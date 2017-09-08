@@ -1,0 +1,72 @@
+<!-- index.html-->
+
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<div class="jumbotron">
+  <h1>Starfinder Weapon Generator</h1>
+  <p class="lead">for use with Starfinder RPG</p>
+  <div class="btn-group" role="group" aria-label="Teo dropdowns">
+
+    <div class="btn-group" role="group">
+      <button id="levelDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Any level
+      </button>
+      <div class="dropdown-menu" aria-labelledby="levelDrop1">
+        <a class="dropdown-item" href="#">Any level</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Tier 1</a>
+        <a class="dropdown-item" href="#">Tier 2</a>
+        <a class="dropdown-item" href="#">Tier 3</a>
+        <a class="dropdown-item" href="#">Tier 4</a>
+        <a class="dropdown-item" href="#">Tier 5</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Level 1</a>
+        <a class="dropdown-item" href="#">Level 2</a>
+        <a class="dropdown-item" href="#">Level 3</a>
+        <a class="dropdown-item" href="#">Level 4</a>
+        <a class="dropdown-item" href="#">Level 5</a>
+        <a class="dropdown-item" href="#">Level 6</a>
+        <a class="dropdown-item" href="#">Level 7</a>
+        <a class="dropdown-item" href="#">Level 8</a>
+        <a class="dropdown-item" href="#">Level 9</a>
+        <a class="dropdown-item" href="#">Level 10</a>
+        <a class="dropdown-item" href="#">Level 11</a>
+        <a class="dropdown-item" href="#">Level 12</a>
+        <a class="dropdown-item" href="#">Level 13</a>
+        <a class="dropdown-item" href="#">Level 14</a>
+        <a class="dropdown-item" href="#">Level 15</a>
+        <a class="dropdown-item" href="#">Level 16</a>
+        <a class="dropdown-item" href="#">Level 17</a>
+        <a class="dropdown-item" href="#">Level 18</a>
+        <a class="dropdown-item" href="#">Level 19</a>
+        <a class="dropdown-item" href="#">Level 20</a>
+      </div>
+    </div>
+    <div class="btn-group" role="group">
+      <button id="weaponDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Any weapon
+      </button>
+      <div class="dropdown-menu" aria-labelledby="weaponDrop1">
+        <a class="dropdown-item" href="#">Any weapon</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Small arm</a>
+        <a class="dropdown-item" href="#">Longarm</a>
+        <a class="dropdown-item" href="#">Heavy</a>
+        <a class="dropdown-item" href="#">Sniper</a>
+      </div>
+    </div>
+
+  </div>
+  </br>
+  </br>
+
+  <button type="button" onclick = "generateWeapon()" class="btn btn-success">Generate</button>
+  <button type="button" onclick = "clearOutput()" class="btn btn-secondary">Clear</button>
+  </br>
+
+  <div class="output area">
+
+	</div>
+</div>
+{% endblock %}
