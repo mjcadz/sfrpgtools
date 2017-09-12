@@ -157,6 +157,15 @@ var sniperDamageCurve = {
   "20": ["10d10"]
 };
 
+var basePrice = [260,625,1415,2195,3230,4425,6350,9175,13300,17950,24400,35300,49600,72400,109750,170350,243850,370000,557450,832900];
+
+var priceVariance = {
+  "0.7":[-0.4,-0.3,-0.2,-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8],
+  "0.2":[-0.2,-0.15,-0.1,-0.05,0,0.05,0.1,0.15,0.2],
+  "0.15":[-0.15,-0.12,-0.1,-0.05,0,0.05,0.1,0.12,0.15],
+  "0.1":[-0.1,-0.08,-0.06,-0.04,-0.02,0,0.02,0.04,0.06,0.08,0.1]
+};
+
 function sayHello() {
     //get radio button values
    var val = $('#weaponType label.active input').val();
@@ -237,6 +246,41 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function getPrice(level) {
+  var price;
+  var variance;
+  var rounding;
+  var finish;
+  var base = basePrice[level - 1];
+  if (level == 1){
+    variance = randomChoice(priceVariance["0.7"]) * base;
+    rounding = 10;
+    finish = randomChoice([0,5,-5]);
+  }
+  else if (level == 2) {
+    variance = randomChoice(priceVariance["0.2"]) * base;
+    rounding = 10;
+    finish = randomChoice([0,5,-5]);
+  }
+  else if (level >= 3 && level <= 6) {
+    variance = randomChoice(priceVariance["0.15"]) * base;
+    rounding = 100;
+    finish = randomChoice([0,50,-50]);
+  }
+  else if (level >= 7 && level <= 19) {
+    variance = randomChoice(priceVariance["0.1"]) * base;
+    rounding = 100;
+    finish = randomChoice([0,100,-100]);
+  }
+  else if (level == 20) {
+    variance = randomChoice(priceVariance["0.2"]) * base;
+    rounding = 100;
+    finish = randomChoice([0,100,-100]);
+  }
+  price = (Math.floor((base + variance)/rounding)*rounding) + finish
+  return price;
+}
+
 function printNeat(level,gunName,type,damage,range,critical,capacity,usage,special,bulk) {
   var $outputArea = $(".output.area").first();
   var storeOutput = $( "div.output.area" ).html();
@@ -245,13 +289,14 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
   $outputArea.append("<hr>")
   $outputArea.append("<h4>Level " + level + " " + gunName + "</h4>");
   $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
-  $outputArea.append( "<p>Damage: " + damage +
+  $outputArea.append( "<p>Price: "+  getPrice(level) +
+                      "<br>Damage: " + damage +
                       "<br>Range: " + range + " ft." +
                       "<br>Critical: " + critical +
                       "<br>Capacity: " + capacity +
                       "<br>Usage: " + usage +
-                      "<br>Special: " + special +
-                      "<br>Bulk: " + bulk + "</p>");
+                      "<br>Bulk: " + bulk +
+                      "<br>Special: " + special + "</p>");
   $outputArea.append(storeOutput);
 
 }
