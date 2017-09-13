@@ -1,0 +1,2 @@
+-generate price
+-add background, pixel stars
