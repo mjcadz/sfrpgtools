@@ -46,7 +46,7 @@ var criticalTypeSniper = {
   "Sonic": ["Knockdown", "Deafen", "Wound"]
 };
 
-var armType = ["smallArm", "longarm", "heavyWeapon", "sniperWeapon"];
+var armType = ["smallArm", "longarm", "heavyWeapon", "sniperWeapon"]; //not used
 var special = ["Analog", "Automatic", "Blast", "Boost", "Bright", "Entangle", "Explode", "Injection", "Line", "Penetrating", "Quick Reload", "Sniper", "Stun", "Unwieldy"];
 var criticalType = ["Arc", "Bleed", "Burn", "Corrode", "Deafen", "Injection DC +2", "Knockdown", "Severe wound", "Staggered", "Wound"];
 
@@ -367,6 +367,79 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
                       "<br>Bulk: " + bulk +
                       "<br>Special: " + special + "</p>");
   $outputArea.append(storeOutput);
+
+}
+
+function printMeleeNeat(level,weaponName,type,damage,critical,bulk,special) {
+  var $outputArea = $(".output.area").first();
+  var storeOutput = $( "div.output.area" ).html();
+  clearOutput();
+
+  $outputArea.append("<hr>")
+  $outputArea.append("<h4>Level " + level + " " + weaponName + "</h4>");
+  $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
+  $outputArea.append( "<p>Price: "+  getPrice(level) +
+                      "<br>Damage: " + damage +
+                      "<br>Critical: " + critical +
+                      "<br>Bulk: " + bulk +
+                      "<br>Special: " + special + "</p>");
+  $outputArea.append(storeOutput);
+
+}
+
+function basicMelee(level) {
+
+  var basicMeleeType = [["Knife","S","one","L","-",""], ["Baton","B","one","L","-",""],["Duelling Sword","S","one","L","-","Power"],["Battleglove","B","one","L","-","Power"],["Spear","P","two","1","-",""],["Staff","B","two","1","Knockdown",""]];
+  var weaponType = randomChoice(basicMeleeType);
+  var weaponName = weaponType[0];
+  var damage;
+  var special = [];
+
+  if (level <= 10){
+    special.push("Analog");
+  }
+  else  {
+    if (weaponType[5] === "Power") {
+      special.push(randomChoice(["Powered (capacity 20, usage 1)","Analog"]));
+    }
+    else {
+      special.push("Analog");
+    }
+  }
+
+  if (weaponName === "Knife") {
+    damage = basicMeleeDamageCurve[level][0] + " " + weaponType[1];
+    special.push("Operative");
+  }
+  else if (weaponName === "Duelling Sword") {
+    damage = basicMeleeDamageCurve[level][1] + " " + weaponType[1];
+  }
+  else if (weaponName === "Baton") {
+    damage = randomChoice(basicMeleeDamageCurve[level]) + " " + weaponType[1];
+    special.push("Operative");
+  }
+  else if (weaponName === "Spear") {
+    damage = randomChoice(basicMeleeDamageCurve[level]) + " " + weaponType[1];
+    special.push("Block");
+    special.push("thrown (20 ft.)");
+  }
+  else if (weaponName === "Staff") {
+    damage = randomChoice(basicMeleeDamageCurve[level]) + " " + weaponType[1];
+    special.push("Block");
+  }
+  else {
+    damage = randomChoice(basicMeleeDamageCurve[level]) + " " + weaponType[1];
+  }
+
+  var critical = weaponType[4];
+
+  special = removeBlankValues(special);
+  var printSpecial = special.join(", ");
+
+  var bulk = weaponType[3];
+  var type = "Basic melee - " + weaponType[2] + "-handed";
+
+  printMeleeNeat(level,weaponName,type,damage,critical,bulk,printSpecial);
 
 }
 
@@ -919,15 +992,17 @@ function generateWeapon() {
 
   //sort weapon
   if (typeDrop.includes("Any")) {
-    type = getRandomInt(1, 4);
-  } else if (typeDrop === "Small arm"){
+    type = getRandomInt(1, 5);
+  } else if (typeDrop === "Basic melee"){
     type = 1;
-  } else if (typeDrop === "Longarm"){
+  } else if (typeDrop === "Small arm"){
     type = 2;
-  } else if (typeDrop === "Heavy"){
+  } else if (typeDrop === "Longarm"){
     type = 3;
-  } else if (typeDrop === "Sniper"){
+  } else if (typeDrop === "Heavy"){
     type = 4;
+  } else if (typeDrop === "Sniper"){
+    type = 5;
   } else {
     type = NaN;
   }
@@ -935,15 +1010,18 @@ function generateWeapon() {
   //generate
   switch (type) {
     case 1:
-      smallArm(level);
+      basicMelee(level);
       break;
     case 2:
-      longarm(level);
+      smallArm(level);
       break;
     case 3:
-      heavyWeapon(level);
+      longarm(level);
       break;
     case 4:
+      heavyWeapon(level);
+      break;
+    case 5:
       sniperWeapon(level);
       break;
     default:
