@@ -1,13 +1,25 @@
 
 var damageType = ["Cryo", "Flame", "Laser", "Plasma", "Projectile", "Shock", "Sonic"];
+var meleeDamageType = ["Cryo", "Flame", "Plasma", "Shock", "Sonic", "Uncat","Uncat"];
 var damageTypeAbbrv = {
+  "Bludgeoning": " B",
   "Cryo": " C",
   "Flame": " F",
   "Laser": " F",
   "Plasma": " E & F",
+  "Piercing": " P",
   "Projectile": " P",
   "Shock": " E",
+  "Slashing": " S",
   "Sonic": " So"
+};
+var criticalTypeAdvanced = {
+  "Cryo": ["Staggered"],
+  "Flame": ["Burn","Wound"],
+  "Plasma": ["Burn", "Severe Wound"],
+  "Uncat": ["-"],
+  "Shock": ["Arc"],
+  "Sonic": ["Knockdown", "Deafen"]
 };
 var criticalTypeSmall = {
   "Cryo": ["Staggered"],
@@ -176,7 +188,7 @@ var basicMeleeDamageCurve = {
   "16":["7d6", "10d4"],
   "17":["4d12", "6d8"],
   "18":["8d6", "5d12"],
-  "19":["1d6", "8d8"],
+  "19":["10d6", "8d8"],
   "20":["6d12", "12d6"]
 };
 
@@ -388,18 +400,21 @@ function printMeleeNeat(level,weaponName,type,damage,critical,bulk,special) {
 }
 
 function basicMelee(level) {
-
-  var basicMeleeType = [["Knife","S","one","L","-",""], ["Baton","B","one","L","-",""],["Duelling Sword","S","one","L","-","Power"],["Battleglove","B","one","L","-","Power"],["Spear","P","two","1","-",""],["Staff","B","two","1","Knockdown",""]];
-  var weaponType = randomChoice(basicMeleeType);
-  var weaponName = weaponType[0];
   var damage;
+  var handed;
+  var bulk;
+  var type;
+  var critical;
   var special = [];
+
+  var basicMeleeType = ["Knife","Baton","Duelling Sword","Battleglove","Space Mace","Spear","Kasathan Bladestaff","Staff"];
+  var weaponName = randomChoice(basicMeleeType);
 
   if (level <= 10){
     special.push("Analog");
   }
   else  {
-    if (weaponType[5] === "Power") {
+    if (weaponName === "Duelling Sword" || weaponName === "Battleglove" || weaponName === "Space Mace") {
       special.push(randomChoice(["Powered (capacity 20, usage 1)","Analog"]));
     }
     else {
@@ -408,36 +423,228 @@ function basicMelee(level) {
   }
 
   if (weaponName === "Knife") {
-    damage = basicMeleeDamageCurve[level][0] + " " + weaponType[1];
+    damage = basicMeleeDamageCurve[level][0] + " S";
+    handed = "one";
+    bulk = "L";
+    critical = "-";
+    special.push("Operative");
+  }
+  else if (weaponName === "Baton") {
+    damage = randomChoice(basicMeleeDamageCurve[level]) + " B"
+    handed = "one";
+    bulk = "L";
+    critical = "-";
     special.push("Operative");
   }
   else if (weaponName === "Duelling Sword") {
-    damage = basicMeleeDamageCurve[level][1] + " " + weaponType[1];
+    damage = basicMeleeDamageCurve[level][1] + " S";
+    handed = "one";
+    bulk = "L";
+    critical = "-";
   }
-  else if (weaponName === "Baton") {
-    damage = randomChoice(basicMeleeDamageCurve[level]) + " " + weaponType[1];
-    special.push("Operative");
+  else if (weaponName === "Battleglove") {
+    damage = randomChoice(basicMeleeDamageCurve[level]) + " B";
+    handed = "one";
+    bulk = "L";
+    critical = "-";
+  }
+  else if (weaponName === "Space Mace") {
+    damage = randomChoice(basicMeleeDamageCurve[level]) + " B";
+    handed = "one";
+    bulk = "L";
+    critical = "Staggered";
   }
   else if (weaponName === "Spear") {
-    damage = randomChoice(basicMeleeDamageCurve[level]) + " " + weaponType[1];
+    damage = randomChoice(basicMeleeDamageCurve[level]) + " P";
+    handed = "two";
+    bulk = "1";
+    critical = "-";
     special.push("Block");
     special.push("thrown (20 ft.)");
   }
-  else if (weaponName === "Staff") {
-    damage = randomChoice(basicMeleeDamageCurve[level]) + " " + weaponType[1];
+  else if (weaponName === "Kasathan Bladestaff") {
+    damage = basicMeleeDamageCurve[level][1]  + " S";
+    handed = "two";
+    bulk = "1";
+    critical = "-";
     special.push("Block");
   }
-  else {
-    damage = randomChoice(basicMeleeDamageCurve[level]) + " " + weaponType[1];
+  else if (weaponName === "Staff") {
+    damage = randomChoice(basicMeleeDamageCurve[level]) + " B";
+    handed = "two";
+    bulk = "1";
+    critical = "Knockdown";
+    special.push("Block");
   }
-
-  var critical = weaponType[4];
 
   special = removeBlankValues(special);
   var printSpecial = special.join(", ");
+  type = "Basic melee - " + handed + "-handed";
 
-  var bulk = weaponType[3];
-  var type = "Basic melee - " + weaponType[2] + "-handed";
+  printMeleeNeat(level,weaponName,type,damage,critical,bulk,printSpecial);
+
+}
+
+function advancedMelee(level) {
+  var damage;
+  var damageShorthand;
+  var handed;
+  var bulk;
+  var type;
+  var critical;
+  var special = [];
+
+  var advancedMeleeType = ["FX Sword","FX Gauntlet","FX Hammer","FX-edged Handaxe","FX Doshko","FX-edged Greatsword","FX Pike","FX Swoop Hammer"];
+  var weaponType = randomChoice(advancedMeleeType);
+
+  var damageType = randomChoice(meleeDamageType);
+
+  var weaponName = weaponType.replace("FX", damageType).replace("Uncat ", "").replace("Uncat-edged ", "");
+
+  if (weaponType === "FX Sword") {
+    if (weaponName ==="Sword"){
+      weaponName = "Longsword";
+    }
+    if (damageType === "Uncat"){
+      damageShorthand = damageTypeAbbrv["Slashing"];
+      critical = (randomChoice(["-","Bleed"]));
+      special.push("Analog");
+    } else {
+      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+    }
+    handed = "one";
+    bulk = "1";
+  }
+  else if (weaponType === "FX Gauntlet") {
+    if (damageType === "Uncat"){
+      damageShorthand = damageTypeAbbrv["Bludgeoning"];
+      critical = (randomChoice(["-","Knockdown"]));
+      special.push("Analog");
+    } else {
+      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+    }
+    handed = "one";
+    bulk = "1";
+  }
+  else if (weaponType === "FX Hammer") {
+    if (damageType === "Uncat"){
+      damageShorthand = damageTypeAbbrv["Bludgeoning"];
+      critical = (randomChoice(["-","Staggered"]));
+      special.push("Analog");
+    } else {
+      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+    }
+    handed = "one";
+    bulk = "1";
+  }
+  else if (weaponType === "FX-edged Handaxe") {
+    if (damageType === "Uncat"){
+      damageShorthand = damageTypeAbbrv["Slashing"];
+      critical = (randomChoice(["-","-","Bleed","Wound"]));
+      special.push("Analog");
+    } else {
+      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+    }
+
+    handed = "one";
+    bulk = "1";
+  }
+  else if (weaponType === "FX Doshko") {
+    if (damageType === "Uncat"){
+      damageShorthand = damageTypeAbbrv["Piercing"];
+      critical = (randomChoice(["-"]));
+      special.push("Analog");
+      special.push("Unwieldy");
+    } else {
+      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+    }
+    handed = "two";
+    bulk = "1";
+  }
+  else if (weaponType === "FX-edged Greatsword") {
+    if (damageType === "Uncat"){
+      damageShorthand = damageTypeAbbrv["Slashing"];
+      critical = (randomChoice(["-","Wound","Bleed"]));
+      special.push("Analog");
+    } else {
+      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+    }
+    special.push("Unwieldy");
+    handed = "two";
+    bulk = "2";
+
+  }
+  else if (weaponType === "FX Pike") {
+    if (damageType === "Uncat"){
+      damageShorthand = damageTypeAbbrv["Piercing"];
+      critical = (randomChoice(["-","Bleed"]));
+      special.push("Analog");
+    } else {
+      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+    }
+    handed = "two";
+    bulk = "2";
+    special.push("Reach");
+  }
+  else if (weaponType === "FX Swoop Hammer") {
+    if (damageType === "Uncat"){
+      damageShorthand = damageTypeAbbrv["Bludgeoning"];
+      critical = (randomChoice(["-","Knockdown"]));
+      special.push("Analog");
+    } else {
+      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+    }
+    handed = "two";
+    bulk = "2";
+    special.push("Reach");
+    special.push("Unwieldy");
+  }
+
+  special = removeBlankValues(special);
+  var printSpecial = special.join(", ");
+  type = "Advanced melee - " + handed + "-handed";
+  if (damageType === "Uncat"){
+    if (weaponType === "FX Doshko") {
+      damage = advMeleeKineticDamageCurve[level][1] + damageShorthand;
+    } else {
+      damage = randomChoice(advMeleeKineticDamageCurve[level]) + damageShorthand;
+    }
+  } else {
+    damageShorthand = damageTypeAbbrv[damageType];
+    critical = randomChoice(criticalTypeAdvanced[damageType]);
+    if (weaponType === "FX Doshko") {
+      damage = advMeleeKineticDamageCurve[level][1] + damageShorthand;
+    } else {
+      damage = randomChoice(advMeleeEnergyDamageCurve[level]) + damageShorthand;
+    }
+  }
+  if (critical === "Burn" || critical === "Arc" || critical === "Bleed") {
+    var num, die;
+    switch (level) {
+      case 1: case 2: case 3: case 4: case 5: case 6:
+      case 7: case 8: case 9: case 10: case 11:
+        num = 1;
+        die = randomChoice(["4", "6"]);
+        break;
+      case 12: case 13: case 14: case 15:
+        num = 2;
+        die = randomChoice(["4", "6", "8"]);
+        break;
+      case 16: case 17: case 18:
+        num = 3;
+        die = randomChoice(["4", "6", "8"]);
+        break;
+      case 19: case 20:
+        num = 4;
+        die = randomChoice(["4", "6", "8"]);
+        break;
+      default:
+        console.error("Invalid level when trying to determine critical for small arm.");
+        num = "?";
+        die = "?";
+    }
+    critical = critical + " " + num + "d" + die;
+  }
 
   printMeleeNeat(level,weaponName,type,damage,critical,bulk,printSpecial);
 
@@ -995,14 +1202,16 @@ function generateWeapon() {
     type = getRandomInt(1, 5);
   } else if (typeDrop === "Basic melee"){
     type = 1;
-  } else if (typeDrop === "Small arm"){
+  } else if (typeDrop === "Advanced melee"){
     type = 2;
-  } else if (typeDrop === "Longarm"){
+  } else if (typeDrop === "Small arm"){
     type = 3;
-  } else if (typeDrop === "Heavy"){
+  } else if (typeDrop === "Longarm"){
     type = 4;
-  } else if (typeDrop === "Sniper"){
+  } else if (typeDrop === "Heavy"){
     type = 5;
+  } else if (typeDrop === "Sniper"){
+    type = 6;
   } else {
     type = NaN;
   }
@@ -1013,15 +1222,18 @@ function generateWeapon() {
       basicMelee(level);
       break;
     case 2:
-      smallArm(level);
+      advancedMelee(level);
       break;
     case 3:
-      longarm(level);
+      smallArm(level);
       break;
     case 4:
-      heavyWeapon(level);
+      longarm(level);
       break;
     case 5:
+      heavyWeapon(level);
+      break;
+    case 6:
       sniperWeapon(level);
       break;
     default:
