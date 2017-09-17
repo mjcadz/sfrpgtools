@@ -87,72 +87,143 @@ var rangeLong = [30, 40, 50, 60, 70];
 var rangeHeavy = [30, 40, 50, 60, 70, 80];
 var rangeSniper = [50, 60];
 
-var smallArmDamageCurve = {
-  "1": ["1d4", "1d6"],
+var smallArmEnergyDamageCurve = {
+  "1": ["1d3", "1d4"],
   "2": ["1d4", "1d6"],
-  "3": ["1d6", "1d4"],
+  "3": ["1d4", "1d6"],
   "4": ["1d6", "1d8"],
   "5": ["1d6", "1d8"],
-  "6": ["2d4", "1d8"],
+  "6": ["1d8", "2d4"],
   "7": ["2d4", "2d6"],
   "8": ["2d6", "3d4"],
-  "9": ["2d6", "3d4"],
-  "10": ["2d8", "3d4"],
-  "11": ["2d8", "3d6"],
-  "12": ["2d8", "4d4"],
-  "13": ["3d6", "4d6"],
-  "14": ["5d4", "3d8"],
-  "15": ["4d6", "3d12"],
-  "16": ["4d8", "3d12"],
-  "17": ["8d4", "5d8"],
-  "18": ["3d12", "4d12"],
-  "19": ["6d6", "4d12"],
-  "20": ["5d12", "9d6"]
+  "9": ["3d4", "2d8"],
+  "10": ["2d8", "4d4"],
+  "11": ["4d4", "3d6"],
+  "12": ["3d6", "2d10"],
+  "13": ["2d10", "5d4"],
+  "14": ["5d4", "2d12"],
+  "15": ["3d8", "4d6"],
+  "16": ["3d10", "5d6"],
+  "17": ["4d8", "3d12"],
+  "18": ["8d4", "4d10"],
+  "19": ["5d8", "9d4"],
+  "20": ["10d4", "4d12"]
 };
-var longarmDamageCurve = {
+
+var smallArmKineticDamageCurve = {
+  "1": ["1d4", "1d6"],
+  "2": ["1d6", "1d8"],
+  "3": ["1d8", "2d4"],
+  "4": ["2d4", "1d10"],
+  "5": ["1d10", "1d12"],
+  "6": ["1d12", "2d6"],
+  "7": ["2d6", "3d4"],
+  "8": ["3d4", "2d8"],
+  "9": ["2d8", "4d4"],
+  "10": ["4d4", "3d6"],
+  "11": ["2d10", "5d4"],
+  "12": ["2d12", "3d8"],
+  "13": ["3d8", "4d6"],
+  "14": ["3d10", "5d6"],
+  "15": ["4d8", "3d12"],
+  "16": ["6d6", "5d8"],
+  "17": ["7d6", "4d12"],
+  "18": ["6d8", "5d10"],
+  "19": ["8d6", "7d8"],
+  "20": ["5d12", "6d10"]
+};
+
+var longarmEnergyDamageCurve = {
   "1": ["1d6", "1d8"],
   "2": ["1d6", "1d8"],
   "3": ["1d6", "1d8"],
-  "4": ["1d8", "1d10"],
-  "5": ["1d8", "1d10"],
+  "4": ["1d8", "2d4"],
+  "5": ["1d10", "1d12"],
   "6": ["1d12", "2d6"],
-  "7": ["2d6", "2d8"],
-  "8": ["2d8", "2d10"],
+  "7": ["2d6", "3d4"],
+  "8": ["2d8", "4d4"],
   "9": ["3d6", "2d10"],
   "10": ["2d10", "5d4"],
-  "11": ["2d12", "3d8"],
-  "12": ["2d12", "3d10"],
-  "13": ["3d10", "3d12"],
-  "14": ["4d8", "4d10"],
-  "15": ["4d10", "4d12"],
-  "16": ["6d8", "8d6"],
-  "17": ["8d6", "12d4"],
-  "18": ["7d8", "6d10"],
+  "11": ["5d4", "2d12"],
+  "12": ["4d6", "3d10"],
+  "13": ["5d6", "7d4"],
+  "14": ["4d8", "8d4"],
+  "15": ["6d6", "4d10"],
+  "16": ["10d4", "6d8"],
+  "17": ["8d6", "5d12"],
+  "18": ["6d10", "10d6"],
   "19": ["8d8", "6d12"],
-  "20": ["8d10", "12d8"]
+  "20": ["9d8", "8d10"]
 };
-var heavyDamageCurve = {
-  "1": ["1d8", "1d10"],
-  "2": ["1d10", "1d10"],
-  "3": ["1d10", "1d10"],
-  "4": ["1d10", "2d6"],
-  "5": ["2d6", "1d12"],
-  "6": ["1d12", "2d6"],
-  "7": ["2d8", "2d6"],
-  "8": ["2d8", "2d10"],
+
+var longarmKineticDamageCurve = {
+  "1": ["1d6", "1d8"],
+  "2": ["1d6", "1d8"],
+  "3": ["1d8", "1d10"],
+  "4": ["1d10", "1d12"],
+  "5": ["1d12", "2d6"],
+  "6": ["3d4", "2d8"],
+  "7": ["2d8", "4d4"],
+  "8": ["3d6", "2d10"],
+  "9": ["5d4", "2d12"],
+  "10": ["3d8", "4d6"],
+  "11": ["6d4", "3d10"],
+  "12": ["5f6", "7d4"],
+  "13": ["4d8", "3d12"],
+  "14": ["4d10", "7d6"],
+  "15": ["6d8", "8d6"],
+  "16": ["7d8", "5d12"],
+  "17": ["10d6", "6d12"],
+  "18": ["9d8", "10d8"],
+  "19": ["9d10", "8d12"],
+  "20": ["12d8", "10d10"]
+};
+
+var heavyEnergyDamageCurve = {
+  "1": ["1d6", "1d8"],
+  "2": ["1d8", "1d10"],
+  "3": ["1d8", "1d10"],
+  "4": ["1d10", "1d12"],
+  "5": ["1d12", "2d6"],
+  "6": ["2d6", "2d8"],
+  "7": ["2d8", "3d6"],
+  "8": ["3d6", "2d10"],
   "9": ["2d10", "2d12"],
   "10": ["2d12", "3d8"],
-  "11": ["3d8", "3d10"],
-  "12": ["3d10", "4d6"],
-  "13": ["4d8", "4d10"],
-  "14": ["4d12", "6d6"],
-  "15": ["4d12", "6d10"],
-  "16": ["5d12", "6d10"],
-  "17": ["7d8", "7d10"],
-  "18": ["9d6", "8d8"],
-  "19": ["8d10", "7d12"],
-  "20": ["10d10", "9d12"]
+  "11": ["3d8", "4d6"],
+  "12": ["4d6", "3d10"],
+  "13": ["5d6", "4d8"],
+  "14": ["3d12", "6d6"],
+  "15": ["4d10", "7d6"],
+  "16": ["4d12", "5d10"],
+  "17": ["5d12", "10d6"],
+  "18": ["8d8", "6d12"],
+  "19": ["9d8", "8d10"],
+  "20": ["10d8", "7d12"]
 };
+var heavyKineticDamageCurve = {
+  "1": ["1d10", "1d10"],
+  "2": ["1d10", "1d12"],
+  "3": ["1d12", "4d4"],
+  "4": ["4d4", "3d6"],
+  "5": ["3d6", "2d10"],
+  "6": ["2d10", "5d4"],
+  "7": ["5d4", "2d12"],
+  "8": ["2d12", "4d6"],
+  "9": ["4d6", "3d10"],
+  "10": ["3d10", "3d12"],
+  "11": ["3d12", "4d10"],
+  "12": ["4d10", "4d12"],
+  "13": ["4d12", "5d10"],
+  "14": ["5d10", "8d6"],
+  "15": ["7d8", "5d12"],
+  "16": ["10d6", "8d8"],
+  "17": ["7d10", "6d12"],
+  "18": ["7d12", "8d12"],
+  "19": ["12d8", "10d10"],
+  "20": ["9d12", "12d10"]
+};
+
 var sniperDamageCurve = {
   "1": ["1d10"],
   "2": ["1d10"],
@@ -674,7 +745,12 @@ function smallArm(level) {
     level += 1;
   }
 
-  var damage = randomChoice(smallArmDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+  var damage;
+  if (randomDamageType === "Projectile") {
+    damage = randomChoice(smallArmKineticDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+  } else {
+    damage = randomChoice(smallArmEnergyDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+  }
 
   var gunName = gunType.replace("FX", randomDamageType).replace("Projectile ", "");
 
@@ -776,7 +852,12 @@ function longarm(level) {
     level += 1;
   }
 
-  var damage = randomChoice(longarmDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+  var damage;
+  if (randomDamageType === "Projectile") {
+    damage = randomChoice(longarmKineticDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+  } else {
+    damage = randomChoice(longarmEnergyDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+  }
 
   var gunName = gunType.replace("FX", randomDamageType).replace("Projectile ", "");
 
@@ -882,13 +963,17 @@ function heavyWeapon(level) {
   var randomDamageType = randomChoice(damageType);
   var gunType = randomChoice(heavySubType);
   var printLevel = level;
+  var damage;
 
   // Railgun increase damage compared to other types
   if (gunType === "FX Railgun" && level != 20) {
     level += 1;
   }
-  var damage = randomChoice(heavyDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
-
+  if (randomDamageType === "Projectile") {
+    damage = randomChoice(heavyKineticDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+  } else {
+    damage = randomChoice(heavyEnergyDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+  }
   var gunName = gunType.replace("FX", randomDamageType);
 
   var special = [];
