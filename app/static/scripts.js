@@ -69,10 +69,10 @@ var armType = ["smallArm", "longarm", "heavyWeapon", "sniperWeapon"];
 var special = ["Analog", "Automatic", "Blast", "Boost", "Bright", "Entangle", "Explode", "Injection", "Line", "Penetrating", "Quick Reload", "Sniper", "Stun", "Unwieldy"];
 var criticalType = ["Arc", "Bleed", "Corrode","Burn", "Corrode", "Deafen", "Injection DC +2", "Knockdown", "Severe wound", "Staggered", "Wound"];
 
-var smallSubType = ["Semi-Auto FX Pistol", "FX Machine Pistol", "FX Revolver", "FX Hand-Cannon"];
-var longSubType = ["FX Rifle", "FX Carbine", "FX Scattergun", "FX Submachine Gun"];
-var heavySubType = ["FX Cannon", "Heavy FX Repeater", "FX Thrower", "FX Railgun"];
-var sniperSubType = ["Shirren-eye FX Rifle", "Bolt Action FX Rifle", "Semi-Auto FX Rifle", "Gas-operated FX Rifle"];
+var smallSubType = ["Semi-Auto FX Pistol", "FX Machine Pistol", "FX Revolver", "FX Hand-Cannon", "FX Bolt Gun", "FX Blaster"];
+var longSubType = ["FX Assault Rifle", "FX Carbine", "FX Scattergun", "FX Submachine Gun", "FX Crossbolter","FX Scout Rifle"];
+var heavySubType = ["FX Cannon", "Heavy FX Repeater", "FX Thrower", "FX Railgun", "Smart Gun - FX", "FX Mass Driver"];
+var sniperSubType = ["Shirren-eye FX Rifle", "Bolt Action FX Rifle", "Semi-Auto FX Rifle", "Gas-operated FX Rifle","FX Beam Rifle","FX Sports Rifle"];
 
 var boostDice = [
   ["1d4", "1d6"],
@@ -817,6 +817,27 @@ function smallArm(level) {
     ammo = randomChoice([semiAuto1, semiAuto2]);
     special.push("Automatic");
   }
+  else if (gunType === "FX Bolt Gun") {
+    ammo = [randomChoice(["10", "12", "24", "32"]) + " rounds", randomChoice(["1", "2"])];
+    special.push(randomChoice([
+      "Boost "+ randomChoice(boostDice[tier-1]),
+      "Bright",
+      "Quick Reload",
+      "Stun"
+    ]));
+  }
+  else if (gunType === "FX Blaster") {
+    ammo = [
+      randomChoice(["20", "40", "80", "100"]) + " charges",
+      randomChoice(["1", "4", "5", "10"])
+    ];
+    special.push(randomChoice([
+      "Boost "+ randomChoice(boostDice[tier-1]),
+      "Bright",
+      "Quick Reload",
+      "Stun"
+    ]));
+  }
 
   if (special.join(", ") === "Analog, -") {
     special = ["Analog"];
@@ -848,7 +869,7 @@ function longarm(level) {
   var printLevel = level;
 
   // Rifle has higher damage compared to other types
-  if (gunType === "FX Rifle" && level != 20) {
+  if (gunType === "FX Assault Rifle" && level != 20) {
     level += 1;
   }
 
@@ -880,17 +901,16 @@ function longarm(level) {
   special.push(randomChoice(["Analog", "", ""]));
 
   // Ammo
-  if (gunType === "FX Rifle") {
+  if (gunType === "FX Assault Rifle") {
     var semiAuto1 = [
-      randomChoice(["20", "40", "80", "100"]) + " charges",
+      randomChoice(["60", "80", "100"]) + " charges",
       randomChoice(["1", "2", "4", "10"])
     ];
     var semiAuto2 = [randomChoice(["6", "12", "18"]) + " rounds", "1"];
     ammo = randomChoice([semiAuto1, semiAuto2]);
     special.push(randomChoice([
-      "Boost "+ randomChoice(boostDice[tier-1]),
+      "Automatic",
       "Penetrating",
-      "Quick Reload",
       "-"
     ]));
     bulk = randomChoice(["1","1","2"]);
@@ -900,7 +920,7 @@ function longarm(level) {
     var semiAuto2 = [randomChoice(["12", "24", "48"]) + " rounds", "1"];
     ammo = randomChoice([semiAuto1, semiAuto2]);
     special.push(randomChoice([
-      "Automatic",
+      "Quick Reload",
       "Boost " + randomChoice(boostDice[tier-1]),
       "Stun",
       "-"
@@ -935,6 +955,28 @@ function longarm(level) {
     var semiAuto2 = [randomChoice(["10", "12", "12", "24", "48"]) + " rounds", "1"];
     ammo = randomChoice([semiAuto1, semiAuto2]);
     bulk = randomChoice(["1", "1", "2"]);
+  }
+  else if (gunType === "FX Crossbolter") {
+    special.push("Unwieldy");
+    ammo.push(randomChoice([
+      "1 arrow",
+      "2 arrows",
+      "4 arrows",
+      "8 arrows"
+    ]));
+    ammo.push("1");
+    bulk = "1";
+  }
+  else if (gunType === "FX Scout Rifle") {
+    rangeo = 120
+    ammo = [randomChoice(["6", "8", "10", "12",]) + " rounds", "1"];
+    bulk = "1";
+    special.push(randomChoice([
+      "Boost " + randomChoice(boostDice[tier-1]),
+      "Bright",
+      "Quick Reload",
+      "-"
+    ]));
   }
 
   if (special.join(", ") === "Analog, -") {
@@ -998,7 +1040,7 @@ function heavyWeapon(level) {
   ]));
 
   if (gunType === "FX Cannon") {
-    gunName = gunName.replace("Projectile", "");
+    gunName = gunName.replace("Projectile ", "");
     ammo = [
       randomChoice(["40", "80", "100"]) + " charges",
       randomChoice(["2", "4", "5", "10"])
@@ -1012,7 +1054,7 @@ function heavyWeapon(level) {
     special.push("Unwieldy");
   }
   else if (gunType === "Heavy FX Repeater") {
-    gunName = gunName.replace("Projectile", "");
+    gunName = gunName.replace("Projectile ", "");
     var semiAuto1= [
       randomChoice(["60", "80", "100"]) + " charges",
       randomChoice(["1", "2", "4", "10"])
@@ -1037,7 +1079,7 @@ function heavyWeapon(level) {
     ];
   }
   else if (gunType === "FX Railgun") {
-    gunName = gunName.replace("Projectile", "");
+    gunName = gunName.replace("Projectile ", "");
     special.push("Line");
     special.push("Penetrating");
     special.push("Unwieldy");
@@ -1047,6 +1089,28 @@ function heavyWeapon(level) {
     ];
     var semiAuto2= [randomChoice(["8", "12", "18", "24"]) + " rounds", "1"]
     ammo = randomChoice([semiAuto1, semiAuto2]);
+  }
+  else if (gunType === "Smart Gun - FX") {
+    gunName = gunName.replace(" - Projectile", "");
+    var semiAuto1= [
+      randomChoice(["60", "80", "100"]) + " charges",
+      randomChoice(["2", "4", "10"])
+    ];
+    var semiAuto2= [randomChoice(["12", "24", "48"]) + " rounds", "1"];
+    ammo = randomChoice([semiAuto1, semiAuto2]);
+    special.push("Automatic");
+    special.push(randomChoice(["Penetrating", ""]));
+    special.push("Stun");
+  }
+  if (gunType === "FX Mass Driver") {
+    gunName = gunName.replace("Projectile ", "");
+    ammo = [
+      randomChoice(["40", "60", "80"]) + " charges",
+      randomChoice(["5", "10"])
+    ];
+    var radius = 5 * tier;
+    special.push("Explode (" + radius + " ft.)");
+    special.push("Unwieldy");
   }
 
   var bulk = randomChoice(["2", "2", "3"]);
@@ -1128,13 +1192,24 @@ function sniperWeapon(level) {
     var semiAuto2 = [randomChoice(["4", "8", "12"]) + " rounds", "1"];
     ammo = randomChoice([semiAuto1, semiAuto2]);
   }
+  else if (gunType === "FX Beam Rifle") {
+    ammo = [
+      randomChoice(["20", "40", "60"]) + " charges",
+      randomChoice(["2", "4", "10"])
+    ];
+    special.push("Bright");
+  }
+  else if (gunType === "FX Sports Rifle") {
+    ammo = [randomChoice(["4", "8", "12"]) + " rounds", "1"];
+    special.push("Stun");
+  }
 
   // add sniper range
   var radius = 250 * tier;
   if (radius > 1000) {
     radius = 1000;
   }
-  special.push(randomChoice(["Bright", "Penetrating", ""]));
+  special.push(randomChoice(["Penetrating", ""]));
   special.push("Sniper (" + radius + " ft.)");
   special.push("Unwieldy");
 

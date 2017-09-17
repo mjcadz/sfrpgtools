@@ -4,3 +4,5 @@
 -advanced melee
 -add acid type
 -refactor crit dice
+-KAC targeting weapons damage increased compared to KAC targeting weapons
+-add new gun types
