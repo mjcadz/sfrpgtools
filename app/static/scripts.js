@@ -1,7 +1,8 @@
 
-var damageType = ["Cryo", "Flame", "Laser", "Plasma", "Projectile", "Shock", "Sonic"];
-var meleeDamageType = ["Cryo", "Flame", "Plasma", "Shock", "Sonic", "Uncat","Uncat"];
+var damageType = ["Acid", "Cryo", "Flame", "Laser", "Plasma", "Projectile", "Shock", "Sonic"];
+var meleeDamageType = ["Acid", "Cryo", "Flame", "Plasma", "Shock", "Sonic", "Uncat","Uncat"];
 var damageTypeAbbrv = {
+  "Acid":" A",
   "Bludgeoning": " B",
   "Cryo": " C",
   "Flame": " F",
@@ -14,6 +15,7 @@ var damageTypeAbbrv = {
   "Sonic": " So"
 };
 var criticalTypeAdvanced = {
+  "Acid": ["Corrode"],
   "Cryo": ["Staggered"],
   "Flame": ["Burn","Wound"],
   "Plasma": ["Burn", "Severe Wound"],
@@ -22,6 +24,7 @@ var criticalTypeAdvanced = {
   "Sonic": ["Knockdown", "Deafen"]
 };
 var criticalTypeSmall = {
+  "Acid": ["Corrode"],
   "Cryo": ["Staggered"],
   "Flame": ["Burn"],
   "Laser": ["Burn", "Staggered"],
@@ -31,6 +34,7 @@ var criticalTypeSmall = {
   "Sonic": ["Knockdown", "Deafen"]
 };
 var criticalTypeLong = {
+  "Acid": ["Corrode"],
   "Cryo": ["Staggered"],
   "Flame": ["Burn"],
   "Laser": ["Burn", "Staggered", "Wound"],
@@ -40,6 +44,7 @@ var criticalTypeLong = {
   "Sonic": ["Knockdown", "Deafen"]
 };
 var criticalTypeHeavy = {
+  "Acid": ["Corrode"],
   "Cryo": ["Staggered", "Wound"],
   "Flame": ["Burn"],
   "Laser": ["Burn", "Staggered", "Wound", "Severe Wound"],
@@ -49,6 +54,7 @@ var criticalTypeHeavy = {
   "Sonic": ["Knockdown", "Deafen", "Wound"]
 };
 var criticalTypeSniper = {
+  "Acid": ["Corrode", "Wound"],
   "Cryo": ["Staggered", "Wound"],
   "Flame": ["Burn", "Wound"],
   "Laser": ["Burn", "Staggered", "Wound", "Severe Wound"],
@@ -58,9 +64,10 @@ var criticalTypeSniper = {
   "Sonic": ["Knockdown", "Deafen", "Wound"]
 };
 
-var armType = ["smallArm", "longarm", "heavyWeapon", "sniperWeapon"]; //not used
+//These three not used, here for reference
+var armType = ["smallArm", "longarm", "heavyWeapon", "sniperWeapon"];
 var special = ["Analog", "Automatic", "Blast", "Boost", "Bright", "Entangle", "Explode", "Injection", "Line", "Penetrating", "Quick Reload", "Sniper", "Stun", "Unwieldy"];
-var criticalType = ["Arc", "Bleed", "Burn", "Corrode", "Deafen", "Injection DC +2", "Knockdown", "Severe wound", "Staggered", "Wound"];
+var criticalType = ["Arc", "Bleed", "Corrode","Burn", "Corrode", "Deafen", "Injection DC +2", "Knockdown", "Severe wound", "Staggered", "Wound"];
 
 var smallSubType = ["Semi-Auto FX Pistol", "FX Machine Pistol", "FX Revolver", "FX Hand-Cannon"];
 var longSubType = ["FX Rifle", "FX Carbine", "FX Scattergun", "FX Submachine Gun"];
@@ -362,6 +369,37 @@ function getPrice(level) {
   return price;
 }
 
+function getCritDice(critical,level){
+  if (critical === "Burn" || critical === "Arc" || critical === "Corrode" || critical === "Bleed") {
+    var num, die;
+    switch (level) {
+      case 1: case 2: case 3: case 4: case 5: case 6:
+      case 7: case 8: case 9: case 10: case 11:
+        num = 1;
+        die = randomChoice(["4", "6"]);
+        break;
+      case 12: case 13: case 14: case 15:
+        num = 2;
+        die = randomChoice(["4", "6", "8"]);
+        break;
+      case 16: case 17: case 18:
+        num = 3;
+        die = randomChoice(["4", "6", "8"]);
+        break;
+      case 19: case 20:
+        num = 4;
+        die = randomChoice(["4", "6", "8"]);
+        break;
+      default:
+        console.error("Invalid level when trying to determine critical.");
+        num = "?";
+        die = "?";
+    }
+    critical = critical + " " + num + "d" + die;
+  }
+  return critical;
+}
+
 function printNeat(level,gunName,type,damage,range,critical,capacity,usage,special,bulk) {
   var $outputArea = $(".output.area").first();
   var storeOutput = $( "div.output.area" ).html();
@@ -604,7 +642,7 @@ function advancedMelee(level) {
   var printSpecial = special.join(", ");
   type = "Advanced melee - " + handed + "-handed";
   if (damageType === "Uncat"){
-    if (weaponType === "FX Doshko") {
+    if (weaponType === "FX Doshko" || weaponType === "FX Swoop Hammer") {
       damage = advMeleeKineticDamageCurve[level][1] + damageShorthand;
     } else {
       damage = randomChoice(advMeleeKineticDamageCurve[level]) + damageShorthand;
@@ -612,39 +650,13 @@ function advancedMelee(level) {
   } else {
     damageShorthand = damageTypeAbbrv[damageType];
     critical = randomChoice(criticalTypeAdvanced[damageType]);
-    if (weaponType === "FX Doshko") {
+    if (weaponType === "FX Doshko" || weaponType === "FX Swoop Hammer") {
       damage = advMeleeKineticDamageCurve[level][1] + damageShorthand;
     } else {
       damage = randomChoice(advMeleeEnergyDamageCurve[level]) + damageShorthand;
     }
   }
-  if (critical === "Burn" || critical === "Arc" || critical === "Bleed") {
-    var num, die;
-    switch (level) {
-      case 1: case 2: case 3: case 4: case 5: case 6:
-      case 7: case 8: case 9: case 10: case 11:
-        num = 1;
-        die = randomChoice(["4", "6"]);
-        break;
-      case 12: case 13: case 14: case 15:
-        num = 2;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      case 16: case 17: case 18:
-        num = 3;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      case 19: case 20:
-        num = 4;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      default:
-        console.error("Invalid level when trying to determine critical for small arm.");
-        num = "?";
-        die = "?";
-    }
-    critical = critical + " " + num + "d" + die;
-  }
+  critical = getCritDice(critical,level);
 
   printMeleeNeat(level,weaponName,type,damage,critical,bulk,printSpecial);
 
@@ -743,34 +755,7 @@ function smallArm(level) {
   if (tier <= 2) {
     critical = randomChoice([critical, critical, "-"]);
   }
-
-  if (critical === "Burn" || critical === "Arc") {
-    var num, die;
-    switch (level) {
-      case 1: case 2: case 3: case 4: case 5: case 6:
-      case 7: case 8: case 9: case 10: case 11:
-        num = 1;
-        die = randomChoice(["4", "6"]);
-        break;
-      case 12: case 13: case 14: case 15:
-        num = 2;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      case 16: case 17: case 18:
-        num = 3;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      case 19: case 20:
-        num = 4;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      default:
-        console.error("Invalid level when trying to determine critical for small arm.");
-        num = "?";
-        die = "?";
-    }
-    critical = critical + " " + num + "d" + die;
-  }
+  critical = getCritDice(critical,level);
 
   bulk = "L"
   type = "Small arm - one-handed"
@@ -884,34 +869,7 @@ function longarm(level) {
   if (tier <= 2) {
     critical = randomChoice([critical, critical, "-"]);
   }
-
-  if (critical === "Burn" || critical === "Arc" || critical === "Corrode") {
-    var num, die;
-    switch (level) {
-      case 1: case 2: case 3: case 4: case 5: case 6:
-      case 7: case 8: case 9: case 10: case 11:
-        num = 1;
-        die = randomChoice(["4", "6"]);
-        break;
-      case 12: case 13: case 14: case 15:
-        num = 2;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      case 16: case 17: case 18:
-        num = 3;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      case 19: case 20:
-        num = 4;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      default:
-        console.error("Invalid level when trying to determine critical for longarm.");
-        num = "?";
-        die = "?";
-    }
-    critical = critical + " " + num + "d" + die;
-  }
+  critical = getCritDice(critical,level);
 
   type = "Longarm - two-handed"
   printNeat(printLevel,gunName,type,damage,rangeo,critical,ammo[0],ammo[1],printSpecial,bulk)
@@ -1020,36 +978,9 @@ function heavyWeapon(level) {
 
   special = removeBlankValues(special);
   var printSpecial = special.join(", ");
+  critical = getCritDice(critical,level);
 
-  if (critical === "Burn" || critical === "Arc" || critical === "Corrode") {
-    var num, die;
-    switch (level) {
-      case 1: case 2: case 3: case 4: case 5: case 6:
-      case 7: case 8: case 9: case 10: case 11:
-        num = 1;
-        die = randomChoice(["4", "6"]);
-        break;
-      case 12: case 13: case 14: case 15:
-        num = 2;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      case 16: case 17: case 18:
-        num = 3;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      case 19: case 20:
-        num = 4;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      default:
-        console.error("Invalid level when trying to determine critical for heavy weapon.");
-        num = "?";
-        die = "?";
-    }
-    critical = critical + " " + num + "d" + die;
-  }
   type = "Heavy - two-handed"
-
 
   printNeat(printLevel,gunName,type,damage,rangeo,critical,ammo[0],ammo[1],printSpecial,bulk)
 
@@ -1136,34 +1067,7 @@ function sniperWeapon(level) {
   if (tier <= 2) {
     critical = randomChoice([critical, "-"]);
   }
-
-  if (critical === "Burn" || critical === "Arc" || critical === "Corrode") {
-    var num, die;
-    switch (level) {
-      case 1: case 2: case 3: case 4: case 5: case 6:
-      case 7: case 8:
-        num = 1;
-        die = randomChoice(["4", "6"]);
-        break;
-      case 9: case 10: case 11: case 12: case 13:
-        num = 2;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      case 14: case 15: case 16: case 17: case 18:
-        num = 3;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      case 19: case 20:
-        num = 4;
-        die = randomChoice(["4", "6", "8"]);
-        break;
-      default:
-        console.error("Invalid level when trying to determine critical for sniper weapon.");
-        num = "?";
-        die = "?";
-    }
-    critical = critical + " " + num + "d" + die;
-  }
+  critical = getCritDice(critical,level);
 
   type = "Sniper - two-handed"
 

@@ -2,3 +2,5 @@
 -add background, pixel stars
 -basic melee
 -advanced melee
+-add acid type
+-refactor crit dice
