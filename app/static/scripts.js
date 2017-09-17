@@ -1263,7 +1263,7 @@ function generateWeapon() {
 
   //sort weapon
   if (typeDrop.includes("Any")) {
-    type = getRandomInt(1, 5);
+    type = getRandomInt(1, 6);
   } else if (typeDrop === "Basic melee"){
     type = 1;
   } else if (typeDrop === "Advanced melee"){
