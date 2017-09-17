@@ -1,8 +1,11 @@
--generate price
--add background, pixel stars
--basic melee
--advanced melee
--add acid type
--refactor crit dice
--KAC targeting weapons damage increased compared to KAC targeting weapons
--add new gun types
+v1.1
+New Features:
+  - generate price
+  - add basic melee
+  - add advanced melee
+  - add acid damage type
+  - add new gun types
+Changes:
+  - add background, pixel stars
+  - refactor crit dice
+  - Kinetic weapons damage increased compared to Energy weapons (didn't notice this trend in initial generator)
