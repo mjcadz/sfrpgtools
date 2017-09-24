@@ -1,3 +1,10 @@
+V1.2
+New Features:
+Changes:
+  - no projectile, only energy damage types for blaster, thrower, and beam rifle
+  - scout rifle has lower damage to offset max range
+  - add truncheon melee type
+
 v1.1
 New Features:
   - generate price

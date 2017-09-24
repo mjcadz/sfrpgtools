@@ -603,7 +603,7 @@ function advancedMelee(level) {
   var critical;
   var special = [];
 
-  var advancedMeleeType = ["FX Sword","FX Gauntlet","FX Hammer","FX-edged Handaxe","FX Doshko","FX-edged Greatsword","FX Pike","FX Swoop Hammer"];
+  var advancedMeleeType = ["FX Sword","FX Gauntlet","FX Hammer","FX-edged Handaxe","FX Truncheon","FX Doshko","FX-edged Greatsword","FX Pike","FX Swoop Hammer"];
   var weaponType = randomChoice(advancedMeleeType);
 
   var damageType = randomChoice(meleeDamageType);
@@ -650,6 +650,18 @@ function advancedMelee(level) {
     if (damageType === "Uncat"){
       damageShorthand = damageTypeAbbrv["Slashing"];
       critical = (randomChoice(["-","-","Bleed","Wound"]));
+      special.push("Analog");
+    } else {
+      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+    }
+
+    handed = "one";
+    bulk = "1";
+  }
+  else if (weaponType === "FX Truncheon") {
+    if (damageType === "Uncat"){
+      damageShorthand = damageTypeAbbrv["Bludgeoning"];
+      critical = (randomChoice(["-","Staggered","Wound"]));
       special.push("Analog");
     } else {
       special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
@@ -744,6 +756,9 @@ function smallArm(level) {
   if (gunType === "FX Hand-Cannon" && level !== 20) {
     level += 1;
   }
+  if (gunType === "FX Blaster" && randomDamageType === "Projectile") {
+    randomDamageType = "Laser";
+  }
 
   var damage;
   if (randomDamageType === "Projectile") {
@@ -780,7 +795,7 @@ function smallArm(level) {
       "Bright",
       "Quick Reload",
       "Stun",
-      "-","-"
+      "-"
     ]));
   }
   else if (gunType === "FX Hand-Cannon") {
@@ -805,7 +820,7 @@ function smallArm(level) {
       "Bright",
       "Quick Reload",
       "Stun",
-      "-","-"
+      "-"
     ]));
   }
   else if (gunType === "FX Machine Pistol") {
@@ -871,6 +886,9 @@ function longarm(level) {
   // Rifle has higher damage compared to other types
   if (gunType === "FX Assault Rifle" && level != 20) {
     level += 1;
+  }
+  if (gunType === "FX Scout Rifle" && level != 1) {
+    level -= 1;
   }
 
   var damage;
@@ -1011,12 +1029,18 @@ function heavyWeapon(level) {
   if (gunType === "FX Railgun" && level != 20) {
     level += 1;
   }
+  if (gunType === "FX Thrower" && randomDamageType === "Projectile") {
+    randomDamageType = "Laser";
+  }
+
+
+
   if (randomDamageType === "Projectile") {
     damage = randomChoice(heavyKineticDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
   } else {
     damage = randomChoice(heavyEnergyDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
   }
-  var gunName = gunType.replace("FX", randomDamageType);
+  var gunName = gunType.replace("FX", randomDamageType).replace("Projectile ", "");
 
   var special = [];
   var ammo = [];
@@ -1040,7 +1064,6 @@ function heavyWeapon(level) {
   ]));
 
   if (gunType === "FX Cannon") {
-    gunName = gunName.replace("Projectile ", "");
     ammo = [
       randomChoice(["40", "80", "100"]) + " charges",
       randomChoice(["2", "4", "5", "10"])
@@ -1054,7 +1077,6 @@ function heavyWeapon(level) {
     special.push("Unwieldy");
   }
   else if (gunType === "Heavy FX Repeater") {
-    gunName = gunName.replace("Projectile ", "");
     var semiAuto1= [
       randomChoice(["60", "80", "100"]) + " charges",
       randomChoice(["1", "2", "4", "10"])
@@ -1066,7 +1088,6 @@ function heavyWeapon(level) {
     rangeo -= 30;
   }
   else if (gunType === "FX Thrower") {
-    gunName = gunName.replace("Projectile", "Laser");
     special.push(randomChoice(["Blast", "Line"]));
     special.push("Unwieldy");
     rangeo = 10 + (tier * 5) + randomChoice([0, 5]);
@@ -1079,7 +1100,6 @@ function heavyWeapon(level) {
     ];
   }
   else if (gunType === "FX Railgun") {
-    gunName = gunName.replace("Projectile ", "");
     special.push("Line");
     special.push("Penetrating");
     special.push("Unwieldy");
@@ -1091,7 +1111,6 @@ function heavyWeapon(level) {
     ammo = randomChoice([semiAuto1, semiAuto2]);
   }
   else if (gunType === "Smart Gun - FX") {
-    gunName = gunName.replace(" - Projectile", "");
     var semiAuto1= [
       randomChoice(["60", "80", "100"]) + " charges",
       randomChoice(["2", "4", "10"])
@@ -1103,7 +1122,6 @@ function heavyWeapon(level) {
     special.push("Stun");
   }
   if (gunType === "FX Mass Driver") {
-    gunName = gunName.replace("Projectile ", "");
     ammo = [
       randomChoice(["40", "60", "80"]) + " charges",
       randomChoice(["5", "10"])
@@ -1146,9 +1164,12 @@ function sniperWeapon(level) {
   if (gunType === "Shirren-eye FX Rifle" && level != 20) {
     level += 1;
   }
+  if (gunType === "FX Beam Rifle" && randomDamageType === "Projectile") {
+    randomDamageType = "Laser";
+  }
   var damage = randomChoice(sniperDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
 
-  var gunName = gunType.replace("FX", randomDamageType);
+  var gunName = gunType.replace("FX", randomDamageType).replace("Projectile ", "");
 
   var special = [];
   var ammo = [];
@@ -1167,8 +1188,6 @@ function sniperWeapon(level) {
   if (randomDamageType === "Projectile") {
     special.push(randomChoice(["Analog", ""]));
   }
-
-  gunName = gunName.replace("Projectile", "");
 
   if (gunType === "Shirren-eye FX Rifle") {
     ammo = [randomChoice(["4", "6", "8"]) + " rounds", "1"];
