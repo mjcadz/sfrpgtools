@@ -64,7 +64,7 @@
   </br>
   </br>
 
-  <button type="button" onclick = "generateWeapon()" class="btn btn-success">Generate</button>
+  <button type="button" onclick = "getrandomName()" class="btn btn-success">Generate</button>
   <button type="button" onclick = "clearOutput()" class="btn btn-secondary">Clear</button>
   </br>
 
@@ -72,4 +72,8 @@
 
 	</div>
 </div>
+{% endblock %}
+{% block includes %}
+<script type = "text/javascript" src = "{{ url_for('static', filename = 'scripts.js') }}" ></script>
+<script type = "text/javascript" src = "{{ url_for('static', filename = 'nameGenerator.js') }}" ></script>
 {% endblock %}
