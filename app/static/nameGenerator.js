@@ -21,38 +21,33 @@ var manufacturer = ["AbadarCorp","Arabani Arms","Ulrikka","Idari","Eox Armory","
 var series = ["A3-","AAA-","ACR-","ACW-","AZU-","BAR-","CBR-","CQB-","CSP-","DX-","GR6-","GSG-","IXN-","KFS-","KHE-","KT-","LNR-","MACR-","NDT-","R9-","RHR-","RTA-","SBR-","STH-","TCR-","UTX-","Z5-","ZTN-","ZTR-"];
 
 function getrandomName(){
-  var name;
+  var name = [];
 
-  name = randomChoice(manufacturer) + " " + randomChoice(series) + getRandomInt(1, 990).toString() + " ";
+  name[1] = randomChoice(manufacturer) + " " + randomChoice(series) + getRandomInt(1, 990).toString() + " ";
 
   var ten = [];
   //for (var i = 1; i <= 10; i++) {
   //  ten = ten.push(randomChoice(noun));
   //}
-  for (i = 0; i < 10; i++) {
+  for (i = 0; i < 8; i++) {
     ten.push(randomChoice(noun));
   }
+  ten.push("Boy");
   ten = ten.concat(nounFlame);
 
-  type = getRandomInt(1, 3);
+  type = getRandomInt(1, 1);
   switch (type) {
     case 1:
-      name = name.concat(randomChoice(["The ","",""]) + randomChoice(adjective) + " " + randomChoice(ten));
+      name[0] = randomChoice(["The ","",""]) + randomChoice(adjective) + " " + randomChoice(noun);
       break;
     case 2:
-      name = name.concat(randomChoice(nounFlame) + "-class Blaster");
+      name[0] = randomChoice(ten) + "-Class Blaster";
       break;
     case 3:
-      name = name.concat(randomChoice(["The ","",""]) + randomChoice(ten)+ " " + randomChoice(ten));
+      name[0] = randomChoice(["The ","",""]) + randomChoice(ten)+ " " + randomChoice(ten);
       break;
     default:
       console.error("name generation error");
   }
-
-
-
-  var $outputArea = $(".output.area").first();
-  $outputArea.empty();
-
-  $outputArea.append("<div>" + name + "</div>");
+  return name;
 }

@@ -477,18 +477,37 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
   clearOutput();
 
   $outputArea.append("<hr>")
-  $outputArea.append("<h4>Level " + level + " " + gunName + "</h4>");
-  $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
-  $outputArea.append( "<p>Price: "+  getPrice(level) +
-                      "<br>Damage: " + damage +
-                      "<br>Range: " + range + " ft." +
-                      "<br>Critical: " + critical +
-                      "<br>Capacity: " + capacity +
-                      "<br>Usage: " + usage +
-                      "<br>Bulk: " + bulk +
-                      "<br>Special: " + special + "</p>");
-  $outputArea.append(storeOutput);
 
+  var nameDrop = $('#nameDrop').text();
+
+  if (nameDrop.includes("Off")) {
+    $outputArea.append("<h4>Level " + level + " " + gunName + "</h4>");
+    $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
+    $outputArea.append( "<p>Price: "+  getPrice(level) +
+                        "<br>Damage: " + damage +
+                        "<br>Range: " + range + " ft." +
+                        "<br>Critical: " + critical +
+                        "<br>Capacity: " + capacity +
+                        "<br>Usage: " + usage +
+                        "<br>Bulk: " + bulk +
+                        "<br>Special: " + special + "</p>");
+
+  } else if (nameDrop.includes("On")){
+    var weaponName = getrandomName();
+    $outputArea.append("<h4>" + weaponName[0] + "</h4>");
+    $outputArea.append("<h6 class=\"text-muted\">" + weaponName[1] + " " + gunName + "</h4>");
+    $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
+    $outputArea.append( "<p>Level: " + level +
+                        "<br>Price: "+  getPrice(level) +
+                        "<br>Damage: " + damage +
+                        "<br>Range: " + range + " ft." +
+                        "<br>Critical: " + critical +
+                        "<br>Capacity: " + capacity +
+                        "<br>Usage: " + usage +
+                        "<br>Bulk: " + bulk +
+                        "<br>Special: " + special + "</p>");
+  }
+  $outputArea.append(storeOutput);
 }
 
 function printMeleeNeat(level,weaponName,type,damage,critical,bulk,special) {
@@ -1040,7 +1059,7 @@ function heavyWeapon(level) {
   } else {
     damage = randomChoice(heavyEnergyDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
   }
-  var gunName = gunType.replace("FX", randomDamageType).replace("Projectile ", "");
+  var gunName = gunType.replace("FX", randomDamageType).replace("Projectile ", "").replace(" - Projectile", "");
 
   var special = [];
   var ammo = [];

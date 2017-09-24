@@ -59,12 +59,26 @@
         <a class="dropdown-item" href="#">Sniper</a>
       </div>
     </div>
-
   </div>
   </br>
   </br>
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-secondary"disabled>Name Generator</button>
 
-  <button type="button" onclick = "getrandomName()" class="btn btn-success">Generate</button>
+    <div class="btn-group" role="group">
+      <button id="nameDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      On
+      </button>
+      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <a class="dropdown-item" href="#">On</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Off</a>
+      </div>
+    </div>
+  </div>
+  </br>
+  </br>
+  <button type="button" onclick = "generateWeapon()" class="btn btn-success">Generate</button>
   <button type="button" onclick = "clearOutput()" class="btn btn-secondary">Clear</button>
   </br>
 
