@@ -325,6 +325,8 @@ var priceVariance = {
   "0.1":[-0.1,-0.08,-0.06,-0.04,-0.02,0,0.02,0.04,0.06,0.08,0.1]
 };
 
+var indexCounter = 0;
+
 function sayHello() {
     //get radio button values
    var val = $('#weaponType label.active input').val();
@@ -341,6 +343,7 @@ function sayHello() {
 function clearOutput() {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
+  indexCounter = 0;
 }
 
 /**
@@ -474,16 +477,20 @@ function getCritDice(critical,level){
 function printNeat(level,gunName,type,damage,range,critical,capacity,usage,special,bulk) {
   var $outputArea = $(".output.area").first();
   var storeOutput = $( "div.output.area" ).html();
-  clearOutput();
-
-  $outputArea.append("<hr>")
-
+  $outputArea.empty();
   var nameDrop = $('#nameDrop').text();
 
+  indexCounter += 1;
+  indexString = "index" + indexCounter.toString();
+
+
+  $outputArea.append("<div class=\"" + indexString + "\">");
+  var $index = $("."+indexString).first();
+  $index.append("<hr>");
   if (nameDrop.includes("Off")) {
-    $outputArea.append("<h4>Level " + level + " " + gunName + "</h4>");
-    $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
-    $outputArea.append( "<p>Price: "+  getPrice(level) +
+    $index.append("<h4>Level " + level + " " + gunName + "</h4>");
+    $index.append("<h6 class=\"text-muted\">" + type + "</h6>");
+    $index.append( "<p>Price: "+  getPrice(level) +
                         "<br>Damage: " + damage +
                         "<br>Range: " + range + " ft." +
                         "<br>Critical: " + critical +
@@ -494,10 +501,10 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
 
   } else if (nameDrop.includes("On")){
     var weaponName = getrandomName(gunName);
-    $outputArea.append("<h4>" + weaponName[2] + " " + weaponName[0] + "</h4>");
-    $outputArea.append("<h6 class=\"text-muted\">" + weaponName[1] + " - " + gunName + "</h4>");
-    $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
-    $outputArea.append( "<p>Level: " + level +
+    $index.append("<h4>" + weaponName[2] + " " + weaponName[0] + "</h4>");
+    $index.append("<h6 class=\"text-muted\">" + weaponName[1] + " - " + gunName + "</h4>");
+    $index.append("<h6 class=\"text-muted\">" + type + "</h6>");
+    $index.append( "<p>Level: " + level +
                         "<br>Price: "+  getPrice(level) +
                         "<br>Damage: " + damage +
                         "<br>Range: " + range + " ft." +
@@ -507,21 +514,29 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
                         "<br>Bulk: " + bulk +
                         "<br>Special: " + special + "</p>");
   }
-  $outputArea.append(storeOutput);
+  $index.append("<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-outline-secondary btn-sm\" onclick = \"removeEntry(this.id)\">Remove</button>");
+
+  if (storeOutput != ""){
+    $outputArea.append(storeOutput);
+  }
 }
 
 function printMeleeNeat(level,weaponName,type,damage,critical,bulk,special) {
   var $outputArea = $(".output.area").first();
   var storeOutput = $( "div.output.area" ).html();
-  clearOutput();
-
-  $outputArea.append("<hr>")
+  $outputArea.empty();
   var nameDrop = $('#nameDrop').text();
+  indexCounter += 1;
+  indexString = "index" + indexCounter.toString();
 
+  $outputArea.append("<div class=\"" + indexString + "\">");
+  var $index = $("."+indexString).first();
+
+  $index.append("<hr>");
   if (nameDrop.includes("Off")) {
-    $outputArea.append("<h4>Level " + level + " " + weaponName + "</h4>");
-    $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
-    $outputArea.append( "<p>Price: "+  getPrice(level) +
+    $index.append("<h4>Level " + level + " " + weaponName + "</h4>");
+    $index.append("<h6 class=\"text-muted\">" + type + "</h6>");
+    $index.append( "<p>Price: "+  getPrice(level) +
                         "<br>Damage: " + damage +
                         "<br>Critical: " + critical +
                         "<br>Bulk: " + bulk +
@@ -529,17 +544,25 @@ function printMeleeNeat(level,weaponName,type,damage,critical,bulk,special) {
 
   } else if (nameDrop.includes("On")){
     var gName = getrandomName(weaponName);
-    $outputArea.append("<h4>" + gName[0] + " " + gName[3] + "</h4>");
-    $outputArea.append("<h6 class=\"text-muted\">" + gName[1] + " - " + weaponName + "</h6>");
-    $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
-    $outputArea.append( "<p>Level: " + level +
+    $index.append("<h4>" + gName[0] + " " + gName[3] + "</h4>");
+    $index.append("<h6 class=\"text-muted\">" + gName[1] + " - " + weaponName + "</h6>");
+    $index.append("<h6 class=\"text-muted\">" + type + "</h6>");
+    $index.append( "<p>Level: " + level +
                         "<br>Price: "+  getPrice(level) +
                         "<br>Damage: " + damage +
                         "<br>Critical: " + critical +
                         "<br>Bulk: " + bulk +
                         "<br>Special: " + special + "</p>");
+    $index.append("<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-outline-secondary btn-sm\" onclick = \"removeEntry(this.id)\">Remove</button>");
   }
-  $outputArea.append(storeOutput);
+
+  if (storeOutput != ""){
+      $outputArea.append(storeOutput);
+  }
+}
+
+function removeEntry(index) {
+  $("."+index).remove();
 }
 
 function basicMelee(level) {

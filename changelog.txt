@@ -1,6 +1,7 @@
 V1.2
 New Features:
   - Name Generator
+  - 'Remove' button for individual entries
 Changes:
   - change Swoop Hammer to Longhammer
   - no projectile, only energy damage types for blaster, thrower, and beam rifle
