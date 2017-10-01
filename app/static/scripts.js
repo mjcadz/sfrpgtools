@@ -493,9 +493,9 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
                         "<br>Special: " + special + "</p>");
 
   } else if (nameDrop.includes("On")){
-    var weaponName = getrandomName();
-    $outputArea.append("<h4>" + weaponName[0] + "</h4>");
-    $outputArea.append("<h6 class=\"text-muted\">" + weaponName[1] + " " + gunName + "</h4>");
+    var weaponName = getrandomName(gunName);
+    $outputArea.append("<h4>" + weaponName[2] + " " + weaponName[0] + "</h4>");
+    $outputArea.append("<h6 class=\"text-muted\">" + weaponName[1] + " - " + gunName + "</h4>");
     $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
     $outputArea.append( "<p>Level: " + level +
                         "<br>Price: "+  getPrice(level) +
@@ -516,15 +516,30 @@ function printMeleeNeat(level,weaponName,type,damage,critical,bulk,special) {
   clearOutput();
 
   $outputArea.append("<hr>")
-  $outputArea.append("<h4>Level " + level + " " + weaponName + "</h4>");
-  $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
-  $outputArea.append( "<p>Price: "+  getPrice(level) +
-                      "<br>Damage: " + damage +
-                      "<br>Critical: " + critical +
-                      "<br>Bulk: " + bulk +
-                      "<br>Special: " + special + "</p>");
-  $outputArea.append(storeOutput);
+  var nameDrop = $('#nameDrop').text();
 
+  if (nameDrop.includes("Off")) {
+    $outputArea.append("<h4>Level " + level + " " + weaponName + "</h4>");
+    $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
+    $outputArea.append( "<p>Price: "+  getPrice(level) +
+                        "<br>Damage: " + damage +
+                        "<br>Critical: " + critical +
+                        "<br>Bulk: " + bulk +
+                        "<br>Special: " + special + "</p>");
+
+  } else if (nameDrop.includes("On")){
+    var gName = getrandomName(weaponName);
+    $outputArea.append("<h4>" + gName[0] + " " + gName[3] + "</h4>");
+    $outputArea.append("<h6 class=\"text-muted\">" + gName[1] + " - " + weaponName + "</h6>");
+    $outputArea.append("<h6 class=\"text-muted\">" + type + "</h6>");
+    $outputArea.append( "<p>Level: " + level +
+                        "<br>Price: "+  getPrice(level) +
+                        "<br>Damage: " + damage +
+                        "<br>Critical: " + critical +
+                        "<br>Bulk: " + bulk +
+                        "<br>Special: " + special + "</p>");
+  }
+  $outputArea.append(storeOutput);
 }
 
 function basicMelee(level) {
@@ -622,7 +637,7 @@ function advancedMelee(level) {
   var critical;
   var special = [];
 
-  var advancedMeleeType = ["FX Sword","FX Gauntlet","FX Hammer","FX-edged Handaxe","FX Truncheon","FX Doshko","FX-edged Greatsword","FX Pike","FX Swoop Hammer"];
+  var advancedMeleeType = ["FX Sword","FX Gauntlet","FX Hammer","FX-edged Handaxe","FX Truncheon","FX Doshko","FX-edged Greatsword","FX Pike","FX Longhammer"];
   var weaponType = randomChoice(advancedMeleeType);
 
   var damageType = randomChoice(meleeDamageType);
@@ -726,7 +741,7 @@ function advancedMelee(level) {
     bulk = "2";
     special.push("Reach");
   }
-  else if (weaponType === "FX Swoop Hammer") {
+  else if (weaponType === "FX Longhammer") {
     if (damageType === "Uncat"){
       damageShorthand = damageTypeAbbrv["Bludgeoning"];
       critical = (randomChoice(["-","Knockdown"]));
@@ -744,7 +759,7 @@ function advancedMelee(level) {
   var printSpecial = special.join(", ");
   type = "Advanced melee - " + handed + "-handed";
   if (damageType === "Uncat"){
-    if (weaponType === "FX Doshko" || weaponType === "FX Swoop Hammer") {
+    if (weaponType === "FX Doshko" || weaponType === "FX Longhammer") {
       damage = advMeleeKineticDamageCurve[level][1] + damageShorthand;
     } else {
       damage = randomChoice(advMeleeKineticDamageCurve[level]) + damageShorthand;
@@ -752,7 +767,7 @@ function advancedMelee(level) {
   } else {
     damageShorthand = damageTypeAbbrv[damageType];
     critical = randomChoice(criticalTypeAdvanced[damageType]);
-    if (weaponType === "FX Doshko" || weaponType === "FX Swoop Hammer") {
+    if (weaponType === "FX Doshko" || weaponType === "FX Longhammer") {
       damage = advMeleeKineticDamageCurve[level][1] + damageShorthand;
     } else {
       damage = randomChoice(advMeleeEnergyDamageCurve[level]) + damageShorthand;

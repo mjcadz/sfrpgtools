@@ -1,6 +1,6 @@
-var adjective = ["Adamantium","Advanced","Aggressive","Amplified","Anti","Anti-Armor","Anti-Personnel","Anti-Tank","Astral","Astronomical","Atomic","Awesome","Basic","Battle","Binary","Bloody","Bolt-Action","Booming","Burning","Bushcraft","Carbon","Celestial","Classic","Cleaning","Commanding","Compact","Consealed","Cosmic","Cosmic","Crude","Dangerous","Dank","Devastating","Diseased","Drunken","Dynamic","Efficient","Essential","Evo Tactical","Explosive","Extrasolar","Extraterrestrial","Fieldcraft","Fission","Flying","Furious","Fusion","Galactic","Geared","Godlike","Godly","Hardened","Hasty","Heavenly","Heavy","Heavy","Horrible","Hungry","Incredible","Infinite","Infinite","Intergalactic","Interplanetary","Interstellar","Laser-Guided","Lever-Action","Liquid","Loaded","Loud","Lunar","Magnificent","Makeshift","Malevolent","Maxx","Meaty","Mechanical","Meteoric","Mil-Spec","Military","Mithril","Naked","Octo","Offensive","Omni-Sport","Overclocked","Patrol","Pearly","Peculiar","Phantasmal","Phantom","Plague","Planetary","Poisonous","Polar","Powerful","Precision","Primary","Proverbial","Pump-Action","Punishing","Quick Draw","Rampaging","Revolutionary","Rhetorical","Rowdy","Rude","Rusty","Ruthless","Salty","Sandy","Savage","Serious","Sidereal","Sneaky","Soggy","Solar","Solid","Spicy","Spiritual","Splendid","Sports","Stellar","Superior","Suppressive","Synthetic","Tactical","Tasty","Terrible","Twin","Ultra","Unforgiving","Unstoppable","Venomous","Weird","Winged","Wooden"];
+var adjective = ["A Gun Named","Accelerated","Adamantium","Advanced","Aggressive","Amplified","Anti","Anti-Armor","Anti-Personnel","Anti-Tank","Astral","Astronomical","Atomic","Automatic","Autonomous","Awesome","Basic","Battle","Binary","Blessed","Bloody","Bolt-Action","Booming","Burning","Bushcraft","Carbon","Celestial","Classic","Commanding","Compact","Computerised","Consealed","Cosmic","Cosmic","Crude","Darkiron","Dangerous","Dank","Delivery","Devastating","Diseased","Double","Drunken","Dynamic","Efficient","Electric","Electronic","Essential","Evo Tactical","Explosive","Exalted","Extrasolar","Extraterrestrial","Fatal","Fieldcraft","Fission","Flying","Friendly","Furious","Fusion","Galactic","Geared","Godlike","Godly","Hardened","Hasty","Heavenly","Heavy","Heavy","Holy","Horrible","Hungry","Incredible","Infinite","Infinite","Intergalactic","Interplanetary","Interstellar","Laser-Guided","Lawful","Lever-Action","Liquid","Legit","Literally A","Loaded","Loud","Lunar","Magnificent","Makeshift","Malevolent","Maxx","Meaty","Mechanical","Mechanised","Meteoric","Mil-Spec","Military","Mithril","Naked","Octo","Offensive","Omni Sport","Overclocked","Patrol","Pearly","Peculiar","Perfect","Phantasmal","Phantom","Planetary","Poisonous","Polar","Powerful","Precision","Primary","Proverbial","Pump-Action","Punishing","Quick Draw","Rampaging","Revolutionary","Rhetorical","Robotic","Rowdy","Rude","Rusty","Ruthless","Sacred","Salty","Sandy","Savage","Serious","Sidereal","Skyforged","Sneaky","Soggy","Solar","Solid","Spicy","Spiritual","Splendid","Sports","Stellar","Superior","Suppressive","Synthetic","Tactical","Tasty","Terrible","Thermonuclear","Triple","Twin","Ultra","Unforgiving","Unstoppable","Vegan","Venomous","Vorpal","Weird","Winged","Wooden","Wrought"];
 
-var noun = ["Aegis","Air-Strike","Alien","Artemis","Asteroid","Barbarian","Bard","Bastard","Beestinger","Beholder","Bitch","Black-hole","Bouncer","Boy","Boy","Boy","Boy","Boy","Bulletstorm","Cataclysm","Claw","Cleric","Cloud","Comet","Constellation","Contingency","Crowd Control","D20","Dark-Matter","Death","Defender","Delivery","Delivery","Delivery","Delivery","Detective","Diamond","Dragon","Druid","Elite","Fighter","Fist","Fox","Galaxy","Gamma-Ray","Ghost","Girl","Goblin","Godzilla","Hercules","Hornet","Infinity","Jaeger","Joker","Justice","King","Kitten","Law","Lich","Madhouse","Magus","Massacre","Matter","Meteor","Monk","Moon","Order","Owlbear","Pacifier","Paladin","Paragon","Pearl","People's-Elbow","Pepper","Photosphere","Pile-Driver","Platypus","Protector","Pulsar","Quarter-Pounder","Quartz","Quasar","Queen","Ranger","Rhino","Rogue","Ruby","Sapphire","Satellite","Shadow","Sorcerer","Star","Starburst","Steel","Stomper","Streetsweeper","Striker","Summoner","Supercluster","Talon","Tea & Biscuits","Threat","Thumper","Titan","Void","Whopper","Widow","Witch","Wizard"];
+var noun = ["Aegis","Air Strike","Alien","Artemis","Asteroid","Avenger","Barbarian","Bard","Bastard","Beast","Beestinger","Beholder","Bitch","Black Hole","Bouncer","Boy","Boy","Boy","Boy","Boy","Bulletstorm","Cataclysm","Chaos","Claw","Cleric","Cloud","Comet","Constellation","Contingency","Crowd Control","D20","Dark Matter","Death","Defender","Delivery","Detective","Demigod","Diamond","Dragon","Dragons Breath","Druid","Duellist","Elite","Executioner","Fighter","Fist","Fox","Galaxy","Gamma Ray","Ghost","Girl","Gladiator","Goblin","Goddess","Godzilla","Hercules","Hornet","Infinity","Jaeger","Joker","Justice","King","Kitten","Law","Lich","Madhouse","Magus","Massacre","Matter","Meteor","Monk","Moon","Order","Owlbear","Pacifier","Paladin","Paragon","Pearl","People's Elbow","Pepper","Photosphere","Pile Driver","Platform","Politician","Platypus","Protector","Pulsar","Seeker","Slave","Quarter-Pounder","Quartz","Quasar","Queen","Ranger","Rhino","Rogue","Ruby","Sapphire","Satellite","Savage","Shadow","Sorcerer","Star","Starburst","Steel","Stomper","Storm","Streetsweeper","Striker","Summoner","Supercluster","Talon","Tea & Biscuits","Threat","Thumper","Titan","Vegan","Void","Whopper","Widow","Witch","Wizard","Zone"];
 
 var nounSlashing = ["Buzzblade","Diamond-Edged","Dimensional Slice","Drop Point","Microserrated","Molecular Rift","Serrated","Ultraserrated","Ultrathin","Zero-Edged"];
 
@@ -8,53 +8,82 @@ var nounBludgeoning = ["Battle","Blunt","Combat","Gravity Well","Hardlight","Pro
 
 var nounPiercing = ["Acceleration","Lightspeed","Mach I","Mach II","Mach III","Momentum","Speed-Force","Sub-light","Velocity","Warp-Speed"];
 
-var nounAcid = ["Corroder","Decay","Scorpion","Taipan","Viper","Dart-Frog","Cobra","King-Brown"];
+var nounAcid = ["Corroder","Decay","Scorpion","Nitric","Hydrochloric","Dart-Frog","Green Lotus","Black Lotus"];
 
 var nounSonic = ["Thunderstrike","LFD","HFD","Banshee","Decibel","Sonic-Boom","Calamity","Hurricane","Howler"];
 
-var nounShock = ["Static ","Storm","Tempest","Lightning","Surge","Giga-Watt","Mega-Watt","Tumblespark"];
+var nounShock = ["Static ","Storm","Tempest","Lightning","Surge","Giga-Watt","Mega-Watt","Tumblespark","Direct Current"];
 
 var nounFlame = ["Pyro","Incendiary","Inferno","Ember","Blaze","Salamander","Hellhound","Firedrake","Phoenix","Volcano"];
 
-var nounLaser = ["Azimuth","Corona","Aphelion","Perihelion","Parallax","Zenith","Parallax","Nova"];
+var nounLaser = ["Azimuth","Corona","Aphelion","Perihelion","Parallax","Zenith","Nova","Prism","Spectrum"];
 
-var nounCryo = ["Chill","Fridge","Frostbite","Hailstorm","Blizzard","Avalanche","Frostdrake","Frost-Giant","Ice-Troll"];
+var nounCryo = ["Chill","Fridge","Frostbite","Hailstorm","Blizzard","Avalanche","Frostdrake","Frost-Giant","Ice-Troll","Snowfall","Snowflake"];
 
-var nounPlasma = ["Red-Star","Orange-Star","Yellow-Star","White-Star","Blue-Star","White-Hot","Solar-Flare","Sun-Storm","Ejecta"];
+var nounPlasma = ["Solar Wind","Coronal Mass Ejection","Ion Cloud","Yellow Star","White Star","Blue Star","White Heat","Solar Flare","Sun Storm","Ejecta"];
 
 var manufacturer = ["AbadarCorp","Arabani Arms","Ulrikka","Idari","Eox Armory","Farraddi","Kalt & Ryder","Kosunagi Arsenal","LR Vostan","Stonewall","Weyland Industries","Hyperion","Aegis Solutions","Davetech","Vercite Traders","Vinson Dynamics" ];
 
 var series = ["A3-","AAA-","ACR-","ACW-","AZU-","BAR-","CBR-","CQB-","CSP-","DX-","GR6-","GSG-","IXN-","KFS-","KHE-","KT-","LNR-","MACR-","NDT-","R9-","RHR-","RTA-","SBR-","STH-","TCR-","UTX-","Z5-","ZTN-","ZTR-"];
 
-function getrandomName(){
+function getrandomName(weaponName){
   var name = [];
+  var deck = [];
+  var concatAll = 0;
+  var stripName = weaponName;
 
-  name[1] = randomChoice(manufacturer) + " " + randomChoice(series) + getRandomInt(1, 990).toString() + " ";
-
-  var ten = [];
-  //for (var i = 1; i <= 10; i++) {
-  //  ten = ten.push(randomChoice(noun));
-  //}
+  //stack the deck
   for (i = 0; i < 8; i++) {
-    ten.push(randomChoice(noun));
+    deck.push(randomChoice(noun));
   }
-  ten.push("Boy");
-  ten = ten.concat(nounFlame);
 
-  type = getRandomInt(1, 2);
-  switch (type) {
-    case 1:
-      name[0] = randomChoice(adjective) + " " + randomChoice(noun);
-      break;
-    case 2:
-      name[0] = randomChoice(adjective) + " " + randomChoice(noun);
-      break;
-    case 3:
-      name[0] = randomChoice(["The ","",""]) + randomChoice(ten)+ " " + randomChoice(ten);
-      name[0] =randomChoice(ten) + "-Class Blaster";
-      break;
-    default:
-      console.error("name generation error");
+  if (weaponName.includes("Knife") || weaponName.includes("Sword") || weaponName.includes("Longsword") || weaponName.includes("Bladestaff") || weaponName.includes("Handaxe") || weaponName.includes("Greatsword")){
+    deck = deck.concat(nounSlashing);
   }
+  else if (weaponName.includes("Baton") || weaponName.includes("Battleglove") || weaponName.includes("Mace") || weaponName.includes("Staff") || weaponName.includes("Gauntlet") || weaponName.includes("Hammer") || weaponName.includes("Longhammer") || weaponName.includes("Truncheon")){
+    deck = deck.concat(nounBludgeoning);
+  }
+  else if (weaponName.includes("Spear") || weaponName.includes("Doshko") || weaponName.includes("Pike")){
+    deck = deck.concat(nounPiercing);
+  }else{
+    concatAll += 1;
+  }
+
+  if (weaponName.includes("Acid")){
+    deck = deck.concat(nounAcid);
+  }
+  else if (weaponName.includes("Sonic")){
+    deck = deck.concat(nounSonic);
+  }
+  else if (weaponName.includes("Shock")){
+    deck = deck.concat(nounShock);
+  }
+  else if (weaponName.includes("Flame")){
+    deck = deck.concat(nounFlame);
+  }
+  else if (weaponName.includes("Laser")){
+    deck = deck.concat(nounLaser);
+  }
+  else if (weaponName.includes("Cryo")){
+    deck = deck.concat(nounCryo);
+  }
+  else if (weaponName.includes("Plasma")){
+    deck = deck.concat(nounPlasma);
+  }
+  else {
+    concatAll += 1;
+  }
+
+  if (concatAll === 2){
+    deck = deck.concat(noun);
+  }
+
+  stripName = stripName.replace("Acid ", "").replace("Acid-edged ", "").replace("Sonic ", "").replace("Sonic-edged ", "").replace("Shock ", "").replace("Shock-edged ", "").replace("Flame ", "").replace("Flame-edged ", "").replace("Cryo ", "").replace("Cryo-edged ", "").replace("Plasma ", "").replace("Plasma-edged ", "").replace("Kasathan ", "");
+
+  name[0] = randomChoice(adjective) + " " + randomChoice(deck);
+  name[1] = randomChoice(manufacturer);
+  name[2] = randomChoice(series) + getRandomInt(1, 990).toString();
+  name[3] = stripName;
+
   return name;
 }
