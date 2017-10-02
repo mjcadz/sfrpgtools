@@ -553,8 +553,8 @@ function printMeleeNeat(level,weaponName,type,damage,critical,bulk,special) {
                         "<br>Critical: " + critical +
                         "<br>Bulk: " + bulk +
                         "<br>Special: " + special + "</p>");
-    $index.append("<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-outline-secondary btn-sm\" onclick = \"removeEntry(this.id)\">Remove</button>");
   }
+  $index.append("<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-outline-secondary btn-sm\" onclick = \"removeEntry(this.id)\">Remove</button>");
 
   if (storeOutput != ""){
       $outputArea.append(storeOutput);

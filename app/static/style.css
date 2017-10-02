@@ -7,3 +7,30 @@ body {
   background-repeat: repeat,no-repeat;
   background-attachment: fixed,fixed;
 }
+
+ul.share-buttons{
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+ul.share-buttons li{
+  display: inline;
+  text-align: center;
+  padding: 0px 8px;
+}
+
+ul.share-buttons .sr-only{
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+.fa{
+  color: white;
+}
