@@ -1320,6 +1320,7 @@ function generateWeapon() {
 
   var level;
   var type;
+  var typeString;
 
   //get vars from page
   var levelDrop = $('#levelDrop').text();
@@ -1360,23 +1361,32 @@ function generateWeapon() {
   switch (type) {
     case 1:
       basicMelee(level);
+      typeString = "Basic Melee";
       break;
     case 2:
       advancedMelee(level);
+      typeString = "Advanced Melee";
       break;
     case 3:
       smallArm(level);
+      typeString = "Smallarm";
       break;
     case 4:
       longarm(level);
+      typeString = "Long Arm";
       break;
     case 5:
       heavyWeapon(level);
+      typeString = "Heavy";
       break;
     case 6:
       sniperWeapon(level);
+      typeString = "Sniper";
       break;
     default:
+      typeString = "Error";
       console.error("generation error");
   }
+  //log event in analytics
+  ga('send', 'event', 'Generation', 'weapon', typeString);
 }
