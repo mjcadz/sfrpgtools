@@ -22,7 +22,7 @@ var nounCryo = ["Chill","Frostbite","Hailstorm","Blizzard","Avalanche","Frostdra
 
 var nounPlasma = ["Solar Wind","Mass Ejection","Ion Cloud","Neutron Star","Star Scream","Blue Heat","White Heat","Solar Flare","Sun Storm","Ejecta","Ionosphere","Welder"];
 
-var manufacturer = ["AbadarCorp","Arabani Arms","Ulrikka","Idari","Eox Armory","Farraddi","Kalt & Ryder","Kosunagi Arsenal","LR Vostan","Stonewall","Weyland Industries","Hyperion","Aegis Solutions","Davetech","Vercite Traders","Vinson Dynamics","Kendachi" ];
+var manufacturer = ["AbadarCorp","Arabani Arms","Ulrikka","Idari","Eox Armory","Farraddi","Kalt & Ryder","Kosunagi Arsenal","LR Vostan","Stonewall","Weyland Industries","Hyperion","Aegis Solutions","Davetech","Vercite Traders","Vinson Dynamics","Kendachi","HyperChrome","Dyson Securities","Scrynet","Neon Photonics","G.L.A.I.V.E","Enforcer Inc.","Turbo Tactical","MantiCorps" ];
 
 var series = ["A3-","AAA-","ACR-","ACW-","AZU-","BAR-","CBR-","CQB-","CSP-","DX-","GR6-","GSG-","IXN-","KFS-","KHE-","KT-","LNR-","MACR-","NDT-","R9-","RHR-","RTA-","SBR-","STH-","TCR-","UTX-","Z5-","ZTN-","ZTR-"];
 
