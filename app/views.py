@@ -1,21 +1,17 @@
 # views.py
 
-from flask import render_template
+from flask import render_template,make_response
 
 from app import app
 
-from flask_cachecontrol import (
-    FlaskCacheControl,
-    cache)
-flask_cache_control = FlaskCacheControl()
-flask_cache_control.init_app(app)
-
 @app.route('/')
-@cache(max_age=604800, public=True)
 def index():
-    return render_template("index.html")
+    resp = make_response(render_template('index.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp
 
 @app.route('/about')
-@cache(max_age=604800, public=True)
 def about():
-    return render_template("about.html")
+    resp = make_response(render_template('about.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp

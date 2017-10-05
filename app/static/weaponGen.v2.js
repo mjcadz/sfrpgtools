@@ -856,11 +856,20 @@ function smallArm(level) {
     ]));
   }
   else if (gunType === "FX Hand-Cannon") {
-    rangeo = 10 + (tier * 5) + randomChoice([0, 5]);
-    if (rangeo > 30) {
-      rangeo = 30;
+    var specialloc = randomChoice(["Blast", "Line"]);
+    if (specialloc === "Blast"){
+      rangeo = 10 + (tier * 5) + randomChoice([0, 5]);
+      if (rangeo > 30) {
+        rangeo = 30;
+      }
     }
-    special.push(randomChoice(["Blast", "Line"]));
+    else if (specialloc === "Line") {
+      rangeo = 10 + (tier * 10) + randomChoice([-5,0, 5]);
+      if (rangeo > 60) {
+        rangeo = 60;
+      }
+    }
+    special.push(specialloc);
     special.push("Unwieldy");
     ammo.push("1 shell");
     ammo.push("1");
@@ -1145,18 +1154,31 @@ function heavyWeapon(level) {
     rangeo -= 30;
   }
   else if (gunType === "FX Thrower") {
-    special.push(randomChoice(["Blast", "Line"]));
-    special.push("Unwieldy");
-    rangeo = 10 + (tier * 5) + randomChoice([0, 5]);
-    if (rangeo > 30) {
-      rangeo = 30;
+    var specialloc = randomChoice(["Blast", "Line"]);
+    if (specialloc === "Blast"){
+      rangeo = 10 + (tier * 5) + randomChoice([0, 5]);
+      if (rangeo > 30) {
+        rangeo = 30;
+      }
     }
+    else if (specialloc === "Line") {
+      rangeo = 10 + (tier * 15) + randomChoice([-5,0, 5]);
+      if (rangeo > 80) {
+        rangeo = 80;
+      }
+    }
+    special.push(specialloc);
+    special.push("Unwieldy");
     ammo = [
       randomChoice(["60", "80", "100"]) + " charges",
       randomChoice(["2", "4", "10"])
     ];
   }
   else if (gunType === "FX Railgun") {
+    rangeo = 15 + (tier * 15) + randomChoice([-5,0, 5]);
+    if (rangeo > 80) {
+      rangeo = 80;
+    }
     special.push("Line");
     special.push("Penetrating");
     special.push("Unwieldy");

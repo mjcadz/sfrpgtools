@@ -3,7 +3,7 @@ html, body {
 }
 body {
   background-image: url('stars.png'),linear-gradient(to top, #4CA1AF,#2C3E50);
-  background-size:contain,cover;
+  background-size: auto,cover;
   background-repeat: repeat,no-repeat;
   background-attachment: fixed,fixed;
 }
