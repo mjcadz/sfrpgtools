@@ -26,7 +26,7 @@ var artificialSatellites = ["Satellite Array","Large Space Station","Huge Space 
 //ATMOSPHERE
 var atmosphereType = ["Thin","Breathable","Thick"];
 var atmosphereMods = ["Corrosive","Toxic"];
-var safeGases = ["Nitrogen","Oxygen","Argon","Carbon Dioxide"];
+var safeGases = ["Nitrogen","Oxygen","Argon","Helium","Neon"];
 var gasGiantGases = ["Helium","Hydrogen","Methane","Ammonia", "Water Vapour"];
 var corrosiveGases = ["Sulphuric Acid","Ammonia"];
-var toxicGases = ["Ammonia","Methane","Carbon Monoxide"];
+var toxicGases = ["Ammonia","Methane","Carbon Monoxide","Carbon Dioxide","Hydrocarbons];
