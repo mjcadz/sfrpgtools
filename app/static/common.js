@@ -1,6 +1,6 @@
 
 function share(id) {
-  
+
   if (id == "facebook"){
     window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL));
   }
@@ -15,4 +15,20 @@ function share(id) {
   }
   ga('send', 'event', 'Share', id);
   return false;
+}
+
+/**
+ * Choose a random element from an array.
+ * @param array array
+ *   May also work with an array-like object.
+ * @return whatever type the array holds
+ */
+function randomChoice(array) {
+  if (length in array) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+  else {
+    console.error("Tried to pull a random value from an item that is not an array or an array-like object.");
+    return;
+  }
 }

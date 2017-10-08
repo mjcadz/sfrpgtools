@@ -10,6 +10,12 @@ def index():
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
+@app.route('/systemGen')
+def systemGen():
+    resp = make_response(render_template('systemGen.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp
+
 @app.route('/about')
 def about():
     resp = make_response(render_template('about.html'))
