@@ -11,17 +11,16 @@ var otherSystems = ["Black Hole","Ark/Generation Ship","Dyson Sphere","High Mass
 var starModifiers = ["Binary System","Nebula","Dust Rings","Asteroid Belt","Energy Harvesting Devices"];
 
 //PLANETS
-var terrestrialPlanets = ["Silicate Planet","Super Silicate Planet","Iron Planet","Coreless Planet","Carbon Planet"];
-var silicateSubTypes = ["Garden Planet","Rocky Planet","City Planet","Ocean Planet","Desert Planet","Forest Planet","Icy Planet","Molten Planet","Swamp Planet"];
-var gasPlanets = ["Gas Planet","Gas Giant","Hot Gas Giant","Cold Gas Giant"];
-var otherPlanets = ["Debris Field","Destroyed Planet","Rocky Planetoid","Ice Planetoid","Protoplanet","Ring World","Cube World","Refuelling Station","Offworld Trading Post"];
+var terrestrialWorlds = ["Garden World","Rocky World","City World","Ocean World","Desert World","Forest World","Ice World","Lava World","Marsh World","Iron World","Coreless World","Carbon World"];
+var irregularWorlds =["Debris Field","Destroyed World","ProtoWorld","Ring World","Cube World","Refuelling Station","Offworld Trading Post"]
+var gasGiants = ["Small Gas World","Gas Giant","Hot Gas Giant","Cold Gas Giant"];
 
-var planetmodifiers = ["Rings","Super Rings","Tidally Locked","Terraformed","Terraform in Progress","Shielded","Force Field","Surrounded by Synthetic Debris","Large Axial Tilt","Perpendicular Rotation","Retrograde Rotation","Eccentric Orbit","Retrograde Orbit"];
+var worldModifiers = ["Rings","Super Rings","Terraformed","Terraform in Progress","Shielded","Force Field","Surrounded by Synthetic Debris","Large Axial Tilt","Eccentric Orbit","Retrograde Rotation"];
 
 //SATELLITES
-var moons = ["Rocky Moon","Icy Moon","Forest Moon","Volcanic Moon","Swamp Moon","Garden Moon"];
-var irregularMoons = ["Captured Asteroid","Irregular Shaped Moon","Destroyed Moon"];
-var artificialSatellites = ["Satellite Array","Space Station","Huge Space Station","Space Elevator","Planetary Defence Platform","Research Outpost","Galactic Navigation Beacon","Terraforming Platform"];
+var moons = ["Rocky Moon","Ice Moon","Forest Moon","Volcanic Moon","Marsh Moon","Garden Moon"];
+var irregularMoons = ["Captured Asteroid","Irregular Shaped Moon","Destroyed Moon","Ice Ball"];
+var artificialSatellites = ["Satellite Array","Space Station","Huge Space Station","Space Elevator","Planetary Defence Platform","Research Outpost","Galactic Navigation Beacon"];
 
 //ATMOSPHERE
 var atmosphereType = ["Thin","Normal","Thick","None"];
@@ -31,7 +30,8 @@ var gasGiantGases = ["Helium","Hydrogen","Methane","Ammonia", "Water Vapour"];
 var corrosiveGases = ["Sulphuric Acid","Ammonia"];
 var toxicGases = ["Ammonia","Methane","Carbon Monoxide","Carbon Dioxide","Hydrocarbons"];
 
-
+//BIOMES
+var biomes = ["Aerial Terrian","Aquatic Terrian","Desert Terrain","Hill Terrian","Mountain Terrain","Marsh Terrain","Urban Terrain"]
 
 function getStar() {
   var deck = [];
@@ -53,12 +53,12 @@ function getPlanet() {
   var deck = [];
   var pick;
 
-  deck = deck.concat(terrestrialPlanets);
-  deck = deck.concat(gasPlanets);
-  deck = deck.concat(otherPlanets);
+  deck = deck.concat(terrestrialWorlds);
+  deck = deck.concat(irregularWorlds);
+  deck = deck.concat(gasGiants);
 
   pick = randomChoice(deck);
-  pick = pick.replace("Silicate Planet",randomChoice(silicateSubTypes));
+
   return pick;
 }
 
