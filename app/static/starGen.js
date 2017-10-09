@@ -16,12 +16,12 @@ var silicateSubTypes = ["Garden Planet","Rocky Planet","City Planet","Ocean Plan
 var gasPlanets = ["Gas Planet","Gas Giant","Hot Gas Giant","Cold Gas Giant"];
 var otherPlanets = ["Debris Field","Destroyed Planet","Rocky Planetoid","Ice Planetoid","Protoplanet","Ring World","Cube World","Refuelling Station","Offworld Trading Post"];
 
-var planetmodifiers = ["Rings","Super Rings","Terraformed","Terraform in Progress","Shielded","Force Field","Surrounded by Synthetic Debris","Large Axial Tilt","Eccentric Orbit","Retrograde Rotation"];
+var planetmodifiers = ["Rings","Super Rings","Tidally Locked","Terraformed","Terraform in Progress","Shielded","Force Field","Surrounded by Synthetic Debris","Large Axial Tilt","Perpendicular Rotation","Retrograde Rotation","Eccentric Orbit","Retrograde Orbit"];
 
 //SATELLITES
 var moons = ["Rocky Moon","Icy Moon","Forest Moon","Volcanic Moon","Swamp Moon","Garden Moon"];
 var irregularMoons = ["Captured Asteroid","Irregular Shaped Moon","Destroyed Moon"];
-var artificialSatellites = ["Satellite Array","Space Station","Huge Space Station","Space Elevator","Planetary Defence Platform","Research Outpost","Galactic Navigation Beacon"];
+var artificialSatellites = ["Satellite Array","Space Station","Huge Space Station","Space Elevator","Planetary Defence Platform","Research Outpost","Galactic Navigation Beacon","Terraforming Platform"];
 
 //ATMOSPHERE
 var atmosphereType = ["Thin","Normal","Thick","None"];
