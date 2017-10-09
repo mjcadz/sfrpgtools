@@ -347,22 +347,6 @@ function clearOutput() {
 }
 
 /**
- * Choose a random element from an array.
- * @param array array
- *   May also work with an array-like object.
- * @return whatever type the array holds
- */
-function randomChoice(array) {
-  if (length in array) {
-    return array[Math.floor(Math.random() * array.length)];
-  }
-  else {
-    console.error("Tried to pull a random value from an item that is not an array or an array-like object.");
-    return;
-  }
-}
-
-/**
  * Get the weapon's tier based on its item level.
  * @param level number
  *   An integer from 1 to 20.

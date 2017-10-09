@@ -1,0 +1,20 @@
+<!-- index.html-->
+
+{% extends "base.html" %}
+{% block title %}Starfinder Weapon Generator{% endblock %}
+{% block body %}
+<div class="jumbotron">
+  <h1>Weapon Generator</h1>
+  <p class="lead">for use with Starfinder RPG</p>
+  <button type="button" onclick = "printSystem()" title = "magic, baby" class="btn btn-success">Generate  <i class="fa fa-magic fa-lg"></i></button>
+  <button type="button" onclick = "clearOutput()" class="btn btn-secondary">Clear</button>
+  </br>
+
+  <div class="output area">
+
+	</div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type = "text/javascript" src = "{{ url_for('static', filename = 'starGen.js') }}" ></script>
+{% endblock %}
