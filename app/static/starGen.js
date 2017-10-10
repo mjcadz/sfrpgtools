@@ -97,13 +97,13 @@ function getSatellite() {
   var pick;
 
   var num = getRandomInt(1, 100);
-  if (num.between(0,41)){
+  if (num.between(0,61)){
     deck = deck.concat(moons);
   }
-  if (num.between(40,81)){
+  if (num.between(60,91)){
     deck = deck.concat(artificialSatellites);
   }
-  if (num.between(80,101)){
+  if (num.between(90,101)){
     deck = deck.concat(irregularMoons);
   }
 
@@ -111,16 +111,45 @@ function getSatellite() {
   return pick;
 }
 
-function getSystem() {
-  var system =[];
+function getMoons() {
+  var moons;
+  var num = getRandomInt(1, 100);
+  if (num.between(0,21)){
+    moons = 0;
+  }
+  if (num.between(20,81)){
+    moons = 1;
+  }
+  if (num.between(80,91)){
+    moons = 2;
+  }
+  if (num.between(90,96)){
+    moons = 3;
+  }
+  if (num.between(95,101)){
+    moons = 4;
+  }
+  return moons;
+}
 
-  system.push(getStar());
-  system.push(getPlanet("inner"));
-  system.push(getPlanet());
-  system.push(getPlanet("outer"));
-  system.push(getSatellite());
+function getBodies() {
+  var bodies =[];
+  var i = 0;
+  var num = getRandomInt(2, 10);
 
-  return system
+  for (i = 0; i < num; i++) {
+    if (i < num/2 - 1) {
+      bodies.push(getPlanet("inner"));
+    }
+    else if (i > num/2 + 1) {
+      bodies.push(getPlanet("outer"));
+    }
+    else {
+      bodies.push(getPlanet());
+    }
+  }
+
+  return bodies
 }
 
 function clearOutput() {
@@ -129,17 +158,37 @@ function clearOutput() {
 }
 
 function printSystem() {
+  var star = getStar();
+  var starLocation;
+  var bodies = getBodies();
+
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
-  var system = getSystem();
+  var num = getRandomInt(1, 100);
+  if (num.between(0,81)){
+    starLocation = "The Vast";
+  }
+  if (num.between(80,101)){
+    starLocation = "Near Space";
+  }
 
-  $outputArea.append( "<p>"+  system[0] +
-                      "<br>"+ system[1] +
-                      "<br>"+ system[2] +
-                      "<br>"+ system[3] +
-                      "<br>"+ system[4] + "</p>"
-  );
+  var list = "<p>"+  star + " Location: " + starLocation;
+  var arrayLength = bodies.length;
+  var arrayLength2 = moons;
+  for (var i = 0; i < arrayLength; i++) {
+    list += "<br>";
+    list += bodies[i];
+    if (!irregularWorlds.includes(bodies[i])){
+      var moons = getMoons();
+      for (var j = 0; j < moons; j++) {
+        list += "<br>&nbsp;&nbsp;" + getSatellite();
+      }
+    }
+  }
+  list += "</p>" ;
+
+  $outputArea.append(list);
 
 }
 
