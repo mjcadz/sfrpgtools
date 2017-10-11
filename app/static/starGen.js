@@ -94,21 +94,44 @@ function getPlanet(position) {
 
 function getSatellite() {
   var deck = [];
+  var weight = [];
+  var w = [];
   var pick;
+  var lifeDrop = $('#lifeDrop').text().toString();
 
-  var num = getRandomInt(1, 100);
-  if (num.between(0,61)){
-    deck = deck.concat(moons);
-  }
-  if (num.between(60,91)){
-    deck = deck.concat(artificialSatellites);
-  }
-  if (num.between(90,101)){
-    deck = deck.concat(irregularMoons);
+  deck = deck.concat(moons);
+  deck = deck.concat(irregularMoons);
+  deck = deck.concat(artificialSatellites);
+
+  if (lifeDrop.includes("Sparse")){
+    w.length = moons.length;w.fill(5);
+    weight = weight.concat(w);
+    w.length = irregularMoons.length;w.fill(5);
+    weight = weight.concat(w);
+    w.length = artificialSatellites.length;w.fill(1);
+    weight = weight.concat(w);
+  } else if (lifeDrop.includes("Average")){
+    w.length = moons.length;w.fill(5);
+    weight = weight.concat(w);
+    w.length = irregularMoons.length;w.fill(5);
+    weight = weight.concat(w);
+    w.length = artificialSatellites.length;w.fill(2);
+    weight = weight.concat(w);
+  } else if (lifeDrop.includes("Teeming")){
+    w.length = moons.length;w.fill(5);
+    weight = weight.concat(w);
+    w.length = irregularMoons.length;w.fill(5);
+    weight = weight.concat(w);
+    w.length = artificialSatellites.length;w.fill(3);
+    weight = weight.concat(w);
   }
 
-  pick = randomChoice(deck);
-  return pick;
+  ///var list = ['javascript', 'php', 'ruby', 'python'];
+  //var weight = [0.7, 0.7, 0.7, 0.7];
+  pick = randomWeightedChoice(deck, weight);
+
+  //pick = randomChoice(deck);
+  return weight;
 }
 
 function getMoons() {
@@ -162,6 +185,7 @@ function printSystem() {
   var starLocation;
   var bodies = getBodies();
 
+
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
@@ -175,7 +199,7 @@ function printSystem() {
 
   var list = "<p>"+  star + " Location: " + starLocation;
   var arrayLength = bodies.length;
-  var arrayLength2 = moons;
+
   for (var i = 0; i < arrayLength; i++) {
     list += "<br>";
     list += bodies[i];
@@ -199,3 +223,35 @@ function printSystem() {
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function getFill(arrayLength,fill) {
+  var filled = [];
+  filled.length = arrayLength;
+  filled.fill(fill);
+  return fill;
+}
+
+var rand = function(min, max) {
+    return Math.random() * (max - min) + min;
+};
+
+var randomWeightedChoice = function(list, weight) {
+    var total_weight = weight.reduce(function (prev, cur, i, arr) {
+        return prev + cur;
+    });
+
+    var random_num = rand(0, total_weight);
+    var weight_sum = 0;
+    //console.log(random_num)
+
+    for (var i = 0; i < list.length; i++) {
+        weight_sum += weight[i];
+        weight_sum = +weight_sum.toFixed(2);
+
+        if (random_num <= weight_sum) {
+            return list[i];
+        }
+    }
+
+    // end of function
+};

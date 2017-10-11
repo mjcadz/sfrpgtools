@@ -1,4 +1,6 @@
+//common functions
 
+//generate share button data
 function share(id) {
 
   if (id == "facebook"){
@@ -32,3 +34,9 @@ function randomChoice(array) {
     return;
   }
 }
+
+//Sets selected dropdown to dropdown display
+$('.dropdown-item').click(function() {
+  var selected = $(this).text();
+  $(this).closest('.btn-group').find('.dropdown-toggle').text(selected);
+});

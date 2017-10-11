@@ -1316,12 +1316,6 @@ function sniperWeapon(level) {
   printNeat(printLevel,gunName,type,damage,rangeo,critical,ammo[0],ammo[1],printSpecial,bulk)
 }
 
-//Sets selected dropdown to dropdown display
-$('.dropdown-item').click(function() {
-  var selected = $(this).text();
-  $(this).closest('.btn-group').find('.dropdown-toggle').text(selected);
-});
-
 function generateWeapon() {
 
   var level;
