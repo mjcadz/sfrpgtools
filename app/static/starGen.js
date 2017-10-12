@@ -1,29 +1,29 @@
 //Heavenly Bodies
 
 //STARS
-var mainStars = ["Red Star","Orange Star","Yellow Star","White Star","Young Red Star","Young Orange Star","Young Yellow Star"];
+var mainStars = ["Red Star","Orange Star","Yellow Star","White Star"];
 var giantStars = ["Red Giant","Orange Giant","Yellow Giant","Blue Giant"];
 var supergiantStars = ["Red Supergiant","Orange Supergiant","Blue SuperGiant"];
-var dwarfStars = ["White Dwarf","Red Dwarf","Brown Dwarf","Black Dwarf"];
-var otherStars = ["Protostar","Neutron Star","Pulsar","Imminent Supernova"];
-var otherSystems = ["Black Hole","Ark/Generation Ship","Dyson Sphere","High Mass Debris Field","Deep Space Research Station","Starless Planet"];
+var otherStars = ["Protostar","Neutron Star","Pulsar","Imminent Supernova","White Dwarf","Red Dwarf","Brown Dwarf","Black Hole","Dyson Sphere","High Mass Debris Field"];
+var systemlessObjects = ["Ark Ship","Generation Ship","Deep Space Research Station","Starless Planet"]
 
-var starModifiers = ["Binary System","Nebula","Dust Rings","Asteroid Belt","Energy Harvesting Devices","Stellar Engine"];
+var starModifiers = ["Binary System","Nebula","Dust Rings","Energy Harvesting Devices","Stellar Engine"];
 
 //PLANETS
-var terrestrialWorlds = ["Garden World","Rocky World","City World","Ocean World","Desert World","Forest World","Ice World","Lava World","Marsh World","Iron World","Coreless World","Carbon World"];
-var irregularWorlds =["Debris Field","Destroyed World","Protoplanet","Ring World","Cube World","Disk World","Shield World","Refuelling Station","Offworld Trading Post","Ship Scrapyard"]
+var terrestrialLife = ["Garden World","Rocky World","City World","Ocean World","Desert World","Forest World","Ice World","Lava World","Marsh World"];
+var terrestrialNonLife = ["Rocky World","Ice World","Iron World","Coreless World","Carbon World","Debris Field","Destroyed World","Protoplanet"];
+var artificialWorlds =["Ring World","Cube World","Ark Ship","Disk World","Shield World","Refuelling Station","Offworld Trading Post","Ship Scrapyard"];
 var gasGiants = ["Small Gas World","Gas Giant","Hot Gas Giant","Cold Gas Giant"];
 
 var worldModifiers = ["Rings","Super Rings","Terraformed","Terraform in Progress","Force Field","Surrounded by Synthetic Debris","Large Axial Tilt","Perpendicular Rotation","Retrograde Rotation","Eccentric Orbit","Retrograde Orbit"];
 
 //SATELLITES
-var moons = ["Rocky Moon","Ice Moon","Forest Moon","Volcanic Moon","Marsh Moon","Garden Moon","Gas Moon"];
-var irregularMoons = ["Captured Asteroid","Non-spherical Moon","Destroyed Moon","Ice Ball"];
+var lifeMoons = ["Ice Moon","Forest Moon","Marsh Moon","Garden Moon","Rocky Moon","Volcanic Moon"];
+var nonLifeMoons = ["Rocky Moon","Ice Moon","Iron Moon","Gas Moon","Captured Asteroid","Destroyed Moon"];
 var artificialSatellites = ["Satellite Array","Space Station","Huge Space Station","Space Elevator","Planetary Defence Platform","Research Outpost","Galactic Navigation Beacon","Artificial Moon","Orbital Drydock","Orbital Mirrors"];
 
 //ATMOSPHERE
-var atmosphereType = ["Thin","Normal","Thick","None"];
+var atmosphereType = ["Thin","Normal","Thick","No Atmosphere"];
 var atmosphereMods = ["Corrosive","Toxic"];
 var safeGases = ["Nitrogen","Oxygen","Argon","Helium","Neon"];
 var gasGiantGases = ["Helium","Hydrogen","Methane","Ammonia", "Water Vapour"];
@@ -41,53 +41,76 @@ Number.prototype.between = function (min, max) {
 
 function getStar() {
   var deck = [];
+  var weight = [];
   var pick;
 
-  var num = getRandomInt(1, 100);
-  if (num.between(0,71)){
-    deck = deck.concat(mainStars);
-    deck = deck.concat(mainStars);
-    deck = deck.concat(giantStars);
-    deck = deck.concat(supergiantStars);
-  }
-  if (num.between(70,81)){
-    deck = deck.concat(dwarfStars);
-  }
-  if (num.between(80,91)){
-    deck = deck.concat(otherStars);
-  }
-  if (num.between(90,101)){
-    deck = deck.concat(otherSystems);
-  }
+  deck = deck.concat(mainStars);
+  deck = deck.concat(giantStars);
+  deck = deck.concat(supergiantStars);
+  deck = deck.concat(otherStars);
+  deck = deck.concat(systemlessObjects);
 
-  pick = randomChoice(deck);
+  weight = weight.concat(getWeightFill(mainStars,3));
+  weight = weight.concat(getWeightFill(giantStars,1));
+  weight = weight.concat(getWeightFill(supergiantStars,1));
+  weight = weight.concat(getWeightFill(otherStars,1));
+  weight = weight.concat(getWeightFill(systemlessObjects,1));
+
+  pick = randomWeightedChoice(deck,weight);
   return pick;
 }
 
 function getPlanet(position) {
   var deck = [];
+  var weight = [];
+  var weight1,weight2,weight3,weight4;
   var pick;
+  var lifeDrop = $('#lifeDrop').text().toString();
 
-  var num = getRandomInt(1, 100);
-  if (num.between(0,51)){
-    deck = deck.concat(terrestrialWorlds);
-  }
-  if (num.between(50,81)){
-    deck = deck.concat(gasGiants);
-  }
-  if (num.between(80,101)){
-    deck = deck.concat(irregularWorlds);
+  deck = deck.concat(terrestrialLife);
+  deck = deck.concat(terrestrialNonLife);
+  deck = deck.concat(artificialWorlds);
+  deck = deck.concat(gasGiants);
+
+  if (lifeDrop.includes("Sparse")){
+    weight1 = getWeightFill(terrestrialLife,1);
+    weight2 = getWeightFill(terrestrialNonLife,5);
+    weight3 = getWeightFill(artificialWorlds,1);
+    weight4 = getWeightFill(gasGiants,6);
+    if (position === "inner"){
+      weight2.fill(weight2[0]+2);
+    }
+
+  } else if (lifeDrop.includes("Average")){
+    weight1 = getWeightFill(terrestrialLife,1);
+    weight2 = getWeightFill(terrestrialNonLife,1);
+    weight3 = getWeightFill(artificialWorlds,1);
+    weight4 = getWeightFill(gasGiants,2);
+    if (position === "inner"){
+      weight1.fill(weight1[0]+2);
+      weight2.fill(weight2[0]+2);
+    }
+
+  } else if (lifeDrop.includes("Teeming")){
+    weight1 = getWeightFill(terrestrialLife,3);
+    weight2 = getWeightFill(terrestrialNonLife,1);
+    weight3 = getWeightFill(artificialWorlds,3);
+    weight4 = getWeightFill(gasGiants,3);
+    if (position === "inner"){
+      weight1.fill(weight1[0]+2);
+      weight2.fill(weight2[0]+2);
+    }
+
   }
 
-  if (position === "inner"){
-    deck = deck.concat(terrestrialWorlds);
-  }
-  else if (position === "outer"){
-    deck = deck.concat(gasGiants);
-    deck = deck.concat(gasGiants);
+  if (position === "outer"){
+    weight4.fill(weight4[0]+4);
   }
 
-  pick = randomChoice(deck);
+  weight = weight.concat(weight1).concat(weight2).concat(weight3).concat(weight4);
+  deck = deck.concat(["Asteroid Belt"]);
+  weight = weight.concat([3]);
+  pick = randomWeightedChoice(deck,weight);
 
   return pick;
 }
@@ -95,70 +118,53 @@ function getPlanet(position) {
 function getSatellite() {
   var deck = [];
   var weight = [];
-  var w = [];
   var pick;
   var lifeDrop = $('#lifeDrop').text().toString();
 
-  deck = deck.concat(moons);
-  deck = deck.concat(irregularMoons);
+  deck = deck.concat(lifeMoons);
+  deck = deck.concat(nonLifeMoons);
   deck = deck.concat(artificialSatellites);
 
   if (lifeDrop.includes("Sparse")){
-    w.length = moons.length;w.fill(5);
-    weight = weight.concat(w);
-    w.length = irregularMoons.length;w.fill(5);
-    weight = weight.concat(w);
-    w.length = artificialSatellites.length;w.fill(1);
-    weight = weight.concat(w);
+    weight = weight.concat(getWeightFill(lifeMoons,1));
+    weight = weight.concat(getWeightFill(nonLifeMoons,6));
+    weight = weight.concat(getWeightFill(artificialSatellites,0.5));
+
   } else if (lifeDrop.includes("Average")){
-    w.length = moons.length;w.fill(5);
-    weight = weight.concat(w);
-    w.length = irregularMoons.length;w.fill(5);
-    weight = weight.concat(w);
-    w.length = artificialSatellites.length;w.fill(2);
-    weight = weight.concat(w);
+    weight = weight.concat(getWeightFill(lifeMoons,1));
+    weight = weight.concat(getWeightFill(nonLifeMoons,1));
+    weight = weight.concat(getWeightFill(artificialSatellites,0.5));
+
   } else if (lifeDrop.includes("Teeming")){
-    w.length = moons.length;w.fill(5);
-    weight = weight.concat(w);
-    w.length = irregularMoons.length;w.fill(5);
-    weight = weight.concat(w);
-    w.length = artificialSatellites.length;w.fill(3);
-    weight = weight.concat(w);
+    weight = weight.concat(getWeightFill(lifeMoons,3));
+    weight = weight.concat(getWeightFill(nonLifeMoons,1));
+    weight = weight.concat(getWeightFill(artificialSatellites,2));
+
   }
 
-  ///var list = ['javascript', 'php', 'ruby', 'python'];
-  //var weight = [0.7, 0.7, 0.7, 0.7];
   pick = randomWeightedChoice(deck, weight);
-
-  //pick = randomChoice(deck);
-  return weight;
+  return pick;
 }
 
 function getMoons() {
-  var moons;
-  var num = getRandomInt(1, 100);
-  if (num.between(0,21)){
-    moons = 0;
-  }
-  if (num.between(20,81)){
-    moons = 1;
-  }
-  if (num.between(80,91)){
-    moons = 2;
-  }
-  if (num.between(90,96)){
-    moons = 3;
-  }
-  if (num.between(95,101)){
-    moons = 4;
-  }
-  return moons;
+  deck = [0,1,2,3,4]
+  weight = [0.2,0.6,0.1,0.05,0.05]
+  return randomWeightedChoice(deck, weight);
 }
 
 function getBodies() {
   var bodies =[];
   var i = 0;
-  var num = getRandomInt(2, 10);
+  var sizeDrop = $('#sizeDrop').text().toString();
+
+  if (sizeDrop.includes("Small")){
+    var num = getRandomInt(2, 5);
+  } else if (sizeDrop.includes("Medium")){
+    var num = getRandomInt(5, 10);
+  } else if (sizeDrop.includes("Large")){
+    var num = getRandomInt(10, 15);
+  }
+
 
   for (i = 0; i < num; i++) {
     if (i < num/2 - 1) {
@@ -175,6 +181,90 @@ function getBodies() {
   return bodies
 }
 
+function getBodyStats (body,solarPlace) {
+  var stats = [];
+  var index,atmo;
+  //Diameter, Mass, Gravity
+  var diameter = ["1/5","1/4","1/3","1/2","2/3","1","1","2","5","10","20","32","50","64","100"];
+  var mass = ["1/200","1/50","1/20","1/5","1/3","1","1","2","8","16","32","64","100","200","320"];
+  var gravity = ["1/10","1/5","1/3","1/2","3/4","1","1","1 1/2","2","2 1/2","3","4","5","6","8"];
+
+  weight = [1,1,2,3,4,8,8,4,3,2,2,1,1,1,1];
+
+  stats.push(randomWeightedChoice(diameter, weight));
+  index = diameter.indexOf(stats[0]);
+  if (index.between(0,14)){
+    index = index + randomChoice([-1,0,+1]);
+  }
+  stats.push(mass[index]);
+  if (index.between(0,13)){
+    index = index + randomChoice([-1,0,+1]);
+  }
+  stats.push(gravity[index]);
+
+  //Atmosphere
+  var atmo,mod,weight,weight1;
+  var atmosphere= ["No Atmosphere","Thin","Normal","Thick"];
+  var mods = ["none","Corrosive","Toxic"];
+  var normalOrNoneAtmo = ["Refuelling Station","Offworld Trading Post","Ark Ship"];
+  var noAtmo = ["Ship Scrapyard"];
+  var lifeDrop = $('#lifeDrop').text().toString();
+
+  if (lifeDrop.includes("Sparse")){
+    weight = [2,1,1,1];
+    weight1 = [3,1,1];
+
+  } else if (lifeDrop.includes("Average")){
+    weight = [1,1,1,1];
+    weight1 = [5,1,1];
+
+  } else if (lifeDrop.includes("Teeming")){
+    weight = [1,2,3,2];
+    weight1 = [8,1,1];
+  }
+  atmo = randomWeightedChoice(atmosphere, weight);
+  mod = randomWeightedChoice(mods, weight1);
+  if (atmo != "No Atmosphere" && mod != "none"){
+    if(atmo == "Normal"){
+      atmo = mod;
+    }
+    else{
+      atmo = mod + " and " + atmo;
+    }
+  }
+
+  if (body.includes("Gas")){
+    atmo = "Special";
+  }
+  if (normalOrNoneAtmo.includes(body)){
+    atmo = randomChoice(["No Atmosphere","Normal"]);
+  }
+  if (noAtmo.includes(body)){
+    atmo = "No Atmosphere";
+  }
+
+  stats.push(atmo);
+
+  //Day
+  var dayHours = [6,10,12,15,18,25,26,27,28,40,47];
+  var dayDays = [1,1,1,2,5,6,7,12,21,26,30];
+  var weight = [1,8,8];
+  var artificalDay = ["Refuelling Station","Offworld Trading Post","Ark Ship","Space Station","Huge Space Station","Research Outpost"];
+  var days = randomWeightedChoice(["-",randomChoice(dayHours)+" hours",randomChoice(dayDays)+" days"],weight);
+
+  if (artificalDay.includes(body)){
+    days = randomChoice([days,"1 day (artificial)"])
+  }
+
+  stats.push(days);
+
+  //year
+
+
+
+  return stats
+}
+
 function clearOutput() {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
@@ -183,34 +273,44 @@ function clearOutput() {
 function printSystem() {
   var star = getStar();
   var starLocation;
-  var bodies = getBodies();
+  var stats;
 
 
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
-  var num = getRandomInt(1, 100);
-  if (num.between(0,81)){
-    starLocation = "The Vast";
-  }
-  if (num.between(80,101)){
-    starLocation = "Near Space";
-  }
+  deck = ["The Vast","Near Space"]
+  weight = [0.8,0.2]
+  starLocation = randomWeightedChoice(deck, weight);
 
   var list = "<p>"+  star + " Location: " + starLocation;
-  var arrayLength = bodies.length;
 
-  for (var i = 0; i < arrayLength; i++) {
-    list += "<br>";
-    list += bodies[i];
-    if (!irregularWorlds.includes(bodies[i])){
-      var moons = getMoons();
-      for (var j = 0; j < moons; j++) {
-        list += "<br>&nbsp;&nbsp;" + getSatellite();
-      }
+  if (!systemlessObjects.includes(star)){
+
+    //get array of system bodies
+    var bodies = getBodies();
+
+    for (var i = 0; i < bodies.length; i++) {
+      list += "<br>";
+      list += bodies[i];
+      //do stats
+      stats = getBodyStats(bodies[i],i+1);
+
+      //list += "<br>&nbsp;&nbsp;Diameter: x" + stats[0];
+      //list += "<br>&nbsp;&nbsp;Mass: x" + stats[1];
+      //list += "<br>&nbsp;&nbsp;Gravity: x" + stats[2];
+      //list += "<br>&nbsp;&nbsp;Atmosphere: " + stats[3];
+      list += "<br>&nbsp;&nbsp;Day: " + stats[4];
+      //do moons
+      //if (!artificialWorlds.includes(bodies[i]) && bodies[i] != "Asteroid Belt"){
+        //var moons = getMoons();
+        //for (var j = 0; j < moons; j++) {
+          //list += "<br>&nbsp;&nbsp;" + getSatellite();
+        //}
+      //}
     }
+    list += "</p>" ;
   }
-  list += "</p>" ;
 
   $outputArea.append(list);
 
@@ -224,11 +324,12 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getFill(arrayLength,fill) {
+//return array full of weights the same length as the array parsed
+function getWeightFill(arrayLength,fill) {
   var filled = [];
-  filled.length = arrayLength;
+  filled.length = arrayLength.length;
   filled.fill(fill);
-  return fill;
+  return filled;
 }
 
 var rand = function(min, max) {

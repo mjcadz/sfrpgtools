@@ -4,7 +4,7 @@
 {% block title %}Starfinder Star System Generator{% endblock %}
 {% block body %}
 <div class="jumbotron">
-  <h1>Star System Generator</h1>
+  <h1></h1>
   <p class="lead">for use with Starfinder RPG</p>
 
   <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -18,6 +18,21 @@
         <a class="dropdown-item" href="#">Sparse</a>
         <a class="dropdown-item" href="#">Average</a>
         <a class="dropdown-item" href="#">Teeming</a>
+      </div>
+    </div>
+  </div>
+  <p></p>
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-secondary"disabled>System Size</button>
+
+    <div class="btn-group" role="group">
+      <button id="sizeDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Medium
+      </button>
+      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <a class="dropdown-item" href="#">Small</a>
+        <a class="dropdown-item" href="#">Medium</a>
+        <a class="dropdown-item" href="#">Large</a>
       </div>
     </div>
   </div>
