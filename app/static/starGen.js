@@ -162,7 +162,7 @@ function getBodies() {
   } else if (sizeDrop.includes("Medium")){
     var num = getRandomInt(5, 10);
   } else if (sizeDrop.includes("Large")){
-    var num = getRandomInt(10, 15);
+    var num = getRandomInt(10, 16);
   }
 
 
@@ -181,7 +181,8 @@ function getBodies() {
   return bodies
 }
 
-function getBodyStats (body,solarPlace) {
+function getBodyStats (bodies,position) {
+  var currentBody = bodies[position];
   var stats = [];
   var index,atmo;
   //Diameter, Mass, Gravity
@@ -233,13 +234,13 @@ function getBodyStats (body,solarPlace) {
     }
   }
 
-  if (body.includes("Gas")){
+  if (currentBody.includes("Gas")){
     atmo = "Special";
   }
-  if (normalOrNoneAtmo.includes(body)){
+  if (normalOrNoneAtmo.includes(currentBody)){
     atmo = randomChoice(["No Atmosphere","Normal"]);
   }
-  if (noAtmo.includes(body)){
+  if (noAtmo.includes(currentBody)){
     atmo = "No Atmosphere";
   }
 
@@ -252,15 +253,37 @@ function getBodyStats (body,solarPlace) {
   var artificalDay = ["Refuelling Station","Offworld Trading Post","Ark Ship","Space Station","Huge Space Station","Research Outpost"];
   var days = randomWeightedChoice(["-",randomChoice(dayHours)+" hours",randomChoice(dayDays)+" days"],weight);
 
-  if (artificalDay.includes(body)){
+  if (artificalDay.includes(currentBody)){
     days = randomChoice([days,"1 day (artificial)"])
   }
 
   stats.push(days);
 
   //year
+  var yearDays = [90,100,110,120,150,180];
+  var yearYears = [1,2,3,4,5,6,7,8,9,10,12,14,16,20,25,30,42,67,89,115,209,243,250,300,350,400,457,500];
+  var yearVaries = [0,1,2,4,20,45,67,88];
+  var yearWeights = [9,8,6,3,3,2,2,1]
 
-
+  var spacing = Math.round(32 / (bodies.length));
+  var z = spacing * position;
+  var currentArray = [];
+  for (var i = 0; i < spacing; i++) {
+   currentArray.push(i); //fill array in numerical order
+  }
+  var choice = z + randomChoice(currentArray);
+  var finalYear;
+  var finalInt;
+  var variance = randomWeightedChoice(yearVaries,yearWeights);
+  if (choice < 6){
+    finalInt = yearDays[choice] + variance;
+    finalYear = finalInt.toString() + " Days";
+  }
+  else {
+    finalInt = yearYears[choice - 6] + variance;
+    finalYear = finalInt.toString() + " Years";
+  }
+  stats.push(finalYear);
 
   return stats
 }
@@ -294,13 +317,14 @@ function printSystem() {
       list += "<br>";
       list += bodies[i];
       //do stats
-      stats = getBodyStats(bodies[i],i+1);
+      stats = getBodyStats(bodies,i);
 
       //list += "<br>&nbsp;&nbsp;Diameter: x" + stats[0];
       //list += "<br>&nbsp;&nbsp;Mass: x" + stats[1];
       //list += "<br>&nbsp;&nbsp;Gravity: x" + stats[2];
       //list += "<br>&nbsp;&nbsp;Atmosphere: " + stats[3];
-      list += "<br>&nbsp;&nbsp;Day: " + stats[4];
+      //list += "<br>&nbsp;&nbsp;Day: " + stats[4];
+      list += "<br>&nbsp;&nbsp;Year: " + stats[5];
       //do moons
       //if (!artificialWorlds.includes(bodies[i]) && bodies[i] != "Asteroid Belt"){
         //var moons = getMoons();
