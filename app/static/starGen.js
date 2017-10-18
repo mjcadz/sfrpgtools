@@ -260,27 +260,26 @@ function getBodyStats (bodies,position) {
   stats.push(days);
 
   //year
-  var yearDays = [90,100,110,120,150,180];
-  var yearYears = [1,2,3,4,5,6,7,8,9,10,12,14,16,20,25,30,42,67,89,115,209,243,250,300,350,400,457,500];
-  var yearVaries = [0,1,2,4,20,45,67,88];
-  var yearWeights = [9,8,6,3,3,2,2,1]
+  var yearYears = [1,1,2,2,3,3,4,5,6,7,8,9,10,12,14,16,20,25,30,42,67,80,115,209,253,300,350,400,457,500];
+  var yearVaries = [0,1,1,2,4,20,45,67,88];
+  var yearWeights = [9,8,4,3,3,2,2,2]
 
   var spacing = Math.round(32 / (bodies.length));
-  var z = spacing * position;
-  var currentArray = [];
+  var interval = spacing * position;
+  var indexChoice = [];
   for (var i = 0; i < spacing; i++) {
-   currentArray.push(i); //fill array in numerical order
+   indexChoice.push(i); //fill array in numerical order
   }
-  var choice = z + randomChoice(currentArray);
+  var finalIndex = interval + randomChoice(indexChoice);
   var finalYear;
   var finalInt;
   var variance = randomWeightedChoice(yearVaries,yearWeights);
-  if (choice < 6){
-    finalInt = yearDays[choice] + variance;
+  if (finalIndex < 6){
+    finalInt = getRandomInt(90,300);
     finalYear = finalInt.toString() + " Days";
   }
   else {
-    finalInt = yearYears[choice - 6] + variance;
+    finalInt = yearYears[finalIndex - 6] + variance;
     finalYear = finalInt.toString() + " Years";
   }
   stats.push(finalYear);
