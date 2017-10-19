@@ -2,10 +2,10 @@ html, body {
   height: 100vh;
 }
 body {
-  background-image: url('stars.png'),linear-gradient(to top, #4CA1AF,#2C3E50);
+  /*background-image: url('stars.png'),linear-gradient(to top, #4CA1AF,#2C3E50);
   background-size: auto,cover;
   background-repeat: repeat,no-repeat;
-  background-attachment: fixed,fixed;
+  background-attachment: fixed,fixed;*/
 }
 
 ul.share-buttons{
