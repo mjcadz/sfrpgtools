@@ -1341,17 +1341,17 @@ function generateWeapon() {
   //sort weapon
   if (typeDrop.includes("Any")) {
     type = getRandomInt(1, 6);
-  } else if (typeDrop === "Basic melee"){
+  } else if (typeDrop.includes("Basic melee")){
     type = 1;
-  } else if (typeDrop === "Advanced melee"){
+  } else if (typeDrop.includes("Advanced melee")){
     type = 2;
-  } else if (typeDrop === "Small arm"){
+  } else if (typeDrop.includes("Small arm")){
     type = 3;
-  } else if (typeDrop === "Longarm"){
+  } else if (typeDrop.includes("Longarm")){
     type = 4;
-  } else if (typeDrop === "Heavy"){
+  } else if (typeDrop.includes("Heavy")){
     type = 5;
-  } else if (typeDrop === "Sniper"){
+  } else if (typeDrop.includes("Sniper")){
     type = 6;
   } else {
     type = NaN;
@@ -1390,3 +1390,17 @@ function generateWeapon() {
   //log event in analytics
   ga('send', 'event', 'Generation', 'weapon', typeString);
 }
+
+//Sets selected dropdown to dropdown display
+//BOOTSTRAP 3
+$(".dropdown-menu li a").click(function(){
+  var selected = $(this).text();
+  if (selected.includes("On") || selected.includes("Off")) {
+    $(this).closest('.btn-group').find('.dropdown-toggle').html("Name Generator " + selected + ' <span class="caret"></span>');
+    $(this).closest('.btn-group').find('.dropdown-toggle').val("Name Generator " + selected)
+  }
+  else {
+    $(this).closest('.btn-group').find('.dropdown-toggle').html(selected + ' <span class="caret"></span>');
+    $(this).closest('.btn-group').find('.dropdown-toggle').val(selected)
+  }
+});

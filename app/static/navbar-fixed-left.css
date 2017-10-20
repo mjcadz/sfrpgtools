@@ -20,7 +20,7 @@
 }
 body {
   padding-top: 70px;
-  min-height: 200vh;
+  min-height: 100vh;
 }
 @media (min-width: 768px) {
   body {

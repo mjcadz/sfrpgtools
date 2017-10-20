@@ -31,6 +31,6 @@ ul.share-buttons .sr-only{
   overflow: hidden;
 }
 
-.fa{
-  color: white;
+.btn{
+  text-transform: none
 }

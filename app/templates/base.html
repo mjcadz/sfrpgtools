@@ -13,8 +13,8 @@
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename = 'style.css') }}">
     <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename = 'navbar-fixed-left.css') }}">
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename = 'style.css') }}">
 
 
     <!-- Font Awesome -->
@@ -60,8 +60,7 @@
       </div>
     </nav>
     <div class="container">
-      <p></p>
-
+      <div style = "height: 30px;"></div>
       {% block body %}
       {% endblock %}
       <footer class="footer">
@@ -71,7 +70,7 @@
           <li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.sfrpgtools.com&text=:%20http%3A%2F%2Fwww.sfrpgtools.com" target="_blank" title="Tweet" id="twitter" onclick="return share(this.id)"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i><span class="sr-only">Tweet</span></a></li>
           <li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.sfrpgtools.com&t=" target="_blank" title="Share on Facebook" id="facebook" onclick="return share(this.id)"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a></li>
         </ul>
-        <p style="color:white;text-align: center;">mjcadz 2017 <i class="fa fa-bolt" aria-hidden="true"></i> v1.2</p>
+        <p style="text-align: center;">mjcadz 2017 <i class="fa fa-bolt" aria-hidden="true"></i> v1.2</p>
       </footer>
     </div> <!-- /container -->
     <!-- Optional JavaScript -->
