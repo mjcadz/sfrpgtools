@@ -6,39 +6,36 @@
 <div class="jumbotron">
   <h1></h1>
   <p class="lead">for use with Starfinder RPG</p>
-
-  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-    <button type="button" class="btn btn-secondary"disabled>Life</button>
-
+  <div class="btn-group" role="group" aria-label="...">
     <div class="btn-group" role="group">
-      <button id="lifeDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Average
+      <button id="lifeDrop" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Life - Average
+        <span class="caret"></span>
       </button>
-      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <a class="dropdown-item" href="#">Sparse</a>
-        <a class="dropdown-item" href="#">Average</a>
-        <a class="dropdown-item" href="#">Teeming</a>
-      </div>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">Sparse</a></li>
+        <li><a href="#">Average</a></li>
+        <li><a href="#">Teeming</a></li>
+      </ul>
     </div>
   </div>
   <p></p>
-  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-    <button type="button" class="btn btn-secondary"disabled>System Size</button>
-
+  <div class="btn-group" role="group" aria-label="...">
     <div class="btn-group" role="group">
-      <button id="sizeDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Medium
+      <button id="sizeDrop" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        System Size - Medium
+        <span class="caret"></span>
       </button>
-      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <a class="dropdown-item" href="#">Small</a>
-        <a class="dropdown-item" href="#">Medium</a>
-        <a class="dropdown-item" href="#">Large</a>
-      </div>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li><a href="#">Small</a></li>
+        <li><a href="#">Medium</a></li>
+        <li><a href="#">Large</a></li>
+      </ul>
     </div>
   </div>
   <p></p>
   <button type="button" onclick = "printSystem()" title = "magic, baby" class="btn btn-success">Generate  <i class="fa fa-magic fa-lg"></i></button>
-  <button type="button" onclick = "clearOutput()" class="btn btn-secondary">Clear</button>
+  <button type="button" onclick = "clearOutput()" class="btn btn-default">Clear</button>
   </br>
 
   <div class="output area">
