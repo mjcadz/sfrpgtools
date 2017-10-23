@@ -323,7 +323,7 @@ function printSystem() {
       //list += "<br>&nbsp;&nbsp;Gravity: x" + stats[2];
       //list += "<br>&nbsp;&nbsp;Atmosphere: " + stats[3];
       //list += "<br>&nbsp;&nbsp;Day: " + stats[4];
-      list += "<br>&nbsp;&nbsp;Year: " + stats[5];
+      //list += "<br>&nbsp;&nbsp;Year: " + stats[5];
       //do moons
       //if (!artificialWorlds.includes(bodies[i]) && bodies[i] != "Asteroid Belt"){
         //var moons = getMoons();
@@ -338,6 +338,54 @@ function printSystem() {
   $outputArea.append(list);
 
 }
+
+function printSystem2() {
+
+  var $outputArea = $(".output.area").first();
+  $outputArea.empty();
+
+  var bodies = getBodies();
+
+  accordion = "<div class=\"panel-group\" id=\"accordion\">";
+
+  //build panels
+  for (var i = 0; i < bodies.length; i++) {
+    var title = bodies[i];
+    var num = i + 1;
+    var index = num.toString();
+    var stats = getBodyStats(bodies,i);
+    var text = "";
+
+    text += "Diameter: x" + stats[0];
+    text += "<br>Mass: x" + stats[1];
+    text += "<br>Gravity: x" + stats[2];
+    text += "<br>Atmosphere: " + stats[3];
+    text += "<br>Day: " + stats[4];
+    text += "&nbsp;&nbsp;Year: " + stats[5];
+
+    accordion += buildPanel(title, index, text);
+  }
+  accordion += "</div>";
+
+  $outputArea.append(accordion);
+
+}
+
+function buildPanel (title, index, text) {
+  panel = "<div class=\"panel panel-default\">" +
+    "<div class=\"panel-heading\">" +
+      "<h4 class=\"panel-title\">" +
+        "<a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse" + index + "\">" +
+        title + "</a>" +
+      "</h4>" +
+    "</div>" +
+    "<div id=\"collapse" + index + "\" class=\"panel-collapse collapse\">" +
+      "<div class=\"panel-body\">" + text + "</div>" +
+    "</div>" +
+  "</div>";
+  return panel;
+}
+
 
 /**
 * Returns a random integer between min (inclusive) and max (inclusive)
