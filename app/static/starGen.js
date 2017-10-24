@@ -345,8 +345,17 @@ function printSystem2() {
   $outputArea.empty();
 
   var bodies = getBodies();
+  var accordionIndex = 1;
+  var starLocation;
+  var innerAccordion = "";
 
-  accordion = "<div class=\"panel-group\" id=\"accordion\">";
+  var deck = ["The Vast","Near Space"]
+  var weight = [0.8,0.2]
+  starLocation = randomWeightedChoice(deck, weight);
+
+  innerAccordion += "<p>Location: " + starLocation + "</p>";
+  innerAccordion += "<p></p>";
+  innerAccordion += "<div class=\"panel-group\" id=\"accordion1\">";
 
   //build panels
   for (var i = 0; i < bodies.length; i++) {
@@ -354,33 +363,62 @@ function printSystem2() {
     var num = i + 1;
     var index = num.toString();
     var stats = getBodyStats(bodies,i);
-    var text = "";
+    var panelBody = "";
 
-    text += "Diameter: x" + stats[0];
-    text += "<br>Mass: x" + stats[1];
-    text += "<br>Gravity: x" + stats[2];
-    text += "<br>Atmosphere: " + stats[3];
-    text += "<br>Day: " + stats[4];
-    text += "&nbsp;&nbsp;Year: " + stats[5];
+    panelBody += "<p><b>Diameter: </b>x" + stats[0];
+    panelBody += "<br><b>Mass: </b>x" + stats[1];
+    panelBody += "<br><b>Gravity: </b>x" + stats[2];
+    panelBody += "<br><b>Atmosphere: </b>" + stats[3];
+    panelBody += "<br><b>Day: </b>" + stats[4];
+    panelBody += "&nbsp;&nbsp;<b>Year: </b>" + stats[5] + "</p>";
+    panelBody += "<p></p>";
 
-    accordion += buildPanel(title, index, text);
+    //build moon panels
+    if (!artificialWorlds.includes(bodies[i]) && bodies[i] != "Asteroid Belt"){
+      var moonNum = getMoons();
+      if (moonNum != 0) {
+
+        accordionIndex += 1;
+        panelBody += "<p></p>";
+        panelBody += "<p><b>Satellites</b></p>";
+        panelBody += "<p></p>";
+        panelBody += "<div class=\"panel-group\" id=\"accordion" + accordionIndex + "\">";
+
+        for (var j = 0; j < moonNum; j++) {
+          var numj = j + 1;
+          var indexj = numj.toString();
+          panelBody += buildPanel(getSatellite(), index + indexj, accordionIndex, "moon", false);
+        }
+        panelBody += "</div>";
+      }
+    }
+
+    innerAccordion += buildPanel(title, index, "1", panelBody, false);
   }
+  innerAccordion += "</div>";
+
+  accordion = "<div class=\"panel-group\" id=\"accordion\">";
+  accordion += buildPanel(getStar(), "", "", innerAccordion, true);
   accordion += "</div>";
 
   $outputArea.append(accordion);
 
 }
 
-function buildPanel (title, index, text) {
+function buildPanel (title, index, accordionIndex, panelBody, unCollapse) {
+  var collapse = "";
+  if (unCollapse) {
+    collapse = " in"
+  }
   panel = "<div class=\"panel panel-default\">" +
     "<div class=\"panel-heading\">" +
-      "<h4 class=\"panel-title\">" +
-        "<a data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse" + index + "\">" +
+      "<h2 class=\"panel-title\">" +
+        "<a data-toggle=\"collapse\" data-parent=\"#accordion" + accordionIndex + "\" href=\"#collapse" + index + "\">" +
         title + "</a>" +
-      "</h4>" +
+      "</h2>" + 
     "</div>" +
-    "<div id=\"collapse" + index + "\" class=\"panel-collapse collapse\">" +
-      "<div class=\"panel-body\">" + text + "</div>" +
+    "<div id=\"collapse" + index + "\" class=\"panel-collapse collapse" + collapse + "\">" +
+      "<div class=\"panel-body\">" + panelBody + "</div>" +
     "</div>" +
   "</div>";
   return panel;
