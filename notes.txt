@@ -1,3 +1,4 @@
 https://codepen.io/marklsanders/pen/OPZXXv
-
 this is nested accordians yall
+
+do binary star systems - star title becomes binary system, then list stars in panel

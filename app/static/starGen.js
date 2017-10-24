@@ -349,11 +349,9 @@ function printSystem2() {
   var starLocation;
   var innerAccordion = "";
 
-  var deck = ["The Vast","Near Space"]
-  var weight = [0.8,0.2]
-  starLocation = randomWeightedChoice(deck, weight);
+  starLocation = randomWeightedChoice(["The Vast","Near Space"], [0.6,0.4]);
 
-  innerAccordion += "<p>Location: " + starLocation + "</p>";
+  innerAccordion += "<p>Sector: " + starLocation + "</p>";
   innerAccordion += "<p></p>";
   innerAccordion += "<div class=\"panel-group\" id=\"accordion1\">";
 
@@ -415,7 +413,7 @@ function buildPanel (title, index, accordionIndex, panelBody, unCollapse) {
       "<h2 class=\"panel-title\">" +
         "<a data-toggle=\"collapse\" data-parent=\"#accordion" + accordionIndex + "\" href=\"#collapse" + index + "\">" +
         title + "</a>" +
-      "</h2>" + 
+      "</h2>" +
     "</div>" +
     "<div id=\"collapse" + index + "\" class=\"panel-collapse collapse" + collapse + "\">" +
       "<div class=\"panel-body\">" + panelBody + "</div>" +
