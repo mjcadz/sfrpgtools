@@ -385,35 +385,42 @@ function printSystem2() {
         for (var j = 0; j < moonNum; j++) {
           var numj = j + 1;
           var indexj = numj.toString();
-          panelBody += buildPanel(getSatellite(), index + indexj, accordionIndex, "moon", false);
+          panelBody += buildPanel(getSatellite(), index + indexj, accordionIndex, "moon", false, false);
         }
         panelBody += "</div>";
       }
     }
 
-    innerAccordion += buildPanel(title, index, "1", panelBody, false);
+    innerAccordion += buildPanel(title, index, "1", panelBody, false, false);
   }
   innerAccordion += "</div>";
 
   accordion = "<div class=\"panel-group\" id=\"accordion\">";
-  accordion += buildPanel(getStar(), "", "", innerAccordion, true);
+  accordion += buildPanel(getStar(), "", "", innerAccordion, true, true);
   accordion += "</div>";
 
   $outputArea.append(accordion);
 
 }
 
-function buildPanel (title, index, accordionIndex, panelBody, unCollapse) {
+function buildPanel (title, index, accordionIndex, panelBody, unCollapse, addButton) {
   var collapse = "";
   if (unCollapse) {
     collapse = " in"
   }
+  var panelHeader = "<div class=\"panel-heading\">" +
+    "<h4 class=\"panel-title\">"
+  if (addButton) {
+    panelHeader = "<div class=\"panel-heading clearfix\">" +
+    "<button id=\"toggletoggle\" onclick = \"expandAll()\" class=\"btn btn-default pull-right\">Expand All</button>" +
+    "<h4 class=\"panel-title pull-left\" style=\"padding-top: 7.5px;\">"
+  }
+
   panel = "<div class=\"panel panel-default\">" +
-    "<div class=\"panel-heading\">" +
-      "<h2 class=\"panel-title\">" +
+    panelHeader +
         "<a data-toggle=\"collapse\" data-parent=\"#accordion" + accordionIndex + "\" href=\"#collapse" + index + "\">" +
         title + "</a>" +
-      "</h2>" +
+      "</h4>" +
     "</div>" +
     "<div id=\"collapse" + index + "\" class=\"panel-collapse collapse" + collapse + "\">" +
       "<div class=\"panel-body\">" + panelBody + "</div>" +
@@ -477,3 +484,15 @@ $(".dropdown-menu li a").click(function(){
     $(this).closest('.btn-group').find('.dropdown-toggle').val("Life - " + selected)
   }
 });
+
+function expandAll() {
+  $('.panel-collapse:not(".in")')
+		.collapse('show');
+
+  //$('#toggletoggle')
+}
+
+function collapseAll() {
+  $('.panel-collapse.in')
+    .collapse('hide');
+}
