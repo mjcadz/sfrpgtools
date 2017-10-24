@@ -412,7 +412,7 @@ function buildPanel (title, index, accordionIndex, panelBody, unCollapse, addBut
     "<h4 class=\"panel-title\">"
   if (addButton) {
     panelHeader = "<div class=\"panel-heading clearfix\">" +
-    "<button id=\"toggletoggle\" onclick = \"expandAll()\" class=\"btn btn-default pull-right\">Expand All</button>" +
+    "<button id=\"toggletoggle\" onclick = \"expandAll()\" class=\"btn btn-default btn-sm pull-right\">Expand All</button>" +
     "<h4 class=\"panel-title pull-left\" style=\"padding-top: 7.5px;\">"
   }
 
@@ -477,11 +477,11 @@ $(".dropdown-menu li a").click(function(){
   var selected = $(this).text();
   if (selected.includes("Small") || selected.includes("Medium") || selected.includes("Large")) {
     $(this).closest('.btn-group').find('.dropdown-toggle').html("System Size - " + selected + ' <span class="caret"></span>');
-    $(this).closest('.btn-group').find('.dropdown-toggle').val("System Size - " + selected)
+    $(this).closest('.btn-group').find('.dropdown-toggle').val("System Size - " + selected);
   }
   else if (selected.includes("Sparse") || selected.includes("Average") || selected.includes("Teeming")){
     $(this).closest('.btn-group').find('.dropdown-toggle').html("Life - " + selected + ' <span class="caret"></span>');
-    $(this).closest('.btn-group').find('.dropdown-toggle').val("Life - " + selected)
+    $(this).closest('.btn-group').find('.dropdown-toggle').val("Life - " + selected);
   }
 });
 
@@ -490,9 +490,20 @@ function expandAll() {
 		.collapse('show');
 
   //$('#toggletoggle')
+  document.getElementById('toggletoggle').onclick = function() { collapseAll(); }
+  $('#toggletoggle').html("Collapse All");
+  $('#toggletoggle').val("Collapse All");
 }
 
 function collapseAll() {
   $('.panel-collapse.in')
     .collapse('hide');
+  document.getElementById('toggletoggle').onclick = function() { expandAll(); }
+  $('#toggletoggle').html("Expand All");
+  $('#toggletoggle').val("Expand All");
+
+  //$('.always-in')
+		//.collapse('show');
+  //$('.always-in:not(".in")')
+	//	.collapse('show');
 }
