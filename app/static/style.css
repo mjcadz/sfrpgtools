@@ -111,3 +111,11 @@ ul.share-buttons .sr-only{
     background-color: #136f63;
   }
 }
+
+/*remove panel title underlines*/
+.panel-title>a{
+  text-decoration: none !important;
+}
+.panel-heading {
+    cursor: pointer;
+}

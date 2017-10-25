@@ -350,7 +350,6 @@ function printSystem2() {
   var innerAccordion = "";
 
   starLocation = randomWeightedChoice(["The Vast","Near Space"], [0.6,0.4]);
-
   innerAccordion += "<p>Sector: " + starLocation + "</p>";
   innerAccordion += "<p></p>";
   innerAccordion += "<div class=\"panel-group\" id=\"accordion1\">";
@@ -395,21 +394,29 @@ function printSystem2() {
   }
   innerAccordion += "</div>";
 
-  accordion = "<div class=\"panel-group\" id=\"accordion\">";
+  accordion = "<hr><div class=\"panel-group\" id=\"accordion\">";
   accordion += buildPanel(getStar(), "", "", innerAccordion, true, true);
   accordion += "</div>";
 
   $outputArea.append(accordion);
 
+  //set icon changes on collapse trigger
+  $(".collapse").on('shown.bs.collapse', function(e){
+    $(e.target).parent().find('.chevron').first().removeClass( "fa-chevron-down" ).addClass( "fa-chevron-up" );
+  });
+  $(".collapse").on('hidden.bs.collapse', function(e) {
+    $(e.target).parent().find('.chevron').first().removeClass( "fa-chevron-up" ).addClass( "fa-chevron-down" );
+  });
 }
 
 function buildPanel (title, index, accordionIndex, panelBody, unCollapse, addButton) {
   var collapse = "";
   if (unCollapse) {
-    collapse = " in"
+    collapse = " in always"
   }
-  var panelHeader = "<div class=\"panel-heading\">" +
-    "<h4 class=\"panel-title\">"
+  var panelHeader = "<div class=\"panel-heading clearfix\" data-toggle=\"collapse\" data-parent=\"#accordion" + accordionIndex + "\" href=\"#collapse" + index + "\">" +
+    "<i class=\"fa fa-chevron-down pull-right chevron\" aria-hidden=\"true\"></i>" +
+    "<h4 class=\"panel-title pull-left\">"
   if (addButton) {
     panelHeader = "<div class=\"panel-heading clearfix\">" +
     "<button id=\"toggletoggle\" onclick = \"expandAll()\" class=\"btn btn-default btn-sm pull-right\">Expand All</button>" +
@@ -418,7 +425,7 @@ function buildPanel (title, index, accordionIndex, panelBody, unCollapse, addBut
 
   panel = "<div class=\"panel panel-default\">" +
     panelHeader +
-        "<a data-toggle=\"collapse\" data-parent=\"#accordion" + accordionIndex + "\" href=\"#collapse" + index + "\">" +
+        "<a>" +
         title + "</a>" +
       "</h4>" +
     "</div>" +
@@ -489,21 +496,16 @@ function expandAll() {
   $('.panel-collapse:not(".in")')
 		.collapse('show');
 
-  //$('#toggletoggle')
   document.getElementById('toggletoggle').onclick = function() { collapseAll(); }
   $('#toggletoggle').html("Collapse All");
   $('#toggletoggle').val("Collapse All");
 }
 
 function collapseAll() {
-  $('.panel-collapse.in')
+  $('.panel-collapse.in:not(".always")')
     .collapse('hide');
   document.getElementById('toggletoggle').onclick = function() { expandAll(); }
   $('#toggletoggle').html("Expand All");
   $('#toggletoggle').val("Expand All");
 
-  //$('.always-in')
-		//.collapse('show');
-  //$('.always-in:not(".in")')
-	//	.collapse('show');
 }
