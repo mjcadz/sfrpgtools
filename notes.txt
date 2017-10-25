@@ -2,3 +2,7 @@ https://codepen.io/marklsanders/pen/OPZXXv
 this is nested accordians yall
 
 do binary star systems - star title becomes binary system, then list stars in panel
+
+
+https://work.smarchal.com/twbscolor/css/e74c3cc0392becf0f1ffbbbc0
+navbar colour picker

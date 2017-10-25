@@ -10,9 +10,15 @@ def index():
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/systemGen')
-def systemGen():
-    resp = make_response(render_template('systemGen.html'))
+@app.route('/weapon-generator')
+def weaponGenerator():
+    resp = make_response(render_template('weapon-generator.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp
+
+@app.route('/system-generator')
+def systemGenerator():
+    resp = make_response(render_template('system-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
