@@ -20,6 +20,23 @@ function share(id) {
 }
 
 /**
+* Returns a random integer between min (inclusive) and max (inclusive)
+* Using Math.round() will give you a non-uniform distribution!
+*/
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function diceRoll(dice){
+  var numbers = dice.split("d");
+  var roll = 0;
+  for (var i = 0; i < Number(numbers[0]); i++) {
+    roll += getRandomInt(1,Number(numbers[1]));
+  }
+  return roll.toString();
+}
+
+/**
  * Choose a random element from an array.
  * @param array array
  *   May also work with an array-like object.

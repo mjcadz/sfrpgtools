@@ -146,10 +146,18 @@ function getSatellite() {
   return pick;
 }
 
-function getMoons() {
-  deck = [0,1,2,3,4]
-  weight = [0.2,0.6,0.1,0.05,0.05]
-  return randomWeightedChoice(deck, weight);
+function getMoonBodies() {
+  var deck = [0,1,2,3,4];
+  var weight = [0.2,0.6,0.1,0.05,0.05]
+  var num = randomWeightedChoice(deck, weight);
+
+  var bodies =[];
+  var i = 0;
+
+  for (i = 0; i < num; i++) {
+    bodies.push(getSatellite());
+  }
+  return bodies;
 }
 
 function getBodies() {
@@ -186,103 +194,118 @@ function getBodyStats (bodies,position) {
   var stats = [];
   var index,atmo;
   //Diameter, Mass, Gravity
-  var diameter = ["1/5","1/4","1/3","1/2","2/3","1","1","2","5","10","20","32","50","64","100"];
-  var mass = ["1/200","1/50","1/20","1/5","1/3","1","1","2","8","16","32","64","100","200","320"];
-  var gravity = ["1/10","1/5","1/3","1/2","3/4","1","1","1 1/2","2","2 1/2","3","4","5","6","8"];
-
-  weight = [1,1,2,3,4,8,8,4,3,2,2,1,1,1,1];
-
-  stats.push(randomWeightedChoice(diameter, weight));
-  index = diameter.indexOf(stats[0]);
-  if (index.between(0,14)){
-    index = index + randomChoice([-1,0,+1]);
+  if (currentBody == "Asteroid Belt"){
+    stats.push("Millions of asteroids, each up to 1000 km across");//diameter
+    stats.push("x2 total (less than x1/100 for any single asteroid)");//mass
+    stats.push("Varies");//gravity
+    stats.push("Special");//atmosphere
+    stats.push("Varies");//day
+    stats.push("Varies");//year
   }
-  stats.push(mass[index]);
-  if (index.between(0,13)){
-    index = index + randomChoice([-1,0,+1]);
-  }
-  stats.push(gravity[index]);
+  else{
+    var diameter = ["1/5","1/4","1/3","1/2","2/3","1","1","2","5","10","20","32","50","64","100"];
+    var mass = ["1/200","1/50","1/20","1/5","1/3","1","1","2","8","16","32","64","100","200","320"];
+    var gravity = ["1/10","1/5","1/3","1/2","3/4","1","1","1 1/2","2","2 1/2","3","4","5","6","8"];
 
-  //Atmosphere
-  var atmo,mod,weight,weight1;
-  var atmosphere= ["No Atmosphere","Thin","Normal","Thick"];
-  var mods = ["none","Corrosive","Toxic"];
-  var normalOrNoneAtmo = ["Refuelling Station","Offworld Trading Post","Ark Ship"];
-  var noAtmo = ["Ship Scrapyard"];
-  var lifeDrop = $('#lifeDrop').text().toString();
+    weight = [1,1,2,3,4,8,8,4,3,2,2,1,1,1,1];
 
-  if (lifeDrop.includes("Sparse")){
-    weight = [2,1,1,1];
-    weight1 = [3,1,1];
-
-  } else if (lifeDrop.includes("Average")){
-    weight = [1,1,1,1];
-    weight1 = [5,1,1];
-
-  } else if (lifeDrop.includes("Teeming")){
-    weight = [1,2,3,2];
-    weight1 = [8,1,1];
-  }
-  atmo = randomWeightedChoice(atmosphere, weight);
-  mod = randomWeightedChoice(mods, weight1);
-  if (atmo != "No Atmosphere" && mod != "none"){
-    if(atmo == "Normal"){
-      atmo = mod;
+    var diam,mas,grav;
+    diam = randomWeightedChoice(diameter, weight);
+    index = diameter.indexOf(diam);
+    if (index.between(0,14)){
+      index = index + randomChoice([-1,0,+1]);
     }
-    else{
-      atmo = mod + " and " + atmo;
+    mas = mass[index];
+    if (index.between(0,13)){
+      index = index + randomChoice([-1,0,+1]);
     }
-  }
+    grav = gravity[index];
 
-  if (currentBody.includes("Gas")){
-    atmo = "Special";
-  }
-  if (normalOrNoneAtmo.includes(currentBody)){
-    atmo = randomChoice(["No Atmosphere","Normal"]);
-  }
-  if (noAtmo.includes(currentBody)){
-    atmo = "No Atmosphere";
-  }
+    stats.push("x"+diam);
+    stats.push("x"+mas);
+    stats.push("x"+grav);
 
-  stats.push(atmo);
+    //Atmosphere
+    var atmo,mod,weight,weight1;
+    var atmosphere= ["No Atmosphere","Thin","Normal","Thick"];
+    var mods = ["none","Corrosive","Toxic"];
+    var normalOrNoneAtmo = ["Refuelling Station","Offworld Trading Post","Ark Ship"];
+    var noAtmo = ["Ship Scrapyard"];
+    var lifeDrop = $('#lifeDrop').text().toString();
 
-  //Day
-  var dayHours = [6,10,12,15,18,25,26,27,28,40,47];
-  var dayDays = [1,1,1,2,5,6,7,12,21,26,30];
-  var weight = [1,8,8];
-  var artificalDay = ["Refuelling Station","Offworld Trading Post","Ark Ship","Space Station","Huge Space Station","Research Outpost"];
-  var days = randomWeightedChoice(["-",randomChoice(dayHours)+" hours",randomChoice(dayDays)+" days"],weight);
+    if (lifeDrop.includes("Sparse")){
+      weight = [2,1,1,1];
+      weight1 = [3,1,1];
 
-  if (artificalDay.includes(currentBody)){
-    days = randomChoice([days,"1 day (artificial)"])
+    } else if (lifeDrop.includes("Average")){
+      weight = [1,1,1,1];
+      weight1 = [5,1,1];
+
+    } else if (lifeDrop.includes("Teeming")){
+      weight = [1,2,3,2];
+      weight1 = [8,1,1];
+    }
+    atmo = randomWeightedChoice(atmosphere, weight);
+    mod = randomWeightedChoice(mods, weight1);
+    if (atmo != "No Atmosphere" && mod != "none"){
+      if(atmo == "Normal"){
+        atmo = mod;
+      }
+      else{
+        atmo = mod + " and " + atmo;
+      }
+    }
+
+    if (currentBody.includes("Gas")){
+      atmo = "Special";
+    }
+    if (normalOrNoneAtmo.includes(currentBody)){
+      atmo = randomChoice(["No Atmosphere","Normal"]);
+    }
+    if (noAtmo.includes(currentBody)){
+      atmo = "No Atmosphere";
+    }
+
+    stats.push(atmo);
+
+    //Day
+    var dayHours = [6,10,12,15,18,25,26,27,28,40,47];
+    var dayDays = [1,1,1,2,5,6,7,12,21,26,30];
+    var weight = [1,8,8];
+    var artificalDay = ["Refuelling Station","Offworld Trading Post","Ark Ship","Space Station","Huge Space Station","Research Outpost"];
+    var days = randomWeightedChoice(["-",randomChoice(dayHours)+" hours",randomChoice(dayDays)+" days"],weight);
+
+    if (artificalDay.includes(currentBody)){
+      days = randomChoice([days,"1 day (artificial)"])
+    }
+
+    stats.push(days);
+
+    //year
+    var yearYears = [1,1,2,2,3,3,4,5,6,7,8,9,10,12,14,16,20,25,30,42,67,80,115,209,253,300,350,400,457,500];
+    var yearVaries = [0,1,1,2,4,20,45,67,88];
+    var yearWeights = [9,8,4,3,3,2,2,2]
+
+    var spacing = Math.round(32 / (bodies.length));
+    var interval = spacing * position;
+    var indexChoice = [];
+    for (var i = 0; i < spacing; i++) {
+     indexChoice.push(i); //fill array in numerical order
+    }
+    var finalIndex = interval + randomChoice(indexChoice);
+    var finalYear;
+    var finalInt;
+    var variance = randomWeightedChoice(yearVaries,yearWeights);
+    if (finalIndex < 6){
+      finalInt = getRandomInt(90,300);
+      finalYear = finalInt.toString() + " Days";
+    }
+    else {
+      finalInt = yearYears[finalIndex - 6] + variance;
+      finalYear = finalInt.toString() + " Years";
+    }
+    stats.push(finalYear);
   }
-
-  stats.push(days);
-
-  //year
-  var yearYears = [1,1,2,2,3,3,4,5,6,7,8,9,10,12,14,16,20,25,30,42,67,80,115,209,253,300,350,400,457,500];
-  var yearVaries = [0,1,1,2,4,20,45,67,88];
-  var yearWeights = [9,8,4,3,3,2,2,2]
-
-  var spacing = Math.round(32 / (bodies.length));
-  var interval = spacing * position;
-  var indexChoice = [];
-  for (var i = 0; i < spacing; i++) {
-   indexChoice.push(i); //fill array in numerical order
-  }
-  var finalIndex = interval + randomChoice(indexChoice);
-  var finalYear;
-  var finalInt;
-  var variance = randomWeightedChoice(yearVaries,yearWeights);
-  if (finalIndex < 6){
-    finalInt = getRandomInt(90,300);
-    finalYear = finalInt.toString() + " Days";
-  }
-  else {
-    finalInt = yearYears[finalIndex - 6] + variance;
-    finalYear = finalInt.toString() + " Years";
-  }
-  stats.push(finalYear);
 
   return stats
 }
@@ -344,58 +367,85 @@ function printSystem2() {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
+  var star = getStar();
   var bodies = getBodies();
   var accordionIndex = 1;
-  var starLocation;
+  var starLocation, travelTime;
   var innerAccordion = "";
 
   starLocation = randomWeightedChoice(["The Vast","Near Space"], [0.6,0.4]);
-  innerAccordion += "<p>Sector: " + starLocation + "</p>";
-  innerAccordion += "<p></p>";
-  innerAccordion += "<div class=\"panel-group\" id=\"accordion1\">";
-
-  //build panels
-  for (var i = 0; i < bodies.length; i++) {
-    var title = bodies[i];
-    var num = i + 1;
-    var index = num.toString();
-    var stats = getBodyStats(bodies,i);
-    var panelBody = "";
-
-    panelBody += "<p><b>Diameter: </b>x" + stats[0];
-    panelBody += "<br><b>Mass: </b>x" + stats[1];
-    panelBody += "<br><b>Gravity: </b>x" + stats[2];
-    panelBody += "<br><b>Atmosphere: </b>" + stats[3];
-    panelBody += "<br><b>Day: </b>" + stats[4];
-    panelBody += "&nbsp;&nbsp;<b>Year: </b>" + stats[5] + "</p>";
-    panelBody += "<p></p>";
-
-    //build moon panels
-    if (!artificialWorlds.includes(bodies[i]) && bodies[i] != "Asteroid Belt"){
-      var moonNum = getMoons();
-      if (moonNum != 0) {
-
-        accordionIndex += 1;
-        panelBody += "<p></p>";
-        panelBody += "<p><b>Satellites</b></p>";
-        panelBody += "<p></p>";
-        panelBody += "<div class=\"panel-group\" id=\"accordion" + accordionIndex + "\">";
-
-        for (var j = 0; j < moonNum; j++) {
-          var numj = j + 1;
-          var indexj = numj.toString();
-          panelBody += buildPanel(getSatellite(), index + indexj, accordionIndex, "moon", false, false);
-        }
-        panelBody += "</div>";
-      }
-    }
-
-    innerAccordion += buildPanel(title, index, "1", panelBody, false, false);
+  if (starLocation == "The Vast"){
+    travelTime = diceRoll('5d6') + " Days";
+  } else if (starLocation == "Near Space") {
+    travelTime = diceRoll('3d6') + " Days";
   }
-  innerAccordion += "</div>";
+
+  innerAccordion += "<p><b>Sector:</b> " + starLocation;
+  innerAccordion += "<br><b>Drift Travel:</b> " + travelTime + "</p>";
+
+  if (!systemlessObjects.includes(star)){
+
+    innerAccordion += "<p></p>";
+    innerAccordion += "<div class=\"panel-group\" id=\"accordion1\">";
+
+    //build panels
+    for (var i = 0; i < bodies.length; i++) {
+      var title = bodies[i];
+      var num = i + 1;
+      var index = num.toString();
+      var stats = getBodyStats(bodies,i);
+      var panelBody = "";
+
+      panelBody += "<p><b>Diameter: </b>" + stats[0];
+      panelBody += "<br><b>Mass: </b>" + stats[1];
+      panelBody += "<br><b>Gravity: </b>" + stats[2];
+      panelBody += "<br><b>Atmosphere: </b>" + stats[3];
+      panelBody += "<br><b>Day: </b>" + stats[4];
+      panelBody += "&nbsp;&nbsp;<b>Year: </b>" + stats[5] + "</p>";
+      panelBody += "<p></p>";
+
+      //build moon panels
+      if (!artificialWorlds.includes(bodies[i]) && bodies[i] != "Asteroid Belt"){
+
+        var moonBodies = getMoonBodies();
+
+        if (moonBodies.length > 0) {
+
+          accordionIndex += 1;
+          panelBody += "<p></p>";
+          panelBody += "<p><b>Satellites:</b></p>";
+          panelBody += "<p></p>";
+          panelBody += "<div class=\"panel-group\" id=\"accordion" + accordionIndex + "\">";
+
+          for (var j = 0; j < moonBodies.length; j++) {
+            var numj = j + 1;
+            var indexj = numj.toString();
+            //
+            var moonStats = getBodyStats(moonBodies,j);
+            var moonPanel = "";
+
+            moonPanel += "<p><b>Diameter: </b>" + moonStats[0];
+            moonPanel += "<br><b>Mass: </b>" + moonStats[1];
+            moonPanel += "<br><b>Gravity: </b>" + moonStats[2];
+            moonPanel += "<br><b>Atmosphere: </b>" + moonStats[3] + "</p>";
+            //
+            panelBody += buildPanel(moonBodies[j], index + indexj, accordionIndex, moonPanel, false, false);
+          }
+          panelBody += "</div>";
+        } else {
+          panelBody += "<p></p>";
+          panelBody += "<p><b>No satellites</b></p>";
+          panelBody += "<p></p>";
+        }
+      }
+
+      innerAccordion += buildPanel(title, index, "1", panelBody, false, false);
+    }
+    innerAccordion += "</div>";
+  }
 
   accordion = "<hr><div class=\"panel-group\" id=\"accordion\">";
-  accordion += buildPanel(getStar(), "", "", innerAccordion, true, true);
+  accordion += buildPanel(star, "", "", innerAccordion, true, true);
   accordion += "</div>";
 
   $outputArea.append(accordion);

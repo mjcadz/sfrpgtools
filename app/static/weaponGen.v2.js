@@ -384,14 +384,6 @@ function removeBlankValues(array) {
   return splicedArray;
 }
 
-/**
-* Returns a random integer between min (inclusive) and max (inclusive)
-* Using Math.round() will give you a non-uniform distribution!
-*/
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 function getPrice(level) {
   var price;
   var variance;
@@ -473,7 +465,7 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
   $index.append("<hr>");
   if (nameDrop.includes("Off")) {
     $index.append("<h4>Level " + level + " " + gunName + "</h4>");
-    $index.append("<h6 class=\"text-muted\">" + type + "</h6>");
+    $index.append("<h5 class=\"text-muted\">" + type + "</h5>");
     $index.append( "<p>Price: "+  getPrice(level) +
                         "<br>Damage: " + damage +
                         "<br>Range: " + range + " ft." +
@@ -486,8 +478,8 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
   } else if (nameDrop.includes("On")){
     var weaponName = getrandomName(gunName);
     $index.append("<h4>" + weaponName[2] + " " + weaponName[0] + "</h4>");
-    $index.append("<h6 class=\"text-muted\">" + weaponName[1] + " - " + gunName + "</h4>");
-    $index.append("<h6 class=\"text-muted\">" + type + "</h6>");
+    $index.append("<h5 class=\"text-muted\">" + weaponName[1] + " - " + gunName + "</h5>");
+    $index.append("<h5 class=\"text-muted\">" + type + "</h5>");
     $index.append( "<p>Level: " + level +
                         "<br>Price: "+  getPrice(level) +
                         "<br>Damage: " + damage +
@@ -519,7 +511,7 @@ function printMeleeNeat(level,weaponName,type,damage,critical,bulk,special) {
   $index.append("<hr>");
   if (nameDrop.includes("Off")) {
     $index.append("<h4>Level " + level + " " + weaponName + "</h4>");
-    $index.append("<h6 class=\"text-muted\">" + type + "</h6>");
+    $index.append("<h5 class=\"text-muted\">" + type + "</h5>");
     $index.append( "<p>Price: "+  getPrice(level) +
                         "<br>Damage: " + damage +
                         "<br>Critical: " + critical +
@@ -529,8 +521,8 @@ function printMeleeNeat(level,weaponName,type,damage,critical,bulk,special) {
   } else if (nameDrop.includes("On")){
     var gName = getrandomName(weaponName);
     $index.append("<h4>" + gName[0] + " " + gName[3] + "</h4>");
-    $index.append("<h6 class=\"text-muted\">" + gName[1] + " - " + weaponName + "</h6>");
-    $index.append("<h6 class=\"text-muted\">" + type + "</h6>");
+    $index.append("<h5 class=\"text-muted\">" + gName[1] + " - " + weaponName + "</h5>");
+    $index.append("<h5 class=\"text-muted\">" + type + "</h5>");
     $index.append( "<p>Level: " + level +
                         "<br>Price: "+  getPrice(level) +
                         "<br>Damage: " + damage +

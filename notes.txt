@@ -7,4 +7,5 @@ do binary star systems - star title becomes binary system, then list stars in pa
 https://work.smarchal.com/twbscolor/css/e74c3cc0392becf0f1ffbbbc0
 navbar colour picker
 
-in stargen add travel days
+change artificial body stats
+reduce moon diameters mass etc
