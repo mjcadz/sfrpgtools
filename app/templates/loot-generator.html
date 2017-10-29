@@ -1,0 +1,21 @@
+<!-- index.html-->
+
+{% extends "base.html" %}
+{% block title %}Starfinder Loot Generator{% endblock %}
+{% block description %}{% endblock %}
+{% block body %}
+<div class="jumbotron">
+  <h1>Loot Generator</h1>
+  <p class="lead">for use with Starfinder RPG</p>
+  <button type="button" onclick = "generateLoot()" title = "magic, baby" class="btn btn-info">Generate  <i class="fa fa-magic fa-lg"></i></button>
+  <button type="button" onclick = "clearOutput()" class="btn btn-default">Clear</button>
+  </br>
+
+  <div class="output area">
+
+	</div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type = "text/javascript" src = "{{ url_for('static', filename = 'lootGen.js') }}" ></script>
+{% endblock %}
