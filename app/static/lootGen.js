@@ -41,11 +41,14 @@ function generateLoot() {
   var itemGroup,itemName,itemAttr;
   var itemArray = [];
 
+  var aplmod = Number($('#APLDrop').text().replace("Average Party Level - ",""));
+  var crmod = $('#CRDrop').text().replace("Challenge Rating - ","");
+
   for (itemGroup in myjson) {
     //$outputArea.append("<p>"+itemGroup+"</p>");
 
     for (itemName in myjson[itemGroup]) {
-      if (Number(myjson[itemGroup][itemName][0]['level']) <= 2 ){
+      if (Number(myjson[itemGroup][itemName][0]['level']) <= aplmod+1 ){
         itemArray.push(itemName);
         //$outputArea.append("<p>"+myjson[itemGroup][itemName][0]['level']+"</p>");
       }
@@ -59,6 +62,7 @@ function generateLoot() {
 
 
   }
+  $outputArea.append("<p>"+aplmod.toString()+ " " + crmod + "</p>");
   $outputArea.append("<p>"+randomChoice(itemArray)+"</p>");
   $outputArea.append("<p>"+randomChoice(itemArray)+"</p>");
   $outputArea.append("<p>"+randomChoice(itemArray)+"</p>");
@@ -68,3 +72,18 @@ function generateLoot() {
   //$outputArea.append("<p>"+list+"</p>");
 
 }
+
+
+//Sets selected dropdown to dropdown display
+//BOOTSTRAP 3
+$(".dropdown-menu li a").click(function(){
+  var selected = $(this).text();
+  if (selected.includes("APL")) {
+    $(this).closest('.btn-group').find('.dropdown-toggle').html("Average Party Level - " + selected.replace("APL ","") + ' <span class="caret"></span>');
+    $(this).closest('.btn-group').find('.dropdown-toggle').val("Average Party Level - " + selected.replace("APL ",""));
+  }
+  else if (selected.includes("CR")){
+    $(this).closest('.btn-group').find('.dropdown-toggle').html("Challenge Rating - " + selected.replace("CR ","") + ' <span class="caret"></span>');
+    $(this).closest('.btn-group').find('.dropdown-toggle').val("Challenge Rating - " + selected.replace("CR ",""));
+  }
+});
