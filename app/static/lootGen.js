@@ -69,9 +69,9 @@ function generateLoot() {
 
 
   for (itemGroup in myjson) {
-    $outputArea.append("<p>"+itemGroup+"</p>");
+    //$outputArea.append("<p>"+itemGroup+"</p>");
 
-    /*for (itemName in myjson[itemGroup]) {
+    for (itemName in myjson[itemGroup]) {
       item = [];
 
       if (Number(myjson[itemGroup][itemName][0]['level']) <= aplmod+1 ){
@@ -104,13 +104,31 @@ function generateLoot() {
       //var myProp = 'prop';
         //if(myProp in myObj){
       //alert("yes, i have that property");
-    }*/
+    }
 
 
-  }/*
+  }
   var list = "<p>";
   var thisItem;
-  var wealthCount = wealth
+  var wealthCount = wealth;
+  var credits,upbs;
+
+  //get credits
+  credits = wealth * randomWeightedChoice([0,0.1,0.2,0.3,0.4,0.5], [5,1,1,1,1,1]);
+  credits = Math.round(credits / 50)*50;
+  if (credits != 0) {
+    list += credits.toString() +" credits<br>";
+    wealthCount -= credits;
+  }
+
+  //get upbs
+  upbs = wealth * randomWeightedChoice([0,0.1,0.2,0.3,0.4,0.5], [5,1,1,1,1,1]);
+  upbs = Math.round(upbs / 50)*50;
+  if (upbs != 0) {
+    list += upbs.toString() +" UPBs<br>";
+    wealthCount -= upbs;
+  }
+
   while (wealthCount > 0) {
       thisItem = randomChoice(itemArray);
       list += thisItem[1] + " - " + thisItem[0] +"<br>"
@@ -120,11 +138,11 @@ function generateLoot() {
 
   //do credits,UPBs fix fusion seals
   $outputArea.append(list);
-  $outputArea.append("<p>"+itemArray+"</p>");
+  //$outputArea.append("<p>"+itemArray+"</p>");
   //$outputArea.append("<p>"+randomChoice(itemArray)[0]+"</p>");
   //$outputArea.append("<p>"+randomChoice(itemArray)[0]+"</p>");
 
-  //myjson.Technologicalitems.Binders[0].sourcepage*/
+  //myjson.Technologicalitems.Binders[0].sourcepage
 
   //$outputArea.append("<p>"+list+"</p>");
 
