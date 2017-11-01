@@ -16,4 +16,4 @@ do professions
 
 art/gems
 
-spells can count as heals, sprayflesh
+spells can count as heals, sprayflesh, medjkit
