@@ -9,3 +9,11 @@ navbar colour picker
 
 change artificial body stats
 reduce moon diameters mass etc
+
+ropes /10ft
+do spell ampoules and spell Gems
+do professions
+
+art/gems
+
+spells can count as heals, sprayflesh
