@@ -65,6 +65,8 @@ var fusionSeal = {
   "20": 148500
 };
 
+var trcount,table;
+
 function clearOutput() {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
@@ -80,7 +82,6 @@ function generateLoot() {
   var itemGroup,itemName,itemAttr;
   var itemArray = [];
   var item = [];
-  var itemLevel, minLevel;
 
   var aplmod = Number($('#APLDrop').text().replace("Average Party Level - ","").trim());
   var crmod = ($('#CRDrop').text().replace("Challenge Rating - ","")).trim();
@@ -91,52 +92,35 @@ function generateLoot() {
   //BUILD LIST
   //
 
-  for (itemGroup in myjson) {
-
-    for (itemName in myjson[itemGroup]) {
-      item = [];
-      //for weapons/armor give a minimum item level (apl -3)
-      itemLevel = Number(myjson[itemGroup][itemName][0]['level']);
-      minLevel = limitedGroups.includes(itemGroup) ? aplmod - 3 : 0
-
-      if ( itemLevel <= aplmod+1 && itemLevel >= minLevel ){
-        item[0] = itemName.replace("Iii","III").replace("Ii","II").replace("Iv","IV").replace("Viii","VIII").replace("Vii","VII").replace("Vi","VI").replace("Fxprofession",randomChoice(professions));//name
-        item[1] = myjson[itemGroup][itemName][0]['level'];//level
-
-        if (itemName.includes("Fusion Seal")){
-          sealLevel = (aplmod+randomChoice([0,1])).toString();
-          sealLevel = (Number(sealLevel) > 20) ? "20" : sealLevel;
-          sealLevel = (Number(sealLevel) < Number(item[1])) ? item[1] : sealLevel
-
-          item[2] = fusionSeal[sealLevel];//fusion seal cost
-          sealText = (item[1] == sealLevel) ? " (level " + item[1] +")" : " (level " + item[1] + "-" + sealLevel+")"//check if same number
-          item[0] = item[0] + sealText;//add seal level to name
-          item[1] = sealLevel;
-        } else {
-          item[2] = myjson[itemGroup][itemName][0]['cost'];//cost
-        }
-
-        item[3] = myjson[itemGroup][itemName][0]['bulk'].toUpperCase();//bulk
-        item[4] = myjson[itemGroup][itemName][0]['sourcepage'];//sourcepage
-        itemArray.push(item);
-        if (moreGroups.includes(itemGroup)){
-          itemArray.push(item);
-          itemArray.push(item);
-        }
-      }
-    }
-  }
+  itemArray = getDataArray("All",myjson)
 
   //
   //CHOOSE ITEMS AND BUILD TABLE
   //
 
-  var table = "<div class=\"container table-responsive\"><table class=\"table table-striped\"><thead><tr><th>#</th><th>Item</th><th>Level</th><th>Bulk</th><th>Cost</th><th>Sourcepage</th></tr></thead><tbody>";
   var thisItem,tr;
   var wealthCount = wealth;
   var credits,upbs;
   var deck,weight;
-  var trcount = 0
+  table = "<div class=\"container table-responsive\"><table class=\"table table-striped\"><thead><tr><th>#</th><th>Item</th><th>Level</th><th>Bulk</th><th>Cost</th><th>Sourcepage</th></tr></thead><tbody>";
+  trcount = 0
+
+  //RESOLVE MORE ITEMS
+
+  moreTable = "";
+
+  //more ammo
+  if (moremod == "ammo") {
+    var ammoItems;
+    ammoItems = getDataArray(["Ammunition","Special Ammunition"],myjson);
+    thisItem = randomChoice(ammoItems);
+
+    addTableItem(thisItem);
+
+    wealthCount -= Number(thisItem[2]);
+    //$outputArea.append("<p>"+ammoItems+"</p>");
+
+  }
 
   //get credits
   deck = (moremod == "credits") ? [0.5,0.6,0.7,0.8,0.9] : [0,0.1,0.2,0.3,0.4,0.5];//increase nums if more credits is selected
@@ -188,24 +172,7 @@ function generateLoot() {
         thisItem[0] = thisItem[0].replace("Spell Gem (Level 0)",randomChoice(spellGems0)).replace("Spell Gem (Level 1)",randomChoice(spellGems1)).replace("Spell Gem (Level 2)",randomChoice(spellGems2)).replace("Spell Gem (Level 3)",randomChoice(spellGems3)).replace("Spell Gem (Level 4)",randomChoice(spellGems4)).replace("Spell Gem (Level 5)",randomChoice(spellGems5)).replace("Spell Gem (Level 6)",randomChoice(spellGems6));
       }
 
-
-
-      //if item already in list increment number
-      if (table.includes(thisItem[0])) {
-        var n = table.indexOf(thisItem[0]) - 10;
-        var m = Number(table.charAt(n));
-        table = table.replace("<td>"+m.toString()+"</td><td>" + thisItem[0],"<td>"+(m+1).toString()+"</td><td>" + thisItem[0]);
-
-      } else { //else just add to table
-        if (trcount == 1) {
-          tr = "<tr class=\"info\">"
-          trcount = 0;
-        } else if (trcount == 0) {
-          tr = "<tr>";
-          trcount = 1;
-        }
-        table += tr + "<td>1</td>"+"<td>"+thisItem[0]+"</td><td>"+thisItem[1]+"</td><td>"+thisItem[3]+"</td><td>"+thisItem[2]+"</td><td>"+thisItem[4]+"</td></tr>";
-      }
+      addTableItem(thisItem);
 
       wealthCount -= Number(thisItem[2]);
   }
@@ -214,6 +181,74 @@ function generateLoot() {
   //push table to html
   $outputArea.append(table);
 
+}
+
+function addTableItem (item){
+  //if item already in list increment number
+  if (table.includes(item[0])) {
+    var n = table.indexOf(item[0]) - 10;
+    var m = Number(table.charAt(n));
+    table = table.replace("<td>"+m.toString()+"</td><td>" + item[0],"<td>"+(m+1).toString()+"</td><td>" + item[0]);
+
+  } else { //else just add to table
+    if (trcount == 1) {
+      tr = "<tr class=\"info\">"
+      trcount = 0;
+    } else if (trcount == 0) {
+      tr = "<tr>";
+      trcount = 1;
+    }
+    table += tr + "<td>1</td>"+"<td>"+item[0]+"</td><td>"+item[1]+"</td><td>"+item[3]+"</td><td>"+item[2]+"</td><td>"+item[4]+"</td></tr>";
+  }
+}
+
+function getDataArray(groups,json){
+  var dataArray = [];
+  var item = [];
+  var itemGroup,itemName;
+  var itemLevel, minLevel,aplmod;
+
+
+  aplmod = Number($('#APLDrop').text().replace("Average Party Level - ","").trim());
+
+  for (itemGroup in json) {
+    if (groups.includes(itemGroup) || groups.includes("All")) {
+      for (itemName in json[itemGroup]) {
+        item = [];
+        itemLevel = Number(json[itemGroup][itemName][0]['level']);
+        //set minimum level for weapons and armor
+        minLevel = limitedGroups.includes(itemGroup) ? aplmod - 3 : 0;
+
+        if ( itemLevel <= aplmod+1 && itemLevel >= minLevel ){
+          item[0] = itemName.replace("Iii","III").replace("Ii","II").replace("Iv","IV").replace("Viii","VIII").replace("Vii","VII").replace("Vi","VI").replace("Fxprofession",randomChoice(professions));//name
+          item[1] = json[itemGroup][itemName][0]['level'];//level
+
+          if (itemName.includes("Fusion Seal")){
+            sealLevel = (aplmod+randomChoice([0,1])).toString();
+            sealLevel = (Number(sealLevel) > 20) ? "20" : sealLevel;
+            sealLevel = (Number(sealLevel) < Number(item[1])) ? item[1] : sealLevel
+
+            item[2] = fusionSeal[sealLevel];//fusion seal cost
+            sealText = (item[1] == sealLevel) ? " (level " + item[1] +")" : " (level " + item[1] + "-" + sealLevel+")"//check if same number
+            item[0] = item[0] + sealText;//add seal level to name
+            item[1] = sealLevel;
+          } else {
+            item[2] = json[itemGroup][itemName][0]['cost'];//cost
+          }
+
+          item[3] = json[itemGroup][itemName][0]['bulk'].toUpperCase();//bulk
+          item[4] = json[itemGroup][itemName][0]['sourcepage'];//sourcepage
+          dataArray.push(item);
+          //extra entries for these groups
+          if (moreGroups.includes(itemGroup)){
+            dataArray.push(item);
+            dataArray.push(item);
+          }
+        }
+      }
+    }
+  }
+  return dataArray;
 }
 
 //Sets selected dropdown to dropdown display
