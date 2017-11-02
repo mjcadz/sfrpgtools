@@ -7,6 +7,9 @@ do binary star systems - star title becomes binary system, then list stars in pa
 https://work.smarchal.com/twbscolor/css/e74c3cc0392becf0f1ffbbbc0
 navbar colour picker
 
+http://blog.koalite.com/bbg/
+button colour picker
+
 change artificial body stats
 reduce moon diameters mass etc
 

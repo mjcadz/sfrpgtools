@@ -129,3 +129,82 @@ ul.share-buttons .sr-only{
   font-size:16px;
   line-height: 1.6;
 }
+
+.table > thead > tr > td.success,
+.table > tbody > tr > td.success,
+.table > tfoot > tr > td.success,
+.table > thead > tr > th.success,
+.table > tbody > tr > th.success,
+.table > tfoot > tr > th.success,
+.table > thead > tr.success > td,
+.table > tbody > tr.success > td,
+.table > tfoot > tr.success > td,
+.table > thead > tr.success > th,
+.table > tbody > tr.success > th,
+.table > tfoot > tr.success > th {
+  background-color: #cbf6f2;
+}
+.table-hover > tbody > tr > td.success:hover,
+.table-hover > tbody > tr > th.success:hover,
+.table-hover > tbody > tr.success:hover > td,
+.table-hover > tbody > tr:hover > .success,
+.table-hover > tbody > tr.success:hover > th {
+  background-color: #4ce0d2!important;
+}
+
+.btn-grn {
+  color: #fff;
+  background-color: #2EC4B6;
+  border-color: #2EC4B6;
+}
+
+.btn-grn:hover,
+.btn-grn:focus,
+.btn-grn:active,
+.btn-grn.active,
+.open .dropdown-toggle.btn-grn {
+  color: #fff;
+  background-color: #4CE0D2;
+  border-color: #2EC4B6;
+}
+
+.btn-grn:active,
+.btn-grn.active,
+.open .dropdown-toggle.btn-grn {
+  background-image: none;
+}
+
+.btn-grn.disabled,
+.btn-grn[disabled],
+fieldset[disabled] .btn-grn,
+.btn-grn.disabled:hover,
+.btn-grn[disabled]:hover,
+fieldset[disabled] .btn-grn:hover,
+.btn-grn.disabled:focus,
+.btn-grn[disabled]:focus,
+fieldset[disabled] .btn-grn:focus,
+.btn-grn.disabled:active,
+.btn-grn[disabled]:active,
+fieldset[disabled] .btn-grn:active,
+.btn-grn.disabled.active,
+.btn-grn[disabled].active,
+fieldset[disabled] .btn-grn.active {
+  background-color: #2EC4B6;
+  border-color: #2EC4B6;
+}
+
+.btn-grn .badge {
+  color: #2EC4B6;
+  background-color: #fff;
+}
+
+.btn:focus,.btn:active {
+   outline: none !important;
+}
+
+.jumbotron h1{
+    color: #666666;
+}
+.jumbotron p{
+    color: #666666;
+}

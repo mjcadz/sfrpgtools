@@ -76,3 +76,8 @@ function randomWeightedChoice(list, weight) {
 function rand(min, max) {
     return Math.random() * (max - min) + min;
 };
+
+//remove button focus after click
+$(".btn").mouseup(function(){
+    $(this).blur();
+})

@@ -113,13 +113,13 @@ function generateLoot() {
   if (moremod == "ammo") {
     var ammoItems;
     ammoItems = getDataArray(["Ammunition","Special Ammunition"],myjson);
-    thisItem = randomChoice(ammoItems);
-
-    addTableItem(thisItem);
-
-    wealthCount -= Number(thisItem[2]);
-    //$outputArea.append("<p>"+ammoItems+"</p>");
-
+     for (var i = randomWeightedChoice([2,3,4,5,6],[1,3,2,1,1]); i > 0; i--){
+       if (wealthCount > 0) {
+         thisItem = randomChoice(ammoItems);
+         addTableItem(thisItem);
+         wealthCount -= Number(thisItem[2]);
+       }
+     }
   }
 
   //get credits
@@ -129,15 +129,17 @@ function generateLoot() {
   credits = Math.round(credits / 50)*50;
   if (credits != 0) {
     if (trcount == 1) {
-      tr = "<tr class=\"info\">"
+      tr = "<tr class=\"success\">"
       trcount = 0;
     } else if (trcount == 0) {
       tr = "<tr>";
       trcount = 1;
     }
     //add to table
-    table += tr + "<td>"+credits.toString() +"</td><td>Credits</td><td></td><td></td><td></td><td></td></tr>"
-    wealthCount -= credits;
+    if (wealthCount > 0) {
+      table += tr + "<td>"+credits.toString() +"</td><td>Credits</td><td></td><td></td><td></td><td></td></tr>"
+      wealthCount -= credits;
+    }
   }
 
   //get upbs
@@ -145,15 +147,17 @@ function generateLoot() {
   upbs = Math.round(upbs / 50)*50;
   if (upbs != 0) {
     if (trcount == 1) {
-      tr = "<tr class=\"info\">"
+      tr = "<tr class=\"success\">"
       trcount = 0;
     } else if (trcount == 0) {
       tr = "<tr>";
       trcount = 1;
     }
     //add to table
-    table += tr + "<td>"+upbs.toString() +"</td><td>UPBs</td><td></td><td></td><td></td><td></td></tr>";
-    wealthCount -= upbs;
+    if (wealthCount > 0) {
+      table += tr + "<td>"+upbs.toString() +"</td><td>UPBs</td><td></td><td></td><td></td><td></td></tr>";
+      wealthCount -= upbs;
+    }
   }
 
 
@@ -192,7 +196,7 @@ function addTableItem (item){
 
   } else { //else just add to table
     if (trcount == 1) {
-      tr = "<tr class=\"info\">"
+      tr = "<tr class=\"success\">"
       trcount = 0;
     } else if (trcount == 0) {
       tr = "<tr>";
