@@ -65,7 +65,7 @@ var fusionSeal = {
   "20": 148500
 };
 
-var trcount,table;
+var trcount,table,moreTable;
 
 function clearOutput() {
   var $outputArea = $(".output.area").first();
@@ -103,6 +103,7 @@ function generateLoot() {
   var credits,upbs;
   var deck,weight;
   table = "<div class=\"container table-responsive\"><table class=\"table table-striped\"><thead><tr><th>#</th><th>Item</th><th>Level</th><th>Bulk</th><th>Cost</th><th>Sourcepage</th></tr></thead><tbody>";
+  moreTable = "";
   trcount = 0
 
   //RESOLVE MORE ITEMS
@@ -116,7 +117,7 @@ function generateLoot() {
      for (var i = randomWeightedChoice([2,3,4,5,6],[1,3,2,1,1]); i > 0; i--){
        if (wealthCount > 0) {
          thisItem = randomChoice(ammoItems);
-         addTableItem(thisItem);
+         addTableItem(thisItem,true);
          wealthCount -= Number(thisItem[2]);
        }
      }
@@ -128,16 +129,9 @@ function generateLoot() {
   credits = wealth * randomWeightedChoice(deck,weight);
   credits = Math.round(credits / 50)*50;
   if (credits != 0) {
-    if (trcount == 1) {
-      tr = "<tr class=\"success\">"
-      trcount = 0;
-    } else if (trcount == 0) {
-      tr = "<tr>";
-      trcount = 1;
-    }
     //add to table
     if (wealthCount > 0) {
-      table += tr + "<td>"+credits.toString() +"</td><td>Credits</td><td></td><td></td><td></td><td></td></tr>"
+      table += "<tr><td>"+credits.toString() +"</td><td>Credits</td><td></td><td></td><td></td><td></td></tr>"
       wealthCount -= credits;
     }
   }
@@ -146,20 +140,14 @@ function generateLoot() {
   upbs = wealth * randomWeightedChoice([0,0.1,0.2,0.3,0.4,0.5], [5,1,1,1,1,1]);
   upbs = Math.round(upbs / 50)*50;
   if (upbs != 0) {
-    if (trcount == 1) {
-      tr = "<tr class=\"success\">"
-      trcount = 0;
-    } else if (trcount == 0) {
-      tr = "<tr>";
-      trcount = 1;
-    }
     //add to table
     if (wealthCount > 0) {
-      table += tr + "<td>"+upbs.toString() +"</td><td>UPBs</td><td></td><td></td><td></td><td></td></tr>";
+      table += "<tr><td>"+upbs.toString() +"</td><td>UPBs</td><td></td><td></td><td></td><td></td></tr>";
       wealthCount -= upbs;
     }
   }
 
+  table += moreTable;//add the more items after UPBs and creds
 
   //table workshop
   while (wealthCount > 0) {
@@ -176,34 +164,54 @@ function generateLoot() {
         thisItem[0] = thisItem[0].replace("Spell Gem (Level 0)",randomChoice(spellGems0)).replace("Spell Gem (Level 1)",randomChoice(spellGems1)).replace("Spell Gem (Level 2)",randomChoice(spellGems2)).replace("Spell Gem (Level 3)",randomChoice(spellGems3)).replace("Spell Gem (Level 4)",randomChoice(spellGems4)).replace("Spell Gem (Level 5)",randomChoice(spellGems5)).replace("Spell Gem (Level 6)",randomChoice(spellGems6));
       }
 
-      addTableItem(thisItem);
+      addTableItem(thisItem,false);
 
       wealthCount -= Number(thisItem[2]);
   }
   table += "</tbody></table></div>";
+
+  //stripe the table
+  var even = false;
+  var trNum = (table.match(new RegExp("<tr>", "g")) || []).length;
+  //alert(table.indexOf("<tr>"));
+  table = table.replace("<tr>","<tr >");
+  for (var i = trNum;i>0;i--){
+    if (even) {
+      table = table.replace("<tr>","<tr class=\"success\">");
+      even = false;
+    } else {
+      table = table.replace("<tr>","<tr >");
+      even = true;
+    }
+  }
 
   //push table to html
   $outputArea.append(table);
 
 }
 
-function addTableItem (item){
+function addTableItem (item,trueTable){
   //if item already in list increment number
-  if (table.includes(item[0])) {
-    var n = table.indexOf(item[0]) - 10;
-    var m = Number(table.charAt(n));
-    table = table.replace("<td>"+m.toString()+"</td><td>" + item[0],"<td>"+(m+1).toString()+"</td><td>" + item[0]);
+  if (trueTable){
+    if (moreTable.includes(item[0])) {
+      var n = moreTable.indexOf(item[0]) - 10;
+      var m = Number(moreTable.charAt(n));
+      moreTable = moreTable.replace("<td>"+m.toString()+"</td><td>" + item[0],"<td>"+(m+1).toString()+"</td><td>" + item[0]);
 
-  } else { //else just add to table
-    if (trcount == 1) {
-      tr = "<tr class=\"success\">"
-      trcount = 0;
-    } else if (trcount == 0) {
-      tr = "<tr>";
-      trcount = 1;
+    } else { //else just add to moreTable
+      moreTable += "<tr><td>1</td>"+"<td>"+item[0]+"</td><td>"+item[1]+"</td><td>"+item[3]+"</td><td>"+item[2]+"</td><td>"+item[4]+"</td></tr>";
     }
-    table += tr + "<td>1</td>"+"<td>"+item[0]+"</td><td>"+item[1]+"</td><td>"+item[3]+"</td><td>"+item[2]+"</td><td>"+item[4]+"</td></tr>";
+  } else {
+    if (table.includes(item[0])) {
+      var n = table.indexOf(item[0]) - 10;
+      var m = Number(table.charAt(n));
+      table = table.replace("<td>"+m.toString()+"</td><td>" + item[0],"<td>"+(m+1).toString()+"</td><td>" + item[0]);
+
+    } else { //else just add to table
+      table += "<tr><td>1</td>"+"<td>"+item[0]+"</td><td>"+item[1]+"</td><td>"+item[3]+"</td><td>"+item[2]+"</td><td>"+item[4]+"</td></tr>";
+    }
   }
+
 }
 
 function getDataArray(groups,json){
