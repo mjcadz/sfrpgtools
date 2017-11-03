@@ -1388,11 +1388,11 @@ function generateWeapon() {
 $(".dropdown-menu li a").click(function(){
   var selected = $(this).text();
   if (selected.includes("On") || selected.includes("Off")) {
-    $(this).closest('.btn-group').find('.dropdown-toggle').html("Name Generator " + selected + ' <span class="caret"></span>');
+    $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">Name Generator ' + selected + '</span><span class="caret"></span>');
     $(this).closest('.btn-group').find('.dropdown-toggle').val("Name Generator " + selected)
   }
   else {
-    $(this).closest('.btn-group').find('.dropdown-toggle').html(selected + ' <span class="caret"></span>');
+    $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' +selected + '</span><span class="caret"></span>');
     $(this).closest('.btn-group').find('.dropdown-toggle').val(selected)
   }
 });

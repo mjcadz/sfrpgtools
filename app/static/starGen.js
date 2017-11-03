@@ -508,11 +508,11 @@ function getWeightFill(arrayLength,fill) {
 $(".dropdown-menu li a").click(function(){
   var selected = $(this).text();
   if (selected.includes("Small") || selected.includes("Medium") || selected.includes("Large")) {
-    $(this).closest('.btn-group').find('.dropdown-toggle').html("System Size - " + selected + ' <span class="caret"></span>');
+    $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">System Size - ' + selected + '</span><span class="caret"></span>');
     $(this).closest('.btn-group').find('.dropdown-toggle').val("System Size - " + selected);
   }
   else if (selected.includes("Sparse") || selected.includes("Average") || selected.includes("Teeming")){
-    $(this).closest('.btn-group').find('.dropdown-toggle').html("Life - " + selected + ' <span class="caret"></span>');
+    $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">Life - ' + selected + '</span><span class="caret"></span>');
     $(this).closest('.btn-group').find('.dropdown-toggle').val("Life - " + selected);
   }
 });

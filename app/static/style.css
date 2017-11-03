@@ -208,3 +208,17 @@ fieldset[disabled] .btn-grn.active {
 .jumbotron p{
     color: #666666;
 }
+
+.btn-notblack {
+    color: #666666!important;
+}
+
+.set-width {
+    width: 105px !important;
+}
+
+.caret {
+    position: absolute;
+    left: 90%;
+    top: 45%;
+}
