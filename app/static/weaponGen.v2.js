@@ -459,28 +459,24 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
   indexCounter += 1;
   indexString = "index" + indexCounter.toString();
 
-
-  $outputArea.append("<div class=\"" + indexString + "\">");
-  var $index = $("."+indexString).first();
-  $index.append("<hr>");
   if (nameDrop.includes("Off")) {
-    $index.append("<h4>Level " + level + " " + gunName + "</h4>");
-    $index.append("<h5 class=\"text-muted\">" + type + "</h5>");
-    $index.append( "<p>Price: "+  getPrice(level) +
+    var panelTitle =  "Level " + level + " " + gunName;
+    var panelBody =   "<h5 class=\"text-muted\">" + type + "</h5>" +
+                      "<p>Price: "+  getPrice(level) +
                         "<br>Damage: " + damage +
                         "<br>Range: " + range + " ft." +
                         "<br>Critical: " + critical +
                         "<br>Capacity: " + capacity +
                         "<br>Usage: " + usage +
                         "<br>Bulk: " + bulk +
-                        "<br>Special: " + special + "</p>");
+                        "<br>Special: " + special + "</p>";
 
   } else if (nameDrop.includes("On")){
     var weaponName = getrandomName(gunName);
-    $index.append("<h4>" + weaponName[2] + " " + weaponName[0] + "</h4>");
-    $index.append("<h5 class=\"text-muted\">" + weaponName[1] + " - " + gunName + "</h5>");
-    $index.append("<h5 class=\"text-muted\">" + type + "</h5>");
-    $index.append( "<p>Level: " + level +
+    var panelTitle =  weaponName[2] + " " + weaponName[0];
+    var panelBody =   "<h5 class=\"text-muted\">" + weaponName[1] + " - " + gunName + "</h5>" +
+                      "<h5 class=\"text-muted\">" + type + "</h5>" +
+                      "<p>Level: " + level +
                         "<br>Price: "+  getPrice(level) +
                         "<br>Damage: " + damage +
                         "<br>Range: " + range + " ft." +
@@ -488,9 +484,16 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
                         "<br>Capacity: " + capacity +
                         "<br>Usage: " + usage +
                         "<br>Bulk: " + bulk +
-                        "<br>Special: " + special + "</p>");
+                        "<br>Special: " + special + "</p>";
+
   }
-  $index.append("<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-default btn-sm\" onclick = \"removeEntry(this.id)\">Remove</button>");
+  $outputArea.append("<div class=\"panel " + indexString + "\">");
+  var $panel = $(".panel."+indexString).first();
+  $panel.append("<div class=\"panel-heading panel-bottom\"><h4>" + panelTitle + "</h4></div>");
+  $panel.append("<div class=\"panel-body "+ indexString + "\">");
+  var $index = $(".panel-body."+indexString).first();
+  $index.append(panelBody);
+  $index.append("<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-default btn-sm btn-notblack pull-right\" onclick = \"removeEntry(this.id)\">Remove</button>");
 
   if (storeOutput != ""){
     $outputArea.append(storeOutput);
@@ -505,32 +508,34 @@ function printMeleeNeat(level,weaponName,type,damage,critical,bulk,special) {
   indexCounter += 1;
   indexString = "index" + indexCounter.toString();
 
-  $outputArea.append("<div class=\"" + indexString + "\">");
-  var $index = $("."+indexString).first();
-
-  $index.append("<hr>");
   if (nameDrop.includes("Off")) {
-    $index.append("<h4>Level " + level + " " + weaponName + "</h4>");
-    $index.append("<h5 class=\"text-muted\">" + type + "</h5>");
-    $index.append( "<p>Price: "+  getPrice(level) +
+    var panelTitle = "Level " + level + " " + weaponName;
+    var panelBody = "<h5 class=\"text-muted\">" + type + "</h5>" +
+                    "<p>Price: "+  getPrice(level) +
                         "<br>Damage: " + damage +
                         "<br>Critical: " + critical +
                         "<br>Bulk: " + bulk +
-                        "<br>Special: " + special + "</p>");
+                        "<br>Special: " + special + "</p>";
 
   } else if (nameDrop.includes("On")){
     var gName = getrandomName(weaponName);
-    $index.append("<h4>" + gName[0] + " " + gName[3] + "</h4>");
-    $index.append("<h5 class=\"text-muted\">" + gName[1] + " - " + weaponName + "</h5>");
-    $index.append("<h5 class=\"text-muted\">" + type + "</h5>");
-    $index.append( "<p>Level: " + level +
+    var panelTitle = gName[0] + " " + gName[3];
+    var panelBody = "<h5 class=\"text-muted\">" + gName[1] + " - " + weaponName + "</h5>" +
+                    "<h5 class=\"text-muted\">" + type + "</h5>" +
+                    "<p>Level: " + level +
                         "<br>Price: "+  getPrice(level) +
                         "<br>Damage: " + damage +
                         "<br>Critical: " + critical +
                         "<br>Bulk: " + bulk +
-                        "<br>Special: " + special + "</p>");
+                        "<br>Special: " + special + "</p>";
   }
-  $index.append("<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-default btn-sm\" onclick = \"removeEntry(this.id)\">Remove</button>");
+  $outputArea.append("<div class=\"panel " + indexString + "\">");
+  var $panel = $(".panel."+indexString).first();
+  $panel.append("<div class=\"panel-heading panel-bottom\"><h4>" + panelTitle + "</h4></div>");
+  $panel.append("<div class=\"panel-body "+ indexString + "\">");
+  var $index = $(".panel-body."+indexString).first();
+  $index.append(panelBody);
+  $index.append("<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-default btn-sm btn-notblack pull-right\" onclick = \"removeEntry(this.id)\">Remove</button>");
 
   if (storeOutput != ""){
       $outputArea.append(storeOutput);
@@ -538,7 +543,7 @@ function printMeleeNeat(level,weaponName,type,damage,critical,bulk,special) {
 }
 
 function removeEntry(index) {
-  $("."+index).remove();
+  $(".panel."+index).remove();
 }
 
 function basicMelee(level) {

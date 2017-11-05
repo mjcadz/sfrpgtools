@@ -11,4 +11,9 @@ http://blog.koalite.com/bbg/
 button colour picker
 
 change artificial body stats
-reduce moon diameters mass etc
+
+rings
+
+bold weapon gen, sort out text in weapon generator
+
+ship scrapyard

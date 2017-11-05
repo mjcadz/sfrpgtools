@@ -15,12 +15,12 @@ var terrestrialNonLife = ["Rocky World","Ice World","Iron World","Coreless World
 var artificialWorlds =["Ring World","Cube World","Ark Ship","Disk World","Shield World","Refuelling Station","Offworld Trading Post","Ship Scrapyard"];
 var gasGiants = ["Small Gas World","Gas Giant","Hot Gas Giant","Cold Gas Giant"];
 
-var worldModifiers = ["Rings","Super Rings","Terraformed","Terraform in Progress","Force Field","Surrounded by Synthetic Debris","Large Axial Tilt","Perpendicular Rotation","Retrograde Rotation","Eccentric Orbit","Retrograde Orbit"];
+var worldModifiers = ["Rings","Super Rings","Terraformed","Terraform in Progress","Force Field","Surrounded by Synthetic Debris","Large Axial Tilt","Perpendicular Rotation"];
 
 //SATELLITES
 var lifeMoons = ["Ice Moon","Forest Moon","Marsh Moon","Garden Moon","Rocky Moon","Volcanic Moon"];
 var nonLifeMoons = ["Rocky Moon","Ice Moon","Iron Moon","Gas Moon","Captured Asteroid","Destroyed Moon"];
-var artificialSatellites = ["Satellite Array","Space Station","Huge Space Station","Space Elevator","Planetary Defence Platform","Research Outpost","Galactic Navigation Beacon","Artificial Moon","Orbital Drydock","Orbital Mirrors"];
+var artificialSatellites = ["Satellite Array","Space Station","Huge Space Station","Space Elevator","Planetary Defence Platform","Research Outpost","Drift Beacon","Artificial Moon","Orbital Drydock","Orbital Mirrors"];
 
 //ATMOSPHERE
 var atmosphereType = ["Thin","Normal","Thick","No Atmosphere"];
@@ -31,8 +31,73 @@ var corrosiveGases = ["Sulphuric Acid","Ammonia"];
 var toxicGases = ["Ammonia","Methane","Carbon Monoxide","Carbon Dioxide","Hydrocarbons"];
 
 //BIOMES
-var biomes = ["Aerial Terrian","Aquatic Terrian","Desert Terrain","Hill Terrian","Mountain Terrain","Marsh Terrain","Urban Terrain"]
+var biomes = ["Aerial Terrain","Aquatic Terrain","Desert Terrain","Hill Terrain","Forest Terrain","Mountain Terrain","Marsh Terrain","Urban Terrain"]
 
+var planetBiomes = {
+  "Garden World": ["Forest Terrain","Hill Terrain","Marsh Terrain","Aerial Terrain"],
+  "Rocky World": ["Desert Terrain","Aerial Terrain","Hill Terrain","Mountain Terrain"],
+  "City World": ["Urban Terrain"],
+  "Ocean World": ["Aquatic Terrain"],
+  "Desert World": ["Desert Terrain"],
+  "Forest World": ["Forest Terrain"],
+  "Ice World": ["Aquatic Terrain","Desert Terrain","Mountain Terrain"],
+  "Lava World": ["Desert Terrain","Hill Terrain","Mountain Terrain"],
+  "Marsh World": ["Marsh Terrain"],
+  "Iron World": ["Desert Terrain","Hill Terrain","Mountain Terrain","Aerial Terrain"],
+  "Coreless World": ["Desert Terrain","Hill Terrain","Mountain Terrain","Aerial Terrain"],
+  "Carbon World": ["Desert Terrain","Hill Terrain","Mountain Terrain","Aerial Terrain"],
+  "Debris Field": ["-"],
+  "Destroyed World": ["Forest Terrain","Desert Terrain","Hill Terrain"],
+  "Protoplanet": ["-"],
+  "Ring World": ["Forest Terrain","Hill Terrain","Urban Terrain"],
+  "Cube World": ["Aquatic Terrain","Forest Terrain","Desert Terrain","Urban Terrain"],
+  "Disk World": ["Aquatic Terrain","Forest Terrain","Desert Terrain","Urban Terrain"],
+  "Shield World": ["Forest Terrain","Hill Terrain","Urban Terrain"],
+  "Ice Moon": ["Aquatic Terrain","Desert Terrain","Mountain Terrain"],
+  "Forest Moon": ["Forest Terrain"],
+  "Marsh Moon": ["Marsh Terrain"],
+  "Garden Moon": ["Forest Terrain","Hill Terrain","Mountain Terrain","Marsh Terrain","Aerial Terrain"],
+  "Artificial Moon": ["Forest Terrain","Hill Terrain","Mountain Terrain","Marsh Terrain","Aerial Terrain"],
+  "Rocky Moon": ["Desert Terrain","Aerial Terrain","Hill Terrain","Mountain Terrain"],
+  "Volcanic Moon": ["Desert Terrain","Hill Terrain"],
+  "Iron Moon": ["Desert Terrain","Hill Terrain","Mountain Terrain"],
+  "Captured Asteroid": ["-"],
+  "Destroyed Moon": ["-"],
+  "Starless Planet": ["Aquatic Terrain","Desert Terrain","Hill Terrain","Forest Terrain","Mountain Terrain","Marsh Terrain","Urban Terrain"]
+}
+
+var numberWords = ["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen"];
+
+var flavourText = ["This world features a prominent ring system composed mainly of ice particles.",
+"A ring system made up of dust and ice surrounds this world.",
+"This world boasts a perpendicular ring system.",
+"A super ring system orbits this world, 200x the diameter of the planet.",
+"This world is in the process of being terraformed.",
+"This world has undergone terraforming to make it habitable.",
+"An ancient terraforming platform lies inactive on the worlds surface.",
+"This world is surrounded by an impenetrable force field.",
+"Tons upon tons of synthetic debris floats in LEO.",
+"The large axial tilt of this world produces violent seasons.",
+"This world rotates perpendicular to the solar plane.",
+"This world is tidally locked.",
+"This world features an eccentric orbit.",
+"The orbit of this world is retrograde compared to the other orbiting bodies.",
+"This world features retrograde rotation.",
+"Ancient alien ruins litter the surface of this world.",
+"Dormant alien technology lies on the surface.",
+"This world has vast supplies of precious minerals.",
+"The surrounding asteroids have been mined dry of all their resources.",
+"This world has been stripped of all resources.",
+"This world is giving off strange readings.",
+"This world is rich in natural resources.",
+"Severe storms cover this world.",
+"Severe winds, up to 200mph, belt the surface of this world.",
+"The weather changes rapidly on this world.",
+"This world is on a collision course with another celestial body.",
+"Ruins of an ancient civilization can be found here.",
+"The surface of this world is orange.",
+"The surface of this world is purple.",
+"The surface of this world is mint green."];
 
 Number.prototype.between = function (min, max) {
     return this > min && this < max;
@@ -189,11 +254,11 @@ function getBodies() {
   return bodies
 }
 
-function getBodyStats (bodies,position) {
+function getBodyStats (bodies,position,moon) {
   var currentBody = bodies[position];
   var stats = [];
   var index,atmo;
-  //Diameter, Mass, Gravity
+
   if (currentBody == "Asteroid Belt"){
     stats.push("Millions of asteroids, each up to 1000 km across");//diameter
     stats.push("x2 total (less than x1/100 for any single asteroid)");//mass
@@ -201,22 +266,85 @@ function getBodyStats (bodies,position) {
     stats.push("Special");//atmosphere
     stats.push("Varies");//day
     stats.push("Varies");//year
+    stats.push("-");//biome
+  }
+  else if (["Ark Ship","Generation Ship","Deep Space Research Station"].includes(currentBody)){
+    stats.push(randomChoice(["2","3","4","5","6"]) + " miles");//diameter
+    stats.push("less than x1/100");//mass
+    stats.push(randomChoice(["-","x1/2 (artificial)","x1 (artificial)","x1 1/2 (artificial)","x2 (artificial)"]));//gravity
+    stats.push(randomChoice(["No Atmosphere","Normal","Normal"]));//atmosphere
+    stats.push("-");//day
+    stats.push("-");//year
+    stats.push("Urban Terrain");//biome
+  }
+  else if (["Debris Field","Destroyed World","Destroyed Moon"].includes(currentBody)){
+    stats.push("Chunks of rock, metal, and ice, each up to 600 miles across");//diameter
+    if (currentBody.includes("Moon")){
+     stats.push(randomChoice(["1/5","x1/2","x1/4","x1/3"]) + " total (less than x1/100 for any single chunk)");//mass
+    }else{
+      stats.push(randomChoice(["x1","x2","x3","x10","x5","x1/2","x1/3"]) + " total (less than x1/100 for any single chunk)");//mass
+    }
+    stats.push("Varies");//gravity
+    stats.push("Special");//atmosphere
+    stats.push("Varies");//day
+    finalYear = getBodyYear(bodies.length,position);
+    stats.push(finalYear);//year
+    stats.push("Varies");//biome
+
+  }
+  else if (["Ring World","Ark Ship","Refuelling Station","Offworld Trading Post","Ship Scrapyard","Satellite Array","Space Station","Huge Space Station","Space Elevator","Planetary Defence Platform","Research Outpost","Drift Beacon","Orbital Drydock","Orbital Mirrors"].includes(currentBody)){
+    if (["Ship Scrapyard","Satellite Array","Space Elevator","Drift Beacon"].includes(currentBody)) {
+      stats.push("-");//diameter
+      stats.push("-");//mass
+      stats.push("-");//gravity
+      stats.push("-");//atmosphere
+
+    }
+    else{
+      stats.push(randomChoice(["2","3","4","5","6"]) + " miles");//diameter
+      stats.push("less than x1/100");//mass
+      stats.push(randomChoice(["-","x1/2 (artificial)","x1 (artificial)","x1 1/2 (artificial)","x2 (artificial)"]));//gravity
+      stats.push(randomChoice(["No Atmosphere","Normal","Normal"]));//atmosphere
+      }
+    stats.push(randomChoice(["1 day (artificial)","1 day (artificial)","20 hours","5 hours","8 hours","43 hours","1 day","4 days","16 days","12 days"]));//day
+
+    //year
+    finalYear = getBodyYear(bodies.length,position);
+    stats.push(finalYear);//year
+
+    if (["Ship Scrapyard","Satellite Array","Drift Beacon","Orbital Mirrors"].includes(currentBody)) {
+      stats.push("-");//biome
+    } else {
+      stats.push("Urban Terrain");//biome
+    }
+
   }
   else{
-    var diameter = ["1/5","1/4","1/3","1/2","2/3","1","1","2","5","10","20","32","50","64","100"];
-    var mass = ["1/200","1/50","1/20","1/5","1/3","1","1","2","8","16","32","64","100","200","320"];
-    var gravity = ["1/10","1/5","1/3","1/2","3/4","1","1","1 1/2","2","2 1/2","3","4","5","6","8"];
-
-    weight = [1,1,2,3,4,8,8,4,3,2,2,1,1,1,1];
+    //Diameter, Mass, Gravity
+    if (moon) { //moon stats
+      var diameter = ["1/80","1/50","1/25","1/20","1/10","1/8","1/6","1/5","1/4","1/4","1/3","1/2"];
+      var mass = ["1/100","1/80","1/50","1/32","1/25","1/24","1/20","1/16","1/10","1/5","1/4","1/3"];
+      var gravity = ["1/10","1/5","1/4","1/3","1/2","1/2","2/3","3/4","1","1","1 1/2","2"];
+      var maxIndex = 13;
+      weight = [1,1,2,2,3,3,3,4,6,8,3,1];
+      var flavour = (randomChoice(flavourText)).replace("world","moon");
+    } else { //planet stats
+      var diameter = ["1/5","1/4","1/3","1/2","2/3","1","1","2","5","10","20","32","50","64","100"];
+      var mass = ["1/200","1/50","1/20","1/5","1/3","1","1","2","8","16","32","64","100","200","320"];
+      var gravity = ["1/10","1/5","1/3","1/2","3/4","1","1","1 1/2","2","2 1/2","3","4","5","6","8"];
+      var maxIndex = 14;
+      weight = [1,1,2,3,4,8,8,4,3,2,2,1,1,1,1];
+      var flavour = randomChoice(flavourText);
+    }
 
     var diam,mas,grav;
     diam = randomWeightedChoice(diameter, weight);
     index = diameter.indexOf(diam);
-    if (index.between(0,14)){
+    if (index.between(0,maxIndex)){
       index = index + randomChoice([-1,0,+1]);
     }
     mas = mass[index];
-    if (index.between(0,13)){
+    if (index.between(0,maxIndex-1)){
       index = index + randomChoice([-1,0,+1]);
     }
     grav = gravity[index];
@@ -278,36 +406,58 @@ function getBodyStats (bodies,position) {
     if (artificalDay.includes(currentBody)){
       days = randomChoice([days,"1 day (artificial)"])
     }
-
+    if (currentBody == "Starless Planet"){
+      days = "-";
+    }
     stats.push(days);
 
     //year
-    var yearYears = [1,1,2,2,3,3,4,5,6,7,8,9,10,12,14,16,20,25,30,42,67,80,115,209,253,300,350,400,457,500];
-    var yearVaries = [0,1,1,2,4,20,45,67,88];
-    var yearWeights = [9,8,4,3,3,2,2,2]
-
-    var spacing = Math.round(32 / (bodies.length));
-    var interval = spacing * position;
-    var indexChoice = [];
-    for (var i = 0; i < spacing; i++) {
-     indexChoice.push(i); //fill array in numerical order
-    }
-    var finalIndex = interval + randomChoice(indexChoice);
-    var finalYear;
-    var finalInt;
-    var variance = randomWeightedChoice(yearVaries,yearWeights);
-    if (finalIndex < 6){
-      finalInt = getRandomInt(90,300);
-      finalYear = finalInt.toString() + " Days";
+    if (currentBody == "Starless Planet"){
+      finalYear = "-";
     }
     else {
-      finalInt = yearYears[finalIndex - 6] + variance;
-      finalYear = finalInt.toString() + " Years";
+      finalYear = getBodyYear(bodies.length,position);
     }
     stats.push(finalYear);
+
+    //biome
+    if (currentBody.includes("Gas")){
+      biome = "Aerial Terrain";
+    }
+    else{
+      //alert(currentBody +planetBiomes[currentBody] )
+      biome = randomChoice(planetBiomes[currentBody]);
+    }
+    stats.push(biome);
+    stats.push(flavour)
   }
 
   return stats
+}
+function getBodyYear(length,position){
+  var yearYears = [1,1,2,2,3,3,4,5,6,7,8,9,10,12,14,16,20,25,30,42,67,80,115,209,253,300,350,400,457,500];
+  var yearVaries = [0,1,1,2,4,20,45,67,88];
+  var yearWeights = [9,8,4,3,3,2,2,2];
+
+  var spacing = Math.round(32 / (length));
+  var interval = spacing * position;
+  var indexChoice = [];
+  for (var i = 0; i < spacing; i++) {
+   indexChoice.push(i); //fill array in numerical order
+  }
+  var finalIndex = interval + randomChoice(indexChoice);
+  var finalYear;
+  var finalInt;
+  var variance = randomWeightedChoice(yearVaries,yearWeights);
+  if (finalIndex < 6){
+    finalInt = getRandomInt(90,300);
+    finalYear = finalInt.toString() + " Days";
+  }
+  else {
+    finalInt = yearYears[finalIndex - 6] + variance;
+    finalYear = finalInt.toString() + " Years";
+  }
+  return finalYear;
 }
 
 function clearOutput() {
@@ -339,7 +489,7 @@ function printSystem() {
       list += "<br>";
       list += bodies[i];
       //do stats
-      stats = getBodyStats(bodies,i);
+      stats = getBodyStats(bodies,i,false);
 
       //list += "<br>&nbsp;&nbsp;Diameter: x" + stats[0];
       //list += "<br>&nbsp;&nbsp;Mass: x" + stats[1];
@@ -368,7 +518,6 @@ function printSystem2() {
   $outputArea.empty();
 
   var star = getStar();
-  var bodies = getBodies();
   var accordionIndex = 1;
   var starLocation, travelTime;
   var innerAccordion = "";
@@ -381,10 +530,12 @@ function printSystem2() {
   }
 
   innerAccordion += "<p><b>Sector:</b> " + starLocation;
-  innerAccordion += "<br><b>Drift Travel:</b> " + travelTime + "</p>";
+  innerAccordion += "<br><b>Drift Travel:</b> " + travelTime;
 
   if (!systemlessObjects.includes(star)){
 
+    var bodies = getBodies();
+    innerAccordion += "<br><b>Orbiting Bodies:</b> " + bodies.length.toString() + "</p>";
     innerAccordion += "<p></p>";
     innerAccordion += "<div class=\"panel-group\" id=\"accordion1\">";
 
@@ -393,10 +544,15 @@ function printSystem2() {
       var title = bodies[i];
       var num = i + 1;
       var index = num.toString();
-      var stats = getBodyStats(bodies,i);
+      var stats = getBodyStats(bodies,i,false);
       var panelBody = "";
 
-      panelBody += "<p><b>Diameter: </b>" + stats[0];
+      if (stats.length == 8){
+        panelBody += "<p>"+stats[7]+"</p>";
+      }
+
+      panelBody += "<p><b>Main biome: </b>" + stats[6];
+      panelBody += "<br><b>Diameter: </b>" + stats[0];
       panelBody += "<br><b>Mass: </b>" + stats[1];
       panelBody += "<br><b>Gravity: </b>" + stats[2];
       panelBody += "<br><b>Atmosphere: </b>" + stats[3];
@@ -421,13 +577,27 @@ function printSystem2() {
             var numj = j + 1;
             var indexj = numj.toString();
             //
-            var moonStats = getBodyStats(moonBodies,j);
+            var moonStats = getBodyStats(moonBodies,j,true);
             var moonPanel = "";
 
-            moonPanel += "<p><b>Diameter: </b>" + moonStats[0];
-            moonPanel += "<br><b>Mass: </b>" + moonStats[1];
-            moonPanel += "<br><b>Gravity: </b>" + moonStats[2];
-            moonPanel += "<br><b>Atmosphere: </b>" + moonStats[3] + "</p>";
+            if (["Space Elevator","Satellite Array","Drift Beacon"].includes(moonBodies[j])){
+              moonPanel += "<p></p>"
+            }
+            else {
+              if (moonStats.length == 8){
+                moonPanel += "<p>"+moonStats[7]+"</p>";
+              }
+
+              moonPanel += "<p><b>Main biome: </b>" + moonStats[6];
+              moonPanel += "<br><b>Diameter: </b>" + moonStats[0];
+              moonPanel += "<br><b>Mass: </b>" + moonStats[1];
+              moonPanel += "<br><b>Gravity: </b>" + moonStats[2];
+              moonPanel += "<br><b>Atmosphere: </b>" + moonStats[3];
+              if (["Refuelling Station","Ark Ship","Offworld Trading Post","Space Station","Huge Space Station","Research Outpost"].includes(moonBodies[j])){
+                moonPanel += "<br><b>Day: </b>" + moonStats[4];
+              }
+              moonPanel += "</p>";
+            }
             //
             panelBody += buildPanel(moonBodies[j], index + indexj, accordionIndex, moonPanel, false, false);
           }
@@ -442,6 +612,17 @@ function printSystem2() {
       innerAccordion += buildPanel(title, index, "1", panelBody, false, false);
     }
     innerAccordion += "</div>";
+  }
+  else{
+    alert(star)
+    var stats = getBodyStats([star],0,false);
+    innerAccordion += "<br><b>Main biome: </b>" + stats[6];
+    innerAccordion += "<br><b>Diameter: </b>" + stats[0];
+    innerAccordion += "<br><b>Mass: </b>" + stats[1];
+    innerAccordion += "<br><b>Gravity: </b>" + stats[2];
+    innerAccordion += "<br><b>Atmosphere: </b>" + stats[3];
+    innerAccordion += "<br><b>Day: </b>" + stats[4];
+    innerAccordion += "&nbsp;&nbsp;<b>Year: </b>" + stats[5] + "</p>";
   }
 
   accordion = "<hr><div class=\"panel-group\" id=\"accordion\">";
@@ -469,11 +650,11 @@ function buildPanel (title, index, accordionIndex, panelBody, unCollapse, addBut
     "<h4 class=\"panel-title pull-left\">"
   if (addButton) {
     panelHeader = "<div class=\"panel-heading clearfix\">" +
-    "<button id=\"toggletoggle\" onclick = \"expandAll()\" class=\"btn btn-default btn-sm pull-right\">Expand All</button>" +
+    "<button id=\"toggletoggle\" onclick = \"expandAll()\" class=\"btn btn-default btn-sm btn-notblack pull-right\">Expand All</button>" +
     "<h4 class=\"panel-title pull-left\" style=\"padding-top: 7.5px;\">"
   }
 
-  panel = "<div class=\"panel panel-default\">" +
+  panel = "<div class=\"panel\">" +
     panelHeader +
         "<a>" +
         title + "</a>" +
