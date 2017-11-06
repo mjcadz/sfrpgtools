@@ -97,7 +97,138 @@ var flavourText = ["This world features a prominent ring system composed mainly 
 "Ruins of an ancient civilization can be found here.",
 "The surface of this world is orange.",
 "The surface of this world is purple.",
-"The surface of this world is mint green."];
+"The surface of this world is mint green.",
+"This world shows signs of being engineered to its current state."];
+
+var flavourDict = {
+  "Satellite Array":
+  ["Planetary communications array.",
+  "This array provides global relocation and navigation.",
+  "This array is used for observation of the surrounding solar system.",
+  "This world is being monitored by unknown parties.",
+  "Geosynchronous satellites surround this world monitoring its state.",
+  "Thousands of tiny sat-cubes orbit this world in a tight network.",
+  "Several weather prediction satellites float above this world."],
+  "Space Station":
+  ["A lonely defunct space station.",
+  "This station has been abandoned by its creators.",
+  "A barely functioning hulk of metal and glass.",
+  "This space station serves as a home to many.",
+  "An ancient alien artifact still capable of harboring citizens.",
+  "A well maintained space station."],
+  "Huge Space Station":
+  ["A lonely defunct space station.",
+  "This station has been abandoned by its creators.",
+  "A barely functioning hulk of metal and glass.",
+  "This space station serves as a home to many.",
+  "An ancient alien artifact still capable of harboring citizens.",
+  "A well maintained space station."],
+  "Offworld Trading Post":
+  ["A central trading hub for nearby mines.",
+  "All kinds of metals and minerals can be found here.",
+  "A dock for huge interstellar haulers.",
+  "A trading post for nearby farms.",
+  "Serves as a hub for nearby ice haulers.",
+  "An abandoned trading post."],
+  "Planetary Defence Platform":
+  ["Holds a single massive cannon capable of ripping holes in even the largest starships.",
+  "Decrepit flak cannon.",
+  "Sensors detect platform is functioning and hostile.",
+  "One of many defense platforms orbiting this world.",
+  "Holds an array of missile launchers."],
+  "Asteroid Belt":
+  ["A circumstellar disc of ice and rock.",
+  "This belt contains several large plantains.",
+  "Asteroids of all, shapes, sizes, and content occupy this belt.",
+  "This belt is a rich source of minerals."],
+  "Ark Ship":
+  ["A ship patiently drifting through space.",
+  "This ships life support has failed, there are no survivors.",
+  "This ship set off before drift travel was gifted.",
+  "Maintenance crews live a die on this ship.",
+  "Massive amounts of cargo are kept alive by the ship systems.",
+  "The cargo of this ship are nearing their new home.",
+  "Unknown circumstances forced these travelers from their old home.",
+  "These travelers are seeking a new home."],
+  "Generation Ship":
+  ["A ship patiently drifting through space.",
+  "This ships life support has failed, there are no survivors.",
+  "This ship set off before drift travel was gifted.",
+  "Maintenance crews live a die on this ship.",
+  "Massive amounts of cargo are kept alive by the ship systems.",
+  "The cargo of this ship are nearing their new home.",
+  "Unknown circumstances forced these travelers from their old home.",
+  "These travelers are seeking a new home."],
+  "Deep Space Research Station":
+  ["A lonely station floating through the void of dark space.",
+  "This station is firmly anchored in the darkness of space.",
+  "The experiments carried out here confirm the nature of the universe.",
+  "The experiments conducted here require absolute isolation."],
+  "Debris Field":
+  ["The remains of a world that failed to form.",
+  "An unknown force smashed this world to pieces.",
+  "Large amounts of debris grouped together by gravity.",
+  "A field rich with natural resources.",
+  "Chunks of rock held together by alien technology.",
+  "A field of space rock almost impossible to navigate through."],
+  "Destroyed World":
+  ["This world was destroyed in a unknown cataclysm.",
+  "Tidal forces ripped this world apart.",
+  "An ancient battle was fought on this world, leaving it in pieces.",
+  "A freak event tore a hole in this world.",
+  "A destructive weapon was unleashed on this world.",
+  "This world was hit by a huge asteroid.",
+  "Massive volcanic activity spewed chunks of this world into space."],
+  "Destroyed Moon":
+  ["This moon was destroyed in a unknown cataclysm.",
+  "Tidal forces ripped this moon apart.",
+  "An ancient battle was fought on this moon, leaving it in pieces.",
+  "A freak event tore a hole in this moon.",
+  "A destructive weapon was unleashed on this moon.",
+  "This moon was hit by a huge asteroid.",
+  "Massive volcanic activity spewed chunks of this moon into space."],
+  "Ring World":
+  ["Part of an interstellar cleansing array.",
+  "A temple for ancient cultures.",
+  "Built to sustain all kinds of life.",
+  "This world is a gigantic space station with thousands of docks.",
+  "Built with ancient technology."],
+  "Refuelling Station":
+  ["A place to refuel your ship.",
+  "Interstellar truck stop.",
+  "The sandwiches aren't bad.",
+  "Holds huge supplies of starship fuel.",
+  "The last refuelling station for 7 Parsecs."],
+  "Ship Scrapyard":
+  ["This scrapyard contains ships all all classes and sizes.",
+  "The place of a huge battle, full of destroyed ships.",
+  "You can find any starship part you might need here.",
+  "A decrepit naval fleet.",
+  "The remains of a ancient spacefaring civilization.",
+  "A flotilla made up of many thousands of ships."],
+  "Space Elevator":
+  ["The elevator brings supplies from the surface of this world.",
+  "Like a beanstalk floating in the clouds.",
+  "This tower is a monument to the civilisation that built it."],
+  "Research Outpost":
+  ["The world this station orbits is under observation.",
+  "Experiments are carried out here in the coldness of space.",
+  "Unethical experiments have been conducted here.",
+  "Holds scientific equipment.",
+  "This station was abandoned."],
+  "Drift Beacon":
+  ["Serves as a navigational buoy for drift travel"],
+  "Orbital Drydock":
+  ["A naval drydock.",
+  "A privately owned drydock for starship repairs.",
+  "A starship workshop.",
+  "A decrepit half built starship occupies this dock.",
+  "Houses repair tools and diagnostic equipment."],
+  "Orbital Mirrors":
+  ["This mirror is placed to provide extra sunlight to agricultural colonies.",
+  "This array extends the daylight hours on this world to grow more food.",
+  "This set of mirrors redirects sunlight to the dark side of this world."]
+}
 
 Number.prototype.between = function (min, max) {
     return this > min && this < max;
@@ -267,6 +398,7 @@ function getBodyStats (bodies,position,moon) {
     stats.push("Varies");//day
     stats.push("Varies");//year
     stats.push("-");//biome
+    stats.push(randomChoice(flavourDict[currentBody]));//flavour text
   }
   else if (["Ark Ship","Generation Ship","Deep Space Research Station"].includes(currentBody)){
     stats.push(randomChoice(["2","3","4","5","6"]) + " miles");//diameter
@@ -276,6 +408,7 @@ function getBodyStats (bodies,position,moon) {
     stats.push("-");//day
     stats.push("-");//year
     stats.push("Urban Terrain");//biome
+    stats.push(randomChoice(flavourDict[currentBody]));//flavour text
   }
   else if (["Debris Field","Destroyed World","Destroyed Moon"].includes(currentBody)){
     stats.push("Chunks of rock, metal, and ice, each up to 600 miles across");//diameter
@@ -290,14 +423,22 @@ function getBodyStats (bodies,position,moon) {
     finalYear = getBodyYear(bodies.length,position);
     stats.push(finalYear);//year
     stats.push("Varies");//biome
+    stats.push(randomChoice(flavourDict[currentBody]));//flavour text
 
   }
   else if (["Ring World","Ark Ship","Refuelling Station","Offworld Trading Post","Ship Scrapyard","Satellite Array","Space Station","Huge Space Station","Space Elevator","Planetary Defence Platform","Research Outpost","Drift Beacon","Orbital Drydock","Orbital Mirrors"].includes(currentBody)){
-    if (["Ship Scrapyard","Satellite Array","Space Elevator","Drift Beacon"].includes(currentBody)) {
+    if (["Satellite Array","Space Elevator","Drift Beacon"].includes(currentBody)) {
       stats.push("-");//diameter
       stats.push("-");//mass
       stats.push("-");//gravity
       stats.push("-");//atmosphere
+
+    }
+    else if (currentBody == "Ship Scrapyard") {
+      stats.push(randomChoice(["50","100","200","400","500"]) + " miles");//diameter
+      stats.push("Varies");//mass
+      stats.push("Varies");//gravity
+      stats.push("Special");//atmosphere
 
     }
     else{
@@ -317,6 +458,7 @@ function getBodyStats (bodies,position,moon) {
     } else {
       stats.push("Urban Terrain");//biome
     }
+    stats.push(randomChoice(flavourDict[currentBody]));//flavour text
 
   }
   else{
@@ -425,7 +567,7 @@ function getBodyStats (bodies,position,moon) {
       biome = "Aerial Terrain";
     }
     else{
-      //alert(currentBody +planetBiomes[currentBody] )
+
       biome = randomChoice(planetBiomes[currentBody]);
     }
     stats.push(biome);
@@ -547,9 +689,7 @@ function printSystem2() {
       var stats = getBodyStats(bodies,i,false);
       var panelBody = "";
 
-      if (stats.length == 8){
-        panelBody += "<p>"+stats[7]+"</p>";
-      }
+
 
       panelBody += "<p><b>Main biome: </b>" + stats[6];
       panelBody += "<br><b>Diameter: </b>" + stats[0];
@@ -558,7 +698,9 @@ function printSystem2() {
       panelBody += "<br><b>Atmosphere: </b>" + stats[3];
       panelBody += "<br><b>Day: </b>" + stats[4];
       panelBody += "&nbsp;&nbsp;<b>Year: </b>" + stats[5] + "</p>";
-      panelBody += "<p></p>";
+      if (stats.length == 8){
+        panelBody += "<p><i>"+stats[7]+"</i></p>";
+      }
 
       //build moon panels
       if (!artificialWorlds.includes(bodies[i]) && bodies[i] != "Asteroid Belt"){
@@ -581,12 +723,12 @@ function printSystem2() {
             var moonPanel = "";
 
             if (["Space Elevator","Satellite Array","Drift Beacon"].includes(moonBodies[j])){
-              moonPanel += "<p></p>"
+              if (moonStats.length == 8){
+                moonPanel += "<p><i>"+moonStats[7]+"</i></p>";
+              }
             }
             else {
-              if (moonStats.length == 8){
-                moonPanel += "<p>"+moonStats[7]+"</p>";
-              }
+
 
               moonPanel += "<p><b>Main biome: </b>" + moonStats[6];
               moonPanel += "<br><b>Diameter: </b>" + moonStats[0];
@@ -597,6 +739,9 @@ function printSystem2() {
                 moonPanel += "<br><b>Day: </b>" + moonStats[4];
               }
               moonPanel += "</p>";
+              if (moonStats.length == 8){
+                moonPanel += "<p><i>"+moonStats[7]+"</i></p>";
+              }
             }
             //
             panelBody += buildPanel(moonBodies[j], index + indexj, accordionIndex, moonPanel, false, false);
@@ -614,7 +759,6 @@ function printSystem2() {
     innerAccordion += "</div>";
   }
   else{
-    alert(star)
     var stats = getBodyStats([star],0,false);
     innerAccordion += "<br><b>Main biome: </b>" + stats[6];
     innerAccordion += "<br><b>Diameter: </b>" + stats[0];
@@ -623,6 +767,10 @@ function printSystem2() {
     innerAccordion += "<br><b>Atmosphere: </b>" + stats[3];
     innerAccordion += "<br><b>Day: </b>" + stats[4];
     innerAccordion += "&nbsp;&nbsp;<b>Year: </b>" + stats[5] + "</p>";
+
+    if (stats.length == 8){
+      innerAccordion += "<p><i>"+stats[7]+"</i></p>";
+    }
   }
 
   accordion = "<hr><div class=\"panel-group\" id=\"accordion\">";
