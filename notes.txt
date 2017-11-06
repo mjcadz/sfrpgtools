@@ -12,8 +12,8 @@ button colour picker
 
 change artificial body stats
 
-rings
+bold weapon gen, sort out text in weapon generato
 
-bold weapon gen, sort out text in weapon generator
+ADD EVENTS FOPR ANALYSTICS
 
-ship scrapyard
+add computers to loot gen

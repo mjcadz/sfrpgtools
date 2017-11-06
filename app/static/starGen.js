@@ -71,7 +71,7 @@ var numberWords = ["Zero","One","Two","Three","Four","Five","Six","Seven","Eight
 var flavourText = ["This world features a prominent ring system composed mainly of ice particles.",
 "A ring system made up of dust and ice surrounds this world.",
 "This world boasts a perpendicular ring system.",
-"A super ring system orbits this world, 200x the diameter of the planet.",
+"A super ring system orbits this world, 200x the diameter of the world.",
 "This world is in the process of being terraformed.",
 "This world has undergone terraforming to make it habitable.",
 "An ancient terraforming platform lies inactive on the worlds surface.",
@@ -98,7 +98,20 @@ var flavourText = ["This world features a prominent ring system composed mainly 
 "The surface of this world is orange.",
 "The surface of this world is purple.",
 "The surface of this world is mint green.",
-"This world shows signs of being engineered to its current state."];
+"This world shows signs of being engineered to its current state.",
+"Cosmic rays bombard the surface of this world",
+"Electrical storms surround the equator of this world",
+"Solar wind is slowly stripping this worlds atmosphere",
+"This world is a severe radiation hazard",
+"The surface of this world is constantly bombarded by asteroids",
+"Beautiful aurorae are frequently seen at the poles of this world",
+"This world has a very strong magnetic field",
+"This world has a weak magnetic field",
+"Geomagnetic storms run wild through this worlds magnetosphere",
+"Volcanic activity constantly reshapes this worlds surface",
+"This world has geysers that spew large amounts of ice and rock into space",
+"Constant meteor showers light up this worlds sky",
+"This world has large polar ice caps"];
 
 var flavourDict = {
   "Satellite Array":
@@ -188,11 +201,11 @@ var flavourDict = {
   "This moon was hit by a huge asteroid.",
   "Massive volcanic activity spewed chunks of this moon into space."],
   "Ring World":
-  ["Part of an interstellar cleansing array.",
-  "A temple for ancient cultures.",
-  "Built to sustain all kinds of life.",
+  ["This ring is part of an interstellar cleansing array.",
+  "This ring is a temple for ancient cultures.",
+  "this ring was built to sustain all kinds of life.",
   "This world is a gigantic space station with thousands of docks.",
-  "Built with ancient technology."],
+  "This ring world was built with alien technology."],
   "Refuelling Station":
   ["A place to refuel your ship.",
   "Interstellar truck stop.",
@@ -214,7 +227,7 @@ var flavourDict = {
   ["The world this station orbits is under observation.",
   "Experiments are carried out here in the coldness of space.",
   "Unethical experiments have been conducted here.",
-  "Holds scientific equipment.",
+  "Holds expensive scientific equipment.",
   "This station was abandoned."],
   "Drift Beacon":
   ["Serves as a navigational buoy for drift travel"],
@@ -471,11 +484,20 @@ function getBodyStats (bodies,position,moon) {
       weight = [1,1,2,2,3,3,3,4,6,8,3,1];
       var flavour = (randomChoice(flavourText)).replace("world","moon");
     } else { //planet stats
-      var diameter = ["1/5","1/4","1/3","1/2","2/3","1","1","2","5","10","20","32","50","64","100"];
-      var mass = ["1/200","1/50","1/20","1/5","1/3","1","1","2","8","16","32","64","100","200","320"];
-      var gravity = ["1/10","1/5","1/3","1/2","3/4","1","1","1 1/2","2","2 1/2","3","4","5","6","8"];
-      var maxIndex = 14;
-      weight = [1,1,2,3,4,8,8,4,3,2,2,1,1,1,1];
+      if (currentBody.includes("Giant")){
+        var diameter = ["5","10","20","32","50","64","100"];
+        var mass = ["8","16","32","64","100","200","320"];
+        var gravity = ["1","1","2","4","5","6","8"];
+        var maxIndex = 6;
+        weight = [1,2,2,1,1,1,1];
+      }
+      else {
+        var diameter = ["1/5","1/4","1/3","1/2","2/3","1","1","2","5","10","20","32","50","64","100"];
+        var mass = ["1/200","1/50","1/20","1/5","1/3","1","1","2","8","16","32","64","100","200","320"];
+        var gravity = ["1/10","1/5","1/3","1/2","3/4","1","1","1 1/2","2","2 1/2","3","4","5","6","8"];
+        var maxIndex = 14;
+        weight = [1,1,2,3,4,8,8,4,3,2,2,1,1,1,1];
+      }
       var flavour = randomChoice(flavourText);
     }
 
