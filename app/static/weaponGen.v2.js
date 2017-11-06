@@ -461,30 +461,30 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
 
   if (nameDrop.includes("Off")) {
     var panelTitle =  "Level " + level + " " + gunName;
-    var panelBody =   "<h5 class=\"text-muted\">" + type + "</h5>" +
-                      "<p>Price: "+  getPrice(level) +
-                        "<br>Damage: " + damage +
-                        "<br>Range: " + range + " ft." +
-                        "<br>Critical: " + critical +
-                        "<br>Capacity: " + capacity +
-                        "<br>Usage: " + usage +
-                        "<br>Bulk: " + bulk +
-                        "<br>Special: " + special + "</p>";
+    var panelBody =   "<h5 class=\"text-muted text-muted-one\">" + type + "</h5>" +
+                      "<p><b>Price: </b>"+  getPrice(level) +
+                        "<br><b>Damage: </b>" + damage +
+                        "<br><b>Range: </b>" + range + " ft." +
+                        "<br><b>Critical: </b>" + critical +
+                        "<br><b>Capacity: </b>" + capacity +
+                        "<br><b>Usage: </b>" + usage +
+                        "<br><b>Bulk: </b>" + bulk +
+                        "<br><b>Special: </b>" + special + "</p>";
 
   } else if (nameDrop.includes("On")){
     var weaponName = getrandomName(gunName);
     var panelTitle =  weaponName[2] + " " + weaponName[0];
-    var panelBody =   "<h5 class=\"text-muted\">" + weaponName[1] + " - " + gunName + "</h5>" +
-                      "<h5 class=\"text-muted\">" + type + "</h5>" +
-                      "<p>Level: " + level +
-                        "<br>Price: "+  getPrice(level) +
-                        "<br>Damage: " + damage +
-                        "<br>Range: " + range + " ft." +
-                        "<br>Critical: " + critical +
-                        "<br>Capacity: " + capacity +
-                        "<br>Usage: " + usage +
-                        "<br>Bulk: " + bulk +
-                        "<br>Special: " + special + "</p>";
+    var panelBody =   "<h5 class=\"text-muted text-muted-one\">" + weaponName[1] + " - " + gunName + "</h5>" +
+                      "<h5 class=\"text-muted text-muted-one\">" + type + "</h5>" +
+                      "<p><b>Level: </b>" + level +
+                        "<br><b>Price: </b>"+  getPrice(level) +
+                        "<br><b>Damage: </b>" + damage +
+                        "<br><b>Range: </b>" + range + " ft." +
+                        "<br><b>Critical: </b>" + critical +
+                        "<br><b>Capacity: </b>" + capacity +
+                        "<br><b>Usage: </b>" + usage +
+                        "<br><b>Bulk: </b>" + bulk +
+                        "<br><b>Special: </b>" + special + "</p>";
 
   }
   $outputArea.append("<div class=\"panel " + indexString + "\">");
@@ -510,24 +510,24 @@ function printMeleeNeat(level,weaponName,type,damage,critical,bulk,special) {
 
   if (nameDrop.includes("Off")) {
     var panelTitle = "Level " + level + " " + weaponName;
-    var panelBody = "<h5 class=\"text-muted\">" + type + "</h5>" +
-                    "<p>Price: "+  getPrice(level) +
-                        "<br>Damage: " + damage +
-                        "<br>Critical: " + critical +
-                        "<br>Bulk: " + bulk +
-                        "<br>Special: " + special + "</p>";
+    var panelBody = "<h5 class=\"text-muted text-muted-one\">" + type + "</h5>" +
+                    "<p><b>Price: </b>"+  getPrice(level) +
+                        "<br><b>Damage: </b>" + damage +
+                        "<br><b>Critical: </b>" + critical +
+                        "<br><b>Bulk: </b>" + bulk +
+                        "<br><b>Special: </b>" + special + "</p>";
 
   } else if (nameDrop.includes("On")){
     var gName = getrandomName(weaponName);
     var panelTitle = gName[0] + " " + gName[3];
-    var panelBody = "<h5 class=\"text-muted\">" + gName[1] + " - " + weaponName + "</h5>" +
-                    "<h5 class=\"text-muted\">" + type + "</h5>" +
-                    "<p>Level: " + level +
-                        "<br>Price: "+  getPrice(level) +
-                        "<br>Damage: " + damage +
-                        "<br>Critical: " + critical +
-                        "<br>Bulk: " + bulk +
-                        "<br>Special: " + special + "</p>";
+    var panelBody = "<h5 class=\"text-muted text-muted-one\">" + gName[1] + " - " + weaponName + "</h5>" +
+                    "<h5 class=\"text-muted text-muted-one\">" + type + "</h5>" +
+                    "<p><b>Level: </b>" + level +
+                        "<br><b>Price: </b>"+  getPrice(level) +
+                        "<br><b>Damage: </b>" + damage +
+                        "<br><b>Critical: </b>" + critical +
+                        "<br><b>Bulk: </b>" + bulk +
+                        "<br><b>Special: </b>" + special + "</p>";
   }
   $outputArea.append("<div class=\"panel " + indexString + "\">");
   var $panel = $(".panel."+indexString).first();

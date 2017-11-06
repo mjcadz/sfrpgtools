@@ -90,10 +90,18 @@ ul.share-buttons .sr-only{
 .navbar-default .navbar-link:hover {
   color: #4ce0d2;
 }
-/*change vertical padding*/
+/*change navbarvertical padding*/
 .navbar-nav>li>a{
   padding-top:10px;
-  padding-bottom:10px}
+  padding-bottom:10px;
+}
+
+.text-muted-one{
+  line-height: 80%!important;
+}
+
+.panel-bottom>h4{
+  line-height: 80%!important;
 }
 
 @media (max-width: 767px) {
@@ -116,7 +124,7 @@ ul.share-buttons .sr-only{
 .panel-title>a{
   text-decoration: none !important;
 }
-.panel-heading {
+.panel-heading-pointer {
     cursor: pointer;
 }
 .panel-title {

@@ -815,7 +815,7 @@ function buildPanel (title, index, accordionIndex, panelBody, unCollapse, addBut
   if (unCollapse) {
     collapse = " in always"
   }
-  var panelHeader = "<div class=\"panel-heading clearfix\" data-toggle=\"collapse\" data-parent=\"#accordion" + accordionIndex + "\" href=\"#collapse" + index + "\">" +
+  var panelHeader = "<div class=\"panel-heading panel-heading-pointer clearfix\" data-toggle=\"collapse\" data-parent=\"#accordion" + accordionIndex + "\" href=\"#collapse" + index + "\">" +
     "<i class=\"fa fa-chevron-down pull-right chevron\" aria-hidden=\"true\"></i>" +
     "<h4 class=\"panel-title pull-left\">"
   if (addButton) {

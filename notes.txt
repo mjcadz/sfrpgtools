@@ -1,5 +1,4 @@
-https://codepen.io/marklsanders/pen/OPZXXv
-this is nested accordians yall
+
 
 do binary star systems - star title becomes binary system, then list stars in panel
 
@@ -10,10 +9,4 @@ navbar colour picker
 http://blog.koalite.com/bbg/
 button colour picker
 
-change artificial body stats
-
-bold weapon gen, sort out text in weapon generato
-
 ADD EVENTS FOPR ANALYSTICS
-
-add computers to loot gen
