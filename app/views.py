@@ -27,9 +27,3 @@ def lootGenerator():
     resp = make_response(render_template('loot-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
-
-@app.route('/about')
-def about():
-    resp = make_response(render_template('about.html'))
-    resp.headers.set('Cache-Control', "public, max-age=604800")
-    return resp

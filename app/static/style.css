@@ -116,8 +116,8 @@ ul.share-buttons .sr-only{
 }
 /*change navbarvertical padding*/
 .navbar-nav>li>a{
-  padding-top:10px;
-  padding-bottom:10px;
+  padding-top:7px;
+  padding-bottom:7px;
 }
 
 .text-muted-one{
@@ -125,7 +125,7 @@ ul.share-buttons .sr-only{
 }
 
 .panel-bottom>h4{
-  line-height: 80%!important;
+  line-height: 100%!important;
 }
 
 @media (max-width: 767px) {

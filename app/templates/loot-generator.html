@@ -2,11 +2,11 @@
 
 {% extends "base.html" %}
 {% block title %}Starfinder Loot Generator{% endblock %}
-{% block description %}{% endblock %}
+{% block description %}Randomly generated loot for starfinder encounters{% endblock %}
 {% block body %}
 <div class="jumbotron">
   <h1>Loot Generator</h1>
-  <p class="lead">for use with Starfinder RPG</p>
+  <p class="lead">Randomly generates loot from equipment in the CRB. APL determines what item levels are available to the party and CR determines the wealth of the encounter.</p>
   <p></p>
   <div class="container">
     <div class="row">
@@ -106,5 +106,5 @@
 </div>
 {% endblock %}
 {% block includes %}
-<script type = "text/javascript" src = "{{ url_for('static', filename = 'lootGen.js') }}" ></script>
+<script type = "text/javascript" src = "{{ url_for('static', filename = 'lootGen.v2.0.js') }}" ></script>
 {% endblock %}

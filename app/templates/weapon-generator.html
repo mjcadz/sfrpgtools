@@ -6,7 +6,7 @@
 {% block body %}
 <div class="jumbotron">
   <h1>Weapon Generator</h1>
-  <p class="lead">for use with Starfinder RPG</p>
+  <p class="lead">Generates balanced weapons for the Starfinder RPG with damage curves matched as closely as possible to the core rulebook weapon entries.</p>
   <p></p>
   <div class="container">
     <div class="row">
@@ -93,6 +93,6 @@
 </div>
 {% endblock %}
 {% block includes %}
-<script type = "text/javascript" src = "{{ url_for('static', filename = 'weaponGen.v2.js') }}" ></script>
-<script type = "text/javascript" src = "{{ url_for('static', filename = 'nameGen.js') }}" ></script>
+<script type = "text/javascript" src = "{{ url_for('static', filename = 'weaponGen.v2.0.js') }}" ></script>
+<script type = "text/javascript" src = "{{ url_for('static', filename = 'nameGen.v2.0.js') }}" ></script>
 {% endblock %}
