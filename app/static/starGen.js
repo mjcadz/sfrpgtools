@@ -3,7 +3,7 @@
 //STARS
 var mainStars = ["Red Star","Orange Star","Yellow Star","White Star"];
 var giantStars = ["Red Giant","Orange Giant","Yellow Giant","Blue Giant"];
-var supergiantStars = ["Red Supergiant","Orange Supergiant","Blue SuperGiant"];
+var supergiantStars = ["Red Supergiant","Orange Supergiant","Blue Supergiant"];
 var otherStars = ["Protostar","Neutron Star","Pulsar","Imminent Supernova","White Dwarf","Red Dwarf","Brown Dwarf","Black Hole","Dyson Sphere","High Mass Debris Field"];
 var systemlessObjects = ["Ark Ship","Generation Ship","Deep Space Research Station","Starless Planet"]
 
@@ -248,7 +248,7 @@ Number.prototype.between = function (min, max) {
 };
 
 
-function getStar() {
+function getStar(includeSystemless) {
   var deck = [];
   var weight = [];
   var pick;
@@ -257,13 +257,18 @@ function getStar() {
   deck = deck.concat(giantStars);
   deck = deck.concat(supergiantStars);
   deck = deck.concat(otherStars);
-  deck = deck.concat(systemlessObjects);
+  if (includeSystemless) {
+    deck = deck.concat(systemlessObjects);
+  }
 
   weight = weight.concat(getWeightFill(mainStars,3));
   weight = weight.concat(getWeightFill(giantStars,1));
   weight = weight.concat(getWeightFill(supergiantStars,1));
   weight = weight.concat(getWeightFill(otherStars,1));
-  weight = weight.concat(getWeightFill(systemlessObjects,1));
+  if (includeSystemless) {
+    weight = weight.concat(getWeightFill(systemlessObjects,1));
+  }
+
 
   pick = randomWeightedChoice(deck,weight);
   return pick;
@@ -482,7 +487,7 @@ function getBodyStats (bodies,position,moon) {
       var gravity = ["1/10","1/5","1/4","1/3","1/2","1/2","2/3","3/4","1","1","1 1/2","2"];
       var maxIndex = 13;
       weight = [1,1,2,2,3,3,3,4,6,8,3,1];
-      var flavour = (randomChoice(flavourText)).replace("world","moon");
+      var flavour = (randomChoice(flavourText)).replace(/world/g,"moon");
     } else { //planet stats
       if (currentBody.includes("Giant")){
         var diameter = ["5","10","20","32","50","64","100"];
@@ -629,62 +634,28 @@ function clearOutput() {
   $outputArea.empty();
 }
 
-function printSystem() {
-  var star = getStar();
-  var starLocation;
-  var stats;
-
-
-  var $outputArea = $(".output.area").first();
-  $outputArea.empty();
-
-  deck = ["The Vast","Near Space"]
-  weight = [0.8,0.2]
-  starLocation = randomWeightedChoice(deck, weight);
-
-  var list = "<p>"+  star + " Location: " + starLocation;
-
-  if (!systemlessObjects.includes(star)){
-
-    //get array of system bodies
-    var bodies = getBodies();
-
-    for (var i = 0; i < bodies.length; i++) {
-      list += "<br>";
-      list += bodies[i];
-      //do stats
-      stats = getBodyStats(bodies,i,false);
-
-      //list += "<br>&nbsp;&nbsp;Diameter: x" + stats[0];
-      //list += "<br>&nbsp;&nbsp;Mass: x" + stats[1];
-      //list += "<br>&nbsp;&nbsp;Gravity: x" + stats[2];
-      //list += "<br>&nbsp;&nbsp;Atmosphere: " + stats[3];
-      //list += "<br>&nbsp;&nbsp;Day: " + stats[4];
-      //list += "<br>&nbsp;&nbsp;Year: " + stats[5];
-      //do moons
-      //if (!artificialWorlds.includes(bodies[i]) && bodies[i] != "Asteroid Belt"){
-        //var moons = getMoons();
-        //for (var j = 0; j < moons; j++) {
-          //list += "<br>&nbsp;&nbsp;" + getSatellite();
-        //}
-      //}
-    }
-    list += "</p>" ;
-  }
-
-  $outputArea.append(list);
-
-}
-
 function printSystem2() {
 
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
-  var star = getStar();
   var accordionIndex = 1;
   var starLocation, travelTime;
   var innerAccordion = "";
+
+  if (getRandomInt(1,10) == 10){
+    if (getRandomInt(1,5) == 5){
+      var star = "A - " + getStar(false) + "<br>B - "+ getStar(false) + "<br>C - "+ getStar(false);
+      innerAccordion += "<p><i>(Trinary system)</i></p>";
+    }
+    else {
+      var star = "A - " + getStar(false) + "<br>B - "+ getStar(false);
+      innerAccordion += "<p><i>(Binary system)</i></p>";
+    }
+  }
+  else {
+    var star = getStar(true);
+  }
 
   starLocation = randomWeightedChoice(["The Vast","Near Space"], [0.6,0.4]);
   if (starLocation == "The Vast"){
@@ -711,8 +682,6 @@ function printSystem2() {
       var stats = getBodyStats(bodies,i,false);
       var panelBody = "";
 
-
-
       panelBody += "<p><b>Main biome: </b>" + stats[6];
       panelBody += "<br><b>Diameter: </b>" + stats[0];
       panelBody += "<br><b>Mass: </b>" + stats[1];
@@ -720,9 +689,7 @@ function printSystem2() {
       panelBody += "<br><b>Atmosphere: </b>" + stats[3];
       panelBody += "<br><b>Day: </b>" + stats[4];
       panelBody += "&nbsp;&nbsp;<b>Year: </b>" + stats[5] + "</p>";
-      if (stats.length == 8){
-        panelBody += "<p><i>"+stats[7]+"</i></p>";
-      }
+      panelBody += "<p><i>"+stats[7]+"</i></p>";
 
       //build moon panels
       if (!artificialWorlds.includes(bodies[i]) && bodies[i] != "Asteroid Belt"){
@@ -745,9 +712,7 @@ function printSystem2() {
             var moonPanel = "";
 
             if (["Space Elevator","Satellite Array","Drift Beacon"].includes(moonBodies[j])){
-              if (moonStats.length == 8){
-                moonPanel += "<p><i>"+moonStats[7]+"</i></p>";
-              }
+              moonPanel += "<p><i>"+moonStats[7]+"</i></p>";
             }
             else {
 
@@ -761,9 +726,7 @@ function printSystem2() {
                 moonPanel += "<br><b>Day: </b>" + moonStats[4];
               }
               moonPanel += "</p>";
-              if (moonStats.length == 8){
-                moonPanel += "<p><i>"+moonStats[7]+"</i></p>";
-              }
+              moonPanel += "<p><i>"+moonStats[7]+"</i></p>";
             }
             //
             panelBody += buildPanel(moonBodies[j], index + indexj, accordionIndex, moonPanel, false, false);
@@ -790,9 +753,7 @@ function printSystem2() {
     innerAccordion += "<br><b>Day: </b>" + stats[4];
     innerAccordion += "&nbsp;&nbsp;<b>Year: </b>" + stats[5] + "</p>";
 
-    if (stats.length == 8){
-      innerAccordion += "<p><i>"+stats[7]+"</i></p>";
-    }
+    innerAccordion += "<p><i>"+stats[7]+"</i></p>";
   }
 
   accordion = "<hr><div class=\"panel-group\" id=\"accordion\">";
@@ -800,6 +761,8 @@ function printSystem2() {
   accordion += "</div>";
 
   $outputArea.append(accordion);
+
+  ga('send', 'event', 'Generation', 'starSystem');
 
   //set icon changes on collapse trigger
   $(".collapse").on('shown.bs.collapse', function(e){

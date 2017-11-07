@@ -288,6 +288,7 @@ function generateLoot() {
   //push table to html
   $outputArea.append(table);
 
+  ga('send', 'event', 'Generation', 'loot', aplmod.toString());
 }
 
 function addTableItem (item,trueTable){
