@@ -1,0 +1,110 @@
+<!-- index.html-->
+
+{% extends "base.html" %}
+{% block title %}Starfinder Loot Generator{% endblock %}
+{% block description %}Randomly generated loot for starfinder encounters{% endblock %}
+{% block body %}
+<div class="jumbotron">
+  <h1>Loot Generator</h1>
+  <p class="lead">Randomly generates loot from equipment in the CRB. APL determines what item levels are available to the party and CR determines the wealth of the encounter.</p>
+  <p></p>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="btn-group btn-block" role="group">
+              <button id="APLDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="pull-left">Average Party Level - 1</span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right">
+                <li><a href="#">APL 1</a></li>
+                <li><a href="#">APL 2</a></li>
+                <li><a href="#">APL 3</a></li>
+                <li><a href="#">APL 4</a></li>
+                <li><a href="#">APL 5</a></li>
+                <li><a href="#">APL 6</a></li>
+                <li><a href="#">APL 7</a></li>
+                <li><a href="#">APL 8</a></li>
+                <li><a href="#">APL 9</a></li>
+                <li><a href="#">APL 10</a></li>
+                <li><a href="#">APL 11</a></li>
+                <li><a href="#">APL 12</a></li>
+                <li><a href="#">APL 13</a></li>
+                <li><a href="#">APL 14</a></li>
+                <li><a href="#">APL 15</a></li>
+                <li><a href="#">APL 16</a></li>
+                <li><a href="#">APL 17</a></li>
+                <li><a href="#">APL 18</a></li>
+                <li><a href="#">APL 19</a></li>
+                <li><a href="#">APL 20</a></li>
+              </ul>
+            </div>
+            <P></P>
+            <div class="btn-group btn-block" role="group">
+              <button id="CRDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="pull-left">Challenge Rating - 1</span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right">
+                <li><a href="#">CR 1/3</a></li>
+                <li><a href="#">CR 1/2</a></li>
+                <li><a href="#">CR 1</a></li>
+                <li><a href="#">CR 2</a></li>
+                <li><a href="#">CR 3</a></li>
+                <li><a href="#">CR 4</a></li>
+                <li><a href="#">CR 5</a></li>
+                <li><a href="#">CR 6</a></li>
+                <li><a href="#">CR 7</a></li>
+                <li><a href="#">CR 8</a></li>
+                <li><a href="#">CR 9</a></li>
+                <li><a href="#">CR 10</a></li>
+                <li><a href="#">CR 11</a></li>
+                <li><a href="#">CR 12</a></li>
+                <li><a href="#">CR 13</a></li>
+                <li><a href="#">CR 14</a></li>
+                <li><a href="#">CR 15</a></li>
+                <li><a href="#">CR 16</a></li>
+                <li><a href="#">CR 17</a></li>
+                <li><a href="#">CR 18</a></li>
+                <li><a href="#">CR 19</a></li>
+                <li><a href="#">CR 20</a></li>
+              </ul>
+            </div>
+          <P></P>
+          <div class="btn-group btn-block" role="group">
+            <button id="moreDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="pull-left">Random Generation</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right">
+              <li><a href="#">Random Generation</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">More ammo</a></li>
+              <li><a href="#">More armor</a></li>
+              <li><a href="#">More credits</a></li>
+              <li><a href="#">More grenades</a></li>
+              <li><a href="#">More heals</a></li>
+              <li><a href="#">More magic</a></li>
+              <li><a href="#">More tech</a></li>
+              <li><a href="#">More upgrades</a></li>
+              <li><a href="#">More weapons</a></li>
+            </ul>
+          </div>
+          <P></P>
+          <button type="button" onclick = "generateLoot()" title = "magic, baby" class="btn btn-grn">Generate  <i class="fa fa-magic fa-lg"></i></button>
+          <button type="button" onclick = "clearOutput()" class="btn btn-default btn-notblack">Clear</button>
+          <P></P>
+        </div>
+        <div class="col-md-8"></div>
+      </div>
+    </div>
+  </br>
+
+  <div class="output area">
+
+	</div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type = "text/javascript" src = "{{ url_for('static', filename = 'lootGen.v2.0.js') }}" ></script>
+{% endblock %}

@@ -1,90 +1,19 @@
 <!-- index.html-->
 
 {% extends "base.html" %}
-{% block title %}Starfinder Weapon Generator{% endblock %}
+{% block title %}Starfinder Tools{% endblock %}
+{% block description %}Starfinder roleplaying game tools and generators to add fun to your game{% endblock %}
 {% block body %}
 <div class="jumbotron">
-  <h1>Weapon Generator</h1>
-  <p class="lead">for use with Starfinder RPG</p>
-  <div class="btn-group" role="group" aria-label="Teo dropdowns">
-    <div class="btn-group" role="group">
-      <button id="levelDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Any level
-      </button>
-      <div class="dropdown-menu" aria-labelledby="levelDrop1">
-        <a class="dropdown-item" href="#">Any level</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Tier 1</a>
-        <a class="dropdown-item" href="#">Tier 2</a>
-        <a class="dropdown-item" href="#">Tier 3</a>
-        <a class="dropdown-item" href="#">Tier 4</a>
-        <a class="dropdown-item" href="#">Tier 5</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Level 1</a>
-        <a class="dropdown-item" href="#">Level 2</a>
-        <a class="dropdown-item" href="#">Level 3</a>
-        <a class="dropdown-item" href="#">Level 4</a>
-        <a class="dropdown-item" href="#">Level 5</a>
-        <a class="dropdown-item" href="#">Level 6</a>
-        <a class="dropdown-item" href="#">Level 7</a>
-        <a class="dropdown-item" href="#">Level 8</a>
-        <a class="dropdown-item" href="#">Level 9</a>
-        <a class="dropdown-item" href="#">Level 10</a>
-        <a class="dropdown-item" href="#">Level 11</a>
-        <a class="dropdown-item" href="#">Level 12</a>
-        <a class="dropdown-item" href="#">Level 13</a>
-        <a class="dropdown-item" href="#">Level 14</a>
-        <a class="dropdown-item" href="#">Level 15</a>
-        <a class="dropdown-item" href="#">Level 16</a>
-        <a class="dropdown-item" href="#">Level 17</a>
-        <a class="dropdown-item" href="#">Level 18</a>
-        <a class="dropdown-item" href="#">Level 19</a>
-        <a class="dropdown-item" href="#">Level 20</a>
-      </div>
-    </div>
-    <div class="btn-group" role="group">
-      <button id="weaponDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Any weapon
-      </button>
-      <div class="dropdown-menu" aria-labelledby="weaponDrop1">
-        <a class="dropdown-item" href="#">Any weapon</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Basic melee</a>
-        <a class="dropdown-item" href="#">Advanced melee</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Small arm</a>
-        <a class="dropdown-item" href="#">Longarm</a>
-        <a class="dropdown-item" href="#">Heavy</a>
-        <a class="dropdown-item" href="#">Sniper</a>
-      </div>
-    </div>
-  </div>
-  <P></P>
-  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-    <button type="button" class="btn btn-secondary"disabled>Name Generator</button>
+  <h1>Starfinder Tools</h1>
+  <p class="lead">sfrpgtools is a suite of tools built with HTML and javascript for use with the Starfinder roleplaying game. The site is currently in development and new tools will be posted as they are created.</p>
+  <p class="lead"> The project can be found over here on <a href="https://github.com/mjcadz/weapon-gen-app">GitHub</a>.</p>
+  <p class="lead">If you have any suggestions I would love to hear from you at <a href="mailto:mjcadzdev@gmail.com?Subject=Hello" target="_top">mjcadzdev@gmail.com</a>.</p>
+  <p class="lead">If you like my work and want to buy me a beer or help with server costs you can here <a href="https://www.paypal.me/mjcadz">paypal.me/mjcadz</a>.</p>
 
-    <div class="btn-group" role="group">
-      <button id="nameDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      On
-      </button>
-      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <a class="dropdown-item" href="#">On</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Off</a>
-      </div>
-    </div>
-  </div>
-  <P></P>
-  <button type="button" onclick = "generateWeapon()" title = "magic, baby" class="btn btn-success">Generate  <i class="fa fa-magic fa-lg"></i></button>
-  <button type="button" onclick = "clearOutput()" class="btn btn-secondary">Clear</button>
-  </br>
 
-  <div class="output area">
-
-	</div>
 </div>
 {% endblock %}
+
 {% block includes %}
-<script type = "text/javascript" src = "{{ url_for('static', filename = 'weaponGen.v2.js') }}" ></script>
-<script type = "text/javascript" src = "{{ url_for('static', filename = 'nameGen.js') }}" ></script>
 {% endblock %}

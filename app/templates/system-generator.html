@@ -1,0 +1,52 @@
+<!-- index.html-->
+
+{% extends "base.html" %}
+{% block title %}Starfinder Star System Generator{% endblock %}
+{% block description %}Star system generator to create randomised systems to visit in your starfinder game{% endblock %}
+{% block body %}
+<div class="jumbotron">
+  <h1>Star System Generator</h1>
+  <p class="lead">Generates randomised star system skeletons ready to fill with stories and adventure.</p>
+  <p></p>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-4">
+          <div class="btn-group btn-block" role="group">
+            <button id="lifeDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="pull-left">Life - Average</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right" aria-labelledby="dropdownMenu1">
+              <li><a href="#">Sparse</a></li>
+              <li><a href="#">Average</a></li>
+              <li><a href="#">Teeming</a></li>
+            </ul>
+          </div>
+          <p></p>
+          <div class="btn-group btn-block" role="group">
+            <button id="sizeDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="pull-left">System Size - Medium</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right" aria-labelledby="dropdownMenu2">
+              <li><a href="#">Small</a></li>
+              <li><a href="#">Medium</a></li>
+              <li><a href="#">Large</a></li>
+            </ul>
+          </div>
+          <p></p>
+          <button type="button" onclick = "printSystem2()" title = "magic, baby" class="btn btn-grn">Generate  <i class="fa fa-magic fa-lg"></i></button>
+          <button type="button" onclick = "clearOutput()" class="btn btn-default">Clear</button>
+          <p></p>
+        </div>
+        <div class="col-md-8"></div>
+    </div>
+  </div>
+  <div class="output area">
+
+	</div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type = "text/javascript" src = "{{ url_for('static', filename = 'starGen.v2.0.js') }}" ></script>
+{% endblock %}
