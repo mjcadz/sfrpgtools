@@ -235,7 +235,8 @@ fieldset[disabled] .btn-grn.active {
    outline: none !important;
 }
 
-.jumbotron h1{
+.jumbotron h1,
+.jumbotron h4{
     color: #666666;
 }
 .jumbotron p{

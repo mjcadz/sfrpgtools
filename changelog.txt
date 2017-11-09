@@ -3,6 +3,8 @@ New Features:
   - New responsive side nav menu
   - Homepage
   - Star System Generator v1.0
+  - Loot Generator v1.0
+  - notify contact form
 Changes:
   - Bootstrap version rolled back to 3.3.7
 
