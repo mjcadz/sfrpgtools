@@ -1,0 +1,357 @@
+.card {
+  background-color: #FFFFFF;
+  padding: 10px 0;
+  width: 100%;
+  border-radius: 6px;
+  color: rgba(0,0,0, 0.87);
+  background: #fff; }
+
+
+.wizard-container {
+  /*padding-top: 100px;*/
+  z-index: 3;
+}
+
+.wizard-container .wizard-navigation {
+  position: relative;
+}
+
+.wizard-card {
+  min-height: 410px;
+  /*box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);*/
+}
+
+.wizard-card .picture-container {
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+}
+
+.wizard-card .picture {
+  width: 106px;
+  height: 106px;
+  background-color: #999999;
+  border: 4px solid #CCCCCC;
+  color: #FFFFFF;
+  border-radius: 50%;
+  margin: 5px auto;
+  overflow: hidden;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+
+.wizard-card .picture:hover {
+  border-color: #2ca8ff;
+}
+
+.wizard-card .moving-tab {
+  position: absolute;
+  text-align: center;
+  padding: 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  -webkit-font-smoothing: subpixel-antialiased;
+  top: -4px;
+  left: 0px;
+  border-radius: 4px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.wizard-card[data-color="purple"] .moving-tab {
+  background-color: #9c27b0;
+  box-shadow: 0 16px 26px -10px rgba(156, 39, 176, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(156, 39, 176, 0.2);
+}
+
+.wizard-card[data-color="purple"] .picture:hover {
+  border-color: #9c27b0;
+}
+
+.wizard-card[data-color="purple"] .choice:hover .icon, .wizard-card[data-color="purple"] .choice.active .icon {
+  border-color: #9c27b0;
+  color: #9c27b0;
+}
+
+.wizard-card[data-color="purple"] .form-group .form-control {
+  background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(#D2D2D2, #D2D2D2);
+}
+
+.wizard-card[data-color="purple"] .checkbox input[type=checkbox]:checked + .checkbox-material .check {
+  background-color: #9c27b0;
+}
+
+.wizard-card[data-color="purple"] .radio input[type=radio]:checked ~ .check {
+  background-color: #9c27b0;
+}
+
+.wizard-card[data-color="purple"] .radio input[type=radio]:checked ~ .circle {
+  border-color: #9c27b0;
+}
+
+.wizard-card[data-color="green"] .moving-tab {
+  background-color: #4caf50;
+  box-shadow: 0 16px 26px -10px rgba(76, 175, 80, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(76, 175, 80, 0.2);
+}
+
+.wizard-card[data-color="green"] .picture:hover {
+  border-color: #4caf50;
+}
+
+.wizard-card[data-color="green"] .choice:hover .icon, .wizard-card[data-color="green"] .choice.active .icon {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+/* line 40, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="green"] .form-group .form-control {
+  background-image: linear-gradient(#4caf50, #4caf50), linear-gradient(#D2D2D2, #D2D2D2);
+}
+
+/* line 46, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="green"] .checkbox input[type=checkbox]:checked + .checkbox-material .check {
+  background-color: #4caf50;
+}
+
+/* line 51, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="green"] .radio input[type=radio]:checked ~ .check {
+  background-color: #4caf50;
+}
+
+/* line 55, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="green"] .radio input[type=radio]:checked ~ .circle {
+  border-color: #4caf50;
+}
+
+/* line 18, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="blue"] .moving-tab {
+  background-color: #00bcd4;
+  box-shadow: 0 16px 26px -10px rgba(0, 188, 212, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 188, 212, 0.2);
+}
+
+/* line 24, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="blue"] .picture:hover {
+  border-color: #00bcd4;
+}
+
+/* line 32, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="blue"] .choice:hover .icon, .wizard-card[data-color="blue"] .choice.active .icon {
+  border-color: #00bcd4;
+  color: #00bcd4;
+}
+
+/* line 40, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="blue"] .form-group .form-control {
+  background-image: linear-gradient(#00bcd4, #00bcd4), linear-gradient(#D2D2D2, #D2D2D2);
+}
+
+/* line 46, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="blue"] .checkbox input[type=checkbox]:checked + .checkbox-material .check {
+  background-color: #00bcd4;
+}
+
+/* line 51, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="blue"] .radio input[type=radio]:checked ~ .check {
+  background-color: #00bcd4;
+}
+
+/* line 55, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="blue"] .radio input[type=radio]:checked ~ .circle {
+  border-color: #00bcd4;
+}
+
+/* line 18, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="orange"] .moving-tab {
+  background-color: #ff9800;
+  box-shadow: 0 16px 26px -10px rgba(255, 152, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(255, 152, 0, 0.2);
+}
+
+/* line 24, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="orange"] .picture:hover {
+  border-color: #ff9800;
+}
+
+/* line 32, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="orange"] .choice:hover .icon, .wizard-card[data-color="orange"] .choice.active .icon {
+  border-color: #ff9800;
+  color: #ff9800;
+}
+
+/* line 40, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="orange"] .form-group .form-control {
+  background-image: linear-gradient(#ff9800, #ff9800), linear-gradient(#D2D2D2, #D2D2D2);
+}
+
+/* line 46, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="orange"] .checkbox input[type=checkbox]:checked + .checkbox-material .check {
+  background-color: #ff9800;
+}
+
+/* line 51, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="orange"] .radio input[type=radio]:checked ~ .check {
+  background-color: #ff9800;
+}
+
+/* line 55, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="orange"] .radio input[type=radio]:checked ~ .circle {
+  border-color: #ff9800;
+}
+
+/* line 18, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="red"] .moving-tab {
+  background-color: #f44336;
+  box-shadow: 0 16px 26px -10px rgba(244, 67, 54, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(244, 67, 54, 0.2);
+}
+
+/* line 24, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="red"] .picture:hover {
+  border-color: #f44336;
+}
+
+/* line 32, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="red"] .choice:hover .icon, .wizard-card[data-color="red"] .choice.active .icon {
+  border-color: #f44336;
+  color: #f44336;
+}
+
+/* line 40, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="red"] .form-group .form-control {
+  background-image: linear-gradient(#f44336, #f44336), linear-gradient(#D2D2D2, #D2D2D2);
+}
+
+/* line 46, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="red"] .checkbox input[type=checkbox]:checked + .checkbox-material .check {
+  background-color: #f44336;
+}
+
+/* line 51, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="red"] .radio input[type=radio]:checked ~ .check {
+  background-color: #f44336;
+}
+
+/* line 55, //material-bootstrap-wizard/mixins/_vendor-prefixes.scss */
+.wizard-card[data-color="red"] .radio input[type=radio]:checked ~ .circle {
+  border-color: #f44336;
+}
+
+/* line 63, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .picture input[type="file"] {
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: 0 !important;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/* line 74, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .picture-src {
+  width: 100%;
+}
+
+/* line 78, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .tab-content {
+  min-height: 340px;
+  padding: 20px 15px;
+}
+
+/* line 83, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .wizard-footer {
+  padding: 0 15px;
+}
+
+/* line 86, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .wizard-footer .checkbox {
+  margin-top: 16px;
+}
+
+/* line 91, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .disabled {
+  display: none;
+}
+
+/* line 95, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .wizard-header {
+  text-align: center;
+  padding: 25px 0 35px;
+}
+
+/* line 99, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .wizard-header h5 {
+  margin: 5px 0 0;
+}
+
+/* line 104, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .nav-pills > li {
+  text-align: center;
+}
+
+/* line 108, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .btn {
+  text-transform: none;
+}
+
+/* line 112, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .info-text {
+  text-align: center;
+  font-weight: 300;
+  margin: 10px 0 30px;
+}
+
+/* line 118, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .choice {
+  text-align: center;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* line 123, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .choice .icon {
+  text-align: center;
+  vertical-align: middle;
+  height: 116px;
+  width: 116px;
+  border-radius: 50%;
+  color: #999999;
+  margin: 0 auto 20px;
+  border: 4px solid #CCCCCC;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+
+/* line 136, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .choice i {
+  font-size: 40px;
+  line-height: 111px;
+}
+
+/* line 143, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .choice:hover .icon, .wizard-card .choice.active .icon {
+  border-color: #2ca8ff;
+}
+
+/* line 148, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .choice input[type="radio"],
+.wizard-card .choice input[type="checkbox"] {
+  position: absolute;
+  left: -10000px;
+  z-index: -1;
+}
+
+
+.wizard-card .btn-finish {
+  display: none;
+}
+
+/* line 160, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .description {
+  color: #999999;
+  font-size: 14px;
+}
+
+/* line 165, //material-bootstrap-wizard/_wizard-card.scss */
+.wizard-card .wizard-title {
+  margin: 0;
+}
