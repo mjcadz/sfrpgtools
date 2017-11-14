@@ -5,117 +5,107 @@
 {% block description %}NPC and monster creator for starfinder roleplaying game{% endblock %}
 {% block body %}
 <div class="jumbotron">
-  <h1>Monster Builder</h1>
-  <div class="btn-group btn-block" role="group">
-    <button id="TypeDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span class="pull-left">Choose base array</span>
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu pull-right">
-      <li><a href="">Combatent array</a></li>
-      <li><a href="">Expert array</a></li>
-      <li><a href="">Spellcaster</a></li>
-    </ul>
-  </div>
-  <p class="lead">Lorem ipsum</p>
-  <p></p>
-  <div class="container">
-    <!--      Wizard container        -->
-    <div class="wizard-container">
-      <div class="card wizard-card" data-color="red" id="wizard">
-        <form action="" method="">
-        <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
-        <!--<div class="wizard-header">
-          <h3 class="wizard-title">Book a Room</h3>
-          <h5>This information will let us know more about you.</h5>
-        </div>-->
-        <div class="wizard-navigation" hidden>
-          <ul>
-            <li><a href="#step1" data-toggle="tab">Step1</a></li>
-            <li><a href="#step2" data-toggle="tab">Step2</a></li>
-            <li><a href="#step3" data-toggle="tab">Step3</a></li>
-            <li><a href="#step4" data-toggle="tab">Step4</a></li>
-          </ul>
+    <h1>Monster Builder</h1>
+    <p class="lead">Lorem ipsum</p>
+    <p></p>
+    <div class="container">
+        <!--      Wizard container        -->
+        <div class="wizard-container">
+            <div class="card wizard-card" data-color="red" id="wizard">
+                <form action="" method="">
+                    <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
+                    <!--<div class="wizard-header">
+                    <h3 class="wizard-title">Book a Room</h3>
+                    <h5>This information will let us know more about you.</h5>
+                    </div>-->
+                    <div class="wizard-navigation" hidden>
+                        <ul>
+                            <li><a href="#step1" data-toggle="tab">Step1</a></li>
+                            <li><a href="#step2" data-toggle="tab">Step2</a></li>
+                            <li><a href="#step3" data-toggle="tab">Step3</a></li>
+                            <li><a href="#step4" data-toggle="tab">Step4</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane" id="step1">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h4 class="info-text">Step 1.</h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="btn-group btn-block" role="group">
+                                        <button id="TypeDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="pull-left">Choose base array</span>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="#">Combatent</a></li>
+                                            <li><a href="#">Expert</a></li>
+                                            <li><a href="#">Spellcaster</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="step2">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h4 class="info-text">Step 2.</h4>
+                                </div>
+                                <div class="col-sm-6">
+
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="step3">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h4 class="info-text">Step 3.</h4>
+                                </div>
+                                <div class="col-sm-6">
+
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="step4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h4 class="info-text">Step 4.</h4>
+                                </div>
+                                <div class="col-sm-6">
+
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-footer">
+                        <div class="pull-right">
+                            <input type='button' class='btn btn-next btn-grn' name='next' value='Next' />
+                            <input type='button' class='btn btn-finish btn-grn' name='finish' value='Finish' />
+                        </div>
+                        <div class="pull-left">
+                            <input type='button' class='btn btn-previous btn-default' name='previous' value='Previous' />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
         </div>
-        <div class="tab-content">
-          <div class="tab-pane" id="step1">
-            <div class="row">
-              <div class="col-sm-12">
-                <h4 class="info-text">Step 1.</h4>
-              </div>
-              <div class="col-sm-6">
-                <div class="btn-group btn-block" role="group">
-                  <button id="TypeDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="pull-left">Choose base array</span>
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu pull-right">
-                    <li><a href="">Combatent array</a></li>
-                    <li><a href="">Expert array</a></li>
-                    <li><a href="">Spellcaster</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-sm-6">
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="step2">
-            <div class="row">
-              <div class="col-sm-12">
-                <h4 class="info-text">Step 2.</h4>
-              </div>
-              <div class="col-sm-6">
-
-              </div>
-              <div class="col-sm-6">
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="step3">
-            <div class="row">
-              <div class="col-sm-12">
-                <h4 class="info-text">Step 3.</h4>
-              </div>
-              <div class="col-sm-6">
-
-              </div>
-              <div class="col-sm-6">
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="step4">
-            <div class="row">
-              <div class="col-sm-12">
-                <h4 class="info-text">Step 4.</h4>
-              </div>
-              <div class="col-sm-6">
-
-              </div>
-              <div class="col-sm-6">
-              </div>
-            </div>
-          </div>
-         </div>
-         <div class="wizard-footer">
-           <div class="pull-right">
-             <input type='button' class='btn btn-next btn-grn' name='next' value='Next' />
-             <input type='button' class='btn btn-finish btn-grn' name='finish' value='Finish' />
-           </div>
-           <div class="pull-left">
-             <input type='button' class='btn btn-previous btn-default' name='previous' value='Previous' />
-           </div>
-         </div>
-         <div class="clearfix"></div>
-       </form>
-       </div>
-     </div>
-   </div> <!-- wizard container -->
- </div>
+        <!-- wizard container -->
+    </div>
+</div>
 {% endblock %}
 {% block includes %}
-<script type = "text/javascript" src = "{{ url_for('static', filename = 'monsterGen.js') }}" ></script>
-<script type = "text/javascript" src = "{{ url_for('static', filename = 'material-bootstrap-wizard.js') }}" ></script>
-<script type = "text/javascript" src = "{{ url_for('static', filename = 'jquery.validate.min.js') }}" ></script>
-<script type = "text/javascript" src = "{{ url_for('static', filename = 'jquery.bootstrap.js') }}" ></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'monsterGen.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'material-bootstrap-wizard.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'jquery.validate.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'jquery.bootstrap.js') }}"></script>
 {% endblock %}
