@@ -6,7 +6,7 @@
 {% block body %}
 <div class="jumbotron">
     <h1>Monster Builder</h1>
-    <p class="lead">This wizard will step through the creation of NPCs (including monsters)</p>
+    <p class="lead">This wizard will step through the creation of NPCs (including monsters).</p>
     <p></p>
     <div class="container">
         <!--      Wizard container        -->
@@ -158,8 +158,6 @@
 </div>
 {% endblock %}
 {% block includes %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'bootstrap-wizard.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'monsterGen.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'material-bootstrap-wizard.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'jquery.validate.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'jquery.bootstrap.js') }}"></script>
 {% endblock %}
