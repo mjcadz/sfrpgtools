@@ -5,7 +5,7 @@ var stepOneDescription = {
     "Spellcaster": "Use the <b>spellcaster</b> option for any NPC whose main capabilities come from casting spells or using spell-like abilities. Spellcaster NPCs usually have the most unusual abilities."
 }
 
-//CR	EAC	KAC	Fort	Ref	Will	Hit Points	Ability DC	Base Spell Dc	Ability Score Modifiers	Special Abilities	Master Skills	Good Skills
+//CR: EAC,	KAC,	Fort,	Ref,	Will,	Hit Points,	Ability DC	Base, Spell Dc,	Ability Score Modifiers,	Special Abilities,	Master Skills,	Good Skills
 var combatantMainStats = {
     "1/3": ["10", "12", "+1", "+1", "+0", "6", "8", "8", "+3, +1, +0", "1", "+7 (1)", "+3 (2)"],
     "1/2": ["10", "12", "+2", "+2", "+0", "13", "9", "9", "+3, +2, +1", "1", "+9 (1)", "+4 (2)"],
@@ -67,7 +67,7 @@ combatantAttackStats = {
     "25": ["+40", "+37", "13d10+25", "14d12+25", "18d10+25+Str", "12d10+25+Str", "9d10+25+Str"]
 };
 
-//CR	EAC	KAC	Fort	Ref	Will	Hit Points	Ability DC	Base Spell Dc	Ability Score Modifiers	Special Abilities	Master Skills	Good Skills
+//CR: EAC,	KAC,	Fort,	Ref,	Will,	Hit Points,	Ability DC	Base, Spell Dc,	Ability Score Modifiers,	Special Abilities,	Master Skills,	Good Skills
 var expertMainStats = {
     "1/3": ["10", "11", "+0", "+0", "+2", "6", "10", "10", "+3, +1, +0", "1", "+7 (3)", "+3 (2)"],
     "1/2": ["10", "11", "+0", "+0", "+3", "12", "11", "11", "+3, +2, +1", "1", "+9 (3)", "+4 (2)"],
@@ -131,7 +131,7 @@ expertAttackStats = {
 };
 
 
-//CR	EAC	KAC	Fort	Ref	Will	Hit Points	Ability DC	Base Spell Dc	Ability Score Modifiers	Special Abilities	Master Skills	Good Skills
+//CR: EAC,	KAC,	Fort,	Ref,	Will,	Hit Points,	Ability DC	Base, Spell Dc,	Ability Score Modifiers,	Special Abilities,	Master Skills,	Good Skills
 var spellcasterMainStats = {
     "1/3": ["9", "10", "+0", "+0", "+2", "5", "10", "12", "+3, +1, +0", "1", "+7 (2)", "+3 (1)"],
     "1/2": ["9", "10", "+0", "+0", "+3", "11", "11", "13", "+3, +2, +1", "1", "+9 (2)", "+4 (1)"],
@@ -249,7 +249,7 @@ creatureSubType = {
     "Shapechanger": ["This subtype is applied to creatures that can dramatically alter their forms.", "Traits: Change shape (specific details depend upon creature)."],
     "Shirren": ["This subtype is applied to shirrens and creatures related to shirrens.", "Traits: Blindsense (vibration) 30 ft.; if the NPC is of the shirren race, it also gains the communalism and limited telepathy racial traits and Culture and Diplomacy as good skills."],
     "Skittermander": ["This subtype is applied to skittermanders and creatures related to skittermanders.", "Traits: Low-light vision; if the NPC is of the skittermander race, it also gains the grappler, hyper, and six-armed racial traits."],
-    "Swarm": ["This subtype is applied to any collection of Fine, Diminutive, or Tiny creatures (usually vermin) that acts as a single creature.", "A swarm has a single pool of Hit Points, a single initiative modifier, and a single EAC and KAC. A swarm attempts saving throws as a single creature. A single swarm usually occupies a square (if it is made up of nonflying creatures) or a cube (if it is made up of flying creatures) 10 feet on a side, but its reach is 0 feet. A swarm can move through cracks or holes large enough for its component creatures to fit through.", "In order to attack, a swarm moves into an opponent's space, which provokes an attack of opportunity. Spellcasting or concentrating on spells within the area of a swarm requires a successful caster level check (DC = 20 + spell level). Using skills that involve patience and concentration, such as Computers, within the area of a swarm requires a successful DC 20 Will saving throw.", "Traits: Swarm defenses, swarm immunities, distraction, swarm attack."],
+    "Swarm": ["This subtype is applied to any collection of Fine, Diminutive, or Tiny creatures (usually vermin) that acts as a single creature. A single swarm usually occupies a square (if it is made up of nonflying creatures) or a cube (if it is made up of flying creatures) 10 feet on a side, but its reach is 0 feet. A swarm can move through cracks or holes large enough for its component creatures to fit through. In order to attack, a swarm moves into an opponent's space, which provokes an attack of opportunity. Spellcasting or concentrating on spells within the area of a swarm requires a successful caster level check (DC = 20 + spell level). Using skills that involve patience and concentration, such as Computers, within the area of a swarm requires a successful DC 20 Will saving throw.", "Traits: Swarm defenses, swarm immunities, distraction, swarm attack."],
     "Verthani": ["This subtype is applied to verthani and creatures related to verthani.", "Traits: Low-light vision; if the NPC is of the verthani race, it also gains the easily augmented and skin mimic racial traits and an additional good skill."],
     "Vesk": ["This subtype is applied to vesk and creatures related to vesk.", "Traits: Low-light vision; if the NPC is of the vesk race, it also gains the armor savant, fearless, and natural weapons racial traits."],
     "Water": ["This subtype is usually applied to outsiders with a connection to the Plane of Water.", "Traits: Swim speed, gains Athletics as a master or good skill."],
@@ -412,10 +412,20 @@ classData = {
 };
 
 
+function generateDropdown(parentID,dropID,title,array) {
+  var dropHtml = '<div class="btn-group btn-block" role="group"><button id="'+ dropID +'" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="pull-left">'+title+'</span><span class="caret"></span></button><ul class="dropdown-menu pull-right">';
+  for (i = 0; i < array.length; i++) {
+    dropHtml += '<li><a href="javascript:void(0)">' + array[i] + '</a></li>';
+  }
+  dropHtml += '</ul></span>';
+  document.getElementById(parentID).innerHTML = dropHtml;
+  //rebind dropdown click dropClickHandler
+  $(".dropdown-menu li a").click(dropClickHandler);
+}
 
 //Sets selected dropdown to dropdown display
 //BOOTSTRAP 3
-$(".dropdown-menu li a").click(function() {
+function dropClickHandler() {
     var selected = $(this).text();
     //Array drop
     if (selected.includes("Combatant") || selected.includes("Expert") || selected.includes("Spellcaster")) {
@@ -432,11 +442,20 @@ $(".dropdown-menu li a").click(function() {
         $descriptionArea.empty();
         $descriptionArea.append("<p>"+creatureType[selected][0]+"</p>");
 
+    } else if (Object.keys(creatureSubType).includes(selected)) {
+        $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
+        $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
+        var $descriptionArea = $(".stepThreeDescription").first();
+        $descriptionArea.empty();
+        $descriptionArea.append("<p>"+creatureSubType[selected][0]+"</p>");
+
     } else {
         $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
         $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
     }
-});
+}
+//set click handler
+$(".dropdown-menu li a").click(dropClickHandler);
 
 // Wizard Initialization
 $('.wizard-card').bootstrapWizard({
@@ -453,6 +472,11 @@ $('.wizard-card').bootstrapWizard({
                 return false;
             }
         }
+        if (index == 2) {
+            generateDropdown("dropStepThree","subtypeDrop","Choose creature subtype",Object.keys(creatureSubType));
+        }
+
+
 
     },
 
