@@ -6,12 +6,12 @@
 {% block body %}
 <div class="jumbotron">
     <h1>Monster Builder</h1>
-    <p class="lead">This wizard will step through the creation of NPCs (including monsters).</p>
+    <p class="lead">This wizard will step through the creation of Starfinder NPCs (including monsters).</p>
     <p></p>
     <div class="container">
         <!--      Wizard container        -->
         <div class="wizard-container">
-            <div class="card wizard-card" data-color="red" id="wizard">
+            <div class="card wizard-card" data-color="green" id="wizard">
                 <form action="" method="">
                     <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
                     <!--<div class="wizard-header">
@@ -26,6 +26,9 @@
                             <li><a href="#step4" data-toggle="tab">Step4</a></li>
                         </ul>
                     </div>
+                    <div id="bar" class="progress">
+                      <div class="progress-bar progress-bar-grn" role="progressbar" style="width: 0%"></div>
+                    </div>
                     <div class="tab-content">
                         <div class="tab-pane" id="step1">
                             <div class="row">
@@ -35,7 +38,7 @@
                                 <div class="col-sm-6">
                                     <div class="btn-group btn-block" role="group">
                                         <button id="CRDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="pull-left">Choose CR</span>
+                                            <span class="pull-left">Choose challenge rating</span>
                                             <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu pull-right">
@@ -79,7 +82,7 @@
 
                                 </div>
                                 <div class="col-sm-6">
-                                  <div class="stepOneDescription">
+                                  <div class="stepOneDescription wizardp">
                                   </div>
                                 </div>
                             </div>

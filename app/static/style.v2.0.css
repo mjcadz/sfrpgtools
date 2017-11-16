@@ -266,3 +266,19 @@ fieldset[disabled] .btn-grn.active {
 .panel-bottom>h4{
   color: #666666;}
 }
+
+.progress-bar-grn {
+  background-color: #2EC4B6 !important;
+}
+.progress-bar {
+  background-color: #2EC4B6 !important;
+}
+.progress-striped .progress-bar-grn {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.progress-bar-grn:last-child.progress-bar:before {
+  background-color: #cbf6f2;
+}
