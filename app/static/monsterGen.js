@@ -196,18 +196,18 @@ spellcasterAttackStats = {
 
 
 creatureType = {
-    "Aberration": ["An aberration has a bizarre anatomy, strange abilities, an alien mindset, or any combination of the three.", "Traits: Darkvision 60 ft.", "Adjustments: +2 to Will saving throws."],
-    "Animal": ["An animal is a living, nonhumanoid creature, usually a vertebrate with no magical abilities and no innate capacity for language or culture.", "Traits: Low-light vision; set Intelligence modifier to -4 or -5.", "Adjustments: +2 to Fortitude and Reflex saving throws."],
-    "Construct": ["A construct is a magically animated object or an artificially created creature.", "Traits: Darkvision 60 ft., low-light vision, construct immunities, unliving; set Constitution modifier to -; must have either the magical or technological subtype; if the construct is mindless, set Intelligence modifier to - and add mindless.", "Adjustments: -2 to all saving throws, +1 to attack rolls."],
-    "Dragon": ["A dragon is a reptilian creature, usually winged, with magical or otherwise unusual abilities.", "Traits: Darkvision 60 ft., low-light vision, immunity to paralysis and sleep.", "Adjustments: +2 to all saving throws, +1 to attack rolls."],
-    "Fey": ["A fey is a creature with supernatural abilities and connections to nature or to some other force or place.", "Traits: Low-light vision.", "Adjustments: +2 to Fortitude and Reflex saving throws, -1 to attack rolls."],
-    "Humanoid": ["A humanoid usually has two arms, two legs, and one head, or it has a humanlike torso, arms, and a head. Humanoids have few or no supernatural or extraordinary abilities, but most can speak and usually have well-developed societies.", "Traits: Must have a subtype that matches its race (such as human, lashunta, or shirren) or that is related to its race (such as goblinoid).", "Adjustments: +2 to one type of saving throw."],
-    "Magical Beast": ["Magical beasts are similar to animals but can have Intelligence modifiers greater than -4 (in which case the magical beast knows at least one language, though it can't necessarily speak). Magical beasts usually have supernatural or extraordinary abilities.", "Traits: Darkvision 60 ft., low-light vision.", "Adjustments: +2 to Fortitude and Reflex saving throws, +1 to attack rolls."],
-    "Monstrous Humanoid": ["Monstrous humanoids are similar to humanoids, but they have monstrous or animalistic features. They often have magical abilities as well.", "Traits: Darkvision 60 ft.", "Adjustments: +2 to Reflex and Will saving throws, +1 to attack rolls."],
-    "Ooze": ["An ooze is an amorphous or mutable creature.", "Traits: Blindsight, mindless, ooze immunities, sightless; set Intelligence modifier to -.", "Adjustments: +2 to Fortitude saving throws, -2 to Reflex and Will saving throws, no master or good skills unless the creature would have them naturally, rather than through training."],
-    "Outsider": ["An outsider is at least partially composed of the essence (but not necessarily the material) of a plane other than the Material Plane. Some creatures start out as another type and become outsiders when they attain a higher or lower state of spiritual existence.", "Traits: Darkvision 60 ft.; if the outsider is a member of a specific race (such as angel, devil, etc.), it must have a subtype to match its race.", "Adjustments: +2 to one type of saving throw, +1 to attack rolls."],
-    "Plant": ["This type describes vegetable creatures. Note that regular plants, such as those growing in gardens or fields, lack Wisdom and Charisma modifiers and are objects, not creatures, even though they are alive.", "Traits: Low-light vision, plant immunities.", "Adjustments: +2 to Fortitude saving throws."],
-    "Undead": ["Undead are once-living creatures animated by magic or advanced technological forces.", "Traits: Darkvision 60 ft., undead immunities, unliving; set Constitution modifier to -.", "Adjustments: +2 to Will saving throws."]
+    "Aberration": ["An <b>aberration</b> has a bizarre anatomy, strange abilities, an alien mindset, or any combination of the three.", "Traits: Darkvision 60 ft.", "Adjustments: +2 to Will saving throws."],
+    "Animal": ["An <b>animal</b> is a living, nonhumanoid creature, usually a vertebrate with no magical abilities and no innate capacity for language or culture.", "Traits: Low-light vision; set Intelligence modifier to -4 or -5.", "Adjustments: +2 to Fortitude and Reflex saving throws."],
+    "Construct": ["A <b>construct</b> is a magically animated object or an artificially created creature.", "Traits: Darkvision 60 ft., low-light vision, construct immunities, unliving; set Constitution modifier to -; must have either the magical or technological subtype; if the construct is mindless, set Intelligence modifier to - and add mindless.", "Adjustments: -2 to all saving throws, +1 to attack rolls."],
+    "Dragon": ["A <b>dragon</b> is a reptilian creature, usually winged, with magical or otherwise unusual abilities.", "Traits: Darkvision 60 ft., low-light vision, immunity to paralysis and sleep.", "Adjustments: +2 to all saving throws, +1 to attack rolls."],
+    "Fey": ["A <b>fey</b> is a creature with supernatural abilities and connections to nature or to some other force or place.", "Traits: Low-light vision.", "Adjustments: +2 to Fortitude and Reflex saving throws, -1 to attack rolls."],
+    "Humanoid": ["A <b>humanoid</b> usually has two arms, two legs, and one head, or it has a humanlike torso, arms, and a head. Humanoids have few or no supernatural or extraordinary abilities, but most can speak and usually have well-developed societies.", "Traits: Must have a subtype that matches its race (such as human, lashunta, or shirren) or that is related to its race (such as goblinoid).", "Adjustments: +2 to one type of saving throw."],
+    "Magical Beast": ["<b>Magical beasts</b> are similar to animals but can have Intelligence modifiers greater than -4 (in which case the magical beast knows at least one language, though it can't necessarily speak). Magical beasts usually have supernatural or extraordinary abilities.", "Traits: Darkvision 60 ft., low-light vision.", "Adjustments: +2 to Fortitude and Reflex saving throws, +1 to attack rolls."],
+    "Monstrous Humanoid": ["<b>Monstrous humanoids</b> are similar to humanoids, but they have monstrous or animalistic features. They often have magical abilities as well.", "Traits: Darkvision 60 ft.", "Adjustments: +2 to Reflex and Will saving throws, +1 to attack rolls."],
+    "Ooze": ["An <b>ooze</b> is an amorphous or mutable creature.", "Traits: Blindsight, mindless, ooze immunities, sightless; set Intelligence modifier to -.", "Adjustments: +2 to Fortitude saving throws, -2 to Reflex and Will saving throws, no master or good skills unless the creature would have them naturally, rather than through training."],
+    "Outsider": ["An <b>outsider</b> is at least partially composed of the essence (but not necessarily the material) of a plane other than the Material Plane. Some creatures start out as another type and become outsiders when they attain a higher or lower state of spiritual existence.", "Traits: Darkvision 60 ft.; if the outsider is a member of a specific race (such as angel, devil, etc.), it must have a subtype to match its race.", "Adjustments: +2 to one type of saving throw, +1 to attack rolls."],
+    "Plant": ["The <b>plant</b> type describes vegetable creatures. Note that regular plants, such as those growing in gardens or fields, lack Wisdom and Charisma modifiers and are objects, not creatures, even though they are alive.", "Traits: Low-light vision, plant immunities.", "Adjustments: +2 to Fortitude saving throws."],
+    "Undead": ["<b>Undead</b> are once-living creatures animated by magic or advanced technological forces.", "Traits: Darkvision 60 ft., undead immunities, unliving; set Constitution modifier to -.", "Adjustments: +2 to Will saving throws."]
 };
 
 creatureSubType = {
@@ -417,12 +417,21 @@ classData = {
 //BOOTSTRAP 3
 $(".dropdown-menu li a").click(function() {
     var selected = $(this).text();
+    //Array drop
     if (selected.includes("Combatant") || selected.includes("Expert") || selected.includes("Spellcaster")) {
         $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
         $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
         var $descriptionArea = $(".stepOneDescription").first();
         $descriptionArea.empty();
         $descriptionArea.append("<p>"+stepOneDescription[selected]+"</p>");
+    //creature type drop
+    } else if (Object.keys(creatureType).includes(selected)) {
+        $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
+        $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
+        var $descriptionArea = $(".stepTwoDescription").first();
+        $descriptionArea.empty();
+        $descriptionArea.append("<p>"+creatureType[selected][0]+"</p>");
+
     } else {
         $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
         $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
