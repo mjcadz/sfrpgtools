@@ -421,8 +421,8 @@ function buildStatBlock() {
   var statBlock = {};
 
   //base array
-  var CRDrop = $('#CRDrop').text().trim().replace("CR ","");
-  var arrayDrop = $('#arrayDrop').text().trim();
+  var CRDrop = $('[data-id="CRDrop"]').text().trim().replace("CR ","");
+  var arrayDrop = $('[data-id="arrayDrop"]').text().trim();
 
   var baseStats = [];
   if (arrayDrop == 'Combatant') {
@@ -442,60 +442,44 @@ function buildStatBlock() {
   $outputArea.empty();
   $outputArea.append("<p>"+statBlock.meleeStandard+"</p>");
 
-
-
-
 }
 
-
+//creates bootstrap-select dropdowns from arrays
 function generateDropdown(parentID,dropID,title,array) {
-  var dropHtml = '<div class="btn-group btn-block" role="group"><button id="'+ dropID +'" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="pull-left">'+title+'</span><span class="caret"></span></button><ul class="dropdown-menu pull-right scrollable-menu">';
+  var dropHtml = '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10">'
   for (i = 0; i < array.length; i++) {
-    dropHtml += '<li><a href="javascript:void(0)">' + array[i] + '</a></li>';
+    dropHtml += '<option>' + array[i] + '</option>';
   }
-  dropHtml += '</ul></span>';
+  dropHtml += '</select>';
   document.getElementById(parentID).innerHTML = dropHtml;
   //rebind dropdown click dropClickHandler
-  $(".dropdown-menu li a").click(dropClickHandler);
+  $('.selectpicker').on('changed.bs.select', dropClickHandler);
 }
 
-//Sets selected dropdown to dropdown display
-//BOOTSTRAP 3
-function dropClickHandler() {
-    var selected = $(this).text();
-    //Array drop
-    if (selected.includes("Combatant") || selected.includes("Expert") || selected.includes("Spellcaster")) {
-        $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
-        $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
-        $(this).closest('.btn-group').find('.dropdown-toggle').removeClass('wizard-shadow');//remove validation highlight
+//handle clicks of dropdowns
+function dropClickHandler(e, clickedIndex, newValue, oldValue) {
+    var selected = $(e.currentTarget).val();
+    if (Object.keys(stepOneDescription).includes(selected)) {
         var $descriptionArea = $(".stepOneDescription").first();
         $descriptionArea.empty();
         $descriptionArea.append("<p>"+stepOneDescription[selected]+"</p>");
-    //creature type drop
+
     } else if (Object.keys(creatureType).includes(selected)) {
-        $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
-        $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
-        $(this).closest('.btn-group').find('.dropdown-toggle').removeClass('wizard-shadow');//remove validation highlight
         var $descriptionArea = $(".stepTwoDescription").first();
         $descriptionArea.empty();
-        $descriptionArea.append("<p>"+creatureType[selected][0]+"</p>");
+        $descriptionArea.append("<p>"+creatureType[selected]+"</p>");
 
     } else if (Object.keys(creatureSubType).includes(selected)) {
-        $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
-        $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
-        $(this).closest('.btn-group').find('.dropdown-toggle').removeClass('wizard-shadow');//remove validation highlight
         var $descriptionArea = $(".stepThreeDescription").first();
         $descriptionArea.empty();
-        $descriptionArea.append("<p>"+creatureSubType[selected][0]+"</p>");
+        $descriptionArea.append("<p>"+creatureSubType[selected]+"</p>");
 
-    } else {
-        $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
-        $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
-        $(this).closest('.btn-group').find('.dropdown-toggle').removeClass('wizard-shadow');//remove validation highlight
     }
+    $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
 }
-//set click handler
-$(".dropdown-menu li a").click(dropClickHandler);
+
+//bind bootstrap-select dropdown change event
+$('.selectpicker').on('changed.bs.select', dropClickHandler);
 
 // Wizard Initialization
 $('.wizard-card').bootstrapWizard({
@@ -523,12 +507,12 @@ $('.wizard-card').bootstrapWizard({
 
             var validated = true;
 
-            if ($('#CRDrop').text().includes("Choose")) {
-                $('#CRDrop').addClass('wizard-shadow');
+            if ($('[data-id="CRDrop"]').text().includes("Choose")) {
+                $('[data-id="CRDrop"]').addClass('wizard-shadow');
                 validated = false;
             }
-            if ($('#arrayDrop').text().includes("Choose")) {
-                $('#arrayDrop').addClass('wizard-shadow');
+            if ($('[data-id="arrayDrop"]').text().includes("Choose")) {
+                $('[data-id="arrayDrop"]').addClass('wizard-shadow');
                 validated = false;
             }
 
@@ -541,7 +525,19 @@ $('.wizard-card').bootstrapWizard({
             }
         }
         if (index == 2) {
+            var validated = true;
 
+            if ($('[data-id="creatureTypeDrop"]').text().includes("Choose")) {
+                $('[data-id="creatureTypeDrop"]').addClass('wizard-shadow');
+                validated = false;
+            }
+
+            if (validated) {
+
+                //return false; //temp for testing
+            } else {
+                return false;
+            }
         }
 
     },

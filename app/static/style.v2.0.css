@@ -247,6 +247,10 @@ fieldset[disabled] .btn-grn.active {
     color: #666666!important;
 }
 
+.btn-default {
+    color: #666666!important;
+}
+
 .set-width {
     width: 105px !important;
 }
