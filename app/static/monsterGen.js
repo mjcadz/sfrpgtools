@@ -207,7 +207,8 @@ creatureType = {
     "Ooze": ["An <b>ooze</b> is an amorphous or mutable creature.", "Traits: Blindsight, mindless, ooze immunities, sightless; set Intelligence modifier to -.", "Adjustments: +2 to Fortitude saving throws, -2 to Reflex and Will saving throws, no master or good skills unless the creature would have them naturally, rather than through training."],
     "Outsider": ["An <b>outsider</b> is at least partially composed of the essence (but not necessarily the material) of a plane other than the Material Plane. Some creatures start out as another type and become outsiders when they attain a higher or lower state of spiritual existence.", "Traits: Darkvision 60 ft.; if the outsider is a member of a specific race (such as angel, devil, etc.), it must have a subtype to match its race.", "Adjustments: +2 to one type of saving throw, +1 to attack rolls."],
     "Plant": ["The <b>plant</b> type describes vegetable creatures. Note that regular plants, such as those growing in gardens or fields, lack Wisdom and Charisma modifiers and are objects, not creatures, even though they are alive.", "Traits: Low-light vision, plant immunities.", "Adjustments: +2 to Fortitude saving throws."],
-    "Undead": ["<b>Undead</b> are once-living creatures animated by magic or advanced technological forces.", "Traits: Darkvision 60 ft., undead immunities, unliving; set Constitution modifier to -.", "Adjustments: +2 to Will saving throws."]
+    "Undead": ["<b>Undead</b> are once-living creatures animated by magic or advanced technological forces.", "Traits: Darkvision 60 ft., undead immunities, unliving; set Constitution modifier to -.", "Adjustments: +2 to Will saving throws."],
+    "Vermin": ["This type includes insects, arachnids, other arthropods, worms, and similar invertebrates.","Traits: Darkvision 60 ft.,mindless; set Intelligence modifier to -.","Adjustments: +2 to Fortitude saving throws."]
 };
 
 creatureSubType = {
@@ -253,6 +254,7 @@ creatureSubType = {
     "Verthani": ["This subtype is applied to verthani and creatures related to verthani.", "Traits: Low-light vision; if the NPC is of the verthani race, it also gains the easily augmented and skin mimic racial traits and an additional good skill."],
     "Vesk": ["This subtype is applied to vesk and creatures related to vesk.", "Traits: Low-light vision; if the NPC is of the vesk race, it also gains the armor savant, fearless, and natural weapons racial traits."],
     "Water": ["This subtype is usually applied to outsiders with a connection to the Plane of Water.", "Traits: Swim speed, gains Athletics as a master or good skill."],
+    "Ysoki": ["This subtype is applied to ysoki and creatures related to ysoki","Traits: Darkvision 60 ft.; if the NPC is of the ysoki race, it also gains the cheek pouches and moxie racial traits, Engineering and Stealth as master skills, and Survival as a good skill."]
 };
 
 otherSubTypes = ["Chaotic", "Evil", "Extraplanar", "Good", "Lawful", "Magical", "Native", "Technological"]
@@ -411,9 +413,43 @@ classData = {
     }
 };
 
+var statLabels = ["eac","kac","fortitude","reflex","will","hitPoints","abilityDCBase","spellDC","abilityScoreModifiers","specialAbilities","masterSkills","goodSkills","highAttackBonus","lowAttackBonus","rangedEnergy","rangedKinetic","meleeStandard","meleeThree","meleeFour"];
+var CRLabels = ["CR 1/3","CR 1/2","CR 1","CR 2","CR 3","CR 4","CR 5","CR 6","CR 7","CR 8","CR 9","CR 10","CR 11","CR 12","CR 13","CR 14","CR 15","CR 16","CR 17","CR 18","CR 19","CR 20","CR 21","CR 22","CR 23","CR 24","CR 25"]
+
+function buildStatBlock() {
+
+  var statBlock = {};
+
+  //base array
+  var CRDrop = $('#CRDrop').text().trim().replace("CR ","");
+  var arrayDrop = $('#arrayDrop').text().trim();
+
+  var baseStats = [];
+  if (arrayDrop == 'Combatant') {
+    baseStats = combatantMainStats[CRDrop].concat(combatantAttackStats[CRDrop]);
+  } else if (arrayDrop == 'Expert') {
+    baseStats = expertMainStats[CRDrop].concat(expertAttackStats[CRDrop]);
+  } else if (arrayDrop == 'Spellcaster') {
+    baseStats = spellcasterMainStats[CRDrop].concat(spellcasterAttackStats[CRDrop]);
+  }
+
+  //assign base stat values
+  for (i = 0; i < statLabels.length; i++) {
+    statBlock[statLabels[i]] = baseStats[i]
+  }
+
+  var $outputArea = $(".output.area").first();
+  $outputArea.empty();
+  $outputArea.append("<p>"+statBlock.meleeStandard+"</p>");
+
+
+
+
+}
+
 
 function generateDropdown(parentID,dropID,title,array) {
-  var dropHtml = '<div class="btn-group btn-block" role="group"><button id="'+ dropID +'" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="pull-left">'+title+'</span><span class="caret"></span></button><ul class="dropdown-menu pull-right">';
+  var dropHtml = '<div class="btn-group btn-block" role="group"><button id="'+ dropID +'" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="pull-left">'+title+'</span><span class="caret"></span></button><ul class="dropdown-menu pull-right scrollable-menu">';
   for (i = 0; i < array.length; i++) {
     dropHtml += '<li><a href="javascript:void(0)">' + array[i] + '</a></li>';
   }
@@ -431,6 +467,7 @@ function dropClickHandler() {
     if (selected.includes("Combatant") || selected.includes("Expert") || selected.includes("Spellcaster")) {
         $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
         $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
+        $(this).closest('.btn-group').find('.dropdown-toggle').removeClass('wizard-shadow');//remove validation highlight
         var $descriptionArea = $(".stepOneDescription").first();
         $descriptionArea.empty();
         $descriptionArea.append("<p>"+stepOneDescription[selected]+"</p>");
@@ -438,6 +475,7 @@ function dropClickHandler() {
     } else if (Object.keys(creatureType).includes(selected)) {
         $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
         $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
+        $(this).closest('.btn-group').find('.dropdown-toggle').removeClass('wizard-shadow');//remove validation highlight
         var $descriptionArea = $(".stepTwoDescription").first();
         $descriptionArea.empty();
         $descriptionArea.append("<p>"+creatureType[selected][0]+"</p>");
@@ -445,6 +483,7 @@ function dropClickHandler() {
     } else if (Object.keys(creatureSubType).includes(selected)) {
         $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
         $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
+        $(this).closest('.btn-group').find('.dropdown-toggle').removeClass('wizard-shadow');//remove validation highlight
         var $descriptionArea = $(".stepThreeDescription").first();
         $descriptionArea.empty();
         $descriptionArea.append("<p>"+creatureSubType[selected][0]+"</p>");
@@ -452,6 +491,7 @@ function dropClickHandler() {
     } else {
         $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">' + selected + '</span><span class="caret"></span>');
         $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
+        $(this).closest('.btn-group').find('.dropdown-toggle').removeClass('wizard-shadow');//remove validation highlight
     }
 }
 //set click handler
@@ -463,20 +503,46 @@ $('.wizard-card').bootstrapWizard({
     'nextSelector': '.btn-next',
     'previousSelector': '.btn-previous',
 
+    //runs when wizard initialised
+    onInit: function(tab, navigation, index) {
+
+        //create initial dropdowns from data arrays
+        //step1
+        generateDropdown("CRDropdown","CRDrop","Choose challenge rating",CRLabels);
+        generateDropdown("arrayDropdown","arrayDrop","Choose base",Object.keys(stepOneDescription));
+        //step2
+        generateDropdown("creatureTypeDropdown","creatureTypeDrop","Choose creature type",Object.keys(creatureType));
+        //Step3
+        generateDropdown("creatureSubtypeDropdown","subtypeDrop","Choose creature subtype",Object.keys(creatureSubType));
+    },
+
     //runs when next button pressed.
     onNext: function(tab, navigation, index) {
         //Validation tab 1
         if (index == 1) {
+
+            var validated = true;
+
             if ($('#CRDrop').text().includes("Choose")) {
-                alert('make choices');
+                $('#CRDrop').addClass('wizard-shadow');
+                validated = false;
+            }
+            if ($('#arrayDrop').text().includes("Choose")) {
+                $('#arrayDrop').addClass('wizard-shadow');
+                validated = false;
+            }
+
+            if (validated) {
+                buildStatBlock()
+
+                //return false; //temp for testing
+            } else {
                 return false;
             }
         }
         if (index == 2) {
-            generateDropdown("dropStepThree","subtypeDrop","Choose creature subtype",Object.keys(creatureSubType));
+
         }
-
-
 
     },
 

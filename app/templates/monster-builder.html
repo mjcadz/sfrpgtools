@@ -36,48 +36,9 @@
                                     <h4 class="info-text">Step 1.</h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="btn-group btn-block" role="group">
-                                        <button id="CRDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="pull-left">Choose challenge rating</span>
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="javascript:void(0)">CR 1/3</a></li>
-                                            <li><a href="javascript:void(0)">CR 1/2</a></li>
-                                            <li><a href="javascript:void(0)">CR 1</a></li>
-                                            <li><a href="javascript:void(0)">CR 2</a></li>
-                                            <li><a href="javascript:void(0)">CR 3</a></li>
-                                            <li><a href="javascript:void(0)">CR 4</a></li>
-                                            <li><a href="javascript:void(0)">CR 5</a></li>
-                                            <li><a href="javascript:void(0)">CR 6</a></li>
-                                            <li><a href="javascript:void(0)">CR 7</a></li>
-                                            <li><a href="javascript:void(0)">CR 8</a></li>
-                                            <li><a href="javascript:void(0)">CR 9</a></li>
-                                            <li><a href="javascript:void(0)">CR 10</a></li>
-                                            <li><a href="javascript:void(0)">CR 11</a></li>
-                                            <li><a href="javascript:void(0)">CR 12</a></li>
-                                            <li><a href="javascript:void(0)">CR 13</a></li>
-                                            <li><a href="javascript:void(0)">CR 14</a></li>
-                                            <li><a href="javascript:void(0)">CR 15</a></li>
-                                            <li><a href="javascript:void(0)">CR 16</a></li>
-                                            <li><a href="javascript:void(0)">CR 17</a></li>
-                                            <li><a href="javascript:void(0)">CR 18</a></li>
-                                            <li><a href="javascript:void(0)">CR 19</a></li>
-                                            <li><a href="javascript:void(0)">CR 20</a></li>
-                                        </ul>
-                                    </div>
+                                    <div id="CRDropdown"></div>
                                     <P></P>
-                                    <div class="btn-group btn-block" role="group">
-                                        <button id="arrayDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="pull-left">Choose base type</span>
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="javascript:void(0)">Combatant</a></li>
-                                            <li><a href="javascript:void(0)">Expert</a></li>
-                                            <li><a href="javascript:void(0)">Spellcaster</a></li>
-                                        </ul>
-                                    </div>
+                                    <div id="arrayDropdown"></div>
                                     <P></P>
 
                                 </div>
@@ -93,26 +54,8 @@
                                     <h4 class="info-text">Step 2.</h4>
                                 </div>
                                 <div class="col-sm-6">
-                                  <div class="btn-group btn-block" role="group">
-                                      <button id="creatureTypeDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          <span class="pull-left">Choose creature type</span>
-                                          <span class="caret"></span>
-                                      </button>
-                                      <ul class="dropdown-menu pull-right">
-                                          <li><a href="javascript:void(0)">Aberration</a></li>
-                                          <li><a href="javascript:void(0)">Animal</a></li>
-                                          <li><a href="javascript:void(0)">Construct</a></li>
-                                          <li><a href="javascript:void(0)">Dragon</a></li>
-                                          <li><a href="javascript:void(0)">Fey</a></li>
-                                          <li><a href="javascript:void(0)">Humanoid</a></li>
-                                          <li><a href="javascript:void(0)">Magical Beast</a></li>
-                                          <li><a href="javascript:void(0)">Monstrous Humanoid</a></li>
-                                          <li><a href="javascript:void(0)">Ooze</a></li>
-                                          <li><a href="javascript:void(0)">Outsider</a></li>
-                                          <li><a href="javascript:void(0)">Plant</a></li>
-                                          <li><a href="javascript:void(0)">Undead</a></li>
-                                      </ul>
-                                  </div>
+                                  <div id="creatureTypeDropdown"></div>
+                                  <P></P>
                                 </div>
                                 <div class="col-sm-6">
                                   <div class="stepTwoDescription wizardp">
@@ -126,7 +69,8 @@
                                     <h4 class="info-text">Step 3.</h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div id="dropStepThree"></div>
+                                    <div id="creatureSubtypeDropdown"></div>
+                                    <P></P>
                                 </div>
                                 <div class="col-sm-6">
                                   <div class="stepThreeDescription wizardp">
@@ -161,6 +105,9 @@
             </div>
         </div>
         <!-- wizard container -->
+    </div>
+    <div class="output area">
+
     </div>
 </div>
 {% endblock %}

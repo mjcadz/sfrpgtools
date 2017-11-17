@@ -282,3 +282,9 @@ fieldset[disabled] .btn-grn.active {
 .progress-bar-grn:last-child.progress-bar:before {
   background-color: #cbf6f2;
 }
+
+.scrollable-menu {
+    height: auto;
+    max-height: 390px;
+    overflow-x: hidden;
+}

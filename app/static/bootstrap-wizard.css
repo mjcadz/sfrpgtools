@@ -138,7 +138,7 @@
 .wizard-card .info-text {
   text-align: center;
   font-weight: 300;
-  margin: 10px 0 30px;
+  margin: 0px 0 20px;
 }
 
 .wizard-card .choice {
@@ -193,4 +193,8 @@
 .wizardp > p {
   line-height: 1.5;
   font-size: 16px;
+}
+
+.wizard-shadow {
+  box-shadow: 0px 0px 25px #FF1493;/*P!NK*/
 }
