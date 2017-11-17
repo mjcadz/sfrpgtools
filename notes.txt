@@ -4,7 +4,5 @@ navbar colour picker
 http://blog.koalite.com/bbg/
 button colour picker
 
-test share buttons/footer
-test resizing and footer
-
-do index/about site words
+https://github.com/silviomoreto/bootstrap-select
+bootstrap dropdown select
