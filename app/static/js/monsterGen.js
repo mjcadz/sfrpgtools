@@ -211,6 +211,74 @@ creatureType = {
     "Vermin": ["This type includes insects, arachnids, other arthropods, worms, and similar invertebrates.","Traits: Darkvision 60 ft.,mindless; set Intelligence modifier to -.","Adjustments: +2 to Fortitude saving throws."]
 };
 
+creatureTypeO = {
+  "Aberration": {
+    "Adjustments": "+2 to Will saving throws.",
+    "Description": "An aberration has a bizarre anatomy, strange abilities, an alien mindset, or any combination of the three.",
+    "Traits": "Darkvision 60 ft."
+  },
+  "Animal": {
+    "Adjustments": "+2 to Fortitude and Reflex saving throws.",
+    "Description": "An animal is a living, nonhumanoid creature, usually a vertebrate with no magical abilities and no innate capacity for language or culture.",
+    "Traits": "Low-light vision; set Intelligence modifier to -4 or -5."
+  },
+  "Construct": {
+    "Adjustments": "-2 to all saving throws, +1 to attack rolls.",
+    "Description": "A construct is a magically animated object or an artificially created creature.",
+    "Traits": "Darkvision 60 ft., low-light vision, construct immunities, unliving; set Constitution modifier to -; must have either the magical or technological subtype; if the construct is mindless, set Intelligence modifier to - and add mindless."
+  },
+  "Dragon": {
+    "Adjustments": "+2 to all saving throws, +1 to attack rolls.",
+    "Description": "A dragon is a reptilian creature, usually winged, with magical or otherwise unusual abilities.",
+    "Traits": "Darkvision 60 ft., low-light vision, immunity to paralysis and sleep."
+  },
+  "Fey": {
+    "Adjustments": "+2 to Fortitude and Reflex saving throws, -1 to attack rolls.",
+    "Description": "A fey is a creature with supernatural abilities and connections to nature or to some other force or place.",
+    "Traits": "Low-light vision."
+  },
+  "Humanoid": {
+    "Adjustments": "+2 to one type of saving throw.",
+    "Description": "A humanoid usually has two arms, two legs, and one head, or it has a humanlike torso, arms, and a head. Humanoids have few or no supernatural or extraordinary abilities, but most can speak and usually have well-developed societies.",
+    "Traits": "Must have a subtype that matches its race (such as human, lashunta, or shirren) or that is related to its race (such as goblinoid)."
+  },
+  "Magical Beast": {
+    "Adjustments": "+2 to Fortitude and Reflex saving throws, +1 to attack rolls.",
+    "Description": "Magical beasts are similar to animals but can have Intelligence modifiers greater than -4 (in which case the magical beast knows at least one language, though it can't necessarily speak). Magical beasts usually have supernatural or extraordinary abilities.",
+    "Traits": "Darkvision 60 ft., low-light vision."
+  },
+  "Monstrous Humanoid": {
+    "Adjustments": {"reflex":2,"will":2,"attack":1},
+    "Description": "Monstrous humanoids are similar to humanoids, but they have monstrous or animalistic features. They often have magical abilities as well.",
+    "Traits": "Darkvision 60 ft."
+  },
+  "Ooze": {
+    "Adjustments": {"fortitude":2,"reflex":-2,"will":-2,"skills":"only natural"},
+    "Description": "An ooze is an amorphous or mutable creature.",
+    "Traits": "Blindsight, mindless, ooze immunities, sightless; set Intelligence modifier to -."
+  },
+  "Outsider": {
+    "Adjustments": {"any":2,"attack":1},
+    "Description": "An outsider is at least partially composed of the essence (but not necessarily the material) of a plane other than the Material Plane. Some creatures start out as another type and become outsiders when they attain a higher or lower state of spiritual existence.",
+    "Traits": "Darkvision 60 ft.; if the outsider is a member of a specific race (such as angel, devil, etc.), it must have a subtype to match its race."
+  },
+  "Plant": {
+    "Adjustments": {"fortitude":2},
+    "Description": "This type describes vegetable creatures. Note that regular plants, such as those growing in gardens or fields, lack Wisdom and Charisma modifiers and are objects, not creatures, even though they are alive.",
+    "Traits": "Low-light vision, plant immunities."
+  },
+  "Undead": {
+    "Adjustments": {"fortitude":2},
+    "Description": "Undead are once-living creatures animated by magic or advanced technological forces.",
+    "Traits": "Darkvision 60 ft., undead immunities, unliving; set Constitution modifier to -."
+  },
+  "Vermin": {
+    "Adjustments": {"fortitude":2},
+    "Description": "This type includes insects, arachnids, other arthropods, worms, and similar invertebrates.",
+    "Traits": "Darkvision 60 ft., mindless; set Intelligence modifier to -."
+  }
+};
+
 creatureSubType = {
     "Aeon": ["Aeons are a race of neutral outsiders who maintain the balance of reality.", "Traits: Immunity to cold, critical hits, and poison; resistance 10 to electricity and fire; bonus equal to CR to skill checks to recall knowledge; extension of all (see below), telepathy 100 ft. (non-verbal).", "Extension of All (Ex): Aeons can communicate telepathically with other aeons over vast distances. This ability works even across planes, albeit less effectively, allowing the communication of only vague impressions and feelings."],
     "Agathion": ["Agathions are celestials, or good outsiders, native to Nirvana.", "Traits: Low-light vision; +4 to saving throws against poison; immunity to electricity and petrification; resistance 10 to cold and sonic; healing channel (as per the healer mystic connection power); truespeech; speak with animals (as per the xenodruid mystic connection power)."],
@@ -420,6 +488,8 @@ function buildStatBlock() {
 
   var statBlock = {};
 
+  //Step 1
+
   //base array
   var CRDrop = $('[data-id="CRDrop"]').text().trim().replace("CR ","");
   var arrayDrop = $('[data-id="arrayDrop"]').text().trim();
@@ -446,7 +516,7 @@ function buildStatBlock() {
 
 //creates bootstrap-select dropdowns from arrays
 function generateDropdown(parentID,dropID,title,array) {
-  var dropHtml = '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10">'
+  var dropHtml = '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10">'
   for (i = 0; i < array.length; i++) {
     dropHtml += '<option>' + array[i] + '</option>';
   }
@@ -464,15 +534,16 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         $descriptionArea.empty();
         $descriptionArea.append("<p>"+stepOneDescription[selected]+"</p>");
 
-    } else if (Object.keys(creatureType).includes(selected)) {
+    } else if (Object.keys(creatureTypeO).includes(selected)) {
         var $descriptionArea = $(".stepTwoDescription").first();
+        var searchMask = new RegExp(selected, "i");//match case insensitive
         $descriptionArea.empty();
-        $descriptionArea.append("<p>"+creatureType[selected]+"</p>");
+        $descriptionArea.append("<p>"+creatureTypeO[selected].Description.replace(searchMask,'<b>'+selected+'</b>')+"</p>");
 
     } else if (Object.keys(creatureSubType).includes(selected)) {
         var $descriptionArea = $(".stepThreeDescription").first();
         $descriptionArea.empty();
-        $descriptionArea.append("<p>"+creatureSubType[selected]+"</p>");
+        $descriptionArea.append("<p>"+creatureSubType[selected][0]+"</p>");
 
     }
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
