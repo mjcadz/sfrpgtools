@@ -133,7 +133,7 @@ expertAttackStats = {
 
 //CR: EAC,	KAC,	Fort,	Ref,	Will,	Hit Points,	Ability DC	Base, Spell Dc,	Ability Score Modifiers,	Special Abilities,	Master Skills,	Good Skills
 var spellcasterMainStats = {
-    "1/3": [9, 10, 0, 0, 2, 5, 10, 12, 3, 1, 0, 1, [7 (2), [3,1]],
+    "1/3": [9, 10, 0, 0, 2, 5, 10, 12, 3, 1, 0, 1, [7,2], [3,1]],
     "1/2": [9, 10, 0, 0, 3, 11, 11, 13, 3, 2, 1, 1, [9,2], [4,1]],
     "1": [10, 11, 1, 1, 4, 16, 12, 13, 4, 2, 1, 1, [10,2], [5,1]],
     "2": [12, 13, 1, 1, 5, 21, 13, 14, 4, 2, 1, 2, [12,2], [7,1]],
@@ -224,7 +224,7 @@ creatureTypeO = {
     "Adjustments": {"fortitude":2,"reflex":2},
     "Description": "An animal is a living, nonhumanoid creature, usually a vertebrate with no magical abilities and no innate capacity for language or culture.",
     "Traits": ["Low-light vision"],
-    "Options": {"int": [-4,-5]}
+    "Options": ["Set intelligence -4","Set intelligence -5"]
   },
   "Construct": {
     "Adjustments": {"fortitude":-2,"reflex":-2,"will":-2,"attackMod":1,"con":"-"},
@@ -232,7 +232,7 @@ creatureTypeO = {
     "Traits": ["Darkvision 60 ft.","Low-light vision","Unliving"],
     "Immunities": ["Construct"],
     "Subtypes": ["magical","technological"],
-    "Options": {"mindless": {"int":"-"}}
+    "Options": ["Mindless (int -)","Not mindless"]
   },
   "Dragon": {
     "Adjustments": {"fortitude":2,"reflex":2,"will":2,"attackMod":1},
@@ -524,23 +524,50 @@ function buildStatBlock() {
   // step 2 - creature type
 
   //initialise relevant statistics
-  statBlock["attackmod"] = baseStats[i]
+  statBlock["attackmod"] = 0
 
 
   var creatureType = $('[data-id="creatureTypeDrop"]').text().trim();
 
-  //adjustments
+  //stat block adjustments
 
   for (adjustment in creatureTypeO[creatureType].Adjustments) {
-    alert(adjustment + creatureTypeO[creatureType].Adjustments[adjustment]);
+    if (adjustment == "anySave"){
+      //use picker
+      var savingThrow = $('[data-id="SavingThrowDrop"]').text().trim().replace(' +2','').toLowerCase();
+      statBlock[savingThrow] += 2;
+    } else if (statBlock.hasOwnProperty(adjustment)){
+      //check if proprty already has entry
+      statBlock[adjustment] += creatureTypeO[creatureType].Adjustments[adjustment];
+    } else {
+      statBlock[adjustment] = creatureTypeO[creatureType].Adjustments[adjustment];
+    }
   }
 
+  //Traits
+  statBlock["traits"] = creatureTypeO[creatureType].Traits;
 
+  //Immunities
+  if (creatureTypeO[creatureType].hasOwnProperty("Immunities")){
+    statBlock["immunities"] = creatureTypeO[creatureType].Immunities;
+  }
+
+  //Options
+  if ($('[data-id="optionDrop"]').length){
+    if (creatureType == "Animal"){
+      statBlock.int = -Number($('[data-id="optionDrop"]').text().trim().replace('Set intelligence -',''));
+    } else if (creatureType == "Construct") {
+      if (!$('[data-id="optionDrop"]').text().trim().includes("Not")){
+        statBlock.int = '-';
+        statBlock.traits = statBlock.traits.concat(["Mindless"]);
+      }
+    }
+  } else {console.log("option error")}
 
 
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
-  $outputArea.append("<p>"+statBlock.meleeStandard+"</p>");
+  $outputArea.append("<p>"+statBlock.traits + statBlock.int +"</p>");
 
 }
 
@@ -552,7 +579,8 @@ function generateDropdown(parentID,dropID,title,array) {
   }
   dropHtml += '</select>';
   document.getElementById(parentID).innerHTML = dropHtml;
-  //rebind dropdown click dropClickHandler
+  //initialise & rebind dropdown click dropClickHandler
+  $('.selectpicker').selectpicker();
   $('.selectpicker').on('changed.bs.select', dropClickHandler);
 }
 
@@ -569,6 +597,18 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         var searchMask = new RegExp(selected, "i");//match case insensitive
         $descriptionArea.empty();
         $descriptionArea.append("<p>"+creatureTypeO[selected].Description.replace(searchMask,'<b>'+selected+'</b>')+"</p>");
+        //check if type needs choices
+        if (creatureTypeO[selected].Adjustments.hasOwnProperty("anySave")){
+          generateDropdown("stepTwoOptionalDropdown","SavingThrowDrop","Choose saving throw",["Fortitude +2","Reflex +2","Will +2"]);
+        }  else if (creatureTypeO[selected].hasOwnProperty("Options")) {
+          if (selected == "Animal"){
+            generateDropdown("stepTwoOptionalDropdown","optionDrop","Choose option",creatureTypeO[selected].Options);
+          } else if (selected == "Construct"){
+            generateDropdown("stepTwoOptionalDropdown","optionDrop","Choose option",creatureTypeO[selected].Options);
+          }
+        } else {
+          $("#stepTwoOptionalDropdown").first().empty();
+        }
 
     } else if (Object.keys(creatureSubType).includes(selected)) {
         var $descriptionArea = $(".stepThreeDescription").first();
@@ -631,10 +671,22 @@ $('.wizard-card').bootstrapWizard({
                 $('[data-id="creatureTypeDrop"]').addClass('wizard-shadow');
                 validated = false;
             }
+            if ($('[data-id="SavingThrowDrop"]').length){
+              if ($('[data-id="SavingThrowDrop"]').text().includes("Choose")) {
+                  $('[data-id="SavingThrowDrop"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+            if ($('[data-id="optionDrop"]').length){
+              if ($('[data-id="optionDrop"]').text().includes("Choose")) {
+                  $('[data-id="optionDrop"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
 
             if (validated) {
                 buildStatBlock()
-                return false;
+                //return false;
                 //return false; //temp for testing
             } else {
                 return false;
