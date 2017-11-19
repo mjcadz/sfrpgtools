@@ -218,18 +218,19 @@ creatureTypeO = {
   "Aberration": {
     "Adjustments": {"fortitude":2,"reflex":2,"attackMod":1},
     "Description": "An aberration has a bizarre anatomy, strange abilities, an alien mindset, or any combination of the three.",
-    "Traits": ["Darkvision 60 ft."]
+    "Senses": ["Darkvision 60 ft."]
   },
   "Animal": {
     "Adjustments": {"fortitude":2,"reflex":2},
     "Description": "An animal is a living, nonhumanoid creature, usually a vertebrate with no magical abilities and no innate capacity for language or culture.",
-    "Traits": ["Low-light vision"],
+    "Senses": ["Low-light vision"],
     "Options": ["Set intelligence -4","Set intelligence -5"]
   },
   "Construct": {
     "Adjustments": {"fortitude":-2,"reflex":-2,"will":-2,"attackMod":1,"con":"-"},
     "Description": "A construct is a magically animated object or an artificially created creature.",
-    "Traits": ["Darkvision 60 ft.","Low-light vision","Unliving"],
+    "Senses": ["Darkvision 60 ft.","Low-light vision"],
+    "OtherAbilities": ["Unliving"],
     "Immunities": ["Construct"],
     "Subtypes": ["magical","technological"],
     "Options": ["Mindless (int -)","Not mindless"]
@@ -237,105 +238,304 @@ creatureTypeO = {
   "Dragon": {
     "Adjustments": {"fortitude":2,"reflex":2,"will":2,"attackMod":1},
     "Description": "A dragon is a reptilian creature, usually winged, with magical or otherwise unusual abilities.",
-    "Traits": ["Darkvision 60 ft.","Low-light vision"],
+    "Senses": ["Darkvision 60 ft.","Low-light vision"],
     "Immunities": ["paralysis","sleep"]
   },
   "Fey": {
     "Adjustments": {"fortitude":2,"reflex":2,"attackMod":-1},
     "Description": "A fey is a creature with supernatural abilities and connections to nature or to some other force or place.",
-    "Traits": ["Low-light vision."]
+    "Senses": ["Low-light vision."]
   },
   "Humanoid": {
     "Adjustments": {"anySave":2},
     "Description": "A humanoid usually has two arms, two legs, and one head, or it has a humanlike torso, arms, and a head. Humanoids have few or no supernatural or extraordinary abilities, but most can speak and usually have well-developed societies.",
-    "Traits": "none",
     "Subtypes": humanoidSubtypes
   },
   "Magical Beast": {
     "Adjustments": {"fortitude":2,"reflex":2,"attackMod":1},
     "Description": "Magical beasts are similar to animals but can have Intelligence modifiers greater than -4 (in which case the magical beast knows at least one language, though it can't necessarily speak). Magical beasts usually have supernatural or extraordinary abilities.",
-    "Traits": ["Darkvision 60 ft.","Low-light vision."]
+    "Senses": ["Darkvision 60 ft.","Low-light vision."]
   },
   "Monstrous Humanoid": {
     "Adjustments": {"reflex":2,"will":2,"attackMod":1},
     "Description": "Monstrous humanoids are similar to humanoids, but they have monstrous or animalistic features. They often have magical abilities as well.",
-    "Traits": ["Darkvision 60 ft."]
+    "Senses": ["Darkvision 60 ft."]
   },
   "Ooze": {
     "Adjustments": {"fortitude":2,"reflex":-2,"will":-2,"skills":"only natural","int":"-"},
     "Description": "An ooze is an amorphous or mutable creature.",
-    "Traits": ["Blindsight","Mindless","Sightless"],
+    "Traits": ["Blindsight","Sightless"],
+    "OtherAbilities": ["Mindless"],
     "Immunities": ["Ooze"]
   },
   "Outsider": {
     "Adjustments": {"anySave":2,"attackMod":1},
     "Description": "An outsider is at least partially composed of the essence (but not necessarily the material) of a plane other than the Material Plane. Some creatures start out as another type and become outsiders when they attain a higher or lower state of spiritual existence.",
-    "Traits": ["Darkvision 60 ft."],
+    "Senses": ["Darkvision 60 ft."],
     "Subtypes": outsiderSubtypes
   },
   "Plant": {
     "Adjustments": {"fortitude":2},
     "Description": "This type describes vegetable creatures. Note that regular plants, such as those growing in gardens or fields, lack Wisdom and Charisma modifiers and are objects, not creatures, even though they are alive.",
-    "Traits": ["Low-light vision"],
+    "Senses": ["Low-light vision"],
     "Immunities": ["Plant"]
   },
   "Undead": {
     "Adjustments": {"fortitude":2,"con":"-"},
     "Description": "Undead are once-living creatures animated by magic or advanced technological forces.",
-    "Traits": ["Darkvision 60 ft.","Unliving"],
+    "Senses": ["Darkvision 60 ft."],
+    "OtherAbilities": ["Unliving"],
     "Immunities": ["Undead"]
   },
   "Vermin": {
     "Adjustments": {"fortitude":2,"int":"-"},
     "Description": "This type includes insects, arachnids, other arthropods, worms, and similar invertebrates.",
-    "Traits": ["Darkvision 60 ft.","Mindless"]
+    "Senses": ["Darkvision 60 ft."],
+    "OtherAbilities": ["Mindless"]
   }
 };
 
 creatureSubType = {
-    "Aeon": ["Aeons are a race of neutral outsiders who maintain the balance of reality.", "Traits: Immunity to cold, critical hits, and poison; resistance 10 to electricity and fire; bonus equal to CR to skill checks to recall knowledge; extension of all (see below), telepathy 100 ft. (non-verbal).", "Extension of All (Ex): Aeons can communicate telepathically with other aeons over vast distances. This ability works even across planes, albeit less effectively, allowing the communication of only vague impressions and feelings."],
-    "Agathion": ["Agathions are celestials, or good outsiders, native to Nirvana.", "Traits: Low-light vision; +4 to saving throws against poison; immunity to electricity and petrification; resistance 10 to cold and sonic; healing channel (as per the healer mystic connection power); truespeech; speak with animals (as per the xenodruid mystic connection power)."],
-    "Air": ["This subtype is usually applied to outsiders with a connection to the Plane of Air.", "Traits: Supernatural fly speed, usually with perfect maneuverability; gains Acrobatics as a master or good skill."],
-    "Android": ["This subtype is applied to androids and creatures related to androids.", "Traits: Most creatures with this subtype gain darkvision 60 ft. and low-light vision; if the NPC is of the android race, it also gains the constructed, flat affect, and upgrade slot racial traits."],
-    "Angel": ["Angels are celestials, or good outsiders, native to the good-aligned Outer Planes.", "Traits: Darkvision 60 ft.; low-light vision; protective aura (see below); +4 to saving throws against poison; immunity to acid, cold, and petrification; resistance 10 to electricity and fire; truespeech.", "Protective Aura (Su): For angels of CR 3 to CR 15, this ability grants creatures within the aura (usually 20 feet), including the angel, a divine bonus (usually +2) to AC against attacks made by evil creatures and a divine bonus (usually +4) to saving throws against effects created by evil creatures. The protective aura of a more powerful or a weaker angel might grant a larger or smaller bonus and have a larger or smaller radius, respectively."],
-    "Aquatic": ["These creatures are often native to environments that are mostly or entirely underwater.", "Traits: Swim speed, water breathing, Athletics as a master or good skill; if it can breathe air, it also gains the amphibious special ability."],
-    "Archon": ["Archons are celestials, or good outsiders, native to Heaven.", "Traits: Darkvision 60 ft.; low-light vision; aura of menace (see below); +4 to saving throws against poison; immunity to electricity and petrification; truespeech; many archons can cast teleport as an at-will spell-like ability (caster level equal to its CR).", "Aura of Menace (Su): This ability imposes a divine penalty (usually -2) to the AC, attacks, and saving throws of each hostile creature within the aura (usually 20 feet) that fails a Will save. This penalty lasts for 24 hours or until that creature deals damage to the archon who generated the aura. A creature that has resisted or broken the effect can't be affected again by the same archon's aura for 24 hours. The aura of a more powerful or weaker archon might impose a larger or smaller penalty and might have a larger or smaller radius, respectively."],
-    "Azata": ["Azatas are celestials, or good outsiders, native to Elysium.", "Traits: Darkvision 60 ft., low-light vision; immunity to electricity and petrification; resistance 10 to cold and fire; truespeech."],
-    "Cold": ["Creatures with this subtype are usually native to frigid environments.", "Traits: Immunity to cold; vulnerable to fire."],
-    "Daemon": ["Daemons are fiends, or evil outsiders, native to Abaddon.", "Traits: Immunity to acid, death effects, disease, and poison; resistance 10 to cold, electricity, and fire; gains ability to summon allies; telepathy."],
-    "Demon": ["Demons are fiends, or evil outsiders, native to the Abyss.", "Traits: Immunity to electricity and poison; resistance 10 to acid, cold, and fire; gains ability to summon allies; telepathy."],
-    "Devil": ["Devils are fiends, or evil outsiders, native to Hell.", "Traits: See in darkness; immunity to fire and poison; resistance 10 to acid and cold; gains ability to summon allies; telepathy."],
-    "Dwarf": ["This subtype is applied to dwarves and creatures related to dwarves.", "Traits: Most creatures with this subtype gain darkvision 60 ft.; if the NPC is of the dwarven race, it also gains the slow but steady, stonecunning, traditional enemies, and weapon familiarity racial traits."],
-    "Earth": ["This subtype is usually applied to outsiders with a connection to the Plane of Earth.", "Traits: Burrow speed; blindsense or blindsight (vibration) with a varied range."],
-    "Elemental": ["An elemental is a creature composed entirely of matter from one of the four Elemental Planes.", "Traits: Elemental immunities."],
-    "Elf": ["This subtype is applied to elves and creatures related to elves.", "Traits: Most creatures with this subtype gain low-light vision and gain Perception as an additional master skill; if the NPC is of the drow race, it gains darkvision 60 ft. instead of low-light vision, as well as the drow immunities, drow magic, and light blindness racial traits; if the NPC is of the elven race, it gains the elven immunities and elven magic racial traits and Mysticism as a master skill; if the NPC is of the half-elven race, it gains the elven blood racial trait and an extra good skill."],
-    "Fire": ["This subtype is usually applied to outsiders with a connection to the Plane of Fire and creatures with a strong affinity to fire.", "Traits: Immunity to fire; vulnerable to cold."],
-    "Giant": ["This subtype is applied to giants and creatures related to giants.", "Traits: Low-light vision; many NPCs with this subtype gain Intimidate and Perception as master skills."],
-    "Gnome": ["This subtype is applied to gnomes and creatures related to gnomes.", "Traits: Low-light vision; if the NPC is of the gnome race it also gains the eternal hope and gnome magic racial traits and Culture as a master skill."],
-    "Goblinoid": ["This subtype is applied to humanoids of various goblinoid subspecies, such as space goblins.", "Traits: Darkvision 60 ft.; if the NPC is of the space goblin race, it also gains the fast and tinker racial traits, Engineering and Stealth as master skills, and Survival as a good skill."],
-    "Gray": ["This subtype is applied to the humanoid aliens known as grays and creatures related to grays.", "Traits: Darkvision 60 ft.; if the NPC is of the gray race, it also gains telepathy 100 ft. and the phase special ability."],
-    "Halfling": ["This subtype is applied to halflings and creatures related to halflings.", "Traits: None; if the NPC is of the halfling race, it gains the halfling luck and sneaky racial traits, Perception and Stealth as master skills, and Acrobatics and Athletics as good skills."],
-    "Human": ["This subtype is applied to humans and creatures related to humans.", "Traits: None; if the NPC is of the human race, it gains an additional special ability of any type and an additional good skill."],
-    "Ikeshti": ["This subtype is applied to ikeshtis and creatures related to ikeshtis.", "Traits: Most creatures with this subtype gain a climb speed; if the NPC is of the ikeshti race, it also gains the desert survivor, shed skin, and squirt blood racial traits."],
-    "Incorporeal": ["Creatures with this subtype have no physical bodies.", "Traits: Incorporeal."],
-    "Inevitable": ["Inevitables are construct-like outsiders built to enforce the laws of the universe.", "Traits: Darkvision 60 ft., low-light vision; constructed; regeneration (suppressed by chaotic-aligned attacks); truespeech."],
-    "Kasatha": ["This subtype is applied to kasathas and creatures related to kasathas.", "Traits: None; if the NPC is of the kasatha race, it gains the desert stride and four-armed racial traits, Acrobatics and Athletics as master skills, and Culture as a good skill."],
-    "Lashunta": ["This subtype is applied to lashuntas and creatures related to lashuntas.", "Traits: None; if the NPC is of the lashunta race, it gains the limited telepathy racial trait and can cast the following spells as spell-like abilities: 1/day- detect thoughts; at will-daze and psychokinetic hand."],
-    "Maraquoi": ["This subtype is applied to maraquoi and creatures related to maraquoi.", "Traits: Low-light vision; if the NPC is of the maraquoi race, it also gains blindsense (sound) 30 ft., a climb speed of 20 ft., the prehensile tail racial trait, and Survival as a master skill."],
-    "Orc": ["This subtype is applied to orcs and creatures who are related to orcs.", "Traits: Most creatures of this subtype gain darkvision 60 ft. and the ferocity universal creature rule; if the creature is of the half-orc race, it also gains Intimidate and Survival as master skills."],
-    "Plantlike": ["Plantlike creatures have many of the characteristics of plants.", "Traits: Most plantlike creatures have the plantlike universal creature rule."],
-    "Protean": ["Proteans are serpentine outsiders of pure chaos native to the Maelstrom.", "Traits: Blindsense (distance and sense varies by protean type); immunity to acid; resistance 10 to electricity and sonic; supernatural flight speed; amorphous; change shape; grab ability with its natural attacks."],
-    "Reptoid": ["This subtype is applied to the shapechanging aliens known as reptoids and creatures related to reptoids.", "Traits: Low-light vision; if the NPC is of the reptoid race, it also gains the change shape, cold-blooded, and natural weapons racial traits."],
-    "Ryphorian": ["This subtype is applied to ryphorians and creatures related to ryphorians.", "Traits: Low-light vision; if the NPC is of the ryphorian race, it also gains an additional special ability of any type, the trimorphic racial trait, and Perception as a master skill."],
-    "Sarcesian": ["This subtype is applied to sarcesians and creatures related to sarcesians.", "Traits: Low-light vision; if the NPC is of the sarcesian race, it also gains the void flyer special ability and an additional good skill."],
-    "Shapechanger": ["This subtype is applied to creatures that can dramatically alter their forms.", "Traits: Change shape (specific details depend upon creature)."],
-    "Shirren": ["This subtype is applied to shirrens and creatures related to shirrens.", "Traits: Blindsense (vibration) 30 ft.; if the NPC is of the shirren race, it also gains the communalism and limited telepathy racial traits and Culture and Diplomacy as good skills."],
-    "Skittermander": ["This subtype is applied to skittermanders and creatures related to skittermanders.", "Traits: Low-light vision; if the NPC is of the skittermander race, it also gains the grappler, hyper, and six-armed racial traits."],
-    "Swarm": ["This subtype is applied to any collection of Fine, Diminutive, or Tiny creatures (usually vermin) that acts as a single creature. A single swarm usually occupies a square (if it is made up of nonflying creatures) or a cube (if it is made up of flying creatures) 10 feet on a side, but its reach is 0 feet. A swarm can move through cracks or holes large enough for its component creatures to fit through. In order to attack, a swarm moves into an opponent's space, which provokes an attack of opportunity. Spellcasting or concentrating on spells within the area of a swarm requires a successful caster level check (DC = 20 + spell level). Using skills that involve patience and concentration, such as Computers, within the area of a swarm requires a successful DC 20 Will saving throw.", "Traits: Swarm defenses, swarm immunities, distraction, swarm attack."],
-    "Verthani": ["This subtype is applied to verthani and creatures related to verthani.", "Traits: Low-light vision; if the NPC is of the verthani race, it also gains the easily augmented and skin mimic racial traits and an additional good skill."],
-    "Vesk": ["This subtype is applied to vesk and creatures related to vesk.", "Traits: Low-light vision; if the NPC is of the vesk race, it also gains the armor savant, fearless, and natural weapons racial traits."],
-    "Water": ["This subtype is usually applied to outsiders with a connection to the Plane of Water.", "Traits: Swim speed, gains Athletics as a master or good skill."],
-    "Ysoki": ["This subtype is applied to ysoki and creatures related to ysoki","Traits: Darkvision 60 ft.; if the NPC is of the ysoki race, it also gains the cheek pouches and moxie racial traits, Engineering and Stealth as master skills, and Survival as a good skill."]
+  "Aeon": {
+    "Description": "Aeons are a race of neutral outsiders who maintain the balance of reality.",
+    "Languages":["telepathy 100 ft. (non-verbal)"]
+    "OtherAbilities":["+CR to skill checks to recall knowledge"]
+    "Immunities":["cold","critical hits","poison"],
+    "Resistance":["electricity 10","fire 10"],
+    "Abilities": {
+      "Extension of All (Ex)": "Aeons can communicate telepathically with other aeons over vast distances. This ability works even across planes, albeit less effectively, allowing the communication of only vague impressions and feelings."
+    }
+  },
+  "Agathion": {
+    "Description": "Agathions are celestials, or good outsiders, native to Nirvana.",
+    "Senses": "Low-light vision"
+    "Languages":["truespeech"],
+    "Immunities":["electricity","petrification"],
+    "Resistance":["cold 10","sonic 10"],
+    "OtherAbilities": ["+4 to saving throws against poison"],
+    "Abilities": {
+      "Healing Channel (Su)": "You can heal yourself and your allies. Healing yourself with channeled energy is a move action, healing an ally you touch is a standard action, and healing all allies within 30 feet is a full action. This energy restores 2d8 Hit Points and increases by 2d8 every 3 CR levels",
+      "Speak with Animals (Su)":"You can communicate with any creature of the animal type, though this doesn’t make it friendly. If an animal is friendly toward you, it may do you favors. This ability allows you to use Intimidate to bully animals, and you can use any other language-dependent effect against animals."
+    }
+  },
+  "Air": {
+    "Description": "This subtype is usually applied to outsiders with a connection to the Plane of Air.",
+    "MasterSkills": ["acrobatics"],
+    "Speed": ["fly 60 ft. (perfect)"]
+  },
+  "Android": {
+    "Description": "This subtype is applied to androids and creatures related to androids.",
+    "Senses": ["Darkvision 60 ft.","low-light vision"],
+    "OtherAbilities": ["constructed","flat affect", "upgrade slot"]
+  },
+  "Angel": {
+    "Description": "Angels are celestials, or good outsiders, native to the good-aligned Outer Planes.",
+    "Senses": ["Darkvision 60 ft.","low-light vision"],
+    "Languages":["truespeech"],
+    "OtherAbilities": ["+4 to saving throws against poison"],
+    "Immunities":["acid","cold","petrification"],
+    "Resistance":["electricity 10","fire 10"],
+    "Abilities": {
+      "Protective Aura (Su)": "For angels of CR 3 to CR 15, this ability grants creatures within the aura (usually 20 feet), including the angel, a divine bonus (usually +2) to AC against attacks made by evil creatures and a divine bonus (usually +4) to saving throws against effects created by evil creatures. The protective aura of a more powerful or a weaker angel might grant a larger or smaller bonus and have a larger or smaller radius, respectively."
+    }
+  },
+  "Aquatic": {
+    "Description": "These creatures are often native to environments that are mostly or entirely underwater.",
+    "Speed": ["swim 30 ft."],
+    "OtherAbilities": ["water breathing"],
+    "MasterSkills": ["athletics"],
+    "Options": ["Amphibious","Not amphibious"]
+  },
+  "Archon": {
+    ,
+    "Description": "Archons are celestials, or good outsiders, native to Heaven.",
+    "OtherAbilities": ["+4 to saving throws against poison"],
+    "SpellsAtWill":["teleport"],
+    "Languages": ["truespeech"],
+    "Immunities":["electricity","petrification"],
+    "Resistance":["electricity 10","fire 10"],
+    "Senses": ["Darkvision 60 ft.","low-light vision"],
+    "Abilities": {
+      "Aura of Menace (Su)": "This ability imposes a divine penalty (usually -2) to the AC, attacks, and saving throws of each hostile creature within the aura (usually 20 feet) that fails a Will save. This penalty lasts for 24 hours or until that creature deals damage to the archon who generated the aura. A creature that has resisted or broken the effect can't be affected again by the same archon's aura for 24 hours. The aura of a more powerful or weaker archon might impose a larger or smaller penalty and might have a larger or smaller radius, respectively."
+    }
+  },
+  "Azata": {
+    "Description": "Azatas are celestials, or good outsiders, native to Elysium.",
+    "Senses": ["Darkvision 60 ft.","low-light vision"],
+    "Immunities":["electricity","petrification"],
+    "Languages": ["truespeech"],
+    "Resistance":["cold 10","fire 10"]
+  },
+  "Cold": {
+    "Description": "Creatures with this subtype are usually native to frigid environments.",
+    "Vulnerable": ["fire"],
+    "Immunities":["cold"],
+  },
+  "Daemon": {
+    "Description": "Daemons are fiends, or evil outsiders, native to Abaddon.",
+    "OtherAbilities": ["gains ability to summon allies"],
+    "Immunities":["acid","death effects", "disease", "poison"],
+    "Resistance":["electricity 10","fire 10","cold 10"],
+    "Languages":["telepathy"]
+  },
+  "Demon": {
+    "Description": "Demons are fiends, or evil outsiders, native to the Abyss.",
+    "OtherAbilities": ["gains ability to summon allies"],
+    "Immunities":["electricity","poison"],
+    "Resistance":["acid 10","fire 10","cold 10"],
+    "Languages":["telepathy"]
+  },
+  "Devil": {
+    "Description": "Devils are fiends, or evil outsiders, native to Hell.",
+    "Senses": ["See in darkness"],
+    "OtherAbilities": ["gains ability to summon allies"],
+    "Immunities":["fire","poison"],
+    "Resistance":["acid 10","cold 10"],
+    "Languages":["telepathy"]
+  },
+  "Dwarf": {
+    "Description": "This subtype is applied to dwarves and creatures related to dwarves.",
+    "Senses": ["Darkvision 60 ft."],
+    "OtherAbilities": ["slow but steady","stonecunning","traditional enemies","weapon familiarity"]
+  },
+  "Earth": {
+    "Description": "This subtype is usually applied to outsiders with a connection to the Plane of Earth.",
+    "Options": ["blindsense","blindsight (vibration)"],
+    "Speed": ["burrow 30 ft."]
+  },
+  "Elemental": {
+    "Description": "An elemental is a creature composed entirely of matter from one of the four Elemental Planes.",
+    "Immunities": ["Elemental"]
+  },
+  "Elf": {
+    "Description": "This subtype is applied to elves and creatures related to elves.",
+    "Drow": {
+      "Senses": ["darkvision 60 ft."],
+      "MasterSkills": ["perception"],
+      "Immunities": ["drow"],
+      "OtherAbilities": ["drow magic","light blindness"]
+    },
+    "Elf": {
+      "Senses": ["low-light vision"],
+      "MasterSkills": ["perception","mysticism"],
+      "Immunities": ["elven"],
+      "OtherAbilities": ["elven magic"]
+    },
+    "Half-elf": {
+      "Senses": ["low-light vision"],
+      "MasterSkills": ["perception","mysticism"],
+      "OtherAbilities": ["elven blood"],
+      "GoodSkills": ["+1"]
+    }
+  },
+  "Fire": {
+    "Description": "This subtype is usually applied to outsiders with a connection to the Plane of Fire and creatures with a strong affinity to fire.",
+    "Traits": "Immunity to fire; vulnerable to cold."
+  },
+  "Giant": {
+    "Description": "This subtype is applied to giants and creatures related to giants.",
+    "Traits": "Low-light vision; many NPCs with this subtype gain Intimidate and Perception as master skills."
+  },
+  "Gnome": {
+    "Description": "This subtype is applied to gnomes and creatures related to gnomes.",
+    "Traits": "Low-light vision; if the NPC is of the gnome race it also gains the eternal hope and gnome magic racial traits and Culture as a master skill."
+  },
+  "Goblinoid": {
+    "Description": "This subtype is applied to humanoids of various goblinoid subspecies, such as space goblins.",
+    "Traits": "Darkvision 60 ft.; if the NPC is of the space goblin race, it also gains the fast and tinker racial traits, Engineering and Stealth as master skills, and Survival as a good skill."
+  },
+  "Gray": {
+    "Description": "This subtype is applied to the humanoid aliens known as grays and creatures related to grays.",
+    "Traits": "Darkvision 60 ft.; if the NPC is of the gray race, it also gains telepathy 100 ft. and the phase special ability."
+  },
+  "Halfling": {
+    "Description": "This subtype is applied to halflings and creatures related to halflings.",
+    "Traits": "None; if the NPC is of the halfling race, it gains the halfling luck and sneaky racial traits, Perception and Stealth as master skills, and Acrobatics and Athletics as good skills."
+  },
+  "Human": {
+    "Description": "This subtype is applied to humans and creatures related to humans.",
+    "Traits": "None; if the NPC is of the human race, it gains an additional special ability of any type and an additional good skill."
+  },
+  "Ikeshti": {
+    "Description": "This subtype is applied to ikeshtis and creatures related to ikeshtis.",
+    "Traits": "Most creatures with this subtype gain a climb speed; if the NPC is of the ikeshti race, it also gains the desert survivor, shed skin, and squirt blood racial traits."
+  },
+  "Incorporeal": {
+    "Description": "Creatures with this subtype have no physical bodies.",
+    "Traits": "Incorporeal."
+  },
+  "Inevitable": {
+    "Description": "Inevitables are construct-like outsiders built to enforce the laws of the universe.",
+    "Traits": "Darkvision 60 ft., low-light vision; constructed; regeneration (suppressed by chaotic-aligned attacks); truespeech."
+  },
+  "Kasatha": {
+    "Description": "This subtype is applied to kasathas and creatures related to kasathas.",
+    "Traits": "None; if the NPC is of the kasatha race, it gains the desert stride and four-armed racial traits, Acrobatics and Athletics as master skills, and Culture as a good skill."
+  },
+  "Lashunta": {
+    "Description": "This subtype is applied to lashuntas and creatures related to lashuntas.",
+    "Traits": "None; if the NPC is of the lashunta race, it gains the limited telepathy racial trait and can cast the following spells as spell-like abilities"
+  },
+  "Maraquoi": {
+    "Description": "This subtype is applied to maraquoi and creatures related to maraquoi.",
+    "Traits": "Low-light vision; if the NPC is of the maraquoi race, it also gains blindsense (sound) 30 ft., a climb speed of 20 ft., the prehensile tail racial trait, and Survival as a master skill."
+  },
+  "Orc": {
+    "Description": "This subtype is applied to orcs and creatures who are related to orcs.",
+    "Traits": "Most creatures of this subtype gain darkvision 60 ft. and the ferocity universal creature rule; if the creature is of the half-orc race, it also gains Intimidate and Survival as master skills."
+  },
+  "Plantlike": {
+    "Description": "Plantlike creatures have many of the characteristics of plants.",
+    "Traits": "Most plantlike creatures have the plantlike universal creature rule."
+  },
+  "Protean": {
+    "Description": "Proteans are serpentine outsiders of pure chaos native to the Maelstrom.",
+    "Traits": "Blindsense (distance and sense varies by protean type); immunity to acid; resistance 10 to electricity and sonic; supernatural flight speed; amorphous; change shape; grab ability with its natural attacks."
+  },
+  "Reptoid": {
+    "Description": "This subtype is applied to the shapechanging aliens known as reptoids and creatures related to reptoids.",
+    "Traits": "Low-light vision; if the NPC is of the reptoid race, it also gains the change shape, cold-blooded, and natural weapons racial traits."
+  },
+  "Ryphorian": {
+    "Description": "This subtype is applied to ryphorians and creatures related to ryphorians.",
+    "Traits": "Low-light vision; if the NPC is of the ryphorian race, it also gains an additional special ability of any type, the trimorphic racial trait, and Perception as a master skill."
+  },
+  "Sarcesian": {
+    "Description": "This subtype is applied to sarcesians and creatures related to sarcesians.",
+    "Traits": "Low-light vision; if the NPC is of the sarcesian race, it also gains the void flyer special ability and an additional good skill."
+  },
+  "Shapechanger": {
+    "Description": "This subtype is applied to creatures that can dramatically alter their forms.",
+    "Traits": "Change shape (specific details depend upon creature)."
+  },
+  "Shirren": {
+    "Description": "This subtype is applied to shirrens and creatures related to shirrens.",
+    "Traits": "Blindsense (vibration) 30 ft.; if the NPC is of the shirren race, it also gains the communalism and limited telepathy racial traits and Culture and Diplomacy as good skills."
+  },
+  "Skittermander": {
+    "Description": "This subtype is applied to skittermanders and creatures related to skittermanders.",
+    "Traits": "Low-light vision; if the NPC is of the skittermander race, it also gains the grappler, hyper, and six-armed racial traits."
+  },
+  "Swarm": {
+    "Description": "This subtype is applied to any collection of Fine, Diminutive, or Tiny creatures (usually vermin) that acts as a single creature. A single swarm usually occupies a square (if it is made up of nonflying creatures) or a cube (if it is made up of flying creatures) 10 feet on a side, but its reach is 0 feet. A swarm can move through cracks or holes large enough for its component creatures to fit through. In order to attack, a swarm moves into an opponent's space, which provokes an attack of opportunity. Spellcasting or concentrating on spells within the area of a swarm requires a successful caster level check (DC = 20 + spell level). Using skills that involve patience and concentration, such as Computers, within the area of a swarm requires a successful DC 20 Will saving throw.",
+    "Traits": "Swarm defenses, swarm immunities, distraction, swarm attack."
+  },
+  "Verthani": {
+    "Description": "This subtype is applied to verthani and creatures related to verthani.",
+    "Traits": "Low-light vision; if the NPC is of the verthani race, it also gains the easily augmented and skin mimic racial traits and an additional good skill."
+  },
+  "Vesk": {
+    "Description": "This subtype is applied to vesk and creatures related to vesk.",
+    "Traits": "Low-light vision; if the NPC is of the vesk race, it also gains the armor savant, fearless, and natural weapons racial traits."
+  },
+  "Water": {
+    "Description": "This subtype is usually applied to outsiders with a connection to the Plane of Water.",
+    "Traits": "Swim speed, gains Athletics as a master or good skill."
+  },
+  "Ysoki": {
+    "Description": "This subtype is applied to ysoki and creatures related to ysoki.",
+    "Traits": "Darkvision 60 ft.; if the NPC is of the ysoki race, it also gains the cheek pouches and moxie racial traits, Engineering and Stealth as master skills, and Survival as a good skill."
+  }
 };
 
 otherSubTypes = ["Chaotic", "Evil", "Extraplanar", "Good", "Lawful", "Magical", "Native", "Technological"]
@@ -545,14 +745,23 @@ function buildStatBlock() {
   }
 
   //Traits
-  statBlock["traits"] = creatureTypeO[creatureType].Traits;
+
+  //Senses
+  if (creatureTypeO[creatureType].hasOwnProperty("Senses")){
+    statBlock["senses"] = creatureTypeO[creatureType].Senses;
+  }
+
+  //Senses
+  if (creatureTypeO[creatureType].hasOwnProperty("OtherAbilities")){
+    statBlock["otherAbilities"] = creatureTypeO[creatureType].OtherAbilities;
+  }
 
   //Immunities
   if (creatureTypeO[creatureType].hasOwnProperty("Immunities")){
     statBlock["immunities"] = creatureTypeO[creatureType].Immunities;
   }
 
-  //Options
+  //Options - only applies to construct and animal
   if ($('[data-id="optionDrop"]').length){
     if (creatureType == "Animal"){
       statBlock.int = -Number($('[data-id="optionDrop"]').text().trim().replace('Set intelligence -',''));
