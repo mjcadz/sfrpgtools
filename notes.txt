@@ -11,5 +11,3 @@ monstergen check fly
 speeds will need to be picked later (i think)
 
 step 3 - options, subraces
-
-need better way to get which dropdown is happening. - eg for giant in subtype and giant in simple grafts

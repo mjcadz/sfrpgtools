@@ -90,7 +90,7 @@ function generateDropdown(parentID,dropID,title,array) {
   dropHtml += '</select>';
   document.getElementById(parentID).innerHTML = dropHtml;
   //initialise & rebind dropdown click dropClickHandler
-  $('.selectpicker').selectpicker();
+  $('#'+dropID).selectpicker();
   $('#'+dropID).on('changed.bs.select', dropClickHandler);
 }
 
@@ -98,12 +98,15 @@ function generateDropdown(parentID,dropID,title,array) {
 function dropClickHandler(e, clickedIndex, newValue, oldValue) {
     var selected = $(e.currentTarget).val();
     var id = $(e.currentTarget).attr('id');
+
     if (id=='arrayDrop') {
+
         var $descriptionArea = $(".stepOneDescription").first();
         $descriptionArea.empty();
         $descriptionArea.append("<p>"+stepOneDescription[selected]+"</p>");
 
     } else if (id=='creatureTypeDrop') {
+
         var $descriptionArea = $(".stepTwoDescription").first();
         var searchMask = new RegExp(selected, "i");//match case insensitive
         $descriptionArea.empty();
@@ -122,6 +125,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         }
 
     } else if (id=='creatureSubTypeDrop') {
+
         var $descriptionArea = $(".stepThreeDescription").first();
         $descriptionArea.empty();
         var searchMask = new RegExp(selected, "i");//match case insensitive
@@ -207,6 +211,7 @@ $('.wizard-card').bootstrapWizard({
 
                 //generate step three dropdowns
                 generateDropdown("creatureSubtypeDropdown","creatureSubTypeDrop","Choose creature subtype",Object.keys(creatureSubType));
+                $("#stepThreeOptionalDropdown").first().empty();
             } else {
                 return false;
             }
