@@ -82,8 +82,11 @@ function buildStatBlock() {
 }
 
 //creates bootstrap-select dropdowns from arrays
-function generateDropdown(parentID,dropID,title,array) {
+function generateDropdown(parentID,dropID,title,array,noneOption) {
   var dropHtml = '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10">'
+  if (noneOption) {
+    dropHtml += '<option>None</option><option data-divider="true"></option>'
+  }
   for (i = 0; i < array.length; i++) {
     dropHtml += '<option>' + array[i] + '</option>';
   }
@@ -113,12 +116,12 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         $descriptionArea.append("<p>"+creatureType[selected].Description.replace(searchMask,'<b>'+selected+'</b>')+"</p>");
         //check if type needs choices
         if (creatureType[selected].Adjustments.hasOwnProperty("anySave")){
-          generateDropdown("stepTwoOptionalDropdown","SavingThrowDrop","Choose saving throw",["Fortitude +2","Reflex +2","Will +2"]);
+          generateDropdown("stepTwoOptionalDropdown","SavingThrowDrop","Choose saving throw",["Fortitude +2","Reflex +2","Will +2"],false);
         }  else if (creatureType[selected].hasOwnProperty("Options")) {
           if (selected == "Animal"){
-            generateDropdown("stepTwoOptionalDropdown","optionDrop","Choose option",creatureType[selected].Options);
+            generateDropdown("stepTwoOptionalDropdown","optionDrop","Choose option",creatureType[selected].Options,false);
           } else if (selected == "Construct"){
-            generateDropdown("stepTwoOptionalDropdown","optionDrop","Choose option",creatureType[selected].Options);
+            generateDropdown("stepTwoOptionalDropdown","optionDrop","Choose option",creatureType[selected].Options,false);
           }
         } else {
           $("#stepTwoOptionalDropdown").first().empty();
@@ -128,15 +131,17 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
         var $descriptionArea = $(".stepThreeDescription").first();
         $descriptionArea.empty();
-        var searchMask = new RegExp(selected, "i");//match case insensitive
-        $descriptionArea.append("<p>"+creatureSubType[selected].Description.replace(searchMask,'<b>'+selected+'</b>')+"</p>");
-        //check if type needs choices
-        if (creatureSubType[selected].hasOwnProperty("Options")) {
-          generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose option",creatureSubType[selected].Options);
-        } else if (creatureSubType[selected].hasOwnProperty("SubRaces")) {
-          generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose race",Object.keys(creatureSubType[selected].SubRaces));
-        } else {
-          $("#stepThreeOptionalDropdown").first().empty();
+        if (selected != "None") {
+          var searchMask = new RegExp(selected, "i");//match case insensitive
+          $descriptionArea.append("<p>"+creatureSubType[selected].Description.replace(searchMask,'<b>'+selected+'</b>')+"</p>");
+          //check if type needs choices
+          if (creatureSubType[selected].hasOwnProperty("Options")) {
+            generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose option",creatureSubType[selected].Options,false);
+          } else if (creatureSubType[selected].hasOwnProperty("SubRaces")) {
+            generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose race",Object.keys(creatureSubType[selected].SubRaces),false);
+          } else {
+            $("#stepThreeOptionalDropdown").first().empty();
+          }
         }
     }
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
@@ -156,10 +161,10 @@ $('.wizard-card').bootstrapWizard({
 
         //create initial dropdowns from data arrays
         //step1
-        generateDropdown("CRDropdown","CRDrop","Choose challenge rating",CRLabels);
-        generateDropdown("arrayDropdown","arrayDrop","Choose base",Object.keys(stepOneDescription));
+        generateDropdown("CRDropdown","CRDrop","Choose challenge rating",CRLabels,false);
+        generateDropdown("arrayDropdown","arrayDrop","Choose base",Object.keys(stepOneDescription),false);
         //step2
-        generateDropdown("creatureTypeDropdown","creatureTypeDrop","Choose creature type",Object.keys(creatureType));
+        generateDropdown("creatureTypeDropdown","creatureTypeDrop","Choose creature type",Object.keys(creatureType),false);
         //Step3
 
     },
@@ -209,9 +214,14 @@ $('.wizard-card').bootstrapWizard({
 
             if (validated) {
 
-                //generate step three dropdowns
-                generateDropdown("creatureSubtypeDropdown","creatureSubTypeDrop","Choose creature subtype",Object.keys(creatureSubType));
-                $("#stepThreeOptionalDropdown").first().empty();
+                //check if step 3 drop needs to be generated
+                var save = $('[data-id="creatureTypeDrop"]').text().trim()
+                if ($('#stepThreeSave').text().trim() != save){
+                    //generate step three dropdowns
+                    generateDropdown("creatureSubtypeDropdown","creatureSubTypeDrop","Choose creature subtype",Object.keys(creatureSubType),true);
+                    $("#stepThreeOptionalDropdown").first().empty();
+                    $('#stepThreeSave').text(save)
+                }
             } else {
                 return false;
             }

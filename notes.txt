@@ -11,3 +11,5 @@ monstergen check fly
 speeds will need to be picked later (i think)
 
 step 3 - options, subraces
+
+minify js and cs files
