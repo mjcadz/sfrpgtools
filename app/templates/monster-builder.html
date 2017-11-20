@@ -73,6 +73,8 @@
                                 <div class="col-sm-6">
                                     <div id="creatureSubtypeDropdown"></div>
                                     <P></P>
+                                    <div id="stepThreeOptionalDropdown"></div>
+                                    <P></P>
                                 </div>
                                 <div class="col-sm-6">
                                   <div class="stepThreeDescription wizardp">
@@ -116,5 +118,6 @@
 {% block includes %}
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-wizard.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterGenData.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterGen.js') }}"></script>
 {% endblock %}
