@@ -1139,9 +1139,9 @@ creatureSubType = {
 
 };
 
-templateGrafts = {
-
-}
+classCombatant = ["Solarian","Soldier"];
+classExpert = ["Envoy","Mechanic","Operative"];
+classSpellcaster = ["Mystic","Technomancer"];
 
 classData = {
     "Mystic": {

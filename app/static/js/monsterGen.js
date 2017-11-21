@@ -49,17 +49,17 @@ function buildStatBlock() {
 
   //Senses
   if (creatureType[creatureTypeDrop].hasOwnProperty("Senses")){
-    statBlock["senses"] = creatureType[creatureTypeDrop].Senses;
+    statBlock["Senses"] = creatureType[creatureTypeDrop].Senses;
   }
 
-  //Senses
+  //otherAbilities
   if (creatureType[creatureTypeDrop].hasOwnProperty("OtherAbilities")){
-    statBlock["otherAbilities"] = creatureType[creatureTypeDrop].OtherAbilities;
+    statBlock["OtherAbilities"] = creatureType[creatureTypeDrop].OtherAbilities;
   }
 
   //Immunities
   if (creatureType[creatureTypeDrop].hasOwnProperty("Immunities")){
-    statBlock["immunities"] = creatureType[creatureTypeDrop].Immunities;
+    statBlock["Immunities"] = creatureType[creatureTypeDrop].Immunities;
   }
 
   //Options - only applies to construct and animal
@@ -69,7 +69,7 @@ function buildStatBlock() {
     } else if (creatureTypeDrop == "Construct") {
       if (!$('[data-id="optionDrop"]').text().trim().includes("Not")){
         statBlock.int = '-';
-        statBlock.traits = statBlock.traits.concat(["Mindless"]);
+        statBlock.OtherAbilities = statBlock.OtherAbilities.concat(["Mindless"]);
       }
     } else {console.log("option error")}
   }
@@ -82,7 +82,14 @@ function buildStatBlock() {
 
     for (trait in creatureSubType[subTypeDrop]) {
       if (trait != "Description"){
-        spud += trait + ' ';
+
+        var traitArray = creatureSubType[subTypeDrop][trait];
+        if (statBlock.hasOwnProperty(trait)){
+          statBlock[trait] = statBlock[trait].concat(traitArray);
+        } else {
+          statBlock[trait] = traitArray;
+        }
+
       }
     }
 
@@ -94,7 +101,7 @@ function buildStatBlock() {
 
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
-  $outputArea.append("<p>"+spud+"</p>");
+  $outputArea.append("<p>"+Object.keys(statBlock)+"</p>");
 
 }
 
@@ -135,9 +142,12 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
     } else if (id=='creatureTypeDrop') {
 
         var $descriptionArea = $(".stepTwoDescription").first();
-        var searchMask = new RegExp(selected, "i");//match case insensitive
+        var description = creatureType[selected].Description;
+        var searchMask = new RegExp(selected+'s?', "i");//match case insensitive
+        var selectedMatch = description.match(searchMask);
+
         $descriptionArea.empty();
-        $descriptionArea.append("<p>"+creatureType[selected].Description.replace(searchMask,'<b>'+selected+'</b>')+"</p>");
+        $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
         //check if type needs choices
         if (creatureType[selected].Adjustments.hasOwnProperty("anySave")){
           generateDropdown("stepTwoOptionalDropdown","SavingThrowDrop","Choose saving throw",["Fortitude +2","Reflex +2","Will +2"]);
@@ -156,8 +166,12 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         var $descriptionArea = $(".stepThreeDescription").first();
         $descriptionArea.empty();
         if (selected != "None") {
-          var searchMask = new RegExp(selected, "i");//match case insensitive
-          $descriptionArea.append("<p>"+creatureSubType[selected].Description.replace(searchMask,'<b>'+selected+'</b>')+"</p>");
+
+          var description = creatureSubType[selected].Description
+          var searchMask = new RegExp(selected+'s?', "i");//match case insensitive
+          var selectedMatch = description.match(searchMask);
+
+          $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
           //check if type needs choices
           if (creatureSubType[selected].hasOwnProperty("Options")) {
             generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose option",creatureSubType[selected].Options);
@@ -244,7 +258,7 @@ $('.wizard-card').bootstrapWizard({
                       var SubTypeArray = ['LABEL='+creatureTypeStepThree+' specific options'];
                       SubTypeArray = SubTypeArray.concat(window['subType'+creatureTypeStepThree]);
                       SubTypeArray = SubTypeArray.concat(['ENDLABEL']);
-                      if (creatureTypeStepThree != 'Construct' && creatureTypeStepThree != 'Dragon'){
+                      if (creatureTypeStepThree != 'Construct'){
                         titleBar ="Optional creature subtype";
                         SubTypeArray = ['None'].concat(SubTypeArray);
                         SubTypeArray = SubTypeArray.concat(['LABEL=General options']);
