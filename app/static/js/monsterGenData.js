@@ -284,6 +284,7 @@ subTypeOutsider = ["Aeon","Agathion","Angel","Archon","Azata","Daemon","Demon","
 subTypeHumanoid = ["Android","Dwarf","Elf","Gnome","Goblinoid","Gray","Halfling","Human","Ikeshti","Kasatha","Lashunta","Maraquoi","Orc","Reptoid","Ryphorian","Sarcesian","Shirren","Skittermander","Verthani","Vesk","Ysoki"];
 subTypeConstruct = ["Magical","Technological"];
 subTypeVermin = ["Swarm"];
+subTypeDragon = ["Black Dragon","Blue Dragon","Green Dragon","Red Dragon","White Dragon"];
 
 creatureSubType = {
   "Aeon": {
@@ -957,8 +958,190 @@ creatureSubType = {
     "Senses": [
       "darkvision 60 ft."
     ]
+  },
+
+//
+//Dragon Entries
+//
+  "Black Dragon": {
+    "Abilities": [
+      "Breath weapon (line 30 ft. + 10 feet per 2 CR, 1d6 A + 1d6 per CR)",
+      "frightful presence (CR 11+, 60 feet + 10 feet per CR)",
+      "spell-like abilities (CR 10+)"
+    ],
+    "Alignment": "Chaotic evil",
+    "DR": {
+      "CR12": "10/magic",
+      "CR15": "15/magic",
+      "CR17": "20/magic",
+      "DR10": "5/magic"
+    },
+    "Description": "Black dragons are callous and enjoy using fear to exert their influence over others.",
+    "Immunities": [
+      "acid"
+    ],
+    "MasterSkills": [
+      "athletics"
+    ],
+    "Required Creature Type": "Dragon",
+    "SR": {
+      "CR10": "11+CR"
+    },
+    "Senses": [
+      "blindsense 60 ft.",
+      "darkvision 120 ft."
+    ],
+    "SpecialAbilities": {
+      "Swamp Stride (Ex)": "A black dragon can move through bogs and quicksand without penalty at its normal speed."
+    },
+    "Speed": [
+      "swim 60 ft."
+    ]
+  },
+  "Blue Dragon": {
+    "Abilities": [
+      "Breath weapon (line 30 feet + 10 feet per 2 CR, 1d8 E + 1d8 per CR)",
+      "frightful presence (CR 9+, 60 feet + 10 feet per CR)",
+      "spell-like abilities (CR 9+)"
+    ],
+    "Alignment": "Lawful evil.",
+    "DR": {
+      "CR13": "10/magic",
+      "CR15": "15/magic",
+      "CR17": "20/magic",
+      "DR11": "5/magic"
+    },
+    "Description": "Stacking plans within plans, blue dragons obsessively dwell on their pet projects.",
+    "Immunities": [
+      "electricity"
+    ],
+    "Required Creature Type": "Dragon",
+    "SR": {
+      "CR12": "11+CR"
+    },
+    "Senses": [
+      "blindsense 60 ft.",
+      "darkvision 120 ft."
+    ],
+    "SpecialAbilities": {
+      "Sound Imitation (Ex)": "A blue dragon can mimic any voice or sound it has heard by succeeding at a Bluff check opposed by a listener\u2019s Sense Motive check."
+    },
+    "Speed": [
+      "burrow 60 ft."
+    ]
+  },
+  "Green Dragon": {
+    "Abilities": [
+      "Breath weapon (cone 15 feet + 5 feet per 2 CR, 1d6 A + 1d6 per CR)",
+      "frightful presence (CR 9+, 60 feet + 10 feet per CR)",
+      "spell-like abilities (CR 9+)"
+    ],
+    "Alignment": "Lawful evil",
+    "DR": {
+      "CR13": "10/magic",
+      "CR15": "15/magic",
+      "CR17": "20/magic",
+      "DR11": "5/magic"
+    },
+    "Description": "Of all the chromatic dragons, green dragons seem the most reasonable, but they will turn on their so-called allies at a moment's notice if profit is on the line.",
+    "Immunities": [
+      "acid"
+    ],
+    "MasterSkills": [
+      "acrobatics"
+    ],
+    "OtherAbilities": [
+      "water breathing"
+    ],
+    "Required Creature Type": "Dragon",
+    "SR": {
+      "CR11": "11+CR"
+    },
+    "Senses": [
+      "blindsense 60 ft.",
+      "darkvision 120 ft."
+    ],
+    "SpecialAbilities": {
+      "Woodland Stride (Ex)": "A green dragon can move through natural foliage at full speed without taking damage or suffering impairment. Areas of foliage that have been magically altered affect it normally."
+    },
+    "Speed": [
+      "fly 60 ft. (perfect)",
+      "swim 40 ft."
+    ]
+  },
+  "Red Dragon": {
+    "Abilities": [
+      "Breath weapon (cone 15 feet + 5 feet per 2 CR, 1d10 F + 1d10 per CR)",
+      "frightful presence (CR 10+, 60 feet + 10 feet per CR)",
+      "spell-like abilities (CR 10+)"
+    ],
+    "Alignment": "Chaotic evil",
+    "DR": {
+      "CR12": "10/magic",
+      "CR14": "15/magic",
+      "CR16": "20/magic",
+      "DR10": "5/magic"
+    },
+    "Description": "Red dragons are quite imperious and brook no disrespect from lowly humanoids, but they can be swayed by copious amounts of groveling.",
+    "Immunities": [
+      "fire"
+    ],
+    "Required Creature Type": "Dragon",
+    "SR": {
+      "CR12": "11+CR"
+    },
+    "Senses": [
+      "blindsense 60 feet",
+      "darkvision 120 feet",
+      "sense through (vision [smoke only])"
+    ],
+    "Vulnerable": [
+      "cold"
+    ]
+  },
+  "White Dragon": {
+    "Abilities": [
+      "Breath weapon (cone 15 feet + 10 feet per 2 CR, 1d6 C + 1d6 per CR)",
+      "frightful presence (CR 10+, 60 feet + 10 feet per CR)",
+      "spell-like abilities (CR 10+)."
+    ],
+    "Alignment": "Chaotic evil",
+    "DR": {
+      "CR12": "10/magic",
+      "CR14": "15/magic",
+      "CR16": "20/magic",
+      "DR9": "5/magic"
+    },
+    "Description": "Similar to the terrain they prefer, white dragons appear cold and emotionless until angered.",
+    "Immunities": [
+      "cold"
+    ],
+    "Required Creature Type": "Dragon",
+    "SR": {
+      "CR12": "11+CR"
+    },
+    "Senses": [
+      "blindsense 60 ft.",
+      "darkvision 120 ft.",
+      "sense through (vision [snow only])"
+    ],
+    "SpecialAbilities": {
+      "Icewalking (Ex)": "A white dragon can move across icy surfaces without penalty and doesn't need to attempt Acrobatics checks to run or charge on ice. In addition, a white dragon can climb icy surfaces as if under the effect of spider climb."
+    },
+    "Speed": [
+      "burrow 30 ft.",
+      "swim 60 ft."
+    ],
+    "Vulnerable": [
+      "fire"
+    ]
   }
+
 };
+
+templateGrafts = {
+
+}
 
 classData = {
     "Mystic": {

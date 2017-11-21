@@ -74,10 +74,27 @@ function buildStatBlock() {
     } else {console.log("option error")}
   }
 
+  //step 3 - subtype
+  var subTypeDrop = $('#creatureSubTypeDrop').val().trim()
+  var spud='';
+  //if option selected
+  if (subTypeDrop != '' && subTypeDrop != 'None'){
+
+    for (trait in creatureSubType[subTypeDrop]) {
+      if (trait != "Description"){
+        spud += trait + ' ';
+      }
+    }
+
+  }
+
+  //subtypes and options
+
+
 
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
-  $outputArea.append("<p>"+statBlock.senses + statBlock.otherAbilities +"</p>");
+  $outputArea.append("<p>"+spud+"</p>");
 
 }
 
@@ -221,13 +238,13 @@ $('.wizard-card').bootstrapWizard({
                 //check if step 3 drop needs to be generated
                 var creatureTypeStepThree = $('[data-id="creatureTypeDrop"]').text().trim()
                 if ($('#stepThreeSave').text().trim() != creatureTypeStepThree){
-                    //generate step three dropdowns
+                    //generate step three dropdowns - creature subtype
                     var titleBar ="Choose creature subtype";
-                    if (['Outsider','Humanoid','Construct','Vermin'].includes(creatureTypeStepThree)){
+                    if (['Outsider','Humanoid','Construct','Vermin','Dragon'].includes(creatureTypeStepThree)){
                       var SubTypeArray = ['LABEL='+creatureTypeStepThree+' specific options'];
                       SubTypeArray = SubTypeArray.concat(window['subType'+creatureTypeStepThree]);
                       SubTypeArray = SubTypeArray.concat(['ENDLABEL']);
-                      if (creatureTypeStepThree != 'Construct'){
+                      if (creatureTypeStepThree != 'Construct' && creatureTypeStepThree != 'Dragon'){
                         titleBar ="Optional creature subtype";
                         SubTypeArray = ['None'].concat(SubTypeArray);
                         SubTypeArray = SubTypeArray.concat(['LABEL=General options']);
