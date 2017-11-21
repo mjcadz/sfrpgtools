@@ -278,322 +278,687 @@ creatureType = {
   }
 };
 
+//subtype lists
+subTypeAll = ["Air","Magical","Chaotic","Evil", "Extraplanar","Good","Lawful","Native","Technological","Aquatic","Cold","Earth","Elemental","Giant","Incorporeal","Fire","Plantlike","Shapechanger","Water"];
+subTypeOutsider = ["Aeon","Agathion","Angel","Archon","Azata","Daemon","Demon","Devil","Inevitable","Protean"];
+subTypeHumanoid = ["Android","Dwarf","Elf","Gnome","Goblinoid","Gray","Halfling","Human","Ikeshti","Kasatha","Lashunta","Maraquoi","Orc","Reptoid","Ryphorian","Sarcesian","Shirren","Skittermander","Verthani","Vesk","Ysoki"];
+subTypeConstruct = ["Magical","Technological"];
+subTypeVermin = ["Swarm"];
+
 creatureSubType = {
   "Aeon": {
     "Description": "Aeons are a race of neutral outsiders who maintain the balance of reality.",
-    "Languages":["telepathy 100 ft. (non-verbal)"],
-    "OtherAbilities":["+CR to skill checks to recall knowledge"],
-    "Immunities":["cold","critical hits","poison"],
-    "Resistance":["electricity 10","fire 10"],
+    "Immunities": [
+      "cold",
+      "critical hits",
+      "poison"
+    ],
+    "Languages": [
+      "telepathy 100 ft. (non-verbal)"
+    ],
+    "OtherAbilities": [
+      "+CR to skill checks to recall knowledge"
+    ],
+    "Resistance": [
+      "electricity 10",
+      "fire 10"
+    ],
     "SpecialAbilities": {
       "Extension of All (Ex)": "Aeons can communicate telepathically with other aeons over vast distances. This ability works even across planes, albeit less effectively, allowing the communication of only vague impressions and feelings."
     }
   },
   "Agathion": {
     "Description": "Agathions are celestials, or good outsiders, native to Nirvana.",
-    "Senses": ["Low-light vision"],
-    "Languages":["truespeech"],
-    "Immunities":["electricity","petrification"],
-    "Resistance":["cold 10","sonic 10"],
-    "OtherAbilities": ["+4 to saving throws against poison"],
+    "Immunities": [
+      "electricity",
+      "petrification"
+    ],
+    "Languages": [
+      "truespeech"
+    ],
+    "OtherAbilities": [
+      "+4 to saving throws against poison"
+    ],
+    "Resistance": [
+      "cold 10",
+      "sonic 10"
+    ],
+    "Senses": [
+      "Low-light vision"
+    ],
     "SpecialAbilities": {
       "Healing Channel (Su)": "You can heal yourself and your allies. Healing yourself with channeled energy is a move action, healing an ally you touch is a standard action, and healing all allies within 30 feet is a full action. This energy restores 2d8 Hit Points and increases by 2d8 every 3 CR levels",
-      "Speak with Animals (Su)":"You can communicate with any creature of the animal type, though this doesn’t make it friendly. If an animal is friendly toward you, it may do you favors. This ability allows you to use Intimidate to bully animals, and you can use any other language-dependent effect against animals."
+      "Speak with Animals (Su)": "You can communicate with any creature of the animal type, though this doesn\u2019t make it friendly. If an animal is friendly toward you, it may do you favors. This ability allows you to use Intimidate to bully animals, and you can use any other language-dependent effect against animals."
     }
   },
   "Air": {
     "Description": "This subtype is usually applied to outsiders with a connection to the Plane of Air.",
-    "MasterSkills": ["acrobatics"],
-    "Speed": ["fly 60 ft. (perfect)"]
+    "MasterSkills": [
+      "acrobatics"
+    ],
+    "Speed": [
+      "fly 60 ft. (perfect)"
+    ]
   },
   "Android": {
     "Description": "This subtype is applied to androids and creatures related to androids.",
-    "Senses": ["Darkvision 60 ft.","low-light vision"],
-    "OtherAbilities": ["constructed","flat affect", "upgrade slot"]
+    "OtherAbilities": [
+      "constructed",
+      "flat affect",
+      "upgrade slot"
+    ],
+    "Senses": [
+      "Darkvision 60 ft.",
+      "low-light vision"
+    ]
   },
   "Angel": {
     "Description": "Angels are celestials, or good outsiders, native to the good-aligned Outer Planes.",
-    "Senses": ["Darkvision 60 ft.","low-light vision"],
-    "Languages":["truespeech"],
-    "OtherAbilities": ["+4 to saving throws against poison"],
-    "Immunities":["acid","cold","petrification"],
-    "Resistance":["electricity 10","fire 10"],
+    "Immunities": [
+      "acid",
+      "cold",
+      "petrification"
+    ],
+    "Languages": [
+      "truespeech"
+    ],
+    "OtherAbilities": [
+      "+4 to saving throws against poison"
+    ],
+    "Resistance": [
+      "electricity 10",
+      "fire 10"
+    ],
+    "Senses": [
+      "Darkvision 60 ft.",
+      "low-light vision"
+    ],
     "SpecialAbilities": {
       "Protective Aura (Su)": "For angels of CR 3 to CR 15, this ability grants creatures within the aura (usually 20 feet), including the angel, a divine bonus (usually +2) to AC against attacks made by evil creatures and a divine bonus (usually +4) to saving throws against effects created by evil creatures. The protective aura of a more powerful or a weaker angel might grant a larger or smaller bonus and have a larger or smaller radius, respectively."
     }
   },
   "Aquatic": {
     "Description": "These creatures are often native to environments that are mostly or entirely underwater.",
-    "Speed": ["swim 30 ft."],
-    "OtherAbilities": ["water breathing"],
-    "MasterSkills": ["athletics"],
-    "Options": ["Amphibious","Not amphibious"]
+    "MasterSkills": [
+      "athletics"
+    ],
+    "Options": [
+      "Amphibious",
+      "Not amphibious"
+    ],
+    "OtherAbilities": [
+      "water breathing"
+    ],
+    "Speed": [
+      "swim 30 ft."
+    ]
   },
   "Archon": {
     "Description": "Archons are celestials, or good outsiders, native to Heaven.",
-    "OtherAbilities": ["+4 to saving throws against poison"],
-    "Languages": ["truespeech"],
-    "Immunities":["electricity","petrification"],
-    "Resistance":["electricity 10","fire 10"],
-    "Senses": ["Darkvision 60 ft.","low-light vision"],
+    "Immunities": [
+      "electricity",
+      "petrification"
+    ],
+    "Languages": [
+      "truespeech"
+    ],
+    "OtherAbilities": [
+      "+4 to saving throws against poison"
+    ],
+    "Resistance": [
+      "electricity 10",
+      "fire 10"
+    ],
+    "Senses": [
+      "Darkvision 60 ft.",
+      "low-light vision"
+    ],
     "SpecialAbilities": {
       "Aura of Menace (Su)": "This ability imposes a divine penalty (usually -2) to the AC, attacks, and saving throws of each hostile creature within the aura (usually 20 feet) that fails a Will save. This penalty lasts for 24 hours or until that creature deals damage to the archon who generated the aura. A creature that has resisted or broken the effect can't be affected again by the same archon's aura for 24 hours. The aura of a more powerful or weaker archon might impose a larger or smaller penalty and might have a larger or smaller radius, respectively."
     },
-    "Spell-likeAbilities" : {
-      "atWill": ["teleport"]
+    "Spell-likeAbilities": {
+      "atWill": [
+        "teleport"
+      ]
     }
   },
   "Azata": {
     "Description": "Azatas are celestials, or good outsiders, native to Elysium.",
-    "Senses": ["Darkvision 60 ft.","low-light vision"],
-    "Immunities":["electricity","petrification"],
-    "Languages": ["truespeech"],
-    "Resistance":["cold 10","fire 10"]
+    "Immunities": [
+      "electricity",
+      "petrification"
+    ],
+    "Languages": [
+      "truespeech"
+    ],
+    "Resistance": [
+      "cold 10",
+      "fire 10"
+    ],
+    "Senses": [
+      "Darkvision 60 ft.",
+      "low-light vision"
+    ]
+  },
+  "Chaotic": {
+    "Description": "This subtype is applied to chaotic aligned creatures"
   },
   "Cold": {
     "Description": "Creatures with this subtype are usually native to frigid environments.",
-    "Vulnerable": ["fire"],
-    "Immunities":["cold"]
+    "Immunities": [
+      "cold"
+    ],
+    "Vulnerable": [
+      "fire"
+    ]
   },
   "Daemon": {
+    "Abilities": [
+      "summon allies (Sp)"
+    ],
     "Description": "Daemons are fiends, or evil outsiders, native to Abaddon.",
-    "Abilities": ["summon allies (Sp)"],
-    "Immunities":["acid","death effects", "disease", "poison"],
-    "Resistance":["electricity 10","fire 10","cold 10"],
-    "Languages":["telepathy"]
+    "Immunities": [
+      "acid",
+      "death effects",
+      "disease",
+      "poison"
+    ],
+    "Languages": [
+      "telepathy"
+    ],
+    "Resistance": [
+      "electricity 10",
+      "fire 10",
+      "cold 10"
+    ]
   },
   "Demon": {
+    "Abilities": [
+      "summon allies (Sp)"
+    ],
     "Description": "Demons are fiends, or evil outsiders, native to the Abyss.",
-    "Abilities": ["summon allies (Sp)"],
-    "Immunities":["electricity","poison"],
-    "Resistance":["acid 10","fire 10","cold 10"],
-    "Languages":["telepathy"]
+    "Immunities": [
+      "electricity",
+      "poison"
+    ],
+    "Languages": [
+      "telepathy"
+    ],
+    "Resistance": [
+      "acid 10",
+      "fire 10",
+      "cold 10"
+    ]
   },
   "Devil": {
+    "Abilities": [
+      "summon allies (Sp)"
+    ],
     "Description": "Devils are fiends, or evil outsiders, native to Hell.",
-    "Senses": ["See in darkness"],
-    "Abilities": ["summon allies (Sp)"],
-    "Immunities":["fire","poison"],
-    "Resistance":["acid 10","cold 10"],
-    "Languages":["telepathy"]
+    "Immunities": [
+      "fire",
+      "poison"
+    ],
+    "Languages": [
+      "telepathy"
+    ],
+    "Resistance": [
+      "acid 10",
+      "cold 10"
+    ],
+    "Senses": [
+      "See in darkness"
+    ]
   },
   "Dwarf": {
     "Description": "This subtype is applied to dwarves and creatures related to dwarves.",
-    "Senses": ["Darkvision 60 ft."],
-    "OtherAbilities": ["slow but steady","stonecunning","traditional enemies","weapon familiarity"]
+    "OtherAbilities": [
+      "slow but steady",
+      "stonecunning",
+      "traditional enemies",
+      "weapon familiarity"
+    ],
+    "Senses": [
+      "Darkvision 60 ft."
+    ]
   },
   "Earth": {
     "Description": "This subtype is usually applied to outsiders with a connection to the Plane of Earth.",
-    "Options": ["blindsense 30 ft.","blindsight (vibration) 30 ft."],
-    "Speed": ["burrow 30 ft."]
+    "Options": [
+      "blindsense 30 ft.",
+      "blindsight (vibration) 30 ft."
+    ],
+    "Speed": [
+      "burrow 30 ft."
+    ]
   },
   "Elemental": {
     "Description": "An elemental is a creature composed entirely of matter from one of the four Elemental Planes.",
-    "Immunities": ["Elemental"]
+    "Immunities": [
+      "Elemental"
+    ]
   },
   "Elf": {
     "Description": "This subtype is applied to elves and creatures related to elves.",
-    "SubRaces":{
+    "SubRaces": {
       "Drow": {
-        "Senses": ["darkvision 60 ft."],
-        "MasterSkills": ["perception"],
-        "Immunities": ["drow"],
-        "OtherAbilities": ["drow magic","light blindness"]
+        "Immunities": [
+          "drow"
+        ],
+        "MasterSkills": [
+          "perception"
+        ],
+        "OtherAbilities": [
+          "drow magic",
+          "light blindness"
+        ],
+        "Senses": [
+          "darkvision 60 ft."
+        ]
       },
       "Elf": {
-        "Senses": ["low-light vision"],
-        "MasterSkills": ["perception","mysticism"],
-        "Immunities": ["elven"],
-        "OtherAbilities": ["elven magic"]
+        "Immunities": [
+          "elven"
+        ],
+        "MasterSkills": [
+          "perception",
+          "mysticism"
+        ],
+        "OtherAbilities": [
+          "elven magic"
+        ],
+        "Senses": [
+          "low-light vision"
+        ]
       },
       "Half-elf": {
-        "Senses": ["low-light vision"],
-        "MasterSkills": ["perception","mysticism"],
-        "OtherAbilities": ["elven blood"],
         "AditionalAbilities": {
-          "GoodSkills":1
-        }
+          "GoodSkills": 1
+        },
+        "MasterSkills": [
+          "perception",
+          "mysticism"
+        ],
+        "OtherAbilities": [
+          "elven blood"
+        ],
+        "Senses": [
+          "low-light vision"
+        ]
       }
     }
   },
+  "Evil": {
+    "Description": "This subtype is applied to evil creatures"
+  },
+  "Extraplanar": {
+    "Description": "This subtype is applies to creatures originating from another plane"
+  },
   "Fire": {
     "Description": "This subtype is usually applied to outsiders with a connection to the Plane of Fire and creatures with a strong affinity to fire.",
-    "Vulnerable": ["cold"],
-    "Immunities":["fire"]
+    "Immunities": [
+      "fire"
+    ],
+    "Vulnerable": [
+      "cold"
+    ]
   },
   "Giant": {
     "Description": "This subtype is applied to giants and creatures related to giants.",
-    "Senses": ["low-light vision"],
-    "MasterSkills":["intimidate","perception"]
+    "MasterSkills": [
+      "intimidate",
+      "perception"
+    ],
+    "Senses": [
+      "low-light vision"
+    ]
   },
   "Gnome": {
     "Description": "This subtype is applied to gnomes and creatures related to gnomes.",
-    "Senses": ["low-light vision"],
-    "OtherAbilities": ["eternal hope","gnome magic"],
-    "MasterSkills": ["culture"]
+    "MasterSkills": [
+      "culture"
+    ],
+    "OtherAbilities": [
+      "eternal hope",
+      "gnome magic"
+    ],
+    "Senses": [
+      "low-light vision"
+    ]
   },
   "Goblinoid": {
     "Description": "This subtype is applied to humanoids of various goblinoid subspecies, such as space goblins.",
-    "Senses": ["darkvision 60 ft."],
-    "OtherAbilities": ["fast","tinker"],
-    "MasterSkills": ["engineering","stealth"],
-    "GoodSkills":["survival"]
+    "GoodSkills": [
+      "survival"
+    ],
+    "MasterSkills": [
+      "engineering",
+      "stealth"
+    ],
+    "OtherAbilities": [
+      "fast",
+      "tinker"
+    ],
+    "Senses": [
+      "darkvision 60 ft."
+    ]
+  },
+  "Good": {
+    "Description": "This subtype is applied to good aligned creatures"
   },
   "Gray": {
     "Description": "This subtype is applied to the humanoid aliens known as grays and creatures related to grays.",
-    "Senses": ["darkvision 60 ft."],
-    "Languages":["telepathy 100 ft."],
-    "OtherAbilities": ["phase"]
+    "Languages": [
+      "telepathy 100 ft."
+    ],
+    "OtherAbilities": [
+      "phase"
+    ],
+    "Senses": [
+      "darkvision 60 ft."
+    ]
   },
   "Halfling": {
     "Description": "This subtype is applied to halflings and creatures related to halflings.",
-    "OtherAbilities": ["halfling luck","sneaky"],
-    "MasterSkills": ["perception","stealth"],
-    "GoodSkills":["acrobatics","athletics"]
+    "GoodSkills": [
+      "acrobatics",
+      "athletics"
+    ],
+    "MasterSkills": [
+      "perception",
+      "stealth"
+    ],
+    "OtherAbilities": [
+      "halfling luck",
+      "sneaky"
+    ]
   },
   "Human": {
-    "Description": "This subtype is applied to humans and creatures related to humans.",
     "AditionalAbilities": {
-      "GoodSkills":1,
-      "SpecialAbilities":1
-    }
+      "GoodSkills": 1,
+      "SpecialAbilities": 1
+    },
+    "Description": "This subtype is applied to humans and creatures related to humans."
   },
   "Ikeshti": {
     "Description": "This subtype is applied to ikeshtis and creatures related to ikeshtis.",
-    "Speed": ["climb 20 ft."],
-    "OtherAbilities": ["desert survivor","shed skin","squirt blood"]
+    "OtherAbilities": [
+      "desert survivor",
+      "shed skin",
+      "squirt blood"
+    ],
+    "Speed": [
+      "climb 20 ft."
+    ]
   },
   "Incorporeal": {
     "Description": "Creatures with this subtype have no physical bodies.",
-    "OtherAbilities": ["incorporeal"]
+    "OtherAbilities": [
+      "incorporeal"
+    ]
   },
   "Inevitable": {
+    "Abilities": [
+      "regeneration (Ex) (suppressed by chaotic-aligned attacks)"
+    ],
     "Description": "Inevitables are construct-like outsiders built to enforce the laws of the universe.",
-    "Abilities": ["regeneration (Ex) (suppressed by chaotic-aligned attacks)"],
-    "Senses": ["darkvision 60 ft.","low-light vision"],
-    "OtherAbilities": ["constructed"],
-    "Languages": ["truespeech"]
+    "Languages": [
+      "truespeech"
+    ],
+    "OtherAbilities": [
+      "constructed"
+    ],
+    "Senses": [
+      "darkvision 60 ft.",
+      "low-light vision"
+    ]
   },
   "Kasatha": {
     "Description": "This subtype is applied to kasathas and creatures related to kasathas.",
-    "OtherAbilities": ["desert stride","four-armed"],
-    "MasterSkills":["acrobatics","athletics"],
-    "GoodSkills":["culture"]
+    "GoodSkills": [
+      "culture"
+    ],
+    "MasterSkills": [
+      "acrobatics",
+      "athletics"
+    ],
+    "OtherAbilities": [
+      "desert stride",
+      "four-armed"
+    ]
   },
   "Lashunta": {
     "Description": "This subtype is applied to lashuntas and creatures related to lashuntas.",
-    "OtherAbilities": ["limited telepathy"],
-    "Spell-likeAbilities" : {
-      "1/day": ["detect thoughts"],
-      "atWill": ["daze","psychokinetic hand"]
+    "OtherAbilities": [
+      "limited telepathy"
+    ],
+    "Spell-likeAbilities": {
+      "1/day": [
+        "detect thoughts"
+      ],
+      "atWill": [
+        "daze",
+        "psychokinetic hand"
+      ]
     }
+  },
+  "Lawful": {
+    "Description": "This subtype is applied to lawful aligned creatures"
+  },
+  "Magical": {
+    "Description": "This subtype is applies to creatures of magical origins"
   },
   "Maraquoi": {
     "Description": "This subtype is applied to maraquoi and creatures related to maraquoi.",
-    "Senses": ["low-light vision","blindsense (sound) 30 ft"],
-    "Speed": ["climb 20 ft."],
-    "OtherAbilities":["prehensile tail"],
-    "MasterSkills":["survival"]
+    "MasterSkills": [
+      "survival"
+    ],
+    "OtherAbilities": [
+      "prehensile tail"
+    ],
+    "Senses": [
+      "low-light vision",
+      "blindsense (sound) 30 ft"
+    ],
+    "Speed": [
+      "climb 20 ft."
+    ]
+  },
+  "Native": {
+    "Description": "This subtype is applies to native creatures"
   },
   "Orc": {
     "Description": "This subtype is applied to orcs and creatures who are related to orcs.",
-    "SubRaces":{
-      "Orc": {
-        "Senses": ["darkvision 60 ft."],
-        "Abilities":["ferocity"]
-      },
+    "SubRaces": {
       "Half-orc": {
-        "Senses": ["darkvision 60 ft."],
-        "Abilities":["ferocity"],
-        "OtherAbilities":["intimidate","survival"]
+        "Abilities": [
+          "ferocity"
+        ],
+        "OtherAbilities": [
+          "intimidate",
+          "survival"
+        ],
+        "Senses": [
+          "darkvision 60 ft."
+        ]
+      },
+      "Orc": {
+        "Abilities": [
+          "ferocity"
+        ],
+        "Senses": [
+          "darkvision 60 ft."
+        ]
       }
     }
   },
   "Plantlike": {
-    "Description": "Plantlike creatures have many of the characteristics of plants.",
-    "Abilities": ["plantlike"]
+    "Abilities": [
+      "plantlike"
+    ],
+    "Description": "Plantlike creatures have many of the characteristics of plants."
   },
   "Protean": {
+    "Abilities": [
+      "amorphous",
+      "change shape"
+    ],
     "Description": "Proteans are serpentine outsiders of pure chaos native to the Maelstrom.",
-    "Senses": ["blindsense 30 ft."],
-    "Speed": ["fly 60 ft."],
-    "Immunities": ["acid"],
-    "Resistance": ["electricity 10","sonic 10"],
-    "Abilities": ["amorphous","change shape"],
-    "OtherAbilities": ["grab ability with its natural attacks"]
+    "Immunities": [
+      "acid"
+    ],
+    "OtherAbilities": [
+      "grab ability with its natural attacks"
+    ],
+    "Resistance": [
+      "electricity 10",
+      "sonic 10"
+    ],
+    "Senses": [
+      "blindsense 30 ft."
+    ],
+    "Speed": [
+      "fly 60 ft."
+    ]
   },
   "Reptoid": {
     "Description": "This subtype is applied to the shapechanging aliens known as reptoids and creatures related to reptoids.",
-    "Senses": ["low-light vision"],
-    "OtherAbilities": ["change shape","natural weapons","cold-blooded"]
+    "OtherAbilities": [
+      "change shape",
+      "natural weapons",
+      "cold-blooded"
+    ],
+    "Senses": [
+      "low-light vision"
+    ]
   },
   "Ryphorian": {
-    "Description": "This subtype is applied to ryphorians and creatures related to ryphorians.",
-    "Senses": ["low-light vision"],
-    "OtherAbilities":["trimorphic"],
-    "MasterSkills":["perception"],
     "AditionalAbilities": {
-      "SpecialAbilities":1
-    }
+      "SpecialAbilities": 1
+    },
+    "Description": "This subtype is applied to ryphorians and creatures related to ryphorians.",
+    "MasterSkills": [
+      "perception"
+    ],
+    "OtherAbilities": [
+      "trimorphic"
+    ],
+    "Senses": [
+      "low-light vision"
+    ]
   },
   "Sarcesian": {
-    "Description": "This subtype is applied to sarcesians and creatures related to sarcesians.",
-    "Senses": ["low-light vision"],
-    "OtherAbilities":["void flyer"],
     "AditionalAbilities": {
-      "GoodSkills":1
-    }
+      "GoodSkills": 1
+    },
+    "Description": "This subtype is applied to sarcesians and creatures related to sarcesians.",
+    "OtherAbilities": [
+      "void flyer"
+    ],
+    "Senses": [
+      "low-light vision"
+    ]
   },
   "Shapechanger": {
-    "Description": "This subtype is applied to creatures that can dramatically alter their forms.",
-    "Abilities": ["change shape"]
+    "Abilities": [
+      "change shape"
+    ],
+    "Description": "This subtype is applied to creatures that can dramatically alter their forms."
   },
   "Shirren": {
     "Description": "This subtype is applied to shirrens and creatures related to shirrens.",
-    "Senses": ["blindsense (vibration) 30 ft."],
-    "OtherAbilities":["communalism","limited telepathy"],
-    "GoodSkills":["culture","diplomacy"]
+    "GoodSkills": [
+      "culture",
+      "diplomacy"
+    ],
+    "OtherAbilities": [
+      "communalism",
+      "limited telepathy"
+    ],
+    "Senses": [
+      "blindsense (vibration) 30 ft."
+    ]
   },
   "Skittermander": {
     "Description": "This subtype is applied to skittermanders and creatures related to skittermanders.",
-    "Senses": ["low-light vision"],
-    "OtherAbilities": ["grappler","hyper","six-armed"]
+    "OtherAbilities": [
+      "grappler",
+      "hyper",
+      "six-armed"
+    ],
+    "Senses": [
+      "low-light vision"
+    ]
   },
   "Swarm": {
+    "Attacks": [
+      "melee swarm attack (1d6+2 P)"
+    ],
+    "DefensiveAbilities": [
+      "swarm defenses"
+    ],
     "Description": "This subtype is applied to any collection of Fine, Diminutive, or Tiny creatures (usually vermin) that acts as a single creature. A single swarm usually occupies a square (if it is made up of nonflying creatures) or a cube (if it is made up of flying creatures) 10 feet on a side, but its reach is 0 feet. A swarm can move through cracks or holes large enough for its component creatures to fit through. In order to attack, a swarm moves into an opponent's space, which provokes an attack of opportunity. Spellcasting or concentrating on spells within the area of a swarm requires a successful caster level check (DC = 20 + spell level). Using skills that involve patience and concentration, such as Computers, within the area of a swarm requires a successful DC 20 Will saving throw.",
-    "DefensiveAbilities":["swarm defenses"],
-    "OffensiveAbilities":["distraction"],
-    "Attacks":["melee swarm attack (1d6+2 P)"],
-    "Immunities":["swarm"]
+    "Immunities": [
+      "swarm"
+    ],
+    "OffensiveAbilities": [
+      "distraction"
+    ]
+  },
+  "Technological": {
+    "Description": "This subtype is applies to creatures of technological origins"
   },
   "Verthani": {
-    "Description": "This subtype is applied to verthani and creatures related to verthani.",
-    "Senses": ["low-light vision"],
-    "OtherAbilities": ["easily augmented","skin mimic"],
     "AditionalAbilities": {
-      "GoodSkills":1
-    }
+      "GoodSkills": 1
+    },
+    "Description": "This subtype is applied to verthani and creatures related to verthani.",
+    "OtherAbilities": [
+      "easily augmented",
+      "skin mimic"
+    ],
+    "Senses": [
+      "low-light vision"
+    ]
   },
   "Vesk": {
     "Description": "This subtype is applied to vesk and creatures related to vesk.",
-    "Senses": ["low-light vision"],
-    "OtherAbilities": ["armor savant","fearless","natural weapons"],
+    "OtherAbilities": [
+      "armor savant",
+      "fearless",
+      "natural weapons"
+    ],
+    "Senses": [
+      "low-light vision"
+    ]
   },
   "Water": {
     "Description": "This subtype is usually applied to outsiders with a connection to the Plane of Water.",
-    "Speed":["swim 30 ft."],
-    "MasterSkills":["athletics"]
+    "MasterSkills": [
+      "athletics"
+    ],
+    "Speed": [
+      "swim 30 ft."
+    ]
   },
   "Ysoki": {
     "Description": "This subtype is applied to ysoki and creatures related to ysoki.",
-    "Senses": ["darkvision 60 ft."],
-    "OtherAbilities": ["cheeck pouches","moxie"],
-    "MasterSkills": ["engineering","stealth"],
-    "GoodSkills": ["survival"],
+    "GoodSkills": [
+      "survival"
+    ],
+    "MasterSkills": [
+      "engineering",
+      "stealth"
+    ],
+    "OtherAbilities": [
+      "cheeck pouches",
+      "moxie"
+    ],
+    "Senses": [
+      "darkvision 60 ft."
+    ]
   }
 };
-
-otherSubTypes = ["Chaotic", "Evil", "Extraplanar", "Good", "Lawful", "Magical", "Native", "Technological"]
 
 classData = {
     "Mystic": {

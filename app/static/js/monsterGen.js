@@ -82,18 +82,25 @@ function buildStatBlock() {
 }
 
 //creates bootstrap-select dropdowns from arrays
-function generateDropdown(parentID,dropID,title,array,noneOption) {
+function generateDropdown(parentID,dropID,title,array) {
   var dropHtml = '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10">'
-  if (noneOption) {
-    dropHtml += '<option>None</option><option data-divider="true"></option>'
-  }
   for (i = 0; i < array.length; i++) {
-    dropHtml += '<option>' + array[i] + '</option>';
+    if (array[i] == 'BREAK'){
+      dropHtml += '<option data-divider="true"></option>';
+    } else if (array[i].includes('LABEL=')) {
+      dropHtml += '<optgroup label="' + array[i].replace('LABEL=','') + '">';
+    } else if (array[i].includes('ENDLABEL')) {
+      dropHtml += '</optgroup>';
+    }
+    else {
+      dropHtml += '<option>' + array[i] + '</option>';
+    }
   }
   dropHtml += '</select>';
   document.getElementById(parentID).innerHTML = dropHtml;
-  //initialise & rebind dropdown click dropClickHandler
+  //initialise dropdown
   $('#'+dropID).selectpicker();
+  //bind dropdown click  handler
   $('#'+dropID).on('changed.bs.select', dropClickHandler);
 }
 
@@ -116,12 +123,12 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         $descriptionArea.append("<p>"+creatureType[selected].Description.replace(searchMask,'<b>'+selected+'</b>')+"</p>");
         //check if type needs choices
         if (creatureType[selected].Adjustments.hasOwnProperty("anySave")){
-          generateDropdown("stepTwoOptionalDropdown","SavingThrowDrop","Choose saving throw",["Fortitude +2","Reflex +2","Will +2"],false);
+          generateDropdown("stepTwoOptionalDropdown","SavingThrowDrop","Choose saving throw",["Fortitude +2","Reflex +2","Will +2"]);
         }  else if (creatureType[selected].hasOwnProperty("Options")) {
           if (selected == "Animal"){
-            generateDropdown("stepTwoOptionalDropdown","optionDrop","Choose option",creatureType[selected].Options,false);
+            generateDropdown("stepTwoOptionalDropdown","optionDrop","Choose option",creatureType[selected].Options);
           } else if (selected == "Construct"){
-            generateDropdown("stepTwoOptionalDropdown","optionDrop","Choose option",creatureType[selected].Options,false);
+            generateDropdown("stepTwoOptionalDropdown","optionDrop","Choose option",creatureType[selected].Options);
           }
         } else {
           $("#stepTwoOptionalDropdown").first().empty();
@@ -136,9 +143,9 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
           $descriptionArea.append("<p>"+creatureSubType[selected].Description.replace(searchMask,'<b>'+selected+'</b>')+"</p>");
           //check if type needs choices
           if (creatureSubType[selected].hasOwnProperty("Options")) {
-            generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose option",creatureSubType[selected].Options,false);
+            generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose option",creatureSubType[selected].Options);
           } else if (creatureSubType[selected].hasOwnProperty("SubRaces")) {
-            generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose race",Object.keys(creatureSubType[selected].SubRaces),false);
+            generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose race",Object.keys(creatureSubType[selected].SubRaces));
           } else {
             $("#stepThreeOptionalDropdown").first().empty();
           }
@@ -146,9 +153,6 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
     }
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
 }
-
-//bind bootstrap-select dropdown change event
-$('.selectpicker').on('changed.bs.select', dropClickHandler);
 
 // Wizard Initialization
 $('.wizard-card').bootstrapWizard({
@@ -161,10 +165,10 @@ $('.wizard-card').bootstrapWizard({
 
         //create initial dropdowns from data arrays
         //step1
-        generateDropdown("CRDropdown","CRDrop","Choose challenge rating",CRLabels,false);
-        generateDropdown("arrayDropdown","arrayDrop","Choose base",Object.keys(stepOneDescription),false);
+        generateDropdown("CRDropdown","CRDrop","Choose challenge rating",CRLabels);
+        generateDropdown("arrayDropdown","arrayDrop","Choose base",Object.keys(stepOneDescription));
         //step2
-        generateDropdown("creatureTypeDropdown","creatureTypeDrop","Choose creature type",Object.keys(creatureType),false);
+        generateDropdown("creatureTypeDropdown","creatureTypeDrop","Choose creature type",Object.keys(creatureType));
         //Step3
 
     },
@@ -215,12 +219,31 @@ $('.wizard-card').bootstrapWizard({
             if (validated) {
 
                 //check if step 3 drop needs to be generated
-                var save = $('[data-id="creatureTypeDrop"]').text().trim()
-                if ($('#stepThreeSave').text().trim() != save){
+                var creatureTypeStepThree = $('[data-id="creatureTypeDrop"]').text().trim()
+                if ($('#stepThreeSave').text().trim() != creatureTypeStepThree){
                     //generate step three dropdowns
-                    generateDropdown("creatureSubtypeDropdown","creatureSubTypeDrop","Choose creature subtype",Object.keys(creatureSubType),true);
+                    var titleBar ="Choose creature subtype";
+                    if (['Outsider','Humanoid','Construct','Vermin'].includes(creatureTypeStepThree)){
+                      var SubTypeArray = ['LABEL='+creatureTypeStepThree+' specific options'];
+                      SubTypeArray = SubTypeArray.concat(window['subType'+creatureTypeStepThree]);
+                      SubTypeArray = SubTypeArray.concat(['ENDLABEL']);
+                      if (creatureTypeStepThree != 'Construct'){
+                        titleBar ="Optional creature subtype";
+                        SubTypeArray = ['None'].concat(SubTypeArray);
+                        SubTypeArray = SubTypeArray.concat(['LABEL=General options']);
+                        SubTypeArray = SubTypeArray.concat(subTypeAll);
+                        SubTypeArray = SubTypeArray.concat(['ENDLABEL']);
+                      }
+                    } else {
+                      titleBar ="Optional creature subtype";
+                      SubTypeArray = ['None','BREAK'].concat(subTypeAll);
+                    }
+
+                    generateDropdown("creatureSubtypeDropdown","creatureSubTypeDrop",titleBar,SubTypeArray);
+                    var $descriptionArea = $(".stepThreeDescription").first().empty();
                     $("#stepThreeOptionalDropdown").first().empty();
-                    $('#stepThreeSave').text(save)
+                    $('#stepThreeSave').text(creatureTypeStepThree);
+
                 }
             } else {
                 return false;
