@@ -218,6 +218,9 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
           if (selectedArray != currentArray) {
             $('#stepFourSave2').text(selected+":"+selectedArray);
+            var $modal = $(".modal-body").first();
+            $modal.empty();
+            $modal.append("<p>This class requires the <b>"+selectedArray+"</b> base array.</p>");
             $('#myModal').modal('show');
           } else {
             stepFourDescription(selected)
@@ -227,6 +230,8 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
     }
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
 }
+
+
 
 function stepFourDescription(selected) {
   var $descriptionArea = $(".stepFourDescription").first();
@@ -362,6 +367,12 @@ $('.wizard-card').bootstrapWizard({
 
               generateDropdown("classDropdown","classDrop","Optional class",classArray);
 
+              var prev = $('#stepFourSave').text().trim();
+              if (prev != 'None') {
+                $('#classDrop').selectpicker('val', prev);
+              }
+
+
             } else {
                 return false;
             }
@@ -406,12 +417,19 @@ $('.btn-change').click(function(){
 
    val=$(this).text()
    if(val=='Change'){
+     //change base array
      var newnew = $('#stepFourSave2').text().trim().split(':');
      $('#arrayDrop').selectpicker('val', newnew[1]);
+     //change step1 description too
+     var $descriptionArea = $(".stepOneDescription").first();
+     $descriptionArea.empty();
+     $descriptionArea.append("<p>"+stepOneDescription[newnew[1]]+"</p>");
      $('#classDrop').selectpicker('val', newnew[0]);
      stepFourDescription(newnew[0]);
    } else if (val=='No thanks'){
+     //change back to previous
      var prev = $('#stepFourSave').text().trim();
      $('#classDrop').selectpicker('val', prev);
+     stepFourDescription(prev);
    }
 })
