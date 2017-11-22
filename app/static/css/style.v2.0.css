@@ -292,3 +292,10 @@ fieldset[disabled] .btn-grn.active {
     max-height: 390px;
     overflow-x: hidden;
 }
+
+.modal-content {
+  color: #666666!important;
+}
+.modal-title {
+  color: #666666!important;
+}

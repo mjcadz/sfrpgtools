@@ -13,3 +13,9 @@ speeds will need to be picked later (i think)
 step 3 - options, subraces
 
 minify js and cs files
+
+
+
+
+FX in popup
+don't regen classes unless base array changes

@@ -384,6 +384,7 @@ creatureSubType = {
       "athletics"
     ],
     "Options": [
+      "OtherAbilities",
       "Amphibious",
       "Not amphibious"
     ],
@@ -526,6 +527,7 @@ creatureSubType = {
   "Earth": {
     "Description": "This subtype is usually applied to outsiders with a connection to the Plane of Earth.",
     "Options": [
+      "Senses",
       "blindsense 30 ft.",
       "blindsight (vibration) 30 ft."
     ],

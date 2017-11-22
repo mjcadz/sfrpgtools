@@ -5,7 +5,7 @@
 {% block description %}NPC and monster creator for starfinder roleplaying game{% endblock %}
 {% block body %}
 <div class="jumbotron">
-    <h1>Monster Builder</h1>
+    <h1></h1>
     <p class="lead">This wizard will step through the creation of Starfinder NPCs (including monsters).</p>
     <p></p>
     <div class="container">
@@ -84,14 +84,21 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="step4">
+                            <span id="stepFourSave" hidden>None</span>
+                            <span id="stepFourSave2" hidden>None</span>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h4 class="info-text">Step 4.</h4>
                                 </div>
                                 <div class="col-sm-6">
-
+                                    <div id="classDropdown"></div>
+                                    <P></P>
+                                    <div id="stepFourOptionalDropdown"></div>
+                                    <P></P>
                                 </div>
                                 <div class="col-sm-6">
+                                  <div class="stepFourDescription wizardp">
+                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -115,6 +122,28 @@
 
     </div>
 </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding: 10px 15px 0px 15px;">
+          <h4 class="modal-title" >Array Change</h4>
+        </div>
+        <div class="modal-body" style="padding: 5px 15px;">
+          <p>This class requires the FX base array.</p>
+        </div>
+        <div class="modal-footer" style="padding: 0px 10px 10px 10px;">
+          <button type="button" class="btn-change btn btn-grn" data-dismiss="modal">Change</button>
+          <button type="button" class="btn-change btn btn-default pull-left" data-dismiss="modal">No thanks</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 {% endblock %}
 {% block includes %}
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>

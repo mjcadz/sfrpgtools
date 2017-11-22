@@ -76,12 +76,19 @@ function buildStatBlock() {
 
   //step 3 - subtype
   var subTypeDrop = $('#creatureSubTypeDrop').val().trim()
-  var spud='';
-  //if option selected
+
+  //if option is selected
   if (subTypeDrop != '' && subTypeDrop != 'None'){
 
-    for (trait in creatureSubType[subTypeDrop]) {
-      if (trait != "Description"){
+    if (creatureSubType[subTypeDrop].hasOwnProperty("SubRaces")){
+      var subRaceDrop = $('#stepThreeOptionDrop').val().trim();
+      var subTypeObject = creatureSubType[subTypeDrop].SubRaces[subRaceDrop];
+    } else {
+      var subTypeObject = creatureSubType[subTypeDrop];
+    }
+
+    for (trait in subTypeObject) {
+      if (trait != "Description" && trait != "Options"){
 
         var traitArray = creatureSubType[subTypeDrop][trait];
         if (statBlock.hasOwnProperty(trait)){
@@ -90,24 +97,34 @@ function buildStatBlock() {
           statBlock[trait] = traitArray;
         }
 
+      } else if (trait == "Options") {
+        var optionDrop = $('#stepThreeOptionDrop').val().trim();
+        optionTrait = creatureSubType[subTypeDrop].Options[0]
+
+        if(!optionDrop.includes("Not")){
+          if (statBlock.hasOwnProperty(optionTrait)){
+            statBlock[optionTrait] = statBlock[optionTrait].concat([optionDrop]);
+          } else {
+            statBlock[optionTrait] = [optionDrop];
+          }
+        }
       }
     }
 
   }
 
-  //subtypes and options
 
 
 
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
-  $outputArea.append("<p>"+Object.keys(statBlock)+"</p>");
+  $outputArea.append("<p>"+statBlock.OtherAbilities+"</p>");
 
 }
 
 //creates bootstrap-select dropdowns from arrays
 function generateDropdown(parentID,dropID,title,array) {
-  var dropHtml = '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10">'
+  var dropHtml = '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="11">'
   for (i = 0; i < array.length; i++) {
     if (array[i] == 'BREAK'){
       dropHtml += '<option data-divider="true"></option>';
@@ -174,15 +191,52 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
           $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
           //check if type needs choices
           if (creatureSubType[selected].hasOwnProperty("Options")) {
-            generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose option",creatureSubType[selected].Options);
+            generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose option",creatureSubType[selected].Options.slice(1,3));
           } else if (creatureSubType[selected].hasOwnProperty("SubRaces")) {
             generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose race",Object.keys(creatureSubType[selected].SubRaces));
           } else {
             $("#stepThreeOptionalDropdown").first().empty();
           }
         }
+    } else if (id=='classDrop') {
+
+        var $descriptionArea = $(".stepFourDescription").first();
+        $descriptionArea.empty();
+        if (selected != "None") {
+
+          var selectedArray;
+          if (classCombatant.includes(selected)){
+            selectedArray = 'Combatant';
+          } else if (classExpert.includes(selected)){
+            selectedArray = 'Expert';
+          } else if (classSpellcaster.includes(selected)){
+            selectedArray = 'Spellcaster';
+          }
+
+          //comapre current with selected
+          var currentArray = $('#arrayDrop').val().trim()
+
+          if (selectedArray != currentArray) {
+            $('#stepFourSave2').text(selected+":"+selectedArray);
+            $('#myModal').modal('show');
+          } else {
+            stepFourDescription(selected)
+          }
+
+        }
     }
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
+}
+
+function stepFourDescription(selected) {
+  var $descriptionArea = $(".stepFourDescription").first();
+  $descriptionArea.empty();
+  var description = classData[selected].Description
+  var searchMask = new RegExp(selected+'s?', "i");//match case insensitive
+  var selectedMatch = description.match(searchMask);
+
+  $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
+  $('#stepFourSave').text(selected);
 }
 
 // Wizard Initialization
@@ -200,7 +254,6 @@ $('.wizard-card').bootstrapWizard({
         generateDropdown("arrayDropdown","arrayDrop","Choose base",Object.keys(stepOneDescription));
         //step2
         generateDropdown("creatureTypeDropdown","creatureTypeDrop","Choose creature type",Object.keys(creatureType));
-        //Step3
 
     },
 
@@ -262,12 +315,12 @@ $('.wizard-card').bootstrapWizard({
                         titleBar ="Optional creature subtype";
                         SubTypeArray = ['None'].concat(SubTypeArray);
                         SubTypeArray = SubTypeArray.concat(['LABEL=General options']);
-                        SubTypeArray = SubTypeArray.concat(subTypeAll);
+                        SubTypeArray = SubTypeArray.concat(subTypeAll.sort());
                         SubTypeArray = SubTypeArray.concat(['ENDLABEL']);
                       }
                     } else {
                       titleBar ="Optional creature subtype";
-                      SubTypeArray = ['None','BREAK'].concat(subTypeAll);
+                      SubTypeArray = ['None','BREAK'].concat(subTypeAll.sort());
                     }
 
                     generateDropdown("creatureSubtypeDropdown","creatureSubTypeDrop",titleBar,SubTypeArray);
@@ -295,7 +348,19 @@ $('.wizard-card').bootstrapWizard({
             }
 
             if (validated) {
-                buildStatBlock()
+              //put current class first in list
+              var arrays = ['Combatant','Expert','Spellcaster'];
+              var arrayDrop = $('#arrayDrop').val().trim();
+              var index = arrays.indexOf(arrayDrop);
+              if (index > -1) {
+                arrays.splice(index, 1);
+              }
+              //build class list, current base array on top
+              var classArray = ['None', 'LABEL='+ arrayDrop +' classes'].concat(window['class'+arrayDrop]).concat(['ENDLABEL']);
+              classArray = classArray.concat(['LABEL='+ arrays[0] +' classes']).concat(window['class'+arrays[0]]).concat(['ENDLABEL']);
+              classArray = classArray.concat(['LABEL='+ arrays[1] +' classes']).concat(window['class'+arrays[1]]).concat(['ENDLABEL']);
+
+              generateDropdown("classDropdown","classDrop","Optional class",classArray);
 
             } else {
                 return false;
@@ -332,5 +397,21 @@ $('.wizard-card').bootstrapWizard({
 });
 //finish function
 $('.btn-finish').click(function() {
-    alert('Finished!');
+
+    //alert('Finished!');
+    //buildStatBlock();
 });
+
+$('.btn-change').click(function(){
+
+   val=$(this).text()
+   if(val=='Change'){
+     var newnew = $('#stepFourSave2').text().trim().split(':');
+     $('#arrayDrop').selectpicker('val', newnew[1]);
+     $('#classDrop').selectpicker('val', newnew[0]);
+     stepFourDescription(newnew[0]);
+   } else if (val=='No thanks'){
+     var prev = $('#stepFourSave').text().trim();
+     $('#classDrop').selectpicker('val', prev);
+   }
+})
