@@ -1112,7 +1112,7 @@ creatureSubType = {
       "CR12": "10/magic",
       "CR14": "15/magic",
       "CR16": "20/magic",
-      "DR9": "5/magic"
+      "CR9": "5/magic"
     },
     "Description": "Similar to the terrain they prefer, white dragons appear cold and emotionless until angered.",
     "Immunities": [
@@ -1299,85 +1299,148 @@ classData = {
     }
 };
 
-var graft = {
+var grafts = {
   "Aerial": {
     "CRMin":"1",
     "Description": "Aerial creatures are native denizens of the Elemental Plane of Air, gas giant planets, or similar landless environments, and have unique adaptations to help them survive there.",
-    "SubTypeGraft": ["air","(fly speed should equal creature's fastest movement speed)"],
-    "Traits": "Half of the damage dealt by its natural attacks becomes electricity damage",
-    "Options": ["Text","From the Elemental Plane of Air","Not from the Elemental Plane of Air","Gains the extraplanar subtype when it isn't on the Elemental Plane of Air."]
+    "SubTypeGraft": "Air",
+    "DamageMod": "Natural 1/2 electricity",
+    "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Air."]
   },
   "Aqueous": {
     "CRMin":"1",
     "Description": "Aqueous creatures are native denizens of the Elemental Plane of Water or similar landless environments, able to survive both in and out of water.",
-    "SubTypeGraft":"water",
-    "Grafts": "Add the water subtype graft (swim speed should equal creature's fastest movement speed).",
-    "Traits": "Amphibious; natural attacks that deal bludgeoning or slashing damage deal piercing damage instead; natural attacks that deal electricity or fire damage deal cold damage instead; if the creature is from the Elemental Plane of Water, it gains the extraplanar subtype when it isn't on that plane."
+    "SubTypeGraft":"Water",
+    "OtherAbilities": "amphibious",
+    "AttackChanges": ["Natural all piercing","electricity to cold","fire to cold"],
+    "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Water."]
   },
   "Astral": {
     "Description": "Astral creatures are natives of the Astral Plane, a vast silvery void between planes.",
-    "Traits": "DR/- with a value equal to creature's CR - 10 (minimum DR 1/-); when the creature isn't on the Astral Plane, it gains the extraplanar subtype."
+    "Text": ["Gains the extraplanar subtype when it isn't on the Astral Plane."],
+    "DR": {
+      "min": "1/-",
+      "DR": "CR-10/-",
+      "IfDRExists":{
+        "Resistance": ["electricity CR-5"]
+      }
+    }
   },
   "Celestial": {
     "Alignment": "Alignment changes to good.",
     "Description": "Celestial creatures are natives of one of the good-aligned Outer Planes.",
-    "Traits": "DR/evil with a value equal to creature's CR - 10 (minimum DR 1/evil); if the creature already has DR of that value or greater, it instead gains resistance to electricity with a value equal to creature's CR - 5 (minimum electricity resistance 1); when the creature isn't on its home plane, it gains the extraplanar subtype."
+    "DR": {
+      "DR": "CR-10/evil",
+      "IfDRExists":{
+        "Resistance": ["electricity CR-5"]
+      }
+    },
+    "Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
   },
-  "Cthonic (Cr 1+)": {
+  "Cthonic": {
+    "CRMin":"1",
     "Description": "Cthonic creatures are native denizens of the Elemental Plane of Earth or underground environments, and they have adapted to exist in dirt and rock.",
-    "Grafts": "Add the earth subtype graft (burrow speed should equal creature's fastest movement speed).",
-    "Traits": "Blindsense (vibration) if CR 7 or less, and blindsight (vibration) if CR 8 or greater (in either case, with a range equal to creature's burrow speed); natural melee attacks bypass DR/cold iron; if the creature is from the Elemental Plane of Earth, it gains the extraplanar subtype when it isn't on that plane."
+    "Senses": {
+      "blindsense (vibration)":["1",30],
+      "blindsight (vibration)":["8",30]
+    },
+    "SubTypeGraft": "Earth",
+    "DamageMod": "DR/cold iron",
+    "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Earth."]
   },
-  "Cybernetic (Cr 1/2+)": {
-    "Armor": "If the creature is CR 3-7, add one armor upgrade with an item level equal to or less than the creature's CR. If it is CR 8+, add two armor upgrades, each with an item level equal to or less than the creature's CR.",
+  "Cybernetic": {
+    "CRMin":"1/2",
+    "ArmorUpgrade": {
+      "CR3-7":1,
+      "CR8":2
+    },
+
     "Description": "A cybernetic creature has been augmented by technological implants (although the same simple template graft can be used to represent creatures augmented by biotech).",
-    "Weapon": "Add a ranged weapon of a level no greater than the creature's CR + 1; this weapon can't be disarmed. A creature with the combatant array should get a longarm, and a creature with the expert or spellcaster array should get a small arm. Add the creature's CR to damage dealt with its weapon. The ammunition of such weapons is recovered once per day after the creature rests for 8 hours."
+    "Weapon": [
+      "CR+1"
+    ],
   },
   "Entropic": {
     "Alignment": "Alignment changes to chaotic.",
     "Description": "Entropic creatures are natives of one of the Outer Planes where chaos is paramount. A GM can allow creatures summoned with the summon creature spell that would normally have the astral, celestial, or fiendish simple template graft instead have the entropic simple template graft.",
-    "Traits": "DR/lawful with a value equal to creature's CR - 10 (minimum DR 1/lawful); if the creature already has DR of that value or greater, it instead gains resistance to acid with a value equal to creature's CR - 5 (minimum acid resistance 1); when the creature is not on its home plane, it gains the extraplanar subtype."
+    "DR": {
+      "DR": "CR-10/lawful",
+      "IfDRExists":{
+        "Resistance": ["acid CR-5"]
+      }
+    },
+    "Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
   },
   "Fiendish": {
-    "Alignment": "Alignment changes to evil.",
+    "Alignment": "evil",
     "Description": "Fiendish creatures are natives of one of the evil-aligned Outer Planes.",
-    "Traits": "DR/good with a value equal to creature's CR - 10 (minimum DR 1/good); if the creature already has DR of that value or greater, it instead gains resistance to fire with a value equal to creature's CR - 5 (minimum fire resistance 1); when the creature isn't on its home plane, it gains the extraplanar subtype."
+    "DR": {
+      "DR": "CR-10/good",
+      "IfDRExists":{
+        "Resistance": ["fire CR-5"]
+      }
+    },
+    "Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
   },
-  "Fiery (Cr 1+)": {
+  "Fiery": {
+    "CRMin":"1",
     "Description": "Fiery creatures are native denizens of the Elemental Plane of Fire or habitats covered in fire, and they have unique adaptations to help them survive there.",
-    "Grafts": "Add the fire subtype graft.",
-    "Traits": "Half of damage dealt by its natural attacks becomes fire damage; if the creature is from the Elemental Plane of Fire, it gains the extraplanar subtype when it isn't on that plane."
+    "SubTypeGraft": "Fire",
+    "DamageMod": "Natural 1/2 fire",
+    "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Fire."]
   },
-  "Giant (Cr 1+)": {
+  "Giant": {
+    "CRMin":"1",
     "Description": "Giant creatures are larger than typical members of their species, and might represent a subspecies that has grown to unusual size due to environmental conditions.",
-    "Traits": "Increase the creature's size by one category, increasing its space and natural reach accordingly."
+    "Size": 1,
+    "Space": 1,
+    "Reach": 1
   },
   "Miniature": {
     "Description": "Miniature creatures are smaller than typical members of their species and might represent a subspecies that has shrunk down due to environmental conditions.",
-    "Traits": "Decrease the creature's size by one category, decreasing its space and natural reach to match; if the creature was already Small and this decreases it to Tiny, the creature maintains a reach of 5 feet due to a change in its proportions."
+    "Size":-1,
+    "Space": -1,
+    "Reach": -1
   },
   "Phrenic": {
+    "Adjustments": {"will":2},
+    "OtherAbilities":["limited telepathy"],
     "Description": "Phrenic creatures have minor innate mental powers, which they might have developed due to high levels of native psychic energy in their environments.",
-    "Traits": "+2 to Will saves; limited telepathy (and are considered to share a language with any other creature with limited telepathy for the purpose of telepathic communication); if CR 7 or greater, gains blindsense (emotion) with a range of 5 feet (if the creature already has a form of blindsense, change the blindsense to be emotion-based and add 5 feet to its range)."
+    "Senses": {
+      "Blindsense (emotion)":["7",5]
+    },
   },
   "Resolute": {
-    "Alignment": "Alignment changes to lawful.",
+    "Alignment": "lawful",
+    "DR": {
+      "DR": "CR-10/chaotic",
+      "IfDRExists":{
+        "Resistance": ["cold CR-5"]
+      }
+    },
     "Description": "Resolute creatures are natives of one of the Outer Planes where law is paramount. A GM can allow creatures summoned with the summon creature spell that would normally have the astral, celestial, or fiendish simple template graft instead have the resolute simple template graft.",
-    "Traits": "DR/chaotic with a value equal to creature's CR - 10 (minimum DR 1/chaotic); if the creature already has DR of that value or greater, it instead gains resistance to cold with a value equal to creature's CR - 5 (minimum cold resistance 1; when the creature isn't on its home plane, it gains the extraplanar subtype."
+    "Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
   },
   "Synthetic": {
-    "Constructed (Ex)": "For effects targeting creatures by type, synthetic creatures count as both their actual creature type and constructs (whichever type allows an ability to affect them for abilities that affect only one type, and whichever type is worse for abilities that affect both creature types). They receive a +2 racial bonus to saving throws against disease, mind-affecting effects, poison, and sleep, unless those effects specifically target constructs. In addition, synthetic creatures do not breathe or suffer the normal environmental effects of being in a vacuum.",
     "Description": "Synthetic creatures are constructed through the use of extremely advanced technology, similar to that which makes androids possible.",
-    "Synthetic (Ex)": "The creature is affected by any ability that specifies it functions against androids.",
-    "Traits": "Constructed (see below), synthetic (see below)."
+    "SpecialAbilities": {
+      "Constructed (Ex)": "For effects targeting creatures by type, synthetic creatures count as both their actual creature type and constructs (whichever type allows an ability to affect them for abilities that affect only one type, and whichever type is worse for abilities that affect both creature types). They receive a +2 racial bonus to saving throws against disease, mind-affecting effects, poison, and sleep, unless those effects specifically target constructs. In addition, synthetic creatures do not breathe or suffer the normal environmental effects of being in a vacuum.",
+      "Synthetic (Ex)": "The creature is affected by any ability that specifies it functions against androids."
+    }
   },
-  "Two-Headed (Cr 3+)": {
+  "Two-Headed": {
+    "CRMin":"3",
     "Description": "This creature is a rare two-headed mutant or a member of a two-headed subspecies of a more common race.",
-    "Traits": "Perception as a master skill; unflankable; if the creature has a bite attack, it can make two bite attacks (and no other attacks) as a full action with a -3 penalty to each bite attack roll."
+    "OtherAbilities": ["unflankable"],
+    "MasterSkills": ["perception"],
+    "AttackChanges": ["bite","bite x2 as full attack -3 penalty"]
   },
   "Umbral": {
     "Description": "Umbral creatures exist in the lightless places of the universe, which might be the Shadow Plane, the interior of unlit caves, or the bottom of the darkest oceans.",
-    "Traits": "Darkvision 60 feet (if creature already has darkvision, increase its range by 60 feet); if creature is CR 7 or higher, it gains blindsense (vibration) with a range of 5 feet (if the creature already has a form of blindsense, add 5 feet to that sense's range)."
+    "Senses": {
+      "Darkvision":[60],
+      "Blindsense (vibration)":["7",5]
+    },
   }
 }
 

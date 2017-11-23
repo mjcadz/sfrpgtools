@@ -124,7 +124,7 @@ function buildStatBlock() {
 
 //creates bootstrap-select dropdowns from arrays
 function generateDropdown(parentID,dropID,title,array) {
-  var dropHtml = '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="11">'
+  var dropHtml = '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="13">'
   for (i = 0; i < array.length; i++) {
     if (array[i] == 'BREAK'){
       dropHtml += '<option data-divider="true"></option>';
@@ -143,6 +143,11 @@ function generateDropdown(parentID,dropID,title,array) {
   $('#'+dropID).selectpicker();
   //bind dropdown click  handler
   $('#'+dropID).on('changed.bs.select', dropClickHandler);
+}
+
+//disables / enables dropdown eg toggleDropdown(id,toggle)
+function disableDropdown(id,bool){
+  $('#'+id).prop('disabled', bool);
 }
 
 //handle clicks of dropdowns
@@ -180,26 +185,8 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
     } else if (id=='creatureSubTypeDrop') {
 
-        var $descriptionArea = $(".stepThreeDescription").first();
-        $descriptionArea.empty();
-        if (selected != "None") {
+      stepThreeDescription(selected)
 
-          var description = creatureSubType[selected].Description
-          var searchMask = new RegExp(selected+'s?', "i");//match case insensitive
-          var selectedMatch = description.match(searchMask);
-
-          $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
-          //check if type needs choices
-          if (creatureSubType[selected].hasOwnProperty("Options")) {
-            generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose option",creatureSubType[selected].Options.slice(1,3));
-          } else if (creatureSubType[selected].hasOwnProperty("SubRaces")) {
-            generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose race",Object.keys(creatureSubType[selected].SubRaces));
-          } else {
-            $("#stepThreeOptionalDropdown").first().empty();
-          }
-        } else {
-          $("#stepThreeOptionalDropdown").first().empty();
-        }
     } else if (id=='classDrop') {
 
         //var $descriptionArea = $(".stepFourDescription").first();
@@ -220,23 +207,62 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
           if (selectedArray != currentArray) {
             $('#stepFourSave2').text(selected+":"+selectedArray);
-            var $modal = $(".modal-body").first();
+            var $modal = $(".modal-body.classModal").first();
             $modal.empty();
             $modal.append("<p>This class graft requires the <b>"+selectedArray+"</b> base.</p>");
-            $('#myModal').modal('show');
+            $('#classModal').modal('show');
           } else {
             stepFourDescription(selected,selectedArray)
+            generateDropdown("precedenceDropdown","precedenceDrop","Choose which stat adjustments will be used",["Creature stat adjustments","Class stat adjustments"]);
+
           }
 
         } else {
           $('#stepFourSave').text(selected+":"+"None"+":"+"chosen");
           var $descriptionArea = $(".stepFourDescription").first();
           $descriptionArea.empty();
+          $("#precedenceDropdown").first().empty();
         }
+    } else if (id=='graftDrop') {
+
+      disableDropdown('creatureSubTypeDrop',false);
+
+      if (grafts[selected].hasOwnProperty("SubTypeGraft")) {
+        $('#stepFiveSave2').text(selected+":"+grafts[selected].SubTypeGraft);
+        var $modal = $(".modal-body.graftModal").first();
+        $modal.empty();
+        $modal.append("<p>This graft requires the <b>"+grafts[selected].SubTypeGraft+"</b> subtype.</p>");
+        $('#graftModal').modal('show');
+      } else {
+
+        stepFiveDescription(selected)
+
+      }
     }
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
 }
 
+function stepThreeDescription(selected){
+  var $descriptionArea = $(".stepThreeDescription").first();
+  $descriptionArea.empty();
+  if (selected != "None") {
+    var description = creatureSubType[selected].Description
+    var searchMask = new RegExp(selected+'s?', "i");//match case insensitive
+    var selectedMatch = description.match(searchMask);
+
+    $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
+    //check if type needs choices
+    if (creatureSubType[selected].hasOwnProperty("Options")) {
+      generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose option",creatureSubType[selected].Options.slice(1,3));
+    } else if (creatureSubType[selected].hasOwnProperty("SubRaces")) {
+      generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose race",Object.keys(creatureSubType[selected].SubRaces));
+    } else {
+      $("#stepThreeOptionalDropdown").first().empty();
+    }
+  } else {
+    $("#stepThreeOptionalDropdown").first().empty();
+  }
+}
 
 
 function stepFourDescription(selected,selectedArray) {
@@ -248,6 +274,22 @@ function stepFourDescription(selected,selectedArray) {
 
   $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
   $('#stepFourSave').text(selected+":"+selectedArray+":"+"None");
+
+}
+
+function stepFiveDescription(selected) {
+
+  var $descriptionArea = $(".stepFiveDescription").first();
+  $descriptionArea.empty();
+
+  if (selected != "None") {
+    var $descriptionArea = $(".stepFiveDescription").first();
+    var description = grafts[selected].Description;
+    var searchMask = new RegExp(selected+'s?', "i");//match case insensitive
+    var selectedMatch = description.match(searchMask);
+    $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
+  }
+  $('#stepFiveSave').text(selected);
 }
 
 // Wizard Initialization
@@ -262,10 +304,11 @@ $('.wizard-card').bootstrapWizard({
         //create initial dropdowns from data arrays
         //step1
         generateDropdown("CRDropdown","CRDrop","Choose challenge rating",CRLabels);
-        generateDropdown("arrayDropdown","arrayDrop","Choose base",Object.keys(stepOneDescription));
+        generateDropdown("arrayDropdown","arrayDrop","Choose base",Object.keys(stepOneDescription).sort());
         //step2
-        generateDropdown("creatureTypeDropdown","creatureTypeDrop","Choose creature type",Object.keys(creatureType));
-
+        generateDropdown("creatureTypeDropdown","creatureTypeDrop","Choose creature type",Object.keys(creatureType).sort());
+        //Step5
+        generateDropdown("graftDropdown","graftDrop","Optional template graft",['None','BREAK'].concat(Object.keys(grafts).sort()));
     },
 
     //runs when next button pressed.
@@ -379,15 +422,32 @@ $('.wizard-card').bootstrapWizard({
               var prev = $('#stepFourSave').text().trim().split(":");
               //var prev2 = $('#stepFourSave2').text().trim().split(":");
 
-
-
               if (prev[0] != 'None' && prev[1] == arrayDrop) {
                 $('#classDrop').selectpicker('val', prev[0]);
                 stepFourDescription(prev[0],prev[1]);
+
               } else if (prev[2] == 'chosen'){
                 $('#classDrop').selectpicker('val', "None");
               }
 
+
+            } else {
+                return false;
+            }
+        }
+        //Validation tab 4
+        if (index == 4) {
+
+            var validated = true;
+
+            if ($('[data-id="precedenceDrop"]').length){
+              if ($('[data-id="precedenceDrop"]').text().includes("Choose")) {
+                  $('[data-id="precedenceDrop"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+
+            if (validated) {
 
             } else {
                 return false;
@@ -442,10 +502,33 @@ $('.btn-change').click(function(){
      $descriptionArea.append("<p>"+stepOneDescription[newChoice[1]]+"</p>");
      $('#classDrop').selectpicker('val', newChoice[0]);
      stepFourDescription(newChoice[0],newChoice[1]);
+     generateDropdown("precedenceDropdown","precedenceDrop","Choose which stat adjustments will be used",["Creature stat adjustments","Class stat adjustments"]);
    } else if (val=='No thanks'){
      //change back to previous
      var prev = $('#stepFourSave').text().trim().split(':');
      $('#classDrop').selectpicker('val', prev[0]);
-     stepFourDescription(prev[0],prev[1]);
+     //stepFourDescription(prev[0],prev[1]);
+   }
+})
+
+$('.btn-graft').click(function(){
+
+   val=$(this).text()
+   if(val=='Change'){
+     //change base array
+     var newChoice = $('#stepFiveSave2').text().trim().split(":");
+     $('#creatureSubTypeDrop').selectpicker('val', newChoice[1]);
+     stepThreeDescription(newChoice[1]);
+     disableDropdown('creatureSubTypeDrop',true);
+
+     $('#graftDrop').selectpicker('val', newChoice[0]);
+     stepFiveDescription(newChoice[0]);
+
+     $('#stepFiveSave').text(newChoice[0]);
+
+   } else if (val=='No thanks'){
+     //change back to previous
+     var prev = $('#stepFiveSave').text().trim();
+     $('#graftDrop').selectpicker('val', prev);
    }
 })

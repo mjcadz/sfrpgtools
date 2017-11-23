@@ -94,7 +94,7 @@
                                 <div class="col-sm-6">
                                     <div id="classDropdown"></div>
                                     <P></P>
-                                    <div id="stepFourOptionalDropdown"></div>
+                                    <div id="precedenceDropdown"></div>
                                     <P></P>
                                 </div>
                                 <div class="col-sm-6">
@@ -104,6 +104,8 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="step5">
+                            <span id="stepFiveSave" hidden>None</span>
+                            <span id="stepFiveSave2" hidden>None:None</span>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h4 class="info-text">Step 5.</h4>
@@ -140,20 +142,39 @@
 </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="classModal" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header" style="padding: 10px 15px 0px 15px;">
-          <h4 class="modal-title" >Base change</h4>
+          <h4 class="modal-title" >Change required</h4>
         </div>
-        <div class="modal-body" style="padding: 5px 15px;">
+        <div class="modal-body classModal" style="padding: 5px 15px;">
 
         </div>
         <div class="modal-footer" style="padding: 0px 10px 10px 10px;">
           <button type="button" class="btn-change btn btn-grn" data-dismiss="modal">Change</button>
           <button type="button" class="btn-change btn btn-default pull-left" data-dismiss="modal">No thanks</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal fade" id="graftModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding: 10px 15px 0px 15px;">
+          <h4 class="modal-title" >Change required</h4>
+        </div>
+        <div class="modal-body graftModal" style="padding: 5px 15px;">
+
+        </div>
+        <div class="modal-footer" style="padding: 0px 10px 10px 10px;">
+          <button type="button" class="btn-graft btn btn-grn" data-dismiss="modal">Change</button>
+          <button type="button" class="btn-graft btn btn-default pull-left" data-dismiss="modal">No thanks</button>
         </div>
       </div>
 
