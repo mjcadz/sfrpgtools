@@ -216,7 +216,7 @@ creatureType = {
     "OtherAbilities": ["Unliving"],
     "Immunities": ["Construct"],
     "Subtypes": ["magical","technological"],
-    "Options": ["Mindless (int -)","Not mindless"]
+    "Options": ["Mindless","Not mindless"]
   },
   "Dragon": {
     "Adjustments": {"fortitude":2,"reflex":2,"will":2,"attackMod":1},
@@ -1300,13 +1300,17 @@ classData = {
 };
 
 var graft = {
-  "Aerial (Cr 1+)": {
+  "Aerial": {
+    "CRMin":"1",
     "Description": "Aerial creatures are native denizens of the Elemental Plane of Air, gas giant planets, or similar landless environments, and have unique adaptations to help them survive there.",
-    "Grafts": "Add the air subtype graft (fly speed should equal creature's fastest movement speed).",
-    "Traits": "Half of the damage dealt by its natural attacks becomes electricity damage; if the creature is from the Elemental Plane of Air, it gains the extraplanar subtype when it isn't on that plane."
+    "SubTypeGraft": ["air","(fly speed should equal creature's fastest movement speed)"],
+    "Traits": "Half of the damage dealt by its natural attacks becomes electricity damage",
+    "Options": ["Text","From the Elemental Plane of Air","Not from the Elemental Plane of Air","Gains the extraplanar subtype when it isn't on the Elemental Plane of Air."]
   },
-  "Aqueous (Cr 1+)": {
+  "Aqueous": {
+    "CRMin":"1",
     "Description": "Aqueous creatures are native denizens of the Elemental Plane of Water or similar landless environments, able to survive both in and out of water.",
+    "SubTypeGraft":"water",
     "Grafts": "Add the water subtype graft (swim speed should equal creature's fastest movement speed).",
     "Traits": "Amphibious; natural attacks that deal bludgeoning or slashing damage deal piercing damage instead; natural attacks that deal electricity or fire damage deal cold damage instead; if the creature is from the Elemental Plane of Water, it gains the extraplanar subtype when it isn't on that plane."
   },

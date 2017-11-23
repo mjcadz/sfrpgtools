@@ -19,3 +19,5 @@ minify js and cs files
 
 FX in popup
 don't regen classes unless base array changes
+
+statblock save actual creature types and subtypes

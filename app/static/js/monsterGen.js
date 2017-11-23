@@ -197,11 +197,13 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
           } else {
             $("#stepThreeOptionalDropdown").first().empty();
           }
+        } else {
+          $("#stepThreeOptionalDropdown").first().empty();
         }
     } else if (id=='classDrop') {
 
-        var $descriptionArea = $(".stepFourDescription").first();
-        $descriptionArea.empty();
+        //var $descriptionArea = $(".stepFourDescription").first();
+        //$descriptionArea.empty();
         if (selected != "None") {
 
           var selectedArray;
@@ -220,12 +222,16 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
             $('#stepFourSave2').text(selected+":"+selectedArray);
             var $modal = $(".modal-body").first();
             $modal.empty();
-            $modal.append("<p>This class requires the <b>"+selectedArray+"</b> base array.</p>");
+            $modal.append("<p>This class graft requires the <b>"+selectedArray+"</b> base.</p>");
             $('#myModal').modal('show');
           } else {
-            stepFourDescription(selected)
+            stepFourDescription(selected,selectedArray)
           }
 
+        } else {
+          $('#stepFourSave').text(selected+":"+"None"+":"+"chosen");
+          var $descriptionArea = $(".stepFourDescription").first();
+          $descriptionArea.empty();
         }
     }
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
@@ -233,7 +239,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
 
 
-function stepFourDescription(selected) {
+function stepFourDescription(selected,selectedArray) {
   var $descriptionArea = $(".stepFourDescription").first();
   $descriptionArea.empty();
   var description = classData[selected].Description
@@ -241,7 +247,7 @@ function stepFourDescription(selected) {
   var selectedMatch = description.match(searchMask);
 
   $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
-  $('#stepFourSave').text(selected);
+  $('#stepFourSave').text(selected+":"+selectedArray+":"+"None");
 }
 
 // Wizard Initialization
@@ -317,7 +323,7 @@ $('.wizard-card').bootstrapWizard({
                       SubTypeArray = SubTypeArray.concat(window['subType'+creatureTypeStepThree]);
                       SubTypeArray = SubTypeArray.concat(['ENDLABEL']);
                       if (creatureTypeStepThree != 'Construct'){
-                        titleBar ="Optional creature subtype";
+                        titleBar ="Optional subtype graft";
                         SubTypeArray = ['None'].concat(SubTypeArray);
                         SubTypeArray = SubTypeArray.concat(['LABEL=General options']);
                         SubTypeArray = SubTypeArray.concat(subTypeAll.sort());
@@ -365,11 +371,21 @@ $('.wizard-card').bootstrapWizard({
               classArray = classArray.concat(['LABEL='+ arrays[0] +' classes']).concat(window['class'+arrays[0]]).concat(['ENDLABEL']);
               classArray = classArray.concat(['LABEL='+ arrays[1] +' classes']).concat(window['class'+arrays[1]]).concat(['ENDLABEL']);
 
-              generateDropdown("classDropdown","classDrop","Optional class",classArray);
+              generateDropdown("classDropdown","classDrop","Optional class graft",classArray);
 
-              var prev = $('#stepFourSave').text().trim();
-              if (prev != 'None') {
-                $('#classDrop').selectpicker('val', prev);
+              var $descriptionArea = $(".stepFourDescription").first();
+              $descriptionArea.empty();
+
+              var prev = $('#stepFourSave').text().trim().split(":");
+              //var prev2 = $('#stepFourSave2').text().trim().split(":");
+
+
+
+              if (prev[0] != 'None' && prev[1] == arrayDrop) {
+                $('#classDrop').selectpicker('val', prev[0]);
+                stepFourDescription(prev[0],prev[1]);
+              } else if (prev[2] == 'chosen'){
+                $('#classDrop').selectpicker('val', "None");
               }
 
 
@@ -418,18 +434,18 @@ $('.btn-change').click(function(){
    val=$(this).text()
    if(val=='Change'){
      //change base array
-     var newnew = $('#stepFourSave2').text().trim().split(':');
-     $('#arrayDrop').selectpicker('val', newnew[1]);
+     var newChoice = $('#stepFourSave2').text().trim().split(':');
+     $('#arrayDrop').selectpicker('val', newChoice[1]);
      //change step1 description too
      var $descriptionArea = $(".stepOneDescription").first();
      $descriptionArea.empty();
-     $descriptionArea.append("<p>"+stepOneDescription[newnew[1]]+"</p>");
-     $('#classDrop').selectpicker('val', newnew[0]);
-     stepFourDescription(newnew[0]);
+     $descriptionArea.append("<p>"+stepOneDescription[newChoice[1]]+"</p>");
+     $('#classDrop').selectpicker('val', newChoice[0]);
+     stepFourDescription(newChoice[0],newChoice[1]);
    } else if (val=='No thanks'){
      //change back to previous
-     var prev = $('#stepFourSave').text().trim();
-     $('#classDrop').selectpicker('val', prev);
-     stepFourDescription(prev);
+     var prev = $('#stepFourSave').text().trim().split(':');
+     $('#classDrop').selectpicker('val', prev[0]);
+     stepFourDescription(prev[0],prev[1]);
    }
 })
