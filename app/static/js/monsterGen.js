@@ -9,6 +9,9 @@ function buildStatBlock() {
   var CRDrop = $('[data-id="CRDrop"]').text().trim().replace("CR ","");
   var arrayDrop = $('[data-id="arrayDrop"]').text().trim();
 
+  statBlock.Cr = CRDrop;
+  statBlock.Base = arrayDrop;
+
   var baseStats = [];
   if (arrayDrop == 'Combatant') {
     baseStats = combatantMainStats[CRDrop].concat(combatantAttackStats[CRDrop]);
@@ -26,6 +29,8 @@ function buildStatBlock() {
   // step 2 - creature type
 
   var creatureTypeDrop = $('[data-id="creatureTypeDrop"]').text().trim();
+
+  statBlock.CreatureType = creatureTypeDrop;
 
   //stat block adjustments
   for (adjustment in creatureType[creatureTypeDrop].Adjustments) {
@@ -76,6 +81,8 @@ function buildStatBlock() {
   //if option is selected
   if (subTypeDrop != '' && subTypeDrop != 'None'){
 
+    statBlock.SubType = subTypeDrop;
+
     if (creatureSubType[subTypeDrop].hasOwnProperty("SubRaces")){
       var subRaceDrop = $('#stepThreeOptionDrop').val().trim();
       var subTypeObject = creatureSubType[subTypeDrop].SubRaces[subRaceDrop];
@@ -106,11 +113,7 @@ function buildStatBlock() {
         }
       }
     }
-
   }
-
-
-
 
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
@@ -120,6 +123,43 @@ function buildStatBlock() {
   }
   $outputArea.append("<p>"+print+"</p>");
 
+}
+
+//get class stats
+function getClassStats(statObject){
+
+  //step 4 - class
+  var classDrop = $('#classDrop').val().trim();
+  var cr = Number($('[data-id="CRDrop"]').text().trim().replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
+
+  //if envoy is selected
+  if (classDrop != '' && classDrop != 'None'){
+    if (classDrop == 'Envoy') {
+
+      classAbilities = getClassAbilities(classDrop,cr)
+
+    }
+  }
+
+}
+
+//gets class abilities by Cr
+function getClassAbilities(selectedClass,cr){
+
+  var keyNums = [];
+  var crBottom = 0;
+  for (key in classData[selectedClass].AbilitiesByCr){
+    keyNums.push(Number(key));
+  }
+  //sort ascending order
+  keyNums.sort(function(a, b){return a-b});
+  var arrayLength = keyNums.length;
+  for (var i = 0; i < arrayLength; i++) {
+    if (keyNums[i] <= cr){
+      crBottom = keyNums[i];
+    }
+  }
+  return classData[selectedClass].AbilitiesByCr[crBottom.toString()];
 }
 
 //creates bootstrap-select dropdowns from arrays
@@ -316,6 +356,10 @@ function stepFiveDescription(selected) {
   $('#stepFiveSave').text(selected);
 }
 
+
+
+
+
 // Wizard Initialization
 $('.wizard-card').bootstrapWizard({
     'tabClass': 'nav nav-pills',
@@ -352,6 +396,7 @@ $('.wizard-card').bootstrapWizard({
             }
 
             if (validated) {
+
               //refresh graft drop if needed (dependent on CR)
               var cr = Number($('[data-id="CRDrop"]').text().trim().replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
               var graft = $('#graftDrop').val().trim();

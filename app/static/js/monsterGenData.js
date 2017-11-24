@@ -1159,11 +1159,11 @@ classData = {
             "16": "Four 8th-level envoy improvisations, skillful special ability, and one special ability.",
             "20": "True expertise, four 8th-level envoy improvisations, skillful special ability, and one special ability."
         },
-        "Ability Score Modifiers": " Charisma, Intelligence, and Dexterity.",
+        "AbilityScoreModifiers": ["Cha","Int","Dex"],
         "Adjustments": {"reflex":2},
         "Description": "Charismatic envoys assist their allies through inspiration and tactical orders.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
-        "Required Array": " Expert",
+        "Required Array": "Expert",
         "Skills": " Master Sense Motive and master Bluff, Diplomacy, or Intimidate."
     },
     "Mechanic": {
@@ -1184,7 +1184,7 @@ classData = {
             "19": "Artificial intelligence, overload, remote hack, miracle worker 3/day, override, ghost in the machine, superior rig, and three 14th-level mechanic tricks.",
             "20": "Artificial intelligence, overload, remote hack, miracle worker 3/day, override, ghost in the machine, superior rig, and four 14th-level mechanic tricks."
         },
-        "Ability Score Modifiers": " Intelligence, Dexterity, and Constitution.",
+        "AbilityScoreModifiers": ["Int","Dex","Con"],
         "Adjustments": {"fortitude":2,"reflex":2,"will":-2},
         "Description": "Experts at dealing with machines, mechanics either use exocortexes to enhance their combat abilities or are accompanied by robotic drones that they can control remotely.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
@@ -1206,7 +1206,7 @@ classData = {
             "19": "All connection powers, mindlink, telepathic bond, and transcendence.",
             "20": "All connection powers, mindlink, telepathic bond, transcendence, and enlightenment."
         },
-        "Ability Score Modifiers": " Wisdom, Constitution, and Charisma.",
+        "AbilityScoreModifiers": ["Wis","Con","Cha"],
         "Adjustments": "None",
         "Description": "Calling on connections to supernatural forces, mystics can manifest magic in a number of different ways.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
@@ -1234,7 +1234,7 @@ classData = {
             "19": "Trick attack +10d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, and two 14th-level operative exploits.",
             "20": "Trick attack +10d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, supreme operative, and two 14th-level operative exploits."
         },
-        "Ability Score Modifiers": " Dexterity, Intelligence, and Wisdom.",
+        "AbilityScoreModifiers": ["Dex","Int","Wis"],
         "Adjustments": {"initiative":"CR/4","reflex":3,"skillChecks":1},
         "Description": "Cunning and swift, operatives are especially skilled and can cause foes to drop their guards, paving the way for devastating attacks.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), sniper rifle (item level = CR), and basic melee weapon with operative special quality (item level = CR - 1).",
@@ -1257,7 +1257,7 @@ classData = {
             "17": "Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, two 14thlevel stellar revelations, and two zenith revelations.",
             "20": "Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, stellar apotheosis, two 14th-level stellar revelations, and two zenith revelations."
         },
-        "Ability Score Modifiers": " Strength, Dexterity, and Charisma.",
+        "AbilityScoreModifiers": ["Str","Dex","Cha"],
         "Adjustments": {"reflex":-2,"will":2},
         "Description": "Drawing power from the eternal cycles of stars, solarians fight with the power of photons and gravitons.",
         "Gear": " A solarian’s gear selection depends on whether you choose solar armor or solar weapon for its solar manifestation.Solar Armor",
@@ -1267,22 +1267,21 @@ classData = {
     },
     "Soldier": {
         "AbilitiesByCr": {
-            "1": "1st-level style technique and one special ability.",
-            "2": "1st-level style technique, one gear boost, and one special ability.",
-            "5": "1st- and 5th-level style techniques, one gear boost, and one special ability.",
-            "7": "1st- and 5th-level style techniques, two gear boosts, and one special ability.",
-            "9": "1st-, 5th-, and 9th-level style techniques; secondary fighting style; 1st-level secondary style technique; two gear boosts; and one special ability.",
-            "11": "1st-, 5th-, and 9th-level style techniques; secondary fighting style; 1st-level secondary style technique; soldier’s onslaught; two gear boosts; and one special ability.",
-            "13": "1st-, 5th-, 9th-, and 13th-level style techniques; secondary fighting style; 1st- and 5th-level secondary style techniques; soldier’s onslaught; and three special abilities.",
-            "17": "1st-, 5th-, 9th-, 13th-, and 17th-level style techniques; second style; 1st-, 5th-, and 9th-level secondary style techniques; soldier’s onslaught; two gear boosts; and one special ability.",
-            "20": "1st-, 5th-, 9th-, 13th-, and 17th-level style techniques; second style; 1st-, 5th-, and 9th-level secondary style techniques; soldier’s onslaught; kill shot; two gear boosts; and one special ability."
+            "1": "1st-level style technique (from selected fighting style) and one special ability.",
+            "2": "1st-level style technique (from selected fighting style), one gear boost, and one special ability.",
+            "5": "1st- and 5th-level style techniques (from selected fighting style), one gear boost, and one special ability.",
+            "7": "1st- and 5th-level style techniques (from selected fighting style), two gear boosts, and one special ability.",
+            "9": "1st-, 5th-, and 9th-level style techniques (from selected fighting style); secondary fighting style; 1st-level secondary style technique (from secondary fighting style); two gear boosts; and one special ability.",
+            "11": "1st-, 5th-, and 9th-level style techniques (from selected fighting style); secondary fighting style; 1st-level secondary style technique (from secondary fighting style); soldier’s onslaught; two gear boosts; and one special ability.",
+            "13": "1st-, 5th-, 9th-, and 13th-level style techniques (from selected fighting style); secondary fighting style; 1st- and 5th-level secondary style techniques (from secondary fighting style); soldier’s onslaught; and three special abilities.",
+            "17": "1st-, 5th-, 9th-, 13th-, and 17th-level style techniques (from selected fighting style); second style; 1st-, 5th-, and 9th-level secondary style techniques (from secondary fighting style); soldier’s onslaught; two gear boosts; and one special ability.",
+            "20": "1st-, 5th-, 9th-, 13th-, and 17th-level style techniques (from selected fighting style); second style; 1st-, 5th-, and 9th-level secondary style techniques (from secondary fighting style); soldier’s onslaught; kill shot; two gear boosts; and one special ability."
         },
-        "Ability Score Modifiers": " A soldier creature should arrange its ability score modifiers depending on its focus in combat. Melee",
-        "Adjustments": " -2 to Reflex saving throws and +2 to Will saving throws.",
+        "AbilityScoreModifiers": " A soldier creature should arrange its ability score modifiers depending on its focus in combat. Melee",
         "Adjustments": {"reflex":-2,"will":2},
         "Description": "Equipped with powerful weapons and armor, soldiers are trained to serve in the front line of battle and to both dish out and withstand massive force.",
         "Gear": " A soldier creature’s gear selection depends on whether it’s focused on melee or ranged combat.Melee",
-        "Required Array": " Combatant",
+        "Required Array": "Combatant",
         "Special Rules": " Choose one fighting style (soldier creatures of CR 9 or higher also choose a secondary fighting style). The soldier creature’s style techniques must come from the selected fighting style or styles. Any style techniques that aren’t relevant to the soldier creature can be skipped (or can simply be incorporated into the creature’s statistics) and don’t need to appear in the creature’s stat block."
     },
     "Technomancer": {
@@ -1298,7 +1297,7 @@ classData = {
             "17": "Spell cache, cache capacitor 2, and two 14th-level magic hacks.",
             "18": "Spell cache, cache capacitor 3, and two 14th-level magic hacks."
         },
-        "Ability Score Modifiers": " Intelligence, Dexterity, and Wisdom.",
+        "AbilityScoreModifiers": ["Int","Dex","Wis"],
         "Adjustments": "None",
         "Description": "These spellcasters meld magic and technology.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",

@@ -16,5 +16,3 @@ minify js and cs files
 
 
 statblock save actual creature types and subtypes
-
-make graft generation based on CR level
