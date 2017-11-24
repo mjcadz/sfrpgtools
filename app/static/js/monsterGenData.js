@@ -1160,10 +1160,10 @@ classData = {
             "20": "True expertise, four 8th-level envoy improvisations, skillful special ability, and one special ability."
         },
         "Ability Score Modifiers": " Charisma, Intelligence, and Dexterity.",
-        "Adjustments": " +2 to Reflex saving throws.",
+        "Adjustments": {"reflex":2},
         "Description": "Charismatic envoys assist their allies through inspiration and tactical orders.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
-        "Required Array": " Expert.",
+        "Required Array": " Expert",
         "Skills": " Master Sense Motive and master Bluff, Diplomacy, or Intimidate."
     },
     "Mechanic": {
@@ -1185,10 +1185,10 @@ classData = {
             "20": "Artificial intelligence, overload, remote hack, miracle worker 3/day, override, ghost in the machine, superior rig, and four 14th-level mechanic tricks."
         },
         "Ability Score Modifiers": " Intelligence, Dexterity, and Constitution.",
-        "Adjustments": " +2 to Fortitude and Reflex saving throws and -2 to Will saving throws.",
+        "Adjustments": {"fortitude":2,"reflex":2,"will":-2},
         "Description": "Experts at dealing with machines, mechanics either use exocortexes to enhance their combat abilities or are accompanied by robotic drones that they can control remotely.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
-        "Required Array": " Expert.",
+        "Required Array": " Expert",
         "Skills": " Master Computers and Engineering.",
         "Special Rules": " All mechanic creatures get the artificial intelligence class feature, which requires a choice between a drone and an exocortex. For a mechanic creature with a drone, build the drone as a separate technological construct of the mechanic’s CR - 2 or use an existing technological construct with the mechanic’s CR - 2. The drone does not get a full suite of actions on its own; each round, the mechanic creature and the drone can each take a move action, a swift action, and a reaction, but only one of them can take a standard action or combine its move and standard actions into a full action. The drone doesn’t have its own CR, it doesn’t contribute to the CR of the encounter, and PCs receive no XP for defeating a drone. For a mechanic creature with an exocortex, add target tracking at CR 1 (see below), wireless hack at CR 5, twin tracking at CR 10, multitasking at CR 15, and quad tracking at CR 20. Target Tracking (Ex)"
     },
@@ -1207,10 +1207,10 @@ classData = {
             "20": "All connection powers, mindlink, telepathic bond, transcendence, and enlightenment."
         },
         "Ability Score Modifiers": " Wisdom, Constitution, and Charisma.",
-        "Adjustments": " None.",
+        "Adjustments": "None",
         "Description": "Calling on connections to supernatural forces, mystics can manifest magic in a number of different ways.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
-        "Required Array": " Spellcaster.",
+        "Required Array": " Spellcaster",
         "Skills": " Master Mysticism and good or master skills chosen from the connection’s associated skills.",
         "Special Rules": " Choose one mystic connection. The mystic creature’s connection powers must come from that connection. Any connection powers that aren’t relevant to the creature (or that can simply be incorporated into the creature’s statistics) don’t need to appear in its stat block. Spells must come from the mystic spell list. Start with connection spells of the corresponding levels and then fill in the remaining slots."
     },
@@ -1235,10 +1235,10 @@ classData = {
             "20": "Trick attack +10d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, supreme operative, and two 14th-level operative exploits."
         },
         "Ability Score Modifiers": " Dexterity, Intelligence, and Wisdom.",
-        "Adjustments": " Bonus to initiative equal to the creature’s CR divided by 4, + 1; +3 to Reflex saving throws; +1 to all skill checks.",
+        "Adjustments": {"initiative":"CR/4","reflex":3,"skillChecks":1},
         "Description": "Cunning and swift, operatives are especially skilled and can cause foes to drop their guards, paving the way for devastating attacks.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), sniper rifle (item level = CR), and basic melee weapon with operative special quality (item level = CR - 1).",
-        "Required Array": " Expert.",
+        "Required Array": " Expert",
         "Skills": " Master skills from operative specialization.",
         "Special Rules": " Choose one operative specialization. The operative creature’s specialization exploit and specialization power must come from that specialization. Any exploits that aren’t relevant to the creature (or that can simply be incorporated into the creature’s statistics) don’t need to appear in the creature’s stat block."
     },
@@ -1258,10 +1258,10 @@ classData = {
             "20": "Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, stellar apotheosis, two 14th-level stellar revelations, and two zenith revelations."
         },
         "Ability Score Modifiers": " Strength, Dexterity, and Charisma.",
-        "Adjustments": " -2 to Reflex saving throws and +2 to Will saving throws.",
+        "Adjustments": {"reflex":-2,"will":2},
         "Description": "Drawing power from the eternal cycles of stars, solarians fight with the power of photons and gravitons.",
         "Gear": " A solarian’s gear selection depends on whether you choose solar armor or solar weapon for its solar manifestation.Solar Armor",
-        "Required Array": " Combatant.",
+        "Required Array": " Combatant",
         "Skills": " Good Mysticism.",
         "Special Rules": " Choose one solar manifestation, either solar armor or solar weapon. For a solarian creature with solar armor, its EAC and KAC each increase by 1 and it receives the energy resistance listed in the table of solarian class features. For a solarian creature with a solar weapon, that weapon deals the standard melee damage for the NPC’s CR from Table 2"
     },
@@ -1279,9 +1279,10 @@ classData = {
         },
         "Ability Score Modifiers": " A soldier creature should arrange its ability score modifiers depending on its focus in combat. Melee",
         "Adjustments": " -2 to Reflex saving throws and +2 to Will saving throws.",
+        "Adjustments": {"reflex":-2,"will":2},
         "Description": "Equipped with powerful weapons and armor, soldiers are trained to serve in the front line of battle and to both dish out and withstand massive force.",
         "Gear": " A soldier creature’s gear selection depends on whether it’s focused on melee or ranged combat.Melee",
-        "Required Array": " Combatant.",
+        "Required Array": " Combatant",
         "Special Rules": " Choose one fighting style (soldier creatures of CR 9 or higher also choose a secondary fighting style). The soldier creature’s style techniques must come from the selected fighting style or styles. Any style techniques that aren’t relevant to the soldier creature can be skipped (or can simply be incorporated into the creature’s statistics) and don’t need to appear in the creature’s stat block."
     },
     "Technomancer": {
@@ -1298,25 +1299,25 @@ classData = {
             "18": "Spell cache, cache capacitor 3, and two 14th-level magic hacks."
         },
         "Ability Score Modifiers": " Intelligence, Dexterity, and Wisdom.",
-        "Adjustments": " None.",
+        "Adjustments": "None",
         "Description": "These spellcasters meld magic and technology.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
-        "Required Array": " Spellcaster.",
+        "Required Array": " Spellcaster",
         "Skills": " Master Computers and good Mysticism.",
         "Special Rules": " In general, spells must come from the technomancer spell list. When choosing a spell for cache capacitor, you don’t have to choose one of the spells from the list of the spells the technomancer knows."
     }
 };
 
 var grafts = {
-  "Aerial": {
-    "CRMin":"1",
+  "Aerial (CR 1+)": {
+    "CRMin":1,
     "Description": "Aerial creatures are native denizens of the Elemental Plane of Air, gas giant planets, or similar landless environments, and have unique adaptations to help them survive there.",
     "SubTypeGraft": "Air",
     "DamageMod": "Natural 1/2 electricity",
     "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Air."]
   },
-  "Aqueous": {
-    "CRMin":"1",
+  "Aqueous (CR 1+)": {
+    "CRMin":1,
     "Description": "Aqueous creatures are native denizens of the Elemental Plane of Water or similar landless environments, able to survive both in and out of water.",
     "SubTypeGraft":"Water",
     "OtherAbilities": "amphibious",
@@ -1345,8 +1346,8 @@ var grafts = {
     },
     "Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
   },
-  "Cthonic": {
-    "CRMin":"1",
+  "Cthonic (CR 1+)": {
+    "CRMin":1,
     "Description": "Cthonic creatures are native denizens of the Elemental Plane of Earth or underground environments, and they have adapted to exist in dirt and rock.",
     "Senses": {
       "blindsense (vibration)":["1",30],
@@ -1356,8 +1357,8 @@ var grafts = {
     "DamageMod": "DR/cold iron",
     "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Earth."]
   },
-  "Cybernetic": {
-    "CRMin":"1/2",
+  "Cybernetic (CR 1/2+)": {
+    "CRMin":0.5,
     "ArmorUpgrade": {
       "CR3-7":1,
       "CR8":2
@@ -1390,15 +1391,15 @@ var grafts = {
     },
     "Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
   },
-  "Fiery": {
-    "CRMin":"1",
+  "Fiery (CR 1+)": {
+    "CRMin":1,
     "Description": "Fiery creatures are native denizens of the Elemental Plane of Fire or habitats covered in fire, and they have unique adaptations to help them survive there.",
     "SubTypeGraft": "Fire",
     "DamageMod": "Natural 1/2 fire",
     "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Fire."]
   },
-  "Giant": {
-    "CRMin":"1",
+  "Giant (CR 1+)" : {
+    "CRMin":1,
     "Description": "Giant creatures are larger than typical members of their species, and might represent a subspecies that has grown to unusual size due to environmental conditions.",
     "Size": 1,
     "Space": 1,
@@ -1436,8 +1437,8 @@ var grafts = {
       "Synthetic (Ex)": "The creature is affected by any ability that specifies it functions against androids."
     }
   },
-  "Two-Headed": {
-    "CRMin":"3",
+  "Two-Headed (CR 3+)": {
+    "CRMin":3,
     "Description": "This creature is a rare two-headed mutant or a member of a two-headed subspecies of a more common race.",
     "OtherAbilities": ["unflankable"],
     "MasterSkills": ["perception"],

@@ -25,10 +25,6 @@ function buildStatBlock() {
 
   // step 2 - creature type
 
-  //initialise relevant statistics
-  statBlock["attackmod"] = 0
-
-
   var creatureTypeDrop = $('[data-id="creatureTypeDrop"]').text().trim();
 
   //stat block adjustments
@@ -118,7 +114,11 @@ function buildStatBlock() {
 
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
-  $outputArea.append("<p>"+statBlock.OtherAbilities+"</p>");
+  var print = '';
+  for (stat in statBlock){
+    print += stat +": " +statBlock[stat] + ' <br>'
+  }
+  $outputArea.append("<p>"+print+"</p>");
 
 }
 
@@ -224,19 +224,43 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
           $("#precedenceDropdown").first().empty();
         }
     } else if (id=='graftDrop') {
+      if (selected != "None") {
+        var cr = Number($('[data-id="CRDrop"]').text().trim().replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
 
-      disableDropdown('creatureSubTypeDrop',false);
+        //check minimum cr is met
+        if (grafts[selected].hasOwnProperty("CRMin")){
+          var crmin = grafts[selected].CRMin;
+        } else {
+          var crmin = 0;
+        }
+        //if met continue
+        if (cr >= crmin) {
 
-      if (grafts[selected].hasOwnProperty("SubTypeGraft")) {
-        $('#stepFiveSave2').text(selected+":"+grafts[selected].SubTypeGraft);
-        var $modal = $(".modal-body.graftModal").first();
-        $modal.empty();
-        $modal.append("<p>This graft requires the <b>"+grafts[selected].SubTypeGraft+"</b> subtype.</p>");
-        $('#graftModal').modal('show');
+          disableDropdown('creatureSubTypeDrop',false);
+
+          if (grafts[selected].hasOwnProperty("SubTypeGraft")) {
+            $('#stepFiveSave2').text(selected+":"+grafts[selected].SubTypeGraft);
+            var $modal = $(".modal-body.graftModal").first();
+            $modal.empty();
+            $modal.append("<p>This graft requires the <b>"+grafts[selected].SubTypeGraft+"</b> subtype.</p>");
+            $('#graftModal').modal('show');
+          } else {
+
+            stepFiveDescription(selected)
+
+          }
+        } else {
+          //show modal
+          var $modal = $(".modal-body.crModal").first();
+          $modal.empty();
+          $modal.append("<p>The current <b>"+$('[data-id="CRDrop"]').text().trim()+"</b> is not high enough for this graft.</p>");
+          $('#crModal').modal('show');
+          //change back to previous
+          var prev = $('#stepFiveSave').text().trim();
+          $('#graftDrop').selectpicker('val', prev);
+        }
       } else {
-
         stepFiveDescription(selected)
-
       }
     }
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
@@ -328,8 +352,22 @@ $('.wizard-card').bootstrapWizard({
             }
 
             if (validated) {
+              //refresh graft drop if needed (dependent on CR)
+              var cr = Number($('[data-id="CRDrop"]').text().trim().replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
+              var graft = $('#graftDrop').val().trim();
 
-                //return false; //temp for testing
+              if (graft != '' && graft != 'None'){
+                if (grafts[graft].hasOwnProperty("CRMin")){
+                  var crmin = grafts[graft].CRMin;
+                } else{
+                  var crmin = 0;
+                }
+                if (cr < crmin) {
+                  //reset dropdown id cr below minimum
+                  generateDropdown("graftDropdown","graftDrop","Optional template graft",['None','BREAK'].concat(Object.keys(grafts).sort()));
+                  stepFiveDescription('None')
+                }
+              }
             } else {
                 return false;
             }
@@ -486,7 +524,7 @@ $('.wizard-card').bootstrapWizard({
 $('.btn-finish').click(function() {
 
     //alert('Finished!');
-    //buildStatBlock();
+    buildStatBlock();
 });
 
 $('.btn-change').click(function(){
