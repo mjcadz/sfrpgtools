@@ -31,22 +31,8 @@ function buildStatBlock() {
   var creatureTypeDrop = $('[data-id="creatureTypeDrop"]').text().trim();
 
   statBlock.CreatureType = creatureTypeDrop;
+  statBlock.CreatureAdjustments = creatureType[creatureTypeDrop].Adjustments;
 
-  //stat block adjustments
-  for (adjustment in creatureType[creatureTypeDrop].Adjustments) {
-    if (adjustment == "anySave"){
-      //use picker
-      var savingThrow = $('[data-id="SavingThrowDrop"]').text().trim().replace(' +2','').toLowerCase();
-      statBlock[savingThrow] += 2;
-    } else if (statBlock.hasOwnProperty(adjustment)){
-      //check if proprty already has entry
-      statBlock[adjustment] += creatureType[creatureTypeDrop].Adjustments[adjustment];
-    } else {
-      statBlock[adjustment] = creatureType[creatureTypeDrop].Adjustments[adjustment];
-    }
-  }
-
-  //Traits
 
   //Senses
   if (creatureType[creatureTypeDrop].hasOwnProperty("Senses")){
@@ -115,6 +101,44 @@ function buildStatBlock() {
     }
   }
 
+  //step 4 -class
+
+  statBlock = getClassStats(statBlock);
+
+
+
+  //stat block adjustments
+
+  var classDrop = $('#classDrop').val().trim();
+  //choose class or creature adjustments not both
+  if (classDrop != '' && classDrop != 'None'){
+    var precedenceDrop = $('#precedenceDrop').val().trim();
+    if (precedenceDrop.includes("Creature")) {
+      var adjustments = statBlock.CreatureAdjustments;
+    } else if (precedenceDrop.includes("Class")){
+      var adjustments = statBlock.ClassAdjustments;
+    }
+  } else {
+    var adjustments = statBlock.CreatureAdjustments;
+  }
+
+  for (adjustment in adjustments) {
+    alert (adjustment);
+    if (adjustment == "anySave"){
+      //use picker
+      var savingThrow = $('[data-id="SavingThrowDrop"]').text().trim().replace(' +2','').toLowerCase();
+      statBlock[savingThrow] += 2;
+    } else if (adjustment == "None") {
+      //do nothing
+    } else if (statBlock.hasOwnProperty(adjustment)){
+      //check if proprty already has entry
+      statBlock[adjustment] += adjustments[adjustment];
+    } else {
+      statBlock[adjustment] = adjustments[adjustment];
+    }
+  }
+
+
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
   var print = '';
@@ -130,16 +154,45 @@ function getClassStats(statObject){
 
   //step 4 - class
   var classDrop = $('#classDrop').val().trim();
-  var cr = Number($('[data-id="CRDrop"]').text().trim().replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
+
 
   //if envoy is selected
   if (classDrop != '' && classDrop != 'None'){
-    if (classDrop == 'Envoy') {
 
-      classAbilities = getClassAbilities(classDrop,cr)
+    var cr = Number($('[data-id="CRDrop"]').text().trim().replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
+    var classObject = classData[classDrop];
 
+    statObject.ClassResolvePoints = Math.round(cr/5) + 3;
+    statObject.ClassAbilities = getClassAbilities(classDrop,cr);
+
+    if (classObject.hasOwnProperty("SpecialRules")){
+      statObject.ClassSpecialRules = classObject.SpecialRules;
+    }
+    statObject.ClassAdjustments = classObject.Adjustments;
+    if (classObject.hasOwnProperty("MasterSkills")){
+      if (statObject.hasOwnProperty("MasterSkills")){
+        statObject.MasterSkills = statObject.MasterSkills.concat(classObject.MasterSkills);
+      } else {
+        statObject.MasterSkills = classObject.MasterSkills;
+      }
+    }
+    if (classObject.hasOwnProperty("GoodSkills")){
+      if (statObject.hasOwnProperty("GoodSkills")){
+        statObject.GoodSkills = statObject.GoodSkills.concat(classObject.GoodSkills);
+      } else {
+        statObject.GoodSkills = classObject.GoodSkills;
+      }
+    }
+
+    if (classDrop == 'Soldier') {
+      statObject.ClassAbilityScoreModifiers = classObject.Melee.AbilityScoreModifiers;
+      statObject.ClassGear = classObject.Melee.Gear;
+    } else {
+      statObject.ClassAbilityScoreModifiers = classObject.AbilityScoreModifiers;
+      statObject.ClassGear = classObject.Gear;
     }
   }
+  return statObject;
 
 }
 
@@ -523,13 +576,6 @@ $('.wizard-card').bootstrapWizard({
 
             var validated = true;
 
-            if ($('[data-id="precedenceDrop"]').length){
-              if ($('[data-id="precedenceDrop"]').text().includes("Choose")) {
-                  $('[data-id="precedenceDrop"]').addClass('wizard-shadow');
-                  validated = false;
-              }
-            }
-
             if (validated) {
 
             } else {
@@ -567,9 +613,18 @@ $('.wizard-card').bootstrapWizard({
 });
 //finish function
 $('.btn-finish').click(function() {
+  //final tab validation
+    var validated = true;
 
-    //alert('Finished!');
-    buildStatBlock();
+    if ($('[data-id="precedenceDrop"]').length){
+      if ($('[data-id="precedenceDrop"]').text().includes("Choose")) {
+          $('[data-id="precedenceDrop"]').addClass('wizard-shadow');
+          validated = false;
+      }
+    }
+    if (validated){
+      buildStatBlock();
+    }
 });
 
 $('.btn-change').click(function(){

@@ -1164,7 +1164,10 @@ classData = {
         "Description": "Charismatic envoys assist their allies through inspiration and tactical orders.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
         "Required Array": "Expert",
-        "Skills": " Master Sense Motive and master Bluff, Diplomacy, or Intimidate."
+        "MasterSkills": [
+          "sense motive"
+        ],
+        "MasterSkillChoice":["Bluff", "Diplomacy" ,"Intimidate"]
     },
     "Mechanic": {
         "AbilitiesByCr": {
@@ -1188,9 +1191,12 @@ classData = {
         "Adjustments": {"fortitude":2,"reflex":2,"will":-2},
         "Description": "Experts at dealing with machines, mechanics either use exocortexes to enhance their combat abilities or are accompanied by robotic drones that they can control remotely.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
-        "Required Array": " Expert",
-        "Skills": " Master Computers and Engineering.",
-        "Special Rules": " All mechanic creatures get the artificial intelligence class feature, which requires a choice between a drone and an exocortex. For a mechanic creature with a drone, build the drone as a separate technological construct of the mechanic’s CR - 2 or use an existing technological construct with the mechanic’s CR - 2. The drone does not get a full suite of actions on its own; each round, the mechanic creature and the drone can each take a move action, a swift action, and a reaction, but only one of them can take a standard action or combine its move and standard actions into a full action. The drone doesn’t have its own CR, it doesn’t contribute to the CR of the encounter, and PCs receive no XP for defeating a drone. For a mechanic creature with an exocortex, add target tracking at CR 1 (see below), wireless hack at CR 5, twin tracking at CR 10, multitasking at CR 15, and quad tracking at CR 20. Target Tracking (Ex)"
+        "Required Array": "Expert",
+        "MasterSkills": [
+          "computers",
+          "engineering"
+        ],
+        "SpecialRules": " All mechanic creatures get the artificial intelligence class feature, which requires a choice between a drone and an exocortex. For a mechanic creature with a drone, build the drone as a separate technological construct of the mechanic’s CR - 2 or use an existing technological construct with the mechanic’s CR - 2. The drone does not get a full suite of actions on its own; each round, the mechanic creature and the drone can each take a move action, a swift action, and a reaction, but only one of them can take a standard action or combine its move and standard actions into a full action. The drone doesn’t have its own CR, it doesn’t contribute to the CR of the encounter, and PCs receive no XP for defeating a drone. For a mechanic creature with an exocortex, add target tracking at CR 1 (see below), wireless hack at CR 5, twin tracking at CR 10, multitasking at CR 15, and quad tracking at CR 20. Target Tracking (Ex)"
     },
     "Mystic": {
         "AbilitiesByCr": {
@@ -1207,12 +1213,14 @@ classData = {
             "20": "All connection powers, mindlink, telepathic bond, transcendence, and enlightenment."
         },
         "AbilityScoreModifiers": ["Wis","Con","Cha"],
-        "Adjustments": "None",
+        "Adjustments": {"None":0},
         "Description": "Calling on connections to supernatural forces, mystics can manifest magic in a number of different ways.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
-        "Required Array": " Spellcaster",
-        "Skills": " Master Mysticism and good or master skills chosen from the connection’s associated skills.",
-        "Special Rules": " Choose one mystic connection. The mystic creature’s connection powers must come from that connection. Any connection powers that aren’t relevant to the creature (or that can simply be incorporated into the creature’s statistics) don’t need to appear in its stat block. Spells must come from the mystic spell list. Start with connection spells of the corresponding levels and then fill in the remaining slots."
+        "Required Array": "Spellcaster",
+        "MasterSkills": [
+          "mysticism"
+        ],
+        "SpecialRules": " Choose one mystic connection. The mystic creature’s connection powers must come from that connection. Any connection powers that aren’t relevant to the creature (or that can simply be incorporated into the creature’s statistics) don’t need to appear in its stat block. Spells must come from the mystic spell list. Start with connection spells of the corresponding levels and then fill in the remaining slots.Good or master skills chosen from the connection’s associated skills."
     },
     "Operative": {
         "AbilitiesByCr": {
@@ -1235,12 +1243,11 @@ classData = {
             "20": "Trick attack +10d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, supreme operative, and two 14th-level operative exploits."
         },
         "AbilityScoreModifiers": ["Dex","Int","Wis"],
-        "Adjustments": {"initiative":"CR/4","reflex":3,"skillChecks":1},
+        "Adjustments": {"initiative":"+CR/4","reflex":3,"skillChecks":1},
         "Description": "Cunning and swift, operatives are especially skilled and can cause foes to drop their guards, paving the way for devastating attacks.",
-        "Gear": " Light armor (item level = CR), small arm (item level = CR), sniper rifle (item level = CR), and basic melee weapon with operative special quality (item level = CR - 1).",
-        "Required Array": " Expert",
-        "Skills": " Master skills from operative specialization.",
-        "Special Rules": " Choose one operative specialization. The operative creature’s specialization exploit and specialization power must come from that specialization. Any exploits that aren’t relevant to the creature (or that can simply be incorporated into the creature’s statistics) don’t need to appear in the creature’s stat block."
+        "Gear": "Light armor (item level = CR), small arm (item level = CR), sniper rifle (item level = CR), and basic melee weapon with operative special quality (item level = CR - 1).",
+        "Required Array": "Expert",
+        "SpecialRules": " Choose one operative specialization. The operative creature’s specialization exploit and specialization power must come from that specialization. Any exploits that aren’t relevant to the creature (or that can simply be incorporated into the creature’s statistics) don’t need to appear in the creature’s stat block. Master skills from operative specialization."
     },
     "Solarian": {
         "AbilitiesByCr": {
@@ -1260,10 +1267,12 @@ classData = {
         "AbilityScoreModifiers": ["Str","Dex","Cha"],
         "Adjustments": {"reflex":-2,"will":2},
         "Description": "Drawing power from the eternal cycles of stars, solarians fight with the power of photons and gravitons.",
-        "Gear": " A solarian’s gear selection depends on whether you choose solar armor or solar weapon for its solar manifestation.Solar Armor",
-        "Required Array": " Combatant",
-        "Skills": " Good Mysticism.",
-        "Special Rules": " Choose one solar manifestation, either solar armor or solar weapon. For a solarian creature with solar armor, its EAC and KAC each increase by 1 and it receives the energy resistance listed in the table of solarian class features. For a solarian creature with a solar weapon, that weapon deals the standard melee damage for the NPC’s CR from Table 2"
+        "Gear": "A solarian’s gear selection depends on whether you choose solar armor or solar weapon for its solar manifestation.Solar Armor",
+        "Required Array": "Combatant",
+        "GoodSkills": [
+          "mysticism"
+        ],
+        "SpecialRules": "Choose one solar manifestation, either solar armor or solar weapon. For a solarian creature with solar armor, its EAC and KAC each increase by 1 and it receives the energy resistance listed in the table of solarian class features. For a solarian creature with a solar weapon, that weapon deals the standard melee damage for the NPC’s CR from Table 2"
     },
     "Soldier": {
         "AbilitiesByCr": {
@@ -1277,12 +1286,17 @@ classData = {
             "17": "1st-, 5th-, 9th-, 13th-, and 17th-level style techniques (from selected fighting style); second style; 1st-, 5th-, and 9th-level secondary style techniques (from secondary fighting style); soldier’s onslaught; two gear boosts; and one special ability.",
             "20": "1st-, 5th-, 9th-, 13th-, and 17th-level style techniques (from selected fighting style); second style; 1st-, 5th-, and 9th-level secondary style techniques (from secondary fighting style); soldier’s onslaught; kill shot; two gear boosts; and one special ability."
         },
-        "AbilityScoreModifiers": " A soldier creature should arrange its ability score modifiers depending on its focus in combat. Melee",
+        "MeleeStyle":{
+          "AbilityScoreModifiers":["Str","Dex","Con"],
+          "Gear":"Heavy armor (item level = CR), advanced melee weapon (item level = CR + 1), longarm (item level = CR), and two grenades (item level = CR)."
+        },
+        "RangedStyle":{
+          "AbilityScoreModifiers":["Dex","Str","Con"],
+          "Gear":"Heavy armor (item level = CR), advanced melee weapon (item level = CR), longarm (item level = CR + 1) or heavy weapon (item level = CR), and two grenades (item level = CR)."
+        },
         "Adjustments": {"reflex":-2,"will":2},
         "Description": "Equipped with powerful weapons and armor, soldiers are trained to serve in the front line of battle and to both dish out and withstand massive force.",
-        "Gear": " A soldier creature’s gear selection depends on whether it’s focused on melee or ranged combat.Melee",
-        "Required Array": "Combatant",
-        "Special Rules": " Choose one fighting style (soldier creatures of CR 9 or higher also choose a secondary fighting style). The soldier creature’s style techniques must come from the selected fighting style or styles. Any style techniques that aren’t relevant to the soldier creature can be skipped (or can simply be incorporated into the creature’s statistics) and don’t need to appear in the creature’s stat block."
+        "Required Array": "Combatant"
     },
     "Technomancer": {
         "AbilitiesByCr": {
@@ -1298,12 +1312,15 @@ classData = {
             "18": "Spell cache, cache capacitor 3, and two 14th-level magic hacks."
         },
         "AbilityScoreModifiers": ["Int","Dex","Wis"],
-        "Adjustments": "None",
+        "Adjustments": {"None":0},
         "Description": "These spellcasters meld magic and technology.",
-        "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
-        "Required Array": " Spellcaster",
-        "Skills": " Master Computers and good Mysticism.",
-        "Special Rules": " In general, spells must come from the technomancer spell list. When choosing a spell for cache capacitor, you don’t have to choose one of the spells from the list of the spells the technomancer knows."
+        "Gear": "Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
+        "Required Array": "Spellcaster",
+        "MasterSkills": [
+          "mysticism",
+          "computers"
+        ],
+        "SpecialRules": "In general, spells must come from the technomancer spell list. When choosing a spell for cache capacitor, you don’t have to choose one of the spells from the list of the spells the technomancer knows."
     }
 };
 

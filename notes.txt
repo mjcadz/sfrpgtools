@@ -14,5 +14,9 @@ step 3 - options, subraces
 
 minify js and cs files
 
+human aditional abiliities
 
 statblock save actual creature types and subtypes
+
+soldier class melee/ranged
+envoy skillchoice
