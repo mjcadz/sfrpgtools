@@ -18,5 +18,17 @@ human aditional abiliities
 
 statblock save actual creature types and subtypes
 
+additional special abilities from grafts AditionalAbilities
+
+immunity special ability/vulnerability
+
+special abilities make the one that affect stats actually affect stats
+
 soldier class melee/ranged
 envoy skillchoice
+
+text attribute in grafts
+
+adjustment abilities
+
+sort free/standard abilities

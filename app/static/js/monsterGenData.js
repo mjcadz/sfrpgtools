@@ -1469,5 +1469,293 @@ var grafts = {
   }
 }
 
-var statLabels = ["eac","kac","fortitude","reflex","will","hitPoints","abilityDCBase","spellDC","abilityScoreModifiers","specialAbilities","masterSkills","goodSkills","highAttackBonus","lowAttackBonus","rangedEnergy","rangedKinetic","meleeStandard","meleeThree","meleeFour"];
+var statLabels = ["eac","kac","fortitude","reflex","will","hitPoints","abilityDCBase","spellDC","abilityScoreModifier0","abilityScoreModifier1","abilityScoreModifier2","specialAbilities","masterSkills","goodSkills","highAttackBonus","lowAttackBonus","rangedEnergy","rangedKinetic","meleeStandard","meleeThree","meleeFour"];
 var CRLabels = ["CR 1/3","CR 1/2","CR 1","CR 2","CR 3","CR 4","CR 5","CR 6","CR 7","CR 8","CR 9","CR 10","CR 11","CR 12","CR 13","CR 14","CR 15","CR 16","CR 17","CR 18","CR 19","CR 20","CR 21","CR 22","CR 23","CR 24","CR 25"]
+
+specialAbilities = {
+  "AdjustmentAbilities":{
+    "Brute": {
+      "Description": "Use the low attack value for the NPC’s main attack, but determine the attack’s damage as if the NPC’s CR were 2 higher (adding the extra damage from weapon specialization).This special ability has a greater impact at higher CRs."
+    },
+    "Extra Hit Points": {
+      "Description": "Increase the NPC’s HP by 20%."
+    },
+    "Save Boost": {
+      "Description": "Increase all saving throw bonuses by 1 or one saving throw bonus by 3."
+    },
+    "Secondary Magic": {
+      "Description": "The NPC gains spell-like abilities (chosen in Step 8) according to its CR, though it gains only the once-per-day spells or one spell per unit of frequency (at will, 1/day, etc.)."
+    },
+    "Skillful": {
+      "Description": "Increase all master and good skill bonuses by 1."
+    }
+  },
+  "FreeAbilities": {
+    "Amphibious (Ex)": {
+      "Description": "The creature has the aquatic subtype, but it can breathe air and survive on land.",
+      "Format": "Other Abilities amphibious."
+    },
+    "Blindsense (Ex)": {
+      "Description": "The creature has a specific imprecise nonvisual sense (vibration or scent) that operates effectively without vision. This specific sense is indicated in parentheses.",
+      "Format": "Senses blindsense (vibration or scent) 60 ft.",
+      "Guidelines": "Blindsense usually has a range of 60 feet."
+    },
+    "Burrow (Ex)": {
+      "Description": "The creature can tunnel through dirt.",
+      "Format": "Speed burrow 30 ft."
+    },
+    "Climb (Ex)": {
+      "Description": "The creature can climb slopes, walls other steep inclines.",
+      "Format": "Speed climb 30 ft."
+    },
+    "Darkvision (Ex Or Su)": {
+      "Description": "The creature can see out to the listed range with no light source at all.",
+      "Format": "Senses darkvision 60 ft.",
+      "Guidelines": "Darkvision has a range of 60 feet for most creatures or 120 feet in exceptional cases."
+    },
+    "Fly (Ex Or Su)": {
+      "Description": "The source of the creature's fly speed (whether extraordinary, supernatural, or from another source such as an item) is noted before its maneuverability. Unless otherwise noted, a creature whose ability to fly is extraordinary can't fly in a vacuum.",
+      "Format": "Speed fly 60 ft. (Ex, perfect)."
+    },
+    "Limited Telepathy (Ex Or Su)": {
+      "Description": "The creature can mentally communicate with any creatures within the listed range with which it shares a language.",
+      "Format": "Languages limited telepathy 30 ft."
+    },
+    "Low-Light Vision (Ex)": {
+      "Description": "The creature can see in dim light as if it were normal light.\nLow-light vision is color vision, unlike darkvision. A creature with low-light vision can read as long as even the tiniest source of light is next to it. Creatures with low-light vision can see outdoors on a moonlit night as well as they can during the day, since the moon casts dim light.",
+      "Format": "Senses low-light vision."
+    },
+    "Mindless (Ex)": {
+      "Description": "The creature has no Intelligence score or modifier and is immune to mind-affecting effects. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).",
+      "Format": "Other Abilities mindless.",
+      "Guidelines": "Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they're incapable of training."
+    },
+    "Swim (Ex)": {
+      "Description": "The creature can swim through liquids.",
+      "Format": "Speed swim 30 ft."
+    },
+    "Water Breathing (Ex)": {
+      "Description": "The creature can breathe water. It can't breathe air unless it has the amphibious special ability.",
+      "Format": "Other Abilities water breathing."
+    }
+  },
+  "Weaknesses": {
+    "Dependency (Ex)": {
+      "Description": "The creature is dependent on a substance, a sense, or something else to either survive or function normally. If the creature is dependent on something to live (such as water), it can survive without that thing for a number of minutes equal to 5 * its Constitution modifier. Beyond this limit, the creature runs the risk of negative effects, such as suffocation or death. A creature that is dependent on something to function normally (such as a creature with blindsight and no visual sense) usually gains a negative condition when it loses that thing.",
+      "Format": "Weaknesses blindsight dependency."
+    },
+    "Light Blindness (Ex)": {
+      "Description": "The creature is blinded for 1 round when first exposed to bright light, such as sunlight, and it is dazzled for as long as it remains in an area of bright light.",
+      "Format": "Weaknesses light blindness."
+    },
+    "Vulnerability (Ex Or Su)": {
+      "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
+      "Format": "Weaknesses vulnerable to fire."
+    }
+  },
+  "Abilities": {
+    "Amorphous (Ex)": {
+      "Description": "The creature's body is malleable and shapeless. It does not take double damage from critical hits, but it is affected by critical hit effects normally.",
+      "Format": "Defensive Abilities amorphous."
+    },
+    "Attach (Ex)": {
+      "Description": "The creature can attempt a special attack against KAC as a standard action. If it succeeds, it deals no damage, but it adheres to its target. Once attached, the creature gains a +4 bonus to its AC (from cover) and a +2 circumstance bonus to melee attacks, but it can attack only the creature to which it is attached. An attached creature can't move (though it moves with its target), take actions that require two hands, or make attacks of opportunity. An attached creature can be removed with a successful Strength check (DC = 10 + 1-1/2 * the creature's CR) made as a move action, or it can remove itself from its target as a move action.",
+      "Format": "Melee attach +6."
+    },
+    "Aura (Ex, Sp, Or Su)": {
+      "Description": "Unless an aura says otherwise, a target is affected by an aura automatically with no action required on the creature's part whenever the target is within the aura's listed range (either when the target enters the aura on its turn or when it begins its turn in the aura, whichever comes first). If the aura deals damage, it damages a target only the first time the target is in the aura each round, regardless of how many times within the round the target enters and leaves the aura. A creature can suppress its aura for 1 round as a move action unless noted otherwise.",
+      "Format": "Aura radiation (30 ft., DC 17); if additional information is needed, the aura also has an entry in Special Abilities."
+    },
+    "Blindsense Exotic (Ex)": {
+      "Description": "The creature has a specific imprecise nonvisual sense (life, thought, or other exotic sense) that operates effectively without vision. This specific sense is indicated in parentheses.",
+      "Format": "Senses blindsense (life, thought, or other exotic sense) 60 ft.",
+      "Guidelines": "Blindsense usually has a range of 60 feet."
+    },
+    "Blindsight (Ex)": {
+      "Description": "Blindsight is a more precise version of blindsense. This ability operates out to a specified range. A creature with blindsight typically perceives using a specific type of sense, indicated in parentheses.",
+      "Format": "Senses blindsight (life) 60 ft.",
+      "Guidelines": "Blindsight usually has a range of 60 feet."
+    },
+    "Breath Weapon (Su)": {
+      "Description": "Some creatures can exhale a cone or line of energy or another magical effect. A breath weapon attack usually deals damage, and it is often energy-based. A breath weapon usually allows a target to attempt a Reflex saving throw for half damage, though some breath weapons require a successful Fortitude or Will save instead. A creature is immune to its own breath weapon and the breath weapons of others of its kind unless otherwise noted.\nEach breath weapon also indicates how often it can be used.",
+      "Format": "Offensive Abilities breath weapon (60-ft. cone, 8d6 F, DC 18, usable every 1d4 rounds); if the breath has more complicated effects, it also has an entry in Special Abilities.",
+      "Guidelines": "1d6 damage + 1d6 per CR, usable once every 1d4 rounds. A cone is usually 30 feet long, increasing by 10 feet for every size category above Medium or decreasing by 5 feet for every size category below Medium. A line is twice as long as a cone would be."
+    },
+    "Change Shape (Su)": {
+      "Description": "The creature has the ability to assume the appearance of a specific creature or type of creature, but it retains most of its own physical qualities. If the form assumed has any of the following abilities, the creature gains them while in that form: blindsight (scent), darkvision, low-light vision, and swim 30 feet. The creature can retain its own breathing ability, or it can assume the ability to breathe in any environment the assumed shape can breathe in (including the no breath ability, which enables it to survive in the vacuum of space). If the ability does not specify what the creature can change shape into, it can assume the form of any creature of the humanoid type, but it can't mimic a specific humanoid. Change shape grants a +10 bonus to Disguise checks to appear as a creature of the type and subtype of the new form, and the DC of the creature's Disguise check is not modified as a result of altering major features or disguising itself as a different race or creature type.\nA creature can assume a form that is one size category smaller or larger than its original form; it becomes that size.\nUnless otherwise stated, it can remain in an alternate form indefinitely. Some creatures can transform into unique forms with special modifiers and abilities. These creatures adjust their ability scores, as noted in their description.",
+      "Format": "Other Abilities change shape (humanoid); creatures with a unique form also have an entry in Special Abilities."
+    },
+    "Compression (Ex)": {
+      "Description": "The creature can move through an area as small as one-quarter of its space without squeezing or one-eighth its space when squeezing.",
+      "Format": "Other Abilities compression."
+    },
+    "Create Darkness (Su)": {
+      "Description": "As a standard action, the creature can create a 20-foot-radius area of darkness centered on itself, which negates the effects of all nonmagical light sources in that area. This darkness lasts for a number of minutes equal to the creature's CR, and the creature can dismiss the effect as a standard action. The darkness doesn't move with the creature. Unless otherwise noted, any magic source of light can increase the light level in the area as normal.",
+      "Format": "Offensive Abilities create darkness."
+    },
+    "Crush (Ex)": {
+      "Description": "When ending a flying or jumping movement, the creature can land on targets that are at least three size categories smaller than itself. Targets are automatically knocked prone, take the listed damage, and are pinned. Each crushed target can attempt to escape the pin normally on its turn, and the pin ends automatically if the crushing creature moves off the target's square. A crushed target does not take damage from the crush more than once, unless the crushing creature moves fully off that creature and then back onto it.",
+      "Format": "Offensive Abilities crush (4d6+8 B).",
+      "Guidelines": "Use the same damage amount as for the creature's standard melee attack."
+    },
+    "Detect Alignment (Sp Or Su)": {
+      "Description": "The creature can detect the alignment of another creature.\nThis functions as detect magic, but rather than determining which creatures and objects in the area are magical, the creature can determine one other creature's alignment.",
+      "Format": "Senses detect alignment."
+    },
+    "Distraction (Ex)": {
+      "Description": "The creature can nauseate targets that it damages. A living creature that takes damage from a creature with the distraction ability is nauseated for 1 round; the target can negate the effect with a successful Fortitude save at the listed DC.",
+      "Format": "Offensive Abilities distraction (DC 15)."
+    },
+    "Earth Glide (Ex)": {
+      "Description": "When the creature burrows, it can pass through dirt, stone, or almost any other sort of earth except metal as easily as a fish swims through water. If protected against fire damage, it can even glide through lava. Its burrowing leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence.",
+      "Format": "Other Abilities earth glide."
+    },
+    "Energy Drain (Su)": {
+      "Description": "A successful energy drain attack inflicts one or more negative levels (as described in the ability). If an attack that includes an energy drain scores a critical hit, it inflicts twice the listed number of negative levels. Unless otherwise specified in the draining creature's description, it gains 5 temporary Hit Points for each negative level it inflicts on an opponent. These temporary Hit Points last for a maximum of 1 hour. Negative levels from energy drain remain until 24 hours have passed or until they are removed with magic or technology. If a negative level isn't removed before 24 hours have passed, the affected target must attempt a Fortitude saving throw (the exact DC is given in the creature's stat block). On a success, the negative level goes away. On a failure, the negative level becomes permanent. A separate saving throw is required for each negative level.",
+      "Format": "Melee slam +24 (6d12+22 B plus energy drain); Offensive Abilities energy drain (2 levels, DC 22)."
+    },
+    "Fast Healing (Ex)": {
+      "Description": "The creature regains the listed number of Hit Points at the start of its turn. Unless otherwise noted, the creature can never exceed its maximum Hit Points.\nFast healing does not restore Hit Points lost from starvation, thirst, or suffocation, nor does it allow a creature to regrow or reattach lost body parts, unless otherwise stated. Fast healing continues to function until a creature dies, at which point the effects of fast healing end immediately.",
+      "Format": "Defensive Abilities fast healing 5."
+    },
+    "Ferocity (Ex)": {
+      "Description": "When the creature is brought to 0 Hit Points, it can fight on for 1 more round. It can act normally until the end of its next turn; if it has 0 HP at that point, it dies. If it would lose further Hit Points before this, it ceases to be able to act and dies.",
+      "Format": "Defensive Abilities ferocity."
+    },
+    "Frightful Presence (Ex Or Su)": {
+      "Description": "The creature's presence unsettles its foes. It can activate this ability as part of the action of making an attack or as a move action, but it can activate it only once per round. It usually has a range of 30 feet. Opponents within the range must succeed at a Will save or be shaken. The duration is 5d6 rounds unless the ability says otherwise. Once an opponent has been exposed to a creature's frightful presence (whether or not the opponent succeeds at its saving throw), it cannot be affected by the same creature's frightful presence for 24 hours. This is an emotion, fear, mind-affecting, and sense-dependent effect.",
+      "Format": "Aura frightful presence (30 ft., DC 22)."
+    },
+    "Gaze (Su)": {
+      "Description": "Opponents that look at a creature with a gaze ability are in danger of being charmed, being paralyzed, being turned to stone, or suffering another negative effect. Each opponent within the gaze's listed range must attempt a saving throw (usually Fortitude or Will) at the beginning of its turn. On a successful save, the effect is negated. An opponent can give itself an advantage against this ability in one of two ways.\nLooking Obliquely: An opponent that avoids looking directly at the creature's face (either by following the creature's shadow or by tracking it in a reflective surface) or that looks at the creature through a camera or heads-up display gains a +4 circumstance bonus to the saving throw. However, the creature with the gaze ability gains concealment against that opponent.\nBlocking Its Vision: By completely blocking or covering its own visual sensors, an opponent doesn't need to attempt a save against the gaze. However, the creature with the gaze ability gains total concealment against that opponent.\nGaze abilities can affect ethereal opponents but not opponents without visual sensors. A creature is immune to the gaze abilities of others of its kind unless otherwise noted. Allies of a creature with a gaze ability can still be affected, but they are always considered to be looking obliquely at the creature.\nThe creature can also veil its eyes, thus negating its gaze ability.",
+      "Format": "Offensive Abilities paralyzing gaze (60 ft., DC 14)."
+    },
+    "Grab (Ex)": {
+      "Description": "If the creature hits with the indicated attack (usually a claw or bite attack), it deals the normal damage. If the creature's attack roll successfully hits the target's KAC + 4, the creature also automatically grapples the foe as a free action. (If it hits the target's KAC + 13, it instead pins the target.) The creature does not need to have a spare limb free to perform this grapple, as long as it can make the listed attack, and it can potentially grapple more than one target if it has more than one attack with the grab ability. The creature can maintain the grab either with another successful grab attack or by performing the grapple combat maneuver normally.",
+      "Format": "Melee claw +8 (1d6+4 plus grab)."
+    },
+    "Immunity (Ex Or Su)": {
+      "Description": "The creature takes no damage from the listed source. Creatures can be immune to certain types of damage, types of afflictions, conditions, spells (based on school, level, or save type), and other effects. A creature that is immune to critical hits doesn't take double damage or suffer critical hit effects. A creature that is immune to a listed source doesn't suffer from its effects or from any secondary effects that it would trigger.",
+      "Format": "Immunities acid, paralysis.",
+      "Guidelines": "A creature usually has one immunity, plus one for every 5 CR. Broad immunities like immunity to mind-affecting effects or all magic should be chosen with caution and might count as multiple abilities."
+    },
+    "Multiattack (Ex)": {
+      "Description": "When making a full attack, the creature can make all the listed attacks, instead of two attacks, at the attack bonuses indicated. It can make the attacks in any order.",
+      "Format": "Multiattack bite +10 (3d6+5), 2 claws +10 (2d8+5).",
+      "Guidelines": "Use the appropriate damage column for the creature's array, and impose a -6 penalty on these attacks instead of a -4 penalty."
+    },
+    "Natural Weapons (Ex)": {
+      "Description": "Natural weapons (and natural attacks), such as acid spit, bite, claw, or slam don't require ammunition and can't be disarmed or sundered.\n"
+    },
+    "No Breath (Ex)": {
+      "Description": "The creature doesn't breathe, and it is immune to effects that require breathing (such as inhaled poison). This does not give it immunity to cloud or gas attacks that don't require breathing.",
+      "Format": "Other Abilities no breath."
+    },
+    "Plantlike (Ex)": {
+      "Description": "For effects targeting creatures by type, plantlike creatures count as both their type and plants, whichever is most detrimental to them. They also receive a +2 racial bonus to saving throws against mind-affecting effects, paralysis, poison, polymorph, sleep, and stunning, unless the effect specifies that it works against plants.",
+      "Format": "Other Abilities plantlike."
+    },
+    "Regeneration (Ex)": {
+      "Description": "The creature regains Hit Points at the start of its turn, as with fast healing, but it can't die as long as its regeneration is still functioning (although creatures with regeneration still fall unconscious when their Hit Points reach 0). Certain attacks, typically those that deal acid or fire damage, cause a creature's regeneration to stop functioning for 1 round. During this round, the creature doesn't regain Hit Points and can die normally. The creature's stat block describes the types of damage that suppress the regeneration.\nRegeneration doesn't restore Hit Points lost from starvation, thirst, or suffocation. Creatures with regeneration can regrow lost portions of their bodies and can reattach severed body parts if they are recovered within 1 hour of severing. Severed parts that aren't reattached wither and decompose normally.\nA creature usually must have a Constitution score or modifier to have this ability.",
+      "Format": "Defensive Abilities regeneration 5 (acid)."
+    },
+    "Resistance (Ex)": {
+      "Description": "The creature ignores some damage of a certain type (acid, cold, electricity, fire, or sonic) per attack, but it does not have total immunity.",
+      "Format": "Resistances acid 10."
+    },
+    "See In Darkness (Su)": {
+      "Description": "The creature can see perfectly in darkness of any kind, including magical darkness.",
+      "Format": "Senses see in darkness."
+    },
+    "Sense Through (Su)": {
+      "Description": "The creature can sense through obstacles that would normally block the ability to perceive what is beyond them. The specific sense this ability applies to is indicated in parentheses after the sense through entry in the creature's statistics. If the ability allows the creature to sense through only a specific material, that material is listed after the specific sense.",
+      "Format": "Senses sense through (vision)."
+    },
+    "Sightless (Ex)": {
+      "Description": "The creature does not use any visual senses and is thus never subject to any effect that requires the creature to see a target or effect. Sightless creatures normally have some form of blindsight to compensate for their sightlessness, but if not, they are assumed to be able to operate as well as a creature with normal vision unless the creature's description says otherwise.",
+      "Format": "Senses sightless."
+    },
+    "Spell Resistance (Ex)": {
+      "Description": "The creature can avoid the effects of some spells and spell-like abilities that would directly affect it. To determine whether a spell or spell-like ability works against a creature with spell resistance, the caster must attempt a caster level check (1d20 + caster level). If the result equals or exceeds the creature's spell resistance, the spell works normally, though the creature can still attempt any saving throws normally allowed.",
+      "Format": "SR 18."
+    },
+    "Stellar Alignment (Su)": {
+      "Description": "The creature is aligned to the cycles of solar systems. Creatures with stellar alignment usually have stellar revelations and zenith revelations, either ones from the solarian class or ones unique to the creature. When using stellar revelations, the creature is always considered attuned. However, it's not always considered fully attuned, so it normally can't always use zenith powers. When you roll initiative for the creature, roll 1d3. Once that many rounds have elapsed, the creature is considered fully attuned and gains access to its zenith powers. After it uses a zenith power, it's no longer fully attuned and you roll 1d3 again to see how many rounds it will take to recharge.\nIf a creature has stellar alignment (graviton) or stellar alignment (photon), it's considered to be attuned only in the indicated mode and can become fully attuned only in the indicated mode, as described above.",
+      "Format": "Other Abilities stellar alignment (graviton)."
+    },
+    "Summon Allies (Sp)": {
+      "Description": "The creature can attempt to summon creatures of the same creature type as itself as a full action. The summoned ally returns to the place from which it came after 1 hour.",
+      "Format": "Spell-Like Abilities 1/day-summon allies (1 imp 60%).",
+      "Guidelines": "Choose either a creature of the same CR as the monster (with a 35% chance of success) or a creature with a CR no greater than the monster's - 5 (with a 60% chance of success)."
+    },
+    "Swallow Whole (Ex)": {
+      "Description": "If the creature hits with the indicated attack (usually a bite attack), it deals the normal damage. If the creature's attack roll successfully hits the target's KAC + 4, the creature also automatically grapples the foe as part of the attack action. (If it hits the target's KAC + 13, it instead pins the target). The creature doesn't need to have a free limb to perform this grapple. Unless otherwise specified, a creature can swallow whole only targets that are at least one size category smaller than itself, and it has room for a single target of that size in its stomach (doubling the maximum number of creatures it can have swallowed for each additional size category by which these creatures are smaller).\nOn the creature's next turn after grappling or pinning the target, if the target has not escaped the grapple or pin, the target automatically takes the attack's damage at the beginning of the creature's turn. The creature can then make a new attack roll with the same attack. If it hits the target's KAC, the grapple or pin is maintained. If it hits the target's KAC + 4, the target is swallowed whole (no damage is dealt).\nOnce swallowed, the target takes the listed swallow whole damage automatically at the beginning its turn every round.\nThe target is considered grappled as long as it is swallowed.\nThe target can attempt to cut its way out (the interior of a creature with swallow whole has the same EAC as its exterior and a KAC equal to that of its exterior - 4) by dealing an amount of damage equal to one-quarter the swallowing creature's total Hit Points, though any attack that does not deal slashing damage deals only half its normal damage. If a target cuts its way out of the creature, the creature cannot use swallow whole again until that damage is healed.\nAlternatively, a target swallowed whole can attempt to climb out. The swallowed creature must succeed at both a grapple check against the creature's internal KAC + 8 and an Athletics check to climb (DC = 10 + 1-1/2 * the creature's CR).\nEach of these actions takes a full round. If both checks are successful, the target climbs back up to the creature's mouth and can escape, ending up in an open square adjacent to the creature.",
+      "Format": "Melee bite +19 (5d4+16 P plus swallow whole); Offensive Abilities swallow whole (5d4+16 A, EAC 30, KAC 27, 71 HP)."
+    },
+    "Swarm Attack (Ex)": {
+      "Description": "The creature deals automatic damage to any creature whose space it occupies at the end of its turn, with no attack roll needed. Swarm attacks are not subject to a miss chance for concealment or cover.",
+      "Format": "Melee swarm attack (1d6+2 P).",
+      "Guidelines": "To determine the amount of damage a creature of CR 6 or lower deals with swarm attack, use the value listed in the CR 6 Three Attacks entry on its appropriate array table (see pages 129-132), lowering the additional damage from that CR to match its actual CR. For all other creatures, use the Four Attacks entry for its CR in the corresponding array table."
+    },
+    "Swarm Defenses (Ex)": {
+      "Description": "Swarms take damage from weapons differently depending on how the weapon targets them.\nA swarm is immune to attacks and effects that targets a single creature (including single-target spells), with the exception of mind-affecting effects if the swarm has an Intelligence score and an ability similar to the formian's hive mind.\nA swarm takes half again as much damage (+50%) from effects that affect all targets in an area, such as grenades, blast and explode weapons, and many evocation spells.\nA swarm takes normal damage from an attack or effect that affects multiple targets (including lines and fully automatic mode attacks). For the purpose of automatic fire, the swarm counts as five targets. For example, if an automatic attack is made using 12 rounds of ammunition, it can attack a maximum of six targets, so it can damage a swarm normally. However, if two other targets are closer to the attacker than the swarm, they must be attacked first, leaving only four attacks to target the swarm, so it takes no damage.",
+      "Format": "Defensive Abilities swarm defenses."
+    },
+    "Tracking (Ex)": {
+      "Description": "The creature can use the Perception skill to perform the follow tracks task of the Survival skill with the listed sense.\nThe sense is usually related to a type of signature that most creatures leave behind, such as a scent or heat trail. The creature might gain a bonus or penalty to its Perception check to follow tracks depending on the strength of the quarry's signature, at the GM's discretion. It is possible for stronger signatures to completely mask other signatures, making following tracks with a weaker signature very difficult.",
+      "Format": "Other Abilities tracking (scent)."
+    },
+    "Trample (Ex)": {
+      "Description": "As a full action, the creature can move up to its speed and through the space of any creatures that are at least one size smaller than itself. The creature does not need to make an attack roll; each creature whose space it moves through takes damage. A target of a trample can attempt a Reflex save with the listed DC to take half damage; if it attempts the save, it can't make an attack of opportunity against the trampling creature due to the creature's movement. A creature can deal trample damage to a given target only once per round.",
+      "Format": "Offensive Abilities trample (3d4+14 B, DC 16).",
+      "Guidelines": "The amount of damage the trample deals should be the same as the creature's standard melee damage."
+    },
+    "Truespeech (Su)": {
+      "Description": "The creature can speak with any other creature that has a language. This ability is always active.",
+      "Format": "Languages truespeech."
+    },
+    "Unflankable (Ex)": {
+      "Description": "Flanking the creature does not grant any bonuses, and abilities that function only against a creature that is flanked do not function against it.",
+      "Format": "Defensive Abilities unflankable."
+    },
+    "Unliving (Ex)": {
+      "Description": "The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn't heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing still benefits from that ability. Unliving creatures don't breathe, eat, or sleep. They can't be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.",
+      "Format": "Other Abilities unliving."
+    },
+    "Vortex (Ex Or Su)": {
+      "Description": "A vortex ability works identically to the whirlwind ability (see below), except the creature gains a swim speed instead of a fly speed, it can form only in a liquid (such as in water), it cannot leave a liquid medium, and it always blocks all vision within it and line of sight past it. In addition, carried creatures must have a swim speed in order to attempt a Reflex save to escape.",
+      "Format": "Offensive Abilities vortex (4d6+8 B, DC 15, 1/day)."
+    },
+    "Whirlwind (Ex Or Su)": {
+      "Description": "The creature can transform into a whirlwind. Unless otherwise specified, the creature can remain in whirlwind form for a number of rounds equal to half its CR. If the creature has a fly speed, it retains that in its whirlwind form. If it does not have a fly speed, it gains an extraordinary fly speed (with average maneuverability) equal to its base speed. A creature in whirlwind form can move freely into and through other creatures' spaces, and it does not provoke attacks of opportunity as a result of its movement.\nThe base of a creature in whirlwind form occupies a 5-foot square, and the whirlwind is twice as wide at its top as its base and has a height equal to four times the width of its base; this doesn't change the size category of the creature. If a creature is Large or larger, it can vary the size of its whirlwind form up to a maximum of a base equal to its normal space as a swift or move action. A creature in whirlwind form does not threaten any spaces around it, and it cannot make its normal attacks.\nIf a creature in whirlwind form enters the space of another creature, that creature must succeed at a Fortitude save with the listed DC or take the whirlwind's listed damage. If the whirlwind covers all of the creature's space, the creature must also succeed at a Reflex save or be picked up by the whirlwind and carried along with it. A carried creature is flatfooted, grappled, and off-target, and it automatically takes the whirlwind's damage at the beginning of its turn. If the carried creature can fly, it can attempt a Reflex save as a move action, escaping on a successful save. If a carried creature does not escape, it can attempt a Fortitude save; if it succeeds, it can take any remaining actions it has on its turn (other than movement). On a failed save, the carried creature is unable to act until its next turn or until the whirlwind releases it.\nA creature in whirlwind form can carry up to two creatures of its size, with the total number it can carry doubling for every size category the affected creatures are smaller than the whirlwind. The creature in whirlwind form can eject a carried creature at any time during its turn, dropping the carried creature in a space of its choice adjacent to its position at the time of ejection. At the GM's discretion, if the whirlwind is in contact with dirt, gases, water, or other material that can be easily drawn into it, the whirlwind blocks all vision within it (including darkvision) and blocks line of sight through it.",
+      "Format": "Offensive Abilities whirlwind (4d6+8 B, DC 15, 1/day).",
+      "Guidelines": "This ability is generally usable once per day, plus one additional time per day for every 5 CR the creature has. The amount of damage the whirlwind deals should be the same as the creature's standard melee damage. Whirlwinds normally deal bludgeoning damage."
+    }
+  },
+  "Immunities": {
+    "Construct Immunities (Ex)": {
+      "Description": "Constructs are immune to the following effects, unless the effect specifies that it works against constructs:\nBleed, death effects, disease, mind-affecting effects, necromancy effects, paralysis, poison, sleep, and stunning.\nAbility damage, ability drain, energy drain, exhaustion, fatigue, negative levels, and nonlethal damage.\nAny effect that requires a Fortitude save (unless the effect works on objects or is harmless).",
+      "Format": "Immunities construct immunities."
+    },
+    "Elemental Immunities (Ex)": {
+      "Description": "Elementals are immune to the following effects, unless the effect specifies that it works against elemental creatures:\nBleed, critical hits, paralysis, poison, sleep effects, and stunning.\nFlanking-elementals are unflankable.",
+      "Format": "Immunities elemental immunities."
+    },
+    "Ooze Immunities (Ex)": {
+      "Description": "Oozes are immune to the following effects, unless the effect specifies that it works against oozes:\nCritical hits, paralysis, poison, polymorph, sleep, and stunning.\nGaze abilities, illusions, visual effects, and other attacks that rely on sight.\nFlanking-oozes are unflankable.",
+      "Format": "Immunities ooze immunities."
+    },
+    "Plant Immunities (Ex)": {
+      "Description": "Plants are immune to the following effects, unless the effect specifies it works against plants:\nMind-affecting effects, paralysis, poison, polymorph, sleep, and stunning.",
+      "Format": "Immunities plant immunities."
+    },
+    "Swarm Immunities (Ex)": {
+      "Description": "Swarms are immune to the following effects unless the effect specifies it works against swarms:\nBleeding, critical hits, flat-footed, off-target, pinned, prone, staggered, and stunned.\nCombat maneuvers-swarms can't be affected by and can't perform combat maneuvers unless the swarm's description says otherwise.\nFlanking-swarms are unflankable.\nDying-a swarm reduced to 0 Hit Points breaks up and ceases to exist as a swarm, though individual members of it might survive.",
+      "Format": "Immunities swarm immunities."
+    },
+    "Undead Immunities (Ex)": {
+      "Description": "Undead are immune to the following effects unless the effect specifies it works against undead creatures:\nBleed, death effects, disease, mind-affecting effects, paralysis, poison, sleep, and stunning.\nAbility damage, ability drain, energy drain, exhaustion, fatigue, negative levels, and nonlethal damage.\nAny effect that requires a Fortitude save (unless the effect works on objects or is harmless).",
+      "Format": "Immunities undead immunities."
+    }
+  }
+}

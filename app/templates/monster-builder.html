@@ -25,6 +25,9 @@
                             <li><a href="#step3" data-toggle="tab">Step3</a></li>
                             <li><a href="#step4" data-toggle="tab">Step4</a></li>
                             <li><a href="#step5" data-toggle="tab">Step5</a></li>
+                            <li><a href="#step6" data-toggle="tab">Step6</a></li>
+                            <li><a href="#step7" data-toggle="tab">Step7</a></li>
+                            <li><a href="#step8" data-toggle="tab">Step8</a></li>
                             <li><a href="#step9" data-toggle="tab">Step9</a></li>
                         </ul>
                     </div>
@@ -33,10 +36,10 @@
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane" id="step1">
-                          <span id="stepOneSave" hidden>None</span>
+                          <span id="stepOneSave" hidden>0</span>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 1.</h4>
+                                    <h4 class="info-text">Step 1 - base array.</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <div id="CRDropdown"></div>
@@ -54,7 +57,7 @@
                         <div class="tab-pane" id="step2">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 2.</h4>
+                                    <h4 class="info-text">Step 2 - creature type graft.</h4>
                                 </div>
                                 <div class="col-sm-6">
                                   <div id="creatureTypeDropdown"></div>
@@ -72,7 +75,7 @@
                             <span id="stepThreeSave" hidden>none</span>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 3.</h4>
+                                    <h4 class="info-text">Step 3 - creature subtype graft.</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <div id="creatureSubtypeDropdown"></div>
@@ -91,10 +94,12 @@
                             <span id="stepFourSave2" hidden>None</span>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 4.</h4>
+                                    <h4 class="info-text">Step 4 - class graft.</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <div id="classDropdown"></div>
+                                    <P></P>
+                                    <div id="stepFourOptionalDropdown"></div>
                                     <P></P>
                                 </div>
                                 <div class="col-sm-6">
@@ -108,7 +113,7 @@
                             <span id="stepFiveSave2" hidden>None:None</span>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 5.</h4>
+                                    <h4 class="info-text">Step 5 - template graft.</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <div id="graftDropdown"></div>
@@ -120,17 +125,70 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane" id="step6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h4 class="info-text">Step 6 - special abilities.</h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="stepSixFreeAbilities wizardp">
+                                        <p>Free abilities can be taken as needed for the NPC concept without counting towards special abilities</p>
+                                    </div>
+                                    <p></p>
+                                    <div id="freeAbilityDropdown"></div>
+                                    <P></P>
+                                    <div class="stepSixAbilities wizardp"></div>
+                                    <p></p>
+                                    <div id="specialAbilityDropdown"></div>
+                                    <P></P>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="stepSixDescription wizardp">
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="step7">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h4 class="info-text">Step 7 - skills.</h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div id="graftDropdown"></div>
+                                    <P></P>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="stepSevenDescription wizardp">
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="step8">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h4 class="info-text">Step 8 - spells.</h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div id="graftDropdown"></div>
+                                    <P></P>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="stepEightDescription wizardp">
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="tab-pane" id="step9">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 9.</h4>
+                                    <h4 class="info-text">Step 9 - final check.</h4>
                                 </div>
                                 <div class="col-sm-6">
                                   <div id="precedenceDropdown"></div>
                                   <P></P>
                                 </div>
                                 <div class="col-sm-6">
-                                  <div class="stepFiveDescription wizardp">
+                                  <div class="stepNineDescription wizardp">
                                   </div>
                                 </div>
                             </div>

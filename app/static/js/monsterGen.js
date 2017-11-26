@@ -238,6 +238,29 @@ function generateDropdown(parentID,dropID,title,array) {
   $('#'+dropID).on('changed.bs.select', dropClickHandler);
 }
 
+//creates bootstrap-select multiple select dropdowns from arrays
+function generateMultiDropdown(parentID,dropID,title,searchTitle,array,maxOptions) {
+  var dropHtml = '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="13" multiple data-live-search="true" data-live-search-placeholder="'+searchTitle+'" data-max-options="'+maxOptions+'" data-selected-text-format="count">'
+  for (i = 0; i < array.length; i++) {
+    if (array[i] == 'BREAK'){
+      dropHtml += '<option data-divider="true"></option>';
+    } else if (array[i].includes('LABEL=')) {
+      dropHtml += '<optgroup label="' + array[i].replace('LABEL=','') + '">';
+    } else if (array[i].includes('ENDLABEL')) {
+      dropHtml += '</optgroup>';
+    }
+    else {
+      dropHtml += '<option>' + array[i] + '</option>';
+    }
+  }
+  dropHtml += '</select>';
+  document.getElementById(parentID).innerHTML = dropHtml;
+  //initialise dropdown
+  $('#'+dropID).selectpicker();
+  //bind dropdown click  handler
+  $('#'+dropID).on('changed.bs.select', dropClickHandler);
+}
+
 //disables / enables dropdown eg toggleDropdown(id,toggle)
 function disableDropdown(id,bool){
   $('#'+id).prop('disabled', bool);
@@ -305,16 +328,13 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
             $modal.append("<p>This class graft requires the <b>"+selectedArray+"</b> base.</p>");
             $('#classModal').modal('show');
           } else {
-            stepFourDescription(selected,selectedArray)
-            generateDropdown("precedenceDropdown","precedenceDrop","Choose which stat adjustments will be used",["Creature stat adjustments","Class stat adjustments"]);
-
+            stepFourDescription(selected,selectedArray);
           }
 
         } else {
           $('#stepFourSave').text(selected+":"+"None"+":"+"chosen");
           var $descriptionArea = $(".stepFourDescription").first();
           $descriptionArea.empty();
-          $("#precedenceDropdown").first().empty();
         }
     } else if (id=='graftDrop') {
       if (selected != "None") {
@@ -392,6 +412,13 @@ function stepFourDescription(selected,selectedArray) {
   $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
   $('#stepFourSave').text(selected+":"+selectedArray+":"+"None");
 
+  //set secondary dropdowns
+  if (selected == "Soldier"){
+    generateDropdown("stepFourOptionalDropdown","stepFourOptionDrop","Choose attack focus",["Melee","Ranged"]);
+  } else {
+    $("#stepFourOptionalDropdown").first().empty();
+  }
+
 }
 
 function stepFiveDescription(selected) {
@@ -452,6 +479,7 @@ $('.wizard-card').bootstrapWizard({
 
               //refresh graft drop if needed (dependent on CR)
               var cr = Number($('[data-id="CRDrop"]').text().trim().replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
+              var array = $('#arrayDrop').val().trim();
               var graft = $('#graftDrop').val().trim();
 
               if (graft != '' && graft != 'None'){
@@ -466,6 +494,18 @@ $('.wizard-card').bootstrapWizard({
                   stepFiveDescription('None')
                 }
               }
+
+              //step6 generation - dependent on CR
+
+              if ($('#stepOneSave').text().trim() != cr.toString()+array){
+                maxOptions = window[array.toLowerCase()+'MainStats'][cr.toString()][11];//get max options from array
+                generateMultiDropdown("freeAbilityDropdown","freeDrop","Select free abilities","Search abilities",Object.keys(specialAbilities.FreeAbilities),10);
+                generateMultiDropdown("specialAbilityDropdown","specialDrop","Select special abilities","Search abilities",Object.keys(specialAbilities.Abilities),maxOptions);
+                var $descriptionArea = $(".stepSixAbilities").first();
+                $descriptionArea.empty();
+                $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");
+              }
+              $('#stepOneSave').text(cr.toString()+array);
             } else {
                 return false;
             }
@@ -561,9 +601,11 @@ $('.wizard-card').bootstrapWizard({
               if (prev[0] != 'None' && prev[1] == arrayDrop) {
                 $('#classDrop').selectpicker('val', prev[0]);
                 stepFourDescription(prev[0],prev[1]);
-
               } else if (prev[2] == 'chosen'){
                 $('#classDrop').selectpicker('val', "None");
+                $('#stepFourSave').text("None:None");
+              } else if (prev[1] != arrayDrop) {
+                $('#stepFourSave').text("None:None");
               }
 
 
@@ -583,6 +625,22 @@ $('.wizard-card').bootstrapWizard({
             }
         }
 
+        //Validation tab 8
+        if (index == 8) {
+
+            var validated = true;
+
+            if (validated) {
+              var classDrop = $('#classDrop').val().trim();
+              if (classDrop != '' && classDrop != 'None'){
+                generateDropdown("precedenceDropdown","precedenceDrop","Choose stat adjustments",["Creature stat adjustments","Class stat adjustments"]);
+              } else {
+                $("#precedenceDropdown").first().empty();
+              }
+            } else {
+                return false;
+            }
+        }
     },
 
     // toggle next/finish button on last tab
@@ -640,7 +698,7 @@ $('.btn-change').click(function(){
      $descriptionArea.append("<p>"+stepOneDescription[newChoice[1]]+"</p>");
      $('#classDrop').selectpicker('val', newChoice[0]);
      stepFourDescription(newChoice[0],newChoice[1]);
-     generateDropdown("precedenceDropdown","precedenceDrop","Choose which stat adjustments will be used",["Creature stat adjustments","Class stat adjustments"]);
+
    } else if (val=='No thanks'){
      //change back to previous
      var prev = $('#stepFourSave').text().trim().split(':');
