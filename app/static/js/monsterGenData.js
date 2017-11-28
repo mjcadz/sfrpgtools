@@ -960,185 +960,7 @@ creatureSubType = {
     "Senses": [
       "darkvision 60 ft."
     ]
-  },
-
-//
-//Dragon Entries
-//
-  "Black Dragon": {
-    "Abilities": [
-      "Breath weapon (line 30 ft. + 10 feet per 2 CR, 1d6 A + 1d6 per CR)",
-      "frightful presence (CR 11+, 60 feet + 10 feet per CR)",
-      "spell-like abilities (CR 10+)"
-    ],
-    "Alignment": "Chaotic evil",
-    "DR": {
-      "CR12": "10/magic",
-      "CR15": "15/magic",
-      "CR17": "20/magic",
-      "DR10": "5/magic"
-    },
-    "Description": "Black dragons are callous and enjoy using fear to exert their influence over others.",
-    "Immunities": [
-      "acid"
-    ],
-    "MasterSkills": [
-      "athletics"
-    ],
-    "Required Creature Type": "Dragon",
-    "SR": {
-      "CR10": "11+CR"
-    },
-    "Senses": [
-      "blindsense 60 ft.",
-      "darkvision 120 ft."
-    ],
-    "SpecialAbilities": {
-      "Swamp Stride (Ex)": "A black dragon can move through bogs and quicksand without penalty at its normal speed."
-    },
-    "Speed": [
-      "swim 60 ft."
-    ]
-  },
-  "Blue Dragon": {
-    "Abilities": [
-      "Breath weapon (line 30 feet + 10 feet per 2 CR, 1d8 E + 1d8 per CR)",
-      "frightful presence (CR 9+, 60 feet + 10 feet per CR)",
-      "spell-like abilities (CR 9+)"
-    ],
-    "Alignment": "Lawful evil.",
-    "DR": {
-      "CR13": "10/magic",
-      "CR15": "15/magic",
-      "CR17": "20/magic",
-      "DR11": "5/magic"
-    },
-    "Description": "Stacking plans within plans, blue dragons obsessively dwell on their pet projects.",
-    "Immunities": [
-      "electricity"
-    ],
-    "Required Creature Type": "Dragon",
-    "SR": {
-      "CR12": "11+CR"
-    },
-    "Senses": [
-      "blindsense 60 ft.",
-      "darkvision 120 ft."
-    ],
-    "SpecialAbilities": {
-      "Sound Imitation (Ex)": "A blue dragon can mimic any voice or sound it has heard by succeeding at a Bluff check opposed by a listener's Sense Motive check."
-    },
-    "Speed": [
-      "burrow 60 ft."
-    ]
-  },
-  "Green Dragon": {
-    "Abilities": [
-      "Breath weapon (cone 15 feet + 5 feet per 2 CR, 1d6 A + 1d6 per CR)",
-      "frightful presence (CR 9+, 60 feet + 10 feet per CR)",
-      "spell-like abilities (CR 9+)"
-    ],
-    "Alignment": "Lawful evil",
-    "DR": {
-      "CR13": "10/magic",
-      "CR15": "15/magic",
-      "CR17": "20/magic",
-      "DR11": "5/magic"
-    },
-    "Description": "Of all the chromatic dragons, green dragons seem the most reasonable, but they will turn on their so-called allies at a moment's notice if profit is on the line.",
-    "Immunities": [
-      "acid"
-    ],
-    "MasterSkills": [
-      "acrobatics"
-    ],
-    "OtherAbilities": [
-      "water breathing"
-    ],
-    "Required Creature Type": "Dragon",
-    "SR": {
-      "CR11": "11+CR"
-    },
-    "Senses": [
-      "blindsense 60 ft.",
-      "darkvision 120 ft."
-    ],
-    "SpecialAbilities": {
-      "Woodland Stride (Ex)": "A green dragon can move through natural foliage at full speed without taking damage or suffering impairment. Areas of foliage that have been magically altered affect it normally."
-    },
-    "Speed": [
-      "fly 60 ft. (perfect)",
-      "swim 40 ft."
-    ]
-  },
-  "Red Dragon": {
-    "Abilities": [
-      "Breath weapon (cone 15 feet + 5 feet per 2 CR, 1d10 F + 1d10 per CR)",
-      "frightful presence (CR 10+, 60 feet + 10 feet per CR)",
-      "spell-like abilities (CR 10+)"
-    ],
-    "Alignment": "Chaotic evil",
-    "DR": {
-      "CR12": "10/magic",
-      "CR14": "15/magic",
-      "CR16": "20/magic",
-      "DR10": "5/magic"
-    },
-    "Description": "Red dragons are quite imperious and brook no disrespect from lowly humanoids, but they can be swayed by copious amounts of groveling.",
-    "Immunities": [
-      "fire"
-    ],
-    "Required Creature Type": "Dragon",
-    "SR": {
-      "CR12": "11+CR"
-    },
-    "Senses": [
-      "blindsense 60 feet",
-      "darkvision 120 feet",
-      "sense through (vision [smoke only])"
-    ],
-    "Vulnerable": [
-      "cold"
-    ]
-  },
-  "White Dragon": {
-    "Abilities": [
-      "Breath weapon (cone 15 feet + 10 feet per 2 CR, 1d6 C + 1d6 per CR)",
-      "frightful presence (CR 10+, 60 feet + 10 feet per CR)",
-      "spell-like abilities (CR 10+)."
-    ],
-    "Alignment": "Chaotic evil",
-    "DR": {
-      "CR12": "10/magic",
-      "CR14": "15/magic",
-      "CR16": "20/magic",
-      "CR9": "5/magic"
-    },
-    "Description": "Similar to the terrain they prefer, white dragons appear cold and emotionless until angered.",
-    "Immunities": [
-      "cold"
-    ],
-    "Required Creature Type": "Dragon",
-    "SR": {
-      "CR12": "11+CR"
-    },
-    "Senses": [
-      "blindsense 60 ft.",
-      "darkvision 120 ft.",
-      "sense through (vision [snow only])"
-    ],
-    "SpecialAbilities": {
-      "Icewalking (Ex)": "A white dragon can move across icy surfaces without penalty and doesn't need to attempt Acrobatics checks to run or charge on ice. In addition, a white dragon can climb icy surfaces as if under the effect of spider climb."
-    },
-    "Speed": [
-      "burrow 30 ft.",
-      "swim 60 ft."
-    ],
-    "Vulnerable": [
-      "fire"
-    ]
   }
-
 };
 
 classCombatant = ["Solarian","Soldier"];
@@ -1163,7 +985,7 @@ classData = {
         "Adjustments": {"reflex":2},
         "Description": "Charismatic envoys assist their allies through inspiration and tactical orders.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
-        "Required Array": "Expert",
+        "RequiredArray": "Expert",
         "MasterSkills": [
           "sense motive"
         ],
@@ -1191,7 +1013,7 @@ classData = {
         "Adjustments": {"fortitude":2,"reflex":2,"will":-2},
         "Description": "Experts at dealing with machines, mechanics either use exocortexes to enhance their combat abilities or are accompanied by robotic drones that they can control remotely.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
-        "Required Array": "Expert",
+        "RequiredArray": "Expert",
         "MasterSkills": [
           "computers",
           "engineering"
@@ -1216,7 +1038,7 @@ classData = {
         "Adjustments": {"None":0},
         "Description": "Calling on connections to supernatural forces, mystics can manifest magic in a number of different ways.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
-        "Required Array": "Spellcaster",
+        "RequiredArray": "Spellcaster",
         "MasterSkills": [
           "mysticism"
         ],
@@ -1246,7 +1068,7 @@ classData = {
         "Adjustments": {"initiative":"+CR/4","reflex":3,"skillChecks":1},
         "Description": "Cunning and swift, operatives are especially skilled and can cause foes to drop their guards, paving the way for devastating attacks.",
         "Gear": "Light armor (item level = CR), small arm (item level = CR), sniper rifle (item level = CR), and basic melee weapon with operative special quality (item level = CR - 1).",
-        "Required Array": "Expert",
+        "RequiredArray": "Expert",
         "SpecialRules": " Choose one operative specialization. The operative creature’s specialization exploit and specialization power must come from that specialization. Any exploits that aren’t relevant to the creature (or that can simply be incorporated into the creature’s statistics) don’t need to appear in the creature’s stat block. Master skills from operative specialization."
     },
     "Solarian": {
@@ -1268,7 +1090,7 @@ classData = {
         "Adjustments": {"reflex":-2,"will":2},
         "Description": "Drawing power from the eternal cycles of stars, solarians fight with the power of photons and gravitons.",
         "Gear": "A solarian’s gear selection depends on whether you choose solar armor or solar weapon for its solar manifestation.Solar Armor",
-        "Required Array": "Combatant",
+        "RequiredArray": "Combatant",
         "GoodSkills": [
           "mysticism"
         ],
@@ -1296,7 +1118,7 @@ classData = {
         },
         "Adjustments": {"reflex":-2,"will":2},
         "Description": "Equipped with powerful weapons and armor, soldiers are trained to serve in the front line of battle and to both dish out and withstand massive force.",
-        "Required Array": "Combatant"
+        "RequiredArray": "Combatant"
     },
     "Technomancer": {
         "AbilitiesByCr": {
@@ -1315,7 +1137,7 @@ classData = {
         "Adjustments": {"None":0},
         "Description": "These spellcasters meld magic and technology.",
         "Gear": "Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
-        "Required Array": "Spellcaster",
+        "RequiredArray": "Spellcaster",
         "MasterSkills": [
           "mysticism",
           "computers"
@@ -1324,18 +1146,20 @@ classData = {
     }
 };
 
-var grafts = {
+grafts = ["simpleGrafts","dragonGrafts"];
+
+var simpleGrafts = {
   "Aerial (CR 1+)": {
     "CRMin":1,
     "Description": "Aerial creatures are native denizens of the Elemental Plane of Air, gas giant planets, or similar landless environments, and have unique adaptations to help them survive there.",
-    "SubTypeGraft": "Air",
+    "RequiredSubType": "Air",
     "DamageMod": "Natural 1/2 electricity",
     "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Air."]
   },
   "Aqueous (CR 1+)": {
     "CRMin":1,
     "Description": "Aqueous creatures are native denizens of the Elemental Plane of Water or similar landless environments, able to survive both in and out of water.",
-    "SubTypeGraft":"Water",
+    "RequiredSubType":"Water",
     "OtherAbilities": "amphibious",
     "AttackChanges": ["Natural all piercing","electricity to cold","fire to cold"],
     "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Water."]
@@ -1369,7 +1193,7 @@ var grafts = {
       "blindsense (vibration)":["1",30],
       "blindsight (vibration)":["8",30]
     },
-    "SubTypeGraft": "Earth",
+    "RequiredSubType": "Earth",
     "DamageMod": "DR/cold iron",
     "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Earth."]
   },
@@ -1410,7 +1234,7 @@ var grafts = {
   "Fiery (CR 1+)": {
     "CRMin":1,
     "Description": "Fiery creatures are native denizens of the Elemental Plane of Fire or habitats covered in fire, and they have unique adaptations to help them survive there.",
-    "SubTypeGraft": "Fire",
+    "RequiredSubType": "Fire",
     "DamageMod": "Natural 1/2 fire",
     "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Fire."]
   },
@@ -1467,6 +1291,183 @@ var grafts = {
       "Blindsense (vibration)":["7",5]
     },
   }
+}
+
+dragonGrafts = {
+  //
+  //Dragon Entries
+  //
+    "Black Dragon": {
+      "Abilities": [
+        "Breath weapon (line 30 ft. + 10 feet per 2 CR, 1d6 A + 1d6 per CR)",
+        "frightful presence (CR 11+, 60 feet + 10 feet per CR)",
+        "spell-like abilities (CR 10+)"
+      ],
+      "Alignment": "Chaotic evil",
+      "DR": {
+        "CR12": "10/magic",
+        "CR15": "15/magic",
+        "CR17": "20/magic",
+        "DR10": "5/magic"
+      },
+      "Description": "Black dragons are callous and enjoy using fear to exert their influence over others.",
+      "Immunities": [
+        "acid"
+      ],
+      "RequiredCreatureType": "Dragon",
+      "RequiredSubType": "Water",
+      "SR": {
+        "CR10": "11+CR"
+      },
+      "Senses": [
+        "blindsense 60 ft.",
+        "darkvision 120 ft."
+      ],
+      "SpecialAbilities": {
+        "Swamp Stride (Ex)": "A black dragon can move through bogs and quicksand without penalty at its normal speed."
+      },
+      "Speed": [
+        "swim 60 ft."
+      ]
+    },
+    "Blue Dragon": {
+      "Abilities": [
+        "Breath weapon (line 30 feet + 10 feet per 2 CR, 1d8 E + 1d8 per CR)",
+        "frightful presence (CR 9+, 60 feet + 10 feet per CR)",
+        "spell-like abilities (CR 9+)"
+      ],
+      "Alignment": "Lawful evil.",
+      "DR": {
+        "CR13": "10/magic",
+        "CR15": "15/magic",
+        "CR17": "20/magic",
+        "DR11": "5/magic"
+      },
+      "Description": "Stacking plans within plans, blue dragons obsessively dwell on their pet projects.",
+      "Immunities": [
+        "electricity"
+      ],
+      "RequiredCreatureType": "Dragon",
+      "RequiredSubType": "Earth",
+      "SR": {
+        "CR12": "11+CR"
+      },
+      "Senses": [
+        "blindsense 60 ft.",
+        "darkvision 120 ft."
+      ],
+      "SpecialAbilities": {
+        "Sound Imitation (Ex)": "A blue dragon can mimic any voice or sound it has heard by succeeding at a Bluff check opposed by a listener's Sense Motive check."
+      },
+      "Speed": [
+        "burrow 60 ft."
+      ]
+    },
+    "Green Dragon": {
+      "Abilities": [
+        "Breath weapon (cone 15 feet + 5 feet per 2 CR, 1d6 A + 1d6 per CR)",
+        "frightful presence (CR 9+, 60 feet + 10 feet per CR)",
+        "spell-like abilities (CR 9+)"
+      ],
+      "Alignment": "Lawful evil",
+      "DR": {
+        "CR13": "10/magic",
+        "CR15": "15/magic",
+        "CR17": "20/magic",
+        "DR11": "5/magic"
+      },
+      "Description": "Of all the chromatic dragons, green dragons seem the most reasonable, but they will turn on their so-called allies at a moment's notice if profit is on the line.",
+      "Immunities": [
+        "acid"
+      ],
+      "OtherAbilities": [
+        "water breathing"
+      ],
+      "RequiredCreatureType": "Dragon",
+      "RequiredSubType": "Air",
+      "SR": {
+        "CR11": "11+CR"
+      },
+      "Senses": [
+        "blindsense 60 ft.",
+        "darkvision 120 ft."
+      ],
+      "SpecialAbilities": {
+        "Woodland Stride (Ex)": "A green dragon can move through natural foliage at full speed without taking damage or suffering impairment. Areas of foliage that have been magically altered affect it normally."
+      },
+      "Speed": [
+        "swim 40 ft."
+      ]
+    },
+    "Red Dragon": {
+      "Abilities": [
+        "Breath weapon (cone 15 feet + 5 feet per 2 CR, 1d10 F + 1d10 per CR)",
+        "frightful presence (CR 10+, 60 feet + 10 feet per CR)",
+        "spell-like abilities (CR 10+)"
+      ],
+      "Alignment": "Chaotic evil",
+      "DR": {
+        "CR12": "10/magic",
+        "CR14": "15/magic",
+        "CR16": "20/magic",
+        "DR10": "5/magic"
+      },
+      "Description": "Red dragons are quite imperious and brook no disrespect from lowly humanoids, but they can be swayed by copious amounts of groveling.",
+      "Immunities": [
+        "fire"
+      ],
+      "RequiredCreatureType": "Dragon",
+      "RequiredSubType": "Fire",
+      "SR": {
+        "CR12": "11+CR"
+      },
+      "Senses": [
+        "blindsense 60 feet",
+        "darkvision 120 feet",
+        "sense through (vision [smoke only])"
+      ],
+      "Vulnerable": [
+        "cold"
+      ]
+    },
+    "White Dragon": {
+      "Abilities": [
+        "Breath weapon (cone 15 feet + 10 feet per 2 CR, 1d6 C + 1d6 per CR)",
+        "frightful presence (CR 10+, 60 feet + 10 feet per CR)",
+        "spell-like abilities (CR 10+)."
+      ],
+      "Alignment": "Chaotic evil",
+      "DR": {
+        "CR12": "10/magic",
+        "CR14": "15/magic",
+        "CR16": "20/magic",
+        "CR9": "5/magic"
+      },
+      "Description": "Similar to the terrain they prefer, white dragons appear cold and emotionless until angered.",
+      "Immunities": [
+        "cold"
+      ],
+      "RequiredCreatureType": "Dragon",
+      "RequiredSubType": "Cold",
+      "SR": {
+        "CR12": "11+CR"
+      },
+      "Senses": [
+        "blindsense 60 ft.",
+        "darkvision 120 ft.",
+        "sense through (vision [snow only])"
+      ],
+      "SpecialAbilities": {
+        "Icewalking (Ex)": "A white dragon can move across icy surfaces without penalty and doesn't need to attempt Acrobatics checks to run or charge on ice. In addition, a white dragon can climb icy surfaces as if under the effect of spider climb."
+      },
+      "Speed": [
+        "burrow 30 ft.",
+        "swim 60 ft."
+      ],
+      "Vulnerable": [
+        "fire"
+      ]
+    }
 }
 
 var statLabels = ["eac","kac","fortitude","reflex","will","hitPoints","abilityDCBase","spellDC","abilityScoreModifier0","abilityScoreModifier1","abilityScoreModifier2","specialAbilities","masterSkills","goodSkills","highAttackBonus","lowAttackBonus","rangedEnergy","rangedKinetic","meleeStandard","meleeThree","meleeFour"];

@@ -14,9 +14,7 @@ step 3 - options, subraces
 
 minify js and cs files
 
-human aditional abiliities
-
-statblock save actual creature types and subtypes
+human aditional abiliities. add in additional special abilities
 
 additional special abilities from grafts AditionalAbilities
 
@@ -24,11 +22,18 @@ immunity special ability/vulnerability
 
 special abilities make the one that affect stats actually affect stats
 
-soldier class melee/ranged
-envoy skillchoice
-
 text attribute in grafts
 
 adjustment abilities
 
 sort free/standard abilities
+
+fix dragon grafts - remove integrated subtypes
+
+backwat=rds check creaturetype to make sure steps are validated - possible validation in final check
+
+do a check to dee if the required types and subtypes are already chosen. negate modal if so
+
+To Test
+soldier class melee/ranged - to test
+envoy skillchoice - to test
