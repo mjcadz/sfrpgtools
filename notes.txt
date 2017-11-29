@@ -26,9 +26,13 @@ text attribute in grafts
 
 adjustment abilities
 
+add weaknesses to abilities
+
 sort free/standard abilities
 
-fix dragon grafts - remove integrated subtypes
+
+
+add damage types as vulnerabilities and others?
 
 backwat=rds check creaturetype to make sure steps are validated - possible validation in final check
 
@@ -37,3 +41,6 @@ do a check to dee if the required types and subtypes are already chosen. negate 
 To Test
 soldier class melee/ranged - to test
 envoy skillchoice - to test
+
+done
+fix dragon grafts - remove integrated subtypes

@@ -270,6 +270,21 @@ function disableDropdown(id,bool){
   $('#'+id).prop('disabled', bool);
 }
 
+//finds the right sub object from key
+function findObjectFromKey(upperObject,key){
+  //get appropriate object
+
+  len = Object.keys(upperObject).length
+  var sub = "";
+  for (var i = 0; i < len; i++) {
+    sub = Object.keys(upperObject)[i]
+    if (upperObject[sub].hasOwnProperty(key)) {
+      var foundObject = upperObject[sub];
+    }
+  }
+  return foundObject;
+}
+
 //handle clicks of dropdowns
 function dropClickHandler(e, clickedIndex, newValue, oldValue) {
     var selected = $(e.currentTarget).val();
@@ -327,18 +342,13 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
       if (selected != "None") {
 
-        //get appropriate object
-        for (var i = 0; i < grafts.length; i++) {
-          if (window[grafts[i]].hasOwnProperty(selected)) {
-            var graftObject = window[grafts[i]][selected];
-          }
-        }
+        var graftObject = findObjectFromKey(graftTemplates,selected);
 
         var cr = Number($('[data-id="CRDrop"]').text().trim().replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
 
         //check minimum cr is met
-        if (graftObject.hasOwnProperty("CRMin")){
-          var crmin = graftObject.CRMin;
+        if (graftObject[selected].hasOwnProperty("CRMin")){
+          var crmin = graftObject[selected].CRMin;
         } else {
           var crmin = 0;
         }
@@ -350,15 +360,15 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
           //disableDropdown('SavingThrowDrop',false);
           //disableDropdown('optionDrop',false);
 
-          if (graftObject.hasOwnProperty("RequiredSubType") || graftObject.hasOwnProperty("RequiredCreatureType")) {
+          if (graftObject[selected].hasOwnProperty("RequiredSubType") || graftObject[selected].hasOwnProperty("RequiredCreatureType")) {
             var sub = "None";
             var creature = "None";
-            if (graftObject.hasOwnProperty("RequiredSubType")){
-              sub = graftObject.RequiredSubType;
+            if (graftObject[selected].hasOwnProperty("RequiredSubType")){
+              sub = graftObject[selected].RequiredSubType;
               modalMessage = "<p>This graft requires the <b>"+sub+"</b> subtype.</p>";
             }
-            if (graftObject.hasOwnProperty("RequiredCreatureType")){
-              creature = graftObject.RequiredCreatureType;
+            if (graftObject[selected].hasOwnProperty("RequiredCreatureType")){
+              creature = graftObject[selected].RequiredCreatureType;
               modalMessage = "<p>This graft requires the <b>"+creature+"</b> creature type.</p>";
               if (sub != "None"){
                 modalMessage = "<p>This graft requires the <b>"+creature+"</b> creature type and the <b>"+sub+"</b> subtype.</p>";
@@ -388,7 +398,38 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       } else {
         stepFiveDescription(selected)
       }
+    } else if (id=='freeDrop') {
+
+      var $descriptionArea = $(".stepSixDescription").first();
+      $descriptionArea.empty();
+      if (selected != '') {
+
+        multi = selected.toString().split(",");
+        var descriptionText = "<p>";
+        for (var i = 0; i < multi.length; i++) {
+          var abilityObject = findObjectFromKey(specialAbilities,multi[i]);
+          descriptionText += "<b>" + multi[i] + "</b> - " + abilityObject[multi[i]].Description + '<br>';
+        }
+        descriptionText += "</p>";
+        $descriptionArea.append(descriptionText);
+      }
+    } else if (id=='specialDrop') {
+
+      var $descriptionArea = $(".stepSixDescriptionTwo").first();
+      $descriptionArea.empty();
+      if (selected != '') {
+
+        multi = selected.toString().split(",");
+        var descriptionText = "<p>";
+        for (var i = 0; i < multi.length; i++) {
+          var abilityObject = findObjectFromKey(specialAbilities,multi[i]);
+          descriptionText += "<b>" + multi[i] + "</b> - " + abilityObject[multi[i]].Description + '<br>';
+        }
+        descriptionText += "</p>";
+        $descriptionArea.append(descriptionText);
+      }
     }
+
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
 }
 
@@ -466,16 +507,10 @@ function stepFiveDescription(selected) {
   $descriptionArea.empty();
 
   if (selected != "None") {
-
-    //get appropriate object
-    for (var i = 0; i < grafts.length; i++) {
-      if (window[grafts[i]].hasOwnProperty(selected)) {
-        var graftObject = window[grafts[i]][selected];
-      }
-    }
+    var graftObject = findObjectFromKey(graftTemplates,selected);
 
     var $descriptionArea = $(".stepFiveDescription").first();
-    var description = graftObject.Description;
+    var description = graftObject[selected].Description;
     var searchMask = new RegExp(selected+'s?', "i");//match case insensitive
     var selectedMatch = description.match(searchMask);
     $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
@@ -490,11 +525,12 @@ String.prototype.capitalise = function() {
 
 function getGraftArray() {
   var graftArray = ['None'];
-  for (var i = 0; i < grafts.length; i++) {
-      graftTitle = grafts[i].replace('Grafts',' grafts').capitalise();
+  var keys = Object.keys(graftTemplates)
+  for (var i = 0; i < keys.length; i++) {
+      graftTitle = keys[i].replace('Grafts',' grafts').capitalise();
 
       graftArray = graftArray.concat(['LABEL=' + graftTitle]);
-      graftArray = graftArray.concat(Object.keys(window[grafts[i]]).sort());
+      graftArray = graftArray.concat(Object.keys(graftTemplates[keys[i]]).sort());
       graftArray = graftArray.concat(['ENDLABEL']);
 
   }
@@ -540,19 +576,20 @@ $('.wizard-card').bootstrapWizard({
             if (validated) {
 
               //refresh graft drop if needed (dependent on CR)
-              var cr = Number($('[data-id="CRDrop"]').text().trim().replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
+              var crString = $('[data-id="CRDrop"]').text().trim();
+              var cr = Number(crString.replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
               var array = $('#arrayDrop').val().trim();
               var graft = $('#graftDrop').val().trim();
 
               if (graft != '' && graft != 'None'){
-                if (simpleGrafts[graft].hasOwnProperty("CRMin")){
-                  var crmin = simpleGrafts[graft].CRMin;
+                if (graftTemplates.simpleGrafts[graft].hasOwnProperty("CRMin")){
+                  var crmin = graftTemplates.simpleGrafts[graft].CRMin;
                 } else{
                   var crmin = 0;
                 }
                 if (cr < crmin) {
-                  //reset dropdown id cr below minimum
-                  generateDropdown("graftDropdown","graftDrop","Optional template graft",['None','BREAK'].concat(getGraftArray()));
+                  //reset dropdown if cr below minimum
+                  generateDropdown("graftDropdown","graftDrop","Optional template graft",getGraftArray());
                   stepFiveDescription('None')
                 }
               }
@@ -560,9 +597,28 @@ $('.wizard-card').bootstrapWizard({
               //step6 generation - dependent on CR
 
               if ($('#stepOneSave').text().trim() != cr.toString()+array){
-                maxOptions = window[array.toLowerCase()+'MainStats'][cr.toString()][11];//get max options from array
-                generateMultiDropdown("freeAbilityDropdown","freeDrop","Select free abilities","Search abilities",Object.keys(specialAbilities.FreeAbilities),10);
-                generateMultiDropdown("specialAbilityDropdown","specialDrop","Select special abilities","Search abilities",Object.keys(specialAbilities.Abilities),maxOptions);
+                alert(crString)
+                maxOptions = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][11];//get max options from array
+
+                var FreeAbilities = [];
+                FreeAbilities = FreeAbilities.concat(['LABEL=Free abilities']);
+                FreeAbilities = FreeAbilities.concat(Object.keys(specialAbilities.FreeAbilities).sort());
+                FreeAbilities = FreeAbilities.concat(['ENDLABEL']);
+                FreeAbilities = FreeAbilities.concat(['LABEL=Weaknesses']);
+                FreeAbilities = FreeAbilities.concat(Object.keys(specialAbilities.Weaknesses).sort());
+                FreeAbilities = FreeAbilities.concat(['ENDLABEL']);
+
+                var SpecialAbilities = [];
+                SpecialAbilities = SpecialAbilities.concat(['LABEL=Adjustment abilities']);
+                SpecialAbilities = SpecialAbilities.concat(Object.keys(specialAbilities.AdjustmentAbilities).sort());
+                SpecialAbilities = SpecialAbilities.concat(['ENDLABEL']);
+                SpecialAbilities = SpecialAbilities.concat(['LABEL=Special abilities']);
+                SpecialAbilities = SpecialAbilities.concat(Object.keys(specialAbilities.Abilities).sort());
+                SpecialAbilities = SpecialAbilities.concat(['ENDLABEL']);
+
+
+                generateMultiDropdown("freeAbilityDropdown","freeDrop","Select free abilities","Search abilities",FreeAbilities,10);
+                generateMultiDropdown("specialAbilityDropdown","specialDrop","Select special abilities","Search abilities",SpecialAbilities,maxOptions);
                 var $descriptionArea = $(".stepSixAbilities").first();
                 $descriptionArea.empty();
                 $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");

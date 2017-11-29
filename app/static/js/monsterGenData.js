@@ -1146,157 +1146,154 @@ classData = {
     }
 };
 
-grafts = ["simpleGrafts","dragonGrafts"];
+graftTemplates = {
+	"simpleGrafts": {
+		"Aerial (CR 1+)": {
+			"CRMin": 1,
+			"Description": "Aerial creatures are native denizens of the Elemental Plane of Air, gas giant planets, or similar landless environments, and have unique adaptations to help them survive there.",
+			"RequiredSubType": "Air",
+			"DamageMod": "Natural 1/2 electricity",
+			"Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Air."]
+		},
+		"Aqueous (CR 1+)": {
+			"CRMin": 1,
+			"Description": "Aqueous creatures are native denizens of the Elemental Plane of Water or similar landless environments, able to survive both in and out of water.",
+			"RequiredSubType": "Water",
+			"OtherAbilities": "amphibious",
+			"AttackChanges": ["Natural all piercing", "electricity to cold", "fire to cold"],
+			"Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Water."]
+		},
+		"Astral": {
+			"Description": "Astral creatures are natives of the Astral Plane, a vast silvery void between planes.",
+			"Text": ["Gains the extraplanar subtype when it isn't on the Astral Plane."],
+			"DR": {
+				"min": "1/-",
+				"DR": "CR-10/-",
+				"IfDRExists": {
+					"Resistance": ["electricity CR-5"]
+				}
+			}
+		},
+		"Celestial": {
+			"Alignment": "Alignment changes to good.",
+			"Description": "Celestial creatures are natives of one of the good-aligned Outer Planes.",
+			"DR": {
+				"DR": "CR-10/evil",
+				"IfDRExists": {
+					"Resistance": ["electricity CR-5"]
+				}
+			},
+			"Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
+		},
+		"Cthonic (CR 1+)": {
+			"CRMin": 1,
+			"Description": "Cthonic creatures are native denizens of the Elemental Plane of Earth or underground environments, and they have adapted to exist in dirt and rock.",
+			"Senses": {
+				"blindsense (vibration)": ["1", 30],
+				"blindsight (vibration)": ["8", 30]
+			},
+			"RequiredSubType": "Earth",
+			"DamageMod": "DR/cold iron",
+			"Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Earth."]
+		},
+		"Cybernetic (CR 1/2+)": {
+			"CRMin": 0.5,
+			"ArmorUpgrade": {
+				"CR3-7": 1,
+				"CR8": 2
+			},
 
-var simpleGrafts = {
-  "Aerial (CR 1+)": {
-    "CRMin":1,
-    "Description": "Aerial creatures are native denizens of the Elemental Plane of Air, gas giant planets, or similar landless environments, and have unique adaptations to help them survive there.",
-    "RequiredSubType": "Air",
-    "DamageMod": "Natural 1/2 electricity",
-    "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Air."]
-  },
-  "Aqueous (CR 1+)": {
-    "CRMin":1,
-    "Description": "Aqueous creatures are native denizens of the Elemental Plane of Water or similar landless environments, able to survive both in and out of water.",
-    "RequiredSubType":"Water",
-    "OtherAbilities": "amphibious",
-    "AttackChanges": ["Natural all piercing","electricity to cold","fire to cold"],
-    "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Water."]
-  },
-  "Astral": {
-    "Description": "Astral creatures are natives of the Astral Plane, a vast silvery void between planes.",
-    "Text": ["Gains the extraplanar subtype when it isn't on the Astral Plane."],
-    "DR": {
-      "min": "1/-",
-      "DR": "CR-10/-",
-      "IfDRExists":{
-        "Resistance": ["electricity CR-5"]
-      }
-    }
-  },
-  "Celestial": {
-    "Alignment": "Alignment changes to good.",
-    "Description": "Celestial creatures are natives of one of the good-aligned Outer Planes.",
-    "DR": {
-      "DR": "CR-10/evil",
-      "IfDRExists":{
-        "Resistance": ["electricity CR-5"]
-      }
-    },
-    "Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
-  },
-  "Cthonic (CR 1+)": {
-    "CRMin":1,
-    "Description": "Cthonic creatures are native denizens of the Elemental Plane of Earth or underground environments, and they have adapted to exist in dirt and rock.",
-    "Senses": {
-      "blindsense (vibration)":["1",30],
-      "blindsight (vibration)":["8",30]
-    },
-    "RequiredSubType": "Earth",
-    "DamageMod": "DR/cold iron",
-    "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Earth."]
-  },
-  "Cybernetic (CR 1/2+)": {
-    "CRMin":0.5,
-    "ArmorUpgrade": {
-      "CR3-7":1,
-      "CR8":2
-    },
-
-    "Description": "A cybernetic creature has been augmented by technological implants (although the same simple template graft can be used to represent creatures augmented by biotech).",
-    "Weapon": [
-      "CR+1"
-    ],
-  },
-  "Entropic": {
-    "Alignment": "Alignment changes to chaotic.",
-    "Description": "Entropic creatures are natives of one of the Outer Planes where chaos is paramount. A GM can allow creatures summoned with the summon creature spell that would normally have the astral, celestial, or fiendish simple template graft instead have the entropic simple template graft.",
-    "DR": {
-      "DR": "CR-10/lawful",
-      "IfDRExists":{
-        "Resistance": ["acid CR-5"]
-      }
-    },
-    "Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
-  },
-  "Fiendish": {
-    "Alignment": "evil",
-    "Description": "Fiendish creatures are natives of one of the evil-aligned Outer Planes.",
-    "DR": {
-      "DR": "CR-10/good",
-      "IfDRExists":{
-        "Resistance": ["fire CR-5"]
-      }
-    },
-    "Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
-  },
-  "Fiery (CR 1+)": {
-    "CRMin":1,
-    "Description": "Fiery creatures are native denizens of the Elemental Plane of Fire or habitats covered in fire, and they have unique adaptations to help them survive there.",
-    "RequiredSubType": "Fire",
-    "DamageMod": "Natural 1/2 fire",
-    "Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Fire."]
-  },
-  "Giant (CR 1+)" : {
-    "CRMin":1,
-    "Description": "Giant creatures are larger than typical members of their species, and might represent a subspecies that has grown to unusual size due to environmental conditions.",
-    "Size": 1,
-    "Space": 1,
-    "Reach": 1
-  },
-  "Miniature": {
-    "Description": "Miniature creatures are smaller than typical members of their species and might represent a subspecies that has shrunk down due to environmental conditions.",
-    "Size":-1,
-    "Space": -1,
-    "Reach": -1
-  },
-  "Phrenic": {
-    "Adjustments": {"will":2},
-    "OtherAbilities":["limited telepathy"],
-    "Description": "Phrenic creatures have minor innate mental powers, which they might have developed due to high levels of native psychic energy in their environments.",
-    "Senses": {
-      "Blindsense (emotion)":["7",5]
-    },
-  },
-  "Resolute": {
-    "Alignment": "lawful",
-    "DR": {
-      "DR": "CR-10/chaotic",
-      "IfDRExists":{
-        "Resistance": ["cold CR-5"]
-      }
-    },
-    "Description": "Resolute creatures are natives of one of the Outer Planes where law is paramount. A GM can allow creatures summoned with the summon creature spell that would normally have the astral, celestial, or fiendish simple template graft instead have the resolute simple template graft.",
-    "Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
-  },
-  "Synthetic": {
-    "Description": "Synthetic creatures are constructed through the use of extremely advanced technology, similar to that which makes androids possible.",
-    "SpecialAbilities": {
-      "Constructed (Ex)": "For effects targeting creatures by type, synthetic creatures count as both their actual creature type and constructs (whichever type allows an ability to affect them for abilities that affect only one type, and whichever type is worse for abilities that affect both creature types). They receive a +2 racial bonus to saving throws against disease, mind-affecting effects, poison, and sleep, unless those effects specifically target constructs. In addition, synthetic creatures do not breathe or suffer the normal environmental effects of being in a vacuum.",
-      "Synthetic (Ex)": "The creature is affected by any ability that specifies it functions against androids."
-    }
-  },
-  "Two-Headed (CR 3+)": {
-    "CRMin":3,
-    "Description": "This creature is a rare two-headed mutant or a member of a two-headed subspecies of a more common race.",
-    "OtherAbilities": ["unflankable"],
-    "MasterSkills": ["perception"],
-    "AttackChanges": ["bite","bite x2 as full attack -3 penalty"]
-  },
-  "Umbral": {
-    "Description": "Umbral creatures exist in the lightless places of the universe, which might be the Shadow Plane, the interior of unlit caves, or the bottom of the darkest oceans.",
-    "Senses": {
-      "Darkvision":[60],
-      "Blindsense (vibration)":["7",5]
-    },
-  }
-}
-
-dragonGrafts = {
-  //
-  //Dragon Entries
-  //
+			"Description": "A cybernetic creature has been augmented by technological implants (although the same simple template graft can be used to represent creatures augmented by biotech).",
+			"Weapon": [
+				"CR+1"
+			]
+		},
+		"Entropic": {
+			"Alignment": "Alignment changes to chaotic.",
+			"Description": "Entropic creatures are natives of one of the Outer Planes where chaos is paramount. A GM can allow creatures summoned with the summon creature spell that would normally have the astral, celestial, or fiendish simple template graft instead have the entropic simple template graft.",
+			"DR": {
+				"DR": "CR-10/lawful",
+				"IfDRExists": {
+					"Resistance": ["acid CR-5"]
+				}
+			},
+			"Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
+		},
+		"Fiendish": {
+			"Alignment": "evil",
+			"Description": "Fiendish creatures are natives of one of the evil-aligned Outer Planes.",
+			"DR": {
+				"DR": "CR-10/good",
+				"IfDRExists": {
+					"Resistance": ["fire CR-5"]
+				}
+			},
+			"Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
+		},
+		"Fiery (CR 1+)": {
+			"CRMin": 1,
+			"Description": "Fiery creatures are native denizens of the Elemental Plane of Fire or habitats covered in fire, and they have unique adaptations to help them survive there.",
+			"RequiredSubType": "Fire",
+			"DamageMod": "Natural 1/2 fire",
+			"Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Fire."]
+		},
+		"Giant (CR 1+)": {
+			"CRMin": 1,
+			"Description": "Giant creatures are larger than typical members of their species, and might represent a subspecies that has grown to unusual size due to environmental conditions.",
+			"Size": 1,
+			"Space": 1,
+			"Reach": 1
+		},
+		"Miniature": {
+			"Description": "Miniature creatures are smaller than typical members of their species and might represent a subspecies that has shrunk down due to environmental conditions.",
+			"Size": -1,
+			"Space": -1,
+			"Reach": -1
+		},
+		"Phrenic": {
+			"Adjustments": {
+				"will": 2
+			},
+			"OtherAbilities": ["limited telepathy"],
+			"Description": "Phrenic creatures have minor innate mental powers, which they might have developed due to high levels of native psychic energy in their environments.",
+			"Senses": {
+				"Blindsense (emotion)": ["7", 5]
+			}
+		},
+		"Resolute": {
+			"Alignment": "lawful",
+			"DR": {
+				"DR": "CR-10/chaotic",
+				"IfDRExists": {
+					"Resistance": ["cold CR-5"]
+				}
+			},
+			"Description": "Resolute creatures are natives of one of the Outer Planes where law is paramount. A GM can allow creatures summoned with the summon creature spell that would normally have the astral, celestial, or fiendish simple template graft instead have the resolute simple template graft.",
+			"Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
+		},
+		"Synthetic": {
+			"Description": "Synthetic creatures are constructed through the use of extremely advanced technology, similar to that which makes androids possible.",
+			"SpecialAbilities": {
+				"Constructed (Ex)": "For effects targeting creatures by type, synthetic creatures count as both their actual creature type and constructs (whichever type allows an ability to affect them for abilities that affect only one type, and whichever type is worse for abilities that affect both creature types). They receive a +2 racial bonus to saving throws against disease, mind-affecting effects, poison, and sleep, unless those effects specifically target constructs. In addition, synthetic creatures do not breathe or suffer the normal environmental effects of being in a vacuum.",
+				"Synthetic (Ex)": "The creature is affected by any ability that specifies it functions against androids."
+			}
+		},
+		"Two-Headed (CR 3+)": {
+			"CRMin": 3,
+			"Description": "This creature is a rare two-headed mutant or a member of a two-headed subspecies of a more common race.",
+			"OtherAbilities": ["unflankable"],
+			"MasterSkills": ["perception"],
+			"AttackChanges": ["bite", "bite x2 as full attack -3 penalty"]
+		},
+		"Umbral": {
+			"Description": "Umbral creatures exist in the lightless places of the universe, which might be the Shadow Plane, the interior of unlit caves, or the bottom of the darkest oceans.",
+			"Senses": {
+				"Darkvision": [60],
+				"Blindsense (vibration)": ["7", 5]
+			}
+		}
+	},
+  "dragonGrafts": {
     "Black Dragon": {
       "Abilities": [
         "Breath weapon (line 30 ft. + 10 feet per 2 CR, 1d6 A + 1d6 per CR)",
@@ -1468,7 +1465,10 @@ dragonGrafts = {
         "fire"
       ]
     }
-}
+  }
+};
+
+
 
 var statLabels = ["eac","kac","fortitude","reflex","will","hitPoints","abilityDCBase","spellDC","abilityScoreModifier0","abilityScoreModifier1","abilityScoreModifier2","specialAbilities","masterSkills","goodSkills","highAttackBonus","lowAttackBonus","rangedEnergy","rangedKinetic","meleeStandard","meleeThree","meleeFour"];
 var CRLabels = ["CR 1/3","CR 1/2","CR 1","CR 2","CR 3","CR 4","CR 5","CR 6","CR 7","CR 8","CR 9","CR 10","CR 11","CR 12","CR 13","CR 14","CR 15","CR 16","CR 17","CR 18","CR 19","CR 20","CR 21","CR 22","CR 23","CR 24","CR 25"]
@@ -1759,4 +1759,34 @@ specialAbilities = {
       "Format": "Immunities undead immunities."
     }
   }
-}
+};
+
+spellCounts = {
+    "1/3": {"spell-like":{"1/day":[2,1],"at will":[2,0]},"caster":{"3/day":[2,1],"at will":[2,0]}},
+    "1/2": {"spell-like":{"1/day":[2,1],"at will":[2,0]},"caster":{"3/day":[2,1],"at will":[2,0]}},
+    "1": {"spell-like":{"1/day":[2,1],"at will":[2,0]},"caster":{"3/day":[2,1],"at will":[2,0]}},
+    "2": {"spell-like":{"1/day":[2,1],"at will":[2,0]},"caster":{"3/day":[2,1],"at will":[2,0]}},
+    "3": {"spell-like":{"1/day":[2,1],"at will":[2,0]},"caster":{"3/day":[2,1],"at will":[2,0]}},
+    "4": {"spell-like":{"1/day":[2,2],"3/day":[3,1],"at will":[2,0]},"caster":{"3/day":[2,2],"6/day":[3,1],"at will":[2,0]}},
+    "5": {"spell-like":{"1/day":[2,2],"3/day":[3,1],"at will":[2,0]},"caster":{"3/day":[2,2],"6/day":[3,1],"at will":[2,0]}},
+    "6": {"spell-like":{"1/day":[2,2],"3/day":[3,1],"at will":[2,0]},"caster":{"3/day":[2,2],"6/day":[3,1],"at will":[2,0]}},
+    "7": {"spell-like":{"1/day":[2,3],"3/day":[4,2],"at will":[2,1]},"caster":{"3/day":[2,3],"6/day":[4,2],"at will":[2,1]}},
+    "8": {"spell-like":{"1/day":[2,3],"3/day":[4,2],"at will":[2,1]},"caster":{"3/day":[2,3],"6/day":[4,2],"at will":[2,1]}},
+    "9": {"spell-like":{"1/day":[2,3],"3/day":[4,2],"at will":[2,1]},"caster":{"3/day":[2,3],"6/day":[4,2],"at will":[2,1]}},
+    "10": {"spell-like":{"1/day":[2,4],"3/day":[4,3],"at will":[2,2]},"caster":{"3/day":[2,4],"6/day":[4,3],"at will":[2,2]}},
+    "11": {"spell-like":{"1/day":[2,4],"3/day":[4,3],"at will":[2,2]},"caster":{"3/day":[2,4],"6/day":[4,3],"at will":[2,2]}},
+    "12": {"spell-like":{"1/day":[2,4],"3/day":[4,3],"at will":[2,2]},"caster":{"3/day":[2,4],"6/day":[4,3],"at will":[2,2]}},
+    "13": {"spell-like":{"1/day":[2,5],"3/day":[4,4],"at will":[2,3]},"caster":{"3/day":[2,5],"6/day":[4,4],"at will":[2,3]}},
+    "14": {"spell-like":{"1/day":[2,5],"3/day":[4,4],"at will":[2,3]},"caster":{"3/day":[2,5],"6/day":[4,4],"at will":[2,3]}},
+    "15": {"spell-like":{"1/day":[2,5],"3/day":[4,4],"at will":[2,3]},"caster":{"3/day":[2,5],"6/day":[4,4],"at will":[2,3]}},
+    "16": {"spell-like":{"1/day":[2,6],"3/day":[4,5],"at will":[2,4]},"caster":{"3/day":[2,6],"6/day":[4,5],"at will":[2,4]}},
+    "17": {"spell-like":{"1/day":[2,6],"3/day":[4,5],"at will":[2,4]},"caster":{"3/day":[2,6],"6/day":[4,5],"at will":[2,4]}},
+    "18": {"spell-like":{"1/day":[2,6],"3/day":[4,5],"at will":[2,4]},"caster":{"3/day":[2,6],"6/day":[4,5],"at will":[2,4]}},
+    "19": {"spell-like":{"1/day":[4,6],"3/day":[3,5],"at will":[2,4]},"caster":{"3/day":[4,6],"6/day":[3,5],"at will":[2,4]}},
+    "20": {"spell-like":{"1/day":[4,6],"3/day":[3,5],"at will":[2,4]},"caster":{"3/day":[4,6],"6/day":[3,5],"at will":[2,4]}},
+    "21": {"spell-like":{"1/day":[4,6],"3/day":[3,5],"at will":[2,4]},"caster":{"3/day":[4,6],"6/day":[3,5],"at will":[2,4]}},
+    "22": {"spell-like":{"1/day":[4,6],"3/day":[3,5],"at will":[2,4]},"caster":{"3/day":[4,6],"6/day":[3,5],"at will":[2,4]}},
+    "23": {"spell-like":{"1/day":[4,6],"3/day":[3,5],"at will":[2,4]},"caster":{"3/day":[4,6],"6/day":[3,5],"at will":[2,4]}},
+    "24": {"spell-like":{"1/day":[4,6],"3/day":[3,5],"at will":[2,4]},"caster":{"3/day":[4,6],"6/day":[3,5],"at will":[2,4]}},
+    "25": {"spell-like":{"1/day":[4,6],"3/day":[3,5],"at will":[2,4]},"caster":{"3/day":[4,6],"6/day":[3,5],"at will":[2,4]}}
+};
