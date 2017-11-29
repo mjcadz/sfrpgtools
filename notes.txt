@@ -30,7 +30,7 @@ add weaknesses to abilities
 
 sort free/standard abilities
 
-
+plant creature type lack wisdom and charisma
 
 add damage types as vulnerabilities and others?
 

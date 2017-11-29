@@ -244,7 +244,12 @@ function generateDropdown(parentID,dropID,title,array) {
 
 //creates bootstrap-select multiple select dropdowns from arrays
 function generateMultiDropdown(parentID,dropID,title,searchTitle,array,maxOptions) {
-  var dropHtml = '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="13" multiple data-live-search="true" data-live-search-placeholder="'+searchTitle+'" data-max-options="'+maxOptions+'" data-selected-text-format="count">'
+  if (searchTitle === 0){
+    searTitl = ''
+  } else {
+    searTitl = 'data-live-search="true" data-live-search-placeholder="'+searchTitle+'" ';
+  }
+  var dropHtml = '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="13" multiple ' + searTitl + 'data-max-options="'+maxOptions+'" data-selected-text-format="count">'
   for (i = 0; i < array.length; i++) {
     if (array[i] == 'BREAK'){
       dropHtml += '<option data-divider="true"></option>';
@@ -594,10 +599,8 @@ $('.wizard-card').bootstrapWizard({
                 }
               }
 
-              //step6 generation - dependent on CR
-
               if ($('#stepOneSave').text().trim() != cr.toString()+array){
-                alert(crString)
+                //step6 generation - dependent on CR
                 maxOptions = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][11];//get max options from array
 
                 var FreeAbilities = [];
@@ -622,6 +625,17 @@ $('.wizard-card').bootstrapWizard({
                 var $descriptionArea = $(".stepSixAbilities").first();
                 $descriptionArea.empty();
                 $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");
+
+                //step7 generation - dependent on CR and array
+                masterMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][0];
+                masterSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][1];
+
+                goodMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][0];
+                goodSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][1];
+
+                generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,Object.keys(skillNames),masterSkillNum);
+                generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,Object.keys(skillNames),goodSkillNum);
+
               }
               $('#stepOneSave').text(cr.toString()+array);
             } else {
