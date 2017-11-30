@@ -505,26 +505,29 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
     } else if (id=='spells1Drop') {
       selected = selected.toString().trim()
+      saved = $('#stepEightSave').text().split(',');
       var $descriptionArea = $(".stepEight1Description").first();
       $descriptionArea.empty();
       if (selected != ''){
-        $descriptionArea.append("<p>"+selected.replace(',',', ')+"</p>");
+        $descriptionArea.append("<p>"+saved[1]+": "+selected.replace(',',', ')+"</p>");
       }
 
     } else if (id=='spells2Drop') {
       selected = selected.toString().trim()
+      saved = $('#stepEightSave').text().split(',');
       var $descriptionArea = $(".stepEight2Description").first();
       $descriptionArea.empty();
       if (selected != ''){
-        $descriptionArea.append("<p>"+selected.replace(',',', ')+"</p>");
+        $descriptionArea.append("<p>"+saved[2]+": "+selected.replace(',',', ')+"</p>");
       }
 
     } else if (id=='spells3Drop') {
       selected = selected.toString().trim()
+      saved = $('#stepEightSave').text().split(',');
       var $descriptionArea = $(".stepEight3Description").first();
       $descriptionArea.empty();
       if (selected != ''){
-        $descriptionArea.append("<p>"+selected.replace(',',', ')+"</p>");
+        $descriptionArea.append("<p>"+saved[3]+": "+selected.replace(',',', ')+"</p>");
       }
 
     }
@@ -936,22 +939,21 @@ $('.wizard-card').bootstrapWizard({
               //"caster":{"3/day":[2,1],"at will":[2,0]}
               var i = 0;
               var spellObject = spellCounts[crString]['caster'];
+              var save = "dummy";
               for (castCat in spellObject){
                 i += 1;
                 var spellNum = spellObject[castCat][0];
                 var spellLevel = spellObject[castCat][1].toString();
-                var spellList = getSpellsByLevel(spellLevel)
+                var spellList = getSpellsByLevel(spellLevel);
 
                 var $descriptionAbility = $(".stepEight"+i).first();
                 $descriptionAbility.empty();
                 $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
 
                 generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
-
-                //"spells1Dropdown"
-                //stepEight1
-
+                save += ","+castCat;
               }
+              $('#stepEightSave').text(save);
 
             } else {
                 return false;
