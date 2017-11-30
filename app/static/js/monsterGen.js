@@ -433,6 +433,76 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         descriptionText += "</p>";
         $descriptionArea.append(descriptionText);
       }
+    } else if (id=='masterDrop') {
+
+      selected = selected.toString().trim()
+
+      if (selected.includes(',')){
+        var selectArray = selected.split(',');
+      } else {
+        selectArray = [selected];
+      }
+      selectArray.push('Perception');
+
+      var skillList = Object.keys(skillNames)
+      for (var i = 0; i < selectArray.length; i++) {
+        skillList.remove(selectArray[i]);
+      }
+      //alert(selectArray)
+      //alert(skillList)
+      goodSkillNum = Number($('#goodNumSave').text());
+      generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,skillList,goodSkillNum);
+      goodSelected = $('#stepSevenGoodSave').text();
+      if ( goodSelected != ''){
+        $('#goodDrop').selectpicker('val', goodSelected.split(','));
+      }
+
+      var $descriptionArea = $(".stepSevenMasterDescription").first();
+      $descriptionArea.empty();
+      if (selected != ''){
+        $descriptionArea.append("<p><b>Master skills:</b> "+selected.replace(',',', ')+"</p>");
+      }
+
+      $('#stepSevenMasterSave').text(selected);
+
+    } else if (id=='goodDrop') {
+
+      selected = selected.toString().trim()
+
+      if (selected.includes(',')){
+        var selectArray = selected.split(',');
+      } else {
+        selectArray = [selected];
+      }
+
+      var skillList = Object.keys(skillNames)
+      for (var i = 0; i < selectArray.length; i++) {
+        skillList.remove(selectArray[i]);
+      }
+      //alert(selectArray)
+      //alert(skillList)
+      masterSkillNum = Number($('#masterNumSave').text());
+      generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,skillList,masterSkillNum);
+      masterSelected = $('#stepSevenMasterSave').text();
+      if ( masterSelected != ''){
+        $('#masterDrop').selectpicker('val', masterSelected.split(','));
+      }
+
+      var $descriptionArea = $(".stepSevenGoodDescription").first();
+      $descriptionArea.empty();
+      if (selected != ''){
+        $descriptionArea.append("<p><b>Good skills:</b> "+selected.replace(',',', ')+"</p>");
+      }
+
+      $('#stepSevenGoodSave').text(selected);
+    } else if (id=='scoresDrop') {
+
+      var $descriptionArea = $(".stepSevenAbilityDescription").first();
+      $descriptionArea.empty();
+      if (selected.toString().trim().split(",").length > 2){
+        $descriptionArea.append("<p><b>Top scores:</b> ("+selected.toString()+")</p>");
+      }
+
     }
 
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
@@ -526,6 +596,15 @@ function stepFiveDescription(selected) {
 
 String.prototype.capitalise = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+Array.prototype.remove = function(toRemove) {
+  var index = this.indexOf(toRemove);
+  if (index > -1) {
+    return this.splice(index, 1);
+  } else {
+    return this;
+  }
 }
 
 function getGraftArray() {
@@ -627,15 +706,49 @@ $('.wizard-card').bootstrapWizard({
                 $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");
 
                 //step7 generation - dependent on CR and array
+
+                //Ability Scores
+
+                var dropdown = '<select class="selectpicker" id="scoresDrop" title="Choose top ability scores"data-style="btn-default" data-width="100%" data-size="13" multiple data-max-options="3">' +
+                  '<option title="Str">Strength</option>' +
+                  '<option title="Dex">Dexterity</option>' +
+                  '<option title="Con">Constitution</option>' +
+                  '<option title="Int">Intelligence</option>' +
+                  '<option title="Wis">Wisdom</option>' +
+                  '<option title="Cha">Charisma</option>' +
+                '</select>'
+                document.getElementById('AbilityScoresDropdown').innerHTML = dropdown;
+                //initialise dropdown
+                $('#scoresDrop').selectpicker();
+                //bind dropdown click  handler
+                $('#scoresDrop').on('changed.bs.select', dropClickHandler);
+
+                var $descriptionAbility = $(".stepSevenAbility").first();
+                $descriptionAbility.empty();
+                $descriptionAbility.append("<p>Select top three ability scores (highest first).</p>");
+
+                //Master Skills
                 masterMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][0];
                 masterSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][1];
+
+                var $descriptionMaster = $(".stepSevenMaster").first();
+                $descriptionMaster.empty();
+                $descriptionMaster.append("<p>Select up to <b>" + masterSkillNum + "</b> master skills.</p>");
+
+                generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,Object.keys(skillNames),masterSkillNum);
+                $('#masterNumSave').text(masterSkillNum);
+                //Good Skills
 
                 goodMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][0];
                 goodSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][1];
 
-                generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,Object.keys(skillNames),masterSkillNum);
-                generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,Object.keys(skillNames),goodSkillNum);
+                var $descriptionGood = $(".stepSevenGood").first();
+                $descriptionGood.empty();
+                $descriptionGood.append("<p>Select up to <b>" + goodSkillNum + "</b> good skills (Perception is already a good skill by default).</p>");
 
+                generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,Object.keys(skillNames).remove('Perception'),goodSkillNum);
+
+                $('#goodNumSave').text(goodSkillNum);
               }
               $('#stepOneSave').text(cr.toString()+array);
             } else {
@@ -713,10 +826,8 @@ $('.wizard-card').bootstrapWizard({
               //put current class first in list
               var arrays = ['Combatant','Expert','Spellcaster'];
               var arrayDrop = $('#arrayDrop').val().trim();
-              var index = arrays.indexOf(arrayDrop);
-              if (index > -1) {
-                arrays.splice(index, 1);
-              }
+              arrays.remove(arrayDrop);
+
               //build class list, current base array on top
               var classArray = ['None', 'LABEL='+ arrayDrop +' classes'].concat(window['class'+arrayDrop]).concat(['ENDLABEL']);
               classArray = classArray.concat(['LABEL='+ arrays[0] +' classes']).concat(window['class'+arrays[0]]).concat(['ENDLABEL']);
