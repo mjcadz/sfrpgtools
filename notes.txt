@@ -32,6 +32,10 @@ sort free/standard abilities
 
 plant creature type lack wisdom and charisma
 
+hide desription areas while changing text then show. will avoid loading looks
+
+ability score chooser regenerates when it doesn't need to , when CR changes
+
 add damage types as vulnerabilities and others?
 
 backwat=rds check creaturetype to make sure steps are validated - possible validation in final check

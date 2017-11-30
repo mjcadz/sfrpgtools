@@ -1,4 +1,4 @@
-spells = {
+spellsData = {
 	"Animate Dead": {
 		"CASTTIME": "1 standard action",
 		"CLASSES": "Mystic=4Technomancer=4",

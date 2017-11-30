@@ -503,6 +503,30 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         $descriptionArea.append("<p><b>Top scores:</b> ("+selected.toString()+")</p>");
       }
 
+    } else if (id=='spells1Drop') {
+      selected = selected.toString().trim()
+      var $descriptionArea = $(".stepEight1Description").first();
+      $descriptionArea.empty();
+      if (selected != ''){
+        $descriptionArea.append("<p>"+selected.replace(',',', ')+"</p>");
+      }
+
+    } else if (id=='spells2Drop') {
+      selected = selected.toString().trim()
+      var $descriptionArea = $(".stepEight2Description").first();
+      $descriptionArea.empty();
+      if (selected != ''){
+        $descriptionArea.append("<p>"+selected.replace(',',', ')+"</p>");
+      }
+
+    } else if (id=='spells3Drop') {
+      selected = selected.toString().trim()
+      var $descriptionArea = $(".stepEight3Description").first();
+      $descriptionArea.empty();
+      if (selected != ''){
+        $descriptionArea.append("<p>"+selected.replace(',',', ')+"</p>");
+      }
+
     }
 
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
@@ -619,6 +643,17 @@ function getGraftArray() {
 
   }
   return graftArray;
+}
+
+function getSpellsByLevel(levelString){
+  var list = [];
+  for (spellName in spellsData){
+    if (spellsData[spellName].LEVEL == levelString){
+      list.push(spellName)
+    }
+  }
+  return list;
+
 }
 
 
@@ -755,6 +790,7 @@ $('.wizard-card').bootstrapWizard({
                 return false;
             }
         }
+        //creature type
         if (index == 2) {
             var validated = true;
 
@@ -808,6 +844,7 @@ $('.wizard-card').bootstrapWizard({
                 return false;
             }
         }
+        // subtype
         if (index == 3) {
             var validated = true;
 
@@ -823,6 +860,8 @@ $('.wizard-card').bootstrapWizard({
             }
 
             if (validated) {
+              //setup tab 4 - class
+
               //put current class first in list
               var arrays = ['Combatant','Expert','Spellcaster'];
               var arrayDrop = $('#arrayDrop').val().trim();
@@ -856,7 +895,7 @@ $('.wizard-card').bootstrapWizard({
                 return false;
             }
         }
-        //Validation tab 4
+        //Validation tab 4 - class
         if (index == 4) {
 
             var validated = true;
@@ -869,6 +908,50 @@ $('.wizard-card').bootstrapWizard({
             }
 
             if (validated) {
+
+            } else {
+                return false;
+            }
+        }
+        //Validation tab 7 - skills
+        if (index == 7) {
+
+            var validated = true;
+
+            if ($('[data-id="scoresDrop"]').length){
+              var dropText = $('[data-id="scoresDrop"]').text().trim();
+              if (dropText.split(",").length < 3) {
+                  $('[data-id="scoresDrop"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+
+            if (validated) {
+
+              //setup tab 8 - spells
+              var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','');
+
+              var array = $('#arrayDrop').val().trim();
+
+              //"caster":{"3/day":[2,1],"at will":[2,0]}
+              var i = 0;
+              var spellObject = spellCounts[crString]['caster'];
+              for (castCat in spellObject){
+                i += 1;
+                var spellNum = spellObject[castCat][0];
+                var spellLevel = spellObject[castCat][1].toString();
+                var spellList = getSpellsByLevel(spellLevel)
+
+                var $descriptionAbility = $(".stepEight"+i).first();
+                $descriptionAbility.empty();
+                $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+
+                generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
+
+                //"spells1Dropdown"
+                //stepEight1
+
+              }
 
             } else {
                 return false;
