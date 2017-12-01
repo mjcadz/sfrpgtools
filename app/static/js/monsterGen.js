@@ -311,8 +311,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
     } else if (id=='classDrop') {
 
-        //var $descriptionArea = $(".stepFourDescription").first();
-        //$descriptionArea.empty();
+        //see if base array needs to change to apply class. via modal
         if (selected != "None") {
 
           var selectedArray;
@@ -328,10 +327,12 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
           var currentArray = $('#arrayDrop').val().trim()
 
           if (selectedArray != currentArray) {
+            //if required is not slected, offer to change it via modal
             $('#stepFourSave2').text(selected+":"+selectedArray);
             var $modal = $(".modal-body.classModal").first();
             $modal.empty();
             $modal.append("<p>This class graft requires the <b>"+selectedArray+"</b> base.</p>");
+            //show modal. defined in html
             $('#classModal').modal('show');
           } else {
             stepFourDescription(selected,selectedArray);
@@ -359,19 +360,20 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         }
         //if met continue
         if (cr >= crmin) {
-
+          //re enable any disabled dropdowns
           disableDropdown('creatureSubTypeDrop',false); //enabling dropdowns
           disableDropdown('creatureTypeDrop',false);
-          //disableDropdown('SavingThrowDrop',false);
-          //disableDropdown('optionDrop',false);
 
+          // check if requirements are met, if not offer to change via modal
           if (graftObject[selected].hasOwnProperty("RequiredSubType") || graftObject[selected].hasOwnProperty("RequiredCreatureType")) {
             var sub = "None";
             var creature = "None";
+            //check for sub type required match
             if (graftObject[selected].hasOwnProperty("RequiredSubType")){
               sub = graftObject[selected].RequiredSubType;
               modalMessage = "<p>This graft requires the <b>"+sub+"</b> subtype.</p>";
             }
+            //check for creature type required match
             if (graftObject[selected].hasOwnProperty("RequiredCreatureType")){
               creature = graftObject[selected].RequiredCreatureType;
               modalMessage = "<p>This graft requires the <b>"+creature+"</b> creature type.</p>";
@@ -380,6 +382,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
               }
             }
 
+            //#show modal - defined in html
             $('#stepFiveSave2').text(selected+":"+sub+":"+creature);
             var $modal = $(".modal-body.graftModal").first();
             $modal.empty();
@@ -442,14 +445,12 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       } else {
         selectArray = [selected];
       }
-      selectArray.push('Perception');
 
-      var skillList = Object.keys(skillNames)
+      var skillList = Object.keys(goodSkillNames)
       for (var i = 0; i < selectArray.length; i++) {
         skillList.remove(selectArray[i]);
       }
-      //alert(selectArray)
-      //alert(skillList)
+
       goodSkillNum = Number($('#goodNumSave').text());
       generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,skillList,goodSkillNum);
       goodSelected = $('#stepSevenGoodSave').text();
@@ -500,7 +501,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       var $descriptionArea = $(".stepSevenAbilityDescription").first();
       $descriptionArea.empty();
       if (selected.toString().trim().split(",").length > 2){
-        $descriptionArea.append("<p><b>Top scores:</b> ("+selected.toString()+")</p>");
+        $descriptionArea.append("<p><b>Main ability scores:</b> ("+selected.toString()+")</p>");
       }
 
     } else if (id=='spells1Drop') {
@@ -532,7 +533,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
     } else if (id == 'casterDrop'){
 
-      var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','');
+
       var caster = $('#casterDrop').val().trim();
 
       if (caster == "Spell-like abilities"){
@@ -541,36 +542,49 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         caster = 'caster';
       }
 
-      var i = 0;
-      var spellObject = spellCounts[crString][caster];
-      var save = "dummy";
-
       $("#spells1Dropdown").first().empty();
       $("#spells2Dropdown").first().empty();
       $("#spells3Dropdown").first().empty();
+      $(".stepEight1").first().empty();
+      $(".stepEight2").first().empty();
+      $(".stepEight3").first().empty();
       $(".stepEight1Description").first().empty();
       $(".stepEight2Description").first().empty();
       $(".stepEight3Description").first().empty();
 
-      for (castCat in spellObject){
-        i += 1;
-        var spellNum = spellObject[castCat][0];
-        var spellLevel = spellObject[castCat][1].toString();
-        var spellList = getSpellsByLevel(spellLevel);
-
-        var $descriptionAbility = $(".stepEight"+i).first();
-        $descriptionAbility.empty();
-        $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
-
-        generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
-        save += ","+castCat;
-      }
-      $('#stepEightSave').text(save);
+      showSpellDropdowns(caster);
 
     }
 
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
 }
+
+//populates the dropdowns on step eight, either spell-like or full caster abilities
+function showSpellDropdowns(caster){
+
+  var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','');
+
+  var i = 0;
+  var spellObject = spellCounts[crString][caster];
+  var save = "dummy";
+
+  for (castCat in spellObject){
+    i += 1;
+    var spellNum = spellObject[castCat][0];
+    var spellLevel = spellObject[castCat][1].toString();
+    var spellList = getSpellsByLevel(spellLevel);
+
+    var $descriptionAbility = $(".stepEight"+i).first();
+    $descriptionAbility.empty();
+    $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+
+    generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
+    save += ","+castCat;
+  }
+  $('#stepEightSave').text(save);
+
+}
+
 
 function stepTwoDescription(selected){
 
@@ -814,7 +828,7 @@ $('.wizard-card').bootstrapWizard({
                 var $descriptionMaster = $(".stepSevenMaster").first();
                 $descriptionMaster.empty();
                 $descriptionMaster.append("<p>Select up to <b>" + masterSkillNum + "</b> master skills.</p>");
-
+                $('#stepSevenMasterSave').text('')
                 generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,Object.keys(skillNames),masterSkillNum);
                 $('#masterNumSave').text(masterSkillNum);
                 //Good Skills
@@ -825,8 +839,8 @@ $('.wizard-card').bootstrapWizard({
                 var $descriptionGood = $(".stepSevenGood").first();
                 $descriptionGood.empty();
                 $descriptionGood.append("<p>Select up to <b>" + goodSkillNum + "</b> good skills (Perception is already a good skill by default).</p>");
-
-                generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,Object.keys(skillNames).remove('Perception'),goodSkillNum);
+                $('#stepSevenGoodSave').text('')
+                generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,Object.keys(goodSkillNames),goodSkillNum);
 
                 //empty descriptions
                 $(".stepSevenMasterDescription").first().empty();
@@ -980,18 +994,42 @@ $('.wizard-card').bootstrapWizard({
               //setup tab 8 - spells
 
               var array = $('#arrayDrop').val().trim();
-              if ($('#stepEightTwoSave').text() != array ){
+              var special = $('#specialDrop').val().toString().trim();
+              alert (special)
+              var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','');
+              if (special.includes("Secondary Magic")){
+                special = "Secondary Magic";
+              } else {
+                special = "None"
+              }
+              alert (special)
+              if ($('#stepEightTwoSave').text() != array+":"+special+":"+crString ){
+
+                $("#spells1Dropdown").first().empty();
+                $("#spells2Dropdown").first().empty();
+                $("#spells3Dropdown").first().empty();
+                $(".stepEight1").first().empty();
+                $(".stepEight2").first().empty();
+                $(".stepEight3").first().empty();
+                $(".stepEight1Description").first().empty();
+                $(".stepEight2Description").first().empty();
+                $(".stepEight3Description").first().empty();
+
                 var $descriptionSpell = $(".casterTypeDescription").first();
                 $descriptionSpell.empty();
+
                 if (array == "Spellcaster"){
-                  descSpell = "This creture is a spellcaster.";
+                  descSpell = "This creature is a spellcaster.";
                   generateDropdown("casterTypeDropdown","casterDrop","Choose casting type",["Spell-like abilities","Full caster"]);
+                } else if(special == "Secondary Magic"){
+                  descSpell = "This creature has spell-like abilities via the Secondary Magic ability.";
+                  showSpellDropdowns('spell-like');
                 } else {
                   descSpell = "Spell casting is reserved for creatures with the spellcaster base and creatures with spell-like abilities";
                 }
 
                 $descriptionSpell.append("<p>"+descSpell+"</p>");
-                $('#stepEightTwoSave').text(array);
+                $('#stepEightTwoSave').text(array+":"+special+":"+crString);
               }
 
             } else {

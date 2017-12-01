@@ -194,9 +194,6 @@ spellcasterAttackStats = {
     "25": ["+36", "+34", "8d10+25", "16d6+25", "12d12+25+Str", "15d6+25+Str", "6d12+25+Str"]
 };
 
-humanoidSubtypes = ["Human"];
-outsiderSubtypes = ["Aeon"];
-
 creatureType = {
   "Aberration": {
     "Adjustments": {"fortitude":2,"reflex":2,"attackMod":1},
@@ -231,8 +228,7 @@ creatureType = {
   },
   "Humanoid": {
     "Adjustments": {"anySave":2},
-    "Description": "A humanoid usually has two arms, two legs, and one head, or it has a humanlike torso, arms, and a head. Humanoids have few or no supernatural or extraordinary abilities, but most can speak and usually have well-developed societies.",
-    "Subtypes": humanoidSubtypes
+    "Description": "A humanoid usually has two arms, two legs, and one head, or it has a humanlike torso, arms, and a head. Humanoids have few or no supernatural or extraordinary abilities, but most can speak and usually have well-developed societies."
   },
   "Magical Beast": {
     "Adjustments": {"fortitude":2,"reflex":2,"attackMod":1},
@@ -254,8 +250,7 @@ creatureType = {
   "Outsider": {
     "Adjustments": {"anySave":2,"attackMod":1},
     "Description": "An outsider is at least partially composed of the essence (but not necessarily the material) of a plane other than the Material Plane. Some creatures start out as another type and become outsiders when they attain a higher or lower state of spiritual existence.",
-    "Senses": ["Darkvision 60 ft."],
-    "Subtypes": outsiderSubtypes
+    "Senses": ["Darkvision 60 ft."]
   },
   "Plant": {
     "Adjustments": {"fortitude":2},
@@ -575,7 +570,7 @@ creatureSubType = {
         ]
       },
       "Half-elf": {
-        "AditionalAbilities": {
+        "AdditionalAbilities": {
           "GoodSkills": 1
         },
         "MasterSkills": [
@@ -677,7 +672,7 @@ creatureSubType = {
     ]
   },
   "Human": {
-    "AditionalAbilities": {
+    "AdditionalAbilities": {
       "GoodSkills": 1,
       "SpecialAbilities": 1
     },
@@ -836,7 +831,7 @@ creatureSubType = {
     ]
   },
   "Ryphorian": {
-    "AditionalAbilities": {
+    "AdditionalAbilities": {
       "SpecialAbilities": 1
     },
     "Description": "This subtype is applied to ryphorians and creatures related to ryphorians.",
@@ -851,7 +846,7 @@ creatureSubType = {
     ]
   },
   "Sarcesian": {
-    "AditionalAbilities": {
+    "AdditionalAbilities": {
       "GoodSkills": 1
     },
     "Description": "This subtype is applied to sarcesians and creatures related to sarcesians.",
@@ -912,7 +907,7 @@ creatureSubType = {
     "Description": "This subtype is applies to creatures of technological origins"
   },
   "Verthani": {
-    "AditionalAbilities": {
+    "AdditionalAbilities": {
       "GoodSkills": 1
     },
     "Description": "This subtype is applied to verthani and creatures related to verthani.",
@@ -1476,19 +1471,30 @@ var CRLabels = ["CR 1/3","CR 1/2","CR 1","CR 2","CR 3","CR 4","CR 5","CR 6","CR 
 specialAbilities = {
   "AdjustmentAbilities":{
     "Brute": {
-      "Description": "Use the low attack value for the NPC’s main attack, but determine the attack’s damage as if the NPC’s CR were 2 higher (adding the extra damage from weapon specialization).This special ability has a greater impact at higher CRs."
+      "Description": "Use the low attack value for the NPC’s main attack, but determine the attack’s damage as if the NPC’s CR were 2 higher (adding the extra damage from weapon specialization).This special ability has a greater impact at higher CRs.",
+      "Adjustments": {
+        "attackValue":"low",
+        "attackDamageCR":2
+      },
     },
     "Extra Hit Points": {
-      "Description": "Increase the NPC’s HP by 20%."
+      "Description": "Increase the NPC’s HP by 20%.",
+      "Adjustments": {"hp":0.2},
     },
     "Save Boost": {
-      "Description": "Increase all saving throw bonuses by 1 or one saving throw bonus by 3."
+      "Description": "Increase all saving throw bonuses by 1 or one saving throw bonus by 3.",
+      "Adjustments": {"allSave":1,"anySave":3},
     },
     "Secondary Magic": {
-      "Description": "The NPC gains spell-like abilities (chosen in Step 8) according to its CR, though it gains only the once-per-day spells or one spell per unit of frequency (at will, 1/day, etc.)."
+      "Description": "The NPC gains spell-like abilities (chosen in Step 8) according to its CR, though it gains only the once-per-day spells or one spell per unit of frequency (at will, 1/day, etc.).",
+      "Spell-likeAbilities": "yes"
     },
     "Skillful": {
-      "Description": "Increase all master and good skill bonuses by 1."
+      "Description": "Increase all master and good skill bonuses by 1.",
+      "Adjustments": {
+        "GoodSkillBonus": 1,
+        "MasterSkillBonus": 1
+      },
     }
   },
   "FreeAbilities": {
@@ -1549,9 +1555,29 @@ specialAbilities = {
       "Description": "The creature is blinded for 1 round when first exposed to bright light, such as sunlight, and it is dazzled for as long as it remains in an area of bright light.",
       "Format": "Weaknesses light blindness."
     },
-    "Vulnerability (Ex Or Su)": {
+    "Vulnerability (Fire) (Ex Or Su)": {
       "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
       "Format": "Weaknesses vulnerable to fire."
+    },
+    "Vulnerability (Cold) (Ex Or Su)": {
+      "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
+      "Format": "Weaknesses vulnerable to cold."
+    },
+    "Vulnerability (Acid) (Ex Or Su)": {
+      "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
+      "Format": "Weaknesses vulnerable to acid."
+    },
+    "Vulnerability (Electricity) (Ex Or Su)": {
+      "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
+      "Format": "Weaknesses vulnerable to electricity."
+    },
+    "Vulnerability (Critical hits) (Ex Or Su)": {
+      "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
+      "Format": "Weaknesses vulnerable to Critical hits."
+    },
+    "Vulnerability (Other) (Ex Or Su)": {
+      "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
+      "Format": "Weaknesses vulnerable to other."
     }
   },
   "Abilities": {
@@ -1775,6 +1801,27 @@ skillNames = {
   "Medicine": "Int",
   "Mysticism": "Wis",
   "Perception": "Wis",
+  "Physical Science": "Int",
+  "Piloting": "Dex",
+  "Sense Motive": "Wis",
+  "Sleight of Hand": "Dex",
+  "Stealth": "Dex",
+  "Survival": "Wis"
+};
+
+goodSkillNames = {//missing perceprtion
+  "Acrobatics": "Dex",
+  "Athletics": "Str",
+  "Bluff": "Cha",
+  "Computers": "Int",
+  "Culture": "Int",
+  "Diplomacy": "Cha",
+  "Disguise": "Cha",
+  "Engineering": "Int",
+  "Intimidate": "Cha",
+  "Life Science": "Int",
+  "Medicine": "Int",
+  "Mysticism": "Wis",
   "Physical Science": "Int",
   "Piloting": "Dex",
   "Sense Motive": "Wis",

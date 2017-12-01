@@ -15,33 +15,13 @@ human aditional abiliities. add in additional special abilities
 
 additional special abilities from grafts AditionalAbilities
 
-immunity special ability/vulnerability
+Types of immunities for the immunity special ability
 
 special abilities make the one that affect stats actually affect stats
 
 text attribute in grafts
 
-adjustment abilities
-
-add weaknesses to abilities
-
-sort free/standard abilities
-
-plant creature type lack wisdom and charisma
-
-hide desription areas while changing text then show. will avoid loading looks
-
-ability score chooser regenerates when it doesn't need to , when CR changes
-
-add damage types as vulnerabilities and others?
-
-backwat=rds check creaturetype to make sure steps are validated - possible validation in final check
-
-do a check to dee if the required types and subtypes are already chosen. negate modal if so
-
-add menu header bootstrap-select, so show what the user should be doing
-
-show skill and ability score modifiers on the skills page step 7
+let creature abilities turn on spell-like abilities
 
 make class selections disable ability scores and disable ability score dropdown
 
@@ -49,11 +29,11 @@ incorporate creature type ability scores such a int = - into skills step
 
 Change the data gathering to iterate through entries and objects instead of setting outright, that way nothing will be missed
 
-validate ability score dropdown to make sure three scores are selected
-
 make sure perception is in the correct skill group when data gathering
 
-let the spell adjustment ability turn on spellcasting
+find out how low.high attack values work
+
+final check for save boost special ability.
 
 To Test
 soldier class melee/ranged - to test
@@ -64,3 +44,8 @@ fix dragon grafts - remove integrated subtypes
 
 Test
 git remote set-url origin https://github.com/mjcadz/sfrpgtools.git
+
+Nice To Have
+hide desription areas while changing text then show. will avoid loading looks
+
+add menu header bootstrap-select, so show what the user should be doing
