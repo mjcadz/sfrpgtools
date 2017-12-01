@@ -796,31 +796,6 @@ $('.wizard-card').bootstrapWizard({
 
                 //step7 generation - dependent on CR and array
 
-                //Ability Scores //only generate once
-                if ($('#stepSevenSave').text() == "None") {
-                  var dropdown = '<select class="selectpicker" id="scoresDrop" title="Choose top ability scores"data-style="btn-default" data-width="100%" data-size="13" multiple data-max-options="3">' +
-                    '<option title="Str">Strength</option>' +
-                    '<option title="Dex">Dexterity</option>' +
-                    '<option title="Con">Constitution</option>' +
-                    '<option title="Int">Intelligence</option>' +
-                    '<option title="Wis">Wisdom</option>' +
-                    '<option title="Cha">Charisma</option>' +
-                  '</select>'
-                  document.getElementById('AbilityScoresDropdown').innerHTML = dropdown;
-                  //initialise dropdown
-                  $('#scoresDrop').selectpicker();
-                  //bind dropdown click  handler
-                  $('#scoresDrop').on('changed.bs.select', dropClickHandler);
-
-                  var $descriptionAbility = $(".stepSevenAbility").first();
-                  $descriptionAbility.empty();
-                  $descriptionAbility.append("<p>Select top three ability scores (highest first).</p>");
-
-                  $(".stepSevenAbilityDescription").first().empty();
-
-                  $('#stepSevenSave').text('Done');
-                }
-
                 //Master Skills
                 masterMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][0];
                 masterSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][1];
@@ -976,6 +951,90 @@ $('.wizard-card').bootstrapWizard({
                 return false;
             }
         }
+        //validation step 6 - special abilities
+        if (index == 6) {
+
+            var validated = true;
+
+            if (validated) {
+
+              var type = $('[data-id="creatureTypeDrop"]').text().trim();
+              var typeOption = $('[data-id="optionDrop"]').text().trim().toString();
+              var classDrop = $('#classDrop').val().toString().trim();
+              var classScores = 'None';
+
+              if (classDrop != '' && classDrop != 'None') {
+                classScores = classData[classDrop].AbilityScoreModifiers;
+                classScores = classScores[0] + ',' + classScores[1] + ',' + classScores[2];
+              }
+
+              //Ability Scores //only generate once
+              if ($('#stepSevenSave').text() != type + ":" + typeOption + ":" + classDrop) {
+
+                $(".stepSevenAbilityDescription").first().empty();
+                $("#AbilityScoresDropdown").first().empty();
+
+
+                if (classScores == 'None') {
+
+                  var str ='<option>Str</option>';
+                  var dex ='<option>Dex</option>';
+                  var con ='<option>Con</option>';
+                  var int ='<option>Int</option>';
+                  var wis ='<option>Wis</option>';
+                  var cha ='<option>Cha</option>';
+
+                  //make creature type changes to ability scores
+                  if (type == "Ooze") {
+                    int = '<option style="color: #9a9a9a;pointer-events: none">Int already set ( - )</option>'
+                  } else if (type == "Construct") {
+                    con = '<option style="color: #9a9a9a;pointer-events: none">Con already set ( - )</option>'
+                    if (!$('[data-id="optionDrop"]').text().trim().includes("Not")){
+                      int = '<option style="color: #9a9a9a;pointer-events: none">Int already set ( - )</option>'
+                    }
+                  } else if (type == "Animal") {
+                    intNum = $('[data-id="optionDrop"]').text().trim().replace('Set intelligence ','')
+                    int = '<option style="color: #9a9a9a;pointer-events: none">Int already set ( '+intNum+' )</option>'
+
+                  } else if (type == "Undead") {
+                    con = '<option style="color: #9a9a9a;pointer-events: none">Con already set ( - )</option>'
+
+                  } else if (type == "Vermin") {
+                    int = '<option style="color: #9a9a9a;pointer-events: none">Int already set ( - )</option>'
+
+                  }
+
+                  var dropdown = '<select class="selectpicker" id="scoresDrop" title="Choose top ability scores"data-style="btn-default" data-width="100%" data-size="13" multiple data-max-options="3">' + str + dex + con + int + wis + cha + '</select>'
+                  document.getElementById('AbilityScoresDropdown').innerHTML = dropdown;
+                  //initialise dropdown
+                  $('#scoresDrop').selectpicker();
+                  //bind dropdown click  handler
+                  $('#scoresDrop').on('changed.bs.select', dropClickHandler);
+
+                  var $descriptionAbility = $(".stepSevenAbility").first();
+                  $descriptionAbility.empty();
+                  $descriptionAbility.append("<p>Select top three ability scores (highest first).</p>");
+
+                } else {
+
+                  var $descriptionAbility = $(".stepSevenAbility").first();
+                  $descriptionAbility.empty();
+                  $descriptionAbility.append("<p>Ability scores have been selected by <b>"+classDrop+"</b> class graft.</p>");
+
+                  var $descriptionArea = $(".stepSevenAbilityDescription").first();
+                  $descriptionArea.empty();
+                  $descriptionArea.append("<p><b>Main ability scores:</b> ("+classScores+")</p>");
+
+
+                }
+
+                $('#stepSevenSave').text(type + ":" + typeOption + ":" + classDrop);
+              }
+
+            } else {
+                return false;
+            }
+        }
         //Validation tab 7 - skills
         if (index == 7) {
 
@@ -995,14 +1054,14 @@ $('.wizard-card').bootstrapWizard({
 
               var array = $('#arrayDrop').val().trim();
               var special = $('#specialDrop').val().toString().trim();
-              alert (special)
+
               var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','');
               if (special.includes("Secondary Magic")){
                 special = "Secondary Magic";
               } else {
                 special = "None"
               }
-              alert (special)
+
               if ($('#stepEightTwoSave').text() != array+":"+special+":"+crString ){
 
                 $("#spells1Dropdown").first().empty();
