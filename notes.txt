@@ -7,10 +7,7 @@ button colour picker
 https://github.com/silviomoreto/bootstrap-select
 bootstrap dropdown select
 
-monstergen check fly
 speeds will need to be picked later (i think)
-
-step 3 - options, subraces
 
 minify js and cs files
 
@@ -56,6 +53,8 @@ validate ability score dropdown to make sure three scores are selected
 
 make sure perception is in the correct skill group when data gathering
 
+let the spell adjustment ability turn on spellcasting
+
 To Test
 soldier class melee/ranged - to test
 envoy skillchoice - to test
@@ -64,3 +63,4 @@ done
 fix dragon grafts - remove integrated subtypes
 
 Test
+git remote set-url origin https://github.com/mjcadz/sfrpgtools.git

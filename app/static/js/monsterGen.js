@@ -509,7 +509,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       var $descriptionArea = $(".stepEight1Description").first();
       $descriptionArea.empty();
       if (selected != ''){
-        $descriptionArea.append("<p>"+saved[1]+": "+selected.replace(',',', ')+"</p>");
+        $descriptionArea.append("<p><b>"+saved[1]+":</b> "+selected.replace(',',', ')+"</p>");
       }
 
     } else if (id=='spells2Drop') {
@@ -518,7 +518,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       var $descriptionArea = $(".stepEight2Description").first();
       $descriptionArea.empty();
       if (selected != ''){
-        $descriptionArea.append("<p>"+saved[2]+": "+selected.replace(',',', ')+"</p>");
+        $descriptionArea.append("<p><b>"+saved[2]+":</b> "+selected.replace(',',', ')+"</p>");
       }
 
     } else if (id=='spells3Drop') {
@@ -527,8 +527,45 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       var $descriptionArea = $(".stepEight3Description").first();
       $descriptionArea.empty();
       if (selected != ''){
-        $descriptionArea.append("<p>"+saved[3]+": "+selected.replace(',',', ')+"</p>");
+        $descriptionArea.append("<p><b>"+saved[3]+":</b> "+selected.replace(',',', ')+"</p>");
       }
+
+    } else if (id == 'casterDrop'){
+
+      var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','');
+      var caster = $('#casterDrop').val().trim();
+
+      if (caster == "Spell-like abilities"){
+        caster = 'spell-like';
+      } else if (caster =="Full caster"){
+        caster = 'caster';
+      }
+
+      var i = 0;
+      var spellObject = spellCounts[crString][caster];
+      var save = "dummy";
+
+      $("#spells1Dropdown").first().empty();
+      $("#spells2Dropdown").first().empty();
+      $("#spells3Dropdown").first().empty();
+      $(".stepEight1Description").first().empty();
+      $(".stepEight2Description").first().empty();
+      $(".stepEight3Description").first().empty();
+
+      for (castCat in spellObject){
+        i += 1;
+        var spellNum = spellObject[castCat][0];
+        var spellLevel = spellObject[castCat][1].toString();
+        var spellList = getSpellsByLevel(spellLevel);
+
+        var $descriptionAbility = $(".stepEight"+i).first();
+        $descriptionAbility.empty();
+        $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+
+        generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
+        save += ","+castCat;
+      }
+      $('#stepEightSave').text(save);
 
     }
 
@@ -745,25 +782,30 @@ $('.wizard-card').bootstrapWizard({
 
                 //step7 generation - dependent on CR and array
 
-                //Ability Scores
+                //Ability Scores //only generate once
+                if ($('#stepSevenSave').text() == "None") {
+                  var dropdown = '<select class="selectpicker" id="scoresDrop" title="Choose top ability scores"data-style="btn-default" data-width="100%" data-size="13" multiple data-max-options="3">' +
+                    '<option title="Str">Strength</option>' +
+                    '<option title="Dex">Dexterity</option>' +
+                    '<option title="Con">Constitution</option>' +
+                    '<option title="Int">Intelligence</option>' +
+                    '<option title="Wis">Wisdom</option>' +
+                    '<option title="Cha">Charisma</option>' +
+                  '</select>'
+                  document.getElementById('AbilityScoresDropdown').innerHTML = dropdown;
+                  //initialise dropdown
+                  $('#scoresDrop').selectpicker();
+                  //bind dropdown click  handler
+                  $('#scoresDrop').on('changed.bs.select', dropClickHandler);
 
-                var dropdown = '<select class="selectpicker" id="scoresDrop" title="Choose top ability scores"data-style="btn-default" data-width="100%" data-size="13" multiple data-max-options="3">' +
-                  '<option title="Str">Strength</option>' +
-                  '<option title="Dex">Dexterity</option>' +
-                  '<option title="Con">Constitution</option>' +
-                  '<option title="Int">Intelligence</option>' +
-                  '<option title="Wis">Wisdom</option>' +
-                  '<option title="Cha">Charisma</option>' +
-                '</select>'
-                document.getElementById('AbilityScoresDropdown').innerHTML = dropdown;
-                //initialise dropdown
-                $('#scoresDrop').selectpicker();
-                //bind dropdown click  handler
-                $('#scoresDrop').on('changed.bs.select', dropClickHandler);
+                  var $descriptionAbility = $(".stepSevenAbility").first();
+                  $descriptionAbility.empty();
+                  $descriptionAbility.append("<p>Select top three ability scores (highest first).</p>");
 
-                var $descriptionAbility = $(".stepSevenAbility").first();
-                $descriptionAbility.empty();
-                $descriptionAbility.append("<p>Select top three ability scores (highest first).</p>");
+                  $(".stepSevenAbilityDescription").first().empty();
+
+                  $('#stepSevenSave').text('Done');
+                }
 
                 //Master Skills
                 masterMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][0];
@@ -785,6 +827,10 @@ $('.wizard-card').bootstrapWizard({
                 $descriptionGood.append("<p>Select up to <b>" + goodSkillNum + "</b> good skills (Perception is already a good skill by default).</p>");
 
                 generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,Object.keys(skillNames).remove('Perception'),goodSkillNum);
+
+                //empty descriptions
+                $(".stepSevenMasterDescription").first().empty();
+                $(".stepSevenGoodDescription").first().empty();
 
                 $('#goodNumSave').text(goodSkillNum);
               }
@@ -932,28 +978,21 @@ $('.wizard-card').bootstrapWizard({
             if (validated) {
 
               //setup tab 8 - spells
-              var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','');
 
               var array = $('#arrayDrop').val().trim();
+              if ($('#stepEightTwoSave').text() != array ){
+                var $descriptionSpell = $(".casterTypeDescription").first();
+                $descriptionSpell.empty();
+                if (array == "Spellcaster"){
+                  descSpell = "This creture is a spellcaster.";
+                  generateDropdown("casterTypeDropdown","casterDrop","Choose casting type",["Spell-like abilities","Full caster"]);
+                } else {
+                  descSpell = "Spell casting is reserved for creatures with the spellcaster base and creatures with spell-like abilities";
+                }
 
-              //"caster":{"3/day":[2,1],"at will":[2,0]}
-              var i = 0;
-              var spellObject = spellCounts[crString]['caster'];
-              var save = "dummy";
-              for (castCat in spellObject){
-                i += 1;
-                var spellNum = spellObject[castCat][0];
-                var spellLevel = spellObject[castCat][1].toString();
-                var spellList = getSpellsByLevel(spellLevel);
-
-                var $descriptionAbility = $(".stepEight"+i).first();
-                $descriptionAbility.empty();
-                $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
-
-                generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
-                save += ","+castCat;
+                $descriptionSpell.append("<p>"+descSpell+"</p>");
+                $('#stepEightTwoSave').text(array);
               }
-              $('#stepEightSave').text(save);
 
             } else {
                 return false;
@@ -964,6 +1003,13 @@ $('.wizard-card').bootstrapWizard({
         if (index == 8) {
 
             var validated = true;
+
+            if ($('[data-id="casterDrop"]').length){
+              if ($('[data-id="casterDrop"]').text().includes("Choose")) {
+                  $('[data-id="casterDrop"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
 
             if (validated) {
               var classDrop = $('#classDrop').val().trim();
