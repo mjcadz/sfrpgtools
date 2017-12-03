@@ -772,7 +772,7 @@ creatureSubType = {
         "Abilities": [
           "ferocity"
         ],
-        "OtherAbilities": [
+        "MasterSkills": [
           "intimidate",
           "survival"
         ],
@@ -1292,15 +1292,17 @@ graftTemplates = {
     "Black Dragon": {
       "Abilities": [
         "Breath weapon (line 30 ft. + 10 feet per 2 CR, 1d6 A + 1d6 per CR)",
-        "frightful presence (CR 11+, 60 feet + 10 feet per CR)",
-        "spell-like abilities (CR 10+)"
+        "frightful presence (CR 11+, 60 feet + 10 feet per CR)"
       ],
+      "Spell-likeAbilities": {
+        "CR": 10
+      },
       "Alignment": "Chaotic evil",
       "DR": {
+        "CR10": "5/magic",
         "CR12": "10/magic",
         "CR15": "15/magic",
-        "CR17": "20/magic",
-        "DR10": "5/magic"
+        "CR17": "20/magic"
       },
       "Description": "Black dragons are callous and enjoy using fear to exert their influence over others.",
       "Immunities": [
@@ -1325,15 +1327,17 @@ graftTemplates = {
     "Blue Dragon": {
       "Abilities": [
         "Breath weapon (line 30 feet + 10 feet per 2 CR, 1d8 E + 1d8 per CR)",
-        "frightful presence (CR 9+, 60 feet + 10 feet per CR)",
-        "spell-like abilities (CR 9+)"
+        "frightful presence (CR 9+, 60 feet + 10 feet per CR)"
       ],
+      "Spell-likeAbilities": {
+        "CR": 9
+      },
       "Alignment": "Lawful evil.",
       "DR": {
+        "CR11": "5/magic",
         "CR13": "10/magic",
         "CR15": "15/magic",
-        "CR17": "20/magic",
-        "DR11": "5/magic"
+        "CR17": "20/magic"
       },
       "Description": "Stacking plans within plans, blue dragons obsessively dwell on their pet projects.",
       "Immunities": [
@@ -1358,15 +1362,17 @@ graftTemplates = {
     "Green Dragon": {
       "Abilities": [
         "Breath weapon (cone 15 feet + 5 feet per 2 CR, 1d6 A + 1d6 per CR)",
-        "frightful presence (CR 9+, 60 feet + 10 feet per CR)",
-        "spell-like abilities (CR 9+)"
+        "frightful presence (CR 9+, 60 feet + 10 feet per CR)"
       ],
+      "Spell-likeAbilities": {
+        "CR": 9
+      },
       "Alignment": "Lawful evil",
       "DR": {
+        "DR11": "5/magic",
         "CR13": "10/magic",
         "CR15": "15/magic",
-        "CR17": "20/magic",
-        "DR11": "5/magic"
+        "CR17": "20/magic"
       },
       "Description": "Of all the chromatic dragons, green dragons seem the most reasonable, but they will turn on their so-called allies at a moment's notice if profit is on the line.",
       "Immunities": [
@@ -1394,15 +1400,17 @@ graftTemplates = {
     "Red Dragon": {
       "Abilities": [
         "Breath weapon (cone 15 feet + 5 feet per 2 CR, 1d10 F + 1d10 per CR)",
-        "frightful presence (CR 10+, 60 feet + 10 feet per CR)",
-        "spell-like abilities (CR 10+)"
+        "frightful presence (CR 10+, 60 feet + 10 feet per CR)"
       ],
+      "Spell-likeAbilities": {
+        "CR": 10
+      },
       "Alignment": "Chaotic evil",
       "DR": {
+        "CR10": "5/magic",
         "CR12": "10/magic",
         "CR14": "15/magic",
-        "CR16": "20/magic",
-        "DR10": "5/magic"
+        "CR16": "20/magic"
       },
       "Description": "Red dragons are quite imperious and brook no disrespect from lowly humanoids, but they can be swayed by copious amounts of groveling.",
       "Immunities": [
@@ -1425,15 +1433,17 @@ graftTemplates = {
     "White Dragon": {
       "Abilities": [
         "Breath weapon (cone 15 feet + 10 feet per 2 CR, 1d6 C + 1d6 per CR)",
-        "frightful presence (CR 10+, 60 feet + 10 feet per CR)",
-        "spell-like abilities (CR 10+)."
+        "frightful presence (CR 10+, 60 feet + 10 feet per CR)"
       ],
+      "Spell-likeAbilities": {
+        "CR": 10
+      },
       "Alignment": "Chaotic evil",
       "DR": {
+        "CR9": "5/magic",
         "CR12": "10/magic",
         "CR14": "15/magic",
-        "CR16": "20/magic",
-        "CR9": "5/magic"
+        "CR16": "20/magic"
       },
       "Description": "Similar to the terrain they prefer, white dragons appear cold and emotionless until angered.",
       "Immunities": [

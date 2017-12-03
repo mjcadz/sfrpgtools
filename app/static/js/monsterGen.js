@@ -290,6 +290,56 @@ function findObjectFromKey(upperObject,key){
   return foundObject;
 }
 
+//gets the already selected skills from grafts for step seven
+function getGraftSkills(type){
+
+  var skillString = type + "Skills";
+
+  //check step 3 subtype graft skills
+  var skillList = [];
+  var subtype = $('#creatureSubTypeDrop').val().trim();
+  if (subtype != '' && subtype != 'None') {
+    if (creatureSubType[subtype].hasOwnProperty(skillString)){
+      skillList = skillList.concat(creatureSubType[subtype][skillString]);
+    }
+    if (creatureSubType[subtype].hasOwnProperty("SubRaces")){
+      subRaceDrop = $('#stepThreeOptionDrop').val().trim();
+      if (creatureSubType[subtype].SubRaces[subRaceDrop].hasOwnProperty(skillString)){
+        skillList = skillList.concat(creatureSubType[subtype].SubRaces[subRaceDrop][skillString]);
+      }
+    }
+  }
+  //check step 4 class graft
+  var classDrop = $('#classDrop').val().trim();
+  if (classDrop != '' && classDrop != 'None') {
+    if (classData[classDrop].hasOwnProperty(skillString)){
+      skillList = skillList.concat(classData[classDrop][skillString]);
+    }
+  }
+  //check step 5 graft
+  var graft = $('#graftDrop').val().trim();
+  if (graft != '' && graft != 'None') {
+    if (graftTemplates.simpleGrafts[graft].hasOwnProperty(skillString)){
+      skillList = skillList.concat(graftTemplates.simpleGrafts[graft][skillString]);
+    }
+  }
+
+  //capitalise to match data array entries
+  for (var i = 0; i < skillList.length; i++) {
+    skillList[i]  = skillList[i].capitalise();
+  }
+
+  //remove duplicates
+  var unique = skillList.filter(function(elem, index, self) {
+    return index === self.indexOf(elem);
+  })
+
+  unique = unique.sort();
+
+  return unique;
+
+}
+
 //handle clicks of dropdowns
 function dropClickHandler(e, clickedIndex, newValue, oldValue) {
     var selected = $(e.currentTarget).val();
@@ -439,16 +489,21 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
     } else if (id=='masterDrop') {
 
       selected = selected.toString().trim()
+      var goodGraftSkills = getGraftSkills("Good");
+      var masterGraftSkills = getGraftSkills("Master");
+      var GraftSkills = goodGraftSkills.concat(masterGraftSkills);
 
       if (selected.includes(',')){
         var selectArray = selected.split(',');
       } else {
         selectArray = [selected];
       }
+      selectArray = selectArray.concat(GraftSkills);
+
 
       var skillList = Object.keys(goodSkillNames)
       for (var i = 0; i < selectArray.length; i++) {
-        skillList.remove(selectArray[i]);
+        skillList = removeElement(skillList,selectArray[i]);
       }
 
       goodSkillNum = Number($('#goodNumSave').text());
@@ -460,28 +515,29 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
       var $descriptionArea = $(".stepSevenMasterDescription").first();
       $descriptionArea.empty();
-      if (selected != ''){
-        $descriptionArea.append("<p><b>Master skills:</b> "+selected.replace(',',', ')+"</p>");
-      }
+      $descriptionArea.append("<p><b>Master skills:</b> "+masterGraftSkills.join().replace(/,/g,'*,')+'*,'+selected+"</p>");
 
       $('#stepSevenMasterSave').text(selected);
 
     } else if (id=='goodDrop') {
 
       selected = selected.toString().trim()
+      var goodGraftSkills = getGraftSkills("Good");
+      var masterGraftSkills = getGraftSkills("Master");
+      var GraftSkills = goodGraftSkills.concat(masterGraftSkills);
 
       if (selected.includes(',')){
         var selectArray = selected.split(',');
       } else {
         selectArray = [selected];
       }
+      selectArray = selectArray.concat(GraftSkills);
 
       var skillList = Object.keys(skillNames)
       for (var i = 0; i < selectArray.length; i++) {
-        skillList.remove(selectArray[i]);
+        skillList = removeElement(skillList,selectArray[i]);
       }
-      //alert(selectArray)
-      //alert(skillList)
+
       masterSkillNum = Number($('#masterNumSave').text());
       generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,skillList,masterSkillNum);
       masterSelected = $('#stepSevenMasterSave').text();
@@ -491,9 +547,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
       var $descriptionArea = $(".stepSevenGoodDescription").first();
       $descriptionArea.empty();
-      if (selected != ''){
-        $descriptionArea.append("<p><b>Good skills:</b> "+selected.replace(',',', ')+"</p>");
-      }
+      $descriptionArea.append("<p><b>Good skills:</b> "+goodGraftSkills.join().replace(/,/g,'*,')+'*,'+selected+"</p>");
 
       $('#stepSevenGoodSave').text(selected);
     } else if (id=='scoresDrop') {
@@ -676,13 +730,14 @@ String.prototype.capitalise = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
-Array.prototype.remove = function(toRemove) {
-  var index = this.indexOf(toRemove);
+function removeElement(array,element) {
+
+  var index = array.indexOf(element);
   if (index > -1) {
-    return this.splice(index, 1);
-  } else {
-    return this;
+    array.splice(index, 1);
   }
+  return array;
+
 }
 
 function getGraftArray() {
@@ -794,34 +849,6 @@ $('.wizard-card').bootstrapWizard({
                 $descriptionArea.empty();
                 $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");
 
-                //step7 generation - dependent on CR and array
-
-                //Master Skills
-                masterMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][0];
-                masterSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][1];
-
-                var $descriptionMaster = $(".stepSevenMaster").first();
-                $descriptionMaster.empty();
-                $descriptionMaster.append("<p>Select up to <b>" + masterSkillNum + "</b> master skills.</p>");
-                $('#stepSevenMasterSave').text('')
-                generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,Object.keys(skillNames),masterSkillNum);
-                $('#masterNumSave').text(masterSkillNum);
-                //Good Skills
-
-                goodMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][0];
-                goodSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][1];
-
-                var $descriptionGood = $(".stepSevenGood").first();
-                $descriptionGood.empty();
-                $descriptionGood.append("<p>Select up to <b>" + goodSkillNum + "</b> good skills (Perception is already a good skill by default).</p>");
-                $('#stepSevenGoodSave').text('')
-                generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,Object.keys(goodSkillNames),goodSkillNum);
-
-                //empty descriptions
-                $(".stepSevenMasterDescription").first().empty();
-                $(".stepSevenGoodDescription").first().empty();
-
-                $('#goodNumSave').text(goodSkillNum);
               }
               $('#stepOneSave').text(cr.toString()+array);
             } else {
@@ -903,7 +930,7 @@ $('.wizard-card').bootstrapWizard({
               //put current class first in list
               var arrays = ['Combatant','Expert','Spellcaster'];
               var arrayDrop = $('#arrayDrop').val().trim();
-              arrays.remove(arrayDrop);
+              arrays = removeElement(arrays,arrayDrop);
 
               //build class list, current base array on top
               var classArray = ['None', 'LABEL='+ arrayDrop +' classes'].concat(window['class'+arrayDrop]).concat(['ENDLABEL']);
@@ -1030,6 +1057,58 @@ $('.wizard-card').bootstrapWizard({
 
                 $('#stepSevenSave').text(type + ":" + typeOption + ":" + classDrop);
               }
+
+              //skills generation - step 7
+
+              var crString = $('[data-id="CRDrop"]').text().trim();
+              var array = $('#arrayDrop').val().trim();
+              var masterGraftSkills = getGraftSkills("Master");
+              var goodGraftSkills = getGraftSkills("Good");
+              var GraftSkills = masterGraftSkills.concat(goodGraftSkills);
+
+
+              //Master Skills
+              masterMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][0];
+              masterSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][1];
+
+              //remove skills already chosen by grafts
+              var masterSkills = Object.keys(skillNames);
+              for (var i = 0; i < GraftSkills.length; i++) {
+                masterSkills = removeElement(masterSkills,GraftSkills[i]);
+              }
+
+              var $descriptionMaster = $(".stepSevenMaster").first();
+              $descriptionMaster.empty();
+              $descriptionMaster.append("<p>Select up to <b>" + masterSkillNum + "</b> master skills.</p>");
+              $('#stepSevenMasterSave').text('')
+              generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,masterSkills,masterSkillNum);
+              $('#masterNumSave').text(masterSkillNum);
+              //Good Skills
+
+              goodMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][0];
+              goodSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][1];
+
+              //remove skills already chosen by grafts
+              var goodSkills = Object.keys(goodSkillNames)
+              for (var i = 0; i < GraftSkills.length; i++) {
+                goodSkills = removeElement(goodSkills,GraftSkills[i]);
+              }
+
+              //set description
+              var $descriptionGood = $(".stepSevenGood").first();
+              $descriptionGood.empty();
+              $descriptionGood.append("<p>Select up to <b>" + goodSkillNum + "</b> good skills<br>Skills selected by grafts: "+goodGraftSkills+"</p>");
+              $('#stepSevenGoodSave').text('');
+              generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,goodSkills,goodSkillNum);
+              $('#goodNumSave').text(goodSkillNum);
+
+              //empty descriptions and fill with skills
+              $(".stepSevenMasterDescription").first().empty();
+              $(".stepSevenMasterDescription").first().append("<p><b>Master skills:</b> "+masterGraftSkills.join().replace(/,/g,'*,')+"*</p>");
+
+              $(".stepSevenGoodDescription").first().empty();
+              $(".stepSevenGoodDescription").first().append("<p><b>Good skills:</b> "+goodGraftSkills.join().replace(/,/g,'*,')+"*</p>");
+
 
             } else {
                 return false;

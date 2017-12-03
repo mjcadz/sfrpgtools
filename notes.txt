@@ -17,6 +17,16 @@ additional special abilities from grafts AditionalAbilities
 
 Types of immunities for the immunity special ability
 
+read secondary magic properly
+
+check that skills are working when there is no graft skills
+
+remove master and good skills already chosen from choices list
+
+997 soldier melee ch0ice no good
+
+make sure master and good goods only generate on changes to steps 3,4,5
+
 special abilities make the one that affect stats actually affect stats
 
 text attribute in grafts
