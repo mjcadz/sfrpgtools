@@ -1819,27 +1819,6 @@ skillNames = {
   "Survival": "Wis"
 };
 
-goodSkillNames = {//missing perceprtion
-  "Acrobatics": "Dex",
-  "Athletics": "Str",
-  "Bluff": "Cha",
-  "Computers": "Int",
-  "Culture": "Int",
-  "Diplomacy": "Cha",
-  "Disguise": "Cha",
-  "Engineering": "Int",
-  "Intimidate": "Cha",
-  "Life Science": "Int",
-  "Medicine": "Int",
-  "Mysticism": "Wis",
-  "Physical Science": "Int",
-  "Piloting": "Dex",
-  "Sense Motive": "Wis",
-  "Sleight of Hand": "Dex",
-  "Stealth": "Dex",
-  "Survival": "Wis"
-};
-
 spellCounts = {
     "1/3": {"spell-like":{"1/day":[2,1],"at will":[2,0]},"caster":{"3/day":[2,1],"at will":[2,0]}},
     "1/2": {"spell-like":{"1/day":[2,1],"at will":[2,0]},"caster":{"3/day":[2,1],"at will":[2,0]}},

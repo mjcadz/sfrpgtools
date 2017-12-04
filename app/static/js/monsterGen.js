@@ -1,4 +1,4 @@
-
+//This funcion reads the state of all the dropdowns in the wizard, uses that info to retrieve the appropriate data from the data objects, then builds the chosen stat block
 function buildStatBlock() {
 
   var statBlock = {};
@@ -123,7 +123,6 @@ function buildStatBlock() {
   }
 
   for (adjustment in adjustments) {
-    alert (adjustment);
     if (adjustment == "anySave"){
       //use picker
       var savingThrow = $('[data-id="SavingThrowDrop"]').text().trim().replace(' +2','').toLowerCase();
@@ -149,20 +148,23 @@ function buildStatBlock() {
 
 }
 
-//get class stats
+//get class stats - if class selected, add the required stats to the stat block
 function getClassStats(statObject){
 
   //step 4 - class
   var classDrop = $('#classDrop').val().trim();
 
 
-  //if envoy is selected
+  //check if class is selected
   if (classDrop != '' && classDrop != 'None'){
 
     var cr = Number($('[data-id="CRDrop"]').text().trim().replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
     var classObject = classData[classDrop];
 
+    //formula for class resolve points
     statObject.ClassResolvePoints = Math.round(cr/5) + 3;
+
+    //read and apply class data
     statObject.ClassAbilities = getClassAbilities(classDrop,cr);
 
     if (classObject.hasOwnProperty("SpecialRules")){
@@ -184,6 +186,7 @@ function getClassStats(statObject){
       }
     }
 
+    //soldier chooses melee or ranged combat focus
     if (classDrop == 'Soldier') {
       var damageStyle = $('#stepFourOptionDrop').val().trim() + 'Style';
       statObject.ClassAbilityScoreModifiers = classObject[damageStyle].AbilityScoreModifiers;
@@ -192,6 +195,7 @@ function getClassStats(statObject){
       statObject.ClassAbilityScoreModifiers = classObject.AbilityScoreModifiers;
       statObject.ClassGear = classObject.Gear;
     }
+    //envoy gains extra master skill
     if (classDrop == 'Envoy') {
       var extraSkill = $('#stepFourOptionDrop').val().trim().toLowerCase();
       statObject.MasterSkills = statObject.MasterSkills.concat(extraSkill);
@@ -200,16 +204,18 @@ function getClassStats(statObject){
   return statObject;
 }
 
-//gets class abilities by Cr
+//class data contains a table of CR dependent abilities - gets the abilities with the appropriate CR vlue
 function getClassAbilities(selectedClass,cr){
 
   var keyNums = [];
   var crBottom = 0;
+  //get array of CR values
   for (key in classData[selectedClass].AbilitiesByCr){
     keyNums.push(Number(key));
   }
-  //sort ascending order
+  //sort ascending order - number value
   keyNums.sort(function(a, b){return a-b});
+  //find abilities equal to or less than CR
   var arrayLength = keyNums.length;
   for (var i = 0; i < arrayLength; i++) {
     if (keyNums[i] <= cr){
@@ -221,7 +227,9 @@ function getClassAbilities(selectedClass,cr){
 
 //creates bootstrap-select dropdowns from arrays
 function generateDropdown(parentID,dropID,title,array) {
+  //add select options
   var dropHtml = '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="13">'
+  //build list, apply BREAKS or LABELS if words present in array
   for (i = 0; i < array.length; i++) {
     if (array[i] == 'BREAK'){
       dropHtml += '<option data-divider="true"></option>';
@@ -235,6 +243,7 @@ function generateDropdown(parentID,dropID,title,array) {
     }
   }
   dropHtml += '</select>';
+  //add to parent div
   document.getElementById(parentID).innerHTML = dropHtml;
   //initialise dropdown
   $('#'+dropID).selectpicker();
@@ -244,12 +253,15 @@ function generateDropdown(parentID,dropID,title,array) {
 
 //creates bootstrap-select multiple select dropdowns from arrays
 function generateMultiDropdown(parentID,dropID,title,searchTitle,array,maxOptions) {
+  //check if search bar added
   if (searchTitle === 0){
     searTitl = ''
   } else {
     searTitl = 'data-live-search="true" data-live-search-placeholder="'+searchTitle+'" ';
   }
+  //add select options
   var dropHtml = '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="13" multiple ' + searTitl + 'data-max-options="'+maxOptions+'" data-selected-text-format="count">'
+  //build list, apply BREAKS or LABELS if words present in array
   for (i = 0; i < array.length; i++) {
     if (array[i] == 'BREAK'){
       dropHtml += '<option data-divider="true"></option>';
@@ -263,6 +275,7 @@ function generateMultiDropdown(parentID,dropID,title,searchTitle,array,maxOption
     }
   }
   dropHtml += '</select>';
+  //append to parent div
   document.getElementById(parentID).innerHTML = dropHtml;
   //initialise dropdown
   $('#'+dropID).selectpicker();
@@ -270,7 +283,7 @@ function generateMultiDropdown(parentID,dropID,title,searchTitle,array,maxOption
   $('#'+dropID).on('changed.bs.select', dropClickHandler);
 }
 
-//disables / enables dropdown eg toggleDropdown(id,toggle)
+//disables / enables dropdown . bool True = disabled
 function disableDropdown(id,bool){
   $('#'+id).prop('disabled', bool);
 }
@@ -340,8 +353,9 @@ function getGraftSkills(type){
 
 }
 
-//handle clicks of dropdowns
+//Handle the clicks from dropdowns - function is divided by dropdown id. each dropdown will only execute the code for its own id
 function dropClickHandler(e, clickedIndex, newValue, oldValue) {
+    //get the item that wa selected on the dropdown click + the dropdowns id
     var selected = $(e.currentTarget).val();
     var id = $(e.currentTarget).attr('id');
 
@@ -501,10 +515,11 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       selectArray = selectArray.concat(GraftSkills);
 
 
-      var skillList = Object.keys(goodSkillNames)
+      var skillList = Object.keys(skillNames)
       for (var i = 0; i < selectArray.length; i++) {
         skillList = removeElement(skillList,selectArray[i]);
       }
+      skillList = removeElement(skillList,'Perception');//perception removed because it is a good skill by default
 
       goodSkillNum = Number($('#goodNumSave').text());
       generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,skillList,goodSkillNum);
@@ -513,9 +528,15 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         $('#goodDrop').selectpicker('val', goodSelected.split(','));
       }
 
+      //graft skills string
+      var graftString = '';
+      if (masterGraftSkills.length > 0) {
+        graftString = masterGraftSkills.join().replace(/,/g,'*,')+'*,';
+      }
+
       var $descriptionArea = $(".stepSevenMasterDescription").first();
       $descriptionArea.empty();
-      $descriptionArea.append("<p><b>Master skills:</b> "+masterGraftSkills.join().replace(/,/g,'*,')+'*,'+selected+"</p>");
+      $descriptionArea.append("<p><b>Master skills:</b> "+graftString+selected+"</p>");
 
       $('#stepSevenMasterSave').text(selected);
 
@@ -545,9 +566,15 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         $('#masterDrop').selectpicker('val', masterSelected.split(','));
       }
 
+      //graft skills string
+      var graftString = '';
+      if (goodGraftSkills.length > 0) {
+        graftString = goodGraftSkills.join().replace(/,/g,'*,')+'*,';
+      }
+
       var $descriptionArea = $(".stepSevenGoodDescription").first();
       $descriptionArea.empty();
-      $descriptionArea.append("<p><b>Good skills:</b> "+goodGraftSkills.join().replace(/,/g,'*,')+'*,'+selected+"</p>");
+      $descriptionArea.append("<p><b>Good skills:</b> "+graftString+selected+"</p>");
 
       $('#stepSevenGoodSave').text(selected);
     } else if (id=='scoresDrop') {
@@ -596,6 +623,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         caster = 'caster';
       }
 
+      //clear all spells related divs
       $("#spells1Dropdown").first().empty();
       $("#spells2Dropdown").first().empty();
       $("#spells3Dropdown").first().empty();
@@ -608,37 +636,103 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
       showSpellDropdowns(caster);
 
+    } else if (id == 'secondaryDrop'){
+
+
+      var secondary = '';
+
+      if (selected.includes('once-per-day')){
+        secondary = 'once-per-day';
+      } else if (selected.includes('frequency')){
+        secondary = 'once-per-freq';
+      }
+
+      //clear all spells related divs
+      $("#spells1Dropdown").first().empty();
+      $("#spells2Dropdown").first().empty();
+      $("#spells3Dropdown").first().empty();
+      $(".stepEight1").first().empty();
+      $(".stepEight2").first().empty();
+      $(".stepEight3").first().empty();
+      $(".stepEight1Description").first().empty();
+      $(".stepEight2Description").first().empty();
+      $(".stepEight3Description").first().empty();
+
+      showSpellDropdowns(secondary);
+
     }
 
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
 }
 
-//populates the dropdowns on step eight, either spell-like or full caster abilities
+//populates the dropdowns on step eight, either spell-like, secondary magic, or full caster abilities
 function showSpellDropdowns(caster){
 
   var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','');
 
-  var i = 0;
-  var spellObject = spellCounts[crString][caster];
-  var save = "dummy";
+  if (caster != 'once-per-day' && caster != 'once-per-freq'){
 
-  for (castCat in spellObject){
-    i += 1;
-    var spellNum = spellObject[castCat][0];
-    var spellLevel = spellObject[castCat][1].toString();
-    var spellList = getSpellsByLevel(spellLevel);
+    var i = 0;
+    var spellObject = spellCounts[crString][caster];
+    var save = "dummy";
 
-    var $descriptionAbility = $(".stepEight"+i).first();
-    $descriptionAbility.empty();
-    $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+    for (castCat in spellObject){
+      i += 1;
+      var spellNum = spellObject[castCat][0];
+      var spellLevel = spellObject[castCat][1].toString();
+      var spellList = getSpellsByLevel(spellLevel);
 
-    generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
-    save += ","+castCat;
+      var $descriptionAbility = $(".stepEight"+i).first();
+      $descriptionAbility.empty();
+      $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+
+      generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
+      save += ","+castCat;
+    }
+  } else {
+
+    var i = 0;
+    var spellObject = spellCounts[crString]['spell-like'];
+    var save = "dummy";
+
+    for (castCat in spellObject){
+      i += 1;
+      var spellNum = spellObject[castCat][0];
+      if (caster == 'once-per-freq') {
+        spellNum = 1;
+      }
+      var spellLevel = spellObject[castCat][1].toString();
+      var spellList = getSpellsByLevel(spellLevel);
+      if (caster == 'once-per-day'){
+        if (castCat == "1/day"){
+          i = 1;
+          var $descriptionAbility = $(".stepEight"+i).first();
+          $descriptionAbility.empty();
+          $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+
+          generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
+          save += ","+castCat;
+
+        }
+      } else {
+        var $descriptionAbility = $(".stepEight"+i).first();
+        $descriptionAbility.empty();
+        $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+
+        generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
+        save += ","+castCat;
+
+      }
+    }
+
+
   }
   $('#stepEightSave').text(save);
 
 }
 
+//DECRIPTION FUNCTIONS
+//set the descriptions for their step , usually called of a dropdown select trigger
 
 function stepTwoDescription(selected){
 
@@ -725,11 +819,12 @@ function stepFiveDescription(selected) {
   $('#stepFiveSave').text(selected);
 }
 
-
+//prototype to capitalise only the first char in a string
 String.prototype.capitalise = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
+//removes the selected element from selected array
 function removeElement(array,element) {
 
   var index = array.indexOf(element);
@@ -740,6 +835,7 @@ function removeElement(array,element) {
 
 }
 
+//builds array/ labels from the graft data entry for step 5. adds label for each key
 function getGraftArray() {
   var graftArray = ['None'];
   var keys = Object.keys(graftTemplates)
@@ -754,6 +850,7 @@ function getGraftArray() {
   return graftArray;
 }
 
+//retrieves the spells of a specific level from the spalls dat objects
 function getSpellsByLevel(levelString){
   var list = [];
   for (spellName in spellsData){
@@ -766,7 +863,7 @@ function getSpellsByLevel(levelString){
 }
 
 
-// Wizard Initialization
+// Bootstrap Wizard Initialization - contains callbacks for initialisation and next button  pushes
 $('.wizard-card').bootstrapWizard({
     'tabClass': 'nav nav-pills',
     'nextSelector': '.btn-next',
@@ -775,7 +872,7 @@ $('.wizard-card').bootstrapWizard({
     //runs when wizard initialised
     onInit: function(tab, navigation, index) {
 
-        //create initial dropdowns from data arrays
+        //create initial dropdowns from data arrays - static dropdowns only
         //step1
         generateDropdown("CRDropdown","CRDrop","Choose challenge rating",CRLabels);
         generateDropdown("arrayDropdown","arrayDrop","Choose base",Object.keys(stepOneDescription).sort());
@@ -785,7 +882,8 @@ $('.wizard-card').bootstrapWizard({
         generateDropdown("graftDropdown","graftDrop","Optional template graft",getGraftArray());
     },
 
-    //runs when next button pressed.
+    //runs when next button pressed. Sorted by tab index. each tab only executes its own code.
+    //validation is also done on selected tabs, makes sure any dropdowns that require a choice have made a choice
     onNext: function(tab, navigation, index) {
         //Validation tab 1
         if (index == 1) {
@@ -1062,52 +1160,69 @@ $('.wizard-card').bootstrapWizard({
 
               var crString = $('[data-id="CRDrop"]').text().trim();
               var array = $('#arrayDrop').val().trim();
-              var masterGraftSkills = getGraftSkills("Master");
-              var goodGraftSkills = getGraftSkills("Good");
-              var GraftSkills = masterGraftSkills.concat(goodGraftSkills);
+              var graft = $('#graftDrop').val().trim();
+              var classDrop = $('#classDrop').val().trim();
+              var subtype = $('#creatureSubTypeDrop').val().trim();
 
+              //check if configuration has changed
+              if ($('#stepSevenSaveTwo').text() != crString + ":" + array + ":" + graft + ":" + classDrop + ":" + subtype) {
 
-              //Master Skills
-              masterMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][0];
-              masterSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][1];
+                var masterGraftSkills = getGraftSkills("Master");
+                var goodGraftSkills = getGraftSkills("Good");
+                var GraftSkills = masterGraftSkills.concat(goodGraftSkills);
 
-              //remove skills already chosen by grafts
-              var masterSkills = Object.keys(skillNames);
-              for (var i = 0; i < GraftSkills.length; i++) {
-                masterSkills = removeElement(masterSkills,GraftSkills[i]);
+                //Master Skills
+                masterMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][0];
+                masterSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][12][1];
+
+                //remove skills already chosen by grafts
+                var masterSkills = Object.keys(skillNames);
+                for (var i = 0; i < GraftSkills.length; i++) {
+                  masterSkills = removeElement(masterSkills,GraftSkills[i]);
+                }
+
+                //set description and generate dropdown
+                var $descriptionMaster = $(".stepSevenMaster").first();
+                $descriptionMaster.empty();
+                $descriptionMaster.append("<p>Select up to <b>" + masterSkillNum + "</b> master skills.</p>");
+                $('#stepSevenMasterSave').text('')
+                generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,masterSkills,masterSkillNum);
+                $('#masterNumSave').text(masterSkillNum);
+                //Good Skills
+
+                goodMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][0];
+                goodSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][1];
+
+                //remove skills already chosen by grafts
+                var goodSkills = Object.keys(skillNames)
+                for (var i = 0; i < GraftSkills.length; i++) {
+                  goodSkills = removeElement(goodSkills,GraftSkills[i]);
+                }
+                goodSkills = removeElement(goodSkills,'Perception');//remove perception from good skills
+
+                //set description and generate dropdown
+                var $descriptionGood = $(".stepSevenGood").first();
+                $descriptionGood.empty();
+                $descriptionGood.append("<p>Select up to <b>" + goodSkillNum + "</b> good skills<br>Skills selected by grafts: "+goodGraftSkills+"</p>");
+                $('#stepSevenGoodSave').text('');
+                generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,goodSkills,goodSkillNum);
+                $('#goodNumSave').text(goodSkillNum);
+
+                //empty descriptions and fill with skills
+                $(".stepSevenMasterDescription").first().empty();
+                $(".stepSevenGoodDescription").first().empty();
+                $(".stepSevenAsterix").first().empty();
+                if (masterGraftSkills.length > 0){
+                  $(".stepSevenMasterDescription").first().append("<p><b>Master skills:</b> "+masterGraftSkills.join().replace(/,/g,'*,')+"*</p>");
+                  $(".stepSevenAsterix").first().append("<p>*selected by graft</p>");
+                }
+                if (goodGraftSkills.length > 0){
+                  $(".stepSevenGoodDescription").first().append("<p><b>Good skills:</b> "+goodGraftSkills.join().replace(/,/g,'*,')+"*</p>");
+                  $(".stepSevenAsterix").first().append("<p>*selected by graft</p>");
+                }
+                //save the current configuration
+                $('#stepSevenSaveTwo').text(crString + ":" + array + ":" + graft + ":" + classDrop + ":" + subtype);
               }
-
-              var $descriptionMaster = $(".stepSevenMaster").first();
-              $descriptionMaster.empty();
-              $descriptionMaster.append("<p>Select up to <b>" + masterSkillNum + "</b> master skills.</p>");
-              $('#stepSevenMasterSave').text('')
-              generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,masterSkills,masterSkillNum);
-              $('#masterNumSave').text(masterSkillNum);
-              //Good Skills
-
-              goodMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][0];
-              goodSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][1];
-
-              //remove skills already chosen by grafts
-              var goodSkills = Object.keys(goodSkillNames)
-              for (var i = 0; i < GraftSkills.length; i++) {
-                goodSkills = removeElement(goodSkills,GraftSkills[i]);
-              }
-
-              //set description
-              var $descriptionGood = $(".stepSevenGood").first();
-              $descriptionGood.empty();
-              $descriptionGood.append("<p>Select up to <b>" + goodSkillNum + "</b> good skills<br>Skills selected by grafts: "+goodGraftSkills+"</p>");
-              $('#stepSevenGoodSave').text('');
-              generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,goodSkills,goodSkillNum);
-              $('#goodNumSave').text(goodSkillNum);
-
-              //empty descriptions and fill with skills
-              $(".stepSevenMasterDescription").first().empty();
-              $(".stepSevenMasterDescription").first().append("<p><b>Master skills:</b> "+masterGraftSkills.join().replace(/,/g,'*,')+"*</p>");
-
-              $(".stepSevenGoodDescription").first().empty();
-              $(".stepSevenGoodDescription").first().append("<p><b>Good skills:</b> "+goodGraftSkills.join().replace(/,/g,'*,')+"*</p>");
 
 
             } else {
@@ -1143,6 +1258,7 @@ $('.wizard-card').bootstrapWizard({
 
               if ($('#stepEightTwoSave').text() != array+":"+special+":"+crString ){
 
+                $("#casterTypeDropdown").first().empty();
                 $("#spells1Dropdown").first().empty();
                 $("#spells2Dropdown").first().empty();
                 $("#spells3Dropdown").first().empty();
@@ -1161,7 +1277,7 @@ $('.wizard-card').bootstrapWizard({
                   generateDropdown("casterTypeDropdown","casterDrop","Choose casting type",["Spell-like abilities","Full caster"]);
                 } else if(special == "Secondary Magic"){
                   descSpell = "This creature has spell-like abilities via the Secondary Magic ability.";
-                  showSpellDropdowns('spell-like');
+                  generateDropdown("casterTypeDropdown","secondaryDrop","Choose limited spells",["Only once-per-day spells","Only one spell per frequency (at will, 1/day, etc.)"]);
                 } else {
                   descSpell = "Spell casting is reserved for creatures with the spellcaster base and creatures with spell-like abilities";
                 }
@@ -1183,6 +1299,13 @@ $('.wizard-card').bootstrapWizard({
             if ($('[data-id="casterDrop"]').length){
               if ($('[data-id="casterDrop"]').text().includes("Choose")) {
                   $('[data-id="casterDrop"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+
+            if ($('[data-id="secondaryDrop"]').length){
+              if ($('[data-id="secondaryDrop"]').text().includes("Choose")) {
+                  $('[data-id="secondaryDrop"]').addClass('wizard-shadow');
                   validated = false;
               }
             }
@@ -1216,7 +1339,7 @@ $('.wizard-card').bootstrapWizard({
             $($wizard).find('.btn-finish').hide();
         }
 
-        //set progress bar
+        //set progress bar to correct percentage
         if ($current == 1) {
           var $percent = 0;
         } else {
@@ -1226,7 +1349,7 @@ $('.wizard-card').bootstrapWizard({
 		    $($wizard).find('.progress-bar').css({width:$percent+'%'});
     }
 });
-//finish function
+//finish function - fires when the finish button is pushed
 $('.btn-finish').click(function() {
   //final tab validation
     var validated = true;
@@ -1238,10 +1361,12 @@ $('.btn-finish').click(function() {
       }
     }
     if (validated){
+      //call statBlock builder on finish
       buildStatBlock();
     }
 });
 
+//button click for modal
 $('.btn-change').click(function(){
 
    val=$(this).text()
@@ -1264,6 +1389,7 @@ $('.btn-change').click(function(){
    }
 })
 
+//button click for modal
 $('.btn-graft').click(function(){
 
    val=$(this).text()
