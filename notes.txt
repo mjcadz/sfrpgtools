@@ -11,10 +11,6 @@ speeds will need to be picked later (i think)
 
 minify js and cs files
 
-human aditional abiliities. add in additional special abilities
-
-additional special abilities from grafts AditionalAbilities
-
 Types of immunities for the immunity special ability
 
 997 soldier melee ch0ice no good

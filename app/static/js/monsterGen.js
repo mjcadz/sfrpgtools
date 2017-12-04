@@ -303,6 +303,24 @@ function findObjectFromKey(upperObject,key){
   return foundObject;
 }
 
+//grabs any additional abilities from the creature subtype
+function getAdditionalAbilities(){
+  //check step 3 subtype graft skills
+  var skillList = {};
+  var subtype = $('#creatureSubTypeDrop').val().trim();
+  if (subtype != '' && subtype != 'None') {
+    if (creatureSubType[subtype].hasOwnProperty("AdditionalAbilities")){
+      skillList = creatureSubType[subtype]["AdditionalAbilities"];
+    } else if (creatureSubType[subtype].hasOwnProperty("SubRaces")){
+      subRaceDrop = $('#stepThreeOptionDrop').val().trim();
+      if (creatureSubType[subtype].SubRaces[subRaceDrop].hasOwnProperty("AdditionalAbilities")){
+        skillList = creatureSubType[subtype].SubRaces[subRaceDrop]["AdditionalAbilities"];
+      }
+    }
+  }
+  return skillList;
+}
+
 //gets the already selected skills from grafts for step seven
 function getGraftSkills(type){
 
@@ -920,35 +938,6 @@ $('.wizard-card').bootstrapWizard({
                 }
               }
 
-              if ($('#stepOneSave').text().trim() != cr.toString()+array){
-                //step6 generation - dependent on CR
-                maxOptions = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][11];//get max options from array
-
-                var FreeAbilities = [];
-                FreeAbilities = FreeAbilities.concat(['LABEL=Free abilities']);
-                FreeAbilities = FreeAbilities.concat(Object.keys(specialAbilities.FreeAbilities).sort());
-                FreeAbilities = FreeAbilities.concat(['ENDLABEL']);
-                FreeAbilities = FreeAbilities.concat(['LABEL=Weaknesses']);
-                FreeAbilities = FreeAbilities.concat(Object.keys(specialAbilities.Weaknesses).sort());
-                FreeAbilities = FreeAbilities.concat(['ENDLABEL']);
-
-                var SpecialAbilities = [];
-                SpecialAbilities = SpecialAbilities.concat(['LABEL=Adjustment abilities']);
-                SpecialAbilities = SpecialAbilities.concat(Object.keys(specialAbilities.AdjustmentAbilities).sort());
-                SpecialAbilities = SpecialAbilities.concat(['ENDLABEL']);
-                SpecialAbilities = SpecialAbilities.concat(['LABEL=Special abilities']);
-                SpecialAbilities = SpecialAbilities.concat(Object.keys(specialAbilities.Abilities).sort());
-                SpecialAbilities = SpecialAbilities.concat(['ENDLABEL']);
-
-
-                generateMultiDropdown("freeAbilityDropdown","freeDrop","Select free abilities","Search abilities",FreeAbilities,10);
-                generateMultiDropdown("specialAbilityDropdown","specialDrop","Select special abilities","Search abilities",SpecialAbilities,maxOptions);
-                var $descriptionArea = $(".stepSixAbilities").first();
-                $descriptionArea.empty();
-                $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");
-
-              }
-              $('#stepOneSave').text(cr.toString()+array);
             } else {
                 return false;
             }
@@ -1076,6 +1065,58 @@ $('.wizard-card').bootstrapWizard({
                 return false;
             }
         }
+        //Validation tab 4 - class
+        if (index == 5) {
+
+            var validated = true;
+
+            if (validated) {
+
+              var crString = $('[data-id="CRDrop"]').text().trim();
+              var cr = Number(crString.replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
+              var array = $('#arrayDrop').val().trim();
+              var subtype = $('#creatureSubTypeDrop').val().trim();
+
+              if ($('#stepSixSave').text().trim() != cr.toString()+array+subtype){
+                //step6 generation - dependent on CR
+                maxOptions = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][11];//get max options from array
+
+                //check for additional specials from grafts
+                var additionalSpecial = getAdditionalAbilities()
+                if (additionalSpecial.hasOwnProperty("SpecialAbilities")) {
+                  maxOptions += additionalSpecial["SpecialAbilities"];
+                }
+
+                var FreeAbilities = [];
+                FreeAbilities = FreeAbilities.concat(['LABEL=Free abilities']);
+                FreeAbilities = FreeAbilities.concat(Object.keys(specialAbilities.FreeAbilities).sort());
+                FreeAbilities = FreeAbilities.concat(['ENDLABEL']);
+                FreeAbilities = FreeAbilities.concat(['LABEL=Weaknesses']);
+                FreeAbilities = FreeAbilities.concat(Object.keys(specialAbilities.Weaknesses).sort());
+                FreeAbilities = FreeAbilities.concat(['ENDLABEL']);
+
+                var SpecialAbilities = [];
+                SpecialAbilities = SpecialAbilities.concat(['LABEL=Adjustment abilities']);
+                SpecialAbilities = SpecialAbilities.concat(Object.keys(specialAbilities.AdjustmentAbilities).sort());
+                SpecialAbilities = SpecialAbilities.concat(['ENDLABEL']);
+                SpecialAbilities = SpecialAbilities.concat(['LABEL=Special abilities']);
+                SpecialAbilities = SpecialAbilities.concat(Object.keys(specialAbilities.Abilities).sort());
+                SpecialAbilities = SpecialAbilities.concat(['ENDLABEL']);
+
+
+                generateMultiDropdown("freeAbilityDropdown","freeDrop","Select free abilities","Search abilities",FreeAbilities,10);
+                generateMultiDropdown("specialAbilityDropdown","specialDrop","Select special abilities","Search abilities",SpecialAbilities,maxOptions);
+                var $descriptionArea = $(".stepSixAbilities").first();
+                $descriptionArea.empty();
+                $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");
+
+              }
+              $('#stepSixSave').text(cr.toString()+array+subtype);
+
+            } else {
+                return false;
+            }
+        }
         //validation step 6 - special abilities
         if (index == 6) {
 
@@ -1192,6 +1233,12 @@ $('.wizard-card').bootstrapWizard({
 
                 goodMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][0];
                 goodSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][1];
+
+                //check for additional skills from grafts
+                var additionalGood = getAdditionalAbilities()
+                if (additionalGood.hasOwnProperty("GoodSkills")) {
+                  goodSkillNum += additionalGood["GoodSkills"];
+                }
 
                 //remove skills already chosen by grafts
                 var goodSkills = Object.keys(skillNames)
