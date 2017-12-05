@@ -49,7 +49,7 @@ function buildStatBlock() {
     statBlock["Immunities"] = creatureType[creatureTypeDrop].Immunities;
   }
 
-  //Options - only applies to construct and animal
+  //Options - only applies to construct and animal - so far
   if ($('[data-id="optionDrop"]').length){
     if (creatureTypeDrop == "Animal"){
       statBlock.int = -Number($('[data-id="optionDrop"]').text().trim().replace('Set intelligence -',''));
@@ -1128,14 +1128,24 @@ $('.wizard-card').bootstrapWizard({
               var typeOption = $('[data-id="optionDrop"]').text().trim().toString();
               var classDrop = $('#classDrop').val().toString().trim();
               var classScores = 'None';
+              //check if soldier for damage focus
+              if ($('[data-id="stepFourOptionDrop"]').length && classDrop == 'Soldier'){
+                var damageStyle = $('#stepFourOptionDrop').val().trim() + 'Style';
+              } else {
+                var damageStyle = 'Style';
+              }
 
               if (classDrop != '' && classDrop != 'None') {
-                classScores = classData[classDrop].AbilityScoreModifiers;
+                if (classDrop == 'Soldier') {
+                  classScores = classData[classDrop][damageStyle].AbilityScoreModifiers;
+                } else {
+                  classScores = classData[classDrop].AbilityScoreModifiers;
+                }
                 classScores = classScores[0] + ',' + classScores[1] + ',' + classScores[2];
               }
 
               //Ability Scores //only generate once
-              if ($('#stepSevenSave').text() != type + ":" + typeOption + ":" + classDrop) {
+              if ($('#stepSevenSave').text() != type + ":" + typeOption + ":" + classDrop + ":" + damageStyle) {
 
                 $(".stepSevenAbilityDescription").first().empty();
                 $("#AbilityScoresDropdown").first().empty();
@@ -1150,7 +1160,7 @@ $('.wizard-card').bootstrapWizard({
                   var wis ='<option>Wis</option>';
                   var cha ='<option>Cha</option>';
 
-                  //make creature type changes to ability scores
+                  //make creature type changes to ability scores TODO change this so that it reads the selected subtypes instead of being hard coded
                   if (type == "Ooze") {
                     int = '<option style="color: #9a9a9a;pointer-events: none">Int already set ( - )</option>'
                   } else if (type == "Construct") {
@@ -1194,7 +1204,7 @@ $('.wizard-card').bootstrapWizard({
 
                 }
 
-                $('#stepSevenSave').text(type + ":" + typeOption + ":" + classDrop);
+                $('#stepSevenSave').text(type + ":" + typeOption + ":" + classDrop + ":" + damageStyle);
               }
 
               //skills generation - step 7
@@ -1205,11 +1215,24 @@ $('.wizard-card').bootstrapWizard({
               var classDrop = $('#classDrop').val().trim();
               var subtype = $('#creatureSubTypeDrop').val().trim();
 
-              //check if configuration has changed
-              if ($('#stepSevenSaveTwo').text() != crString + ":" + array + ":" + graft + ":" + classDrop + ":" + subtype) {
+              //check if envoy for extra master skill
+              if ($('[data-id="stepFourOptionDrop"]').length && classDrop == 'Envoy'){
+                var extraMaster = [$('#stepFourOptionDrop').val().trim()];
+              } else {
+                var extraMaster = [];
+              }
 
+              //check if configuration has changed
+              if ($('#stepSevenSaveTwo').text() != crString + ":" + array + ":" + graft + ":" + classDrop + ":" + subtype + ":" + extraMaster) {
+
+                //get any skills from grafts if necessary
                 var masterGraftSkills = getGraftSkills("Master");
                 var goodGraftSkills = getGraftSkills("Good");
+                //if envoy grab extra skill from dropdown
+                if ($('[data-id="stepFourOptionDrop"]').length && classDrop == 'Envoy'){
+                  masterGraftSkills = masterGraftSkills.concat([extraMaster]);
+                }
+                //combine
                 var GraftSkills = masterGraftSkills.concat(goodGraftSkills);
 
                 //Master Skills
@@ -1246,11 +1269,12 @@ $('.wizard-card').bootstrapWizard({
                   goodSkills = removeElement(goodSkills,GraftSkills[i]);
                 }
                 goodSkills = removeElement(goodSkills,'Perception');//remove perception from good skills
+                //add relevant abilityscores to
 
                 //set description and generate dropdown
                 var $descriptionGood = $(".stepSevenGood").first();
                 $descriptionGood.empty();
-                $descriptionGood.append("<p>Select up to <b>" + goodSkillNum + "</b> good skills<br>Skills selected by grafts: "+goodGraftSkills+"</p>");
+                $descriptionGood.append("<p>Select up to <b>" + goodSkillNum + "</b> good skills.</p>");
                 $('#stepSevenGoodSave').text('');
                 generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,goodSkills,goodSkillNum);
                 $('#goodNumSave').text(goodSkillNum);
@@ -1268,7 +1292,7 @@ $('.wizard-card').bootstrapWizard({
                   $(".stepSevenAsterix").first().append("<p>*selected by graft</p>");
                 }
                 //save the current configuration
-                $('#stepSevenSaveTwo').text(crString + ":" + array + ":" + graft + ":" + classDrop + ":" + subtype);
+                $('#stepSevenSaveTwo').text(crString + ":" + array + ":" + graft + ":" + classDrop + ":" + subtype + ":" + extraMaster);
               }
 
 

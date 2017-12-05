@@ -13,8 +13,6 @@ minify js and cs files
 
 Types of immunities for the immunity special ability
 
-997 soldier melee ch0ice no good
-
 special abilities make the one that affect stats actually affect stats
 
 text attribute in grafts
@@ -37,8 +35,6 @@ final check for save boost special ability.
 
 check special abilities for ability score adjustments
 
-show ability scores next to skills
-
 if spellcaster is mystic or technomancer choose spells only from their spell lists
 
 To Test
@@ -53,6 +49,8 @@ Test
 git remote set-url origin https://github.com/mjcadz/sfrpgtools.git
 
 Nice To Have
+show ability scores next to skills
+
 hide desription areas while changing text then show. will avoid loading looks
 
 add menu header bootstrap-select, so show what the user should be doing
