@@ -77,9 +77,9 @@ function buildStatBlock() {
     }
 
     for (trait in subTypeObject) {
-      if (trait != "Description" && trait != "Options"){
 
-        var traitArray = creatureSubType[subTypeDrop][trait];
+      if (trait != "Description" && trait != "Options"){
+        var traitArray = subTypeObject[trait];
         if (statBlock.hasOwnProperty(trait)){
           statBlock[trait] = statBlock[trait].concat(traitArray);
         } else {
@@ -88,7 +88,7 @@ function buildStatBlock() {
 
       } else if (trait == "Options") {
         var optionDrop = $('#stepThreeOptionDrop').val().trim();
-        optionTrait = creatureSubType[subTypeDrop].Options[0]
+        optionTrait = subTypeObject.Options[0]
 
         if(!optionDrop.includes("Not")){
           if (statBlock.hasOwnProperty(optionTrait)){
@@ -104,6 +104,51 @@ function buildStatBlock() {
   //step 4 -class
 
   statBlock = getClassStats(statBlock);
+
+  // //step 5 - graft
+  // var graft = $('#graftDrop').val().trim();
+  //
+  //   statBlock.Graft = graft;
+  //
+  //   var graftObject = graftTemplates.simpleGrafts = {;
+
+  // var graft = $('#graftDrop').val().trim();
+  // if (graft != '' && graft != 'None') {
+  //   for (var subgraft in graftTemplates){
+  //     if (graftTemplates[subgraft].hasOwnProperty(graft)){
+  //       if (graftTemplates[subgraft][graft].hasOwnProperty(skillString)){
+  //         skillList = skillList.concat(graftTemplates[subgraft][graft][skillString]);
+  //       }
+  //     }
+  //   }
+  // }
+  //
+  //
+  //   for (trait in subTypeObject) {
+  //
+  //     if (trait != "Description" && trait != "Options"){
+  //       var traitArray = subTypeObject[trait];
+  //       if (statBlock.hasOwnProperty(trait)){
+  //         statBlock[trait] = statBlock[trait].concat(traitArray);
+  //       } else {
+  //         statBlock[trait] = traitArray;
+  //       }
+  //
+  //     } else if (trait == "Options") {
+  //       var optionDrop = $('#stepThreeOptionDrop').val().trim();
+  //       optionTrait = subTypeObject.Options[0]
+  //
+  //       if(!optionDrop.includes("Not")){
+  //         if (statBlock.hasOwnProperty(optionTrait)){
+  //           statBlock[optionTrait] = statBlock[optionTrait].concat([optionDrop]);
+  //         } else {
+  //           statBlock[optionTrait] = [optionDrop];
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
 
 
 
@@ -172,6 +217,7 @@ function getClassStats(statObject){
     }
     statObject.ClassAdjustments = classObject.Adjustments;
     if (classObject.hasOwnProperty("MasterSkills")){
+      alert(statObject.hasOwnProperty("MasterSkills"))
       if (statObject.hasOwnProperty("MasterSkills")){
         statObject.MasterSkills = statObject.MasterSkills.concat(classObject.MasterSkills);
       } else {
@@ -197,7 +243,7 @@ function getClassStats(statObject){
     }
     //envoy gains extra master skill
     if (classDrop == 'Envoy') {
-      var extraSkill = $('#stepFourOptionDrop').val().trim().toLowerCase();
+      var extraSkill = [$('#stepFourOptionDrop').val().trim().toLowerCase()];
       statObject.MasterSkills = statObject.MasterSkills.concat(extraSkill);
     }
   }
@@ -350,8 +396,12 @@ function getGraftSkills(type){
   //check step 5 graft
   var graft = $('#graftDrop').val().trim();
   if (graft != '' && graft != 'None') {
-    if (graftTemplates.simpleGrafts[graft].hasOwnProperty(skillString)){
-      skillList = skillList.concat(graftTemplates.simpleGrafts[graft][skillString]);
+    for (var subgraft in graftTemplates){
+      if (graftTemplates[subgraft].hasOwnProperty(graft)){
+        if (graftTemplates[subgraft][graft].hasOwnProperty(skillString)){
+          skillList = skillList.concat(graftTemplates[subgraft][graft][skillString]);
+        }
+      }
     }
   }
 
@@ -926,11 +976,16 @@ $('.wizard-card').bootstrapWizard({
               var graft = $('#graftDrop').val().trim();
 
               if (graft != '' && graft != 'None'){
-                if (graftTemplates.simpleGrafts[graft].hasOwnProperty("CRMin")){
-                  var crmin = graftTemplates.simpleGrafts[graft].CRMin;
-                } else{
-                  var crmin = 0;
+                var crmin = 0;
+                //check all graft sub keys for CRMin
+                for (var subgraft in graftTemplates){
+                  if (graftTemplates[subgraft].hasOwnProperty(graft)){
+                    if (graftTemplates[subgraft][graft].hasOwnProperty("CRMin")){
+                      crmin = graftTemplates[subgraft][graft].CRMin;
+                    }
+                  }
                 }
+
                 if (cr < crmin) {
                   //reset dropdown if cr below minimum
                   generateDropdown("graftDropdown","graftDrop","Optional template graft",getGraftArray());
