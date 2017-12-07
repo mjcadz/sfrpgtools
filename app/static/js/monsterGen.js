@@ -153,6 +153,17 @@ function buildStatBlock() {
 
   //step 8 - spells
 
+  for (var i = 1; i < 4; i++) {//loop three times
+    //grab text from descriptions
+    var spellSlot = $(".stepEight"+ i.toString() +"Description").first().text()
+    //check if there is text there and assign to stat block
+    if (spellSlot.length > 2){
+      var spells = spellSlot.split(': ');
+      var freq = spells[0].replace(' ','');
+      statBlock['Spells'+freq] = spells[1].split(', ');
+    }
+  }
+
   //step 9 - final checks
 
   //stat block adjustments

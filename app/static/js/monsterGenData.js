@@ -1495,7 +1495,7 @@ specialAbilities = {
     },
     "Secondary Magic": {
       "Description": "The NPC gains spell-like abilities (chosen in Step 8) according to its CR, though it gains only the once-per-day spells or one spell per unit of frequency (at will, 1/day, etc.).",
-      "Spell-likeAbilities": "yes"
+      "Spell-likeAbilities": "magic, baby"
     },
     "Skillful": {
       "Description": "Increase all master and good skill bonuses by 1.",

@@ -31,6 +31,10 @@ final check for save boost special ability.
 
 check special abilities for ability score adjustments
 
+add graft selected spells to the final spells
+
+finish adjustment abilities
+
 if spellcaster is mystic or technomancer choose spells only from their spell lists. show a message that tells the user which class is selected and that spells should be selected acording to the class
 
 To Test
