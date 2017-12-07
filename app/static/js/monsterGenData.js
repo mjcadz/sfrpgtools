@@ -299,9 +299,9 @@ creatureSubType = {
       "electricity 10",
       "fire 10"
     ],
-    "SpecialAbilities": {
-      "Extension of All (Ex)": "Aeons can communicate telepathically with other aeons over vast distances. This ability works even across planes, albeit less effectively, allowing the communication of only vague impressions and feelings."
-    }
+    "SpecialAbilities": [
+      "Extension of All (Ex)"
+    ]
   },
   "Agathion": {
     "Description": "Agathions are celestials, or good outsiders, native to Nirvana.",
@@ -322,10 +322,10 @@ creatureSubType = {
     "Senses": [
       "Low-light vision"
     ],
-    "SpecialAbilities": {
-      "Healing Channel (Su)": "You can heal yourself and your allies. Healing yourself with channeled energy is a move action, healing an ally you touch is a standard action, and healing all allies within 30 feet is a full action. This energy restores 2d8 Hit Points and increases by 2d8 every 3 CR levels",
-      "Speak with Animals (Su)": "You can communicate with any creature of the animal type, though this doesn't make it friendly. If an animal is friendly toward you, it may do you favors. This ability allows you to use Intimidate to bully animals, and you can use any other language-dependent effect against animals."
-    }
+    "SpecialAbilities": [
+      "Healing Channel (Su)",
+      "Speak with Animals (Su)"
+    ]
   },
   "Air": {
     "Description": "This subtype is usually applied to outsiders with a connection to the Plane of Air.",
@@ -369,9 +369,9 @@ creatureSubType = {
       "Darkvision 60 ft.",
       "low-light vision"
     ],
-    "SpecialAbilities": {
-      "Protective Aura (Su)": "For angels of CR 3 to CR 15, this ability grants creatures within the aura (usually 20 feet), including the angel, a divine bonus (usually +2) to AC against attacks made by evil creatures and a divine bonus (usually +4) to saving throws against effects created by evil creatures. The protective aura of a more powerful or a weaker angel might grant a larger or smaller bonus and have a larger or smaller radius, respectively."
-    }
+    "SpecialAbilities": [
+      "Protective Aura (Su)"
+    ]
   },
   "Aquatic": {
     "Description": "These creatures are often native to environments that are mostly or entirely underwater.",
@@ -410,9 +410,9 @@ creatureSubType = {
       "Darkvision 60 ft.",
       "low-light vision"
     ],
-    "SpecialAbilities": {
-      "Aura of Menace (Su)": "This ability imposes a divine penalty (usually -2) to the AC, attacks, and saving throws of each hostile creature within the aura (usually 20 feet) that fails a Will save. This penalty lasts for 24 hours or until that creature deals damage to the archon who generated the aura. A creature that has resisted or broken the effect can't be affected again by the same archon's aura for 24 hours. The aura of a more powerful or weaker archon might impose a larger or smaller penalty and might have a larger or smaller radius, respectively."
-    },
+    "SpecialAbilities": [
+      "Aura of Menace (Su)"
+    ],
     "Spell-likeAbilities": {
       "atWill": [
         "teleport"
@@ -450,7 +450,7 @@ creatureSubType = {
     ]
   },
   "Daemon": {
-    "Abilities": [
+    "OtherAbilities": [
       "summon allies (Sp)"
     ],
     "Description": "Daemons are fiends, or evil outsiders, native to Abaddon.",
@@ -470,7 +470,7 @@ creatureSubType = {
     ]
   },
   "Demon": {
-    "Abilities": [
+    "OtherAbilities": [
       "summon allies (Sp)"
     ],
     "Description": "Demons are fiends, or evil outsiders, native to the Abyss.",
@@ -488,7 +488,7 @@ creatureSubType = {
     ]
   },
   "Devil": {
-    "Abilities": [
+    "OtherAbilities": [
       "summon allies (Sp)"
     ],
     "Description": "Devils are fiends, or evil outsiders, native to Hell.",
@@ -696,15 +696,13 @@ creatureSubType = {
     ]
   },
   "Inevitable": {
-    "Abilities": [
-      "regeneration (Ex) (suppressed by chaotic-aligned attacks)"
-    ],
     "Description": "Inevitables are construct-like outsiders built to enforce the laws of the universe.",
     "Languages": [
       "truespeech"
     ],
     "OtherAbilities": [
-      "constructed"
+      "constructed",
+      "regeneration (Ex) (suppressed by chaotic-aligned attacks)"
     ],
     "Senses": [
       "darkvision 60 ft.",
@@ -769,7 +767,7 @@ creatureSubType = {
     "Description": "This subtype is applied to orcs and creatures who are related to orcs.",
     "SubRaces": {
       "Half-orc": {
-        "Abilities": [
+        "OtherAbilities": [
           "ferocity"
         ],
         "MasterSkills": [
@@ -781,7 +779,7 @@ creatureSubType = {
         ]
       },
       "Orc": {
-        "Abilities": [
+        "OtherAbilities": [
           "ferocity"
         ],
         "Senses": [
@@ -791,13 +789,13 @@ creatureSubType = {
     }
   },
   "Plantlike": {
-    "Abilities": [
+    "OtherAbilities": [
       "plantlike"
     ],
     "Description": "Plantlike creatures have many of the characteristics of plants."
   },
   "Protean": {
-    "Abilities": [
+    "OtherAbilities": [
       "amorphous",
       "change shape"
     ],
@@ -858,7 +856,7 @@ creatureSubType = {
     ]
   },
   "Shapechanger": {
-    "Abilities": [
+    "OtherAbilities": [
       "change shape"
     ],
     "Description": "This subtype is applied to creatures that can dramatically alter their forms."
@@ -982,7 +980,7 @@ classData = {
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
         "RequiredArray": "Expert",
         "MasterSkills": [
-          "sense motive"
+          "sense Motive"
         ],
         "MasterSkillChoice":["Bluff", "Diplomacy" ,"Intimidate"]
     },
@@ -1268,10 +1266,10 @@ graftTemplates = {
 		},
 		"Synthetic": {
 			"Description": "Synthetic creatures are constructed through the use of extremely advanced technology, similar to that which makes androids possible.",
-			"SpecialAbilities": {
-				"Constructed (Ex)": "For effects targeting creatures by type, synthetic creatures count as both their actual creature type and constructs (whichever type allows an ability to affect them for abilities that affect only one type, and whichever type is worse for abilities that affect both creature types). They receive a +2 racial bonus to saving throws against disease, mind-affecting effects, poison, and sleep, unless those effects specifically target constructs. In addition, synthetic creatures do not breathe or suffer the normal environmental effects of being in a vacuum.",
-				"Synthetic (Ex)": "The creature is affected by any ability that specifies it functions against androids."
-			}
+			"SpecialAbilities": [
+				"Constructed (Ex)",
+				"Synthetic (Ex)"
+			]
 		},
 		"Two-Headed (CR 3+)": {
 			"CRMin": 3,
@@ -1290,7 +1288,7 @@ graftTemplates = {
 	},
   "dragonGrafts": {
     "Black Dragon": {
-      "Abilities": [
+      "OtherAbilities": [
         "Breath weapon (line 30 ft. + 10 feet per 2 CR, 1d6 A + 1d6 per CR)",
         "frightful presence (CR 11+, 60 feet + 10 feet per CR)"
       ],
@@ -1317,15 +1315,15 @@ graftTemplates = {
         "blindsense 60 ft.",
         "darkvision 120 ft."
       ],
-      "SpecialAbilities": {
-        "Swamp Stride (Ex)": "A black dragon can move through bogs and quicksand without penalty at its normal speed."
-      },
+      "SpecialAbilities": [
+        "Swamp Stride (Ex)"
+      ],
       "Speed": [
         "swim 60 ft."
       ]
     },
     "Blue Dragon": {
-      "Abilities": [
+      "OtherAbilities": [
         "Breath weapon (line 30 feet + 10 feet per 2 CR, 1d8 E + 1d8 per CR)",
         "frightful presence (CR 9+, 60 feet + 10 feet per CR)"
       ],
@@ -1352,15 +1350,15 @@ graftTemplates = {
         "blindsense 60 ft.",
         "darkvision 120 ft."
       ],
-      "SpecialAbilities": {
-        "Sound Imitation (Ex)": "A blue dragon can mimic any voice or sound it has heard by succeeding at a Bluff check opposed by a listener's Sense Motive check."
-      },
+      "SpecialAbilities": [
+        "Sound Imitation (Ex)"
+      ],
       "Speed": [
         "burrow 60 ft."
       ]
     },
     "Green Dragon": {
-      "Abilities": [
+      "OtherAbilities": [
         "Breath weapon (cone 15 feet + 5 feet per 2 CR, 1d6 A + 1d6 per CR)",
         "frightful presence (CR 9+, 60 feet + 10 feet per CR)"
       ],
@@ -1390,15 +1388,15 @@ graftTemplates = {
         "blindsense 60 ft.",
         "darkvision 120 ft."
       ],
-      "SpecialAbilities": {
-        "Woodland Stride (Ex)": "A green dragon can move through natural foliage at full speed without taking damage or suffering impairment. Areas of foliage that have been magically altered affect it normally."
-      },
+      "SpecialAbilities": [
+        "Woodland Stride (Ex)"
+      ],
       "Speed": [
         "swim 40 ft."
       ]
     },
     "Red Dragon": {
-      "Abilities": [
+      "OtherAbilities": [
         "Breath weapon (cone 15 feet + 5 feet per 2 CR, 1d10 F + 1d10 per CR)",
         "frightful presence (CR 10+, 60 feet + 10 feet per CR)"
       ],
@@ -1431,7 +1429,7 @@ graftTemplates = {
       ]
     },
     "White Dragon": {
-      "Abilities": [
+      "OtherAbilities": [
         "Breath weapon (cone 15 feet + 10 feet per 2 CR, 1d6 C + 1d6 per CR)",
         "frightful presence (CR 10+, 60 feet + 10 feet per CR)"
       ],
@@ -1459,9 +1457,9 @@ graftTemplates = {
         "darkvision 120 ft.",
         "sense through (vision [snow only])"
       ],
-      "SpecialAbilities": {
-        "Icewalking (Ex)": "A white dragon can move across icy surfaces without penalty and doesn't need to attempt Acrobatics checks to run or charge on ice. In addition, a white dragon can climb icy surfaces as if under the effect of spider climb."
-      },
+      "SpecialAbilities": [
+        "Icewalking (Ex)"
+      ],
       "Speed": [
         "burrow 30 ft.",
         "swim 60 ft."
@@ -1847,4 +1845,18 @@ spellCounts = {
     "23": {"spell-like":{"1/day":[4,6],"3/day":[3,5],"at will":[2,4]},"caster":{"3/day":[4,6],"6/day":[3,5],"at will":[2,4]}},
     "24": {"spell-like":{"1/day":[4,6],"3/day":[3,5],"at will":[2,4]},"caster":{"3/day":[4,6],"6/day":[3,5],"at will":[2,4]}},
     "25": {"spell-like":{"1/day":[4,6],"3/day":[3,5],"at will":[2,4]},"caster":{"3/day":[4,6],"6/day":[3,5],"at will":[2,4]}}
+};
+
+graftSpecialAbilities = {
+  "Healing Channel (Su)": "You can heal yourself and your allies. Healing yourself with channeled energy is a move action, healing an ally you touch is a standard action, and healing all allies within 30 feet is a full action. This energy restores 2d8 Hit Points and increases by 2d8 every 3 CR levels.",
+  "Speak with Animals (Su)": "You can communicate with any creature of the animal type, though this doesn't make it friendly. If an animal is friendly toward you, it may do you favors. This ability allows you to use Intimidate to bully animals, and you can use any other language-dependent effect against animals.",
+  "Extension of All (Ex)": "Aeons can communicate telepathically with other aeons over vast distances. This ability works even across planes, albeit less effectively, allowing the communication of only vague impressions and feelings.",
+  "Protective Aura (Su)": "For angels of CR 3 to CR 15, this ability grants creatures within the aura (usually 20 feet), including the angel, a divine bonus (usually +2) to AC against attacks made by evil creatures and a divine bonus (usually +4) to saving throws against effects created by evil creatures. The protective aura of a more powerful or a weaker angel might grant a larger or smaller bonus and have a larger or smaller radius, respectively.",
+  "Aura of Menace (Su)": "This ability imposes a divine penalty (usually -2) to the AC, attacks, and saving throws of each hostile creature within the aura (usually 20 feet) that fails a Will save. This penalty lasts for 24 hours or until that creature deals damage to the archon who generated the aura. A creature that has resisted or broken the effect can't be affected again by the same archon's aura for 24 hours. The aura of a more powerful or weaker archon might impose a larger or smaller penalty and might have a larger or smaller radius, respectively.",
+  "Constructed (Ex)": "For effects targeting creatures by type, synthetic creatures count as both their actual creature type and constructs (whichever type allows an ability to affect them for abilities that affect only one type, and whichever type is worse for abilities that affect both creature types). They receive a +2 racial bonus to saving throws against disease, mind-affecting effects, poison, and sleep, unless those effects specifically target constructs. In addition, synthetic creatures do not breathe or suffer the normal environmental effects of being in a vacuum.",
+  "Synthetic (Ex)": "The creature is affected by any ability that specifies it functions against androids.",
+  "Swamp Stride (Ex)": "A black dragon can move through bogs and quicksand without penalty at its normal speed.",
+  "Sound Imitation (Ex)": "A blue dragon can mimic any voice or sound it has heard by succeeding at a Bluff check opposed by a listener's Sense Motive check.",
+  "Icewalking (Ex)": "A white dragon can move across icy surfaces without penalty and doesn't need to attempt Acrobatics checks to run or charge on ice. In addition, a white dragon can climb icy surfaces as if under the effect of spider climb.",
+  "Woodland Stride (Ex)": "A green dragon can move through natural foliage at full speed without taking damage or suffering impairment. Areas of foliage that have been magically altered affect it normally."
 };

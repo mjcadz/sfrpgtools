@@ -105,52 +105,55 @@ function buildStatBlock() {
 
   statBlock = getClassStats(statBlock);
 
-  // //step 5 - graft
-  // var graft = $('#graftDrop').val().trim();
-  //
-  //   statBlock.Graft = graft;
-  //
-  //   var graftObject = graftTemplates.simpleGrafts = {;
+  //step 5 - graft
+  var graft = $('#graftDrop').val().trim();
 
-  // var graft = $('#graftDrop').val().trim();
-  // if (graft != '' && graft != 'None') {
-  //   for (var subgraft in graftTemplates){
-  //     if (graftTemplates[subgraft].hasOwnProperty(graft)){
-  //       if (graftTemplates[subgraft][graft].hasOwnProperty(skillString)){
-  //         skillList = skillList.concat(graftTemplates[subgraft][graft][skillString]);
-  //       }
-  //     }
-  //   }
-  // }
-  //
-  //
-  //   for (trait in subTypeObject) {
-  //
-  //     if (trait != "Description" && trait != "Options"){
-  //       var traitArray = subTypeObject[trait];
-  //       if (statBlock.hasOwnProperty(trait)){
-  //         statBlock[trait] = statBlock[trait].concat(traitArray);
-  //       } else {
-  //         statBlock[trait] = traitArray;
-  //       }
-  //
-  //     } else if (trait == "Options") {
-  //       var optionDrop = $('#stepThreeOptionDrop').val().trim();
-  //       optionTrait = subTypeObject.Options[0]
-  //
-  //       if(!optionDrop.includes("Not")){
-  //         if (statBlock.hasOwnProperty(optionTrait)){
-  //           statBlock[optionTrait] = statBlock[optionTrait].concat([optionDrop]);
-  //         } else {
-  //           statBlock[optionTrait] = [optionDrop];
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  statBlock.Graft = graft;
 
+  //iterate through selected graft traits
+  if (graft != '' && graft != 'None') {
 
+    for (var graftType in graftTemplates){
+      //iterate traits in all graft types. eg . dragons, simple
+      if (graftTemplates[graftType].hasOwnProperty(graft)) {
 
+        for (trait in graftTemplates[graftType][graft]) {
+
+          if (trait != "Description"){//skip descriptions
+            var traitArray = graftTemplates[graftType][graft][trait];
+            //check if trait is array or object, handle each differently
+            if (statBlock.hasOwnProperty(trait)){
+              if (Array.isArray(traitArray)){
+                //handle array
+                statBlock[trait] = statBlock[trait].concat(traitArray);
+              } else {
+                //handle object
+                statBlock[trait] = $.extend({}, statBlock[trait], traitArray);
+              }
+            } else {
+              //if trait does not already exist, create and assign value
+              statBlock[trait] = traitArray;
+            }
+          }
+        }
+      }
+
+    }
+  }
+  //TODO
+
+  //step 6 - special Abilities
+
+  //step 7 - skills and Modifiers
+
+  //overwrite master+ good skills with selected + graft skills
+  statBlock.MainAbilityScores = $(".stepSevenAbilityDescription").first().text().replace('Main ability scores: (','').replace(')','').split(',')
+  statBlock.MasterSkills = $(".stepSevenMasterDescription").first().text().replace('Master skills: ','').replace(/\*/g,'').split(',');
+  statBlock.GoodSkills = $(".stepSevenGoodDescription").first().text().replace('Good skills: ','').replace(/\*/g,'').split(',');
+
+  //step 8 - spells
+
+  //step 9 - final checks
 
   //stat block adjustments
 
@@ -187,7 +190,13 @@ function buildStatBlock() {
   $outputArea.empty();
   var print = '';
   for (stat in statBlock){
-    print += stat +": " +statBlock[stat] + ' <br>'
+    if (typeof statBlock[stat] === 'object' && !Array.isArray(statBlock[stat])) {
+      for (entry in statBlock[stat]) {
+        print += "stat:" + entry +": " +statBlock[stat][entry] + ' <br>'
+      }
+    } else {
+      print += stat +": " +statBlock[stat] + ' <br>'
+    }
   }
   $outputArea.append("<p>"+print+"</p>");
 
@@ -199,12 +208,13 @@ function getClassStats(statObject){
   //step 4 - class
   var classDrop = $('#classDrop').val().trim();
 
-
   //check if class is selected
   if (classDrop != '' && classDrop != 'None'){
 
     var cr = Number($('[data-id="CRDrop"]').text().trim().replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
     var classObject = classData[classDrop];
+
+    statObject.Class = classDrop;
 
     //formula for class resolve points
     statObject.ClassResolvePoints = Math.round(cr/5) + 3;
@@ -217,7 +227,6 @@ function getClassStats(statObject){
     }
     statObject.ClassAdjustments = classObject.Adjustments;
     if (classObject.hasOwnProperty("MasterSkills")){
-      alert(statObject.hasOwnProperty("MasterSkills"))
       if (statObject.hasOwnProperty("MasterSkills")){
         statObject.MasterSkills = statObject.MasterSkills.concat(classObject.MasterSkills);
       } else {
@@ -367,6 +376,62 @@ function getAdditionalAbilities(){
   return skillList;
 }
 
+//gets the already selected abilities from grafts for step seven
+function getGraftAbilities(type){
+
+  //current type choices - Other, Special
+
+  var abilityString = type + "Abilities";
+
+  //check step 3 subtype graft skills
+  var Abilities = [];
+  var subtype = $('#creatureSubTypeDrop').val().trim();
+  if (subtype != '' && subtype != 'None') {
+    if (creatureSubType[subtype].hasOwnProperty(abilityString)){
+      Abilities = Abilities.concat(creatureSubType[subtype][abilityString]);
+    }
+    if (creatureSubType[subtype].hasOwnProperty("SubRaces")){
+      subRaceDrop = $('#stepThreeOptionDrop').val().trim();
+      if (creatureSubType[subtype].SubRaces[subRaceDrop].hasOwnProperty(abilityString)){
+        Abilities = Abilities.concat(creatureSubType[subtype].SubRaces[subRaceDrop][abilityString]);
+      }
+    }
+  }
+  //check step 4 class graft
+  var classDrop = $('#classDrop').val().trim();
+  if (classDrop != '' && classDrop != 'None') {
+    if (classData[classDrop].hasOwnProperty(abilityString)){
+      Abilities = Abilities.concat(classData[classDrop][abilityString]);
+    }
+  }
+  //check step 5 graft
+  var graft = $('#graftDrop').val().trim();
+  if (graft != '' && graft != 'None') {
+    for (var subgraft in graftTemplates){
+      if (graftTemplates[subgraft].hasOwnProperty(graft)){
+        if (graftTemplates[subgraft][graft].hasOwnProperty(abilityString)){
+          Abilities = Abilities.concat(graftTemplates[subgraft][graft][abilityString]);
+        }
+      }
+    }
+  }
+
+  //capitalise to match data array entries
+  for (var i = 0; i < Abilities.length; i++) {
+    Abilities[i]  = Abilities[i].capitalise();
+  }
+
+  //remove duplicates
+  var unique = Abilities.filter(function(elem, index, self) {
+    return index === self.indexOf(elem);
+  })
+
+  unique = unique.sort();
+
+  return unique;
+
+}
+
 //gets the already selected skills from grafts for step seven
 function getGraftSkills(type){
 
@@ -478,6 +543,10 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         }
     } else if (id=='graftDrop') {
 
+      //re enable any disabled dropdowns
+      disableDropdown('creatureSubTypeDrop',false); //enabling dropdowns
+      disableDropdown('creatureTypeDrop',false);
+
       if (selected != "None") {
 
         var graftObject = findObjectFromKey(graftTemplates,selected);
@@ -492,9 +561,6 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         }
         //if met continue
         if (cr >= crmin) {
-          //re enable any disabled dropdowns
-          disableDropdown('creatureSubTypeDrop',false); //enabling dropdowns
-          disableDropdown('creatureTypeDrop',false);
 
           // check if requirements are met, if not offer to change via modal
           if (graftObject[selected].hasOwnProperty("RequiredSubType") || graftObject[selected].hasOwnProperty("RequiredCreatureType")) {
@@ -540,7 +606,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       }
     } else if (id=='freeDrop') {
 
-      var $descriptionArea = $(".stepSixDescription").first();
+      var $descriptionArea = $(".stepSixDescriptionTwo").first();
       $descriptionArea.empty();
       if (selected != '') {
 
@@ -555,7 +621,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       }
     } else if (id=='specialDrop') {
 
-      var $descriptionArea = $(".stepSixDescriptionTwo").first();
+      var $descriptionArea = $(".stepSixDescriptionThree").first();
       $descriptionArea.empty();
       if (selected != '') {
 
@@ -857,16 +923,19 @@ function stepFourDescription(selected,selectedArray) {
   var selectedMatch = description.match(searchMask);
 
   $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
-  $('#stepFourSave').text(selected+":"+selectedArray+":"+"None");
+
 
   //set secondary dropdowns
-  if (selected == "Soldier"){
-    generateDropdown("stepFourOptionalDropdown","stepFourOptionDrop","Choose attack focus",["Melee","Ranged"]);
-  } else if (selected == "Envoy"){
-    generateDropdown("stepFourOptionalDropdown","stepFourOptionDrop","Choose additional master skill",["Bluff", "Diplomacy" ,"Intimidate"]);
-  } else {
-    $("#stepFourOptionalDropdown").first().empty();
+  if ($('#stepFourSave').text() != selected+":"+selectedArray+":"+"None"){
+    if (selected == "Soldier"){
+      generateDropdown("stepFourOptionalDropdown","stepFourOptionDrop","Choose attack focus",["Melee","Ranged"]);
+    } else if (selected == "Envoy"){
+      generateDropdown("stepFourOptionalDropdown","stepFourOptionDrop","Choose additional master skill",["Bluff", "Diplomacy" ,"Intimidate"]);
+    } else {
+      $("#stepFourOptionalDropdown").first().empty();
+    }
   }
+  $('#stepFourSave').text(selected+":"+selectedArray+":"+"None");
 
 }
 
@@ -1131,8 +1200,11 @@ $('.wizard-card').bootstrapWizard({
               var cr = Number(crString.replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
               var array = $('#arrayDrop').val().trim();
               var subtype = $('#creatureSubTypeDrop').val().trim();
+              var graft = $('#graftDrop').val().trim();
+              var classDrop = $('#classDrop').val().trim();
 
-              if ($('#stepSixSave').text().trim() != cr.toString()+array+subtype){
+              //check if configuration has changed
+              if ($('#stepSixSave').text() != crString + ":" + array + ":" + graft + ":" + classDrop + ":" + subtype) {
                 //step6 generation - dependent on CR
                 maxOptions = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][11];//get max options from array
 
@@ -1157,8 +1229,22 @@ $('.wizard-card').bootstrapWizard({
                 SpecialAbilities = SpecialAbilities.concat(['LABEL=Special abilities']);
                 SpecialAbilities = SpecialAbilities.concat(Object.keys(specialAbilities.Abilities).sort());
                 SpecialAbilities = SpecialAbilities.concat(['ENDLABEL']);
+                //get graft abilities
+                var otherString = getGraftAbilities("Other").join(', ');
+                var specialString = getGraftAbilities("Special").join(', ');
+                var graftString = (otherString.length > 0 ? otherString : '') + (specialString.length > 0 && otherString.length > 0 ? ', ' : '') + (specialString.length > 0 ? specialString : '');
 
+                //clear description areas
+                $(".stepSixDescriptionTwo").first().empty();
+                $(".stepSixDescriptionThree").first().empty();
 
+                var $descriptionArea = $(".stepSixDescription").first();
+                $descriptionArea.empty();
+                if (graftString.length > 2){
+                  $descriptionArea.append("<p><b>Abilities from grafts:</b> "+graftString+"</p>");
+                }
+
+                //generate dropdowns for special and free abilities
                 generateMultiDropdown("freeAbilityDropdown","freeDrop","Select free abilities","Search abilities",FreeAbilities,10);
                 generateMultiDropdown("specialAbilityDropdown","specialDrop","Select special abilities","Search abilities",SpecialAbilities,maxOptions);
                 var $descriptionArea = $(".stepSixAbilities").first();
@@ -1166,7 +1252,7 @@ $('.wizard-card').bootstrapWizard({
                 $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");
 
               }
-              $('#stepSixSave').text(cr.toString()+array+subtype);
+              $('#stepSixSave').text(crString + ":" + array + ":" + graft + ":" + classDrop + ":" + subtype);
 
             } else {
                 return false;
@@ -1285,8 +1371,9 @@ $('.wizard-card').bootstrapWizard({
                 var goodGraftSkills = getGraftSkills("Good");
                 //if envoy grab extra skill from dropdown
                 if ($('[data-id="stepFourOptionDrop"]').length && classDrop == 'Envoy'){
-                  masterGraftSkills = masterGraftSkills.concat([extraMaster]);
+                  masterGraftSkills = masterGraftSkills.concat(extraMaster);
                 }
+
                 //combine
                 var GraftSkills = masterGraftSkills.concat(goodGraftSkills);
 
@@ -1307,8 +1394,8 @@ $('.wizard-card').bootstrapWizard({
                 $('#stepSevenMasterSave').text('')
                 generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,masterSkills,masterSkillNum);
                 $('#masterNumSave').text(masterSkillNum);
-                //Good Skills
 
+                //Good Skills
                 goodMod = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][0];
                 goodSkillNum = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][13][1];
 

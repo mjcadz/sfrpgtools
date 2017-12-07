@@ -9,8 +9,6 @@ bootstrap dropdown select
 
 speeds will need to be picked later (i think)
 
-minify js and cs files
-
 Types of immunities for the immunity special ability
 
 special abilities make the one that affect stats actually affect stats
@@ -25,8 +23,6 @@ make the height of the wizard to height of the heightiest tab.
 
 Change the data gathering to iterate through entries and objects instead of setting outright, that way nothing will be missed
 
-make sure perception is in the correct skill group when data gathering
-
 check oozes only natural skills,
 
 find out how low.high attack values work
@@ -35,18 +31,13 @@ final check for save boost special ability.
 
 check special abilities for ability score adjustments
 
-add in abilities already selected by grafts into step 6
-
-if spellcaster is mystic or technomancer choose spells only from their spell lists
-
+if spellcaster is mystic or technomancer choose spells only from their spell lists. show a message that tells the user which class is selected and that spells should be selected acording to the class
 
 To Test
 soldier class melee/ranged - to test
 envoy skillchoice - to test
 Spellcasting needs to regenerate when creature array changed
 
-done
-fix dragon grafts - remove integrated subtypes
 
 Test
 git remote set-url origin https://github.com/mjcadz/sfrpgtools.git
@@ -59,3 +50,5 @@ hide desription areas while changing text then show. will avoid loading looks
 add menu header bootstrap-select, so show what the user should be doing
 
 Change handling of previously set ability scores so that it is read from the creature entry ( will allow for easier creature type additions)
+
+Bug where if Construct selected, subtype must be magical or technological. Then applying graft that changed the sub type. Doesn't work properly and shouldn't work
