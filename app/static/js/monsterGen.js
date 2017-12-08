@@ -1671,6 +1671,32 @@ $('.wizard-card').bootstrapWizard({
                 return false;
             }
         }
+        //Validation tab 9
+        if (index == 9) {
+
+          //final tab validation
+          var validated = true;
+
+          if ($('[data-id="precedenceDrop"]').length){
+            if ($('[data-id="precedenceDrop"]').text().includes("Choose")) {
+                $('[data-id="precedenceDrop"]').addClass('wizard-shadow');
+                validated = false;
+            }
+          }
+          if (validated){
+            //call statBlock builder on finish
+            $('#summernote').summernote({
+              toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'clear', 'color']],
+                ['fontsize', ['fontsize']],
+                ['insert', ['link','hr','picture']],
+                ['misc', ['fullscreen','codeview']]
+              ]
+            });
+            buildStatBlock();
+          }
+        }
     },
 
     // toggle next/finish button on last tab
@@ -1701,19 +1727,7 @@ $('.wizard-card').bootstrapWizard({
 });
 //finish function - fires when the finish button is pushed
 $('.btn-finish').click(function() {
-  //final tab validation
-    var validated = true;
 
-    if ($('[data-id="precedenceDrop"]').length){
-      if ($('[data-id="precedenceDrop"]').text().includes("Choose")) {
-          $('[data-id="precedenceDrop"]').addClass('wizard-shadow');
-          validated = false;
-      }
-    }
-    if (validated){
-      //call statBlock builder on finish
-      buildStatBlock();
-    }
 });
 
 //button click for modal
