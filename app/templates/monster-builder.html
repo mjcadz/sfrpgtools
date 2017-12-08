@@ -8,6 +8,10 @@
     <h1></h1>
     <p class="lead">This wizard will step through the creation of Starfinder NPCs (including monsters).</p>
     <p></p>
+    <div class="alert-this">
+      <button type="button" class="close" aria-label="Close" onclick="$('.alert-this').hide()"><span aria-hidden="true">&times;</span></button>
+      <p><strong>Heads up!</strong> Class abilities and special abilities are not yet fully integrated into the builder. Any class or special abilities you choose will be printed below the stat block and can be added manually into the stats. Full ability integration will coming be in a later version.</p>
+    </div>
     <div class="container">
         <!--      Wizard container        -->
         <div class="wizard-container">
@@ -29,6 +33,7 @@
                             <li><a href="#step7" data-toggle="tab">Step7</a></li>
                             <li><a href="#step8" data-toggle="tab">Step8</a></li>
                             <li><a href="#step9" data-toggle="tab">Step9</a></li>
+                            <li><a href="#step9" data-toggle="tab">Step10</a></li>
                         </ul>
                     </div>
                     <div id="bar" class="progress">
@@ -42,6 +47,7 @@
                                     <h4 class="info-text">Step 1 - base array.</h4>
                                 </div>
                                 <div class="col-sm-6">
+                                    <hr>
                                     <div id="CRDropdown"></div>
                                     <p></p>
                                     <div id="arrayDropdown"></div>
@@ -49,6 +55,7 @@
 
                                 </div>
                                 <div class="col-sm-6">
+                                  <hr>
                                   <div class="stepOneDescription wizardp">
                                   </div>
                                 </div>
@@ -60,12 +67,14 @@
                                     <h4 class="info-text">Step 2 - creature type graft.</h4>
                                 </div>
                                 <div class="col-sm-6">
+                                  <hr>
                                   <div id="creatureTypeDropdown"></div>
                                   <p></p>
                                   <div id="stepTwoOptionalDropdown"></div>
                                   <p></p>
                                 </div>
                                 <div class="col-sm-6">
+                                  <hr>
                                   <div class="stepTwoDescription wizardp">
                                   </div>
                                 </div>
@@ -78,12 +87,14 @@
                                     <h4 class="info-text">Step 3 - creature subtype graft.</h4>
                                 </div>
                                 <div class="col-sm-6">
+                                    <hr>
                                     <div id="creatureSubtypeDropdown"></div>
                                     <p></p>
                                     <div id="stepThreeOptionalDropdown"></div>
                                     <p></p>
                                 </div>
                                 <div class="col-sm-6">
+                                  <hr>
                                   <div class="stepThreeDescription wizardp">
                                   </div>
                                 </div>
@@ -97,12 +108,14 @@
                                     <h4 class="info-text">Step 4 - class graft.</h4>
                                 </div>
                                 <div class="col-sm-6">
+                                    <hr>
                                     <div id="classDropdown"></div>
                                     <p></p>
                                     <div id="stepFourOptionalDropdown"></div>
                                     <p></p>
                                 </div>
                                 <div class="col-sm-6">
+                                  <hr>
                                   <div class="stepFourDescription wizardp">
                                   </div>
                                 </div>
@@ -116,10 +129,12 @@
                                     <h4 class="info-text">Step 5 - template graft.</h4>
                                 </div>
                                 <div class="col-sm-6">
+                                    <hr>
                                     <div id="graftDropdown"></div>
                                     <p></p>
                                 </div>
                                 <div class="col-sm-6">
+                                  <hr>
                                   <div class="stepFiveDescription wizardp">
                                   </div>
                                 </div>
@@ -132,6 +147,7 @@
                                     <h4 class="info-text">Step 6 - special abilities.</h4>
                                 </div>
                                 <div class="col-sm-6">
+                                    <hr>
                                     <div class="stepSixFreeAbilities wizardp">
                                         <p>Free abilities can be taken as needed for the NPC concept without counting towards special abilities</p>
                                     </div>
@@ -144,6 +160,7 @@
                                     <p></p>
                                 </div>
                                 <div class="col-sm-6">
+                                  <hr>
                                   <div class="stepSixDescription wizardp">
                                   </div>
                                   <div class="stepSixDescriptionTwo wizardp">
@@ -165,6 +182,7 @@
                                     <h4 class="info-text">Step 7 - skills.</h4>
                                 </div>
                                 <div class="col-sm-6">
+                                    <hr>
                                     <div class="stepSevenAbility wizardp"></div>
                                     <p></p>
                                     <div id="AbilityScoresDropdown"></div>
@@ -183,6 +201,7 @@
                                     <p></p>
                                 </div>
                                 <div class="col-sm-6">
+                                    <hr>
                                     <div class="stepSevenAbilityDescription wizardp">
                                     </div>
                                     <div class="stepSevenMasterDescription wizardp">
@@ -202,6 +221,7 @@
                                     <h4 class="info-text">Step 8 - spells.</h4>
                                 </div>
                                 <div class="col-sm-6">
+                                    <hr>
                                     <div class="casterTypeDescription wizardp"></div>
                                     <p></p>
                                     <div id="casterTypeDropdown"></div>
@@ -220,6 +240,9 @@
                                     <p></p>
                                 </div>
                                 <div class="col-sm-6">
+                                  <hr>
+                                  <div class="stepEight0Description wizardp">
+                                  </div>
                                   <div class="stepEight1Description wizardp">
                                   </div>
                                   <div class="stepEight2Description wizardp">
@@ -235,12 +258,25 @@
                                     <h4 class="info-text">Step 9 - final check.</h4>
                                 </div>
                                 <div class="col-sm-6">
+                                  <hr>
                                   <div id="precedenceDropdown"></div>
                                   <p></p>
                                 </div>
                                 <div class="col-sm-6">
+                                  <hr>
                                   <div class="stepNineDescription wizardp">
                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="step10">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h4 class="info-text">Stat Block.</h4>
+                                </div>
+                                <div class="col-sm-6">
+                                </div>
+                                <div class="col-sm-6">
                                 </div>
                             </div>
                         </div>

@@ -1139,6 +1139,8 @@ classData = {
     }
 };
 
+
+//make sure there are not graft entries of the same name in multiple sub headings. eg no "dragon" in both DragonGrafts AND simpleGrafts
 graftTemplates = {
 	"simpleGrafts": {
 		"Aerial (CR 1+)": {

@@ -108,10 +108,10 @@ function buildStatBlock() {
   //step 5 - graft
   var graft = $('#graftDrop').val().trim();
 
-  statBlock.Graft = graft;
-
   //iterate through selected graft traits
   if (graft != '' && graft != 'None') {
+
+    statBlock.Graft = graft;
 
     for (var graftType in graftTemplates){
       //iterate traits in all graft types. eg . dragons, simple
@@ -140,9 +140,12 @@ function buildStatBlock() {
 
     }
   }
-  //TODO
-
   //step 6 - special Abilities
+
+  statBlock.OtherAbilitiesGraft = getGraftAbilities("Other");
+  statBlock.SpecialAbilitiesGraft = getGraftAbilities("Special");
+  statBlock.OtherAbilitiesDescription = $('#freeDrop').val().toString().trim();
+  statBlock.SpecialAbilitiesDescription = $('#specialDrop').val().toString().trim();
 
   //step 7 - skills and Modifiers
 
@@ -153,6 +156,20 @@ function buildStatBlock() {
 
   //step 8 - spells
 
+  //get any spelllike abilities from grafts
+  var subtype = $('#creatureSubTypeDrop').val().trim();
+  if (subtype != '' && subtype != 'None') {
+    if (creatureSubType[subtype].hasOwnProperty("Spell-likeAbilities")){
+      statBlock.spellLikeFromGrafts = creatureSubType[subtype]["Spell-likeAbilities"];
+    }
+    if (creatureSubType[subtype].hasOwnProperty("SubRaces")){
+      subRaceDrop = $('#stepThreeOptionDrop').val().trim();
+      if (creatureSubType[subtype].SubRaces[subRaceDrop].hasOwnProperty("Spell-likeAbilities")){
+        statBlock.spellLikeFromGrafts = creatureSubType[subtype].SubRaces[subRaceDrop]["Spell-likeAbilities"];
+      }
+    }
+  }
+  //spells from descriptions
   for (var i = 1; i < 4; i++) {//loop three times
     //grab text from descriptions
     var spellSlot = $(".stepEight"+ i.toString() +"Description").first().text()
@@ -497,6 +514,41 @@ function getGraftSkills(type){
 
 }
 
+//gets the graft spell-like abilitys
+function getGraftSpelllikeAbilities(){
+
+  //check step 3 subtype graft skills
+  var spelllike = {}
+
+  var subtype = $('#creatureSubTypeDrop').val().trim();
+  if (subtype != '' && subtype != 'None') {
+    if (creatureSubType[subtype].hasOwnProperty("Spell-likeAbilities")){
+      spelllike = creatureSubType[subtype]["Spell-likeAbilities"];
+    }
+    if (creatureSubType[subtype].hasOwnProperty("SubRaces")){
+      subRaceDrop = $('#stepThreeOptionDrop').val().trim();
+      if (creatureSubType[subtype].SubRaces[subRaceDrop].hasOwnProperty("Spell-likeAbilities")){
+        spelllike = creatureSubType[subtype].SubRaces[subRaceDrop]["Spell-likeAbilities"];
+      }
+    }
+  }
+
+  //check step 5 graft
+  var graft = $('#graftDrop').val().trim();
+  if (graft != '' && graft != 'None') {
+    for (var subgraft in graftTemplates){
+      if (graftTemplates[subgraft].hasOwnProperty(graft)){
+        if (graftTemplates[subgraft][graft].hasOwnProperty("Spell-likeAbilities")){
+          spelllike = graftTemplates[subgraft][graft]["Spell-likeAbilities"];
+        }
+      }
+    }
+  }
+  //if any spell like attributes found
+  return spelllike;
+
+}
+
 //Handle the clicks from dropdowns - function is divided by dropdown id. each dropdown will only execute the code for its own id
 function dropClickHandler(e, clickedIndex, newValue, oldValue) {
     //get the item that wa selected on the dropdown click + the dropdowns id
@@ -779,7 +831,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       $(".stepEight2Description").first().empty();
       $(".stepEight3Description").first().empty();
 
-      showSpellDropdowns(caster);
+      showSpellDropdowns(caster,'None');
 
     } else if (id == 'secondaryDrop'){
 
@@ -803,7 +855,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       $(".stepEight2Description").first().empty();
       $(".stepEight3Description").first().empty();
 
-      showSpellDropdowns(secondary);
+      showSpellDropdowns(secondary,'None');
 
     }
 
@@ -811,7 +863,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 }
 
 //populates the dropdowns on step eight, either spell-like, secondary magic, or full caster abilities
-function showSpellDropdowns(caster){
+function showSpellDropdowns(caster,className){
 
   var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','');
 
@@ -825,7 +877,7 @@ function showSpellDropdowns(caster){
       i += 1;
       var spellNum = spellObject[castCat][0];
       var spellLevel = spellObject[castCat][1].toString();
-      var spellList = getSpellsByLevel(spellLevel);
+      var spellList = getSpellsByLevel(spellLevel,className);
 
       var $descriptionAbility = $(".stepEight"+i).first();
       $descriptionAbility.empty();
@@ -847,7 +899,7 @@ function showSpellDropdowns(caster){
         spellNum = 1;
       }
       var spellLevel = spellObject[castCat][1].toString();
-      var spellList = getSpellsByLevel(spellLevel);
+      var spellList = getSpellsByLevel(spellLevel,className);
       if (caster == 'once-per-day'){
         if (castCat == "1/day"){
           i = 1;
@@ -999,15 +1051,34 @@ function getGraftArray() {
 }
 
 //retrieves the spells of a specific level from the spalls dat objects
-function getSpellsByLevel(levelString){
+function getSpellsByLevel(levelString,className){
   var list = [];
-  for (spellName in spellsData){
-    if (spellsData[spellName].LEVEL == levelString){
-      list.push(spellName)
+  if (className == 'None'){
+    for (spellName in spellsData){
+      if (spellsData[spellName].LEVEL == levelString){
+        list.push(spellName)
+      }
+    }
+  } else if (className == 'Mystic' || className == 'Technomancer'){
+    for (spellName in spellsData){
+      if (spellsData[spellName].LEVEL == levelString && spellsData[spellName].CLASSES.includes(className)){
+        list.push(spellName)
+      }
     }
   }
   return list;
 
+}
+
+//checks if object is empty
+function isObjectEmpty(myObject) {
+    for(var key in myObject) {
+        if (myObject.hasOwnProperty(key)) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 
@@ -1035,6 +1106,9 @@ $('.wizard-card').bootstrapWizard({
     onNext: function(tab, navigation, index) {
         //Validation tab 1
         if (index == 1) {
+
+            //hide the alert
+            $('.alert-this').hide();
 
             var validated = true;
 
@@ -1435,13 +1509,15 @@ $('.wizard-card').bootstrapWizard({
                 //empty descriptions and fill with skills
                 $(".stepSevenMasterDescription").first().empty();
                 $(".stepSevenGoodDescription").first().empty();
-                $(".stepSevenAsterix").first().empty();
+
                 if (masterGraftSkills.length > 0){
                   $(".stepSevenMasterDescription").first().append("<p><b>Master skills:</b> "+masterGraftSkills.join().replace(/,/g,'*,')+"*</p>");
+                  $(".stepSevenAsterix").first().empty();
                   $(".stepSevenAsterix").first().append("<p>*selected by graft</p>");
                 }
                 if (goodGraftSkills.length > 0){
                   $(".stepSevenGoodDescription").first().append("<p><b>Good skills:</b> "+goodGraftSkills.join().replace(/,/g,'*,')+"*</p>");
+                  $(".stepSevenAsterix").first().empty();
                   $(".stepSevenAsterix").first().append("<p>*selected by graft</p>");
                 }
                 //save the current configuration
@@ -1470,18 +1546,36 @@ $('.wizard-card').bootstrapWizard({
 
               //setup tab 8 - spells
 
+              //grab spell objects from graft if any
+              var graftSpells = getGraftSpelllikeAbilities()
+
               var array = $('#arrayDrop').val().trim();
               var special = $('#specialDrop').val().toString().trim();
+              var graft = $('#graftDrop').val().trim();
+              var subtype = $('#creatureSubTypeDrop').val().trim();
+              var classDrop = $('#classDrop').val().trim();
 
               var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','');
+              var cr = Number(crString.replace("1/2","0.5").replace("1/3","0.3"));
+
               if (special.includes("Secondary Magic")){
                 special = "Secondary Magic";
               } else {
                 special = "None"
               }
+              //TODO this will need to be fixed if graft type ever has CR and other abilities
+              var graftSpelllike = false;
+              if (graftSpells.hasOwnProperty("CR")) {
+                var crmatch = graftSpells["CR"];
+                if (cr >= crmatch){
+                  graftSpelllike = true;
+                  graftSpells = {};
+                }
+              }
 
-              if ($('#stepEightTwoSave').text() != array+":"+special+":"+crString ){
+              if ($('#stepEightTwoSave').text() != array+":"+special+":"+crString+":"+subtype+":"+graft+":"+classDrop){
 
+                //clear page
                 $("#casterTypeDropdown").first().empty();
                 $("#spells1Dropdown").first().empty();
                 $("#spells2Dropdown").first().empty();
@@ -1489,25 +1583,57 @@ $('.wizard-card').bootstrapWizard({
                 $(".stepEight1").first().empty();
                 $(".stepEight2").first().empty();
                 $(".stepEight3").first().empty();
+                $(".stepEight0Description").first().empty();
                 $(".stepEight1Description").first().empty();
                 $(".stepEight2Description").first().empty();
                 $(".stepEight3Description").first().empty();
+
+                //check if there are graft spell-like abilities and print if necessary
+                if (!isObjectEmpty(graftSpells)){
+                  var $description = $(".stepEight0Description").first();
+                  $description.empty();
+                  graftString = "<p>"+"Spell-like Abilities from creature graft:"+"</p>";
+                  for (key in graftSpells) {
+                    var Key = key;
+                    if (Key == "atWill"){
+                      Key = "at will";
+                    }
+                    graftString += "<p><b>" + Key + ":</b> " + graftSpells[key].join(', ') + "</p>";
+                  }
+
+                  $description.append(graftString);
+
+                };
 
                 var $descriptionSpell = $(".casterTypeDescription").first();
                 $descriptionSpell.empty();
 
                 if (array == "Spellcaster"){
-                  descSpell = "This creature is a spellcaster.";
-                  generateDropdown("casterTypeDropdown","casterDrop","Choose casting type",["Spell-like abilities","Full caster"]);
+                  //spell caster base array
+                  if (classDrop == 'Mystic' || classDrop == 'Technomancer'){
+                    //spelcaster classes
+                    descSpell = "This creature has the " + classDrop + " class. Spell choices are only from the " + classDrop + " spell list.";
+                    showSpellDropdowns("caster",classDrop);
+                  } else {
+                    //spellcasters can choose between full caster or spell-like abilities
+                    descSpell = "This creature is a spellcaster.";
+                    generateDropdown("casterTypeDropdown","casterDrop","Choose casting type",["Spell-like abilities","Full caster"]);
+                  };
+                } else if( graftSpelllike ){
+                  //spell-like abilities from graft abilities
+                  descSpell = "This creature has spell-like abilities.";
+                  showSpellDropdowns("spell-like",'None');
                 } else if(special == "Secondary Magic"){
-                  descSpell = "This creature has spell-like abilities via the Secondary Magic ability.";
+                  //spell-like abilities from secondary magic special ability
+                  descSpell = "This creature has limited spell-like abilities via the Secondary Magic ability.";
                   generateDropdown("casterTypeDropdown","secondaryDrop","Choose limited spells",["Only once-per-day spells","Only one spell per frequency (at will, 1/day, etc.)"]);
                 } else {
+                  //no spells brah
                   descSpell = "Spell casting is reserved for creatures with the spellcaster base and creatures with spell-like abilities";
-                }
+                };
 
                 $descriptionSpell.append("<p>"+descSpell+"</p>");
-                $('#stepEightTwoSave').text(array+":"+special+":"+crString);
+                $('#stepEightTwoSave').text(array+":"+special+":"+crString+":"+subtype+":"+graft+":"+classDrop);
               }
 
             } else {
