@@ -39,7 +39,7 @@ dropdowns for speeds
 
 reach
 
-alignment
+alignment - add to statblock and choose in final step, also size
 
 other abilities
 

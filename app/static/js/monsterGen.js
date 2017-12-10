@@ -263,6 +263,30 @@ function buildStatBlock() {
     }
   }
 
+  //
+  //Printing the stat block
+  //
+
+  //if the string requires more than one line of code then build it before the stat block section
+
+  //build name String
+  var nameInput = $('#inputName').val().trim();
+  var nameString = '';
+  if (nameInput == ''){
+    nameString = "CREATURE NAME";
+  } else {
+    nameString = nameInput;
+  }
+
+  //build creature type String
+  var subTypeString = '';
+  if (['Outsider','Humanoid','Construct','Vermin'].includes(statBlock.CreatureType)){
+    if (!subTypeAll.includes(statBlock.SubType)){
+      subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
+    }
+  }
+  var typeString = '<p>CN Medium ' + statBlock.CreatureType.toLowerCase() + subTypeString + '</p>';
+
   //build skills string
   listOfSkills = Object.keys(skillNames);
   var skillString = '';
@@ -286,7 +310,6 @@ function buildStatBlock() {
     var clVal = ordinalNumber(Number(statBlock.Cr));
     spellString += '<p><b>Spells Known</b> (CL ' + clVal +'; ranged '+statBlock.highAttackBonus+')</p>';
     //for each frequency
-    alert(statBlock.Spellcasting.length);
     for (var i = 0; i < statBlock.Spellcasting.length; i++) {
       spellBlock = statBlock.Spellcasting[i];
       //add new line for each frequency
@@ -319,9 +342,7 @@ function buildStatBlock() {
     specialString += '<p><b>SPECIAL ABILITIES</b></p>';
     specialString += '<hr>';
     var abilities = statBlock.SpecialAbilitiesDescription;
-    alert(abilities)
     for (var i = 0; i < abilities.length; i++) {
-      alert(abilities[i])
       specialString += '<p><b>'+abilities[i]+'</b> ';
       specialString += specialAbilities.Abilities[abilities[i]].Description;
       specialString += '</p><br>';
@@ -339,9 +360,10 @@ function buildStatBlock() {
   textBlock = "";
   //description
   textBlock += '<hr>';
-  textBlock += leftAndRight('<b>CREATURE NAME</b>','<b>CR '+statBlock.Cr+'</b>');
+  textBlock += leftAndRight('<b>' + nameString + '</b>','<b>CR '+statBlock.Cr+'</b>');
   textBlock += '<hr>';
   textBlock += "<p><b>XP "+statBlock.Xp+"</b></p>";
+  textBlock += typeString;
   textBlock += "<p><b>Init</b> "+statBlock.dex+sensesString+'; <b>Perception</b> '+statBlock.goodSkills[0].toString()+"</p>";
   textBlock += "<br>";
 
@@ -369,7 +391,7 @@ function buildStatBlock() {
   textBlock += "<br>";
 
   //special Abilities
-  if (spellString != ''){//add spellcasting if any
+  if (specialString != ''){//add spellcasting if any
     textBlock += specialString;
   }
 
