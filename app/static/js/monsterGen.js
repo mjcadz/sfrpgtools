@@ -1,3 +1,6 @@
+var abilityMods = [];
+var abilityModsPrev = 0
+
 //This funcion reads the state of all the dropdowns in the wizard, uses that info to retrieve the appropriate data from the data objects, then builds the chosen stat block
 function buildStatBlock() {
 
@@ -11,6 +14,8 @@ function buildStatBlock() {
 
   statBlock.Cr = CRDrop;
   statBlock.Base = arrayDrop;
+  //monster XP
+  statBlock.Xp = xp[CRDrop];
 
   var baseStats = [];
   if (arrayDrop == 'Combatant') {
@@ -144,8 +149,27 @@ function buildStatBlock() {
 
   statBlock.OtherAbilitiesGraft = getGraftAbilities("Other");
   statBlock.SpecialAbilitiesGraft = getGraftAbilities("Special");
-  statBlock.OtherAbilitiesDescription = $('#freeDrop').val().toString().trim();
-  statBlock.SpecialAbilitiesDescription = $('#specialDrop').val().toString().trim();
+  //free abilities selected if any
+  var freeList = $('#freeDrop').val().toString().trim();
+  if(freeList != ''){
+    if (freeList.includes(',')){
+      var subArray = freeList.split(',');
+    } else {
+      var subArray = [freeList];
+    }
+    statBlock.OtherAbilitiesDescription = subArray;
+  }
+  //special abilities selected if any
+  var specialList = $('#specialDrop').val().toString().trim();
+  if(specialList != ''){
+    if (specialList.includes(',')){
+      var subArray = specialList.split(',');
+    } else {
+      var subArray = [specialList];
+    }
+    statBlock.SpecialAbilitiesDescription = subArray;
+  }
+
 
   //step 7 - skills and Modifiers
 
@@ -170,15 +194,27 @@ function buildStatBlock() {
     }
   }
   //spells from descriptions
+  spellArray = [];
   for (var i = 1; i < 4; i++) {//loop three times
     //grab text from descriptions
     var spellSlot = $(".stepEight"+ i.toString() +"Description").first().text()
+
     //check if there is text there and assign to stat block
     if (spellSlot.length > 2){
       var spells = spellSlot.split(': ');
-      var freq = spells[0].replace(' ','');
-      statBlock['Spells'+freq] = spells[1].split(', ');
+      var frequency = spells[0];
+      //make sure values are arrays even if only 1 value
+      if (spells[1].includes(',')){
+        var subArray = spells[1].split(', ');
+      } else {
+        var subArray = [spells[1]];
+      }
+      spellArray[spellArray.length] = [frequency].concat(subArray);
     }
+  }
+  //if no spells chosen, dont add spell list
+  if (spellArray.length != 0){
+    statBlock.Spellcasting = spellArray;
   }
 
   //step 9 - final checks
@@ -213,6 +249,135 @@ function buildStatBlock() {
     }
   }
 
+  //apply ability scores
+  scoreNames = ['str','dex','con','int','wis','cha'];
+  for (i = 0; i < scoreNames.length; i++) {
+    if (!statBlock.hasOwnProperty(scoreNames[i])){
+      ability = scoreNames[i].capitalise();
+      if (statBlock.MainAbilityScores.includes(ability)){
+        index = statBlock.MainAbilityScores.indexOf(ability);
+        statBlock[scoreNames[i]] = '+' + statBlock['abilityScoreModifier'+ index.toString()].toString();
+      } else {
+        statBlock[scoreNames[i]] = '+0';
+      }
+    }
+  }
+
+  //build skills string
+  listOfSkills = Object.keys(skillNames);
+  var skillString = '';
+  for (i = 0; i < listOfSkills.length; i++) {
+    if (statBlock.MasterSkills.includes(listOfSkills[i])){
+      skillString += ', ' + listOfSkills[i] + ' +' + statBlock.masterSkills[0].toString()
+    } else if (statBlock.GoodSkills.includes(listOfSkills[i])){
+      skillString += ', ' + listOfSkills[i] + ' +' + statBlock.goodSkills[0].toString()
+    }
+  }
+  skillString = skillString.replace(', ','');
+  if (skillString == ''){
+    skillString = 'None';
+  }
+
+  //build spell casting string
+  spellString = '';
+  //check if creature has spellcasting
+  if (statBlock.hasOwnProperty('Spellcasting')){
+    //Caster Level
+    var clVal = ordinalNumber(Number(statBlock.Cr));
+    spellString += '<p><b>Spells Known</b> (CL ' + clVal +'; ranged '+statBlock.highAttackBonus+')</p>';
+    //for each frequency
+    alert(statBlock.Spellcasting.length);
+    for (var i = 0; i < statBlock.Spellcasting.length; i++) {
+      spellBlock = statBlock.Spellcasting[i];
+      //add new line for each frequency
+      spellString += '<p>' + spellBlock[0] + '-';
+      //for each spell
+      for (var j = 1; j < spellBlock.length; j++) {
+        spell = spellBlock[j];
+        dc = '';
+        //check if the spell needs a DC save and add in if necessary
+        if (spellsData[spellBlock[j]].hasOwnProperty("SAVEINFO")){
+          if (spellsData[spellBlock[j]]["SAVEINFO"] != 'None'){
+            dc = ' (DC ' + (Number(spellBlock[0].charAt(0)) + statBlock.spellDC).toString() + ')';
+          }
+        } else {
+          dc = ' (DC ' + (Number(spellBlock[0].charAt(0)) + statBlock.spellDC).toString() + ')';
+        }
+        spell+=dc;
+        spellString += ',' + spell
+      }
+      // finalise the spell string
+      spellString = spellString.replace(',','')//remove first comma
+      spellString += '</p>';
+    }
+  }
+
+  var specialString = '';
+  //build special ability String
+
+  if (statBlock.hasOwnProperty('SpecialAbilitiesDescription')){
+    specialString += '<p><b>SPECIAL ABILITIES</b></p>';
+    specialString += '<hr>';
+    var abilities = statBlock.SpecialAbilitiesDescription;
+    alert(abilities)
+    for (var i = 0; i < abilities.length; i++) {
+      alert(abilities[i])
+      specialString += '<p><b>'+abilities[i]+'</b> ';
+      specialString += specialAbilities.Abilities[abilities[i]].Description;
+      specialString += '</p><br>';
+    }
+
+  }
+
+  //check if there is any senses
+  var sensesString = '';
+  if (statBlock.hasOwnProperty('Senses')){
+    sensesString = '; <b>Senses</b> '+statBlock.Senses.join(', ').toLowerCase()
+  }
+
+  //build text stat Block
+  textBlock = "";
+  //description
+  textBlock += '<hr>';
+  textBlock += leftAndRight('<b>CREATURE NAME</b>','<b>CR '+statBlock.Cr+'</b>');
+  textBlock += '<hr>';
+  textBlock += "<p><b>XP "+statBlock.Xp+"</b></p>";
+  textBlock += "<p><b>Init</b> "+statBlock.dex+sensesString+'; <b>Perception</b> '+statBlock.goodSkills[0].toString()+"</p>";
+  textBlock += "<br>";
+
+  //Defence
+  textBlock += leftAndRight('<b>DEFENCE</b>','<b>HP</b> '+statBlock.hitPoints);
+  textBlock += "<hr>";
+  textBlock += "<p><b>EAC</b> "+statBlock.eac + "; <b>KAC</b> "+statBlock.kac+"<p>";
+  textBlock += "<p><b>Fort</b> +"+statBlock.fortitude + "; <b>Ref</b> +"+statBlock.reflex+ "; <b>Will</b> +"+statBlock.will+"<p>";
+  textBlock += "<br>";
+
+  //Offence
+  textBlock += '<p><b>OFFENCE</b></p>';
+  textBlock += '<hr>';
+  textBlock += '<p><b>Speed</b> 30 ft.</p>';//TODO fix this
+  if (spellString != ''){//add spellcasting if any
+    textBlock += spellString;
+  }
+  textBlock += "<br>";
+
+  //statistics
+  textBlock += '<p><b>STATISTICS</b></p>';
+  textBlock += '<hr>';
+  textBlock += "<p><b>Str</b> "+statBlock.str + "; <b>Dex</b> "+statBlock.dex+ "; <b>Con</b> "+statBlock.con+ "; <b>Int</b> "+statBlock.int+ "; <b>Wis</b> "+statBlock.wis+ "; <b>Cha</b> "+statBlock.cha+"</p>";
+  textBlock += '<p><b>Skills </b>'+skillString+'</p>';
+  textBlock += "<br>";
+
+  //special Abilities
+  if (spellString != ''){//add spellcasting if any
+    textBlock += specialString;
+  }
+
+  //statBlock.CreatureType
+  var $StatBlock = $(".summernoteEdit").first();
+  $StatBlock.empty();
+  $StatBlock.append(textBlock);
+
 
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
@@ -228,6 +393,26 @@ function buildStatBlock() {
   }
   $outputArea.append("<p>"+print+"</p>");
 
+}
+
+//returns a string div with right aligned and left alignedtext on the same line
+function leftAndRight(left,right){
+  return '<div class="row"><div class="col-xs-9"><p>' + left + '</p></div><div class="col-xs-3"><p class="text-right">' + right + '</p></div></div>'
+}
+
+function ordinalNumber(i) {
+    var j = i % 10,
+        k = i % 100;
+    if (j == 1 && k != 11) {
+        return i + "st";
+    }
+    if (j == 2 && k != 12) {
+        return i + "nd";
+    }
+    if (j == 3 && k != 13) {
+        return i + "rd";
+    }
+    return i + "th";
 }
 
 //get class stats - if class selected, add the required stats to the stat block
@@ -775,6 +960,8 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
       $('#stepSevenGoodSave').text(selected);
     } else if (id=='scoresDrop') {
+      //get ability mods in the correct order
+
 
       var $descriptionArea = $(".stepSevenAbilityDescription").first();
       $descriptionArea.empty();
@@ -788,7 +975,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       var $descriptionArea = $(".stepEight1Description").first();
       $descriptionArea.empty();
       if (selected != ''){
-        $descriptionArea.append("<p><b>"+saved[1]+":</b> "+selected.replace(',',', ')+"</p>");
+        $descriptionArea.append(("<p><b>"+saved[2]+"th ("+saved[1]+"):</b> "+selected.replace(/,/g,', ')+"</p>").replace("0th","0").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
       }
 
     } else if (id=='spells2Drop') {
@@ -797,7 +984,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       var $descriptionArea = $(".stepEight2Description").first();
       $descriptionArea.empty();
       if (selected != ''){
-        $descriptionArea.append("<p><b>"+saved[2]+":</b> "+selected.replace(',',', ')+"</p>");
+        $descriptionArea.append(("<p><b>"+saved[4]+"th ("+saved[3]+"):</b> "+selected.replace(/,/g,', ')+"</p>").replace("0th","0").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
       }
 
     } else if (id=='spells3Drop') {
@@ -806,7 +993,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       var $descriptionArea = $(".stepEight3Description").first();
       $descriptionArea.empty();
       if (selected != ''){
-        $descriptionArea.append("<p><b>"+saved[3]+":</b> "+selected.replace(',',', ')+"</p>");
+        $descriptionArea.append(("<p><b>"+saved[6]+"th ("+saved[5]+"):</b> "+selected.replace(/,/g,', ')+"</p>").replace("0th","0").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
       }
 
     } else if (id == 'casterDrop'){
@@ -870,9 +1057,10 @@ function showSpellDropdowns(caster,className){
   if (caster != 'once-per-day' && caster != 'once-per-freq'){
 
     var i = 0;
-    var spellObject = spellCounts[crString][caster];
+    var spellObject = spellCounts[crString][caster]; //return cr and type specific spell categories and numbers
     var save = "dummy";
 
+    //do all casting categories eg 1/day
     for (castCat in spellObject){
       i += 1;
       var spellNum = spellObject[castCat][0];
@@ -884,7 +1072,7 @@ function showSpellDropdowns(caster,className){
       $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
 
       generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
-      save += ","+castCat;
+      save += ","+castCat+","+spellLevel;
     }
   } else {
 
@@ -905,7 +1093,7 @@ function showSpellDropdowns(caster,className){
           i = 1;
           var $descriptionAbility = $(".stepEight"+i).first();
           $descriptionAbility.empty();
-          $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+          $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","0").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
 
           generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
           save += ","+castCat;
@@ -917,7 +1105,7 @@ function showSpellDropdowns(caster,className){
         $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
 
         generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
-        save += ","+castCat;
+        save += ","+castCat+","+spellLevel;
 
       }
     }
@@ -1099,6 +1287,9 @@ $('.wizard-card').bootstrapWizard({
         generateDropdown("creatureTypeDropdown","creatureTypeDrop","Choose creature type",Object.keys(creatureType).sort());
         //Step5
         generateDropdown("graftDropdown","graftDrop","Optional template graft",getGraftArray());
+
+        //save button is initially hidden
+        $('.btn-save').hide();
     },
 
     //runs when next button pressed. Sorted by tab index. each tab only executes its own code.
@@ -1685,7 +1876,7 @@ $('.wizard-card').bootstrapWizard({
           }
           if (validated){
             //call statBlock builder on finish
-            $('#summernote').summernote({
+            /*$('#summernote').summernote({
               toolbar: [
                 // [groupName, [list of button]]
                 ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'clear', 'color']],
@@ -1693,7 +1884,7 @@ $('.wizard-card').bootstrapWizard({
                 ['insert', ['link','hr','picture']],
                 ['misc', ['fullscreen','codeview']]
               ]
-            });
+            });*/
             buildStatBlock();
           }
         }
@@ -1751,7 +1942,7 @@ $('.btn-change').click(function(){
      $('#classDrop').selectpicker('val', prev[0]);
      //stepFourDescription(prev[0],prev[1]);
    }
-})
+});
 
 //button click for modal
 $('.btn-graft').click(function(){
@@ -1782,4 +1973,26 @@ $('.btn-graft').click(function(){
      var prev = $('#stepFiveSave').text().trim();
      $('#graftDrop').selectpicker('val', prev);
    }
-})
+});
+
+function edit() {
+  $('.btn-save').show();
+  $('.btn-edit').hide();
+  $('.summernoteEdit').summernote({
+    focus: true,
+    toolbar: [
+      // [groupName, [list of button]]
+      ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'clear', 'color']],
+      ['fontsize', ['fontsize']],
+      ['insert', ['link','hr','picture']],
+      ['misc', ['fullscreen','codeview']]
+    ]
+  });
+};
+
+function save() {
+  $('.btn-save').hide();
+  $('.btn-edit').show();
+  var markup = $('.summernoteEdit').summernote('code');
+  $('.summernoteEdit').summernote('destroy');
+};

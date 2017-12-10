@@ -194,6 +194,36 @@ spellcasterAttackStats = {
     "25": ["+36", "+34", "8d10+25", "16d6+25", "12d12+25+Str", "15d6+25+Str", "6d12+25+Str"]
 };
 
+xp = {
+  "1/3": "135",
+  "1/2": "200",
+  "1": "400",
+  "2": "600",
+  "3": "800",
+  "4": "1,200",
+  "5": "1,600",
+  "6": "2,400",
+  "7": "3,200",
+  "8": "4,800",
+  "9": "6,400",
+  "10": "9,600",
+  "11": "12,800",
+  "12": "19,200",
+  "13": "25,600",
+  "14": "38,400",
+  "15": "51,200",
+  "16": "76,800",
+  "17": "102,400",
+  "18": "153,600",
+  "19": "204,800",
+  "20": "307,200",
+  "21": "409,600",
+  "22": "614,400",
+  "23": "819,200",
+  "24": "1,228,800",
+  "25": "1,638,400"
+};
+
 creatureType = {
   "Aberration": {
     "Adjustments": {"fortitude":2,"reflex":2,"attackMod":1},
@@ -1170,7 +1200,7 @@ graftTemplates = {
 			}
 		},
 		"Celestial": {
-			"Alignment": "Alignment changes to good.",
+			"Alignment": "Good",
 			"Description": "Celestial creatures are natives of one of the good-aligned Outer Planes.",
 			"DR": {
 				"DR": "CR-10/evil",
@@ -1204,7 +1234,7 @@ graftTemplates = {
 			]
 		},
 		"Entropic": {
-			"Alignment": "Alignment changes to chaotic.",
+			"Alignment": "Chaotic",
 			"Description": "Entropic creatures are natives of one of the Outer Planes where chaos is paramount. A GM can allow creatures summoned with the summon creature spell that would normally have the astral, celestial, or fiendish simple template graft instead have the entropic simple template graft.",
 			"DR": {
 				"DR": "CR-10/lawful",
@@ -1332,7 +1362,7 @@ graftTemplates = {
       "Spell-likeAbilities": {
         "CR": 9
       },
-      "Alignment": "Lawful evil.",
+      "Alignment": "Lawful evil",
       "DR": {
         "CR11": "5/magic",
         "CR13": "10/magic",
