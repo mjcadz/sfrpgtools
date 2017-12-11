@@ -985,35 +985,46 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
     } else if (id=='scoresDrop') {
       //get ability mods in the correct order
 
-      //set initial counter if not sell
-      if (!sessionStorage.previous) {
-        sessionStorage.previous = 0;
-        sessionStorage.abilities = [];
-      }
+      selected = selected.toString().trim();
+
       //get array of selected items
-      if (selected.toString().includes(',')){
-        selected = selected.toString().trim().split(",")
+      if (selected.includes(',')){
+        var mods = selected.split(",");
+      } else if  (selected == ''){
+        var mods = [];
       } else {
-        selected = [selected.toString().trim()]
+        var mods = [selected];
       }
 
-      if (selected.length > sessionStorage.previous) {
+      saved = $('#stepSevenSaveThree').text()
 
-        for (var i = 0; i < sessionStorage.abilities.length; i++) {
-          selected = removeElement(selected,sessionStorage.abilities[i])
+      if (saved.includes(',')){
+        var abils = saved.split(",");
+      } else if (saved == ''){
+        var abils = [];
+      }else {
+        var abils = [saved];
+      }
+
+      if (mods.length > abils.length) {
+        for (var i = 0; i < abils.length; i++) {
+          mods = removeElement(mods,abils[i])
         }
-        sessionStorage.abilities = sessionStorage.abilities.push(selected[0]);
-
-
+        abils = abils.concat(mods);
+      } else if (mods.length < abils.length) {
+        var abilities = abils.slice();
+        for (var i = 0; i < mods.length; i++) {
+          abilities = removeElement(abilities,mods[i])
+        }
+        abils = removeElement(abils,abilities[0]);
       }
 
-
-
+      $('#stepSevenSaveThree').text(abils)
 
       var $descriptionArea = $(".stepSevenAbilityDescription").first();
       $descriptionArea.empty();
-      if (.length > 2){
-        $descriptionArea.append("<p><b>Main ability scores:</b> ("+selected.toString()+")</p>");
+      if (abils.length > 2){
+        $descriptionArea.append("<p><b>Main ability scores:</b> ("+abils.join(',')+")</p>");
       }
 
     } else if (id=='spells1Drop') {
@@ -1644,7 +1655,7 @@ $('.wizard-card').bootstrapWizard({
 
                   }
 
-                  var dropdown = '<select class="selectpicker" id="scoresDrop" title="Choose top ability scores"data-style="btn-default" data-width="100%" data-size="13" multiple data-max-options="3">' + str + dex + con + int + wis + cha + '</select>'
+                  var dropdown = '<select class="selectpicker" id="scoresDrop" title="Choose top ability scores"data-style="btn-default" data-width="100%" data-size="13" multiple data-max-options="3" data-selected-text-format="count > 0">' + str + dex + con + int + wis + cha + '</select>'
                   document.getElementById('AbilityScoresDropdown').innerHTML = dropdown;
                   //initialise dropdown
                   $('#scoresDrop').selectpicker();
@@ -1773,7 +1784,7 @@ $('.wizard-card').bootstrapWizard({
             var validated = true;
 
             if ($('[data-id="scoresDrop"]').length){
-              var dropText = $('[data-id="scoresDrop"]').text().trim();
+              var dropText = $('#scoresDrop').val().toString().trim();;
               if (dropText.split(",").length < 3) {
                   $('[data-id="scoresDrop"]').addClass('wizard-shadow');
                   validated = false;
