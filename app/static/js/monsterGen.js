@@ -419,9 +419,10 @@ function buildStatBlock() {
 
 //returns a string div with right aligned and left alignedtext on the same line
 function leftAndRight(left,right){
-  return '<div class="row"><div class="col-xs-9"><p>' + left + '</p></div><div class="col-xs-3"><p class="text-right">' + right + '</p></div></div>'
+  return '<div class="row"><div class="col-xs-8"><p>' + left + '</p></div><div class="col-xs-4"><p class="text-right">' + right + '</p></div></div>'
 }
 
+//turns a 3 into a 3rd etc.
 function ordinalNumber(i) {
     var j = i % 10,
         k = i % 100;
@@ -984,10 +985,34 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
     } else if (id=='scoresDrop') {
       //get ability mods in the correct order
 
+      //set initial counter if not sell
+      if (!sessionStorage.previous) {
+        sessionStorage.previous = 0;
+        sessionStorage.abilities = [];
+      }
+      //get array of selected items
+      if (selected.toString().includes(',')){
+        selected = selected.toString().trim().split(",")
+      } else {
+        selected = [selected.toString().trim()]
+      }
+
+      if (selected.length > sessionStorage.previous) {
+
+        for (var i = 0; i < sessionStorage.abilities.length; i++) {
+          selected = removeElement(selected,sessionStorage.abilities[i])
+        }
+        sessionStorage.abilities = sessionStorage.abilities.push(selected[0]);
+
+
+      }
+
+
+
 
       var $descriptionArea = $(".stepSevenAbilityDescription").first();
       $descriptionArea.empty();
-      if (selected.toString().trim().split(",").length > 2){
+      if (.length > 2){
         $descriptionArea.append("<p><b>Main ability scores:</b> ("+selected.toString()+")</p>");
       }
 

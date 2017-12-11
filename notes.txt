@@ -27,6 +27,8 @@ check oozes only natural skills,
 
 find out how low.high attack values work
 
+change the bootstarp dropdown focus color to something else. mint?
+
 add the rest of the grafts
 
 add basic stat block maybe only choosing step 1 options
