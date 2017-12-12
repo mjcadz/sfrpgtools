@@ -45,8 +45,6 @@ handle lashunta spells
 
 fix special ability aura, and ones with commas
 
-spellcasting type title in stat block, Spells Known. (mystic technomancer also.) or spell-like abilities
-
 final check for save boost special ability.
 
 check special abilities for ability score adjustments

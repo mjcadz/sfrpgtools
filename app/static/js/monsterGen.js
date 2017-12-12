@@ -236,8 +236,11 @@ function buildStatBlock() {
 
   //step 9 - final checks
 
+  //
   //stat block adjustments
+  //
 
+  //choose creature or class adjustments to apply
   var classDrop = $('#classDrop').val().trim();
   //choose class or creature adjustments not both
   if (classDrop != '' && classDrop != 'None'){
@@ -250,7 +253,7 @@ function buildStatBlock() {
   } else {
     var adjustments = statBlock.CreatureAdjustments;
   }
-
+  //apply
   for (adjustment in adjustments) {
     if (adjustment == "anySave"){
       //use picker
@@ -281,6 +284,43 @@ function buildStatBlock() {
       }
     }
   }
+
+  //apply any adjustment ABILITIES
+  if (statBlock.hasOwnProperty('AdjustmentAbilitiesDescription')){
+    var adjustments = statBlock.AdjustmentAbilitiesDescription
+    if (adjustments.includes("Extra Hit Points")){
+      //add 20% hitpoints
+      alert(statBlock.hitPoints)
+      statBlock.hitPoints = Math.round(statBlock.hitPoints + (statBlock.hitPoints * 0.2));
+      alert(statBlock.hitPoints)
+    }
+    if (adjustments.includes("Skillful")){
+      //increase skill scores
+      statBlock.masterSkills[0] = statBlock.masterSkills[0] + 1;
+      statBlock.goodSkills[0] = statBlock.goodSkills[0] + 1;
+    }
+    if (adjustments.includes("Save Boost")){
+      //increase save values
+      var saveInput = $('#BoostDrop').val().trim();
+      if (saveInput.startsWith("All")) {
+        statBlock.fortitude = statBlock.fortitude + 1;
+        statBlock.reflex = statBlock.reflex + 1;
+        statBlock.will = statBlock.will + 1;
+      } else {
+        var pick = saveInput.replace(' +3','').toLowerCase();
+        statBlock[pick] = statBlock[pick] + 3;
+      }
+    }
+  }
+
+  /*"Brute": {
+    "Description": "Use the low attack value for the NPC’s main attack, but determine the attack’s damage as if the NPC’s CR were 2 higher (adding the extra damage from weapon specialization).This special ability has a greater impact at higher CRs.",
+    "Adjustments": {
+      "attackValue":"low",
+      "attackDamageCR":2
+    },
+
+}*/
 
   //
   //Stat Block Strings
@@ -330,15 +370,35 @@ function buildStatBlock() {
   }
 
   //build spell casting string
-  spellString = '';
-
-  alert($('.casterTypeDescription').text())/!!!!TODO 
+  var spellString = '';
 
   //check if creature has spellcasting
   if (statBlock.hasOwnProperty('Spellcasting')){
+
+    //do the spells title
+    var typeTitle = '';
+    if ($('.casterTypeDescription').text().includes('Mystic')){
+      //Mystic
+      typeTitle = 'Mystic Spells Known';
+    } else if ($('.casterTypeDescription').text().includes('Technomancer')){
+      //Technomancer
+      typeTitle = 'Technomancer Spells Known';
+    } else if ($('[data-id="casterDrop"]').length){
+      //Full caster
+      if ($('[data-id="casterDrop"]').text().includes("Full")) {
+        typeTitle = 'Spells Known';
+      } else {
+        //spell-like
+        typeTitle = 'Spell-like Abilities';
+      }
+    } else {
+      //spell-like
+      typeTitle = 'Spell-like Abilities';
+    }
+
     //Caster Level
     var clVal = ordinalNumber(Number(statBlock.Cr));
-    spellString += '<p><b>Spells Known</b> (CL ' + clVal +'; ranged '+statBlock.highAttackBonus+')</p>';
+    spellString += '<p><b>'+typeTitle+'</b> (CL ' + clVal +'; ranged '+statBlock.highAttackBonus+')</p>';
     //for each frequency
     for (var i = 0; i < statBlock.Spellcasting.length; i++) {
       spellBlock = statBlock.Spellcasting[i];
@@ -929,7 +989,8 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         $descriptionArea.append(descriptionText);
       }
     } else if (id=='specialDrop') {
-
+      //show descriptions of selected special abilities
+      $descriptionArea = $(".saveBoostDropdown").first().empty();
       var $descriptionArea = $(".stepSixDescriptionThree").first();
       $descriptionArea.empty();
       if (selected != '') {
@@ -939,6 +1000,13 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         for (var i = 0; i < multi.length; i++) {
           var abilityObject = findObjectFromKey(specialAbilities,multi[i]);
           descriptionText += "<b>" + multi[i] + "</b> - " + abilityObject[multi[i]].Description + '<br>';
+
+          //display extra options for save boost if selected
+          if (multi[i] == "Save Boost") {
+            generateDropdown("saveBoostDropdown","BoostDrop","Choose save boost",["All saving throws +1","Fortitude +3","Reflex +3","Will +3"]);
+          }
+
+
         }
         descriptionText += "</p>";
         $descriptionArea.append(descriptionText);
@@ -1648,6 +1716,13 @@ $('.wizard-card').bootstrapWizard({
         if (index == 6) {
 
             var validated = true;
+
+            if ($('[data-id="BoostDrop"]').length){
+              if ($('[data-id="BoostDrop"]').text().includes("Choose")) {
+                  $('[data-id="BoostDrop"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
 
             if (validated) {
 
