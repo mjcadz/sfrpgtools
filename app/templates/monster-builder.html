@@ -8,7 +8,7 @@
     <h1></h1>
     <p class="lead">This wizard will step through the creation of Starfinder NPCs (including monsters).</p>
     <p></p>
-    <div class="alert-this">
+    <div class="alert-this"style="display: none;">
       <button type="button" class="close" aria-label="Close" onclick="$('.alert-this').hide()"><span aria-hidden="true">&times;</span></button>
       <p><strong>Heads up!</strong> Class abilities and special abilities are not yet fully integrated into the builder. Any class or special abilities you choose will be printed below the stat block and can be added manually into the stats. Full ability integration will coming be in a later version.</p>
     </div>
@@ -49,9 +49,7 @@
                                 <div class="col-sm-6">
                                     <hr>
                                     <div id="CRDropdown"></div>
-                                    <p></p>
                                     <div id="arrayDropdown"></div>
-                                    <p></p>
 
                                 </div>
                                 <div class="col-sm-6">
@@ -69,9 +67,7 @@
                                 <div class="col-sm-6">
                                   <hr>
                                   <div id="creatureTypeDropdown"></div>
-                                  <p></p>
                                   <div id="stepTwoOptionalDropdown"></div>
-                                  <p></p>
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
@@ -89,9 +85,7 @@
                                 <div class="col-sm-6">
                                     <hr>
                                     <div id="creatureSubtypeDropdown"></div>
-                                    <p></p>
                                     <div id="stepThreeOptionalDropdown"></div>
-                                    <p></p>
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
@@ -110,9 +104,7 @@
                                 <div class="col-sm-6">
                                     <hr>
                                     <div id="classDropdown"></div>
-                                    <p></p>
                                     <div id="stepFourOptionalDropdown"></div>
-                                    <p></p>
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
@@ -131,7 +123,6 @@
                                 <div class="col-sm-6">
                                     <hr>
                                     <div id="graftDropdown"></div>
-                                    <p></p>
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
@@ -151,13 +142,9 @@
                                     <div class="stepSixFreeAbilities wizardp">
                                         <p>Free abilities can be taken as needed for the NPC concept without counting towards special abilities</p>
                                     </div>
-                                    <p></p>
                                     <div id="freeAbilityDropdown"></div>
-                                    <p></p>
                                     <div class="stepSixAbilities wizardp"></div>
-                                    <p></p>
                                     <div id="specialAbilityDropdown"></div>
-                                    <p></p>
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
@@ -185,17 +172,11 @@
                                 <div class="col-sm-6">
                                     <hr>
                                     <div class="stepSevenAbility wizardp"></div>
-                                    <p></p>
                                     <div id="AbilityScoresDropdown"></div>
-                                    <p></p>
                                     <div class="stepSevenMaster wizardp"></div>
-                                    <p></p>
                                     <div id="masterSkillsDropdown"></div>
-                                    <p></p>
                                     <div class="stepSevenGood wizardp"></div>
-                                    <p></p>
                                     <div id="goodSkillsDropdown"></div>
-                                    <p></p>
                                     <div class="wizardp">
                                         <p>(Perception is a good skill by default)</p>
                                     </div>
@@ -224,21 +205,13 @@
                                 <div class="col-sm-6">
                                     <hr>
                                     <div class="casterTypeDescription wizardp"></div>
-                                    <p></p>
                                     <div id="casterTypeDropdown"></div>
-                                    <p></p>
                                     <div class="stepEight1 wizardp"></div>
-                                    <p></p>
                                     <div id="spells1Dropdown"></div>
-                                    <p></p>
                                     <div class="stepEight2 wizardp"></div>
-                                    <p></p>
                                     <div id="spells2Dropdown"></div>
-                                    <p></p>
                                     <div class="stepEight3 wizardp"></div>
-                                    <p></p>
                                     <div id="spells3Dropdown"></div>
-                                    <p></p>
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
@@ -372,6 +345,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-wizard.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote-ext-print.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/spellData.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterGenData.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterGen.js') }}"></script>

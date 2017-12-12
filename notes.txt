@@ -15,29 +15,25 @@ special abilities make the one that affect stats actually affect stats
 
 text attribute in grafts
 
-let creature abilities turn on spell-like abilities
-
-change html save bits to use official  window storage saves
-
-make the height of the wizard to height of the heightiest tab.
-
-Change the data gathering to iterate through entries and objects instead of setting outright, that way nothing will be missed
-
-check oozes only natural skills,
-
 find out how low.high attack values work
 
-change the bootstarp dropdown focus color to something else. mint?
+spells don't always use high attack bonus. use which one is selected
+
+if possible make print style sheet work with values on the same line
 
 add the rest of the grafts
 
-add basic stat block maybe only choosing step 1 options
+TODOs
 
-make ability mods be in the correct order
+add basic stat block maybe only choosing step 1 options
 
 Languages dropdown
 
 dropdowns for speeds
+
+attackMod
+
+if perception is a master skill add the master value to the stat block
 
 reach
 
@@ -49,7 +45,7 @@ handle lashunta spells
 
 fix special ability aura, and ones with commas
 
-spellcasting type in stat block, Spells Known. (mystic technomancer also.) or spell-like abilities
+spellcasting type title in stat block, Spells Known. (mystic technomancer also.) or spell-like abilities
 
 final check for save boost special ability.
 
@@ -76,3 +72,7 @@ add menu header bootstrap-select, so show what the user should be doing
 Change handling of previously set ability scores so that it is read from the creature entry ( will allow for easier creature type additions)
 
 Bug where if Construct selected, subtype must be magical or technological. Then applying graft that changed the sub type. Doesn't work properly and shouldn't work
+
+check oozes only natural skills,
+
+doesn't quite work unless cleared properly: change html save bits to use official  window storage saves

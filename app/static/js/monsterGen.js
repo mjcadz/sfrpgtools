@@ -1,9 +1,8 @@
-var abilityMods = [];
-var abilityModsPrev = 0
 
-//This funcion reads the state of all the dropdowns in the wizard, uses that info to retrieve the appropriate data from the data objects, then builds the chosen stat block
+//This funcion reads the state of all the dropdowns in the wizard, uses that info to retrieve the appropriate data from the data objects, then builds and displays the stat block
 function buildStatBlock() {
 
+  //new stat block object
   var statBlock = {};
 
   //Step 1
@@ -167,7 +166,25 @@ function buildStatBlock() {
     } else {
       var subArray = [specialList];
     }
-    statBlock.SpecialAbilitiesDescription = subArray;
+    //Split adjustments and abilities
+    var subArrayAdjustment = [];
+    var subArrayAbility = [];
+
+    for (var i = 0; i < subArray.length; i++) {
+      if (specialAbilities.Abilities.hasOwnProperty(subArray[i])){
+        subArrayAbility.push(subArray[i]);
+      } else if (specialAbilities.AdjustmentAbilities.hasOwnProperty(subArray[i])){
+        subArrayAdjustment.push(subArray[i]);
+      }
+    }
+
+    if (subArrayAdjustment.length > 0){
+      statBlock.AdjustmentAbilitiesDescription = subArrayAdjustment;
+    }
+    if (subArrayAbility.length > 0){
+      statBlock.SpecialAbilitiesDescription = subArrayAbility;
+    }
+
   }
 
 
@@ -249,13 +266,15 @@ function buildStatBlock() {
     }
   }
 
-  //apply ability scores
+  //apply ability mods to selected ability scores
   scoreNames = ['str','dex','con','int','wis','cha'];
   for (i = 0; i < scoreNames.length; i++) {
     if (!statBlock.hasOwnProperty(scoreNames[i])){
       ability = scoreNames[i].capitalise();
       if (statBlock.MainAbilityScores.includes(ability)){
         index = statBlock.MainAbilityScores.indexOf(ability);
+        //alert(index);
+        //alert('abilityScoreModifier'+ index.toString())
         statBlock[scoreNames[i]] = '+' + statBlock['abilityScoreModifier'+ index.toString()].toString();
       } else {
         statBlock[scoreNames[i]] = '+0';
@@ -264,7 +283,7 @@ function buildStatBlock() {
   }
 
   //
-  //Printing the stat block
+  //Stat Block Strings
   //
 
   //if the string requires more than one line of code then build it before the stat block section
@@ -281,10 +300,18 @@ function buildStatBlock() {
   //build creature type String
   var subTypeString = '';
   if (['Outsider','Humanoid','Construct','Vermin'].includes(statBlock.CreatureType)){
-    if (!subTypeAll.includes(statBlock.SubType)){
+    if (statBlock.CreatureType == 'Construct') {
       subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
     }
+    else {
+      if (statBlock.hasOwnProperty('SubType')){
+        if (!subTypeAll.includes(statBlock.SubType)){
+          subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
+        }
+      }
+    }
   }
+  //TODO creature size and alignment
   var typeString = '<p>CN Medium ' + statBlock.CreatureType.toLowerCase() + subTypeString + '</p>';
 
   //build skills string
@@ -304,6 +331,9 @@ function buildStatBlock() {
 
   //build spell casting string
   spellString = '';
+
+  alert($('.casterTypeDescription').text())/!!!!TODO 
+
   //check if creature has spellcasting
   if (statBlock.hasOwnProperty('Spellcasting')){
     //Caster Level
@@ -313,7 +343,7 @@ function buildStatBlock() {
     for (var i = 0; i < statBlock.Spellcasting.length; i++) {
       spellBlock = statBlock.Spellcasting[i];
       //add new line for each frequency
-      spellString += '<p>' + spellBlock[0] + '-';
+      spellString += '<p>' + spellBlock[0] + ' - ';
       //for each spell
       for (var j = 1; j < spellBlock.length; j++) {
         spell = spellBlock[j];
@@ -327,10 +357,13 @@ function buildStatBlock() {
           dc = ' (DC ' + (Number(spellBlock[0].charAt(0)) + statBlock.spellDC).toString() + ')';
         }
         spell+=dc;
-        spellString += ',' + spell
+        if (j > 1){
+          spellString += ', ';
+        }
+        spellString += spell;
       }
       // finalise the spell string
-      spellString = spellString.replace(',','')//remove first comma
+
       spellString += '</p>';
     }
   }
@@ -341,11 +374,13 @@ function buildStatBlock() {
   if (statBlock.hasOwnProperty('SpecialAbilitiesDescription')){
     specialString += '<p><b>SPECIAL ABILITIES</b></p>';
     specialString += '<hr>';
-    var abilities = statBlock.SpecialAbilitiesDescription;
+    var abilities = statBlock.SpecialAbilitiesDescription;//is array
     for (var i = 0; i < abilities.length; i++) {
-      specialString += '<p><b>'+abilities[i]+'</b> ';
-      specialString += specialAbilities.Abilities[abilities[i]].Description;
-      specialString += '</p><br>';
+      if (specialAbilities.Abilities.hasOwnProperty(abilities[i])){
+        specialString += '<p><b>'+abilities[i]+'</b> ';
+        specialString += specialAbilities.Abilities[abilities[i]].Description;
+        specialString += '</p><br>';
+      }
     }
 
   }
@@ -356,7 +391,10 @@ function buildStatBlock() {
     sensesString = '; <b>Senses</b> '+statBlock.Senses.join(', ').toLowerCase()
   }
 
-  //build text stat Block
+  //
+  //Stat Block
+  //
+
   textBlock = "";
   //description
   textBlock += '<hr>';
@@ -983,11 +1021,11 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
       $('#stepSevenGoodSave').text(selected);
     } else if (id=='scoresDrop') {
-      //get ability mods in the correct order
+      //get ability modifiers in the correct order
 
       selected = selected.toString().trim();
 
-      //get array of selected items
+      //build an array from selected items. including 0 and 1 items
       if (selected.includes(',')){
         var mods = selected.split(",");
       } else if  (selected == ''){
@@ -997,7 +1035,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       }
 
       saved = $('#stepSevenSaveThree').text()
-
+      //build an array from previously saved items. including 0 and 1 items
       if (saved.includes(',')){
         var abils = saved.split(",");
       } else if (saved == ''){
@@ -1007,20 +1045,22 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       }
 
       if (mods.length > abils.length) {
+        //if number of selected items greater than saved items, figure out which one is new and push it to the saved list
         for (var i = 0; i < abils.length; i++) {
           mods = removeElement(mods,abils[i])
         }
         abils = abils.concat(mods);
       } else if (mods.length < abils.length) {
+        //if number of selected items is less than saved items, figure out which item has been unselected and remove it from the saved list
         var abilities = abils.slice();
         for (var i = 0; i < mods.length; i++) {
           abilities = removeElement(abilities,mods[i])
         }
         abils = removeElement(abils,abilities[0]);
       }
-
+      //save result
       $('#stepSevenSaveThree').text(abils)
-
+      //display the saved list if three modifiers have been selected
       var $descriptionArea = $(".stepSevenAbilityDescription").first();
       $descriptionArea.empty();
       if (abils.length > 2){
@@ -1028,6 +1068,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       }
 
     } else if (id=='spells1Drop') {
+      //display which spells have been selected in save slot 1
       selected = selected.toString().trim()
       saved = $('#stepEightSave').text().split(',');
       var $descriptionArea = $(".stepEight1Description").first();
@@ -1037,6 +1078,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       }
 
     } else if (id=='spells2Drop') {
+      //display which spells have been selected in save slot 2
       selected = selected.toString().trim()
       saved = $('#stepEightSave').text().split(',');
       var $descriptionArea = $(".stepEight2Description").first();
@@ -1046,6 +1088,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       }
 
     } else if (id=='spells3Drop') {
+      //display which spells have been selected in save slot 3
       selected = selected.toString().trim()
       saved = $('#stepEightSave').text().split(',');
       var $descriptionArea = $(".stepEight3Description").first();
@@ -1056,6 +1099,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
     } else if (id == 'casterDrop'){
 
+      //generate spell selection dropdowns depending on if spell-like or full casting abilities have been selected
 
       var caster = $('#casterDrop').val().trim();
 
@@ -1076,10 +1120,12 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       $(".stepEight2Description").first().empty();
       $(".stepEight3Description").first().empty();
 
+      //generate spell dropdowns
       showSpellDropdowns(caster,'None');
 
     } else if (id == 'secondaryDrop'){
 
+      //generate spell selection dropdowns for Secondary magic ability
 
       var secondary = '';
 
@@ -1100,11 +1146,12 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       $(".stepEight2Description").first().empty();
       $(".stepEight3Description").first().empty();
 
+      //generate dropdowns
       showSpellDropdowns(secondary,'None');
 
     }
-
-    $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');//remove validation highlight
+    //remove any highlight that has been applied for form validation
+    $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');
 }
 
 //populates the dropdowns on step eight, either spell-like, secondary magic, or full caster abilities
@@ -1348,6 +1395,11 @@ $('.wizard-card').bootstrapWizard({
 
         //save button is initially hidden
         $('.btn-save').hide();
+        //only show the alert once for the duration of the session
+        if (sessionStorage.showAlert != 'key') {
+          $('.alert-this').show();
+          sessionStorage.showAlert = 'key';
+        }
     },
 
     //runs when next button pressed. Sorted by tab index. each tab only executes its own code.
@@ -1356,7 +1408,7 @@ $('.wizard-card').bootstrapWizard({
         //Validation tab 1
         if (index == 1) {
 
-            //hide the alert
+            //hide the alert if shown once
             $('.alert-this').hide();
 
             var validated = true;
@@ -1627,6 +1679,9 @@ $('.wizard-card').bootstrapWizard({
 
 
                 if (classScores == 'None') {
+
+                  //reset scores save
+                  $('#stepSevenSaveThree').text('');
 
                   var str ='<option>Str</option>';
                   var dex ='<option>Dex</option>';
@@ -2033,6 +2088,7 @@ $('.btn-graft').click(function(){
    }
 });
 
+//show the summernote edit box wrapped around the statblock text
 function edit() {
   $('.btn-save').show();
   $('.btn-edit').hide();
@@ -2043,11 +2099,16 @@ function edit() {
       ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'clear', 'color']],
       ['fontsize', ['fontsize']],
       ['insert', ['link','hr','picture']],
-      ['misc', ['fullscreen','codeview']]
-    ]
+      ['misc', ['fullscreen','codeview',]],
+      ['miscc', ['print']]
+    ],
+    print: {
+        'stylesheetUrl': 'static/css/print.css'
+    }
   });
 };
 
+//remove the edit box and show straight html
 function save() {
   $('.btn-save').hide();
   $('.btn-edit').show();

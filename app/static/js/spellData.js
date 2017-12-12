@@ -1639,7 +1639,7 @@ spellsData = {
 	"Make Whole": {
 		"CASTTIME": "10 minutes",
 		"CLASSES": "Technomancer=2",
-		"DESCRIPTION": "Restore 1d4 Hit Points to an object or construct.",
+		"DESCRIPTION": "Restore 5d6 Hit Points to an object or construct.",
 		"DURATION": "Instantaneous",
 		"LEVEL": "2",
 		"LONGDESCRIPTION": "This spell functions as mending except it restores 5d6 Hit Points when cast on an object or construct creature. Make whole can fix destroyed magic items and it restores the magic properties of the item if your technomancer level is at least twice the item's level. Items with charges (such as batteries) and single-use items (such as potions and grenades) can't be repaired in this way. When you cast make whole on a construct the spell bypasses any immunity to magic as if the spell did not allow spell resistance.",
@@ -1653,7 +1653,7 @@ spellsData = {
 	"Mending": {
 		"CASTTIME": "10 minutes",
 		"CLASSES": "Technomancer=0",
-		"DESCRIPTION": "Restore 5d6 Hit Points to an object or construct.",
+		"DESCRIPTION": "Restore 1d4 Hit Points to an object or construct.",
 		"DURATION": "Instantaneous",
 		"LEVEL": "0",
 		"LONGDESCRIPTION": "This spell repairs damaged objects and constructs restoring 1d4 Hit Points. If the object has the broken condition this condition is removed if the object is restored to at least half its original Hit Points. All of the pieces of an object must be present for this spell to function. A construct can benefit from this spell only once per day. Magic items can be repaired by this spell but magic items that are destroyed don't have their magic abilities restored. This spell doesn't reverse effects that warp or otherwise transmute items but it can still repair damage dealt to such items.",
