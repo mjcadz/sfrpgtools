@@ -677,43 +677,96 @@ function generateMultiDropdown(parentID,dropID,title,searchTitle,array,maxOption
 //creates bootstrap-select dropdowns from arrays
 function generateAttackEntry(style) {
 
+  //validate high stat choice
+  if ($('[data-id="attackDrop"]').text().includes("Choose")) {
+      $('[data-id="attackDrop"]').addClass('wizard-shadow');
+      return;
+  }
+
   var $outputArea = $(".attackContainer").first();
   var storeEntries = $( "div.attackContainer" ).html();
   $outputArea.empty();
 
+  var crString = $('[data-id="CRDrop"]').text().trim();
+  var cr = Number(crString.replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
+  var array = $('#arrayDrop').val().trim();
+
+  var attackStats = window[array.toLowerCase()+'AttackStats'][crString.replace("CR ","")];
+
+  var highStat = $('#attackDrop').val().trim();
+
+  if (style == "Melee"){
+    var attackPlaceholder = "eg. Claws";
+    var attackDamage = attackStats[4];
+    var damageType = Object.keys(kineticMeleeTypes);
+
+    if (highStat == "Melee"){
+      var attackBonus = attackStats[0];
+    } else if (highStat == "Ranged") {
+      var attackBonus = attackStats[1];
+    }
+
+  }
+  else if (style == "Ranged"){
+    var attackPlaceholder = "eg. Pistol";
+    var attackDamage = attackStats[3];
+    var damageType = Object.keys(kineticRangedTypes);
+
+    if (highStat == "Ranged"){
+      var attackBonus = attackStats[0];
+    } else if (highStat == "Melee") {
+      var attackBonus = attackStats[1];
+    }
+
+  }
 
   attackIndexCounter += 1;
   var indexString = "index" + attackIndexCounter.toString();
 
   var attackBody = "<div class=\"" + indexString + "\">"
   attackBody +=
+      "<h6>"+style+" attack</h6>" +
       "<div class=\"row\">" +
           "<div class=\"col-lg-6\">" +
               "<div class=\"form-group\">" +
                   "<label for=\"name"+indexString+"\">Attack name</label>" +
-                   "<input type=\"text\" class=\"form-control\" id=\"name"+indexString+"\" placeholder=\"eg. claws\">" +
+                   "<input type=\"text\" class=\"form-control\" id=\"name"+indexString+"\" placeholder=\""+attackPlaceholder+"\">" +
               "</div>" +
           "</div>" +
           "<div class=\"col-lg-6\">" +
               "<div class=\"row\">" +
                   "<div class=\"col-xs-4\">" +
                       "<div class=\"form-group\">" +
-                          "<label for=\"attack"+indexString+"\">Attack</label>" +
-                          "<input type=\"text\" class=\"form-control\" id=\"attack"+indexString+"\" value=\"+6\">" +
+                          "<label for=\"attack"+indexString+"\">Bonus</label>" +
+                          "<input type=\"text\" class=\"form-control\" id=\"attack"+indexString+"\" value=\""+attackBonus+"\">" +
                       "</div>" +
                   "</div>" +
                   "<div class=\"col-xs-8\">" +
                       "<div class=\"form-group\">" +
                           "<label for=\"damage"+indexString+"\">Damage</label>" +
-                          "<input type=\"text\" class=\"form-control\" id=\"damage"+indexString+"\" value=\"1d6+STR P\">" +
+                          "<input type=\"text\" class=\"form-control\" id=\"damage"+indexString+"\" value=\""+attackDamage+"\">" +
                       "</div>" +
                   "</div>" +
               "</div>" +
           "</div>" +
+          "<div class=\"col-lg-4\">" +
+              "<div class=\"form-group\">" +
+                  "<label for=\"attacktype"+indexString+"\">Attack type</label>" +
+                  "<div id=\"attacktype"+indexString+"\"></div>" +
+              "</div>" +
+          "</div>" +
+          "<div class=\"col-lg-4\">" +
+              "<div class=\"form-group\">" +
+                  "<label for=\"damagetype"+indexString+"\">Damage type</label>" +
+                  "<div id=\"damagetype"+indexString+"\"></div>" +
+              "</div>" +
+          "</div>" +
+          "<div class=\"col-lg-4\">" +
+          "</div>" +
       "</div>"
 
   attackBody += "<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-default btn-sm pull-right\" onclick = \"removeEntry(this.id)\">Remove</button>"
-  attackBody += "<hr><br><br><br><br>"
+  attackBody += "<br><hr>"
   attackBody += "</div>"
 
 
@@ -721,6 +774,14 @@ function generateAttackEntry(style) {
     $outputArea.append(storeEntries);
   }
   $outputArea.append(attackBody);
+
+  generateDropdown("attacktype"+indexString,"AT"+indexString+"Drop","...",["Energy","Kinetic"]);
+  $('#AT'+indexString+'Drop').selectpicker('val', "Kinetic");
+  $('#AT'+indexString+'Drop').selectpicker('refresh');
+  generateDropdown("damagetype"+indexString,"DT"+indexString+"Drop","...",damageType);
+  $('#DT'+indexString+'Drop').selectpicker('val', damageType[0]);
+  $('#AT'+indexString+'Drop').selectpicker('refresh');
+
 }
 
 function removeEntry(index) {
@@ -1279,7 +1340,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       showSpellDropdowns(secondary,'None');
 
     } else if (id == 'attackDrop'){
-      generateAttackEntry("melee")
+
 
     }
     //remove any highlight that has been applied for form validation

@@ -23,6 +23,12 @@ if possible make print style sheet work with values on the same line
 
 add the rest of the grafts
 
+let soldier type choose main attack type
+
+make sure attack names are validated
+
+change attack values when attack type is changed and when high stat is changed
+
 TODOs
 
 add basic stat block maybe only choosing step 1 options

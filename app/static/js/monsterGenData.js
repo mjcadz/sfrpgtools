@@ -224,6 +224,26 @@ xp = {
   "25": "1,638,400"
 };
 
+var energyTypes = {
+  "Acid":"A",
+  "Cryo": "C",
+  "Flame": "F",
+  "Laser": "F",
+  "Plasma": "E & F",
+  "Shock": "E",
+  "Sonic": " So"
+};
+
+var kineticMeleeTypes = {
+  "Bludgeoning": "B",
+  "Piercing": "P",
+  "Slashing": "S"
+};
+
+var kineticRangedTypes = {
+  "Projectile": "P",
+};
+
 creatureType = {
   "Aberration": {
     "Adjustments": {"fortitude":2,"reflex":2,"attackMod":1},

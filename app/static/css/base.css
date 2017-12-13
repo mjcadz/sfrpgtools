@@ -364,3 +364,7 @@ line-height: 1.4;
 .col-sm-12 {
   padding: 0px 0px;
 }
+
+.btn-wrap {
+    white-space: normal;
+}
