@@ -34,6 +34,7 @@
                             <li><a href="#step8" data-toggle="tab">Step8</a></li>
                             <li><a href="#step9" data-toggle="tab">Step9</a></li>
                             <li><a href="#step10" data-toggle="tab">Step10</a></li>
+                            <li><a href="#step11" data-toggle="tab">Step11</a></li>
                         </ul>
                     </div>
                     <div id="bar" class="progress">
@@ -44,7 +45,7 @@
                           <span id="stepOneSave" hidden>0</span>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 1 - base array.</h4>
+                                    <h4 class="info-text">Base array</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <hr>
@@ -62,7 +63,7 @@
                         <div class="tab-pane" id="step2">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 2 - creature type graft.</h4>
+                                    <h4 class="info-text">Creature type graft</h4>
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
@@ -80,7 +81,7 @@
                             <span id="stepThreeSave" hidden>none</span>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 3 - creature subtype graft.</h4>
+                                    <h4 class="info-text">Creature subtype graft</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <hr>
@@ -99,7 +100,7 @@
                             <span id="stepFourSave2" hidden>None</span>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 4 - class graft.</h4>
+                                    <h4 class="info-text">Class graft</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <hr>
@@ -118,7 +119,7 @@
                             <span id="stepFiveSave2" hidden>None:None:None</span>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 5 - template graft.</h4>
+                                    <h4 class="info-text">Template graft</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <hr>
@@ -135,7 +136,7 @@
                             <span id="stepSixSave" hidden>None</span>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 6 - special abilities.</h4>
+                                    <h4 class="info-text">Special abilities</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <hr>
@@ -168,7 +169,7 @@
                           <span id="stepSevenSaveThree" hidden></span>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 7 - skills.</h4>
+                                    <h4 class="info-text">Skills</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <hr>
@@ -197,11 +198,26 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="step8">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h4 class="info-text">Attacks</h4>
+                                </div>
+                                <div class="col-sm-4">
+                                    <hr>
+                                    <div id="MainAttackDropdown"></div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <hr>
+                                    <div class="attackContainer"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="step9">
                             <span id="stepEightSave" hidden></span>
                             <span id="stepEightTwoSave" hidden>None</span>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 8 - spells.</h4>
+                                    <h4 class="info-text">Spells</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <hr>
@@ -215,22 +231,22 @@
                                     <div id="spells3Dropdown"></div>
                                 </div>
                                 <div class="col-sm-6">
-                                  <hr>
-                                  <div class="stepEight0Description wizardp">
-                                  </div>
-                                  <div class="stepEight1Description wizardp">
-                                  </div>
-                                  <div class="stepEight2Description wizardp">
-                                  </div>
-                                  <div class="stepEight3Description wizardp">
-                                  </div>
+                                    <hr>
+                                    <div class="stepEight0Description wizardp">
+                                    </div>
+                                    <div class="stepEight1Description wizardp">
+                                    </div>
+                                    <div class="stepEight2Description wizardp">
+                                    </div>
+                                    <div class="stepEight3Description wizardp">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="step9">
+                        <div class="tab-pane" id="step10">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Step 9 - final checks.</h4>
+                                    <h4 class="info-text">Final checks</h4>
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
@@ -247,10 +263,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="step10">
+                        <div class="tab-pane" id="step11">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4 class="info-text">Stat Block.</h4>
+                                    <h4 class="info-text">Stat Block</h4>
                                     <hr>
                                     <button type="button" class="btn btn-edit btn-grn" onclick="edit()" type="button">Edit</button>
                                     <button type="button" class="btn btn-save btn-grn" onclick="save()" type="button">Save</button>

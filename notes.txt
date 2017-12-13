@@ -45,8 +45,6 @@ handle lashunta spells
 
 fix special ability aura, and ones with commas
 
-final check for save boost special ability.
-
 check special abilities for ability score adjustments
 
 finish adjustment abilities

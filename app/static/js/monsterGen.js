@@ -1,3 +1,5 @@
+//globals
+var attackIndexCounter = 0;
 
 //This funcion reads the state of all the dropdowns in the wizard, uses that info to retrieve the appropriate data from the data objects, then builds and displays the stat block
 function buildStatBlock() {
@@ -672,6 +674,65 @@ function generateMultiDropdown(parentID,dropID,title,searchTitle,array,maxOption
   $('#'+dropID).on('changed.bs.select', dropClickHandler);
 }
 
+//creates bootstrap-select dropdowns from arrays
+function generateAttackEntry(style) {
+
+  var $outputArea = $(".attackContainer").first();
+  var storeEntries = $( "div.attackContainer" ).html();
+  $outputArea.empty();
+
+
+  attackIndexCounter += 1;
+  var indexString = "index" + attackIndexCounter.toString();
+
+  var attackBody = "<div class=\"" + indexString + "\">"
+  attackBody +=
+      "<div class=\"row\">" +
+          "<div class=\"col-lg-6\">" +
+              "<div class=\"form-group\">" +
+                  "<label for=\"name"+indexString+"\">Attack name</label>" +
+                   "<input type=\"text\" class=\"form-control\" id=\"name"+indexString+"\" placeholder=\"eg. claws\">" +
+              "</div>" +
+          "</div>" +
+          "<div class=\"col-lg-6\">" +
+              "<div class=\"row\">" +
+                  "<div class=\"col-xs-4\">" +
+                      "<div class=\"form-group\">" +
+                          "<label for=\"attack"+indexString+"\">Attack</label>" +
+                          "<input type=\"text\" class=\"form-control\" id=\"attack"+indexString+"\" value=\"+6\">" +
+                      "</div>" +
+                  "</div>" +
+                  "<div class=\"col-xs-8\">" +
+                      "<div class=\"form-group\">" +
+                          "<label for=\"damage"+indexString+"\">Damage</label>" +
+                          "<input type=\"text\" class=\"form-control\" id=\"damage"+indexString+"\" value=\"1d6+STR P\">" +
+                      "</div>" +
+                  "</div>" +
+              "</div>" +
+          "</div>" +
+      "</div>"
+
+  attackBody += "<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-default btn-sm pull-right\" onclick = \"removeEntry(this.id)\">Remove</button>"
+  attackBody += "<hr><br><br><br><br>"
+  attackBody += "</div>"
+
+
+  if (storeEntries != ""){
+    $outputArea.append(storeEntries);
+  }
+  $outputArea.append(attackBody);
+}
+
+function removeEntry(index) {
+  $("."+index).remove();
+}
+
+function clearAttacks() {
+  var $outputArea = $(".attackContainer").first();
+  $outputArea.empty();
+  indexCounter = 0;
+}
+
 //disables / enables dropdown . bool True = disabled
 function disableDropdown(id,bool){
   $('#'+id).prop('disabled', bool);
@@ -1217,6 +1278,9 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       //generate dropdowns
       showSpellDropdowns(secondary,'None');
 
+    } else if (id == 'attackDrop'){
+      generateAttackEntry("melee")
+
     }
     //remove any highlight that has been applied for form validation
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');
@@ -1460,6 +1524,9 @@ $('.wizard-card').bootstrapWizard({
         generateDropdown("creatureTypeDropdown","creatureTypeDrop","Choose creature type",Object.keys(creatureType).sort());
         //Step5
         generateDropdown("graftDropdown","graftDrop","Optional template graft",getGraftArray());
+        //Attacks
+        generateDropdown("MainAttackDropdown","attackDrop","Choose main attack style",["Melee","Ranged"]);
+
 
         //save button is initially hidden
         $('.btn-save').hide();
@@ -1923,7 +1990,18 @@ $('.wizard-card').bootstrapWizard({
 
             if (validated) {
 
-              //setup tab 8 - spells
+            } else {
+                return false;
+            }
+        }
+        //Validation tab 8
+        if (index == 8) {
+
+            var validated = true;
+
+            if (validated) {
+
+              //setup tab 9 - spells
 
               //grab spell objects from graft if any
               var graftSpells = getGraftSpelllikeAbilities()
@@ -2020,8 +2098,8 @@ $('.wizard-card').bootstrapWizard({
             }
         }
 
-        //Validation tab 8
-        if (index == 8) {
+        //Validation tab 9
+        if (index == 9) {
 
             var validated = true;
 
@@ -2050,8 +2128,8 @@ $('.wizard-card').bootstrapWizard({
                 return false;
             }
         }
-        //Validation tab 9
-        if (index == 9) {
+        //Validation tab 10
+        if (index == 10) {
 
           //final tab validation
           var validated = true;
@@ -2063,17 +2141,10 @@ $('.wizard-card').bootstrapWizard({
             }
           }
           if (validated){
-            //call statBlock builder on finish
-            /*$('#summernote').summernote({
-              toolbar: [
-                // [groupName, [list of button]]
-                ['style', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'clear', 'color']],
-                ['fontsize', ['fontsize']],
-                ['insert', ['link','hr','picture']],
-                ['misc', ['fullscreen','codeview']]
-              ]
-            });*/
+
             buildStatBlock();
+          } else {
+              return false;
           }
         }
     },
