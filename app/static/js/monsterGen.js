@@ -453,6 +453,67 @@ function buildStatBlock() {
     sensesString = '; <b>Senses</b> '+statBlock.Senses.join(', ').toLowerCase()
   }
 
+  //build attack strings
+  var MeleeString = '';
+  var RangedString = '';
+  //iterate through attack entries
+  $("[class^='attackDiv']").each(function(){
+      var index = $(this).attr('class').replace('attackDiv','')
+
+      var indexParts = index.split('-');
+      var name = $('#attackName'+index).val().trim().toLowerCase();
+      var bonus = $('#bonus'+index).val().trim();
+      var damage = $('#damage'+index).val().trim();
+      var attackType = $('#AT'+index+'Drop').val().trim();
+      var damageType = $('#DT'+index+'Drop').val().trim();
+      var critical = $('#critical'+index).val().trim();
+      var end = ' or<br>';
+
+      //handle strength
+      if (damage.includes('Str')){
+        var damageSplit = damage.split('+');
+        var str = Number(statBlock.str.replace('+',''));
+        var damageBonus = Number(damageSplit[1])
+        damageBonus = damageBonus + str;
+        damage = damageSplit[0] + '+' + damageBonus.toString();
+      }
+
+      damageType = window[attackType.toLowerCase() + indexParts[0] + 'Types'][damageType];
+
+      if (critical != '') {
+        critical = '; critical ' + critical;
+      }
+
+      if (indexParts[0].toString() == 'Melee') {
+
+        if (MeleeString == ''){
+          MeleeString = '<p><b>'+ indexParts[0] + '</b> ';
+          end = ''
+        }
+
+        MeleeString += end + name + ' ' + bonus + ' (' + damage + ' ' + damageType + critical + ')'
+
+      }
+
+      if (indexParts[0].toString() == 'Ranged') {
+
+        if (RangedString == ''){
+          RangedString = '<p><b>'+ indexParts[0] + '</b> ';
+          end = ''
+        }
+
+        RangedString += end + name + ' ' + bonus + ' (' + damage + ' ' + damageType + critical + ')'
+
+      }
+
+  });
+  if (MeleeString != ''){
+    MeleeString += '</p>';
+  }
+  if (RangedString != ''){
+    RangedString += '</p>';
+  }
+
   //
   //Stat Block
   //
@@ -464,7 +525,7 @@ function buildStatBlock() {
   textBlock += '<hr>';
   textBlock += "<p><b>XP "+statBlock.Xp+"</b></p>";
   textBlock += typeString;
-  textBlock += "<p><b>Init</b> "+statBlock.dex+sensesString+'; <b>Perception</b> '+statBlock.goodSkills[0].toString()+"</p>";
+  textBlock += "<p><b>Init</b> "+statBlock.dex+sensesString+'; <b>Perception</b> +'+statBlock.goodSkills[0].toString()+"</p>";
   textBlock += "<br>";
 
   //Defence
@@ -478,6 +539,12 @@ function buildStatBlock() {
   textBlock += '<p><b>OFFENCE</b></p>';
   textBlock += '<hr>';
   textBlock += '<p><b>Speed</b> 30 ft.</p>';//TODO fix this
+  if (MeleeString != ''){
+    textBlock += MeleeString;
+  }
+  if (RangedString != ''){
+    textBlock += RangedString;
+  }
   if (spellString != ''){//add spellcasting if any
     textBlock += spellString;
   }
@@ -721,7 +788,7 @@ function generateAttackEntry(style) {
   attackIndexCounter += 1;
   var indexString = style + "-" + attackIndexCounter.toString();
 
-  var attackBody = "<div class=\"" + indexString + "\">"
+  var attackBody = "<div class=\"attackDiv" + indexString + "\">"
   attackBody +=
       "<h5>"+style+"</h5>" +
       "<div class=\"row\">" +
@@ -771,7 +838,7 @@ function generateAttackEntry(style) {
   attackBody += "<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-default btn-sm pull-right\" onclick = \"removeEntry(this.id)\">Remove</button>"
   attackBody += "<br><hr>"
   attackBody += "</div>"
-  
+
   $outputArea.append(attackBody);
 
   generateDropdown("attacktype"+indexString,"AT"+indexString+"Drop","...",["Energy","Kinetic"]);
@@ -784,7 +851,7 @@ function generateAttackEntry(style) {
 }
 
 function removeEntry(index) {
-  $("."+index).remove();
+  $(".attackDiv"+index).remove();
 }
 
 function removeHighlight(index) {

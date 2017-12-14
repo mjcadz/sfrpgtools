@@ -55,7 +55,9 @@ fix special ability aura, and ones with commas
 
 check special abilities for ability score adjustments
 
-finish adjustment abilities
+finish adjustment abilities - brute
+
+turn finish button into reset button
 
 To Test
 soldier class melee/ranged - to test
