@@ -684,8 +684,6 @@ function generateAttackEntry(style) {
   }
 
   var $outputArea = $(".attackContainer").first();
-  var storeEntries = $( "div.attackContainer" ).html();
-  $outputArea.empty();
 
   var crString = $('[data-id="CRDrop"]').text().trim();
   var cr = Number(crString.replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
@@ -721,24 +719,24 @@ function generateAttackEntry(style) {
   }
 
   attackIndexCounter += 1;
-  var indexString = "index" + attackIndexCounter.toString();
+  var indexString = style + "-" + attackIndexCounter.toString();
 
   var attackBody = "<div class=\"" + indexString + "\">"
   attackBody +=
-      "<h6>"+style+" attack</h6>" +
+      "<h5>"+style+"</h5>" +
       "<div class=\"row\">" +
           "<div class=\"col-lg-6\">" +
               "<div class=\"form-group\">" +
-                  "<label for=\"name"+indexString+"\">Attack name</label>" +
-                   "<input type=\"text\" class=\"form-control\" id=\"name"+indexString+"\" placeholder=\""+attackPlaceholder+"\">" +
+                  "<label for=\"attackName"+indexString+"\">Attack name</label>" +
+                   "<input type=\"text\" class=\"form-control\" id=\"attackName"+indexString+"\" placeholder=\""+attackPlaceholder+"\"  oninput=\"removeHighlight(this.id)\">" +
               "</div>" +
           "</div>" +
           "<div class=\"col-lg-6\">" +
               "<div class=\"row\">" +
-                  "<div class=\"col-xs-4\">" +
+                  "<div class=\"col-xs-4\" style=\"padding-right: 0\">" +
                       "<div class=\"form-group\">" +
-                          "<label for=\"attack"+indexString+"\">Bonus</label>" +
-                          "<input type=\"text\" class=\"form-control\" id=\"attack"+indexString+"\" value=\""+attackBonus+"\">" +
+                          "<label for=\"bonus"+indexString+"\">Bonus</label>" +
+                          "<input type=\"text\" class=\"form-control\" id=\"bonus"+indexString+"\" value=\""+attackBonus+"\">" +
                       "</div>" +
                   "</div>" +
                   "<div class=\"col-xs-8\">" +
@@ -762,17 +760,18 @@ function generateAttackEntry(style) {
               "</div>" +
           "</div>" +
           "<div class=\"col-lg-4\">" +
+              "<div class=\"form-group\">" +
+                  "<label for=\"critical"+indexString+"\">Critical</label>" +
+                  "<input type=\"text\" class=\"form-control\" id=\"critical"+indexString+"\" placeholder=\"None\">" +
+              "</div>" +
           "</div>" +
       "</div>"
 
+  attackBody += "<br>"
   attackBody += "<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-default btn-sm pull-right\" onclick = \"removeEntry(this.id)\">Remove</button>"
   attackBody += "<br><hr>"
   attackBody += "</div>"
-
-
-  if (storeEntries != ""){
-    $outputArea.append(storeEntries);
-  }
+  
   $outputArea.append(attackBody);
 
   generateDropdown("attacktype"+indexString,"AT"+indexString+"Drop","...",["Energy","Kinetic"]);
@@ -780,12 +779,16 @@ function generateAttackEntry(style) {
   $('#AT'+indexString+'Drop').selectpicker('refresh');
   generateDropdown("damagetype"+indexString,"DT"+indexString+"Drop","...",damageType);
   $('#DT'+indexString+'Drop').selectpicker('val', damageType[0]);
-  $('#AT'+indexString+'Drop').selectpicker('refresh');
+  $('#DT'+indexString+'Drop').selectpicker('refresh');
 
 }
 
 function removeEntry(index) {
   $("."+index).remove();
+}
+
+function removeHighlight(index) {
+  $("#"+index).removeClass('wizard-shadow');
 }
 
 function clearAttacks() {
@@ -1340,6 +1343,62 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       showSpellDropdowns(secondary,'None');
 
     } else if (id == 'attackDrop'){
+
+      var crString = $('[data-id="CRDrop"]').text().trim();
+      var array = $('#arrayDrop').val().trim();
+      var attackStats = window[array.toLowerCase()+'AttackStats'][crString.replace("CR ","")];
+
+      if (selected == 'Ranged') {
+        var rangedBonus = attackStats[0];
+        var meleeBonus = attackStats[1];
+      } else if (selected == 'Melee') {
+        var rangedBonus = attackStats[1];
+        var meleeBonus = attackStats[0];
+      }
+
+      //all that startswith selectors
+      $("[id^='bonusRanged']").val(rangedBonus);
+      $("[id^='bonusMelee']").val(meleeBonus);
+
+
+    } else if (id.startsWith('AT')){
+      //handle individual attack damage type
+      var indexString = id.replace('AT','').replace('Drop','');
+      var indexParts = indexString.split('-');
+
+      var crString = $('[data-id="CRDrop"]').text().trim();
+      var array = $('#arrayDrop').val().trim();
+      var attackStats = window[array.toLowerCase()+'AttackStats'][crString.replace("CR ","")];
+
+      if (selected == "Kinetic"){
+        if (indexParts[0] == 'Ranged'){
+          var damageType = Object.keys(kineticRangedTypes);
+          var damage = attackStats[3];
+        } else if (indexParts[0] == 'Melee'){
+          var damageType = Object.keys(kineticMeleeTypes);
+          var damage = attackStats[4];
+        }
+      }
+      if (selected == 'Energy'){
+        if (indexParts[0] == 'Ranged'){
+          var damageType = Object.keys(energyRangedTypes);
+          var damage = attackStats[2];
+        } else if (indexParts[0] == 'Melee'){
+          var damageType = Object.keys(energyMeleeTypes);
+          var damage = attackStats[5];
+          if (damage == '-') {
+            damage = attackStats[4];
+          }
+        }
+      }
+
+      //set damage
+      $('#damage'+indexString).val(damage);
+
+      //set damage type dropdown
+      generateDropdown("damagetype"+indexString,"DT"+indexString+"Drop","...",damageType);
+      $('#DT'+indexString+'Drop').selectpicker('val', damageType[0]);
+      $('#DT'+indexString+'Drop').selectpicker('refresh');
 
 
     }
@@ -2059,6 +2118,16 @@ $('.wizard-card').bootstrapWizard({
         if (index == 8) {
 
             var validated = true;
+
+            //iterate all attack names
+            $("[id^='attackName']").each(function(){
+                if ($(this).val() == ''){
+                  $(this).addClass('wizard-shadow');
+                  validated = false
+                } else {
+                  $(this).removeClass('wizard-shadow');
+                }
+            });
 
             if (validated) {
 

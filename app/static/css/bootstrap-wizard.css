@@ -111,5 +111,5 @@
 }
 
 .wizard-shadow {
-  box-shadow: 0px 0px 25px #FF1493;/*P!NK*/
+  box-shadow: 0px 0px 25px #FF1493!important;/*P!NK*/
 }

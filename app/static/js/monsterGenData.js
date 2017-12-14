@@ -224,7 +224,16 @@ xp = {
   "25": "1,638,400"
 };
 
-var energyTypes = {
+var energyMeleeTypes = {
+  "Acid":"A",
+  "Cryo": "C",
+  "Flame": "F",
+  "Plasma": "E & F",
+  "Shock": "E",
+  "Sonic": " So"
+};
+
+var energyRangedTypes = {
   "Acid":"A",
   "Cryo": "C",
   "Flame": "F",
