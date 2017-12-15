@@ -15,21 +15,11 @@ special abilities make the one that affect stats actually affect stats
 
 text attribute in grafts
 
-find out how low.high attack values work
-
 spells don't always use high attack bonus. use which one is selected
-
-if possible make print style sheet work with values on the same line
 
 add the rest of the grafts
 
 let soldier type choose main attack type
-
-remove pink shadow from text inputs on typing event
-
-make sure attack names are validated
-
-change attack values when attack type is changed and when high stat is changed
 
 TODOs
 
@@ -39,7 +29,7 @@ Languages dropdown
 
 dropdowns for speeds
 
-attackMod
+attackMod value in adjustments
 
 if perception is a master skill add the master value to the stat block
 
@@ -51,8 +41,6 @@ other abilities
 
 fly shouldnt be a free ability
 
-print CR on attacks page
-
 add labels to drops
 
 make sure free graft and special abilities apply in the correct place
@@ -62,8 +50,6 @@ handle lashunta spells
 fix special ability aura, and ones with commas
 
 check special abilities for ability score adjustments
-
-finish adjustment abilities - brute
 
 turn finish button into reset button
 
@@ -94,3 +80,5 @@ Bug where if Construct selected, subtype must be magical or technological. Then 
 check oozes only natural skills,
 
 doesn't quite work unless cleared properly: change html save bits to use official  window storage saves
+
+if possible make print style sheet work with values on the same line

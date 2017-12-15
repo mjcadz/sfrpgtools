@@ -315,15 +315,6 @@ function buildStatBlock() {
     }
   }
 
-  /*"Brute": {
-    "Description": "Use the low attack value for the NPC’s main attack, but determine the attack’s damage as if the NPC’s CR were 2 higher (adding the extra damage from weapon specialization).This special ability has a greater impact at higher CRs.",
-    "Adjustments": {
-      "attackValue":"low",
-      "attackDamageCR":2
-    },
-
-}*/
-
   //
   //Stat Block Strings
   //
@@ -758,6 +749,7 @@ function generateAttackEntry(style) {
   var crString = $('[data-id="CRDrop"]').text().trim();
   var cr = Number(crString.replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
   var array = $('#arrayDrop').val().trim();
+  var special = $('#specialDrop').val().toString().trim();
 
   var attackStats = window[array.toLowerCase()+'AttackStats'][crString.replace("CR ","")];
 
@@ -788,12 +780,47 @@ function generateAttackEntry(style) {
 
   }
 
+  var brute = false; // :(
+  var bruteClass = '';
+  var bruteLabel = '';
+  //apply brute if chosen
+  if (special.includes("Brute")){
+    brute = true; // :)
+    //check if already applied
+    $("[class^='attackDiv']").each(function(){
+      if ($(this).attr('class').includes('brute')){
+        brute = false; // :(
+      }
+    });
+  }
+
+  if (brute) {
+    attackBonus = attackStats[1];
+    var crlist = Object.keys(combatantMainStats);
+    var crindex = crlist.indexOf(crString.replace("CR ",""));
+    crindex += 2;
+    if(crindex > 26){
+      crindex = 26;
+    }
+    var newCr = crlist[crindex];
+    alert(newCr)
+    attackStats = window[array.toLowerCase()+'AttackStats'][newCr];
+    if (style == "Melee"){
+      var attackDamage = attackStats[4];
+    }
+    if (style == "Ranged"){
+      var attackDamage = attackStats[3];
+    }
+    bruteClass = ' brute';
+    bruteLabel = ' - brute attack';
+  }
+
   attackIndexCounter += 1;
   var indexString = style + "-" + attackIndexCounter.toString();
 
-  var attackBody = "<div class=\"attackDiv" + indexString + "\">"
+  var attackBody = "<div class=\"attackDiv" + indexString + bruteClass + "\">"
   attackBody +=
-      "<h5>"+style+"</h5>" +
+      "<h5>"+style+bruteLabel+"</h5>" +
       "<div class=\"row\">" +
           "<div class=\"col-lg-6\">" +
               "<div class=\"form-group\">" +
@@ -1490,7 +1517,20 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
       var crString = $('[data-id="CRDrop"]').text().trim();
       var array = $('#arrayDrop').val().trim();
+
       var attackStats = window[array.toLowerCase()+'AttackStats'][crString.replace("CR ","")];
+
+      //fix attack stats if brute attacks
+      if ($('.attackDiv'+indexString).attr('class').includes('brute')){
+        var crlist = Object.keys(combatantMainStats);
+        var crindex = crlist.indexOf(crString.replace("CR ",""));
+        crindex += 2;
+        if(crindex > 26){
+          crindex = 26;
+        }
+        var newCr = crlist[crindex];
+        attackStats = window[array.toLowerCase()+'AttackStats'][newCr];
+      }
 
       if (selected == "Kinetic"){
         if (indexParts[0] == 'Ranged'){
@@ -2245,6 +2285,9 @@ $('.wizard-card').bootstrapWizard({
             }
 
             if (validated) {
+
+              var crString = $('[data-id="CRDrop"]').text().trim();
+              $(".attackCR").html('<h5>'+crString+'</h5>')
 
             } else {
                 return false;
