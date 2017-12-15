@@ -69,6 +69,8 @@ turn finish button into reset button
 
 make the ranged spell attack value next to CL refect which choice was made on the attack card. make sure main attack type is validated if spels are used
 
+add in a multi dropdown to create user fillable stat block sections. Gear. tactics, ecology
+
 To Test
 soldier class melee/ranged - to test
 envoy skillchoice - to test
