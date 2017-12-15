@@ -49,6 +49,14 @@ alignment - add to statblock and choose in final step, also size
 
 other abilities
 
+fly shouldnt be a free ability
+
+print CR on attacks page
+
+add labels to drops
+
+make sure free graft and special abilities apply in the correct place
+
 handle lashunta spells
 
 fix special ability aura, and ones with commas
@@ -58,6 +66,8 @@ check special abilities for ability score adjustments
 finish adjustment abilities - brute
 
 turn finish button into reset button
+
+make the ranged spell attack value next to CL refect which choice was made on the attack card. make sure main attack type is validated if spels are used
 
 To Test
 soldier class melee/ranged - to test

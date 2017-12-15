@@ -481,7 +481,7 @@ function buildStatBlock() {
       damageType = window[attackType.toLowerCase() + indexParts[0] + 'Types'][damageType];
 
       if (critical != '') {
-        critical = '; critical ' + critical;
+        critical = '; critical ' + critical.toLowerCase();
       }
 
       if (indexParts[0].toString() == 'Melee') {
@@ -593,6 +593,9 @@ function leftAndRight(left,right){
 function ordinalNumber(i) {
     var j = i % 10,
         k = i % 100;
+    if (i == 0)  {
+        return "0"
+    }
     if (j == 1 && k != 11) {
         return i + "st";
     }
@@ -1224,6 +1227,17 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       }
       skillList = removeElement(skillList,'Perception');//perception removed because it is a good skill by default
 
+      //populate profession dropdown if necessary
+      if (selectArray.includes("Profession")) {
+        //generate if not already there
+        if (!$('[data-id="masterProfDrop"]').length){
+          generateDropdown("masterProfessionDropdown","masterProfDrop","Choose master profession",professionSkills);
+        }
+      } else {
+        //remove profession dropdown
+        $("#masterProfessionDropdown").empty();
+      }
+
       goodSkillNum = Number($('#goodNumSave').text());
       generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,skillList,goodSkillNum);
       goodSelected = $('#stepSevenGoodSave').text();
@@ -1237,9 +1251,18 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         graftString = masterGraftSkills.join().replace(/,/g,'*,')+'*,';
       }
 
+      description = "<p><b>Master skills:</b> "+graftString+selected+"</p>"
+
+      //apply the correct profession text
+      if ($('[data-id="masterProfDrop"]').length){
+        if (!$('[data-id="masterProfDrop"]').text().includes("Choose")) {
+            description = description.replace(/((Profession)( \(.*\))?)+/g,$('#masterProfDrop').val().trim());
+        }
+      }
+
       var $descriptionArea = $(".stepSevenMasterDescription").first();
       $descriptionArea.empty();
-      $descriptionArea.append("<p><b>Master skills:</b> "+graftString+selected+"</p>");
+      $descriptionArea.append(description);
 
       $('#stepSevenMasterSave').text(selected);
 
@@ -1262,6 +1285,17 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         skillList = removeElement(skillList,selectArray[i]);
       }
 
+      //populate profession dropdown if necessary
+      if (selectArray.includes("Profession")) {
+        //generate if not already there
+        if (!$('[data-id="goodProfDrop"]').length){
+          generateDropdown("goodProfessionDropdown","goodProfDrop","Choose good profession",professionSkills);
+        }
+      } else {
+        //remove profession dropdown
+        $("#goodProfessionDropdown").empty();
+      }
+
       masterSkillNum = Number($('#masterNumSave').text());
       generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,skillList,masterSkillNum);
       masterSelected = $('#stepSevenMasterSave').text();
@@ -1275,11 +1309,32 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         graftString = goodGraftSkills.join().replace(/,/g,'*,')+'*,';
       }
 
+      description = "<p><b>Good skills:</b> "+graftString+selected+"</p>"
+
+      //apply the correct profession text
+      if ($('[data-id="goodProfDrop"]').length){
+        if (!$('[data-id="goodProfDrop"]').text().includes("Choose")) {
+            description = description.replace(/((Profession)( \(.*\))?)+/g,$('#goodProfDrop').val().trim());
+        }
+      }
+
       var $descriptionArea = $(".stepSevenGoodDescription").first();
       $descriptionArea.empty();
-      $descriptionArea.append("<p><b>Good skills:</b> "+graftString+selected+"</p>");
+      $descriptionArea.append(description);
 
       $('#stepSevenGoodSave').text(selected);
+    } else if (id=='masterProfDrop') {
+      //apply the correct profession text
+      var description = $(".stepSevenMasterDescription").html();
+      description = description.replace(/((Profession)( \(.*\))?)+/g,selected);
+      $(".stepSevenMasterDescription").html(description);
+
+    } else if (id=='goodProfDrop') {
+      //apply the correct profession text
+      var description = $(".stepSevenGoodDescription").html();
+      description = description.replace(/((Profession)( \(.*\))?)+/g,selected);
+      $(".stepSevenGoodDescription").html(description);
+
     } else if (id=='scoresDrop') {
       //get ability modifiers in the correct order
 
@@ -1334,7 +1389,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       var $descriptionArea = $(".stepEight1Description").first();
       $descriptionArea.empty();
       if (selected != ''){
-        $descriptionArea.append(("<p><b>"+saved[2]+"th ("+saved[1]+"):</b> "+selected.replace(/,/g,', ')+"</p>").replace("0th","0").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+        $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[2]))+" ("+saved[1]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
       }
 
     } else if (id=='spells2Drop') {
@@ -1344,7 +1399,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       var $descriptionArea = $(".stepEight2Description").first();
       $descriptionArea.empty();
       if (selected != ''){
-        $descriptionArea.append(("<p><b>"+saved[4]+"th ("+saved[3]+"):</b> "+selected.replace(/,/g,', ')+"</p>").replace("0th","0").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+        $descriptionArea.append(("<p><b>"+ordinalNumber(Number(saved[4]))+" ("+saved[3]+"):</b> "+selected.replace(/,/g,', ')+"</p>"));
       }
 
     } else if (id=='spells3Drop') {
@@ -1354,7 +1409,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       var $descriptionArea = $(".stepEight3Description").first();
       $descriptionArea.empty();
       if (selected != ''){
-        $descriptionArea.append(("<p><b>"+saved[6]+"th ("+saved[5]+"):</b> "+selected.replace(/,/g,', ')+"</p>").replace("0th","0").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+        $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[6]))+" ("+saved[5]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
       }
 
     } else if (id == 'casterDrop'){
@@ -1493,7 +1548,7 @@ function showSpellDropdowns(caster,className){
 
       var $descriptionAbility = $(".stepEight"+i).first();
       $descriptionAbility.empty();
-      $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+      $descriptionAbility.append("<p><b>"+castCat+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
 
       generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
       save += ","+castCat+","+spellLevel;
@@ -1517,7 +1572,7 @@ function showSpellDropdowns(caster,className){
           i = 1;
           var $descriptionAbility = $(".stepEight"+i).first();
           $descriptionAbility.empty();
-          $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","0").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+          $descriptionAbility.append("<p><b>"+castCat+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
 
           generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
           save += ","+castCat;
@@ -1526,7 +1581,7 @@ function showSpellDropdowns(caster,className){
       } else {
         var $descriptionAbility = $(".stepEight"+i).first();
         $descriptionAbility.empty();
-        $descriptionAbility.append(("<p><b>"+castCat+":</b> Select up to "+spellNum+" "+spellLevel+"th level spells.</p>").replace("0th","zero").replace("1th","1st").replace("2th","2nd").replace("3th","3rd"));
+        $descriptionAbility.append("<p><b>"+castCat+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
 
         generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
         save += ","+castCat+","+spellLevel;
@@ -1897,7 +1952,7 @@ $('.wizard-card').bootstrapWizard({
                 return false;
             }
         }
-        //Validation tab 4 - class
+        //Validation tab 5 - template
         if (index == 5) {
 
             var validated = true;
@@ -2146,12 +2201,12 @@ $('.wizard-card').bootstrapWizard({
                 if (masterGraftSkills.length > 0){
                   $(".stepSevenMasterDescription").first().append("<p><b>Master skills:</b> "+masterGraftSkills.join().replace(/,/g,'*,')+"*</p>");
                   $(".stepSevenAsterix").first().empty();
-                  $(".stepSevenAsterix").first().append("<p>*selected by graft</p>");
+                  $(".stepSevenAsterix").first().append("<p>*selected by grafts</p>");
                 }
                 if (goodGraftSkills.length > 0){
                   $(".stepSevenGoodDescription").first().append("<p><b>Good skills:</b> "+goodGraftSkills.join().replace(/,/g,'*,')+"*</p>");
                   $(".stepSevenAsterix").first().empty();
-                  $(".stepSevenAsterix").first().append("<p>*selected by graft</p>");
+                  $(".stepSevenAsterix").first().append("<p>*selected by grafts</p>");
                 }
                 //save the current configuration
                 $('#stepSevenSaveTwo').text(crString + ":" + array + ":" + graft + ":" + classDrop + ":" + subtype + ":" + extraMaster);
@@ -2175,13 +2230,27 @@ $('.wizard-card').bootstrapWizard({
               }
             }
 
+            if ($('[data-id="masterProfDrop"]').length){
+              if ($('[data-id="masterProfDrop"]').text().includes("Choose")) {
+                  $('[data-id="masterProfDrop"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+
+            if ($('[data-id="goodProfDrop"]').length){
+              if ($('[data-id="goodProfDrop"]').text().includes("Choose")) {
+                  $('[data-id="goodProfDrop"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+
             if (validated) {
 
             } else {
                 return false;
             }
         }
-        //Validation tab 8
+        //Validation tab 8 - attacks
         if (index == 8) {
 
             var validated = true;
