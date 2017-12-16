@@ -19,25 +19,21 @@ spells don't always use high attack bonus. use which one is selected
 
 add the rest of the grafts
 
-let soldier type choose main attack type
-
 TODOs
 
 add basic stat block maybe only choosing step 1 options
-
-Languages dropdown
 
 dropdowns for speeds
 
 DR from template grafts
 
-add class to statblock name entry
-
 phrenic adjustments
 
-reach
+make giant and miniature affect size StartToStart
 
-alignment - add to statblock and choose in final step, also size
+make alignments from template affect alignmnet stat
+
+also size
 
 other abilities
 

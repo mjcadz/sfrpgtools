@@ -190,14 +190,17 @@ function buildStatBlock() {
   }
 
 
-  //step 7 - skills and Modifiers
+  //step 7 - attacks
+  statBlock.attackFocus = $("#attackDrop").val().trim();
+
+  //step 8 - skills and Modifiers
 
   //overwrite master+ good skills with selected + graft skills
   statBlock.MainAbilityScores = $(".stepSevenAbilityDescription").first().text().replace('Main ability scores: (','').replace(')','').split(',')
   statBlock.MasterSkills = $(".stepSevenMasterDescription").first().text().replace('Master skills: ','').replace(/\*/g,'').split(',');
   statBlock.GoodSkills = $(".stepSevenGoodDescription").first().text().replace('Good skills: ','').replace(/\*/g,'').split(',');
 
-  //step 8 - spells
+  //step 9 - spells
 
   //get any spelllike abilities from grafts
   var subtype = $('#creatureSubTypeDrop').val().trim();
@@ -236,7 +239,9 @@ function buildStatBlock() {
     statBlock.Spellcasting = spellArray;
   }
 
-  //step 9 - final checks
+  //step 10 - final checks
+
+  statBlock.creatureSize = $('#sizeDrop').val().trim();
 
   //
   //stat block adjustments
@@ -367,8 +372,16 @@ function buildStatBlock() {
       }
     }
   }
-  //TODO creature size and alignment
-  var typeString = '<p>CN Medium ' + statBlock.CreatureType.toLowerCase() + subTypeString + '</p>';
+  var className = $('#classDrop').val().trim();
+  if ( className != '' || className != 'None'){
+    var classString = ' ' + className.toLowerCase()
+  } else {
+    classString = ' ';
+  }
+  //TODO creature size
+  var alignString = alignments[$('#align1Drop').val().trim() + $('#align2Drop').val().trim()];
+
+  var typeString = '<p>'+ alignString +' ' + statBlock.creatureSize + ' ' + statBlock.CreatureType.toLowerCase() + subTypeString + classString + '</p>';
 
   //build skills string
   listOfSkills = Object.keys(skillNames);
@@ -412,9 +425,10 @@ function buildStatBlock() {
       typeTitle = 'Spell-like Abilities';
     }
 
+    var rangeAttackVal = (statBlock.attackFocus == 'Ranged') ? statBlock.highAttackBonus:statBlock.lowAttackBonus;
     //Caster Level
     var clVal = ordinalNumber(Number(statBlock.Cr));
-    spellString += '<p><b>'+typeTitle+'</b> (CL ' + clVal +'; ranged '+statBlock.highAttackBonus+')</p>';
+    spellString += '<p><b>'+typeTitle+'</b> (CL ' + clVal +'; ranged '+rangeAttackVal+')</p>';
     //for each frequency
     for (var i = 0; i < statBlock.Spellcasting.length; i++) {
       spellBlock = statBlock.Spellcasting[i];
@@ -558,11 +572,34 @@ function buildStatBlock() {
     TacticsString = '<p><b>TACTICS</b></p><hr><p>tactics details here e.g. During combat, Morale</p><br>';
   }
 
-  //perception value
+  //perception string
   if (statBlock.MasterSkills.includes("Perception")){
     var perceptionValue = statBlock.masterSkills[0].toString()
   } else {
     var perceptionValue = statBlock.goodSkills[0].toString()
+  }
+
+  //space and reach strings
+  var spaceReachString = '';
+  if (statBlock.creatureSize != 'Medium' ){
+    sizeArray = creatureSize[statBlock.creatureSize];
+    var space = '';
+    var reach = '';
+
+    if (sizeArray[2] != "5 ft."){
+      space = '<b>Space</b> ' + sizeArray[2];
+    }
+    if (sizeArray[3] != "5 ft."){
+      reach = '<b>Reach</b> ' + sizeArray[3];
+    }
+    spaceReachString += space;
+    if (space != '' && reach != '') {
+      spaceReachString += '; '
+    }
+    spaceReachString += reach;
+    if (spaceReachString != ''){
+      spaceReachString = '<p>' + spaceReachString + '</p>';
+    }
   }
 
   //
@@ -596,6 +633,7 @@ function buildStatBlock() {
   if (RangedString != ''){
     textBlock += RangedString;
   }
+  textBlock += spaceReachString;
   if (spellString != ''){//add spellcasting if any
     textBlock += spellString;
   }
@@ -1885,12 +1923,17 @@ $('.wizard-card').bootstrapWizard({
         generateDropdown("MainAttackDropdown","Attack focus","attackDrop","Choose main attack focus",["Melee","Ranged"]);
 
         //generate alignment
-        generateDropdown("Alignment1Dropdown","Alignment","alignment1Drop","...",["Lawful","Neutral","Chaotic"]);
-        $('#alignment1Drop').selectpicker('val', "Chaotic");
-        $('#alignment1Drop').selectpicker('refresh');
-        generateDropdown("Alignment2Dropdown","&nbsp;","alignment2Drop","...",["Good","Neutral","Evil"]);
-        $('#alignment2Drop').selectpicker('val', "Neutral");
-        $('#alignment2Drop').selectpicker('refresh');
+        generateDropdown("Alignment1Dropdown","Alignment","align1Drop","...",["Lawful","Neutral","Chaotic"]);
+        $('#align1Drop').selectpicker('val', "Chaotic");
+        $('#align1Drop').selectpicker('refresh');
+        generateDropdown("Alignment2Dropdown","&nbsp;","align2Drop","...",["Good","Neutral","Evil"]);
+        $('#align2Drop').selectpicker('val', "Neutral");
+        $('#align2Drop').selectpicker('refresh');
+
+        //size dropdown
+        generateDropdown("sizeDropdown","Size","sizeDrop","...",Object.keys(creatureSize));
+        $('#sizeDrop').selectpicker('val', "Medium");
+        $('#sizeDrop').selectpicker('refresh');
 
         //save button is initially hidden
         $('.btn-save').hide();
@@ -2164,8 +2207,17 @@ $('.wizard-card').bootstrapWizard({
               //check if soldier for damage focus
               if ($('[data-id="stepFourOptionDrop"]').length && classDrop == 'Soldier'){
                 var damageStyle = $('#stepFourOptionDrop').val().trim() + 'Style';
+
+                //also set attack focus in attack sections
+                disableDropdown('attackDrop',false);
+                $('#attackDrop').selectpicker('val', $('#stepFourOptionDrop').val().trim());
+                $('#attackDrop').selectpicker('refresh');
+                disableDropdown('attackDrop',true);
+
+
               } else {
                 var damageStyle = 'Style';
+                disableDropdown('attackDrop',false);
               }
 
               if (classDrop != '' && classDrop != 'None') {
@@ -2379,6 +2431,14 @@ $('.wizard-card').bootstrapWizard({
         if (index == 8) {
 
             var validated = true;
+
+            //validate high stat choice
+            if ($('[data-id="attackDrop"]').length){
+              if ($('[data-id="attackDrop"]').text().includes("Choose")) {
+                  $('[data-id="attackDrop"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
 
             //iterate all attack names
             $("[id^='attackName']").each(function(){

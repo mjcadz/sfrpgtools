@@ -1963,7 +1963,8 @@ graftSpecialAbilities = {
   "Woodland Stride (Ex)": "A green dragon can move through natural foliage at full speed without taking damage or suffering impairment. Areas of foliage that have been magically altered affect it normally."
 };
 
-commonLanguages = ["Common",
+commonLanguages = [
+  "Common",
   "Aklo",
   "Lashunta",
   "Eoxian",
@@ -1975,7 +1976,8 @@ commonLanguages = ["Common",
   "Ysoki"
 ];
 
-uncommonLanguages = ["Aquan",
+uncommonLanguages = [
+  "Aquan",
   "Arkanen",
   "Auran",
   "Celestial",
@@ -1995,3 +1997,28 @@ uncommonLanguages = ["Aquan",
   "Shobhad",
   "Terran"
 ];
+
+alignments = {
+  "LawfulGood":"LG",
+  "LawfulNeutral":"LN",
+  "LawfulEvil":"LE",
+  "NeutralGood":"NG",
+  "NeutralNeutral":"N",
+  "NeutralEvil":"NE",
+  "ChaoticGood":"CG",
+  "ChaoticNeutral":"CN",
+  "ChaoticEvil":"CE"
+};
+
+//category:  height or length , weight, space, natural reach tall, natural reach long
+creatureSize = {
+  "Fine":       ["6 in. or less","1/8 lb. or less","1/2 ft.","0 ft.","0 ft."],
+  "Diminutive": ["6 in.–1 ft.","1/8–1 lb.","1 ft.","0 ft.","0 ft."],
+  "Tiny":       ["1–2 ft.","1–8 lbs.","2-1/2 ft.","0 ft.","0 ft."],
+  "Small":      ["2–4 ft.","8–60 lbs.","5 ft.","5 ft.","5 ft."],
+  "Medium":     ["4–8 ft.","60–500 lbs.","5 ft.","5 ft.","5 ft."],
+  "Large":      ["8–16 ft.","500 lbs.–2 tons","10 ft.","10 ft.","5 ft."],
+  "Huge":       ["16–32 ft.","2–16 tons","15 ft.","15 ft.","10 ft."],
+  "Gargantuan": ["32–64 ft.","16–125 tons","20 ft.","20 ft.","15 ft."],
+  "Colossal":   ["64 ft. or more","125 tons or more","30 ft.","30 ft.","20 ft."]
+};
