@@ -1117,7 +1117,7 @@ classData = {
             "20": "Trick attack +10d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, supreme operative, and two 14th-level operative exploits."
         },
         "AbilityScoreModifiers": ["Dex","Int","Wis"],
-        "Adjustments": {"initiative":"+CR/4","reflex":3,"skillChecks":1},
+        "Adjustments": {"initiativeMod":"+CR/4","reflex":3,"skillCheckMod":1},
         "Description": "Cunning and swift, operatives are especially skilled and can cause foes to drop their guards, paving the way for devastating attacks.",
         "Gear": "Light armor (item level = CR), small arm (item level = CR), sniper rifle (item level = CR), and basic melee weapon with operative special quality (item level = CR - 1).",
         "RequiredArray": "Expert",
@@ -1274,7 +1274,7 @@ graftTemplates = {
 			"Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
 		},
 		"Fiendish": {
-			"Alignment": "evil",
+			"Alignment": "Evil",
 			"Description": "Fiendish creatures are natives of one of the evil-aligned Outer Planes.",
 			"DR": {
 				"DR": "CR-10/good",
@@ -1315,7 +1315,7 @@ graftTemplates = {
 			}
 		},
 		"Resolute": {
-			"Alignment": "lawful",
+			"Alignment": "Lawful",
 			"DR": {
 				"DR": "CR-10/chaotic",
 				"IfDRExists": {
@@ -1356,7 +1356,7 @@ graftTemplates = {
       "Spell-likeAbilities": {
         "CR": 10
       },
-      "Alignment": "Chaotic evil",
+      "Alignment": "Chaotic Evil",
       "DR": {
         "CR10": "5/magic",
         "CR12": "10/magic",
@@ -1391,7 +1391,7 @@ graftTemplates = {
       "Spell-likeAbilities": {
         "CR": 9
       },
-      "Alignment": "Lawful evil",
+      "Alignment": "Lawful Evil",
       "DR": {
         "CR11": "5/magic",
         "CR13": "10/magic",
@@ -1426,7 +1426,7 @@ graftTemplates = {
       "Spell-likeAbilities": {
         "CR": 9
       },
-      "Alignment": "Lawful evil",
+      "Alignment": "Lawful Evil",
       "DR": {
         "DR11": "5/magic",
         "CR13": "10/magic",
@@ -1464,7 +1464,7 @@ graftTemplates = {
       "Spell-likeAbilities": {
         "CR": 10
       },
-      "Alignment": "Chaotic evil",
+      "Alignment": "Chaotic Evil",
       "DR": {
         "CR10": "5/magic",
         "CR12": "10/magic",
@@ -1497,7 +1497,7 @@ graftTemplates = {
       "Spell-likeAbilities": {
         "CR": 10
       },
-      "Alignment": "Chaotic evil",
+      "Alignment": "Chaotic Evil",
       "DR": {
         "CR9": "5/magic",
         "CR12": "10/magic",
@@ -1962,3 +1962,36 @@ graftSpecialAbilities = {
   "Icewalking (Ex)": "A white dragon can move across icy surfaces without penalty and doesn't need to attempt Acrobatics checks to run or charge on ice. In addition, a white dragon can climb icy surfaces as if under the effect of spider climb.",
   "Woodland Stride (Ex)": "A green dragon can move through natural foliage at full speed without taking damage or suffering impairment. Areas of foliage that have been magically altered affect it normally."
 };
+
+commonLanguages = ["Common",
+  "Aklo",
+  "Lashunta",
+  "Eoxian",
+  "Kasatha",
+  "Shirren",
+  "Triaxian",
+  "Vercite",
+  "Vesk",
+  "Ysoki"
+];
+
+uncommonLanguages = ["Aquan",
+  "Arkanen",
+  "Auran",
+  "Celestial",
+  "Draconic",
+  "Drow",
+  "Dwarven",
+  "Elven",
+  "Gnome",
+  "Goblin",
+  "Halfling",
+  "Ignan",
+  "Infernal",
+  "Kalo",
+  "Nchaki",
+  "Orc",
+  "Sarcesian",
+  "Shobhad",
+  "Terran"
+];

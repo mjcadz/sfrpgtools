@@ -271,6 +271,19 @@ function buildStatBlock() {
     }
   }
 
+  //apply attack mods if any
+  if (statBlock.hasOwnProperty('attackMod')){
+
+    statBlock.highAttackBonus = '+' + (Number(statBlock.highAttackBonus.replace('+','')) + statBlock.attackMod).toString();
+    statBlock.lowAttackBonus = '+' + (Number(statBlock.lowAttackBonus.replace('+','')) + statBlock.attackMod).toString();
+  }
+
+  if (statBlock.hasOwnProperty("skillCheckMod")){
+    //increase skill scores
+    statBlock.masterSkills[0] = statBlock.masterSkills[0] + statBlock.skillCheckMod;
+    statBlock.goodSkills[0] = statBlock.goodSkills[0] + statBlock.skillCheckMod;
+  }
+
   //apply ability mods to selected ability scores
   scoreNames = ['str','dex','con','int','wis','cha'];
   for (i = 0; i < scoreNames.length; i++) {
@@ -284,6 +297,16 @@ function buildStatBlock() {
       } else {
         statBlock[scoreNames[i]] = '+0';
       }
+    }
+  }
+
+  statBlock.initiative = statBlock.dex
+
+  //add any initiative mods. ie from operative
+  if (statBlock.hasOwnProperty("initiativeMod")){
+    //increase initiative
+    if (statBlock.initiativeMod == "+CR/4"){
+      statBlock.initiative =  '+' + (Number(statBlock.initiative.replace('+','')) + Math.floor(Number(statBlock.Cr) / 4)).toString()
     }
   }
 
@@ -469,6 +492,13 @@ function buildStatBlock() {
         damage = damageSplit[0] + '+' + damageBonus.toString();
       }
 
+      //handle attack mod
+      alert(bonus)
+      if (statBlock.hasOwnProperty('attackMod')){
+        bonus = '+' + (Number(bonus.replace('+','')) + statBlock.attackMod).toString();
+      }
+      alert(bonus)
+
       damageType = window[attackType.toLowerCase() + indexParts[0] + 'Types'][damageType];
 
       if (critical != '') {
@@ -505,6 +535,36 @@ function buildStatBlock() {
     RangedString += '</p>';
   }
 
+  // language string
+  var languageString = '';
+  var languages = $('#languageDrop').val().toString().trim();
+  if (languages != ''){
+    languageString = '<p><b>Languages</b> ' + languages.replace(/,/g,', ') + '<p>';
+  }
+
+  //Extra user fillable entries
+  var EcologyString = '';
+  var GearString = '';
+  var TacticsString = '';
+  var extraEntries = $('#OSDrop').val().toString().trim();
+
+  if (extraEntries.includes("Ecology")){
+    EcologyString = '<p><b>ECOLOGY</b></p><hr><p>ecology details here e.g. Environment, Organisation</p><br>';
+  }
+  if (extraEntries.includes("Gear")){
+    GearString = '<p><b>Gear</b> list gear here e.g. Armor, Ammunition</p>';
+  }
+  if (extraEntries.includes("Tactics")){
+    TacticsString = '<p><b>TACTICS</b></p><hr><p>tactics details here e.g. During combat, Morale</p><br>';
+  }
+
+  //perception value
+  if (statBlock.MasterSkills.includes("Perception")){
+    var perceptionValue = statBlock.masterSkills[0].toString()
+  } else {
+    var perceptionValue = statBlock.goodSkills[0].toString()
+  }
+
   //
   //Stat Block
   //
@@ -516,7 +576,7 @@ function buildStatBlock() {
   textBlock += '<hr>';
   textBlock += "<p><b>XP "+statBlock.Xp+"</b></p>";
   textBlock += typeString;
-  textBlock += "<p><b>Init</b> "+statBlock.dex+sensesString+'; <b>Perception</b> +'+statBlock.goodSkills[0].toString()+"</p>";
+  textBlock += "<p><b>Init</b> "+statBlock.initiative+sensesString+'; <b>Perception</b> +'+perceptionValue+"</p>";
   textBlock += "<br>";
 
   //Defence
@@ -541,12 +601,20 @@ function buildStatBlock() {
   }
   textBlock += "<br>";
 
+  //tactics
+  textBlock += TacticsString;
+
   //statistics
   textBlock += '<p><b>STATISTICS</b></p>';
   textBlock += '<hr>';
   textBlock += "<p><b>Str</b> "+statBlock.str + "; <b>Dex</b> "+statBlock.dex+ "; <b>Con</b> "+statBlock.con+ "; <b>Int</b> "+statBlock.int+ "; <b>Wis</b> "+statBlock.wis+ "; <b>Cha</b> "+statBlock.cha+"</p>";
   textBlock += '<p><b>Skills </b>'+skillString+'</p>';
+  textBlock += languageString;
+  textBlock += GearString;
   textBlock += "<br>";
+
+  //ecology
+  textBlock += EcologyString;
 
   //special Abilities
   if (specialString != ''){//add spellcasting if any
@@ -678,9 +746,13 @@ function getClassAbilities(selectedClass,cr){
 }
 
 //creates bootstrap-select dropdowns from arrays
-function generateDropdown(parentID,dropID,title,array) {
+function generateDropdown(parentID,label,dropID,title,array) {
   //add select options
-  var dropHtml = '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="13">'
+  var dropHtml = "";
+  if (label != "") {
+    dropHtml += '<label>' + label + '</label>'
+  }
+  dropHtml += '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="13">'
   //build list, apply BREAKS or LABELS if words present in array
   for (i = 0; i < array.length; i++) {
     if (array[i] == 'BREAK'){
@@ -704,7 +776,7 @@ function generateDropdown(parentID,dropID,title,array) {
 }
 
 //creates bootstrap-select multiple select dropdowns from arrays
-function generateMultiDropdown(parentID,dropID,title,searchTitle,array,maxOptions) {
+function generateMultiDropdown(parentID,label,dropID,title,searchTitle,array,maxOptions) {
   //check if search bar added
   if (searchTitle === 0){
     searTitl = ''
@@ -712,7 +784,11 @@ function generateMultiDropdown(parentID,dropID,title,searchTitle,array,maxOption
     searTitl = 'data-live-search="true" data-live-search-placeholder="'+searchTitle+'" ';
   }
   //add select options
-  var dropHtml = '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="13" multiple ' + searTitl + 'data-max-options="'+maxOptions+'" data-selected-text-format="count">'
+  var dropHtml = "";
+  if (label != "") {
+    dropHtml += '<label>' + label + '</label>'
+  }
+  dropHtml += '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="13" multiple ' + searTitl + 'data-max-options="'+maxOptions+'" data-selected-text-format="count">'
   //build list, apply BREAKS or LABELS if words present in array
   for (i = 0; i < array.length; i++) {
     if (array[i] == 'BREAK'){
@@ -756,7 +832,7 @@ function generateAttackEntry(style) {
   var highStat = $('#attackDrop').val().trim();
 
   if (style == "Melee"){
-    var attackPlaceholder = "eg. Claws";
+    var attackPlaceholder = "e.g. Claws";
     var attackDamage = attackStats[4];
     var damageType = Object.keys(kineticMeleeTypes);
 
@@ -768,7 +844,7 @@ function generateAttackEntry(style) {
 
   }
   else if (style == "Ranged"){
-    var attackPlaceholder = "eg. Pistol";
+    var attackPlaceholder = "e.g. Pistol";
     var attackDamage = attackStats[3];
     var damageType = Object.keys(kineticRangedTypes);
 
@@ -803,7 +879,6 @@ function generateAttackEntry(style) {
       crindex = 26;
     }
     var newCr = crlist[crindex];
-    alert(newCr)
     attackStats = window[array.toLowerCase()+'AttackStats'][newCr];
     if (style == "Melee"){
       var attackDamage = attackStats[4];
@@ -871,10 +946,10 @@ function generateAttackEntry(style) {
 
   $outputArea.append(attackBody);
 
-  generateDropdown("attacktype"+indexString,"AT"+indexString+"Drop","...",["Energy","Kinetic"]);
+  generateDropdown("attacktype"+indexString,"","AT"+indexString+"Drop","...",["Energy","Kinetic"]);
   $('#AT'+indexString+'Drop').selectpicker('val', "Kinetic");
   $('#AT'+indexString+'Drop').selectpicker('refresh');
-  generateDropdown("damagetype"+indexString,"DT"+indexString+"Drop","...",damageType);
+  generateDropdown("damagetype"+indexString,"","DT"+indexString+"Drop","...",damageType);
   $('#DT'+indexString+'Drop').selectpicker('val', damageType[0]);
   $('#DT'+indexString+'Drop').selectpicker('refresh');
 
@@ -1225,7 +1300,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
           //display extra options for save boost if selected
           if (multi[i] == "Save Boost") {
-            generateDropdown("saveBoostDropdown","BoostDrop","Choose save boost",["All saving throws +1","Fortitude +3","Reflex +3","Will +3"]);
+            generateDropdown("saveBoostDropdown","Save boost","BoostDrop","Choose save boost",["All saving throws +1","Fortitude +3","Reflex +3","Will +3"]);
           }
 
 
@@ -1258,7 +1333,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       if (selectArray.includes("Profession")) {
         //generate if not already there
         if (!$('[data-id="masterProfDrop"]').length){
-          generateDropdown("masterProfessionDropdown","masterProfDrop","Choose master profession",professionSkills);
+          generateDropdown("masterProfessionDropdown","Profession","masterProfDrop","Choose profession",professionSkills);
         }
       } else {
         //remove profession dropdown
@@ -1266,7 +1341,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       }
 
       goodSkillNum = Number($('#goodNumSave').text());
-      generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,skillList,goodSkillNum);
+      generateMultiDropdown("goodSkillsDropdown","","goodDrop","Select good skills",0,skillList,goodSkillNum);
       goodSelected = $('#stepSevenGoodSave').text();
       if ( goodSelected != ''){
         $('#goodDrop').selectpicker('val', goodSelected.split(','));
@@ -1316,7 +1391,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       if (selectArray.includes("Profession")) {
         //generate if not already there
         if (!$('[data-id="goodProfDrop"]').length){
-          generateDropdown("goodProfessionDropdown","goodProfDrop","Choose good profession",professionSkills);
+          generateDropdown("goodProfessionDropdown","Profession","goodProfDrop","Choose good profession",professionSkills);
         }
       } else {
         //remove profession dropdown
@@ -1324,7 +1399,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       }
 
       masterSkillNum = Number($('#masterNumSave').text());
-      generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,skillList,masterSkillNum);
+      generateMultiDropdown("masterSkillsDropdown","","masterDrop","Select master skills",0,skillList,masterSkillNum);
       masterSelected = $('#stepSevenMasterSave').text();
       if ( masterSelected != ''){
         $('#masterDrop').selectpicker('val', masterSelected.split(','));
@@ -1558,7 +1633,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       $('#damage'+indexString).val(damage);
 
       //set damage type dropdown
-      generateDropdown("damagetype"+indexString,"DT"+indexString+"Drop","...",damageType);
+      generateDropdown("damagetype"+indexString,"","DT"+indexString+"Drop","...",damageType);
       $('#DT'+indexString+'Drop').selectpicker('val', damageType[0]);
       $('#DT'+indexString+'Drop').selectpicker('refresh');
 
@@ -1590,7 +1665,7 @@ function showSpellDropdowns(caster,className){
       $descriptionAbility.empty();
       $descriptionAbility.append("<p><b>"+castCat+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
 
-      generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
+      generateMultiDropdown("spells"+i+"Dropdown","","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
       save += ","+castCat+","+spellLevel;
     }
   } else {
@@ -1614,7 +1689,7 @@ function showSpellDropdowns(caster,className){
           $descriptionAbility.empty();
           $descriptionAbility.append("<p><b>"+castCat+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
 
-          generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
+          generateMultiDropdown("spells"+i+"Dropdown","","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
           save += ","+castCat;
 
         }
@@ -1623,7 +1698,7 @@ function showSpellDropdowns(caster,className){
         $descriptionAbility.empty();
         $descriptionAbility.append("<p><b>"+castCat+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
 
-        generateMultiDropdown("spells"+i+"Dropdown","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
+        generateMultiDropdown("spells"+i+"Dropdown","","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
         save += ","+castCat+","+spellLevel;
 
       }
@@ -1649,12 +1724,12 @@ function stepTwoDescription(selected){
   $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
   //check if type needs choices
   if (creatureType[selected].Adjustments.hasOwnProperty("anySave")){
-    generateDropdown("stepTwoOptionalDropdown","SavingThrowDrop","Choose saving throw",["Fortitude +2","Reflex +2","Will +2"]);
+    generateDropdown("stepTwoOptionalDropdown","Saving throw","SavingThrowDrop","Choose saving throw",["Fortitude +2","Reflex +2","Will +2"]);
   }  else if (creatureType[selected].hasOwnProperty("Options")) {
     if (selected == "Animal"){
-      generateDropdown("stepTwoOptionalDropdown","optionDrop","Choose option",creatureType[selected].Options);
+      generateDropdown("stepTwoOptionalDropdown","Animal intelligence","optionDrop","Choose option",creatureType[selected].Options);
     } else if (selected == "Construct"){
-      generateDropdown("stepTwoOptionalDropdown","optionDrop","Choose option",creatureType[selected].Options);
+      generateDropdown("stepTwoOptionalDropdown","Construct mindless","optionDrop","Choose option",creatureType[selected].Options);
     }
   } else {
     $("#stepTwoOptionalDropdown").first().empty();
@@ -1673,9 +1748,9 @@ function stepThreeDescription(selected){
     $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
     //check if type needs choices
     if (creatureSubType[selected].hasOwnProperty("Options")) {
-      generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose option",creatureSubType[selected].Options.slice(1,3));
+      generateDropdown("stepThreeOptionalDropdown","Option","stepThreeOptionDrop","Choose option",creatureSubType[selected].Options.slice(1,3));
     } else if (creatureSubType[selected].hasOwnProperty("SubRaces")) {
-      generateDropdown("stepThreeOptionalDropdown","stepThreeOptionDrop","Choose race",Object.keys(creatureSubType[selected].SubRaces));
+      generateDropdown("stepThreeOptionalDropdown","Race","stepThreeOptionDrop","Choose race",Object.keys(creatureSubType[selected].SubRaces));
     } else {
       $("#stepThreeOptionalDropdown").first().empty();
     }
@@ -1698,9 +1773,9 @@ function stepFourDescription(selected,selectedArray) {
   //set secondary dropdowns
   if ($('#stepFourSave').text() != selected+":"+selectedArray+":"+"None"){
     if (selected == "Soldier"){
-      generateDropdown("stepFourOptionalDropdown","stepFourOptionDrop","Choose attack focus",["Melee","Ranged"]);
+      generateDropdown("stepFourOptionalDropdown","Attack focus","stepFourOptionDrop","Choose attack focus",["Melee","Ranged"]);
     } else if (selected == "Envoy"){
-      generateDropdown("stepFourOptionalDropdown","stepFourOptionDrop","Choose additional master skill",["Bluff", "Diplomacy" ,"Intimidate"]);
+      generateDropdown("stepFourOptionalDropdown","Additional master skill","stepFourOptionDrop","Choose additional master skill",["Bluff", "Diplomacy" ,"Intimidate"]);
     } else {
       $("#stepFourOptionalDropdown").first().empty();
     }
@@ -1800,15 +1875,22 @@ $('.wizard-card').bootstrapWizard({
 
         //create initial dropdowns from data arrays - static dropdowns only
         //step1
-        generateDropdown("CRDropdown","CRDrop","Choose challenge rating",CRLabels);
-        generateDropdown("arrayDropdown","arrayDrop","Choose base",Object.keys(stepOneDescription).sort());
+        generateDropdown("CRDropdown","Challenge rating","CRDrop","Choose CR",CRLabels);
+        generateDropdown("arrayDropdown","Base array","arrayDrop","Choose base",Object.keys(stepOneDescription).sort());
         //step2
-        generateDropdown("creatureTypeDropdown","creatureTypeDrop","Choose creature type",Object.keys(creatureType).sort());
+        generateDropdown("creatureTypeDropdown","Creature type","creatureTypeDrop","Choose creature type",Object.keys(creatureType).sort());
         //Step5
-        generateDropdown("graftDropdown","graftDrop","Optional template graft",getGraftArray());
+        generateDropdown("graftDropdown","Template graft","graftDrop","Optional template graft",getGraftArray());
         //Attacks
-        generateDropdown("MainAttackDropdown","attackDrop","Choose main attack style",["Melee","Ranged"]);
+        generateDropdown("MainAttackDropdown","Attack focus","attackDrop","Choose main attack focus",["Melee","Ranged"]);
 
+        //generate alignment
+        generateDropdown("Alignment1Dropdown","Alignment","alignment1Drop","...",["Lawful","Neutral","Chaotic"]);
+        $('#alignment1Drop').selectpicker('val', "Chaotic");
+        $('#alignment1Drop').selectpicker('refresh');
+        generateDropdown("Alignment2Dropdown","&nbsp;","alignment2Drop","...",["Good","Neutral","Evil"]);
+        $('#alignment2Drop').selectpicker('val', "Neutral");
+        $('#alignment2Drop').selectpicker('refresh');
 
         //save button is initially hidden
         $('.btn-save').hide();
@@ -1860,7 +1942,7 @@ $('.wizard-card').bootstrapWizard({
 
                 if (cr < crmin) {
                   //reset dropdown if cr below minimum
-                  generateDropdown("graftDropdown","graftDrop","Optional template graft",getGraftArray());
+                  generateDropdown("graftDropdown","Template graft","graftDrop","Optional template graft",getGraftArray());
                   stepFiveDescription('None')
                 }
               }
@@ -1913,7 +1995,7 @@ $('.wizard-card').bootstrapWizard({
                       SubTypeArray = ['None','BREAK'].concat(subTypeAll.sort());
                     }
 
-                    generateDropdown("creatureSubtypeDropdown","creatureSubTypeDrop",titleBar,SubTypeArray);
+                    generateDropdown("creatureSubtypeDropdown","Creature subtype","creatureSubTypeDrop",titleBar,SubTypeArray);
                     var $descriptionArea = $(".stepThreeDescription").first().empty();
                     $("#stepThreeOptionalDropdown").first().empty();
                     $('#stepThreeSave').text(creatureTypeStepThree);
@@ -1951,7 +2033,7 @@ $('.wizard-card').bootstrapWizard({
               classArray = classArray.concat(['LABEL='+ arrays[0] +' classes']).concat(window['class'+arrays[0]]).concat(['ENDLABEL']);
               classArray = classArray.concat(['LABEL='+ arrays[1] +' classes']).concat(window['class'+arrays[1]]).concat(['ENDLABEL']);
 
-              generateDropdown("classDropdown","classDrop","Optional class graft",classArray);
+              generateDropdown("classDropdown","Class graft","classDrop","Optional class graft",classArray);
 
               var $descriptionArea = $(".stepFourDescription").first();
               $descriptionArea.empty();
@@ -2048,8 +2130,8 @@ $('.wizard-card').bootstrapWizard({
                 }
 
                 //generate dropdowns for special and free abilities
-                generateMultiDropdown("freeAbilityDropdown","freeDrop","Select free abilities","Search abilities",FreeAbilities,10);
-                generateMultiDropdown("specialAbilityDropdown","specialDrop","Select special abilities","Search abilities",SpecialAbilities,maxOptions);
+                generateMultiDropdown("freeAbilityDropdown","","freeDrop","Select free abilities","Search abilities",FreeAbilities,10);
+                generateMultiDropdown("specialAbilityDropdown","","specialDrop","Select special abilities","Search abilities",SpecialAbilities,maxOptions);
                 var $descriptionArea = $(".stepSixAbilities").first();
                 $descriptionArea.empty();
                 $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");
@@ -2205,7 +2287,7 @@ $('.wizard-card').bootstrapWizard({
                 $descriptionMaster.empty();
                 $descriptionMaster.append("<p>Select up to <b>" + masterSkillNum + "</b> master skills.</p>");
                 $('#stepSevenMasterSave').text('')
-                generateMultiDropdown("masterSkillsDropdown","masterDrop","Select master skills",0,masterSkills,masterSkillNum);
+                generateMultiDropdown("masterSkillsDropdown","","masterDrop","Select master skills",0,masterSkills,masterSkillNum);
                 $('#masterNumSave').text(masterSkillNum);
 
                 //Good Skills
@@ -2231,7 +2313,7 @@ $('.wizard-card').bootstrapWizard({
                 $descriptionGood.empty();
                 $descriptionGood.append("<p>Select up to <b>" + goodSkillNum + "</b> good skills.</p>");
                 $('#stepSevenGoodSave').text('');
-                generateMultiDropdown("goodSkillsDropdown","goodDrop","Select good skills",0,goodSkills,goodSkillNum);
+                generateMultiDropdown("goodSkillsDropdown","","goodDrop","Select good skills",0,goodSkills,goodSkillNum);
                 $('#goodNumSave').text(goodSkillNum);
 
                 //empty descriptions and fill with skills
@@ -2383,7 +2465,7 @@ $('.wizard-card').bootstrapWizard({
                   } else {
                     //spellcasters can choose between full caster or spell-like abilities
                     descSpell = "This creature is a spellcaster.";
-                    generateDropdown("casterTypeDropdown","casterDrop","Choose casting type",["Spell-like abilities","Full caster"]);
+                    generateDropdown("casterTypeDropdown","Casting type","casterDrop","Choose casting type",["Spell-like abilities","Full caster"]);
                   };
                 } else if( graftSpelllike ){
                   //spell-like abilities from graft abilities
@@ -2392,7 +2474,7 @@ $('.wizard-card').bootstrapWizard({
                 } else if(special == "Secondary Magic"){
                   //spell-like abilities from secondary magic special ability
                   descSpell = "This creature has limited spell-like abilities via the Secondary Magic ability.";
-                  generateDropdown("casterTypeDropdown","secondaryDrop","Choose limited spells",["Only once-per-day spells","Only one spell per frequency (at will, 1/day, etc.)"]);
+                  generateDropdown("casterTypeDropdown","Limited spells","secondaryDrop","Choose limited spells",["Only once-per-day spells","Only one spell per frequency (at will, 1/day, etc.)"]);
                 } else {
                   //no spells brah
                   descSpell = "Spell casting is reserved for creatures with the spellcaster base and creatures with spell-like abilities";
@@ -2427,12 +2509,31 @@ $('.wizard-card').bootstrapWizard({
             }
 
             if (validated) {
+
               var classDrop = $('#classDrop').val().trim();
               if (classDrop != '' && classDrop != 'None'){
-                generateDropdown("precedenceDropdown","precedenceDrop","Choose stat adjustments",["Creature stat adjustments","Class stat adjustments"]);
+                var type = $('#creatureTypeDrop').val().trim();
+                generateDropdown("precedenceDropdown","Main stat adjustments","precedenceDrop","Choose stat adjustments",["Creature ("+type+") stat adjustments","Class ("+classDrop+") stat adjustments"]);
               } else {
                 $("#precedenceDropdown").first().empty();
               }
+
+              //generate Languages
+              var languages = [];
+              languages = languages.concat(['LABEL=Common']);
+              languages = languages.concat(commonLanguages.sort());
+              languages = languages.concat(['ENDLABEL']);
+              languages = languages.concat(['LABEL=Uncommon']);
+              languages = languages.concat(uncommonLanguages.sort());
+              languages = languages.concat(['ENDLABEL']);
+
+              generateMultiDropdown("languageDropdown","Languages (if any)","languageDrop","Select languages",0,languages,100);
+
+              //generate user fillable sections
+              generateMultiDropdown("optionalSectionsDropdown","Extra stat block entries (user fillable)","OSDrop","Select entries",0,["Ecology","Gear","Tactics"],100);
+
+
+
             } else {
                 return false;
             }

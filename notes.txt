@@ -29,9 +29,11 @@ Languages dropdown
 
 dropdowns for speeds
 
-attackMod value in adjustments
+DR from template grafts
 
-if perception is a master skill add the master value to the stat block
+add class to statblock name entry
+
+phrenic adjustments
 
 reach
 
@@ -40,8 +42,6 @@ alignment - add to statblock and choose in final step, also size
 other abilities
 
 fly shouldnt be a free ability
-
-add labels to drops
 
 make sure free graft and special abilities apply in the correct place
 
@@ -54,8 +54,6 @@ check special abilities for ability score adjustments
 turn finish button into reset button
 
 make the ranged spell attack value next to CL refect which choice was made on the attack card. make sure main attack type is validated if spels are used
-
-add in a multi dropdown to create user fillable stat block sections. Gear. tactics, ecology
 
 To Test
 soldier class melee/ranged - to test

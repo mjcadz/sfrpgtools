@@ -6,7 +6,7 @@
 {% block body %}
 <div class="jumbotron">
     <h1></h1>
-    <p class="lead">This wizard will step through the creation of Starfinder NPCs (including monsters).</p>
+    <p class="lead">This wizard will step through the creation of Starfinder NPCs and monsters.</p>
     <p></p>
     <div class="alert-this"style="display: none;">
       <button type="button" class="close" aria-label="Close" onclick="$('.alert-this').hide()"><span aria-hidden="true">&times;</span></button>
@@ -17,11 +17,6 @@
         <div class="wizard-container">
             <div class="card wizard-card" id="wizard">
                 <form action="" method="">
-                    <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
-                    <!--<div class="wizard-header">
-                    <h3 class="wizard-title">Book a Room</h3>
-                    <h5>This information will let us know more about you.</h5>
-                    </div>-->
                     <div class="wizard-navigation" hidden>
                         <ul>
                             <li><a href="#step1" data-toggle="tab">Step1</a></li>
@@ -51,7 +46,6 @@
                                     <hr>
                                     <div id="CRDropdown"></div>
                                     <div id="arrayDropdown"></div>
-
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
@@ -264,10 +258,19 @@
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
-                                  <div id="precedenceDropdown"></div>
-                                  <p></p>
                                   <div class="form-group">
                                       <input type="text" class="form-control" id="inputName" placeholder="Creature Name">
+                                  </div>
+                                  <div id="precedenceDropdown"></div>
+                                  <div id="languageDropdown"></div>
+                                  <div id="optionalSectionsDropdown"></div>
+                                  <div class="row">
+                                      <div class="col-xs-6">
+                                          <div id="Alignment1Dropdown"></div>
+                                      </div>
+                                      <div class="col-xs-6">
+                                          <div id="Alignment2Dropdown"></div>
+                                      </div>
                                   </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -312,7 +315,9 @@
     </div>
 </div>
 
-  <!-- Modal -->
+  <!-- Modal pop up html-->
+
+  <!-- Change required for grft Modal -->
   <div class="modal fade" id="classModal" role="dialog">
     <div class="modal-dialog">
 
@@ -335,7 +340,7 @@
   <div class="modal fade" id="graftModal" role="dialog">
     <div class="modal-dialog">
 
-      <!-- Modal content-->
+      <!-- Change required for graft Modal -->
       <div class="modal-content">
         <div class="modal-header" style="padding: 10px 15px 0px 15px;">
           <h4 class="modal-title" >Change required</h4>
@@ -354,7 +359,7 @@
   <div class="modal fade" id="crModal" role="dialog">
     <div class="modal-dialog">
 
-      <!-- Modal content-->
+      <!-- condition not met Modal -->
       <div class="modal-content">
         <div class="modal-header" style="padding: 10px 15px 0px 15px;">
           <h4 class="modal-title" >Condition not met</h4>
