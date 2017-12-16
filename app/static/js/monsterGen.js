@@ -343,6 +343,20 @@ function buildStatBlock() {
     }
   }
 
+  //apply DR
+  if (statBlock.hasOwnProperty('DR')){
+    if (statBlock['DR'].hasOwnProperty('DR')){
+      var drsplit = statBlock['DR']['DR'].split('/')
+      var drcr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      drcr = drcr + Number(drsplit[0].replace('CR',''));
+      if (drcr < 1){
+        drcr = 1;
+      }
+      statBlock.DRapplied = drcr.toString() + '/' + drsplit[1];
+    }
+  }
+  "CR-10/chaotic"
+
   //
   //Stat Block Strings
   //
@@ -551,9 +565,17 @@ function buildStatBlock() {
 
   // language string
   var languageString = '';
+  var languageArray = [];
   var languages = $('#languageDrop').val().toString().trim();
   if (languages != ''){
-    languageString = '<p><b>Languages</b> ' + languages.replace(/,/g,', ') + '<p>';
+    languageArray = languageArray.concat(languages.split(','))
+  }
+  if (statBlock.hasOwnProperty('Languages')){
+    languageArray = languageArray.concat(statBlock.Languages);
+  }
+  if (languageArray.length > 0){
+    languageArray = languageArray.sort()
+    languageString = '<p><b>Languages</b> ' + languageArray.join(', ') + '<p>';
   }
 
   //Extra user fillable entries
@@ -602,6 +624,52 @@ function buildStatBlock() {
     }
   }
 
+  //defences String
+  var defencesString = '';
+  //immunities
+  if (statBlock.hasOwnProperty('DRapplied')){
+    if (defencesString != '') {
+      defencesString += '; ';
+    }
+    defencesString += '<b>DR </b>'+statBlock.DRapplied;
+  }
+  //immunities
+  if (statBlock.hasOwnProperty('Immunities')){
+    if (defencesString != '') {
+      defencesString += '; ';
+    }
+    defencesString += '<b>Immunities </b>'+statBlock.Immunities.join(', ');
+  }
+  //resistances
+  if (statBlock.hasOwnProperty('Resistance')){
+    if (defencesString != '') {
+      defencesString += '; ';
+    }
+    defencesString += '<b>Resistances </b>'+statBlock.Resistance.join(', ');
+  }
+  //weaknesses
+  var weaknessString = '';
+  var weaknessInput = $('#inputWeakness').val().trim();
+  if (statBlock.hasOwnProperty('Vulnerable')){
+    weaknessString += statBlock.Vulnerable.join(', ');
+  }
+  if (weaknessInput != '') {
+    if (weaknessString != '') {
+      weaknessString += ', ';
+    }
+    weaknessString += weaknessInput;
+  }
+  if (weaknessString != '') {
+    if (defencesString != '') {
+      defencesString += '; ';
+    }
+    defencesString += '<b>Weaknesses </b>'+weaknessString;
+  }
+  if (defencesString != '') {
+    defencesString = '<p>' + defencesString + '</p>';
+  }
+
+
   //
   //Stat Block
   //
@@ -621,22 +689,17 @@ function buildStatBlock() {
   textBlock += "<hr>";
   textBlock += "<p><b>EAC</b> "+statBlock.eac + "; <b>KAC</b> "+statBlock.kac+"<p>";
   textBlock += "<p><b>Fort</b> +"+statBlock.fortitude + "; <b>Ref</b> +"+statBlock.reflex+ "; <b>Will</b> +"+statBlock.will+"<p>";
+  textBlock += defencesString;
   textBlock += "<br>";
 
   //Offence
   textBlock += '<p><b>OFFENCE</b></p>';
   textBlock += '<hr>';
   textBlock += '<p><b>Speed</b> 30 ft.</p>';//TODO fix this
-  if (MeleeString != ''){
-    textBlock += MeleeString;
-  }
-  if (RangedString != ''){
-    textBlock += RangedString;
-  }
+  textBlock += MeleeString;
+  textBlock += RangedString;
   textBlock += spaceReachString;
-  if (spellString != ''){//add spellcasting if any
-    textBlock += spellString;
-  }
+  textBlock += spellString;
   textBlock += "<br>";
 
   //tactics

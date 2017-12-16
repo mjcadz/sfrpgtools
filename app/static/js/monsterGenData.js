@@ -270,7 +270,7 @@ creatureType = {
     "Description": "A construct is a magically animated object or an artificially created creature.",
     "Senses": ["Darkvision 60 ft.","Low-light vision"],
     "OtherAbilities": ["Unliving"],
-    "Immunities": ["Construct"],
+    "Immunities": ["construct immunities"],
     "Subtypes": ["magical","technological"],
     "Options": ["Mindless","Not mindless"]
   },
@@ -304,7 +304,7 @@ creatureType = {
     "Description": "An ooze is an amorphous or mutable creature.",
     "Senses": ["Blindsight","Sightless"],
     "OtherAbilities": ["Mindless"],
-    "Immunities": ["Ooze"]
+    "Immunities": ["Ooze immunities"]
   },
   "Outsider": {
     "Adjustments": {"anySave":2,"attackMod":1},
@@ -315,14 +315,14 @@ creatureType = {
     "Adjustments": {"fortitude":2},
     "Description": "This type describes vegetable creatures. Note that regular plants, such as those growing in gardens or fields, lack Wisdom and Charisma modifiers and are objects, not creatures, even though they are alive.",
     "Senses": ["Low-light vision"],
-    "Immunities": ["Plant"]
+    "Immunities": ["Plant immunities"]
   },
   "Undead": {
     "Adjustments": {"fortitude":2,"con":"-"},
     "Description": "Undead are once-living creatures animated by magic or advanced technological forces.",
     "Senses": ["Darkvision 60 ft."],
     "OtherAbilities": ["Unliving"],
-    "Immunities": ["Undead"]
+    "Immunities": ["Undead immunities"]
   },
   "Vermin": {
     "Adjustments": {"fortitude":2,"int":"-"},
@@ -592,7 +592,7 @@ creatureSubType = {
   "Elemental": {
     "Description": "An elemental is a creature composed entirely of matter from one of the four Elemental Planes.",
     "Immunities": [
-      "Elemental"
+      "elemental immunities"
     ]
   },
   "Elf": {
@@ -600,7 +600,7 @@ creatureSubType = {
     "SubRaces": {
       "Drow": {
         "Immunities": [
-          "drow"
+          "drow immunities"
         ],
         "MasterSkills": [
           "perception"
@@ -615,7 +615,7 @@ creatureSubType = {
       },
       "Elf": {
         "Immunities": [
-          "elven"
+          "elven immunities"
         ],
         "MasterSkills": [
           "perception",
@@ -954,7 +954,7 @@ creatureSubType = {
     ],
     "Description": "This subtype is applied to any collection of Fine, Diminutive, or Tiny creatures (usually vermin) that acts as a single creature. A single swarm usually occupies a square (if it is made up of nonflying creatures) or a cube (if it is made up of flying creatures) 10 feet on a side, but its reach is 0 feet. A swarm can move through cracks or holes large enough for its component creatures to fit through. In order to attack, a swarm moves into an opponent's space, which provokes an attack of opportunity. Spellcasting or concentrating on spells within the area of a swarm requires a successful caster level check (DC = 20 + spell level). Using skills that involve patience and concentration, such as Computers, within the area of a swarm requires a successful DC 20 Will saving throw.",
     "Immunities": [
-      "swarm"
+      "swarm immunities"
     ],
     "OffensiveAbilities": [
       "distraction"
@@ -1221,7 +1221,6 @@ graftTemplates = {
 			"Description": "Astral creatures are natives of the Astral Plane, a vast silvery void between planes.",
 			"Text": ["Gains the extraplanar subtype when it isn't on the Astral Plane."],
 			"DR": {
-				"min": "1/-",
 				"DR": "CR-10/-",
 				"IfDRExists": {
 					"Resistance": ["electricity CR-5"]
