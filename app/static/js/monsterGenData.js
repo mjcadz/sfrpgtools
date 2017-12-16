@@ -1356,11 +1356,10 @@ graftTemplates = {
         "CR": 10
       },
       "Alignment": "Chaotic Evil",
-      "DR": {
-        "CR10": "5/magic",
-        "CR12": "10/magic",
-        "CR15": "15/magic",
-        "CR17": "20/magic"
+      "DRtable": {
+        "type" : "magic",
+        "CR" : [10,12,15,17],
+        "DR" : [5,10,15,20]
       },
       "Description": "Black dragons are callous and enjoy using fear to exert their influence over others.",
       "Immunities": [
@@ -1391,11 +1390,10 @@ graftTemplates = {
         "CR": 9
       },
       "Alignment": "Lawful Evil",
-      "DR": {
-        "CR11": "5/magic",
-        "CR13": "10/magic",
-        "CR15": "15/magic",
-        "CR17": "20/magic"
+      "DRtable": {
+        "type" : "magic",
+        "CR" : [11,13,15,17],
+        "DR" : [5,10,15,20]
       },
       "Description": "Stacking plans within plans, blue dragons obsessively dwell on their pet projects.",
       "Immunities": [
@@ -1426,11 +1424,10 @@ graftTemplates = {
         "CR": 9
       },
       "Alignment": "Lawful Evil",
-      "DR": {
-        "DR11": "5/magic",
-        "CR13": "10/magic",
-        "CR15": "15/magic",
-        "CR17": "20/magic"
+      "DRtable": {
+        "type" : "magic",
+        "CR" : [11,13,15,17],
+        "DR" : [5,10,15,20]
       },
       "Description": "Of all the chromatic dragons, green dragons seem the most reasonable, but they will turn on their so-called allies at a moment's notice if profit is on the line.",
       "Immunities": [
@@ -1464,11 +1461,10 @@ graftTemplates = {
         "CR": 10
       },
       "Alignment": "Chaotic Evil",
-      "DR": {
-        "CR10": "5/magic",
-        "CR12": "10/magic",
-        "CR14": "15/magic",
-        "CR16": "20/magic"
+      "DRtable": {
+        "type" : "magic",
+        "CR" : [10,12,14,16],
+        "DR" : [5,10,15,20]
       },
       "Description": "Red dragons are quite imperious and brook no disrespect from lowly humanoids, but they can be swayed by copious amounts of groveling.",
       "Immunities": [
@@ -1497,11 +1493,10 @@ graftTemplates = {
         "CR": 10
       },
       "Alignment": "Chaotic Evil",
-      "DR": {
-        "CR9": "5/magic",
-        "CR12": "10/magic",
-        "CR14": "15/magic",
-        "CR16": "20/magic"
+      "DRtable": {
+        "type" : "magic",
+        "CR" : [9,12,14,16],
+        "DR" : [5,10,15,20]
       },
       "Description": "Similar to the terrain they prefer, white dragons appear cold and emotionless until angered.",
       "Immunities": [

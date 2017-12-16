@@ -355,7 +355,19 @@ function buildStatBlock() {
       statBlock.DRapplied = drcr.toString() + '/' + drsplit[1];
     }
   }
-  "CR-10/chaotic"
+  if (statBlock.hasOwnProperty('DRtable')){
+    var crTable = statBlock.DRtable['CR']
+    var drcr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+    var choice = 'none'
+    for (i = 0; i < crTable.length; i++) {
+      if (drcr >= crTable[i]) {
+        choice = i;
+      }
+    }
+    if (choice != 'none') {
+      statBlock.DRapplied = statBlock.DRtable['DR'][choice].toString() + '/' + statBlock.DRtable.type;
+    }
+  }
 
   //
   //Stat Block Strings
@@ -2540,8 +2552,8 @@ $('.wizard-card').bootstrapWizard({
                 var crmatch = graftSpells["CR"];
                 if (cr >= crmatch){
                   graftSpelllike = true;
-                  graftSpells = {};
                 }
+                graftSpells = {};
               }
 
               if ($('#stepEightTwoSave').text() != array+":"+special+":"+crString+":"+subtype+":"+graft+":"+classDrop){
