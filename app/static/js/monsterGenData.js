@@ -509,8 +509,8 @@ creatureSubType = {
     ]
   },
   "Daemon": {
-    "OtherAbilities": [
-      "summon allies (Sp)"
+    "SpecialAbilities": [
+      "Summon Allies (Sp)"
     ],
     "Description": "Daemons are fiends, or evil outsiders, native to Abaddon.",
     "Immunities": [
@@ -529,8 +529,8 @@ creatureSubType = {
     ]
   },
   "Demon": {
-    "OtherAbilities": [
-      "summon allies (Sp)"
+    "SpecialAbilities": [
+      "Summon Allies (Sp)"
     ],
     "Description": "Demons are fiends, or evil outsiders, native to the Abyss.",
     "Immunities": [
@@ -547,8 +547,8 @@ creatureSubType = {
     ]
   },
   "Devil": {
-    "OtherAbilities": [
-      "summon allies (Sp)"
+    "SpecialAbilities": [
+      "Summon Allies (Sp)"
     ],
     "Description": "Devils are fiends, or evil outsiders, native to Hell.",
     "Immunities": [
@@ -1581,6 +1581,10 @@ specialAbilities = {
       "Format": "Senses darkvision 60 ft.",
       "Guidelines": "Darkvision has a range of 60 feet for most creatures or 120 feet in exceptional cases."
     },
+    "Light Blindness (Ex)": {
+      "Description": "The creature is blinded for 1 round when first exposed to bright light, such as sunlight, and it is dazzled for as long as it remains in an area of bright light.",
+      "Format": "Other Abilities light blindness."
+    },
     "Limited Telepathy (Ex Or Su)": {
       "Description": "The creature can mentally communicate with any creatures within the listed range with which it shares a language.",
       "Format": "Languages limited telepathy 30 ft."
@@ -1604,37 +1608,17 @@ specialAbilities = {
     }
   },
   "Weaknesses": {
-    "Dependency (Ex)": {
+    "Dependency (Specified)": {
       "Description": "The creature is dependent on a substance, a sense, or something else to either survive or function normally. If the creature is dependent on something to live (such as water), it can survive without that thing for a number of minutes equal to 5 * its Constitution modifier. Beyond this limit, the creature runs the risk of negative effects, such as suffocation or death. A creature that is dependent on something to function normally (such as a creature with blindsight and no visual sense) usually gains a negative condition when it loses that thing.",
       "Format": "Weaknesses blindsight dependency."
     },
-    "Light Blindness (Ex)": {
-      "Description": "The creature is blinded for 1 round when first exposed to bright light, such as sunlight, and it is dazzled for as long as it remains in an area of bright light.",
-      "Format": "Weaknesses light blindness."
+    "Other Weakness (Specified)": {
+      "Description": "The creature might have a specific weakness e.g. Akata are susceptible to salt water.",
+      "Format": "Weaknesses"
     },
-    "Vulnerability (Fire) (Ex Or Su)": {
+    "Vulnerability (Specified)": {
       "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
-      "Format": "Weaknesses vulnerable to fire."
-    },
-    "Vulnerability (Cold) (Ex Or Su)": {
-      "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
-      "Format": "Weaknesses vulnerable to cold."
-    },
-    "Vulnerability (Acid) (Ex Or Su)": {
-      "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
-      "Format": "Weaknesses vulnerable to acid."
-    },
-    "Vulnerability (Electricity) (Ex Or Su)": {
-      "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
-      "Format": "Weaknesses vulnerable to electricity."
-    },
-    "Vulnerability (Critical hits) (Ex Or Su)": {
-      "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
-      "Format": "Weaknesses vulnerable to Critical hits."
-    },
-    "Vulnerability (Other) (Ex Or Su)": {
-      "Description": "The creature takes half again as much damage (+50%) when it takes damage of a specific type. Creatures with a vulnerability to an effect that doesn't deal damage instead take a -4 penalty to saves against spells and effects that cause or use the listed vulnerability (such as enchantments). Some creatures might suffer additional effects, as noted in their stat blocks.",
-      "Format": "Weaknesses vulnerable to other."
+      "Format": "Weaknesses vulnerable"
     }
   },
   "Abilities": {
@@ -1952,7 +1936,9 @@ graftSpecialAbilities = {
   "Swamp Stride (Ex)": "A black dragon can move through bogs and quicksand without penalty at its normal speed.",
   "Sound Imitation (Ex)": "A blue dragon can mimic any voice or sound it has heard by succeeding at a Bluff check opposed by a listener's Sense Motive check.",
   "Icewalking (Ex)": "A white dragon can move across icy surfaces without penalty and doesn't need to attempt Acrobatics checks to run or charge on ice. In addition, a white dragon can climb icy surfaces as if under the effect of spider climb.",
-  "Woodland Stride (Ex)": "A green dragon can move through natural foliage at full speed without taking damage or suffering impairment. Areas of foliage that have been magically altered affect it normally."
+  "Woodland Stride (Ex)": "A green dragon can move through natural foliage at full speed without taking damage or suffering impairment. Areas of foliage that have been magically altered affect it normally.",
+  "Summon Allies (Sp)": "The creature can attempt to summon creatures of the same creature type as itself as a full action. The summoned ally returns to the place from which it came after 1 hour.",
+
 };
 
 commonLanguages = [

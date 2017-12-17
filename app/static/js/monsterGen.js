@@ -169,6 +169,43 @@ function buildStatBlock() {
     }
     statBlock.OtherAbilitiesDescription = subArray;
   }
+
+  //weaknesses if any
+  if ($('#inputWeakness').length != 0){
+    statBlock.weaknessAbilities = $('#inputWeakness').val().trim();
+  }
+
+  //vulnerabilities if any
+  if ($('#inputVulnerability').length != 0){
+    var stats = $('#inputVulnerability').val().trim();
+    if (stats != '') {
+      if (stats.includes(',')){
+        var vulners = stats.split(',')
+      } else {
+        var vulners = [stats];
+      }
+
+      if (statBlock.hasOwnProperty('Vulnerable')){
+        statBlock.Vulnerable = statBlock.Vulnerable.concat(vulners);
+      }
+      else {
+        statBlock.Vulnerable = vulners;
+      }
+    }
+  }
+
+  //dependencies if any
+  if ($('#inputDependency').length != 0){
+    var depends = $('#inputDependency').val().trim();
+    if (stats != '') {
+      if (depends.includes(',')){
+        statBlock.Dependencies = depends.split(',')
+      } else {
+        statBlock.Dependencies = [depends];
+      }
+    }
+  }
+
   //special abilities selected if any
   var specialList = $('#specialDrop').val().toString().trim();
   if(specialList != ''){
@@ -196,6 +233,17 @@ function buildStatBlock() {
       statBlock.SpecialAbilitiesDescription = subArrayAbility;
     }
 
+  }
+
+  //free abilities selected if any
+  var freeList = $('#freeDrop').val().toString().trim();
+  if(freeList != ''){
+    if (freeList.includes(',')){
+      var subArray = freeList.split(',');
+    } else {
+      var subArray = [freeList];
+    }
+    statBlock.FreeAbilities = subArray
   }
 
 
@@ -580,15 +628,49 @@ function buildStatBlock() {
 
   }
 
+  //free abilities
+  if (statBlock.hasOwnProperty('FreeAbilities')){
+    var abilitiesArray = statBlock.FreeAbilities;
+
+    for (var i = 0; i < abilitiesArray.length; i++) {
+      var format = specialAbilities.FreeAbilities[abilitiesArray[i]].Format;
+      if (format.includes('Other Abilities')){
+        otherAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
+      }
+      if (format.includes('Speed')){
+        if (statBlock.hasOwnProperty('Speed')){
+          statBlock.Speed.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
+        } else {
+          statBlock.Speed = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
+        }
+
+      }
+      if (format.includes('Languages')){
+        if (statBlock.hasOwnProperty('Languages')){
+          statBlock.Languages.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
+        } else {
+          statBlock.Languages = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
+        }
+
+      }
+      if (format.includes('Senses')){
+        if (statBlock.hasOwnProperty('Senses')){
+          alert(statBlock.Senses)
+          statBlock.Senses.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
+          alert(statBlock.Senses)
+        } else {
+          statBlock.Senses = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'')];
+        }
+
+      }
+    }
+  }
+
+  //other abilities from grafts
   if (statBlock.hasOwnProperty('OtherAbilitiesGraft')){
     otherAbilities = otherAbilities.concat(statBlock.OtherAbilitiesGraft)
-    var sorted = [];
-    for (var i = 0; i < otherAbilities.length; i++) {
-        sorted.push(otherAbilities[i].toLowerCase());
-    }
-    sorted.sort();
-    otherAbilities = sorted;
   }
+
 
   //strings for abilities
   var offensiveAbilitiesString = '';
@@ -602,6 +684,13 @@ function buildStatBlock() {
     var defensiveAbilitiesString = '<b>Defensive abilities </b>' + defensiveAbilities.join(', ');
   }
   if (otherAbilities.length > 0) {
+    //sort the array
+    var sorted = [];
+    for (var i = 0; i < otherAbilities.length; i++) {
+        sorted.push(otherAbilities[i].toLowerCase());
+    }
+    sorted.sort();
+    otherAbilities = sorted;
     var otherAbilitiesString = '<p><b>Other abilities </b>' + otherAbilities.join(', ') + '</p>';
   }
 
@@ -769,21 +858,30 @@ function buildStatBlock() {
   }
   //weaknesses
   var weaknessString = '';
-  var weaknessInput = $('#inputWeakness').val().trim();
-  if (statBlock.hasOwnProperty('Vulnerable')){
-    weaknessString += statBlock.Vulnerable.join(', ');
+
+  if (statBlock.hasOwnProperty('weaknessAbilities')){
+    weaknessString += statBlock.weaknessAbilities;
   }
-  if (weaknessInput != '') {
+
+  if (statBlock.hasOwnProperty('Dependencies')){
     if (weaknessString != '') {
-      weaknessString += ', ';
+      weaknessString += '; ';
     }
-    weaknessString += weaknessInput;
+    weaknessString += 'vulnerable to ' + statBlock.Dependencies.join(', vulnerable to ');
   }
+
+  if (statBlock.hasOwnProperty('Vulnerable')){
+    if (weaknessString != '') {
+      weaknessString += '; ';
+    }
+    weaknessString += statBlock.Vulnerable.join(' dependent, ') + ' dependent';
+  }
+
   if (weaknessString != '') {
     if (defencesString != '') {
       defencesString += '; ';
     }
-    defencesString += '<b>Weaknesses </b>'+weaknessString;
+    defencesString += '<b>Weaknesses </b>' + weaknessString;
   }
   if (defencesString != '') {
     defencesString = '<p>' + defencesString + '</p>';
@@ -975,7 +1073,7 @@ function generateDropdown(parentID,label,dropID,title,array) {
   if (label != "") {
     dropHtml += '<label>' + label + '</label>'
   }
-  dropHtml += '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="13">'
+  dropHtml += '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10">'
   //build list, apply BREAKS or LABELS if words present in array
   for (i = 0; i < array.length; i++) {
     if (array[i] == 'BREAK'){
@@ -998,6 +1096,18 @@ function generateDropdown(parentID,label,dropID,title,array) {
   $('#'+dropID).on('changed.bs.select', dropClickHandler);
 }
 
+//creates text inputs
+function generateTextInput(parentID,label,placeholder,textID) {
+
+  var inputHtml = '<div class="form-group">';
+  inputHtml += '<label for="' + textID + '">' + label + '</label>';
+  inputHtml += '<input type="text" class="form-control" id="' + textID + '" placeholder="' + placeholder + '">';
+  inputHtml += '</div>';
+
+  //add to parent div
+  document.getElementById(parentID).innerHTML = inputHtml;
+}
+
 //creates bootstrap-select multiple select dropdowns from arrays
 function generateMultiDropdown(parentID,label,dropID,title,searchTitle,array,maxOptions) {
   //check if search bar added
@@ -1011,7 +1121,7 @@ function generateMultiDropdown(parentID,label,dropID,title,searchTitle,array,max
   if (label != "") {
     dropHtml += '<label>' + label + '</label>'
   }
-  dropHtml += '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="13" multiple ' + searTitl + 'data-max-options="'+maxOptions+'" data-selected-text-format="count">'
+  dropHtml += '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10" multiple ' + searTitl + 'data-max-options="'+maxOptions+'" data-selected-text-format="count">'
   //build list, apply BREAKS or LABELS if words present in array
   for (i = 0; i < array.length; i++) {
     if (array[i] == 'BREAK'){
@@ -1497,6 +1607,36 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
       var $descriptionArea = $(".stepSixDescriptionTwo").first();
       $descriptionArea.empty();
+
+      //show other weakness input if selected
+      if (selected.toString().includes('Other Weakness (Specified)')){
+        if ($('#inputWeakness').length == 0){
+          generateTextInput("weaknessTextInput","Specify other weakness","e.g. salt water","inputWeakness");
+        }
+      } else {
+        $("#weaknessTextInput").first().empty();
+      }
+
+      //show other vulerabilities if selected
+      if (selected.toString().includes('Vulnerability (Specified)')){
+        if ($('#inputVulnerability').length == 0){
+          generateTextInput("vulnerabilityTextInput","Specify vulnerabilities","e.g. cold, critical hits, enchantments","inputVulnerability");
+        }
+      } else {
+        $("#vulnerabilityTextInput").first().empty();
+      }
+
+      //show other vulerabilities if selected
+      if (selected.toString().includes('Dependency (Specified)')){
+        if ($('#inputDependency').length == 0){
+          generateTextInput("dependencyTextInput","Specify dependencies","e.g. water, atmosphere","inputDependency");
+        }
+      } else {
+        $("#dependencyTextInput").first().empty();
+      }
+
+
+
       if (selected != '') {
 
         multi = selected.toString().split(",");
@@ -2107,11 +2247,6 @@ $('.wizard-card').bootstrapWizard({
         //Attacks
         generateDropdown("MainAttackDropdown","Attack focus","attackDrop","Choose main attack focus",["Melee","Ranged"]);
 
-        //size dropdown
-        generateDropdown("sizeDropdown","Size","sizeDrop","...",Object.keys(creatureSize));
-        $('#sizeDrop').selectpicker('val', "Medium");
-        $('#sizeDrop').selectpicker('refresh');
-
         //save button is initially hidden
         $('.btn-save').hide();
         //only show the alert once for the duration of the session
@@ -2350,7 +2485,7 @@ $('.wizard-card').bootstrapWizard({
                 }
 
                 //generate dropdowns for special and free abilities
-                generateMultiDropdown("freeAbilityDropdown","","freeDrop","Select free abilities","Search abilities",FreeAbilities,10);
+                generateMultiDropdown("freeAbilityDropdown","","freeDrop","Select free abilities","Search abilities",FreeAbilities,100);
                 generateMultiDropdown("specialAbilityDropdown","","specialDrop","Select special abilities","Search abilities",SpecialAbilities,maxOptions);
                 var $descriptionArea = $(".stepSixAbilities").first();
                 $descriptionArea.empty();
@@ -2825,6 +2960,19 @@ $('.wizard-card').bootstrapWizard({
                 $('#align2Drop').selectpicker('refresh');
               }
 
+              //size dropdown
+              var sizeSelect = "Medium";
+              if (graft == "Giant (CR 1+)") {
+                sizeSelect = "Large";
+              }
+              if (graft == "Miniature") {
+                sizeSelect = "Tiny";
+              }
+
+              generateDropdown("sizeDropdown","Size","sizeDrop","...",Object.keys(creatureSize));
+              $('#sizeDrop').selectpicker('val', sizeSelect);
+              $('#sizeDrop').selectpicker('refresh');
+
 
 
 
@@ -2894,9 +3042,10 @@ $('.wizard-card').bootstrapWizard({
 		    $($wizard).find('.progress-bar').css({width:$percent+'%'});
     }
 });
-//finish function - fires when the finish button is pushed
-$('.btn-finish').click(function() {
 
+//finish function - fires when the finish button is pushed//now reset button
+$('.btn-finish').click(function() {
+  document.location.reload();
 });
 
 //button click for modal
