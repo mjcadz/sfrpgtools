@@ -11,17 +11,25 @@ speeds will need to be picked later (i think)
 
 Types of immunities for the immunity special ability
 
+have an are you sure on the reset
+
 text attribute in grafts
 
 add the rest of the grafts
 
 weaknesses, maybe make new section instead of being part of free abilities. add dropdowns for vulnerabilities and depenencies and move general weaknesses to here
 
-"AttackChanges" "DamageMod"
+"AttackChanges" "DamageMod" armor upgrade
 
 add dropdown for resistance and immunities (or prompyt user to add to statblock)
 
-humanoids and outsider set size to medium or small. only make giant available to these creatures
+make sure free ability descriptions are added down the botton in the special abilities string
+
+dont forget to print the class shit
+
+speed and senses from free abilities need to be sorted
+
+check that summon allies prints somwhere in the stat block
 
 TODOs
 
@@ -33,13 +41,7 @@ phrenic adjustments
 
 make giant and miniature affect size StartToStart
 
-make sure free graft and special abilities apply in the correct place
-
 handle lashunta spells
-
-turn finish button into reset button
-
-make the ranged spell attack value next to CL refect which choice was made on the attack card. make sure main attack type is validated if spels are used
 
 To Test
 soldier class melee/ranged - to test
