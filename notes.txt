@@ -11,13 +11,17 @@ speeds will need to be picked later (i think)
 
 Types of immunities for the immunity special ability
 
-special abilities make the one that affect stats actually affect stats
-
 text attribute in grafts
 
-spells don't always use high attack bonus. use which one is selected
-
 add the rest of the grafts
+
+weaknesses, maybe make new section instead of being part of free abilities. add dropdowns for vulnerabilities and depenencies and move general weaknesses to here
+
+"AttackChanges" "DamageMod"
+
+add dropdown for resistance and immunities (or prompyt user to add to statblock)
+
+humanoids and outsider set size to medium or small. only make giant available to these creatures
 
 TODOs
 
@@ -25,27 +29,13 @@ add basic stat block maybe only choosing step 1 options
 
 dropdowns for speeds
 
-DR from template grafts
-
 phrenic adjustments
 
 make giant and miniature affect size StartToStart
 
-make alignments from template affect alignmnet stat
-
-also size
-
-other abilities
-
-fly shouldnt be a free ability
-
 make sure free graft and special abilities apply in the correct place
 
 handle lashunta spells
-
-fix special ability aura, and ones with commas
-
-check special abilities for ability score adjustments
 
 turn finish button into reset button
 
@@ -61,7 +51,14 @@ Test
 git remote set-url origin https://github.com/mjcadz/sfrpgtools.git
 
 Nice To Have
-show ability scores next to skills
+
+make the display of creature traits optional eg, showing the traits
+
+display available immunities
+
+show ability scores next to skills in dropdown
+
+special abilities make the one that affect stats actually affect stats
 
 hide desription areas while changing text then show. will avoid loading looks
 

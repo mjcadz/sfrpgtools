@@ -148,8 +148,17 @@ function buildStatBlock() {
   }
   //step 6 - special Abilities
 
-  statBlock.OtherAbilitiesGraft = getGraftAbilities("Other");
-  statBlock.SpecialAbilitiesGraft = getGraftAbilities("Special");
+  //from grafts
+  var graftOther = getGraftAbilities("Other");
+  if (graftOther.length > 0) {
+    statBlock.OtherAbilitiesGraft = graftOther;
+  }
+
+  var graftSpecial = getGraftAbilities("Special");
+  if (graftSpecial.length > 0) {
+    statBlock.SpecialAbilitiesGraft = graftSpecial;
+  }
+
   //free abilities selected if any
   var freeList = $('#freeDrop').val().toString().trim();
   if(freeList != ''){
@@ -485,21 +494,117 @@ function buildStatBlock() {
   }
 
   var specialString = '';
-  //build special ability String
+  var offensiveAbilities = [];
+  var defensiveAbilities = [];
+  var otherAbilities = [];
+  //build special ability Strings
 
-  if (statBlock.hasOwnProperty('SpecialAbilitiesDescription')){
+  if (statBlock.hasOwnProperty('SpecialAbilitiesDescription')  || statBlock.hasOwnProperty('SpecialAbilitiesGraft')){
+
     specialString += '<p><b>SPECIAL ABILITIES</b></p>';
     specialString += '<hr>';
-    var abilities = statBlock.SpecialAbilitiesDescription;//is array
-    for (var i = 0; i < abilities.length; i++) {
-      if (specialAbilities.Abilities.hasOwnProperty(abilities[i])){
-        specialString += '<p><b>'+abilities[i]+'</b> ';
-        specialString += specialAbilities.Abilities[abilities[i]].Description;
+
+    var abilitiesArray = [];
+    if (statBlock.hasOwnProperty('SpecialAbilitiesDescription')) {
+      abilitiesArray = abilitiesArray.concat(statBlock.SpecialAbilitiesDescription);
+    }
+    if (statBlock.hasOwnProperty('SpecialAbilitiesGraft')) {
+      abilitiesArray = abilitiesArray.concat(statBlock.SpecialAbilitiesGraft);
+    }
+    var abilitiesArray = abilitiesArray.sort();
+
+    for (var i = 0; i < abilitiesArray.length; i++) {
+      //chosen abilities
+      if (specialAbilities.Abilities.hasOwnProperty(abilitiesArray[i])){
+        specialString += '<p><b>'+abilitiesArray[i]+'</b> ';
+        specialString += specialAbilities.Abilities[abilitiesArray[i]].Description;
+        //print guidelines if any
+        if (specialAbilities.Abilities[abilitiesArray[i]].hasOwnProperty("Guidelines")) {
+          specialString += '<br<b>Guidelines </b>' + specialAbilities.Abilities[abilitiesArray[i]].Guidelines;
+        }
         specialString += '</p><br>';
+        //add abilities to the correct headings
+        var format = specialAbilities.Abilities[abilitiesArray[i]].Format;
+        if (format.includes('Defensive Abilities')){
+          defensiveAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
+        }
+        if (format.includes('Other Abilities')){
+          otherAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
+        }
+
+        if (format.includes('Speed')){
+          if (statBlock.hasOwnProperty('Speed')){
+            statBlock.Speed.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
+          } else {
+            statBlock.Speed = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
+          }
+
+        }
+        if (format.includes('Languages')){
+          if (statBlock.hasOwnProperty('Languages')){
+            statBlock.Languages.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
+          } else {
+            statBlock.Languages = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
+          }
+
+        }
+        if (format.includes('Senses')){
+          if (statBlock.hasOwnProperty('Senses')){
+            alert(statBlock.Senses)
+            statBlock.Senses.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
+            alert(statBlock.Senses)
+          } else {
+            statBlock.Senses = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'')];
+          }
+
+        }
+        if (format.includes('Melee')){
+          /*if (statBlock.hasOwnProperty('MeleeFromAbility')){
+            statBlock.MeleeFromAbility = statBlock.MeleeFromAbility.push(format.replace('Melee ','').replace('.',''));
+          } else {
+            statBlock.MeleeFromAbility = format.replace('Melee ','').replace('.','');
+          }*/
+        //else if so that swallow whole doesn't mess things up TODO fix
+        }else if (format.includes('Offensive Abilities')){
+          offensiveAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
+        }
+      //graft abilities
+      } else if (graftSpecialAbilities.hasOwnProperty(abilitiesArray[i])){
+        specialString += '<p><b>'+abilitiesArray[i]+'</b> ';
+        specialString += graftSpecialAbilities[abilitiesArray[i]];
+        specialString += '</p><br>';
+        //add to other abilities
+        otherAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
       }
     }
 
   }
+
+  if (statBlock.hasOwnProperty('OtherAbilitiesGraft')){
+    otherAbilities = otherAbilities.concat(statBlock.OtherAbilitiesGraft)
+    var sorted = [];
+    for (var i = 0; i < otherAbilities.length; i++) {
+        sorted.push(otherAbilities[i].toLowerCase());
+    }
+    sorted.sort();
+    otherAbilities = sorted;
+  }
+
+  //strings for abilities
+  var offensiveAbilitiesString = '';
+  var defensiveAbilitiesString = '';
+  var otherAbilitiesString = '';
+
+  if (offensiveAbilities.length > 0) {
+    var offensiveAbilitiesString = '<p><b>Offensive abilities </b>' + offensiveAbilities.join(', ') + '</p>';
+  }
+  if (defensiveAbilities.length > 0) {
+    var defensiveAbilitiesString = '<b>Defensive abilities </b>' + defensiveAbilities.join(', ');
+  }
+  if (otherAbilities.length > 0) {
+    var otherAbilitiesString = '<p><b>Other abilities </b>' + otherAbilities.join(', ') + '</p>';
+  }
+
 
   //check if there is any senses
   var sensesString = '';
@@ -586,7 +691,7 @@ function buildStatBlock() {
     languageArray = languageArray.concat(statBlock.Languages);
   }
   if (languageArray.length > 0){
-    languageArray = languageArray.sort()
+    languageArray.sort();
     languageString = '<p><b>Languages</b> ' + languageArray.join(', ') + '<p>';
   }
 
@@ -638,7 +743,10 @@ function buildStatBlock() {
 
   //defences String
   var defencesString = '';
-  //immunities
+  //defensive abbilities
+  defencesString += defensiveAbilitiesString;
+
+  //DR
   if (statBlock.hasOwnProperty('DRapplied')){
     if (defencesString != '') {
       defencesString += '; ';
@@ -711,6 +819,7 @@ function buildStatBlock() {
   textBlock += MeleeString;
   textBlock += RangedString;
   textBlock += spaceReachString;
+  textBlock += offensiveAbilitiesString;
   textBlock += spellString;
   textBlock += "<br>";
 
@@ -723,6 +832,7 @@ function buildStatBlock() {
   textBlock += "<p><b>Str</b> "+statBlock.str + "; <b>Dex</b> "+statBlock.dex+ "; <b>Con</b> "+statBlock.con+ "; <b>Int</b> "+statBlock.int+ "; <b>Wis</b> "+statBlock.wis+ "; <b>Cha</b> "+statBlock.cha+"</p>";
   textBlock += '<p><b>Skills </b>'+skillString+'</p>';
   textBlock += languageString;
+  textBlock += otherAbilitiesString;
   textBlock += GearString;
   textBlock += "<br>";
 
@@ -1997,14 +2107,6 @@ $('.wizard-card').bootstrapWizard({
         //Attacks
         generateDropdown("MainAttackDropdown","Attack focus","attackDrop","Choose main attack focus",["Melee","Ranged"]);
 
-        //generate alignment
-        generateDropdown("Alignment1Dropdown","Alignment","align1Drop","...",["Lawful","Neutral","Chaotic"]);
-        $('#align1Drop').selectpicker('val', "Chaotic");
-        $('#align1Drop').selectpicker('refresh');
-        generateDropdown("Alignment2Dropdown","&nbsp;","align2Drop","...",["Good","Neutral","Evil"]);
-        $('#align2Drop').selectpicker('val', "Neutral");
-        $('#align2Drop').selectpicker('refresh');
-
         //size dropdown
         generateDropdown("sizeDropdown","Size","sizeDrop","...",Object.keys(creatureSize));
         $('#sizeDrop').selectpicker('val', "Medium");
@@ -2644,6 +2746,7 @@ $('.wizard-card').bootstrapWizard({
             }
 
             if (validated) {
+              //genrate final checks
 
               var classDrop = $('#classDrop').val().trim();
               if (classDrop != '' && classDrop != 'None'){
@@ -2667,6 +2770,62 @@ $('.wizard-card').bootstrapWizard({
               //generate user fillable sections
               generateMultiDropdown("optionalSectionsDropdown","Extra stat block entries (user fillable)","OSDrop","Select entries",0,["Ecology","Gear","Tactics"],100);
 
+              //geneate alignments
+
+              //generate alignment
+              generateDropdown("Alignment1Dropdown","Alignment","align1Drop","Choose alignmnet",["Lawful","Neutral","Chaotic"]);
+              generateDropdown("Alignment2Dropdown","&nbsp;","align2Drop","Choose alignmnet",["Good","Neutral","Evil"]);
+
+              //check if any alignments apply from template graft
+              var setAlignment = '';
+              var graft = $('#graftDrop').val().trim();
+              if (graft != '' && graft != 'None') {
+                for (var subgraft in graftTemplates){
+                  if (graftTemplates[subgraft].hasOwnProperty(graft)){
+                    if (graftTemplates[subgraft][graft].hasOwnProperty("Alignment")){
+                      setAlignment = graftTemplates[subgraft][graft]["Alignment"];
+                    }
+                  }
+                }
+              }
+
+              if (setAlignment != '') {
+                //part 1
+                var set1 = '';
+                var part1 = ["Lawful","Neutral","Chaotic"]
+                for (i = 0; i < part1.length; i++) {
+                  if (setAlignment.includes(part1[i])){
+                    set1 = part1[i];
+                  }
+                }
+                if (set1 != ''){
+                  $('#align1Drop').selectpicker('val', set1);
+                  $('#align1Drop').selectpicker('refresh');
+                  disableDropdown('align1Drop',true);
+                }
+                //part 2
+                var set2 = '';
+                var part2 = ["Good","Neutral","Evil"]
+                for (i = 0; i < part2.length; i++) {
+                  if (setAlignment.includes(part2[i])){
+                    set2 = part2[i];
+                  }
+                }
+                if (set2 != ''){
+                  $('#align2Drop').selectpicker('val', set2);
+                  $('#align2Drop').selectpicker('refresh');
+                  disableDropdown('align2Drop',true);
+                }
+
+              } else {
+                //default alignment us chaotic neutral
+                $('#align1Drop').selectpicker('val', "Chaotic");
+                $('#align1Drop').selectpicker('refresh');
+                $('#align2Drop').selectpicker('val', "Neutral");
+                $('#align2Drop').selectpicker('refresh');
+              }
+
+
 
 
             } else {
@@ -2685,6 +2844,21 @@ $('.wizard-card').bootstrapWizard({
                 validated = false;
             }
           }
+
+          if ($('[data-id="align1Drop"]').length){
+            if ($('[data-id="align1Drop"]').text().includes("Choose")) {
+                $('[data-id="align1Drop"]').addClass('wizard-shadow');
+                validated = false;
+            }
+          }
+
+          if ($('[data-id="align2Drop"]').length){
+            if ($('[data-id="align2Drop"]').text().includes("Choose")) {
+                $('[data-id="align2Drop"]').addClass('wizard-shadow');
+                validated = false;
+            }
+          }
+
           if (validated){
 
             buildStatBlock();

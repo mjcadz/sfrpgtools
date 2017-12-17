@@ -949,15 +949,13 @@ creatureSubType = {
     "Attacks": [
       "melee swarm attack (1d6+2 P)"
     ],
-    "DefensiveAbilities": [
-      "swarm defenses"
+    "SpecialAbilities": [
+      "Swarm Defenses (Ex)",
+      "Distraction (Ex)"
     ],
     "Description": "This subtype is applied to any collection of Fine, Diminutive, or Tiny creatures (usually vermin) that acts as a single creature. A single swarm usually occupies a square (if it is made up of nonflying creatures) or a cube (if it is made up of flying creatures) 10 feet on a side, but its reach is 0 feet. A swarm can move through cracks or holes large enough for its component creatures to fit through. In order to attack, a swarm moves into an opponent's space, which provokes an attack of opportunity. Spellcasting or concentrating on spells within the area of a swarm requires a successful caster level check (DC = 20 + spell level). Using skills that involve patience and concentration, such as Computers, within the area of a swarm requires a successful DC 20 Will saving throw.",
     "Immunities": [
       "swarm immunities"
-    ],
-    "OffensiveAbilities": [
-      "distraction"
     ]
   },
   "Technological": {
@@ -1006,7 +1004,7 @@ creatureSubType = {
       "stealth"
     ],
     "OtherAbilities": [
-      "cheeck pouches",
+      "cheek pouches",
       "moxie"
     ],
     "Senses": [
@@ -1583,10 +1581,6 @@ specialAbilities = {
       "Format": "Senses darkvision 60 ft.",
       "Guidelines": "Darkvision has a range of 60 feet for most creatures or 120 feet in exceptional cases."
     },
-    "Fly (Ex Or Su)": {
-      "Description": "The source of the creature's fly speed (whether extraordinary, supernatural, or from another source such as an item) is noted before its maneuverability. Unless otherwise noted, a creature whose ability to fly is extraordinary can't fly in a vacuum.",
-      "Format": "Speed fly 60 ft. (Ex, perfect)."
-    },
     "Limited Telepathy (Ex Or Su)": {
       "Description": "The creature can mentally communicate with any creatures within the listed range with which it shares a language.",
       "Format": "Languages limited telepathy 30 ft."
@@ -1652,7 +1646,7 @@ specialAbilities = {
       "Description": "The creature can attempt a special attack against KAC as a standard action. If it succeeds, it deals no damage, but it adheres to its target. Once attached, the creature gains a +4 bonus to its AC (from cover) and a +2 circumstance bonus to melee attacks, but it can attack only the creature to which it is attached. An attached creature can't move (though it moves with its target), take actions that require two hands, or make attacks of opportunity. An attached creature can be removed with a successful Strength check (DC = 10 + 1-1/2 * the creature's CR) made as a move action, or it can remove itself from its target as a move action.",
       "Format": "Melee attach +6."
     },
-    "Aura (Ex, Sp, Or Su)": {
+    "Aura (Ex Sp Or Su)": {
       "Description": "Unless an aura says otherwise, a target is affected by an aura automatically with no action required on the creature's part whenever the target is within the aura's listed range (either when the target enters the aura on its turn or when it begins its turn in the aura, whichever comes first). If the aura deals damage, it damages a target only the first time the target is in the aura each round, regardless of how many times within the round the target enters and leaves the aura. A creature can suppress its aura for 1 round as a move action unless noted otherwise.",
       "Format": "Aura radiation (30 ft., DC 17); if additional information is needed, the aura also has an entry in Special Abilities."
     },
@@ -1711,6 +1705,10 @@ specialAbilities = {
     "Ferocity (Ex)": {
       "Description": "When the creature is brought to 0 Hit Points, it can fight on for 1 more round. It can act normally until the end of its next turn; if it has 0 HP at that point, it dies. If it would lose further Hit Points before this, it ceases to be able to act and dies.",
       "Format": "Defensive Abilities ferocity."
+    },
+    "Fly (Ex Or Su)": {
+      "Description": "The source of the creature's fly speed (whether extraordinary, supernatural, or from another source such as an item) is noted before its maneuverability. Unless otherwise noted, a creature whose ability to fly is extraordinary can't fly in a vacuum.",
+      "Format": "Speed fly 60 ft. (Ex, perfect)."
     },
     "Frightful Presence (Ex Or Su)": {
       "Description": "The creature's presence unsettles its foes. It can activate this ability as part of the action of making an attack or as a move action, but it can activate it only once per round. It usually has a range of 30 feet. Opponents within the range must succeed at a Will save or be shaken. The duration is 5d6 rounds unless the ability says otherwise. Once an opponent has been exposed to a creature's frightful presence (whether or not the opponent succeeds at its saving throw), it cannot be affected by the same creature's frightful presence for 24 hours. This is an emotion, fear, mind-affecting, and sense-dependent effect.",
