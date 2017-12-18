@@ -23,6 +23,12 @@ weaknesses, maybe make new section instead of being part of free abilities. add 
 
 add dropdown for resistance and immunities (or prompyt user to add to statblock)
 
+make sure attacks size properly
+
+sort free abilities ie senses speed
+
+finish other speeds and process them at the end
+
 make sure free ability descriptions are added down the botton in the special abilities string
 
 dont forget to print the class shit
