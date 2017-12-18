@@ -444,9 +444,11 @@ function buildStatBlock() {
   //build creature type String
   var subTypeString = '';
   if (['Outsider','Humanoid','Construct','Vermin'].includes(statBlock.CreatureType)){
+    alert(statBlock.CreatureType)
     if (statBlock.CreatureType == 'Construct') {
       subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
     }
+
     else {
       if (statBlock.hasOwnProperty('SubType')){
         if (!subTypeAll.includes(statBlock.SubType)){
@@ -887,6 +889,23 @@ function buildStatBlock() {
     defencesString = '<p>' + defencesString + '</p>';
   }
 
+  //save string
+  var saveString = "<p><b>Fort</b> +"+statBlock.fortitude + "; <b>Ref</b> +"+statBlock.reflex+ "; <b>Will</b> +"+statBlock.will;
+  if (statBlock.hasOwnProperty('PlusAbilities')){
+    alert(statBlock.PlusAbilities)
+    saveString += '; ' + statBlock.PlusAbilities.join(', ').replace('+CR','+'+statBlock.Cr.toString());
+  }
+  saveString += "<p>";
+
+  //speedString
+  var speedInput = $('#inputSpeed').val().trim();
+  var speedString = '<p><b>Speed</b> '+speedInput+' ft.';
+  if (statBlock.hasOwnProperty('Speed')){
+    var speeds = statBlock.Speed;
+    speeds.sort()
+    speedString += ', ' + speeds.join(', ');
+  }
+  speedString += "<p>";
 
   //
   //Stat Block
@@ -906,14 +925,14 @@ function buildStatBlock() {
   textBlock += leftAndRight('<b>DEFENCE</b>','<b>HP</b> '+statBlock.hitPoints);
   textBlock += "<hr>";
   textBlock += "<p><b>EAC</b> "+statBlock.eac + "; <b>KAC</b> "+statBlock.kac+"<p>";
-  textBlock += "<p><b>Fort</b> +"+statBlock.fortitude + "; <b>Ref</b> +"+statBlock.reflex+ "; <b>Will</b> +"+statBlock.will+"<p>";
+  textBlock += saveString;
   textBlock += defencesString;
   textBlock += "<br>";
 
   //Offence
   textBlock += '<p><b>OFFENCE</b></p>';
   textBlock += '<hr>';
-  textBlock += '<p><b>Speed</b> 30 ft.</p>';//TODO fix this
+  textBlock += speedString;
   textBlock += MeleeString;
   textBlock += RangedString;
   textBlock += spaceReachString;
@@ -1103,6 +1122,28 @@ function generateTextInput(parentID,label,placeholder,textID) {
   inputHtml += '<label for="' + textID + '">' + label + '</label>';
   inputHtml += '<input type="text" class="form-control" id="' + textID + '" placeholder="' + placeholder + '">';
   inputHtml += '</div>';
+
+  //add to parent div
+  document.getElementById(parentID).innerHTML = inputHtml;
+}
+
+//creates text inputs for speeds
+function generateSpeedTextInput(parentID,label,value,textID) {
+
+  var inputHtml ='<div class="row">' +
+  inputHtml +=    '<div class="col-xs-10">' +
+  inputHtml +=      '<div class="form-group">' +
+  inputHtml +=          '<label for="'+textID+'">'+label+'</label>' +
+  inputHtml +=          '<input type="text" class="form-control" id="'+textID+'" value="' +value + '">' +
+  inputHtml +=      '</div>' +
+  inputHtml +=    '</div>' +
+  inputHtml +=    '<div class="col-xs-2">' +
+  inputHtml +=        '<div class="form-group">' +
+  inputHtml +=            '<label for="inputSpeed">&nbsp;</label>' +
+  inputHtml +=            '<p>ft.<p>' +
+  inputHtml +=        '</div>' +
+  inputHtml +=    '</div>' +
+  inputHtml +='</div>'
 
   //add to parent div
   document.getElementById(parentID).innerHTML = inputHtml;
@@ -1607,6 +1648,23 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
 
       var $descriptionArea = $(".stepSixDescriptionTwo").first();
       $descriptionArea.empty();
+
+      //
+      //Speeds
+      //
+
+      //show burrow speed
+      if (selected.toString().includes('Burrow (Ex)')){
+        if ($('#inputBurrow').length == 0){
+          generateSpeedTextInput("burrowTextInput","Burrow speed","30","inputBurrow")
+        }
+      } else {
+        $("#weaknessTextInput").first().empty();
+      }
+
+      //
+      //Weaknesses
+      //
 
       //show other weakness input if selected
       if (selected.toString().includes('Other Weakness (Specified)')){
@@ -2252,7 +2310,6 @@ $('.wizard-card').bootstrapWizard({
         //only show the alert once for the duration of the session
         if (sessionStorage.showAlert != 'key') {
           $('.alert-this').show();
-          sessionStorage.showAlert = 'key';
         }
     },
 
@@ -2263,7 +2320,7 @@ $('.wizard-card').bootstrapWizard({
         if (index == 1) {
 
             //hide the alert if shown once
-            $('.alert-this').hide();
+            //$('.alert-this').hide();
 
             var validated = true;
 
@@ -3129,3 +3186,8 @@ function save() {
   var markup = $('.summernoteEdit').summernote('code');
   $('.summernoteEdit').summernote('destroy');
 };
+
+function dismissAlert() {
+  $('.alert-this').hide()
+  sessionStorage.showAlert = 'key';
+}

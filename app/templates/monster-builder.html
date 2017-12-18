@@ -9,8 +9,8 @@
     <p class="lead">This wizard will step through the creation of Starfinder NPCs and monsters.</p>
     <p></p>
     <div class="alert-this"style="display: none;">
-      <button type="button" class="close" aria-label="Close" onclick="$('.alert-this').hide()"><span aria-hidden="true">&times;</span></button>
-      <p><strong>Heads up!</strong> Class abilities and special abilities are not yet fully integrated into the builder. Any class or special abilities you choose will be printed below the stat block and can be added manually into the stats. Full ability integration will coming be in a later version.</p>
+      <button type="button" class="close" aria-label="Close" onclick="dismissAlert()"><span aria-hidden="true">&times;</span></button>
+      <p><strong>Heads up!</strong> Class abilities and special abilities are not yet fully integrated into the builder. Currently any class or special abilities you choose will be printed below the stat block but any additions to the stat block (e.g. special attacks) will need to be added manually.</p>
     </div>
     <div class="container">
         <!--      Wizard container        -->
@@ -144,6 +144,10 @@
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
+                                  <div id="burrowTextInput"></div>
+                                  <div id="climbTextInput"></div>
+                                  <div id="flyTextInput"></div>
+                                  <div id="swimTextInput"></div>
                                   <div id="weaknessTextInput"></div>
                                   <div id="vulnerabilityTextInput"></div>
                                   <div id="dependencyTextInput"></div>
@@ -265,6 +269,21 @@
                                       <label for="inputName">Creature name</label>
                                       <input type="text" class="form-control" id="inputName" placeholder="Name">
                                   </div>
+                                  <div class="row">
+                                      <div class="col-xs-10">
+                                        <div class="form-group">
+                                            <label for="inputSpeed">Speed</label>
+                                            <input type="text" class="form-control" id="inputSpeed" placeholder="Name" value="30">
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-2">
+                                          <div class="form-group">
+                                              <label for="inputSpeed">&nbsp;</label>
+                                              <p>ft.<p>
+                                          </div>
+                                      </div>
+                                  </div>
+
                                   <div id="precedenceDropdown"></div>
                                   <div id="languageDropdown"></div>
                                   <div id="optionalSectionsDropdown"></div>
@@ -277,6 +296,7 @@
                                           <div id="Alignment2Dropdown"></div>
                                       </div>
                                   </div>
+
                                   <!--<div class="form-group">
                                       <label for="inputWeakness" >Weaknesses</label>
                                       <input type="text" class="form-control" id="inputWeakness" placeholder="None">

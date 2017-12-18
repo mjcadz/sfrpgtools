@@ -351,7 +351,7 @@ creatureSubType = {
     "Languages": [
       "telepathy 100 ft. (non-verbal)"
     ],
-    "OtherAbilities": [
+    "PlusAbilities": [
       "+CR to skill checks to recall knowledge"
     ],
     "Resistance": [
@@ -371,7 +371,7 @@ creatureSubType = {
     "Languages": [
       "truespeech"
     ],
-    "OtherAbilities": [
+    "PlusAbilities": [
       "+4 to saving throws against poison"
     ],
     "Resistance": [
@@ -417,7 +417,7 @@ creatureSubType = {
     "Languages": [
       "truespeech"
     ],
-    "OtherAbilities": [
+    "PlusAbilities": [
       "+4 to saving throws against poison"
     ],
     "Resistance": [
@@ -458,7 +458,7 @@ creatureSubType = {
     "Languages": [
       "truespeech"
     ],
-    "OtherAbilities": [
+    "PlusAbilities": [
       "+4 to saving throws against poison"
     ],
     "Resistance": [
@@ -873,7 +873,7 @@ creatureSubType = {
       "blindsense 30 ft."
     ],
     "Speed": [
-      "fly 60 ft."
+      "fly 60 ft. (average)"
     ]
   },
   "Reptoid": {
@@ -1581,6 +1581,10 @@ specialAbilities = {
       "Format": "Senses darkvision 60 ft.",
       "Guidelines": "Darkvision has a range of 60 feet for most creatures or 120 feet in exceptional cases."
     },
+    "Fly (Ex Or Su)": {
+      "Description": "The source of the creature's fly speed (whether extraordinary, supernatural, or from another source such as an item) is noted before its maneuverability. Unless otherwise noted, a creature whose ability to fly is extraordinary can't fly in a vacuum.",
+      "Format": "Speed fly 60 ft. (Ex, perfect)."
+    },
     "Light Blindness (Ex)": {
       "Description": "The creature is blinded for 1 round when first exposed to bright light, such as sunlight, and it is dazzled for as long as it remains in an area of bright light.",
       "Format": "Other Abilities light blindness."
@@ -1689,10 +1693,6 @@ specialAbilities = {
     "Ferocity (Ex)": {
       "Description": "When the creature is brought to 0 Hit Points, it can fight on for 1 more round. It can act normally until the end of its next turn; if it has 0 HP at that point, it dies. If it would lose further Hit Points before this, it ceases to be able to act and dies.",
       "Format": "Defensive Abilities ferocity."
-    },
-    "Fly (Ex Or Su)": {
-      "Description": "The source of the creature's fly speed (whether extraordinary, supernatural, or from another source such as an item) is noted before its maneuverability. Unless otherwise noted, a creature whose ability to fly is extraordinary can't fly in a vacuum.",
-      "Format": "Speed fly 60 ft. (Ex, perfect)."
     },
     "Frightful Presence (Ex Or Su)": {
       "Description": "The creature's presence unsettles its foes. It can activate this ability as part of the action of making an attack or as a move action, but it can activate it only once per round. It usually has a range of 30 feet. Opponents within the range must succeed at a Will save or be shaken. The duration is 5d6 rounds unless the ability says otherwise. Once an opponent has been exposed to a creature's frightful presence (whether or not the opponent succeeds at its saving throw), it cannot be affected by the same creature's frightful presence for 24 hours. This is an emotion, fear, mind-affecting, and sense-dependent effect.",
