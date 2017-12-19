@@ -159,15 +159,54 @@ function buildStatBlock() {
     statBlock.SpecialAbilitiesGraft = graftSpecial;
   }
 
-  //free abilities selected if any
-  var freeList = $('#freeDrop').val().toString().trim();
-  if(freeList != ''){
-    if (freeList.includes(',')){
-      var subArray = freeList.split(',');
+  //speeds
+  //burrow
+  if ($('#inputBurrow').length != 0){
+    var burrow = 'burrow ' + $('#inputBurrow').val().trim() + ' ft.';
+
+    if (statBlock.hasOwnProperty('Speed')){
+      if (!statBlock.Speed.join(',').includes('burrow')){
+        statBlock.Speed.push(burrow);
+      }
     } else {
-      var subArray = [freeList];
+      statBlock.Speed = [burrow];
     }
-    statBlock.OtherAbilitiesDescription = subArray;
+  }
+  //climb
+  if ($('#inputClimb').length != 0){
+    var climb = 'climb ' + $('#inputClimb').val().trim() + ' ft.';
+
+    if (statBlock.hasOwnProperty('Speed')){
+      if (!statBlock.Speed.join(',').includes('climb')){
+        statBlock.Speed.push(climb);
+      }
+    } else {
+      statBlock.Speed = [climb];
+    }
+  }
+  //fly
+  if ($('#inputFly').length != 0){
+    var fly = 'fly ' + $('#inputFly').val().trim() + ' ft. (' + $('#flyInputDrop').val().trim() + ')';
+
+    if (statBlock.hasOwnProperty('Speed')){
+      if (!statBlock.Speed.join(',').includes('fly')){
+        statBlock.Speed.push(fly);
+      }
+    } else {
+      statBlock.Speed = [fly];
+    }
+  }
+  //swim
+  if ($('#inputSwim').length != 0){
+    var swim = 'swim ' + $('#inputSwim').val().trim() + ' ft.';
+
+    if (statBlock.hasOwnProperty('Speed')){
+      if (!statBlock.Speed.join(',').includes('swim')){
+        statBlock.Speed.push(swim);
+      }
+    } else {
+      statBlock.Speed = [swim];
+    }
   }
 
   //weaknesses if any
@@ -259,6 +298,7 @@ function buildStatBlock() {
 
   //step 9 - spells
 
+  //TODO checks only step 3 grafts not step 5
   //get any spelllike abilities from grafts
   var subtype = $('#creatureSubTypeDrop').val().trim();
   if (subtype != '' && subtype != 'None') {
@@ -353,8 +393,7 @@ function buildStatBlock() {
       ability = scoreNames[i].capitalise();
       if (statBlock.MainAbilityScores.includes(ability)){
         index = statBlock.MainAbilityScores.indexOf(ability);
-        //alert(index);
-        //alert('abilityScoreModifier'+ index.toString())
+
         statBlock[scoreNames[i]] = '+' + statBlock['abilityScoreModifier'+ index.toString()].toString();
       } else {
         statBlock[scoreNames[i]] = '+0';
@@ -377,9 +416,9 @@ function buildStatBlock() {
     var adjustments = statBlock.AdjustmentAbilitiesDescription
     if (adjustments.includes("Extra Hit Points")){
       //add 20% hitpoints
-      alert(statBlock.hitPoints)
+
       statBlock.hitPoints = Math.round(statBlock.hitPoints + (statBlock.hitPoints * 0.2));
-      alert(statBlock.hitPoints)
+
     }
     if (adjustments.includes("Skillful")){
       //increase skill scores
@@ -444,7 +483,7 @@ function buildStatBlock() {
   //build creature type String
   var subTypeString = '';
   if (['Outsider','Humanoid','Construct','Vermin'].includes(statBlock.CreatureType)){
-    alert(statBlock.CreatureType)
+
     if (statBlock.CreatureType == 'Construct') {
       subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
     }
@@ -459,14 +498,14 @@ function buildStatBlock() {
   }
   var className = $('#classDrop').val().trim();
   if ( className != '' || className != 'None'){
-    var classString = ' ' + className.toLowerCase()
+    var classSString = ' ' + className.toLowerCase()
   } else {
-    classString = ' ';
+    classSString = ' ';
   }
-  //TODO creature size
+
   var alignString = alignments[$('#align1Drop').val().trim() + $('#align2Drop').val().trim()];
 
-  var typeString = '<p>'+ alignString +' ' + statBlock.creatureSize + ' ' + statBlock.CreatureType.toLowerCase() + subTypeString + classString + '</p>';
+  var typeString = '<p>'+ alignString +' ' + statBlock.creatureSize + ' ' + statBlock.CreatureType.toLowerCase() + subTypeString + classSString + '</p>';
 
   //build skills string
   listOfSkills = Object.keys(skillNames);
@@ -485,6 +524,21 @@ function buildStatBlock() {
 
   //build spell casting string
   var spellString = '';
+
+  //racial spell-like abilitiesArray
+  if (statBlock.hasOwnProperty('spellLikeFromGrafts')){
+    var spells = statBlock.spellLikeFromGrafts;
+    spellString += '<p><b>Racial spell-like abilities</b> ';
+    for (key in spells) {
+      var Key = key;
+      if (Key == "atWill"){
+        Key = "at will";
+      }
+      spellString += '; (' + Key + "): " + spells[key].join(', ');
+    }
+    spellString += '</p>';
+    spellString = spellString.replace('; ','')
+  }
 
   //check if creature has spellcasting
   if (statBlock.hasOwnProperty('Spellcasting')){
@@ -570,7 +624,7 @@ function buildStatBlock() {
         specialString += specialAbilities.Abilities[abilitiesArray[i]].Description;
         //print guidelines if any
         if (specialAbilities.Abilities[abilitiesArray[i]].hasOwnProperty("Guidelines")) {
-          specialString += '<br<b>Guidelines </b>' + specialAbilities.Abilities[abilitiesArray[i]].Guidelines;
+          specialString += ' <b>Guidelines </b>' + specialAbilities.Abilities[abilitiesArray[i]].Guidelines;
         }
         specialString += '</p><br>';
         //add abilities to the correct headings
@@ -600,9 +654,7 @@ function buildStatBlock() {
         }
         if (format.includes('Senses')){
           if (statBlock.hasOwnProperty('Senses')){
-            alert(statBlock.Senses)
             statBlock.Senses.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
-            alert(statBlock.Senses)
           } else {
             statBlock.Senses = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'')];
           }
@@ -633,37 +685,42 @@ function buildStatBlock() {
   //free abilities
   if (statBlock.hasOwnProperty('FreeAbilities')){
     var abilitiesArray = statBlock.FreeAbilities;
-
     for (var i = 0; i < abilitiesArray.length; i++) {
-      var format = specialAbilities.FreeAbilities[abilitiesArray[i]].Format;
-      if (format.includes('Other Abilities')){
-        otherAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
-      }
-      if (format.includes('Speed')){
-        if (statBlock.hasOwnProperty('Speed')){
-          statBlock.Speed.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
-        } else {
-          statBlock.Speed = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
+      if (!Object.keys(specialAbilities.Weaknesses).includes(abilitiesArray[i])){
+        var format = specialAbilities.FreeAbilities[abilitiesArray[i]].Format;
+        if (format.includes('Other Abilities')){
+          otherAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
         }
+        /*if (format.includes('Speed')){
+          if (statBlock.hasOwnProperty('Speed')){
+            statBlock.Speed.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
+          } else {
+            statBlock.Speed = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
+          }
 
-      }
-      if (format.includes('Languages')){
-        if (statBlock.hasOwnProperty('Languages')){
-          statBlock.Languages.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
-        } else {
-          statBlock.Languages = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
+        }*/
+        if (format.includes('Languages')){
+          if (statBlock.hasOwnProperty('Languages')){
+            statBlock.Languages.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
+          } else {
+            statBlock.Languages = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
+          }
+
         }
+        if (format.includes('Senses')){
+          if (statBlock.hasOwnProperty('Senses')){
+            if (abilitiesArray[i] == 'Blindsense (Ex)'){
+              abilitiesArray[i] = 'Blindsense 60 ft.'
+            }
+            if (abilitiesArray[i] == 'Darkvision (Ex Or Su)'){
+              abilitiesArray[i] = 'Darkvision 60 ft.'
+            }
+            statBlock.Senses.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
+          } else {
+            statBlock.Senses = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'')];
+          }
 
-      }
-      if (format.includes('Senses')){
-        if (statBlock.hasOwnProperty('Senses')){
-          alert(statBlock.Senses)
-          statBlock.Senses.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
-          alert(statBlock.Senses)
-        } else {
-          statBlock.Senses = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'')];
         }
-
       }
     }
   }
@@ -729,11 +786,9 @@ function buildStatBlock() {
       }
 
       //handle attack mod
-      alert(bonus)
       if (statBlock.hasOwnProperty('attackMod')){
         bonus = '+' + (Number(bonus.replace('+','')) + statBlock.attackMod).toString();
       }
-      alert(bonus)
 
       damageType = window[attackType.toLowerCase() + indexParts[0] + 'Types'][damageType];
 
@@ -865,18 +920,18 @@ function buildStatBlock() {
     weaknessString += statBlock.weaknessAbilities;
   }
 
-  if (statBlock.hasOwnProperty('Dependencies')){
-    if (weaknessString != '') {
-      weaknessString += '; ';
-    }
-    weaknessString += 'vulnerable to ' + statBlock.Dependencies.join(', vulnerable to ');
-  }
-
   if (statBlock.hasOwnProperty('Vulnerable')){
     if (weaknessString != '') {
       weaknessString += '; ';
     }
-    weaknessString += statBlock.Vulnerable.join(' dependent, ') + ' dependent';
+    weaknessString += 'vulnerable to ' + statBlock.Vulnerable.join(', vulnerable to ');
+  }
+
+  if (statBlock.hasOwnProperty('Dependencies')){
+    if (weaknessString != '') {
+      weaknessString += '; ';
+    }
+    weaknessString += statBlock.Dependencies.join(' dependent, ') + ' dependent';
   }
 
   if (weaknessString != '') {
@@ -892,7 +947,6 @@ function buildStatBlock() {
   //save string
   var saveString = "<p><b>Fort</b> +"+statBlock.fortitude + "; <b>Ref</b> +"+statBlock.reflex+ "; <b>Will</b> +"+statBlock.will;
   if (statBlock.hasOwnProperty('PlusAbilities')){
-    alert(statBlock.PlusAbilities)
     saveString += '; ' + statBlock.PlusAbilities.join(', ').replace('+CR','+'+statBlock.Cr.toString());
   }
   saveString += "<p>";
@@ -906,6 +960,22 @@ function buildStatBlock() {
     speedString += ', ' + speeds.join(', ');
   }
   speedString += "<p>";
+
+  classString = '';
+  if (statBlock.hasOwnProperty('Class')) {
+    classString += '<p><b>' + statBlock.Class.toUpperCase() + ' ABILITIES</b></p>';
+    classString += '<hr>';
+    classString += '<p><b>Resolve points</b> ' + statBlock.ClassResolvePoints + '</p>';
+    classString += '<p><b>Class abilities</b> '.replace('Class',statBlock.Class) + statBlock.ClassAbilities + '</p>';
+    if (statBlock.hasOwnProperty('ClassSpecialRules')) {
+      classString += '<p><b>Class special rules</b> '.replace('Class',statBlock.Class) + statBlock.ClassSpecialRules + '</p>';
+    }
+    classString += '<p><b>Class gear</b> '.replace('Class',statBlock.Class) + statBlock.ClassGear + '</p>';
+    classString += '<br>';
+
+  }
+
+
 
   //
   //Stat Block
@@ -956,10 +1026,16 @@ function buildStatBlock() {
   //ecology
   textBlock += EcologyString;
 
-  //special Abilities
-  if (specialString != ''){//add spellcasting if any
-    textBlock += specialString;
+  //warning
+  if (classString != '' || specialString != '') {
+    textBlock += '<br>';
+    textBlock += '<p><b>Heads up!</b> if there are any required stat block changes below this warning, they will need to be added manually.</p>';
+    textBlock += '<br>';
   }
+  //class abilities
+  textBlock += classString;
+  //special Abilities
+  textBlock += specialString;
 
   //statBlock.CreatureType
   var $StatBlock = $(".summernoteEdit").first();
@@ -1128,25 +1204,62 @@ function generateTextInput(parentID,label,placeholder,textID) {
 }
 
 //creates text inputs for speeds
-function generateSpeedTextInput(parentID,label,value,textID) {
+function generateSpeedTextInput(parentID,label,value,textID,isFly) {
 
-  var inputHtml ='<div class="row">' +
-  inputHtml +=    '<div class="col-xs-10">' +
-  inputHtml +=      '<div class="form-group">' +
-  inputHtml +=          '<label for="'+textID+'">'+label+'</label>' +
-  inputHtml +=          '<input type="text" class="form-control" id="'+textID+'" value="' +value + '">' +
-  inputHtml +=      '</div>' +
-  inputHtml +=    '</div>' +
-  inputHtml +=    '<div class="col-xs-2">' +
-  inputHtml +=        '<div class="form-group">' +
-  inputHtml +=            '<label for="inputSpeed">&nbsp;</label>' +
-  inputHtml +=            '<p>ft.<p>' +
-  inputHtml +=        '</div>' +
-  inputHtml +=    '</div>' +
-  inputHtml +='</div>'
+  if (isFly == false){
 
-  //add to parent div
-  document.getElementById(parentID).innerHTML = inputHtml;
+    var inputHtml = '<div class="row">'
+    inputHtml +=    '<div class="col-xs-10">'
+    inputHtml +=      '<div class="form-group">'
+    inputHtml +=          '<label for="'+textID+'">'+label+'</label>'
+    inputHtml +=          '<input type="text" class="form-control" id="'+textID+'" value="' +value + '">'
+    inputHtml +=      '</div>'
+    inputHtml +=    '</div>'
+    inputHtml +=    '<div class="col-xs-2">'
+    inputHtml +=        '<div class="form-group">'
+    inputHtml +=            '<label>&nbsp;</label>'
+    inputHtml +=            '<p>ft.<p>'
+    inputHtml +=        '</div>'
+    inputHtml +=    '</div>'
+    inputHtml +='</div>'
+
+    //add to parent div
+    document.getElementById(parentID).innerHTML = inputHtml;
+
+  } else if (isFly == true) {
+
+    var inputHtml = '<div class="row">'
+    inputHtml +=        '<div class="col-lg-6">'
+    inputHtml +=            '<div class="row">'
+    inputHtml +=                '<div class="col-xs-10">'
+    inputHtml +=                    '<div class="form-group">'
+    inputHtml +=                        '<label for="'+textID+'">'+label+'</label>'
+    inputHtml +=                        '<input type="text" class="form-control" id="'+textID+'" value="' +value + '">'
+    inputHtml +=                    '</div>'
+    inputHtml +=                '</div>'
+    inputHtml +=                '<div class="col-xs-2">'
+    inputHtml +=                    '<div class="form-group">'
+    inputHtml +=                        '<label >&nbsp;</label>'
+    inputHtml +=                        '<p>ft.<p>'
+    inputHtml +=                    '</div>'
+    inputHtml +=                '</div>'
+    inputHtml +=             '</div>'
+    inputHtml +=         '</div>'
+    inputHtml +=         '<div class="col-lg-6">'
+    inputHtml +=             '<div id="flyInputDropdown"></div>'
+    inputHtml +=         '</div>'
+    inputHtml +=     '</div>'
+
+    //add to parent div
+    document.getElementById(parentID).innerHTML = inputHtml;
+
+    generateDropdown("flyInputDropdown","fly maneuverability","flyInputDrop","...",['clumsy','average','perfect']);
+    $('#flyInputDrop').selectpicker('val', "average");
+    $('#flyInputDrop').selectpicker('refresh');
+
+  }
+
+
 }
 
 //creates bootstrap-select multiple select dropdowns from arrays
@@ -1656,10 +1769,37 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       //show burrow speed
       if (selected.toString().includes('Burrow (Ex)')){
         if ($('#inputBurrow').length == 0){
-          generateSpeedTextInput("burrowTextInput","Burrow speed","30","inputBurrow")
+          generateSpeedTextInput("burrowTextInput","Burrow speed","30","inputBurrow",false)
         }
       } else {
-        $("#weaknessTextInput").first().empty();
+        $("#burrowTextInput").first().empty();
+      }
+
+      //show climb speed
+      if (selected.toString().includes('Climb (Ex)')){
+        if ($('#inputClimb').length == 0){
+          generateSpeedTextInput("climbTextInput","Climb speed","20","inputClimb",false)
+        }
+      } else {
+        $("#climbTextInput").first().empty();
+      }
+
+      //show fly speed
+      if (selected.toString().includes('Fly (Ex Or Su)')){
+        if ($('#inputFly').length == 0){
+          generateSpeedTextInput("flyTextInput","Fly speed","60","inputFly",true)
+        }
+      } else {
+        $("#flyTextInput").first().empty();
+      }
+
+      //show swim speed
+      if (selected.toString().includes('Swim (Ex)')){
+        if ($('#inputSwim').length == 0){
+          generateSpeedTextInput("swimTextInput","Swim speed","30","inputSwim",false)
+        }
+      } else {
+        $("#swimTextInput").first().empty();
       }
 
       //
@@ -2869,7 +3009,7 @@ $('.wizard-card').bootstrapWizard({
                 if (!isObjectEmpty(graftSpells)){
                   var $description = $(".stepEight0Description").first();
                   $description.empty();
-                  graftString = "<p>"+"Spell-like Abilities from creature graft:"+"</p>";
+                  graftString = "<p>"+"Racial spell-like abilities:"+"</p>";
                   for (key in graftSpells) {
                     var Key = key;
                     if (Key == "atWill"){
@@ -3102,6 +3242,10 @@ $('.wizard-card').bootstrapWizard({
 
 //finish function - fires when the finish button is pushed//now reset button
 $('.btn-finish').click(function() {
+  $('#ResetModal').modal('show');
+});
+
+$('.btn-reset').click(function() {
   document.location.reload();
 });
 
