@@ -512,6 +512,11 @@ creatureSubType = {
     "SpecialAbilities": [
       "Summon Allies (Sp)"
     ],
+    "Spell-likeAbilities": {
+      "1/day": [
+        "summon allies"
+      ]
+    },
     "Description": "Daemons are fiends, or evil outsiders, native to Abaddon.",
     "Immunities": [
       "acid",
@@ -532,6 +537,11 @@ creatureSubType = {
     "SpecialAbilities": [
       "Summon Allies (Sp)"
     ],
+    "Spell-likeAbilities": {
+      "1/day": [
+        "summon allies"
+      ]
+    },
     "Description": "Demons are fiends, or evil outsiders, native to the Abyss.",
     "Immunities": [
       "electricity",
@@ -550,6 +560,11 @@ creatureSubType = {
     "SpecialAbilities": [
       "Summon Allies (Sp)"
     ],
+    "Spell-likeAbilities": {
+      "1/day": [
+        "summon allies"
+      ]
+    },
     "Description": "Devils are fiends, or evil outsiders, native to Hell.",
     "Immunities": [
       "fire",
@@ -784,7 +799,7 @@ creatureSubType = {
   },
   "Lashunta": {
     "Description": "This subtype is applied to lashuntas and creatures related to lashuntas.",
-    "OtherAbilities": [
+    "Languages": [
       "limited telepathy"
     ],
     "Spell-likeAbilities": {
@@ -928,6 +943,8 @@ creatureSubType = {
     ],
     "OtherAbilities": [
       "communalism",
+    ],
+    "Languages": [
       "limited telepathy"
     ],
     "Senses": [
@@ -1253,7 +1270,6 @@ graftTemplates = {
 				"CR3-7": 1,
 				"CR8": 2
 			},
-
 			"Description": "A cybernetic creature has been augmented by technological implants (although the same simple template graft can be used to represent creatures augmented by biotech).",
 			"Weapon": [
 				"CR+1"
@@ -1305,7 +1321,7 @@ graftTemplates = {
 			"Adjustments": {
 				"will": 2
 			},
-			"OtherAbilities": ["limited telepathy"],
+			"Languages": ["limited telepathy"],
 			"Description": "Phrenic creatures have minor innate mental powers, which they might have developed due to high levels of native psychic energy in their environments.",
 			"Senses": {
 				"Blindsense (emotion)": ["7", 5]

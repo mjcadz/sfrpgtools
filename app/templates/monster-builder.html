@@ -10,7 +10,7 @@
     <p></p>
     <div class="alert-this"style="display: none;">
       <button type="button" class="close" aria-label="Close" onclick="dismissAlert()"><span aria-hidden="true">&times;</span></button>
-      <p><strong>Heads up!</strong> Class abilities and special abilities are not yet fully integrated into the builder. Currently any class or special abilities you choose will be printed below the stat block but any additions to the stat block (e.g. special attacks) will need to be added manually.</p>
+      <p><strong>Heads up!</strong> Class abilities and special abilities are not yet fully integrated into the builder. Currently any class or special abilities you choose will be printed below the stat block but any additions to the stat block (e.g. special attacks or senses) will need to be added manually.</p>
     </div>
     <div class="container">
         <!--      Wizard container        -->
@@ -143,20 +143,22 @@
                                     <div id="saveBoostDropdown"></div>
                                 </div>
                                 <div class="col-sm-6">
-                                  <hr>
-                                  <div id="burrowTextInput"></div>
-                                  <div id="climbTextInput"></div>
-                                  <div id="flyTextInput"></div>
-                                  <div id="swimTextInput"></div>
-                                  <div id="weaknessTextInput"></div>
-                                  <div id="vulnerabilityTextInput"></div>
-                                  <div id="dependencyTextInput"></div>
-                                  <div class="stepSixDescription wizardp">
-                                  </div>
-                                  <div class="stepSixDescriptionTwo wizardp">
-                                  </div>
-                                  <div class="stepSixDescriptionThree wizardp">
-                                  </div>
+                                    <hr>
+                                    <div id="burrowTextInput"></div>
+                                    <div id="climbTextInput"></div>
+                                    <div id="flyTextInput"></div>
+                                    <div id="swimTextInput"></div>
+                                    <br>
+                                    <div id="dependencyTextInput"></div>
+                                    <div id="weaknessTextInput"></div>
+                                    <div id="vulnerabilityTextInput"></div>
+                                    <br>
+                                    <div class="stepSixDescription wizardp">
+                                    </div>
+                                    <div class="stepSixDescriptionTwo wizardp">
+                                    </div>
+                                    <div class="stepSixDescriptionThree wizardp">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -270,6 +272,15 @@
                                       <input type="text" class="form-control" id="inputName" placeholder="Name">
                                   </div>
                                   <div class="row">
+                                      <div class="col-xs-6">
+                                          <div id="Alignment1Dropdown"></div>
+                                      </div>
+                                      <div class="col-xs-6">
+                                          <div id="Alignment2Dropdown"></div>
+                                      </div>
+                                  </div>
+                                  <div id="sizeDropdown"></div>
+                                  <div class="row">
                                       <div class="col-xs-10">
                                         <div class="form-group">
                                             <label for="inputSpeed">Speed</label>
@@ -284,19 +295,6 @@
                                       </div>
                                   </div>
 
-                                  <div id="precedenceDropdown"></div>
-                                  <div id="languageDropdown"></div>
-                                  <div id="optionalSectionsDropdown"></div>
-                                  <div id="sizeDropdown"></div>
-                                  <div class="row">
-                                      <div class="col-xs-6">
-                                          <div id="Alignment1Dropdown"></div>
-                                      </div>
-                                      <div class="col-xs-6">
-                                          <div id="Alignment2Dropdown"></div>
-                                      </div>
-                                  </div>
-
                                   <!--<div class="form-group">
                                       <label for="inputWeakness" >Weaknesses</label>
                                       <input type="text" class="form-control" id="inputWeakness" placeholder="None">
@@ -304,8 +302,9 @@
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
-                                  <div class="stepNineDescription wizardp">
-                                  </div>
+                                  <div id="precedenceDropdown"></div>
+                                  <div id="languageDropdown"></div>
+                                  <div id="optionalSectionsDropdown"></div>
                                 </div>
                             </div>
                         </div>
@@ -398,6 +397,25 @@
         </div>
         <div class="modal-footer" style="padding: 0px 10px 10px 10px;">
           <button type="button" class="btn-graft btn btn-grn" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal fade" id="ResetModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+      <!-- condition not met Modal -->
+      <div class="modal-content">
+        <div class="modal-header" style="padding: 10px 15px 0px 15px;">
+          <h4 class="modal-title" >Reset builder</h4>
+        </div>
+        <div class="modal-body crModal" style="padding: 5px 15px;">
+          <p>Are you sure? your stat block will be lost.</p>
+        </div>
+        <div class="modal-footer" style="padding: 0px 10px 10px 10px;">
+          <button type="button" class="btn-reset btn btn-grn" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">No thanks</button>
         </div>
       </div>
 

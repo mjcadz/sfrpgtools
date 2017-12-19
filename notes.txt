@@ -4,61 +4,22 @@ navbar colour picker
 http://blog.koalite.com/bbg/
 button colour picker
 
+git remote set-url origin https://github.com/mjcadz/sfrpgtools.git
+
 https://github.com/silviomoreto/bootstrap-select
 bootstrap dropdown select
 
-speeds will need to be picked later (i think)
-
-Types of immunities for the immunity special ability
-
-have an are you sure on the reset
-
-text attribute in grafts
-
 add the rest of the grafts
-
-weaknesses, maybe make new section instead of being part of free abilities. add dropdowns for vulnerabilities and depenencies and move general weaknesses to here
 
 "AttackChanges" "DamageMod" armor upgrade
 
-add dropdown for resistance and immunities (or prompyt user to add to statblock)
+phrenic adjustments
 
-make sure attacks size properly
-
-sort free abilities ie senses speed
-
-finish other speeds and process them at the end
-
-make sure free ability descriptions are added down the botton in the special abilities string
-
-dont forget to print the class shit
-
-speed and senses from free abilities need to be sorted
-
-check that summon allies prints somwhere in the stat block
-
-TODOs
+Nice To Have
 
 add basic stat block maybe only choosing step 1 options
 
-dropdowns for speeds
-
-phrenic adjustments
-
-make giant and miniature affect size StartToStart
-
-handle lashunta spells
-
-To Test
-soldier class melee/ranged - to test
-envoy skillchoice - to test
-Spellcasting needs to regenerate when creature array changed
-
-
-Test
-git remote set-url origin https://github.com/mjcadz/sfrpgtools.git
-
-Nice To Have
+sort the free abilities into speeds senses etc
 
 make the display of creature traits optional eg, showing the traits
 
@@ -68,9 +29,7 @@ show ability scores next to skills in dropdown
 
 special abilities make the one that affect stats actually affect stats
 
-hide desription areas while changing text then show. will avoid loading looks
-
-add menu header bootstrap-select, so show what the user should be doing
+hide desription areas while changing text then show. will avoid loading looks (don't think times a bad enough for this yet)
 
 Change handling of previously set ability scores so that it is read from the creature entry ( will allow for easier creature type additions)
 
@@ -78,6 +37,6 @@ Bug where if Construct selected, subtype must be magical or technological. Then 
 
 check oozes only natural skills,
 
-doesn't quite work unless cleared properly: change html save bits to use official  window storage saves
-
 if possible make print style sheet work with values on the same line
+
+text attribute in grafts
