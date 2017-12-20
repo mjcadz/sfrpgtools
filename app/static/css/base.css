@@ -374,3 +374,7 @@ line-height: 1.4;
   line-height: 1.3!important;
   font-size: 13px!important;
 }
+
+.smallsup {
+  font-size: 24px!important;
+}

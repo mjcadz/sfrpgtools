@@ -17,6 +17,13 @@ phrenic adjustments
 
 dragon breath and fear abilities
 
+speed and weakness inputs must be reset when the free ability list is generated
+as well as saveboost dropdown
+
+umbral and phrenic senses are objects not arrays
+
+add subtype to dragons name
+
 
 
 Nice To Have

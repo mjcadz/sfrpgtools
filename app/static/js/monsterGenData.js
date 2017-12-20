@@ -1156,7 +1156,7 @@ classData = {
         "AbilityScoreModifiers": ["Str","Dex","Cha"],
         "Adjustments": {"reflex":-2,"will":2},
         "Description": "Drawing power from the eternal cycles of stars, solarians fight with the power of photons and gravitons.",
-        "Gear": "A solarian’s gear selection depends on whether you choose solar armor or solar weapon for its solar manifestation.Solar Armor",
+        "Gear": "A solarian’s gear selection depends on whether you choose solar armor or solar weapon for its solar manifestation. Solar Armor: Light armor (item level = CR), small arm (item level = CR), and advanced melee weapon (item level = CR + 1). Solar Weapon: Light armor (item level = CR), small arm (item level = CR), and solarian crystal (item level = CR).",
         "RequiredArray": "Combatant",
         "GoodSkills": [
           "mysticism"
@@ -1362,10 +1362,18 @@ graftTemplates = {
 	},
   "dragonGrafts": {
     "Black Dragon": {
-      "OtherAbilities": [
-        "Breath weapon (line 30 ft. + 10 feet per 2 CR, 1d6 A + 1d6 per CR)",
-        "frightful presence (CR 11+, 60 feet + 10 feet per CR)"
-      ],
+      "CalculatedAbilities": {
+        "Breath weapon": {
+          "type": "line",
+          "range": "30+10per2CR",
+          "damageType": "A",
+          "damage":"1d6+1d6perCR"
+        },
+        "Frightful presence": {
+          "CR": 11,
+          "range": "60+10perCR"
+        }
+      },
       "Spell-likeAbilities": {
         "CR": 10
       },
@@ -1381,8 +1389,9 @@ graftTemplates = {
       ],
       "RequiredCreatureType": "Dragon",
       "RequiredSubType": "Water",
-      "SR": {
-        "CR10": "11+CR"
+      "SRtable": {
+        "CR" : [10],
+        "SR" : ["11+CR"]
       },
       "Senses": [
         "blindsense 60 ft.",
@@ -1396,10 +1405,18 @@ graftTemplates = {
       ]
     },
     "Blue Dragon": {
-      "OtherAbilities": [
-        "Breath weapon (line 30 feet + 10 feet per 2 CR, 1d8 E + 1d8 per CR)",
-        "frightful presence (CR 9+, 60 feet + 10 feet per CR)"
-      ],
+      "CalculatedAbilities": {
+        "Breath weapon": {
+          "type": "line",
+          "range": "30+10per2CR",
+          "damageType": "E",
+          "damage":"1d8+1d8perCR"
+        },
+        "Frightful presence": {
+          "CR": 9,
+          "range": "60+10perCR"
+        }
+      },
       "Spell-likeAbilities": {
         "CR": 9
       },
@@ -1415,8 +1432,9 @@ graftTemplates = {
       ],
       "RequiredCreatureType": "Dragon",
       "RequiredSubType": "Earth",
-      "SR": {
-        "CR12": "11+CR"
+      "SRtable": {
+        "CR" : [12],
+        "SR" : ["11+CR"]
       },
       "Senses": [
         "blindsense 60 ft.",
@@ -1430,10 +1448,18 @@ graftTemplates = {
       ]
     },
     "Green Dragon": {
-      "OtherAbilities": [
-        "Breath weapon (cone 15 feet + 5 feet per 2 CR, 1d6 A + 1d6 per CR)",
-        "frightful presence (CR 9+, 60 feet + 10 feet per CR)"
-      ],
+      "CalculatedAbilities": {
+        "Breath weapon": {
+          "type": "cone",
+          "range": "15+5per2CR",
+          "damageType": "A",
+          "damage":"1d6+1d6perCR"
+        },
+        "Frightful presence": {
+          "CR": 9,
+          "range": "60+10perCR"
+        }
+      },
       "Spell-likeAbilities": {
         "CR": 9
       },
@@ -1452,8 +1478,9 @@ graftTemplates = {
       ],
       "RequiredCreatureType": "Dragon",
       "RequiredSubType": "Air",
-      "SR": {
-        "CR11": "11+CR"
+      "SRtable": {
+        "CR" : [11],
+        "SR" : ["11+CR"]
       },
       "Senses": [
         "blindsense 60 ft.",
@@ -1467,10 +1494,18 @@ graftTemplates = {
       ]
     },
     "Red Dragon": {
-      "OtherAbilities": [
-        "Breath weapon (cone 15 feet + 5 feet per 2 CR, 1d10 F + 1d10 per CR)",
-        "frightful presence (CR 10+, 60 feet + 10 feet per CR)"
-      ],
+      "CalculatedAbilities": {
+        "Breath weapon": {
+          "type": "cone",
+          "range": "30+5per2CR",
+          "damageType": "F",
+          "damage":"1d10+1d10perCR"
+        },
+        "Frightful presence": {
+          "CR": 10,
+          "range": "60+10perCR"
+        }
+      },
       "Spell-likeAbilities": {
         "CR": 10
       },
@@ -1486,8 +1521,9 @@ graftTemplates = {
       ],
       "RequiredCreatureType": "Dragon",
       "RequiredSubType": "Fire",
-      "SR": {
-        "CR12": "11+CR"
+      "SRtable": {
+        "CR" : [12],
+        "SR" : ["11+CR"]
       },
       "Senses": [
         "blindsense 60 feet",
@@ -1499,10 +1535,18 @@ graftTemplates = {
       ]
     },
     "White Dragon": {
-      "OtherAbilities": [
-        "Breath weapon (cone 15 feet + 10 feet per 2 CR, 1d6 C + 1d6 per CR)",
-        "frightful presence (CR 10+, 60 feet + 10 feet per CR)"
-      ],
+      "CalculatedAbilities": {
+        "Breath weapon": {
+          "type": "cone",
+          "range": "15+10per2CR",
+          "damageType": "C",
+          "damage":"1d6+1d6perCR"
+        },
+        "Frightful presence": {
+          "CR": 10,
+          "range": "60+10perCR"
+        }
+      },
       "Spell-likeAbilities": {
         "CR": 10
       },
@@ -1518,8 +1562,9 @@ graftTemplates = {
       ],
       "RequiredCreatureType": "Dragon",
       "RequiredSubType": "Cold",
-      "SR": {
-        "CR12": "11+CR"
+      "SRtable": {
+        "CR" : [12],
+        "SR" : ["11+CR"]
       },
       "Senses": [
         "blindsense 60 ft.",

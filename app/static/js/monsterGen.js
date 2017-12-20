@@ -464,6 +464,48 @@ function buildStatBlock() {
       statBlock.DRapplied = statBlock.DRtable['DR'][choice].toString() + '/' + statBlock.DRtable.type;
     }
   }
+  //apply SR
+  if (statBlock.hasOwnProperty('SRtable')){
+    var crTable = statBlock.SRtable['CR']
+    var srcr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+    var choice = 'none'
+    for (i = 0; i < crTable.length; i++) {
+      if (srcr >= crTable[i]) {
+        choice = i;
+      }
+    }
+    if (choice != 'none') {
+      var sr = statBlock.SRtable['SR'][choice];
+      if (sr.toString().includes('+CR') ){
+        statBlock.SRapplied = (Number(sr.replace('+CR','')) + srcr).toString();
+      } else {
+        statBlock.SRapplied = sr;
+      }
+    }
+  }
+  //apply any calculated abilities
+  if (statBlock.hasOwnProperty('CalculatedAbilities')){
+    for (ability in statBlock.CalculatedAbilities){
+      //any breath weapons
+      if (ability == "Breath weapon") {
+        var breathEntry = 'breath weapon';
+
+        var cr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+
+        var range1 = Number((statBlock.CalculatedAbilities["Breath weapon"].range.split('+'))[0]);
+        var range2 = Math.floor(cr/2) * Number(statBlock.CalculatedAbilities["Breath weapon"].range.split('+')[1].split('per')[0])
+
+        breathEntry += ' (' + (range1+range2).toString() +'-ft. '+ statBlock.CalculatedAbilities["Breath weapon"].type;
+
+        var damageDice = (statBlock.CalculatedAbilities["Breath weapon"].damage.split('+'))[0].split('d')[1];
+        var damage = 1 + cr
+
+        breathEntry += ', ' + damage.toString() + 'd' + damageDice + ' ' + statBlock.CalculatedAbilities["Breath weapon"].damageType
+
+        alert(breathEntry)
+      }
+    }
+  }
 
   //
   //Stat Block Strings
@@ -497,7 +539,7 @@ function buildStatBlock() {
     }
   }
   var className = $('#classDrop').val().trim();
-  if ( className != '' || className != 'None'){
+  if ( className != '' && className != 'None'){
     var classSString = ' ' + className.toLowerCase()
   } else {
     classSString = ' ';
@@ -765,7 +807,7 @@ function buildStatBlock() {
   var RangedString = '';
   //iterate through attack entries
   $("[class^='attackDiv']").each(function(){
-      var index = $(this).attr('class').replace('attackDiv','')
+      var index = $(this).attr('class').replace('attackDiv','').replace(' brute','')
 
       var indexParts = index.split('-');
       var name = $('#attackName'+index).val().trim().toLowerCase();
@@ -912,6 +954,13 @@ function buildStatBlock() {
       defencesString += '; ';
     }
     defencesString += '<b>Resistances </b>'+statBlock.Resistance.join(', ');
+  }
+  //SR
+  if (statBlock.hasOwnProperty('SRapplied')){
+    if (defencesString != '') {
+      defencesString += '; ';
+    }
+    defencesString += '<b>SR </b>'+statBlock.SRapplied;
   }
   //weaknesses
   var weaknessString = '';
@@ -1851,6 +1900,16 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       $descriptionArea = $(".saveBoostDropdown").first().empty();
       var $descriptionArea = $(".stepSixDescriptionThree").first();
       $descriptionArea.empty();
+
+      //display extra options for save boost if selected
+      if (selected.toString().includes('Save Boost')){
+        if ($('#BoostDrop').length == 0){
+          generateDropdown("saveBoostDropdown","Save boost","BoostDrop","Choose save boost",["All saving throws +1","Fortitude +3","Reflex +3","Will +3"]);
+        }
+      } else {
+        $("#saveBoostDropdown").first().empty();
+      }
+
       if (selected != '') {
 
         multi = selected.toString().split(",");
@@ -1858,13 +1917,6 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         for (var i = 0; i < multi.length; i++) {
           var abilityObject = findObjectFromKey(specialAbilities,multi[i]);
           descriptionText += "<b>" + multi[i] + "</b> - " + abilityObject[multi[i]].Description + '<br>';
-
-          //display extra options for save boost if selected
-          if (multi[i] == "Save Boost") {
-            generateDropdown("saveBoostDropdown","Save boost","BoostDrop","Choose save boost",["All saving throws +1","Fortitude +3","Reflex +3","Will +3"]);
-          }
-
-
         }
         descriptionText += "</p>";
         $descriptionArea.append(descriptionText);
@@ -2643,6 +2695,17 @@ $('.wizard-card').bootstrapWizard({
               //check if configuration has changed
               if ($('#stepSixSave').text() != crString + ":" + array + ":" + graft + ":" + classDrop + ":" + subtype) {
                 //step6 generation - dependent on CR
+                //remove any previously generated dropdowns
+
+                $("#burrowTextInput").first().empty();
+                $("#climbTextInput").first().empty();
+                $("#flyTextInput").first().empty();
+                $("#swimTextInput").first().empty();
+                $("#dependencyTextInput").first().empty();
+                $("#weaknessTextInput").first().empty();
+                $("#vulnerabilityTextInput").first().empty();
+                $("#saveBoostDropdown").first().empty();
+
                 maxOptions = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][11];//get max options from array
 
                 //check for additional specials from grafts

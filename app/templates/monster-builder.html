@@ -5,12 +5,12 @@
 {% block description %}NPC and monster creator for starfinder roleplaying game{% endblock %}
 {% block body %}
 <div class="jumbotron">
-    <h1></h1>
-    <p class="lead">This wizard will step through the creation of Starfinder NPCs and monsters.</p>
+    <h1>Monster Builder <sup><sup class="smallsup">BETA</sup></sup></h1>
+    <p class="lead">This wizard will step through the creation of Starfinder NPCs and monsters.<br><br>This tool is still in beta, If you find any issues or have any suggestions to make it better, please <a href="https://github.com/mjcadz/sfrpgtools/issues/new">create a new issue on Github</a> or contact me at <a href="mailto:mjcadzdev@gmail.com">mjcadzdev@gmail.com</a>.</p>
     <p></p>
     <div class="alert-this"style="display: none;">
       <button type="button" class="close" aria-label="Close" onclick="dismissAlert()"><span aria-hidden="true">&times;</span></button>
-      <p><strong>Heads up!</strong> Class abilities and special abilities are not yet fully integrated into the builder. Currently any class or special abilities you choose will be printed below the stat block but any additions to the stat block (e.g. special attacks or senses) will need to be added manually.</p>
+      <p><strong>Heads up!</strong> Class abilities and special abilities are not yet fully integrated into the builder. Currently any class or special abilities you choose will be printed below the stat block but any additions to the stat block (e.g. special attacks or senses) will need to be added manually.<br><br>Additionally not all template grafts have been added yet. Only simple/dragon grafts are available.</p>
     </div>
     <div class="container">
         <!--      Wizard container        -->
@@ -140,7 +140,6 @@
                                     <div id="freeAbilityDropdown"></div>
                                     <div class="stepSixAbilities wizardp"></div>
                                     <div id="specialAbilityDropdown"></div>
-                                    <div id="saveBoostDropdown"></div>
                                 </div>
                                 <div class="col-sm-6">
                                     <hr>
@@ -152,6 +151,8 @@
                                     <div id="dependencyTextInput"></div>
                                     <div id="weaknessTextInput"></div>
                                     <div id="vulnerabilityTextInput"></div>
+                                    <br>
+                                    <div id="saveBoostDropdown"></div>
                                     <br>
                                     <div class="stepSixDescription wizardp">
                                     </div>
