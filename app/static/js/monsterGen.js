@@ -495,14 +495,25 @@ function buildStatBlock() {
         var range1 = Number((statBlock.CalculatedAbilities["Breath weapon"].range.split('+'))[0]);
         var range2 = Math.floor(cr/2) * Number(statBlock.CalculatedAbilities["Breath weapon"].range.split('+')[1].split('per')[0])
 
-        breathEntry += ' (' + (range1+range2).toString() +'-ft. '+ statBlock.CalculatedAbilities["Breath weapon"].type;
+        breathEntry += ' (' + (range1+range2).toString() +' ft. '+ statBlock.CalculatedAbilities["Breath weapon"].type;
 
         var damageDice = (statBlock.CalculatedAbilities["Breath weapon"].damage.split('+'))[0].split('d')[1];
         var damage = 1 + cr
 
-        breathEntry += ', ' + damage.toString() + 'd' + damageDice + ' ' + statBlock.CalculatedAbilities["Breath weapon"].damageType
+        breathEntry += ', ' + damage.toString() + 'd' + damageDice + ' ' + statBlock.CalculatedAbilities["Breath weapon"].damageType + ', Reflex DC ' +statBlock.abilityDCBase.toString() + ' half, usable every 1d4 rounds)';
 
-        alert(breathEntry)
+        statBlock.OffensiveAbilities = [breathEntry];
+      }
+      if (ability == "Frightful presence") {
+
+        var cr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+        if (cr >= statBlock.CalculatedAbilities["Frightful presence"]["CR"]) {
+          var auraEntry = 'frightful presence (';
+          var fright = statBlock.CalculatedAbilities["Frightful presence"]["range"].split('+');
+          auraEntry += (Number(fright[0]) + (10 * cr)).toString()+ ' ft., DC ' + statBlock.abilityDCBase.toString() + ')';
+          statBlock.Aura = [auraEntry];
+          //TODO only does 10ft * cr will need updating if any grafts change
+        }
       }
     }
   }
@@ -524,20 +535,10 @@ function buildStatBlock() {
 
   //build creature type String
   var subTypeString = '';
-  if (['Outsider','Humanoid','Construct','Vermin'].includes(statBlock.CreatureType)){
-
-    if (statBlock.CreatureType == 'Construct') {
-      subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
-    }
-
-    else {
-      if (statBlock.hasOwnProperty('SubType')){
-        if (!subTypeAll.includes(statBlock.SubType)){
-          subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
-        }
-      }
-    }
+  if (statBlock.hasOwnProperty('SubType')){
+    subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
   }
+
   var className = $('#classDrop').val().trim();
   if ( className != '' && className != 'None'){
     var classSString = ' ' + className.toLowerCase()
@@ -778,8 +779,16 @@ function buildStatBlock() {
   var defensiveAbilitiesString = '';
   var otherAbilitiesString = '';
 
-  if (offensiveAbilities.length > 0) {
-    var offensiveAbilitiesString = '<p><b>Offensive abilities </b>' + offensiveAbilities.join(', ') + '</p>';
+  if (offensiveAbilities.length > 0 || statBlock.hasOwnProperty('OffensiveAbilities')) {
+    var offence = [];
+    if (offensiveAbilities.length > 0){
+      offence = offence.concat(offensiveAbilities);
+    }
+    if (statBlock.hasOwnProperty('OffensiveAbilities')){
+      offence = offence.concat(statBlock.OffensiveAbilities);
+    }
+    offence.sort()
+    var offensiveAbilitiesString = '<p><b>Offensive abilities </b>' + offence.join(', ') + '</p>';
   }
   if (defensiveAbilities.length > 0) {
     var defensiveAbilitiesString = '<b>Defensive abilities </b>' + defensiveAbilities.join(', ');
@@ -1024,6 +1033,12 @@ function buildStatBlock() {
 
   }
 
+  //Aura string
+  auraString = '';
+  if (statBlock.hasOwnProperty('Aura')){
+    auraString = '<p><b>Aura</b> ' + statBlock.Aura.join(', ') + '</p>'
+  }
+
 
 
   //
@@ -1038,6 +1053,7 @@ function buildStatBlock() {
   textBlock += "<p><b>XP "+statBlock.Xp+"</b></p>";
   textBlock += typeString;
   textBlock += "<p><b>Init</b> "+statBlock.initiative+sensesString+'; <b>Perception</b> +'+perceptionValue+"</p>";
+  textBlock += auraString;
   textBlock += "<br>";
 
   //Defence

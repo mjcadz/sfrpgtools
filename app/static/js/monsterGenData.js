@@ -194,6 +194,9 @@ spellcasterAttackStats = {
     "25": ["+36", "+34", "8d10+25", "16d6+25", "12d12+25+Str", "15d6+25+Str", "6d12+25+Str"]
 };
 
+var statLabels = ["eac","kac","fortitude","reflex","will","hitPoints","abilityDCBase","spellDC","abilityScoreModifier0","abilityScoreModifier1","abilityScoreModifier2","specialAbilities","masterSkills","goodSkills","highAttackBonus","lowAttackBonus","rangedEnergy","rangedKinetic","meleeStandard","meleeThree","meleeFour"];
+var CRLabels = ["CR 1/3","CR 1/2","CR 1","CR 2","CR 3","CR 4","CR 5","CR 6","CR 7","CR 8","CR 9","CR 10","CR 11","CR 12","CR 13","CR 14","CR 15","CR 16","CR 17","CR 18","CR 19","CR 20","CR 21","CR 22","CR 23","CR 24","CR 25"]
+
 xp = {
   "1/3": "135",
   "1/2": "200",
@@ -497,7 +500,8 @@ creatureSubType = {
     ]
   },
   "Chaotic": {
-    "Description": "This subtype is applied to chaotic aligned creatures"
+    "Description": "This subtype is applied to chaotic aligned creatures",
+    "Alignment": "Chaotic",
   },
   "Cold": {
     "Description": "Creatures with this subtype are usually native to frigid environments.",
@@ -661,7 +665,8 @@ creatureSubType = {
     }
   },
   "Evil": {
-    "Description": "This subtype is applied to evil creatures"
+    "Description": "This subtype is applied to evil creatures",
+    "Alignment": "Evil"
   },
   "Extraplanar": {
     "Description": "This subtype is applies to creatures originating from another plane"
@@ -716,7 +721,8 @@ creatureSubType = {
     ]
   },
   "Good": {
-    "Description": "This subtype is applied to good aligned creatures"
+    "Description": "This subtype is applied to good aligned creatures",
+    "Alignment": "Good"
   },
   "Gray": {
     "Description": "This subtype is applied to the humanoid aliens known as grays and creatures related to grays.",
@@ -813,7 +819,8 @@ creatureSubType = {
     }
   },
   "Lawful": {
-    "Description": "This subtype is applied to lawful aligned creatures"
+    "Description": "This subtype is applied to lawful aligned creatures",
+    "Alignment": "Lawful"
   },
   "Magical": {
     "Description": "This subtype is applies to creatures of magical origins"
@@ -1324,7 +1331,7 @@ graftTemplates = {
 			"Languages": ["limited telepathy"],
 			"Description": "Phrenic creatures have minor innate mental powers, which they might have developed due to high levels of native psychic energy in their environments.",
 			"Senses": {
-				"Blindsense (emotion)": ["7", 5]
+				"Blindsense (emotion) 5 ft.": ["CR7"]
 			}
 		},
 		"Resolute": {
@@ -1584,11 +1591,6 @@ graftTemplates = {
     }
   }
 };
-
-
-
-var statLabels = ["eac","kac","fortitude","reflex","will","hitPoints","abilityDCBase","spellDC","abilityScoreModifier0","abilityScoreModifier1","abilityScoreModifier2","specialAbilities","masterSkills","goodSkills","highAttackBonus","lowAttackBonus","rangedEnergy","rangedKinetic","meleeStandard","meleeThree","meleeFour"];
-var CRLabels = ["CR 1/3","CR 1/2","CR 1","CR 2","CR 3","CR 4","CR 5","CR 6","CR 7","CR 8","CR 9","CR 10","CR 11","CR 12","CR 13","CR 14","CR 15","CR 16","CR 17","CR 18","CR 19","CR 20","CR 21","CR 22","CR 23","CR 24","CR 25"]
 
 specialAbilities = {
   "AdjustmentAbilities":{

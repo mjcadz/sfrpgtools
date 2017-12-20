@@ -15,8 +15,6 @@ add the rest of the grafts
 
 phrenic adjustments
 
-dragon breath and fear abilities
-
 speed and weakness inputs must be reset when the free ability list is generated
 as well as saveboost dropdown
 
