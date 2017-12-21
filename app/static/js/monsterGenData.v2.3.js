@@ -1774,7 +1774,8 @@ specialAbilities = {
       "Guidelines": "Use the appropriate damage column for the creature's array, and impose a -6 penalty on these attacks instead of a -4 penalty."
     },
     "Natural Weapons (Ex)": {
-      "Description": "Natural weapons (and natural attacks), such as acid spit, bite, claw, or slam don't require ammunition and can't be disarmed or sundered.\n"
+      "Description": "Natural weapons (and natural attacks), such as acid spit, bite, claw, or slam don't require ammunition and can't be disarmed or sundered.",
+      "Format": "Offensive Abilities",
     },
     "No Breath (Ex)": {
       "Description": "The creature doesn't breathe, and it is immune to effects that require breathing (such as inhaled poison). This does not give it immunity to cloud or gas attacks that don't require breathing.",
