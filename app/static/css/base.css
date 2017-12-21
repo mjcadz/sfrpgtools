@@ -313,14 +313,26 @@ line-height: 1.4;
 }
 
 /*stat blocks*/
-.edit-block > .row > .col-xs-8 > p,
-.note-editable > .row > .col-xs-8 > p,
-.edit-block > .row > .col-xs-4 > p,
-.note-editable > .row > .col-xs-4 > p,
-.edit-block>p,
-.note-editable>p {
+.edit-block > .row > .col-xs-8 > div,
+.note-editable > .row > .col-xs-8 > div,
+.edit-block > .row > .col-xs-4 > div,
+.note-editable > .row > .col-xs-4 > div,
+.edit-block>div,
+.note-editable>div {
   margin: 0!important;
   line-height: 1.3!important;
+  color: #666666!important;
+  font-size: 20px!important;
+  font-weight: 200!important;
+  padding-left: 0px!important;
+  padding-right: 0px!important;
+}
+.edit-block > .row > .col-xs-8,
+.note-editable > .row > .col-xs-8,
+.edit-block > .row > .col-xs-4,
+.note-editable > .row > .col-xs-4 {
+  padding-left: 0px!important;
+  padding-right: 0px!important;
 }
 .edit-block>hr,
 .note-editable>hr {

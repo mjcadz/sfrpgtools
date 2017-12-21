@@ -548,7 +548,7 @@ function buildStatBlock() {
 
   var alignString = alignments[$('#align1Drop').val().trim() + $('#align2Drop').val().trim()];
 
-  var typeString = '<p>'+ alignString +' ' + statBlock.creatureSize + ' ' + statBlock.CreatureType.toLowerCase() + subTypeString + classSString + '</p>';
+  var typeString = '<div>'+ alignString +' ' + statBlock.creatureSize + ' ' + statBlock.CreatureType.toLowerCase() + subTypeString + classSString + '</div>';
 
   //build skills string
   listOfSkills = Object.keys(skillNames);
@@ -571,7 +571,7 @@ function buildStatBlock() {
   //racial spell-like abilitiesArray
   if (statBlock.hasOwnProperty('spellLikeFromGrafts')){
     var spells = statBlock.spellLikeFromGrafts;
-    spellString += '<p><b>Racial spell-like abilities</b> ';
+    spellString += '<div><b>Racial spell-like abilities</b> ';
     for (key in spells) {
       var Key = key;
       if (Key == "atWill"){
@@ -579,7 +579,7 @@ function buildStatBlock() {
       }
       spellString += '; (' + Key + "): " + spells[key].join(', ');
     }
-    spellString += '</p>';
+    spellString += '</div>';
     spellString = spellString.replace('; ','')
   }
 
@@ -610,12 +610,12 @@ function buildStatBlock() {
     var rangeAttackVal = (statBlock.attackFocus == 'Ranged') ? statBlock.highAttackBonus:statBlock.lowAttackBonus;
     //Caster Level
     var clVal = ordinalNumber(Number(statBlock.Cr));
-    spellString += '<p><b>'+typeTitle+'</b> (CL ' + clVal +'; ranged '+rangeAttackVal+')</p>';
+    spellString += '<div><b>'+typeTitle+'</b> (CL ' + clVal +'; ranged '+rangeAttackVal+')</div>';
     //for each frequency
     for (var i = 0; i < statBlock.Spellcasting.length; i++) {
       spellBlock = statBlock.Spellcasting[i];
       //add new line for each frequency
-      spellString += '<p>' + spellBlock[0] + ' - ';
+      spellString += '<div>' + spellBlock[0] + ' - ';
       //for each spell
       for (var j = 1; j < spellBlock.length; j++) {
         spell = spellBlock[j];
@@ -636,7 +636,7 @@ function buildStatBlock() {
       }
       // finalise the spell string
 
-      spellString += '</p>';
+      spellString += '</div>';
     }
   }
 
@@ -648,7 +648,7 @@ function buildStatBlock() {
 
   if (statBlock.hasOwnProperty('SpecialAbilitiesDescription')  || statBlock.hasOwnProperty('SpecialAbilitiesGraft')){
 
-    specialString += '<p><b>SPECIAL ABILITIES</b></p>';
+    specialString += '<div><b>SPECIAL ABILITIES</b></div>';
     specialString += '<hr>';
 
     var abilitiesArray = [];
@@ -663,13 +663,13 @@ function buildStatBlock() {
     for (var i = 0; i < abilitiesArray.length; i++) {
       //chosen abilities
       if (specialAbilities.Abilities.hasOwnProperty(abilitiesArray[i])){
-        specialString += '<p><b>'+abilitiesArray[i]+'</b> ';
+        specialString += '<div><b>'+abilitiesArray[i]+'</b> ';
         specialString += specialAbilities.Abilities[abilitiesArray[i]].Description;
         //print guidelines if any
         if (specialAbilities.Abilities[abilitiesArray[i]].hasOwnProperty("Guidelines")) {
           specialString += ' <b>Guidelines </b>' + specialAbilities.Abilities[abilitiesArray[i]].Guidelines;
         }
-        specialString += '</p><br>';
+        specialString += '</div><br>';
         //add abilities to the correct headings
         var format = specialAbilities.Abilities[abilitiesArray[i]].Format;
         if (format.includes('Defensive Abilities')){
@@ -715,9 +715,9 @@ function buildStatBlock() {
         }
       //graft abilities
       } else if (graftSpecialAbilities.hasOwnProperty(abilitiesArray[i])){
-        specialString += '<p><b>'+abilitiesArray[i]+'</b> ';
+        specialString += '<div><b>'+abilitiesArray[i]+'</b> ';
         specialString += graftSpecialAbilities[abilitiesArray[i]];
-        specialString += '</p><br>';
+        specialString += '</div><br>';
         //add to other abilities
         otherAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
       }
@@ -788,7 +788,7 @@ function buildStatBlock() {
       offence = offence.concat(statBlock.OffensiveAbilities);
     }
     offence.sort()
-    var offensiveAbilitiesString = '<p><b>Offensive abilities </b>' + offence.join(', ') + '</p>';
+    var offensiveAbilitiesString = '<div><b>Offensive abilities </b>' + offence.join(', ') + '</div>';
   }
   if (defensiveAbilities.length > 0) {
     var defensiveAbilitiesString = '<b>Defensive abilities </b>' + defensiveAbilities.join(', ');
@@ -801,7 +801,7 @@ function buildStatBlock() {
     }
     sorted.sort();
     otherAbilities = sorted;
-    var otherAbilitiesString = '<p><b>Other abilities </b>' + otherAbilities.join(', ') + '</p>';
+    var otherAbilitiesString = '<div><b>Other abilities </b>' + otherAbilities.join(', ') + '</div>';
   }
 
 
@@ -850,7 +850,7 @@ function buildStatBlock() {
       if (indexParts[0].toString() == 'Melee') {
 
         if (MeleeString == ''){
-          MeleeString = '<p><b>'+ indexParts[0] + '</b> ';
+          MeleeString = '<div><b>'+ indexParts[0] + '</b> ';
           end = ''
         }
 
@@ -861,7 +861,7 @@ function buildStatBlock() {
       if (indexParts[0].toString() == 'Ranged') {
 
         if (RangedString == ''){
-          RangedString = '<p><b>'+ indexParts[0] + '</b> ';
+          RangedString = '<div><b>'+ indexParts[0] + '</b> ';
           end = ''
         }
 
@@ -871,10 +871,10 @@ function buildStatBlock() {
 
   });
   if (MeleeString != ''){
-    MeleeString += '</p>';
+    MeleeString += '</div>';
   }
   if (RangedString != ''){
-    RangedString += '</p>';
+    RangedString += '</div>';
   }
 
   // language string
@@ -889,7 +889,7 @@ function buildStatBlock() {
   }
   if (languageArray.length > 0){
     languageArray.sort();
-    languageString = '<p><b>Languages</b> ' + languageArray.join(', ') + '<p>';
+    languageString = '<div><b>Languages</b> ' + languageArray.join(', ') + '</div>';
   }
 
   //Extra user fillable entries
@@ -899,13 +899,13 @@ function buildStatBlock() {
   var extraEntries = $('#OSDrop').val().toString().trim();
 
   if (extraEntries.includes("Ecology")){
-    EcologyString = '<p><b>ECOLOGY</b></p><hr><p>ecology details here e.g. Environment, Organisation</p><br>';
+    EcologyString = '<div><b>ECOLOGY</b></div><hr><div>ecology details here e.g. Environment, Organisation</div><br>';
   }
   if (extraEntries.includes("Gear")){
-    GearString = '<p><b>Gear</b> list gear here e.g. Armor, Ammunition</p>';
+    GearString = '<div><b>Gear</b> list gear here e.g. Armor, Ammunition</div>';
   }
   if (extraEntries.includes("Tactics")){
-    TacticsString = '<p><b>TACTICS</b></p><hr><p>tactics details here e.g. During combat, Morale</p><br>';
+    TacticsString = '<div><b>TACTICS</b></div><hr><div>tactics details here e.g. During combat, Morale</div><br>';
   }
 
   //perception string
@@ -934,7 +934,7 @@ function buildStatBlock() {
     }
     spaceReachString += reach;
     if (spaceReachString != ''){
-      spaceReachString = '<p>' + spaceReachString + '</p>';
+      spaceReachString = '<div>' + spaceReachString + '</div>';
     }
   }
 
@@ -999,36 +999,36 @@ function buildStatBlock() {
     defencesString += '<b>Weaknesses </b>' + weaknessString;
   }
   if (defencesString != '') {
-    defencesString = '<p>' + defencesString + '</p>';
+    defencesString = '<div>' + defencesString + '</div>';
   }
 
   //save string
-  var saveString = "<p><b>Fort</b> +"+statBlock.fortitude + "; <b>Ref</b> +"+statBlock.reflex+ "; <b>Will</b> +"+statBlock.will;
+  var saveString = "<div><b>Fort</b> +"+statBlock.fortitude + "; <b>Ref</b> +"+statBlock.reflex+ "; <b>Will</b> +"+statBlock.will;
   if (statBlock.hasOwnProperty('PlusAbilities')){
     saveString += '; ' + statBlock.PlusAbilities.join(', ').replace('+CR','+'+statBlock.Cr.toString());
   }
-  saveString += "<p>";
+  saveString += "</div>";
 
   //speedString
   var speedInput = $('#inputSpeed').val().trim();
-  var speedString = '<p><b>Speed</b> '+speedInput+' ft.';
+  var speedString = '<div><b>Speed</b> '+speedInput+' ft.';
   if (statBlock.hasOwnProperty('Speed')){
     var speeds = statBlock.Speed;
     speeds.sort()
     speedString += ', ' + speeds.join(', ');
   }
-  speedString += "<p>";
+  speedString += "</div>";
 
   classString = '';
   if (statBlock.hasOwnProperty('Class')) {
-    classString += '<p><b>' + statBlock.Class.toUpperCase() + ' ABILITIES</b></p>';
+    classString += '<div><b>' + statBlock.Class.toUpperCase() + ' ABILITIES</b></div>';
     classString += '<hr>';
-    classString += '<p><b>Resolve points</b> ' + statBlock.ClassResolvePoints + '</p>';
-    classString += '<p><b>Class abilities</b> '.replace('Class',statBlock.Class) + statBlock.ClassAbilities + '</p>';
+    classString += '<div><b>Resolve points</b> ' + statBlock.ClassResolvePoints + '</div>';
+    classString += '<div><b>Class abilities</b> '.replace('Class',statBlock.Class) + statBlock.ClassAbilities + '</div>';
     if (statBlock.hasOwnProperty('ClassSpecialRules')) {
-      classString += '<p><b>Class special rules</b> '.replace('Class',statBlock.Class) + statBlock.ClassSpecialRules + '</p>';
+      classString += '<div><b>Class special rules</b> '.replace('Class',statBlock.Class) + statBlock.ClassSpecialRules + '</div>';
     }
-    classString += '<p><b>Class gear</b> '.replace('Class',statBlock.Class) + statBlock.ClassGear + '</p>';
+    classString += '<div><b>Class gear</b> '.replace('Class',statBlock.Class) + statBlock.ClassGear + '</div>';
     classString += '<br>';
 
   }
@@ -1036,7 +1036,7 @@ function buildStatBlock() {
   //Aura string
   auraString = '';
   if (statBlock.hasOwnProperty('Aura')){
-    auraString = '<p><b>Aura</b> ' + statBlock.Aura.join(', ') + '</p>'
+    auraString = '<div><b>Aura</b> ' + statBlock.Aura.join(', ') + '</div>'
   }
 
 
@@ -1050,22 +1050,22 @@ function buildStatBlock() {
   textBlock += '<hr>';
   textBlock += leftAndRight('<b>' + nameString + '</b>','<b>CR '+statBlock.Cr+'</b>');
   textBlock += '<hr>';
-  textBlock += "<p><b>XP "+statBlock.Xp+"</b></p>";
+  textBlock += "<div><b>XP "+statBlock.Xp+"</b></div>";
   textBlock += typeString;
-  textBlock += "<p><b>Init</b> "+statBlock.initiative+sensesString+'; <b>Perception</b> +'+perceptionValue+"</p>";
+  textBlock += "<div><b>Init</b> "+statBlock.initiative+sensesString+'; <b>Perception</b> +'+perceptionValue+"</div>";
   textBlock += auraString;
   textBlock += "<br>";
 
   //Defence
   textBlock += leftAndRight('<b>DEFENCE</b>','<b>HP</b> '+statBlock.hitPoints);
   textBlock += "<hr>";
-  textBlock += "<p><b>EAC</b> "+statBlock.eac + "; <b>KAC</b> "+statBlock.kac+"<p>";
+  textBlock += "<div><b>EAC</b> "+statBlock.eac + "; <b>KAC</b> "+statBlock.kac+"</div>";
   textBlock += saveString;
   textBlock += defencesString;
   textBlock += "<br>";
 
   //Offence
-  textBlock += '<p><b>OFFENCE</b></p>';
+  textBlock += '<div><b>OFFENCE</b></div>';
   textBlock += '<hr>';
   textBlock += speedString;
   textBlock += MeleeString;
@@ -1079,10 +1079,10 @@ function buildStatBlock() {
   textBlock += TacticsString;
 
   //statistics
-  textBlock += '<p><b>STATISTICS</b></p>';
+  textBlock += '<div><b>STATISTICS</b></div>';
   textBlock += '<hr>';
-  textBlock += "<p><b>Str</b> "+statBlock.str + "; <b>Dex</b> "+statBlock.dex+ "; <b>Con</b> "+statBlock.con+ "; <b>Int</b> "+statBlock.int+ "; <b>Wis</b> "+statBlock.wis+ "; <b>Cha</b> "+statBlock.cha+"</p>";
-  textBlock += '<p><b>Skills </b>'+skillString+'</p>';
+  textBlock += "<div><b>Str</b> "+statBlock.str + "; <b>Dex</b> "+statBlock.dex+ "; <b>Con</b> "+statBlock.con+ "; <b>Int</b> "+statBlock.int+ "; <b>Wis</b> "+statBlock.wis+ "; <b>Cha</b> "+statBlock.cha+"</div>";
+  textBlock += '<div><b>Skills </b>'+skillString+'</div>';
   textBlock += languageString;
   textBlock += otherAbilitiesString;
   textBlock += GearString;
@@ -1094,7 +1094,7 @@ function buildStatBlock() {
   //warning
   if (classString != '' || specialString != '') {
     textBlock += '<br>';
-    textBlock += '<p><b>Heads up!</b> if there are any required stat block changes below this warning, they will need to be added manually.</p>';
+    textBlock += '<div><b>Heads up!</b> if there are any required stat block changes below this warning, they will need to be added manually.</div>';
     textBlock += '<br>';
   }
   //class abilities
@@ -1120,13 +1120,13 @@ function buildStatBlock() {
       print += stat +": " +statBlock[stat] + ' <br>'
     }
   }
-  $outputArea.append("<p>"+print+"</p>");
+  $outputArea.append("<p>"+print+"</div>");
 
 }
 
 //returns a string div with right aligned and left alignedtext on the same line
 function leftAndRight(left,right){
-  return '<div class="row"><div class="col-xs-8"><p>' + left + '</p></div><div class="col-xs-4"><p class="text-right">' + right + '</p></div></div>'
+  return '<div class="row"><div class="col-xs-8"><div>' + left + '</div></div><div class="col-xs-4"><div class="text-right">' + right + '</div></div></div>'
 }
 
 //turns a 3 into a 3rd etc.
