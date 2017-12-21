@@ -1086,7 +1086,7 @@ function buildStatBlock() {
   //Text string
   textString = '';
   if (statBlock.hasOwnProperty('Text')){
-    textString = '<div><b>Text</b> ' + statBlock.Text + '</div>'
+    textString = '<div><b>Text</b> ' + statBlock.Text + '<br></div>'
   }
 
 
