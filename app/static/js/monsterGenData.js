@@ -305,7 +305,7 @@ creatureType = {
   "Ooze": {
     "Adjustments": {"fortitude":2,"reflex":-2,"will":-2,"skills":"only natural","int":"-"},
     "Description": "An ooze is an amorphous or mutable creature.",
-    "Senses": ["Blindsight","Sightless"],
+    "Senses": ["Blindsight (vibration) 60 ft.","Sightless"],
     "OtherAbilities": ["Mindless"],
     "Immunities": ["Ooze immunities"]
   },
@@ -1228,8 +1228,7 @@ graftTemplates = {
 			"CRMin": 1,
 			"Description": "Aerial creatures are native denizens of the Elemental Plane of Air, gas giant planets, or similar landless environments, and have unique adaptations to help them survive there.",
 			"RequiredSubType": "Air",
-			"DamageMod": "Natural 1/2 electricity",
-			"Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Air."]
+			"Text": "Half of the damage dealt by its natural attacks becomes electricity damage; Gains the extraplanar subtype when it isn't on the Elemental Plane of Air."
 		},
 		"Aqueous (CR 1+)": {
 			"CRMin": 1,
@@ -1237,11 +1236,11 @@ graftTemplates = {
 			"RequiredSubType": "Water",
 			"OtherAbilities": "amphibious",
 			"AttackChanges": ["Natural all piercing", "electricity to cold", "fire to cold"],
-			"Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Water."]
+			"Text": "Natural attacks that deal bludgeoning or slashing damage deal piercing damage instead; Natural attacks that deal electricity or fire damage deal cold damage instead; Gains the extraplanar subtype when it isn't on the Elemental Plane of Water."
 		},
 		"Astral": {
 			"Description": "Astral creatures are natives of the Astral Plane, a vast silvery void between planes.",
-			"Text": ["Gains the extraplanar subtype when it isn't on the Astral Plane."],
+			"Text": "Gains the extraplanar subtype when it isn't on the Astral Plane.",
 			"DR": {
 				"DR": "CR-10/-",
 				"IfDRExists": {
@@ -1258,30 +1257,23 @@ graftTemplates = {
 					"Resistance": ["electricity CR-5"]
 				}
 			},
-			"Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
+			"Text": "When the creature isn't on its home plane, it gains the extraplanar subtype."
 		},
 		"Cthonic (CR 1+)": {
 			"CRMin": 1,
 			"Description": "Cthonic creatures are native denizens of the Elemental Plane of Earth or underground environments, and they have adapted to exist in dirt and rock.",
-			"Senses": {
-				"blindsense (vibration)": ["1", 30],
-				"blindsight (vibration)": ["8", 30]
+			"SensesTable": {
+				"blindsense (vibration) 30ft.": 0,
+				"blindsight (vibration) 30ft.": 8
 			},
 			"RequiredSubType": "Earth",
-			"DamageMod": "DR/cold iron",
-			"Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Earth."]
+			"Text": "Natural melee attacks bypass DR/cold iron; Gains the extraplanar subtype when it isn't on the Elemental Plane of Earth."
 		},
 		"Cybernetic (CR 1/2+)": {
 			"CRMin": 0.5,
-			"ArmorUpgrade": {
-				"CR3-7": 1,
-				"CR8": 2
-			},
 			"Description": "A cybernetic creature has been augmented by technological implants (although the same simple template graft can be used to represent creatures augmented by biotech).",
-			"Weapon": [
-				"CR+1"
-			]
-		},
+      "Text": "Armor: If the creature is CR 3–7, add one armor upgrade with an item level equal to or less than the creature’s CR. If it is CR 8+, add two armor upgrades, each with an item level equal to or less than the creature’s CR.<br>Weapon: Add a ranged weapon of a level no greater than the creature’s CR + 1; this weapon can’t be disarmed. A creature with the combatant array should get a longarm, and a creature with the expert or spellcaster array should get a small arm. Add the creature’s CR to damage dealt with its weapon. The ammunition of such weapons is recovered once per day after the creature rests for 8 hours."
+    },
 		"Entropic": {
 			"Alignment": "Chaotic",
 			"Description": "Entropic creatures are natives of one of the Outer Planes where chaos is paramount. A GM can allow creatures summoned with the summon creature spell that would normally have the astral, celestial, or fiendish simple template graft instead have the entropic simple template graft.",
@@ -1291,7 +1283,7 @@ graftTemplates = {
 					"Resistance": ["acid CR-5"]
 				}
 			},
-			"Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
+			"Text": "When the creature isn't on its home plane, it gains the extraplanar subtype."
 		},
 		"Fiendish": {
 			"Alignment": "Evil",
@@ -1302,14 +1294,14 @@ graftTemplates = {
 					"Resistance": ["fire CR-5"]
 				}
 			},
-			"Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
+			"Text": "When the creature isn't on its home plane, it gains the extraplanar subtype."
 		},
 		"Fiery (CR 1+)": {
 			"CRMin": 1,
 			"Description": "Fiery creatures are native denizens of the Elemental Plane of Fire or habitats covered in fire, and they have unique adaptations to help them survive there.",
 			"RequiredSubType": "Fire",
 			"DamageMod": "Natural 1/2 fire",
-			"Text": ["Gains the extraplanar subtype when it isn't on the Elemental Plane of Fire."]
+			"Text": "Half of damage dealt by its natural attacks becomes fire damage; Gains the extraplanar subtype when it isn't on the Elemental Plane of Fire."
 		},
 		"Giant (CR 1+)": {
 			"CRMin": 1,
@@ -1325,14 +1317,16 @@ graftTemplates = {
 			"Reach": -1
 		},
 		"Phrenic": {
-			"Adjustments": {
-				"will": 2
-			},
+      "CalculatedAbilities": {
+        "Save": {
+          "will": 2
+        }
+      },
 			"Languages": ["limited telepathy"],
 			"Description": "Phrenic creatures have minor innate mental powers, which they might have developed due to high levels of native psychic energy in their environments.",
-			"Senses": {
-				"Blindsense (emotion) 5 ft.": ["CR7"]
-			}
+      "SensesTable": {
+				"blindsense (emotion) 5 ft.": 7
+			},
 		},
 		"Resolute": {
 			"Alignment": "Lawful",
@@ -1343,7 +1337,7 @@ graftTemplates = {
 				}
 			},
 			"Description": "Resolute creatures are natives of one of the Outer Planes where law is paramount. A GM can allow creatures summoned with the summon creature spell that would normally have the astral, celestial, or fiendish simple template graft instead have the resolute simple template graft.",
-			"Text": ["When the creature isn't on its home plane, it gains the extraplanar subtype."]
+			"Text": "When the creature isn't on its home plane, it gains the extraplanar subtype."
 		},
 		"Synthetic": {
 			"Description": "Synthetic creatures are constructed through the use of extremely advanced technology, similar to that which makes androids possible.",
@@ -1357,14 +1351,14 @@ graftTemplates = {
 			"Description": "This creature is a rare two-headed mutant or a member of a two-headed subspecies of a more common race.",
 			"OtherAbilities": ["unflankable"],
 			"MasterSkills": ["perception"],
-			"AttackChanges": ["bite", "bite x2 as full attack -3 penalty"]
+			"Text": "If the creature has a bite attack, it can make two bite attacks (and no other attacks) as a full action with a –3 penalty to each bite attack roll."
 		},
 		"Umbral": {
 			"Description": "Umbral creatures exist in the lightless places of the universe, which might be the Shadow Plane, the interior of unlit caves, or the bottom of the darkest oceans.",
-			"Senses": {
-				"Darkvision": [60],
-				"Blindsense (vibration)": ["7", 5]
-			}
+      "SensesTable": {
+				"darkvision 60 ft.": "always",
+				"blindsense (vibration) 5 ft.": 7
+			},
 		}
 	},
   "dragonGrafts": {

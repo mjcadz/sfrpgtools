@@ -483,6 +483,34 @@ function buildStatBlock() {
       }
     }
   }
+  //apply senses per cr
+  if (statBlock.hasOwnProperty('SensesTable')){
+    var SensesTable = statBlock.SensesTable;
+    var cr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+    var senseArray = [];
+    var currentSense = '';
+
+    for (sense in SensesTable) {
+      if (SensesTable[sense] == "always") {
+        senseArray.push(sense);
+      } else if (cr >= SensesTable[sense]){
+        currentSense = sense;
+      }
+    }
+    if (currentSense != ''){
+      senseArray.push(currentSense);
+    }
+
+    if (senseArray.length > 0){
+      if (statBlock.hasOwnProperty('Senses')){
+        statBlock.Senses = statBlock.Senses.concat(senseArray);
+      } else {
+        statBlock.Senses = senseArray;
+      }
+    }
+  }
+
+
   //apply any calculated abilities
   if (statBlock.hasOwnProperty('CalculatedAbilities')){
     for (ability in statBlock.CalculatedAbilities){
@@ -513,6 +541,11 @@ function buildStatBlock() {
           auraEntry += (Number(fright[0]) + (10 * cr)).toString()+ ' ft., DC ' + statBlock.abilityDCBase.toString() + ')';
           statBlock.Aura = [auraEntry];
           //TODO only does 10ft * cr will need updating if any grafts change
+        }
+      }
+      if (ability == "Save") {
+        for(save in statBlock.CalculatedAbilities["Save"]) {
+          statBlock[save] = statBlock[save] + statBlock.CalculatedAbilities["Save"][save];
         }
       }
     }
@@ -1050,6 +1083,12 @@ function buildStatBlock() {
     auraString = '<div><b>Aura</b> ' + statBlock.Aura.join(', ') + '</div>'
   }
 
+  //Text string
+  textString = '';
+  if (statBlock.hasOwnProperty('Text')){
+    textString = '<div><b>Text</b> ' + statBlock.Text + '</div>'
+  }
+
 
 
   //
@@ -1103,11 +1142,13 @@ function buildStatBlock() {
   textBlock += EcologyString;
 
   //warning
-  if (classString != '' || specialString != '') {
+  if (classString != '' || specialString != '' || textString != '') {
     textBlock += '<br>';
     textBlock += '<div><b>Heads up!</b> if there are any required stat block changes below this warning, they will need to be added manually.</div>';
     textBlock += '<br>';
   }
+  //extra text
+  textBlock += textString;
   //class abilities
   textBlock += classString;
   //special Abilities
@@ -1118,7 +1159,10 @@ function buildStatBlock() {
   $StatBlock.empty();
   $StatBlock.append(textBlock);
 
+  //log event in analytics
+  ga('send', 'event', 'Generation', 'monster', statBlock.Cr+":"+statBlock.Base+":"+statBlock.CreatureType);
 
+  /* debugging ouput
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
   var print = '';
@@ -1131,7 +1175,7 @@ function buildStatBlock() {
       print += stat +": " +statBlock[stat] + ' <br>'
     }
   }
-  $outputArea.append("<p>"+print+"</div>");
+  $outputArea.append("<p>"+print+"</div>"); */
 
 }
 
