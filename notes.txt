@@ -13,6 +13,8 @@ add the rest of the grafts
 
 "AttackChanges" "DamageMod" armor upgrade
 
+don't forget to add even handler
+
 phrenic adjustments
 
 speed and weakness inputs must be reset when the free ability list is generated
@@ -20,7 +22,8 @@ as well as saveboost dropdown
 
 umbral and phrenic senses are objects not arrays
 
-add subtype to dragons name
+two headed attack changes
+
 
 
 

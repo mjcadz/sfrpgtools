@@ -390,3 +390,9 @@ line-height: 1.4;
 .smallsup {
   font-size: 24px!important;
 }
+
+.btn-round{
+  border-radius: 17px;
+  border-color: #2EC4B6;
+  color: #fff!important;
+}

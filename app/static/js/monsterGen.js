@@ -772,6 +772,17 @@ function buildStatBlock() {
   if (statBlock.hasOwnProperty('OtherAbilitiesGraft')){
     otherAbilities = otherAbilities.concat(statBlock.OtherAbilitiesGraft)
   }
+  //other abilities from sub choices
+  if (statBlock.hasOwnProperty('OtherAbilities')){
+    var otherotherabilities = statBlock.OtherAbilities;
+    var OAString = otherAbilities.join(',').toLowerCase();
+    for (var i = 0; i < otherotherabilities.length; i++) {
+        if ( !OAString.includes(otherotherabilities[i]) && !OAString.includes(otherotherabilities[i].toLowerCase())){
+          otherAbilities.push(otherotherabilities[i]);
+        }
+    }
+    otherAbilities.sort();
+  }
 
 
   //strings for abilities
