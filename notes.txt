@@ -9,16 +9,13 @@ git remote set-url origin https://github.com/mjcadz/sfrpgtools.git
 https://github.com/silviomoreto/bootstrap-select
 bootstrap dropdown select
 
-add the rest of the grafts
+
 
 "AttackChanges" "DamageMod" armor upgrade
 
 don't forget to add even handler
 
 phrenic adjustments
-
-speed and weakness inputs must be reset when the free ability list is generated
-as well as saveboost dropdown
 
 umbral and phrenic senses are objects not arrays
 
@@ -28,6 +25,8 @@ two headed attack changes
 
 
 Nice To Have
+
+add the rest of the grafts
 
 add basic stat block maybe only choosing step 1 options
 
