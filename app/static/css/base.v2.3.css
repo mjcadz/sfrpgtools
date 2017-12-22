@@ -18,6 +18,9 @@ body {
   .footer {
     height: 65px;
   }
+  .nav-height-calc {
+    height: calc(100vh - 280px);
+  }
 }
 @media (max-width: 767px) {
   .content {
@@ -25,6 +28,9 @@ body {
   }
   .footer {
     height: 65px;
+  }
+  .nav-height-calc {
+    height: calc(100vh - 390px);
   }
 }
 
@@ -305,6 +311,18 @@ padding: 8px 35px 8px 14px;
 margin-bottom: 18px;
 text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 background-color: #cbf6f2;
+border: 1px solid #fbeed5;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+line-height: 1.4;
+}
+
+.alert-this-red {
+padding: 8px 35px 8px 14px;
+margin-bottom: 18px;
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+background-color: #F2DEDE;
 border: 1px solid #fbeed5;
 -webkit-border-radius: 4px;
 -moz-border-radius: 4px;

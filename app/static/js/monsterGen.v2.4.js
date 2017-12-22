@@ -4,1163 +4,1185 @@ var attackIndexCounter = 0;
 //This funcion reads the state of all the dropdowns in the wizard, uses that info to retrieve the appropriate data from the data objects, then builds and displays the stat block
 function buildStatBlock() {
 
-  //new stat block object
-  var statBlock = {};
+  //try gathering data
+  try {
 
-  //Step 1
+    //new stat block object
+    var statBlock = {};
 
-  //base array
-  var CRDrop = $('[data-id="CRDrop"]').text().trim().replace("CR ","");
-  var arrayDrop = $('[data-id="arrayDrop"]').text().trim();
+    //Step 1
 
-  statBlock.Cr = CRDrop;
-  statBlock.Base = arrayDrop;
-  //monster XP
-  statBlock.Xp = xp[CRDrop];
+    //base array
+    var CRDrop = $('[data-id="CRDrop"]').text().trim().replace("CR ","");
+    var arrayDrop = $('[data-id="arrayDrop"]').text().trim();
 
-  var baseStats = [];
-  if (arrayDrop == 'Combatant') {
-    baseStats = combatantMainStats[CRDrop].concat(combatantAttackStats[CRDrop]);
-  } else if (arrayDrop == 'Expert') {
-    baseStats = expertMainStats[CRDrop].concat(expertAttackStats[CRDrop]);
-  } else if (arrayDrop == 'Spellcaster') {
-    baseStats = spellcasterMainStats[CRDrop].concat(spellcasterAttackStats[CRDrop]);
-  }
+    statBlock.Cr = CRDrop;
+    statBlock.Base = arrayDrop;
+    //monster XP
+    statBlock.Xp = xp[CRDrop];
 
-  //assign base stat values
-  for (i = 0; i < statLabels.length; i++) {
-    statBlock[statLabels[i]] = baseStats[i]
-  }
-
-  // step 2 - creature type
-
-  var creatureTypeDrop = $('[data-id="creatureTypeDrop"]').text().trim();
-
-  statBlock.CreatureType = creatureTypeDrop;
-  statBlock.CreatureAdjustments = creatureType[creatureTypeDrop].Adjustments;
-
-
-  //Senses
-  if (creatureType[creatureTypeDrop].hasOwnProperty("Senses")){
-    statBlock["Senses"] = creatureType[creatureTypeDrop].Senses;
-  }
-
-  //otherAbilities
-  if (creatureType[creatureTypeDrop].hasOwnProperty("OtherAbilities")){
-    statBlock["OtherAbilities"] = creatureType[creatureTypeDrop].OtherAbilities;
-  }
-
-  //Immunities
-  if (creatureType[creatureTypeDrop].hasOwnProperty("Immunities")){
-    statBlock["Immunities"] = creatureType[creatureTypeDrop].Immunities;
-  }
-
-  //Options - only applies to construct and animal - so far
-  if ($('[data-id="optionDrop"]').length){
-    if (creatureTypeDrop == "Animal"){
-      statBlock.int = -Number($('[data-id="optionDrop"]').text().trim().replace('Set intelligence -',''));
-    } else if (creatureTypeDrop == "Construct") {
-      if (!$('[data-id="optionDrop"]').text().trim().includes("Not")){
-        statBlock.int = '-';
-        statBlock.OtherAbilities = statBlock.OtherAbilities.concat(["Mindless"]);
-      }
-    } else {console.log("option error")}
-  }
-
-  //step 3 - subtype
-  var subTypeDrop = $('#creatureSubTypeDrop').val().trim()
-
-  //if option is selected
-  if (subTypeDrop != '' && subTypeDrop != 'None'){
-
-    statBlock.SubType = subTypeDrop;
-
-    if (creatureSubType[subTypeDrop].hasOwnProperty("SubRaces")){
-      var subRaceDrop = $('#stepThreeOptionDrop').val().trim();
-      var subTypeObject = creatureSubType[subTypeDrop].SubRaces[subRaceDrop];
-    } else {
-      var subTypeObject = creatureSubType[subTypeDrop];
+    var baseStats = [];
+    if (arrayDrop == 'Combatant') {
+      baseStats = combatantMainStats[CRDrop].concat(combatantAttackStats[CRDrop]);
+    } else if (arrayDrop == 'Expert') {
+      baseStats = expertMainStats[CRDrop].concat(expertAttackStats[CRDrop]);
+    } else if (arrayDrop == 'Spellcaster') {
+      baseStats = spellcasterMainStats[CRDrop].concat(spellcasterAttackStats[CRDrop]);
     }
 
-    for (trait in subTypeObject) {
+    //assign base stat values
+    for (i = 0; i < statLabels.length; i++) {
+      statBlock[statLabels[i]] = baseStats[i]
+    }
 
-      if (trait != "Description" && trait != "Options"){
-        var traitArray = subTypeObject[trait];
-        if (statBlock.hasOwnProperty(trait)){
-          statBlock[trait] = statBlock[trait].concat(traitArray);
-        } else {
-          statBlock[trait] = traitArray;
+    // step 2 - creature type
+
+    var creatureTypeDrop = $('[data-id="creatureTypeDrop"]').text().trim();
+
+    statBlock.CreatureType = creatureTypeDrop;
+    statBlock.CreatureAdjustments = creatureType[creatureTypeDrop].Adjustments;
+
+
+    //Senses
+    if (creatureType[creatureTypeDrop].hasOwnProperty("Senses")){
+      statBlock["Senses"] = creatureType[creatureTypeDrop].Senses;
+    }
+
+    //otherAbilities
+    if (creatureType[creatureTypeDrop].hasOwnProperty("OtherAbilities")){
+      statBlock["OtherAbilities"] = creatureType[creatureTypeDrop].OtherAbilities;
+    }
+
+    //Immunities
+    if (creatureType[creatureTypeDrop].hasOwnProperty("Immunities")){
+      statBlock["Immunities"] = creatureType[creatureTypeDrop].Immunities;
+    }
+
+    //Options - only applies to construct and animal - so far
+    if ($('[data-id="optionDrop"]').length){
+      if (creatureTypeDrop == "Animal"){
+        statBlock.int = -Number($('[data-id="optionDrop"]').text().trim().replace('Set intelligence -',''));
+      } else if (creatureTypeDrop == "Construct") {
+        if (!$('[data-id="optionDrop"]').text().trim().includes("Not")){
+          statBlock.int = '-';
+          statBlock.OtherAbilities = statBlock.OtherAbilities.concat(["Mindless"]);
         }
+      } else {console.log("option error")}
+    }
 
-      } else if (trait == "Options") {
-        var optionDrop = $('#stepThreeOptionDrop').val().trim();
-        optionTrait = subTypeObject.Options[0]
+    //step 3 - subtype
+    var subTypeDrop = $('#creatureSubTypeDrop').val().trim()
 
-        if(!optionDrop.includes("Not")){
-          if (statBlock.hasOwnProperty(optionTrait)){
-            statBlock[optionTrait] = statBlock[optionTrait].concat([optionDrop]);
+    //if option is selected
+    if (subTypeDrop != '' && subTypeDrop != 'None'){
+
+      statBlock.SubType = subTypeDrop;
+
+      if (creatureSubType[subTypeDrop].hasOwnProperty("SubRaces")){
+        var subRaceDrop = $('#stepThreeOptionDrop').val().trim();
+        var subTypeObject = creatureSubType[subTypeDrop].SubRaces[subRaceDrop];
+      } else {
+        var subTypeObject = creatureSubType[subTypeDrop];
+      }
+
+      for (trait in subTypeObject) {
+
+        if (trait != "Description" && trait != "Options"){
+          var traitArray = subTypeObject[trait];
+          if (statBlock.hasOwnProperty(trait)){
+            statBlock[trait] = statBlock[trait].concat(traitArray);
           } else {
-            statBlock[optionTrait] = [optionDrop];
+            statBlock[trait] = traitArray;
           }
-        }
-      }
-    }
-  }
 
-  //step 4 -class
+        } else if (trait == "Options") {
+          var optionDrop = $('#stepThreeOptionDrop').val().trim();
+          optionTrait = subTypeObject.Options[0]
 
-  statBlock = getClassStats(statBlock);
-
-  //step 5 - graft
-  var graft = $('#graftDrop').val().trim();
-
-  //iterate through selected graft traits
-  if (graft != '' && graft != 'None') {
-
-    statBlock.Graft = graft;
-
-    for (var graftType in graftTemplates){
-      //iterate traits in all graft types. eg . dragons, simple
-      if (graftTemplates[graftType].hasOwnProperty(graft)) {
-
-        for (trait in graftTemplates[graftType][graft]) {
-
-          if (trait != "Description"){//skip descriptions
-            var traitArray = graftTemplates[graftType][graft][trait];
-            //check if trait is array or object, handle each differently
-            if (statBlock.hasOwnProperty(trait)){
-              if (Array.isArray(traitArray)){
-                //handle array
-                statBlock[trait] = statBlock[trait].concat(traitArray);
-              } else {
-                //handle object
-                statBlock[trait] = $.extend({}, statBlock[trait], traitArray);
-              }
+          if(!optionDrop.includes("Not")){
+            if (statBlock.hasOwnProperty(optionTrait)){
+              statBlock[optionTrait] = statBlock[optionTrait].concat([optionDrop]);
             } else {
-              //if trait does not already exist, create and assign value
-              statBlock[trait] = traitArray;
+              statBlock[optionTrait] = [optionDrop];
             }
           }
         }
       }
-
     }
-  }
-  //step 6 - special Abilities
 
-  //from grafts
-  var graftOther = getGraftAbilities("Other");
-  if (graftOther.length > 0) {
-    statBlock.OtherAbilitiesGraft = graftOther;
-  }
+    //step 4 -class
 
-  var graftSpecial = getGraftAbilities("Special");
-  if (graftSpecial.length > 0) {
-    statBlock.SpecialAbilitiesGraft = graftSpecial;
-  }
+    statBlock = getClassStats(statBlock);
 
-  //speeds
-  //burrow
-  if ($('#inputBurrow').length != 0){
-    var burrow = 'burrow ' + $('#inputBurrow').val().trim() + ' ft.';
+    //step 5 - graft
+    var graft = $('#graftDrop').val().trim();
 
-    if (statBlock.hasOwnProperty('Speed')){
-      if (!statBlock.Speed.join(',').includes('burrow')){
-        statBlock.Speed.push(burrow);
+    //iterate through selected graft traits
+    if (graft != '' && graft != 'None') {
+
+      statBlock.Graft = graft;
+
+      for (var graftType in graftTemplates){
+        //iterate traits in all graft types. eg . dragons, simple
+        if (graftTemplates[graftType].hasOwnProperty(graft)) {
+
+          for (trait in graftTemplates[graftType][graft]) {
+
+            if (trait != "Description"){//skip descriptions
+              var traitArray = graftTemplates[graftType][graft][trait];
+              //check if trait is array or object, handle each differently
+              if (statBlock.hasOwnProperty(trait)){
+                if (Array.isArray(traitArray)){
+                  //handle array
+                  statBlock[trait] = statBlock[trait].concat(traitArray);
+                } else {
+                  //handle object
+                  statBlock[trait] = $.extend({}, statBlock[trait], traitArray);
+                }
+              } else {
+                //if trait does not already exist, create and assign value
+                statBlock[trait] = traitArray;
+              }
+            }
+          }
+        }
+
       }
-    } else {
-      statBlock.Speed = [burrow];
     }
-  }
-  //climb
-  if ($('#inputClimb').length != 0){
-    var climb = 'climb ' + $('#inputClimb').val().trim() + ' ft.';
+    //step 6 - special Abilities
 
-    if (statBlock.hasOwnProperty('Speed')){
-      if (!statBlock.Speed.join(',').includes('climb')){
-        statBlock.Speed.push(climb);
-      }
-    } else {
-      statBlock.Speed = [climb];
+    //from grafts
+    var graftOther = getGraftAbilities("Other");
+    if (graftOther.length > 0) {
+      statBlock.OtherAbilitiesGraft = graftOther;
     }
-  }
-  //fly
-  if ($('#inputFly').length != 0){
-    var fly = 'fly ' + $('#inputFly').val().trim() + ' ft. (' + $('#flyInputDrop').val().trim() + ')';
 
-    if (statBlock.hasOwnProperty('Speed')){
-      if (!statBlock.Speed.join(',').includes('fly')){
-        statBlock.Speed.push(fly);
-      }
-    } else {
-      statBlock.Speed = [fly];
+    var graftSpecial = getGraftAbilities("Special");
+    if (graftSpecial.length > 0) {
+      statBlock.SpecialAbilitiesGraft = graftSpecial;
     }
-  }
-  //swim
-  if ($('#inputSwim').length != 0){
-    var swim = 'swim ' + $('#inputSwim').val().trim() + ' ft.';
 
-    if (statBlock.hasOwnProperty('Speed')){
-      if (!statBlock.Speed.join(',').includes('swim')){
-        statBlock.Speed.push(swim);
-      }
-    } else {
-      statBlock.Speed = [swim];
-    }
-  }
+    //speeds
+    //burrow
+    if ($('#inputBurrow').length != 0){
+      var burrow = 'burrow ' + $('#inputBurrow').val().trim() + ' ft.';
 
-  //weaknesses if any
-  if ($('#inputWeakness').length != 0){
-    statBlock.weaknessAbilities = $('#inputWeakness').val().trim();
-  }
-
-  //vulnerabilities if any
-  if ($('#inputVulnerability').length != 0){
-    var stats = $('#inputVulnerability').val().trim();
-    if (stats != '') {
-      if (stats.includes(',')){
-        var vulners = stats.split(',')
+      if (statBlock.hasOwnProperty('Speed')){
+        if (!statBlock.Speed.join(',').includes('burrow')){
+          statBlock.Speed.push(burrow);
+        }
       } else {
-        var vulners = [stats];
-      }
-
-      if (statBlock.hasOwnProperty('Vulnerable')){
-        statBlock.Vulnerable = statBlock.Vulnerable.concat(vulners);
-      }
-      else {
-        statBlock.Vulnerable = vulners;
+        statBlock.Speed = [burrow];
       }
     }
-  }
+    //climb
+    if ($('#inputClimb').length != 0){
+      var climb = 'climb ' + $('#inputClimb').val().trim() + ' ft.';
 
-  //dependencies if any
-  if ($('#inputDependency').length != 0){
-    var depends = $('#inputDependency').val().trim();
-    if (stats != '') {
-      if (depends.includes(',')){
-        statBlock.Dependencies = depends.split(',')
+      if (statBlock.hasOwnProperty('Speed')){
+        if (!statBlock.Speed.join(',').includes('climb')){
+          statBlock.Speed.push(climb);
+        }
       } else {
-        statBlock.Dependencies = [depends];
+        statBlock.Speed = [climb];
       }
     }
-  }
+    //fly
+    if ($('#inputFly').length != 0){
+      var fly = 'fly ' + $('#inputFly').val().trim() + ' ft. (' + $('#flyInputDrop').val().trim() + ')';
 
-  //special abilities selected if any
-  var specialList = $('#specialDrop').val().toString().trim();
-  if(specialList != ''){
-    if (specialList.includes(',')){
-      var subArray = specialList.split(',');
-    } else {
-      var subArray = [specialList];
-    }
-    //Split adjustments and abilities
-    var subArrayAdjustment = [];
-    var subArrayAbility = [];
-
-    for (var i = 0; i < subArray.length; i++) {
-      if (specialAbilities.Abilities.hasOwnProperty(subArray[i])){
-        subArrayAbility.push(subArray[i]);
-      } else if (specialAbilities.AdjustmentAbilities.hasOwnProperty(subArray[i])){
-        subArrayAdjustment.push(subArray[i]);
-      }
-    }
-
-    if (subArrayAdjustment.length > 0){
-      statBlock.AdjustmentAbilitiesDescription = subArrayAdjustment;
-    }
-    if (subArrayAbility.length > 0){
-      statBlock.SpecialAbilitiesDescription = subArrayAbility;
-    }
-
-  }
-
-  //free abilities selected if any
-  var freeList = $('#freeDrop').val().toString().trim();
-  if(freeList != ''){
-    if (freeList.includes(',')){
-      var subArray = freeList.split(',');
-    } else {
-      var subArray = [freeList];
-    }
-    statBlock.FreeAbilities = subArray
-  }
-
-
-  //step 7 - attacks
-  statBlock.attackFocus = $("#attackDrop").val().trim();
-
-  //step 8 - skills and Modifiers
-
-  //overwrite master+ good skills with selected + graft skills
-  statBlock.MainAbilityScores = $(".stepSevenAbilityDescription").first().text().replace('Main ability scores: (','').replace(')','').split(',')
-  statBlock.MasterSkills = $(".stepSevenMasterDescription").first().text().replace('Master skills: ','').replace(/\*/g,'').split(',');
-  statBlock.GoodSkills = $(".stepSevenGoodDescription").first().text().replace('Good skills: ','').replace(/\*/g,'').split(',');
-
-  //step 9 - spells
-
-  //TODO checks only step 3 grafts not step 5
-  //get any spelllike abilities from grafts
-  var subtype = $('#creatureSubTypeDrop').val().trim();
-  if (subtype != '' && subtype != 'None') {
-    if (creatureSubType[subtype].hasOwnProperty("Spell-likeAbilities")){
-      statBlock.spellLikeFromGrafts = creatureSubType[subtype]["Spell-likeAbilities"];
-    }
-    if (creatureSubType[subtype].hasOwnProperty("SubRaces")){
-      subRaceDrop = $('#stepThreeOptionDrop').val().trim();
-      if (creatureSubType[subtype].SubRaces[subRaceDrop].hasOwnProperty("Spell-likeAbilities")){
-        statBlock.spellLikeFromGrafts = creatureSubType[subtype].SubRaces[subRaceDrop]["Spell-likeAbilities"];
-      }
-    }
-  }
-  //spells from descriptions
-  spellArray = [];
-  for (var i = 1; i < 4; i++) {//loop three times
-    //grab text from descriptions
-    var spellSlot = $(".stepEight"+ i.toString() +"Description").first().text()
-
-    //check if there is text there and assign to stat block
-    if (spellSlot.length > 2){
-      var spells = spellSlot.split(': ');
-      var frequency = spells[0];
-      //make sure values are arrays even if only 1 value
-      if (spells[1].includes(',')){
-        var subArray = spells[1].split(', ');
+      if (statBlock.hasOwnProperty('Speed')){
+        if (!statBlock.Speed.join(',').includes('fly')){
+          statBlock.Speed.push(fly);
+        }
       } else {
-        var subArray = [spells[1]];
+        statBlock.Speed = [fly];
       }
-      spellArray[spellArray.length] = [frequency].concat(subArray);
     }
-  }
-  //if no spells chosen, dont add spell list
-  if (spellArray.length != 0){
-    statBlock.Spellcasting = spellArray;
-  }
+    //swim
+    if ($('#inputSwim').length != 0){
+      var swim = 'swim ' + $('#inputSwim').val().trim() + ' ft.';
 
-  //step 10 - final checks
+      if (statBlock.hasOwnProperty('Speed')){
+        if (!statBlock.Speed.join(',').includes('swim')){
+          statBlock.Speed.push(swim);
+        }
+      } else {
+        statBlock.Speed = [swim];
+      }
+    }
 
-  statBlock.creatureSize = $('#sizeDrop').val().trim();
+    //weaknesses if any
+    if ($('#inputWeakness').length != 0){
+      statBlock.weaknessAbilities = $('#inputWeakness').val().trim();
+    }
+
+    //vulnerabilities if any
+    if ($('#inputVulnerability').length != 0){
+      var stats = $('#inputVulnerability').val().trim();
+      if (stats != '') {
+        if (stats.includes(',')){
+          var vulners = stats.split(',')
+        } else {
+          var vulners = [stats];
+        }
+
+        if (statBlock.hasOwnProperty('Vulnerable')){
+          statBlock.Vulnerable = statBlock.Vulnerable.concat(vulners);
+        }
+        else {
+          statBlock.Vulnerable = vulners;
+        }
+      }
+    }
+
+    //dependencies if any
+    if ($('#inputDependency').length != 0){
+      var depends = $('#inputDependency').val().trim();
+      if (stats != '') {
+        if (depends.includes(',')){
+          statBlock.Dependencies = depends.split(',')
+        } else {
+          statBlock.Dependencies = [depends];
+        }
+      }
+    }
+
+    //special abilities selected if any
+    var specialList = $('#specialDrop').val().toString().trim();
+    if(specialList != ''){
+      if (specialList.includes(',')){
+        var subArray = specialList.split(',');
+      } else {
+        var subArray = [specialList];
+      }
+      //Split adjustments and abilities
+      var subArrayAdjustment = [];
+      var subArrayAbility = [];
+
+      for (var i = 0; i < subArray.length; i++) {
+        if (specialAbilities.Abilities.hasOwnProperty(subArray[i])){
+          subArrayAbility.push(subArray[i]);
+        } else if (specialAbilities.AdjustmentAbilities.hasOwnProperty(subArray[i])){
+          subArrayAdjustment.push(subArray[i]);
+        }
+      }
+
+      if (subArrayAdjustment.length > 0){
+        statBlock.AdjustmentAbilitiesDescription = subArrayAdjustment;
+      }
+      if (subArrayAbility.length > 0){
+        statBlock.SpecialAbilitiesDescription = subArrayAbility;
+      }
+
+    }
+
+    //free abilities selected if any
+    var freeList = $('#freeDrop').val().toString().trim();
+    if(freeList != ''){
+      if (freeList.includes(',')){
+        var subArray = freeList.split(',');
+      } else {
+        var subArray = [freeList];
+      }
+      statBlock.FreeAbilities = subArray
+    }
+
+
+    //step 7 - attacks
+    statBlock.attackFocus = $("#attackDrop").val().trim();
+
+    //step 8 - skills and Modifiers
+
+    //overwrite master+ good skills with selected + graft skills
+    statBlock.MainAbilityScores = $(".stepSevenAbilityDescription").first().text().replace('Main ability scores: (','').replace(')','').split(',')
+    statBlock.MasterSkills = $(".stepSevenMasterDescription").first().text().replace('Master skills: ','').replace(/\*/g,'').split(',');
+    statBlock.GoodSkills = $(".stepSevenGoodDescription").first().text().replace('Good skills: ','').replace(/\*/g,'').split(',');
+
+    //step 9 - spells
+
+    //TODO checks only step 3 grafts not step 5
+    //get any spelllike abilities from grafts
+    var subtype = $('#creatureSubTypeDrop').val().trim();
+    if (subtype != '' && subtype != 'None') {
+      if (creatureSubType[subtype].hasOwnProperty("Spell-likeAbilities")){
+        statBlock.spellLikeFromGrafts = creatureSubType[subtype]["Spell-likeAbilities"];
+      }
+      if (creatureSubType[subtype].hasOwnProperty("SubRaces")){
+        subRaceDrop = $('#stepThreeOptionDrop').val().trim();
+        if (creatureSubType[subtype].SubRaces[subRaceDrop].hasOwnProperty("Spell-likeAbilities")){
+          statBlock.spellLikeFromGrafts = creatureSubType[subtype].SubRaces[subRaceDrop]["Spell-likeAbilities"];
+        }
+      }
+    }
+    //spells from descriptions
+    spellArray = [];
+    for (var i = 1; i < 4; i++) {//loop three times
+      //grab text from descriptions
+      var spellSlot = $(".stepEight"+ i.toString() +"Description").first().text()
+
+      //check if there is text there and assign to stat block
+      if (spellSlot.length > 2){
+        var spells = spellSlot.split(': ');
+        var frequency = spells[0];
+        //make sure values are arrays even if only 1 value
+        if (spells[1].includes(',')){
+          var subArray = spells[1].split(', ');
+        } else {
+          var subArray = [spells[1]];
+        }
+        spellArray[spellArray.length] = [frequency].concat(subArray);
+      }
+    }
+    //if no spells chosen, dont add spell list
+    if (spellArray.length != 0){
+      statBlock.Spellcasting = spellArray;
+    }
+
+    //step 10 - final checks
+
+    statBlock.creatureSize = $('#sizeDrop').val().trim();
+
+  } catch(err) {
+    document.getElementById("errorMessage").innerHTML = "statblock data gathering error: " + err.message + '<br><br>' + err.stack;
+    $('.alert-this-red').show();
+    return false;
+  }
 
   //
   //stat block adjustments
   //
 
-  //choose creature or class adjustments to apply
-  var classDrop = $('#classDrop').val().trim();
-  //choose class or creature adjustments not both
-  if (classDrop != '' && classDrop != 'None'){
-    var precedenceDrop = $('#precedenceDrop').val().trim();
-    if (precedenceDrop.includes("Creature")) {
-      var adjustments = statBlock.CreatureAdjustments;
-    } else if (precedenceDrop.includes("Class")){
-      var adjustments = statBlock.ClassAdjustments;
-    }
-  } else {
-    var adjustments = statBlock.CreatureAdjustments;
-  }
-  //apply
-  for (adjustment in adjustments) {
-    if (adjustment == "anySave"){
-      //use picker
-      var savingThrow = $('[data-id="SavingThrowDrop"]').text().trim().replace(' +2','').toLowerCase();
-      statBlock[savingThrow] += 2;
-    } else if (adjustment == "None") {
-      //do nothing
-    } else if (statBlock.hasOwnProperty(adjustment)){
-      //check if proprty already has entry
-      statBlock[adjustment] += adjustments[adjustment];
+  try {
+
+    //choose creature or class adjustments to apply
+    var classDrop = $('#classDrop').val().trim();
+    //choose class or creature adjustments not both
+    if (classDrop != '' && classDrop != 'None'){
+      var precedenceDrop = $('#precedenceDrop').val().trim();
+      if (precedenceDrop.includes("Creature")) {
+        var adjustments = statBlock.CreatureAdjustments;
+      } else if (precedenceDrop.includes("Class")){
+        var adjustments = statBlock.ClassAdjustments;
+      }
     } else {
-      statBlock[adjustment] = adjustments[adjustment];
+      var adjustments = statBlock.CreatureAdjustments;
     }
-  }
-
-  //apply attack mods if any
-  if (statBlock.hasOwnProperty('attackMod')){
-
-    statBlock.highAttackBonus = '+' + (Number(statBlock.highAttackBonus.replace('+','')) + statBlock.attackMod).toString();
-    statBlock.lowAttackBonus = '+' + (Number(statBlock.lowAttackBonus.replace('+','')) + statBlock.attackMod).toString();
-  }
-
-  if (statBlock.hasOwnProperty("skillCheckMod")){
-    //increase skill scores
-    statBlock.masterSkills[0] = statBlock.masterSkills[0] + statBlock.skillCheckMod;
-    statBlock.goodSkills[0] = statBlock.goodSkills[0] + statBlock.skillCheckMod;
-  }
-
-  //apply ability mods to selected ability scores
-  scoreNames = ['str','dex','con','int','wis','cha'];
-  for (i = 0; i < scoreNames.length; i++) {
-    if (!statBlock.hasOwnProperty(scoreNames[i])){
-      ability = scoreNames[i].capitalise();
-      if (statBlock.MainAbilityScores.includes(ability)){
-        index = statBlock.MainAbilityScores.indexOf(ability);
-
-        statBlock[scoreNames[i]] = '+' + statBlock['abilityScoreModifier'+ index.toString()].toString();
+    //apply
+    for (adjustment in adjustments) {
+      if (adjustment == "anySave"){
+        //use picker
+        var savingThrow = $('[data-id="SavingThrowDrop"]').text().trim().replace(' +2','').toLowerCase();
+        statBlock[savingThrow] += 2;
+      } else if (adjustment == "None") {
+        //do nothing
+      } else if (statBlock.hasOwnProperty(adjustment)){
+        //check if proprty already has entry
+        statBlock[adjustment] += adjustments[adjustment];
       } else {
-        statBlock[scoreNames[i]] = '+0';
+        statBlock[adjustment] = adjustments[adjustment];
       }
     }
-  }
 
-  statBlock.initiative = statBlock.dex
+    //apply attack mods if any
+    if (statBlock.hasOwnProperty('attackMod')){
 
-  //add any initiative mods. ie from operative
-  if (statBlock.hasOwnProperty("initiativeMod")){
-    //increase initiative
-    if (statBlock.initiativeMod == "+CR/4"){
-      statBlock.initiative =  '+' + (Number(statBlock.initiative.replace('+','')) + Math.floor(Number(statBlock.Cr) / 4)).toString()
+      statBlock.highAttackBonus = '+' + (Number(statBlock.highAttackBonus.replace('+','')) + statBlock.attackMod).toString();
+      statBlock.lowAttackBonus = '+' + (Number(statBlock.lowAttackBonus.replace('+','')) + statBlock.attackMod).toString();
     }
-  }
 
-  //apply any adjustment ABILITIES
-  if (statBlock.hasOwnProperty('AdjustmentAbilitiesDescription')){
-    var adjustments = statBlock.AdjustmentAbilitiesDescription
-    if (adjustments.includes("Extra Hit Points")){
-      //add 20% hitpoints
-
-      statBlock.hitPoints = Math.round(statBlock.hitPoints + (statBlock.hitPoints * 0.2));
-
-    }
-    if (adjustments.includes("Skillful")){
+    if (statBlock.hasOwnProperty("skillCheckMod")){
       //increase skill scores
-      statBlock.masterSkills[0] = statBlock.masterSkills[0] + 1;
-      statBlock.goodSkills[0] = statBlock.goodSkills[0] + 1;
+      statBlock.masterSkills[0] = statBlock.masterSkills[0] + statBlock.skillCheckMod;
+      statBlock.goodSkills[0] = statBlock.goodSkills[0] + statBlock.skillCheckMod;
     }
-    if (adjustments.includes("Save Boost")){
-      //increase save values
-      var saveInput = $('#BoostDrop').val().trim();
-      if (saveInput.startsWith("All")) {
-        statBlock.fortitude = statBlock.fortitude + 1;
-        statBlock.reflex = statBlock.reflex + 1;
-        statBlock.will = statBlock.will + 1;
-      } else {
-        var pick = saveInput.replace(' +3','').toLowerCase();
-        statBlock[pick] = statBlock[pick] + 3;
+
+    //apply ability mods to selected ability scores
+    scoreNames = ['str','dex','con','int','wis','cha'];
+    for (i = 0; i < scoreNames.length; i++) {
+      if (!statBlock.hasOwnProperty(scoreNames[i])){
+        ability = scoreNames[i].capitalise();
+        if (statBlock.MainAbilityScores.includes(ability)){
+          index = statBlock.MainAbilityScores.indexOf(ability);
+
+          statBlock[scoreNames[i]] = '+' + statBlock['abilityScoreModifier'+ index.toString()].toString();
+        } else {
+          statBlock[scoreNames[i]] = '+0';
+        }
       }
     }
-  }
 
-  //apply DR
-  if (statBlock.hasOwnProperty('DR')){
-    if (statBlock['DR'].hasOwnProperty('DR')){
-      var drsplit = statBlock['DR']['DR'].split('/')
+    statBlock.initiative = statBlock.dex
+
+    //add any initiative mods. ie from operative
+    if (statBlock.hasOwnProperty("initiativeMod")){
+      //increase initiative
+      if (statBlock.initiativeMod == "+CR/4"){
+        statBlock.initiative =  '+' + (Number(statBlock.initiative.replace('+','')) + Math.floor(Number(statBlock.Cr) / 4)).toString()
+      }
+    }
+
+    //apply any adjustment ABILITIES
+    if (statBlock.hasOwnProperty('AdjustmentAbilitiesDescription')){
+      var adjustments = statBlock.AdjustmentAbilitiesDescription
+      if (adjustments.includes("Extra Hit Points")){
+        //add 20% hitpoints
+
+        statBlock.hitPoints = Math.round(statBlock.hitPoints + (statBlock.hitPoints * 0.2));
+
+      }
+      if (adjustments.includes("Skillful")){
+        //increase skill scores
+        statBlock.masterSkills[0] = statBlock.masterSkills[0] + 1;
+        statBlock.goodSkills[0] = statBlock.goodSkills[0] + 1;
+      }
+      if (adjustments.includes("Save Boost")){
+        //increase save values
+        var saveInput = $('#BoostDrop').val().trim();
+        if (saveInput.startsWith("All")) {
+          statBlock.fortitude = statBlock.fortitude + 1;
+          statBlock.reflex = statBlock.reflex + 1;
+          statBlock.will = statBlock.will + 1;
+        } else {
+          var pick = saveInput.replace(' +3','').toLowerCase();
+          statBlock[pick] = statBlock[pick] + 3;
+        }
+      }
+    }
+
+    //apply DR
+    if (statBlock.hasOwnProperty('DR')){
+      if (statBlock['DR'].hasOwnProperty('DR')){
+        var drsplit = statBlock['DR']['DR'].split('/')
+        var drcr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+        drcr = drcr + Number(drsplit[0].replace('CR',''));
+        if (drcr < 1){
+          drcr = 1;
+        }
+        statBlock.DRapplied = drcr.toString() + '/' + drsplit[1];
+      }
+    }
+    if (statBlock.hasOwnProperty('DRtable')){
+      var crTable = statBlock.DRtable['CR']
       var drcr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
-      drcr = drcr + Number(drsplit[0].replace('CR',''));
-      if (drcr < 1){
-        drcr = 1;
-      }
-      statBlock.DRapplied = drcr.toString() + '/' + drsplit[1];
-    }
-  }
-  if (statBlock.hasOwnProperty('DRtable')){
-    var crTable = statBlock.DRtable['CR']
-    var drcr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
-    var choice = 'none'
-    for (i = 0; i < crTable.length; i++) {
-      if (drcr >= crTable[i]) {
-        choice = i;
-      }
-    }
-    if (choice != 'none') {
-      statBlock.DRapplied = statBlock.DRtable['DR'][choice].toString() + '/' + statBlock.DRtable.type;
-    }
-  }
-  //apply SR
-  if (statBlock.hasOwnProperty('SRtable')){
-    var crTable = statBlock.SRtable['CR']
-    var srcr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
-    var choice = 'none'
-    for (i = 0; i < crTable.length; i++) {
-      if (srcr >= crTable[i]) {
-        choice = i;
-      }
-    }
-    if (choice != 'none') {
-      var sr = statBlock.SRtable['SR'][choice];
-      if (sr.toString().includes('+CR') ){
-        statBlock.SRapplied = (Number(sr.replace('+CR','')) + srcr).toString();
-      } else {
-        statBlock.SRapplied = sr;
-      }
-    }
-  }
-  //apply senses per cr
-  if (statBlock.hasOwnProperty('SensesTable')){
-    var SensesTable = statBlock.SensesTable;
-    var cr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
-    var senseArray = [];
-    var currentSense = '';
-
-    for (sense in SensesTable) {
-      if (SensesTable[sense] == "always") {
-        senseArray.push(sense);
-      } else if (cr >= SensesTable[sense]){
-        currentSense = sense;
-      }
-    }
-    if (currentSense != ''){
-      senseArray.push(currentSense);
-    }
-
-    if (senseArray.length > 0){
-      if (statBlock.hasOwnProperty('Senses')){
-        statBlock.Senses = statBlock.Senses.concat(senseArray);
-      } else {
-        statBlock.Senses = senseArray;
-      }
-    }
-  }
-
-
-  //apply any calculated abilities
-  if (statBlock.hasOwnProperty('CalculatedAbilities')){
-    for (ability in statBlock.CalculatedAbilities){
-      //any breath weapons
-      if (ability == "Breath weapon") {
-        var breathEntry = 'breath weapon';
-
-        var cr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
-
-        var range1 = Number((statBlock.CalculatedAbilities["Breath weapon"].range.split('+'))[0]);
-        var range2 = Math.floor(cr/2) * Number(statBlock.CalculatedAbilities["Breath weapon"].range.split('+')[1].split('per')[0])
-
-        breathEntry += ' (' + (range1+range2).toString() +' ft. '+ statBlock.CalculatedAbilities["Breath weapon"].type;
-
-        var damageDice = (statBlock.CalculatedAbilities["Breath weapon"].damage.split('+'))[0].split('d')[1];
-        var damage = 1 + cr
-
-        breathEntry += ', ' + damage.toString() + 'd' + damageDice + ' ' + statBlock.CalculatedAbilities["Breath weapon"].damageType + ', Reflex DC ' +statBlock.abilityDCBase.toString() + ' half, usable every 1d4 rounds)';
-
-        statBlock.OffensiveAbilities = [breathEntry];
-      }
-      if (ability == "Frightful presence") {
-
-        var cr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
-        if (cr >= statBlock.CalculatedAbilities["Frightful presence"]["CR"]) {
-          var auraEntry = 'frightful presence (';
-          var fright = statBlock.CalculatedAbilities["Frightful presence"]["range"].split('+');
-          auraEntry += (Number(fright[0]) + (10 * cr)).toString()+ ' ft., DC ' + statBlock.abilityDCBase.toString() + ')';
-          statBlock.Aura = [auraEntry];
-          //TODO only does 10ft * cr will need updating if any grafts change
+      var choice = 'none'
+      for (i = 0; i < crTable.length; i++) {
+        if (drcr >= crTable[i]) {
+          choice = i;
         }
       }
-      if (ability == "Save") {
-        for(save in statBlock.CalculatedAbilities["Save"]) {
-          statBlock[save] = statBlock[save] + statBlock.CalculatedAbilities["Save"][save];
+      if (choice != 'none') {
+        statBlock.DRapplied = statBlock.DRtable['DR'][choice].toString() + '/' + statBlock.DRtable.type;
+      }
+    }
+    //apply SR
+    if (statBlock.hasOwnProperty('SRtable')){
+      var crTable = statBlock.SRtable['CR']
+      var srcr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var choice = 'none'
+      for (i = 0; i < crTable.length; i++) {
+        if (srcr >= crTable[i]) {
+          choice = i;
+        }
+      }
+      if (choice != 'none') {
+        var sr = statBlock.SRtable['SR'][choice];
+        if (sr.toString().includes('+CR') ){
+          statBlock.SRapplied = (Number(sr.replace('+CR','')) + srcr).toString();
+        } else {
+          statBlock.SRapplied = sr;
         }
       }
     }
+    //apply senses per cr
+    if (statBlock.hasOwnProperty('SensesTable')){
+      var SensesTable = statBlock.SensesTable;
+      var cr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var senseArray = [];
+      var currentSense = '';
+
+      for (sense in SensesTable) {
+        if (SensesTable[sense] == "always") {
+          senseArray.push(sense);
+        } else if (cr >= SensesTable[sense]){
+          currentSense = sense;
+        }
+      }
+      if (currentSense != ''){
+        senseArray.push(currentSense);
+      }
+
+      if (senseArray.length > 0){
+        if (statBlock.hasOwnProperty('Senses')){
+          statBlock.Senses = statBlock.Senses.concat(senseArray);
+        } else {
+          statBlock.Senses = senseArray;
+        }
+      }
+    }
+
+
+    //apply any calculated abilities
+    if (statBlock.hasOwnProperty('CalculatedAbilities')){
+      for (ability in statBlock.CalculatedAbilities){
+        //any breath weapons
+        if (ability == "Breath weapon") {
+          var breathEntry = 'breath weapon';
+
+          var cr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+
+          var range1 = Number((statBlock.CalculatedAbilities["Breath weapon"].range.split('+'))[0]);
+          var range2 = Math.floor(cr/2) * Number(statBlock.CalculatedAbilities["Breath weapon"].range.split('+')[1].split('per')[0])
+
+          breathEntry += ' (' + (range1+range2).toString() +' ft. '+ statBlock.CalculatedAbilities["Breath weapon"].type;
+
+          var damageDice = (statBlock.CalculatedAbilities["Breath weapon"].damage.split('+'))[0].split('d')[1];
+          var damage = 1 + cr
+
+          breathEntry += ', ' + damage.toString() + 'd' + damageDice + ' ' + statBlock.CalculatedAbilities["Breath weapon"].damageType + ', Reflex DC ' +statBlock.abilityDCBase.toString() + ' half, usable every 1d4 rounds)';
+
+          statBlock.OffensiveAbilities = [breathEntry];
+        }
+        if (ability == "Frightful presence") {
+
+          var cr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+          if (cr >= statBlock.CalculatedAbilities["Frightful presence"]["CR"]) {
+            var auraEntry = 'frightful presence (';
+            var fright = statBlock.CalculatedAbilities["Frightful presence"]["range"].split('+');
+            auraEntry += (Number(fright[0]) + (10 * cr)).toString()+ ' ft., DC ' + statBlock.abilityDCBase.toString() + ')';
+            statBlock.Aura = [auraEntry];
+            //TODO only does 10ft * cr will need updating if any grafts change
+          }
+        }
+        if (ability == "Save") {
+          for(save in statBlock.CalculatedAbilities["Save"]) {
+            statBlock[save] = statBlock[save] + statBlock.CalculatedAbilities["Save"][save];
+          }
+        }
+      }
+    }
+  } catch(err) {
+    document.getElementById("errorMessage").innerHTML = "statblock adjustment error: " + err.message + '<br><br>' + err.stack;
+    $('.alert-this-red').show();
+    return false;
   }
 
   //
   //Stat Block Strings
   //
 
+  try {
   //if the string requires more than one line of code then build it before the stat block section
 
-  //build name String
-  var nameInput = $('#inputName').val().trim();
-  var nameString = '';
-  if (nameInput == ''){
-    nameString = "CREATURE NAME";
-  } else {
-    nameString = nameInput;
-  }
-
-  //build creature type String
-  var subTypeString = '';
-  if (statBlock.hasOwnProperty('SubType')){
-    subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
-  }
-
-  var className = $('#classDrop').val().trim();
-  if ( className != '' && className != 'None'){
-    var classSString = ' ' + className.toLowerCase()
-  } else {
-    classSString = ' ';
-  }
-
-  var alignString = alignments[$('#align1Drop').val().trim() + $('#align2Drop').val().trim()];
-
-  var typeString = '<div>'+ alignString +' ' + statBlock.creatureSize + ' ' + statBlock.CreatureType.toLowerCase() + subTypeString + classSString + '</div>';
-
-  //build skills string
-  listOfSkills = Object.keys(skillNames);
-  var skillString = '';
-  for (i = 0; i < listOfSkills.length; i++) {
-    if (statBlock.MasterSkills.includes(listOfSkills[i])){
-      skillString += ', ' + listOfSkills[i] + ' +' + statBlock.masterSkills[0].toString()
-    } else if (statBlock.GoodSkills.includes(listOfSkills[i])){
-      skillString += ', ' + listOfSkills[i] + ' +' + statBlock.goodSkills[0].toString()
+    //build name String
+    var nameInput = $('#inputName').val().trim();
+    var nameString = '';
+    if (nameInput == ''){
+      nameString = "CREATURE NAME";
+    } else {
+      nameString = nameInput;
     }
-  }
-  skillString = skillString.replace(', ','');
-  if (skillString == ''){
-    skillString = 'None';
-  }
 
-  //build spell casting string
-  var spellString = '';
+    //build creature type String
+    var subTypeString = '';
+    if (statBlock.hasOwnProperty('SubType')){
+      subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
+    }
 
-  //racial spell-like abilitiesArray
-  if (statBlock.hasOwnProperty('spellLikeFromGrafts')){
-    var spells = statBlock.spellLikeFromGrafts;
-    spellString += '<div><b>Racial spell-like abilities</b> ';
-    for (key in spells) {
-      var Key = key;
-      if (Key == "atWill"){
-        Key = "at will";
+    var className = $('#classDrop').val().trim();
+    if ( className != '' && className != 'None'){
+      var classSString = ' ' + className.toLowerCase()
+    } else {
+      classSString = ' ';
+    }
+
+    var alignString = alignments[$('#align1Drop').val().trim() + $('#align2Drop').val().trim()];
+
+    var typeString = '<div>'+ alignString +' ' + statBlock.creatureSize + ' ' + statBlock.CreatureType.toLowerCase() + subTypeString + classSString + '</div>';
+
+    //build skills string
+    listOfSkills = Object.keys(skillNames);
+    var skillString = '';
+    for (i = 0; i < listOfSkills.length; i++) {
+      if (statBlock.MasterSkills.includes(listOfSkills[i])){
+        skillString += ', ' + listOfSkills[i] + ' +' + statBlock.masterSkills[0].toString()
+      } else if (statBlock.GoodSkills.includes(listOfSkills[i])){
+        skillString += ', ' + listOfSkills[i] + ' +' + statBlock.goodSkills[0].toString()
       }
-      spellString += '; (' + Key + "): " + spells[key].join(', ');
     }
-    spellString += '</div>';
-    spellString = spellString.replace('; ','')
-  }
+    skillString = skillString.replace(', ','');
+    if (skillString == ''){
+      skillString = 'None';
+    }
 
-  //check if creature has spellcasting
-  if (statBlock.hasOwnProperty('Spellcasting')){
+    //build spell casting string
+    var spellString = '';
 
-    //do the spells title
-    var typeTitle = '';
-    if ($('.casterTypeDescription').text().includes('Mystic')){
-      //Mystic
-      typeTitle = 'Mystic Spells Known';
-    } else if ($('.casterTypeDescription').text().includes('Technomancer')){
-      //Technomancer
-      typeTitle = 'Technomancer Spells Known';
-    } else if ($('[data-id="casterDrop"]').length){
-      //Full caster
-      if ($('[data-id="casterDrop"]').text().includes("Full")) {
-        typeTitle = 'Spells Known';
+    //racial spell-like abilitiesArray
+    if (statBlock.hasOwnProperty('spellLikeFromGrafts')){
+      var spells = statBlock.spellLikeFromGrafts;
+      spellString += '<div><b>Racial spell-like abilities</b> ';
+      for (key in spells) {
+        var Key = key;
+        if (Key == "atWill"){
+          Key = "at will";
+        }
+        spellString += '; (' + Key + "): " + spells[key].join(', ');
+      }
+      spellString += '</div>';
+      spellString = spellString.replace('; ','')
+    }
+
+    //check if creature has spellcasting
+    if (statBlock.hasOwnProperty('Spellcasting')){
+
+      //do the spells title
+      var typeTitle = '';
+      if ($('.casterTypeDescription').text().includes('Mystic')){
+        //Mystic
+        typeTitle = 'Mystic Spells Known';
+      } else if ($('.casterTypeDescription').text().includes('Technomancer')){
+        //Technomancer
+        typeTitle = 'Technomancer Spells Known';
+      } else if ($('[data-id="casterDrop"]').length){
+        //Full caster
+        if ($('[data-id="casterDrop"]').text().includes("Full")) {
+          typeTitle = 'Spells Known';
+        } else {
+          //spell-like
+          typeTitle = 'Spell-like Abilities';
+        }
       } else {
         //spell-like
         typeTitle = 'Spell-like Abilities';
       }
-    } else {
-      //spell-like
-      typeTitle = 'Spell-like Abilities';
-    }
 
-    var rangeAttackVal = (statBlock.attackFocus == 'Ranged') ? statBlock.highAttackBonus:statBlock.lowAttackBonus;
-    //Caster Level
-    var clVal = ordinalNumber(Number(statBlock.Cr));
-    spellString += '<div><b>'+typeTitle+'</b> (CL ' + clVal +'; ranged '+rangeAttackVal+')</div>';
-    //for each frequency
-    for (var i = 0; i < statBlock.Spellcasting.length; i++) {
-      spellBlock = statBlock.Spellcasting[i];
-      //add new line for each frequency
-      spellString += '<div>' + spellBlock[0] + ' - ';
-      //for each spell
-      for (var j = 1; j < spellBlock.length; j++) {
-        spell = spellBlock[j];
-        dc = '';
-        //check if the spell needs a DC save and add in if necessary
-        if (spellsData[spellBlock[j]].hasOwnProperty("SAVEINFO")){
-          if (spellsData[spellBlock[j]]["SAVEINFO"] != 'None'){
+      var rangeAttackVal = (statBlock.attackFocus == 'Ranged') ? statBlock.highAttackBonus:statBlock.lowAttackBonus;
+      //Caster Level
+      var clVal = ordinalNumber(Number(statBlock.Cr));
+      spellString += '<div><b>'+typeTitle+'</b> (CL ' + clVal +'; ranged '+rangeAttackVal+')</div>';
+      //for each frequency
+      for (var i = 0; i < statBlock.Spellcasting.length; i++) {
+        spellBlock = statBlock.Spellcasting[i];
+        //add new line for each frequency
+        spellString += '<div>' + spellBlock[0] + ' - ';
+        //for each spell
+        for (var j = 1; j < spellBlock.length; j++) {
+          spell = spellBlock[j];
+          dc = '';
+          //check if the spell needs a DC save and add in if necessary
+          if (spellsData[spellBlock[j]].hasOwnProperty("SAVEINFO")){
+            if (spellsData[spellBlock[j]]["SAVEINFO"] != 'None'){
+              dc = ' (DC ' + (Number(spellBlock[0].charAt(0)) + statBlock.spellDC).toString() + ')';
+            }
+          } else {
             dc = ' (DC ' + (Number(spellBlock[0].charAt(0)) + statBlock.spellDC).toString() + ')';
           }
-        } else {
-          dc = ' (DC ' + (Number(spellBlock[0].charAt(0)) + statBlock.spellDC).toString() + ')';
+          spell+=dc;
+          if (j > 1){
+            spellString += ', ';
+          }
+          spellString += spell;
         }
-        spell+=dc;
-        if (j > 1){
-          spellString += ', ';
-        }
-        spellString += spell;
+        // finalise the spell string
+
+        spellString += '</div>';
       }
-      // finalise the spell string
-
-      spellString += '</div>';
     }
-  }
 
-  var specialString = '';
-  var offensiveAbilities = [];
-  var defensiveAbilities = [];
-  var otherAbilities = [];
-  //build special ability Strings
+    var specialString = '';
+    var offensiveAbilities = [];
+    var defensiveAbilities = [];
+    var otherAbilities = [];
+    //build special ability Strings
 
-  if (statBlock.hasOwnProperty('SpecialAbilitiesDescription')  || statBlock.hasOwnProperty('SpecialAbilitiesGraft')){
+    if (statBlock.hasOwnProperty('SpecialAbilitiesDescription')  || statBlock.hasOwnProperty('SpecialAbilitiesGraft')){
 
-    specialString += '<div><b>SPECIAL ABILITIES</b></div>';
-    specialString += '<hr>';
+      specialString += '<div><b>SPECIAL ABILITIES</b></div>';
+      specialString += '<hr>';
 
-    var abilitiesArray = [];
-    if (statBlock.hasOwnProperty('SpecialAbilitiesDescription')) {
-      abilitiesArray = abilitiesArray.concat(statBlock.SpecialAbilitiesDescription);
-    }
-    if (statBlock.hasOwnProperty('SpecialAbilitiesGraft')) {
-      abilitiesArray = abilitiesArray.concat(statBlock.SpecialAbilitiesGraft);
-    }
-    var abilitiesArray = abilitiesArray.sort();
+      var abilitiesArray = [];
+      if (statBlock.hasOwnProperty('SpecialAbilitiesDescription')) {
+        abilitiesArray = abilitiesArray.concat(statBlock.SpecialAbilitiesDescription);
+      }
+      if (statBlock.hasOwnProperty('SpecialAbilitiesGraft')) {
+        abilitiesArray = abilitiesArray.concat(statBlock.SpecialAbilitiesGraft);
+      }
+      var abilitiesArray = abilitiesArray.sort();
 
-    for (var i = 0; i < abilitiesArray.length; i++) {
-      //chosen abilities
-      if (specialAbilities.Abilities.hasOwnProperty(abilitiesArray[i])){
-        specialString += '<div><b>'+abilitiesArray[i]+'</b> ';
-        specialString += specialAbilities.Abilities[abilitiesArray[i]].Description;
-        //print guidelines if any
-        if (specialAbilities.Abilities[abilitiesArray[i]].hasOwnProperty("Guidelines")) {
-          specialString += ' <b>Guidelines </b>' + specialAbilities.Abilities[abilitiesArray[i]].Guidelines;
-        }
-        specialString += '</div><br>';
-        //add abilities to the correct headings
-        var format = specialAbilities.Abilities[abilitiesArray[i]].Format;
-        if (format.includes('Defensive Abilities')){
-          defensiveAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
-        }
-        if (format.includes('Other Abilities')){
+      for (var i = 0; i < abilitiesArray.length; i++) {
+        //chosen abilities
+        if (specialAbilities.Abilities.hasOwnProperty(abilitiesArray[i])){
+          specialString += '<div><b>'+abilitiesArray[i]+'</b> ';
+          specialString += specialAbilities.Abilities[abilitiesArray[i]].Description;
+          //print guidelines if any
+          if (specialAbilities.Abilities[abilitiesArray[i]].hasOwnProperty("Guidelines")) {
+            specialString += ' <b>Guidelines </b>' + specialAbilities.Abilities[abilitiesArray[i]].Guidelines;
+          }
+          specialString += '</div><br>';
+          //add abilities to the correct headings
+          var format = specialAbilities.Abilities[abilitiesArray[i]].Format;
+          if (format.includes('Defensive Abilities')){
+            defensiveAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
+          }
+          if (format.includes('Other Abilities')){
+            otherAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
+          }
+
+          if (format.includes('Speed')){
+            if (statBlock.hasOwnProperty('Speed')){
+              statBlock.Speed.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
+            } else {
+              statBlock.Speed = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
+            }
+
+          }
+          if (format.includes('Languages')){
+            if (statBlock.hasOwnProperty('Languages')){
+              statBlock.Languages.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
+            } else {
+              statBlock.Languages = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
+            }
+
+          }
+          if (format.includes('Senses')){
+            if (statBlock.hasOwnProperty('Senses')){
+              statBlock.Senses.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
+            } else {
+              statBlock.Senses = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'')];
+            }
+
+          }
+          if (format.includes('Melee')){
+            /*if (statBlock.hasOwnProperty('MeleeFromAbility')){
+              statBlock.MeleeFromAbility = statBlock.MeleeFromAbility.push(format.replace('Melee ','').replace('.',''));
+            } else {
+              statBlock.MeleeFromAbility = format.replace('Melee ','').replace('.','');
+            }*/
+          //else if so that swallow whole doesn't mess things up TODO fix
+          }else if (format.includes('Offensive Abilities')){
+            offensiveAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
+          }
+        //graft abilities
+        } else if (graftSpecialAbilities.hasOwnProperty(abilitiesArray[i])){
+          specialString += '<div><b>'+abilitiesArray[i]+'</b> ';
+          specialString += graftSpecialAbilities[abilitiesArray[i]];
+          specialString += '</div><br>';
+          //add to other abilities
           otherAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
         }
+      }
 
-        if (format.includes('Speed')){
-          if (statBlock.hasOwnProperty('Speed')){
-            statBlock.Speed.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
-          } else {
-            statBlock.Speed = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
+    }
+
+    //free abilities
+    if (statBlock.hasOwnProperty('FreeAbilities')){
+      var abilitiesArray = statBlock.FreeAbilities;
+      for (var i = 0; i < abilitiesArray.length; i++) {
+        if (!Object.keys(specialAbilities.Weaknesses).includes(abilitiesArray[i])){
+          var format = specialAbilities.FreeAbilities[abilitiesArray[i]].Format;
+          if (format.includes('Other Abilities')){
+            otherAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
           }
+          /*if (format.includes('Speed')){
+            if (statBlock.hasOwnProperty('Speed')){
+              statBlock.Speed.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
+            } else {
+              statBlock.Speed = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
+            }
 
-        }
-        if (format.includes('Languages')){
-          if (statBlock.hasOwnProperty('Languages')){
-            statBlock.Languages.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
-          } else {
-            statBlock.Languages = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
-          }
-
-        }
-        if (format.includes('Senses')){
-          if (statBlock.hasOwnProperty('Senses')){
-            statBlock.Senses.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
-          } else {
-            statBlock.Senses = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'')];
-          }
-
-        }
-        if (format.includes('Melee')){
-          /*if (statBlock.hasOwnProperty('MeleeFromAbility')){
-            statBlock.MeleeFromAbility = statBlock.MeleeFromAbility.push(format.replace('Melee ','').replace('.',''));
-          } else {
-            statBlock.MeleeFromAbility = format.replace('Melee ','').replace('.','');
           }*/
-        //else if so that swallow whole doesn't mess things up TODO fix
-        }else if (format.includes('Offensive Abilities')){
-          offensiveAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
-        }
-      //graft abilities
-      } else if (graftSpecialAbilities.hasOwnProperty(abilitiesArray[i])){
-        specialString += '<div><b>'+abilitiesArray[i]+'</b> ';
-        specialString += graftSpecialAbilities[abilitiesArray[i]];
-        specialString += '</div><br>';
-        //add to other abilities
-        otherAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
-      }
-    }
-
-  }
-
-  //free abilities
-  if (statBlock.hasOwnProperty('FreeAbilities')){
-    var abilitiesArray = statBlock.FreeAbilities;
-    for (var i = 0; i < abilitiesArray.length; i++) {
-      if (!Object.keys(specialAbilities.Weaknesses).includes(abilitiesArray[i])){
-        var format = specialAbilities.FreeAbilities[abilitiesArray[i]].Format;
-        if (format.includes('Other Abilities')){
-          otherAbilities.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
-        }
-        /*if (format.includes('Speed')){
-          if (statBlock.hasOwnProperty('Speed')){
-            statBlock.Speed.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
-          } else {
-            statBlock.Speed = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
-          }
-
-        }*/
-        if (format.includes('Languages')){
-          if (statBlock.hasOwnProperty('Languages')){
-            statBlock.Languages.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
-          } else {
-            statBlock.Languages = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
-          }
-
-        }
-        if (format.includes('Senses')){
-          if (statBlock.hasOwnProperty('Senses')){
-            if (abilitiesArray[i] == 'Blindsense (Ex)'){
-              abilitiesArray[i] = 'Blindsense 60 ft.'
+          if (format.includes('Languages')){
+            if (statBlock.hasOwnProperty('Languages')){
+              statBlock.Languages.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise());
+            } else {
+              statBlock.Languages = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'').capitalise()];
             }
-            if (abilitiesArray[i] == 'Darkvision (Ex Or Su)'){
-              abilitiesArray[i] = 'Darkvision 60 ft.'
+
+          }
+          if (format.includes('Senses')){
+            if (statBlock.hasOwnProperty('Senses')){
+              if (abilitiesArray[i] == 'Blindsense (Ex)'){
+                abilitiesArray[i] = 'Blindsense 60 ft.'
+              }
+              if (abilitiesArray[i] == 'Darkvision (Ex Or Su)'){
+                abilitiesArray[i] = 'Darkvision 60 ft.'
+              }
+              statBlock.Senses.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
+            } else {
+              statBlock.Senses = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'')];
             }
-            statBlock.Senses.push(abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,''));
-          } else {
-            statBlock.Senses = [abilitiesArray[i].toLowerCase().replace(/ \(.*\)/g,'')];
+
+          }
+        }
+      }
+    }
+
+    //other abilities from grafts
+    if (statBlock.hasOwnProperty('OtherAbilitiesGraft')){
+      otherAbilities = otherAbilities.concat(statBlock.OtherAbilitiesGraft)
+    }
+    //other abilities from sub choices
+    if (statBlock.hasOwnProperty('OtherAbilities')){
+      var otherotherabilities = statBlock.OtherAbilities;
+      var OAString = otherAbilities.join(',').toLowerCase();
+      for (var i = 0; i < otherotherabilities.length; i++) {
+          if ( !OAString.includes(otherotherabilities[i]) && !OAString.includes(otherotherabilities[i].toLowerCase())){
+            otherAbilities.push(otherotherabilities[i]);
+          }
+      }
+      otherAbilities.sort();
+    }
+
+
+    //strings for abilities
+    var offensiveAbilitiesString = '';
+    var defensiveAbilitiesString = '';
+    var otherAbilitiesString = '';
+
+    if (offensiveAbilities.length > 0 || statBlock.hasOwnProperty('OffensiveAbilities')) {
+      var offence = [];
+      if (offensiveAbilities.length > 0){
+        offence = offence.concat(offensiveAbilities);
+      }
+      if (statBlock.hasOwnProperty('OffensiveAbilities')){
+        offence = offence.concat(statBlock.OffensiveAbilities);
+      }
+      offence.sort()
+      var offensiveAbilitiesString = '<div><b>Offensive abilities </b>' + offence.join(', ') + '</div>';
+    }
+    if (defensiveAbilities.length > 0) {
+      var defensiveAbilitiesString = '<b>Defensive abilities </b>' + defensiveAbilities.join(', ');
+    }
+    if (otherAbilities.length > 0) {
+      //sort the array
+      var sorted = [];
+      for (var i = 0; i < otherAbilities.length; i++) {
+          sorted.push(otherAbilities[i].toLowerCase());
+      }
+      sorted.sort();
+      otherAbilities = sorted;
+      var otherAbilitiesString = '<div><b>Other abilities </b>' + otherAbilities.join(', ') + '</div>';
+    }
+
+
+    //check if there is any senses
+    var sensesString = '';
+    if (statBlock.hasOwnProperty('Senses')){
+      sensesString = '; <b>Senses</b> '+statBlock.Senses.join(', ').toLowerCase()
+    }
+
+    //build attack strings
+    var MeleeString = '';
+    var RangedString = '';
+    //iterate through attack entries
+    $("[class^='attackDiv']").each(function(){
+        var index = $(this).attr('class').replace('attackDiv','').replace(' brute','')
+
+        var indexParts = index.split('-');
+        var name = $('#attackName'+index).val().trim().toLowerCase();
+        var bonus = $('#bonus'+index).val().trim();
+        var damage = $('#damage'+index).val().trim();
+        var attackType = $('#AT'+index+'Drop').val().trim();
+        var damageType = $('#DT'+index+'Drop').val().trim();
+        var critical = $('#critical'+index).val().trim();
+        var end = ' or<br>';
+
+        //handle strength
+        if (damage.includes('Str')){
+          var damageSplit = damage.split('+');
+          var str = Number(statBlock.str.replace('+',''));
+          var damageBonus = Number(damageSplit[1])
+          damageBonus = damageBonus + str;
+          damage = damageSplit[0] + '+' + damageBonus.toString();
+        }
+
+        //handle attack mod
+        if (statBlock.hasOwnProperty('attackMod')){
+          bonus = '+' + (Number(bonus.replace('+','')) + statBlock.attackMod).toString();
+        }
+
+        damageType = window[attackType.toLowerCase() + indexParts[0] + 'Types'][damageType];
+
+        if (critical != '') {
+          critical = '; critical ' + critical.toLowerCase();
+        }
+
+        if (indexParts[0].toString() == 'Melee') {
+
+          if (MeleeString == ''){
+            MeleeString = '<div><b>'+ indexParts[0] + '</b> ';
+            end = ''
           }
 
-        }
-      }
-    }
-  }
+          MeleeString += end + name + ' ' + bonus + ' (' + damage + ' ' + damageType + critical + ')'
 
-  //other abilities from grafts
-  if (statBlock.hasOwnProperty('OtherAbilitiesGraft')){
-    otherAbilities = otherAbilities.concat(statBlock.OtherAbilitiesGraft)
-  }
-  //other abilities from sub choices
-  if (statBlock.hasOwnProperty('OtherAbilities')){
-    var otherotherabilities = statBlock.OtherAbilities;
-    var OAString = otherAbilities.join(',').toLowerCase();
-    for (var i = 0; i < otherotherabilities.length; i++) {
-        if ( !OAString.includes(otherotherabilities[i]) && !OAString.includes(otherotherabilities[i].toLowerCase())){
-          otherAbilities.push(otherotherabilities[i]);
-        }
-    }
-    otherAbilities.sort();
-  }
-
-
-  //strings for abilities
-  var offensiveAbilitiesString = '';
-  var defensiveAbilitiesString = '';
-  var otherAbilitiesString = '';
-
-  if (offensiveAbilities.length > 0 || statBlock.hasOwnProperty('OffensiveAbilities')) {
-    var offence = [];
-    if (offensiveAbilities.length > 0){
-      offence = offence.concat(offensiveAbilities);
-    }
-    if (statBlock.hasOwnProperty('OffensiveAbilities')){
-      offence = offence.concat(statBlock.OffensiveAbilities);
-    }
-    offence.sort()
-    var offensiveAbilitiesString = '<div><b>Offensive abilities </b>' + offence.join(', ') + '</div>';
-  }
-  if (defensiveAbilities.length > 0) {
-    var defensiveAbilitiesString = '<b>Defensive abilities </b>' + defensiveAbilities.join(', ');
-  }
-  if (otherAbilities.length > 0) {
-    //sort the array
-    var sorted = [];
-    for (var i = 0; i < otherAbilities.length; i++) {
-        sorted.push(otherAbilities[i].toLowerCase());
-    }
-    sorted.sort();
-    otherAbilities = sorted;
-    var otherAbilitiesString = '<div><b>Other abilities </b>' + otherAbilities.join(', ') + '</div>';
-  }
-
-
-  //check if there is any senses
-  var sensesString = '';
-  if (statBlock.hasOwnProperty('Senses')){
-    sensesString = '; <b>Senses</b> '+statBlock.Senses.join(', ').toLowerCase()
-  }
-
-  //build attack strings
-  var MeleeString = '';
-  var RangedString = '';
-  //iterate through attack entries
-  $("[class^='attackDiv']").each(function(){
-      var index = $(this).attr('class').replace('attackDiv','').replace(' brute','')
-
-      var indexParts = index.split('-');
-      var name = $('#attackName'+index).val().trim().toLowerCase();
-      var bonus = $('#bonus'+index).val().trim();
-      var damage = $('#damage'+index).val().trim();
-      var attackType = $('#AT'+index+'Drop').val().trim();
-      var damageType = $('#DT'+index+'Drop').val().trim();
-      var critical = $('#critical'+index).val().trim();
-      var end = ' or<br>';
-
-      //handle strength
-      if (damage.includes('Str')){
-        var damageSplit = damage.split('+');
-        var str = Number(statBlock.str.replace('+',''));
-        var damageBonus = Number(damageSplit[1])
-        damageBonus = damageBonus + str;
-        damage = damageSplit[0] + '+' + damageBonus.toString();
-      }
-
-      //handle attack mod
-      if (statBlock.hasOwnProperty('attackMod')){
-        bonus = '+' + (Number(bonus.replace('+','')) + statBlock.attackMod).toString();
-      }
-
-      damageType = window[attackType.toLowerCase() + indexParts[0] + 'Types'][damageType];
-
-      if (critical != '') {
-        critical = '; critical ' + critical.toLowerCase();
-      }
-
-      if (indexParts[0].toString() == 'Melee') {
-
-        if (MeleeString == ''){
-          MeleeString = '<div><b>'+ indexParts[0] + '</b> ';
-          end = ''
         }
 
-        MeleeString += end + name + ' ' + bonus + ' (' + damage + ' ' + damageType + critical + ')'
+        if (indexParts[0].toString() == 'Ranged') {
 
-      }
+          if (RangedString == ''){
+            RangedString = '<div><b>'+ indexParts[0] + '</b> ';
+            end = ''
+          }
 
-      if (indexParts[0].toString() == 'Ranged') {
+          RangedString += end + name + ' ' + bonus + ' (' + damage + ' ' + damageType + critical + ')'
 
-        if (RangedString == ''){
-          RangedString = '<div><b>'+ indexParts[0] + '</b> ';
-          end = ''
         }
 
-        RangedString += end + name + ' ' + bonus + ' (' + damage + ' ' + damageType + critical + ')'
+    });
+    if (MeleeString != ''){
+      MeleeString += '</div>';
+    }
+    if (RangedString != ''){
+      RangedString += '</div>';
+    }
 
+    // language string
+    var languageString = '';
+    var languageArray = [];
+    var languages = $('#languageDrop').val().toString().trim();
+    if (languages != ''){
+      languageArray = languageArray.concat(languages.split(','))
+    }
+    if (statBlock.hasOwnProperty('Languages')){
+      languageArray = languageArray.concat(statBlock.Languages);
+    }
+    if (languageArray.length > 0){
+      languageArray.sort();
+      languageString = '<div><b>Languages</b> ' + languageArray.join(', ') + '</div>';
+    }
+
+    //Extra user fillable entries
+    var EcologyString = '';
+    var GearString = '';
+    var TacticsString = '';
+    var extraEntries = $('#OSDrop').val().toString().trim();
+
+    if (extraEntries.includes("Ecology")){
+      EcologyString = '<div><b>ECOLOGY</b></div><hr><div>ecology details here e.g. Environment, Organisation</div><br>';
+    }
+    if (extraEntries.includes("Gear")){
+      GearString = '<div><b>Gear</b> list gear here e.g. Armor, Ammunition</div>';
+    }
+    if (extraEntries.includes("Tactics")){
+      TacticsString = '<div><b>TACTICS</b></div><hr><div>tactics details here e.g. During combat, Morale</div><br>';
+    }
+
+    //perception string
+    if (statBlock.MasterSkills.includes("Perception")){
+      var perceptionValue = statBlock.masterSkills[0].toString()
+    } else {
+      var perceptionValue = statBlock.goodSkills[0].toString()
+    }
+
+    //space and reach strings
+    var spaceReachString = '';
+    if (statBlock.creatureSize != 'Medium' ){
+      sizeArray = creatureSize[statBlock.creatureSize];
+      var space = '';
+      var reach = '';
+
+      if (sizeArray[2] != "5 ft."){
+        space = '<b>Space</b> ' + sizeArray[2];
       }
-
-  });
-  if (MeleeString != ''){
-    MeleeString += '</div>';
-  }
-  if (RangedString != ''){
-    RangedString += '</div>';
-  }
-
-  // language string
-  var languageString = '';
-  var languageArray = [];
-  var languages = $('#languageDrop').val().toString().trim();
-  if (languages != ''){
-    languageArray = languageArray.concat(languages.split(','))
-  }
-  if (statBlock.hasOwnProperty('Languages')){
-    languageArray = languageArray.concat(statBlock.Languages);
-  }
-  if (languageArray.length > 0){
-    languageArray.sort();
-    languageString = '<div><b>Languages</b> ' + languageArray.join(', ') + '</div>';
-  }
-
-  //Extra user fillable entries
-  var EcologyString = '';
-  var GearString = '';
-  var TacticsString = '';
-  var extraEntries = $('#OSDrop').val().toString().trim();
-
-  if (extraEntries.includes("Ecology")){
-    EcologyString = '<div><b>ECOLOGY</b></div><hr><div>ecology details here e.g. Environment, Organisation</div><br>';
-  }
-  if (extraEntries.includes("Gear")){
-    GearString = '<div><b>Gear</b> list gear here e.g. Armor, Ammunition</div>';
-  }
-  if (extraEntries.includes("Tactics")){
-    TacticsString = '<div><b>TACTICS</b></div><hr><div>tactics details here e.g. During combat, Morale</div><br>';
-  }
-
-  //perception string
-  if (statBlock.MasterSkills.includes("Perception")){
-    var perceptionValue = statBlock.masterSkills[0].toString()
-  } else {
-    var perceptionValue = statBlock.goodSkills[0].toString()
-  }
-
-  //space and reach strings
-  var spaceReachString = '';
-  if (statBlock.creatureSize != 'Medium' ){
-    sizeArray = creatureSize[statBlock.creatureSize];
-    var space = '';
-    var reach = '';
-
-    if (sizeArray[2] != "5 ft."){
-      space = '<b>Space</b> ' + sizeArray[2];
+      if (sizeArray[3] != "5 ft."){
+        reach = '<b>Reach</b> ' + sizeArray[3];
+      }
+      spaceReachString += space;
+      if (space != '' && reach != '') {
+        spaceReachString += '; '
+      }
+      spaceReachString += reach;
+      if (spaceReachString != ''){
+        spaceReachString = '<div>' + spaceReachString + '</div>';
+      }
     }
-    if (sizeArray[3] != "5 ft."){
-      reach = '<b>Reach</b> ' + sizeArray[3];
-    }
-    spaceReachString += space;
-    if (space != '' && reach != '') {
-      spaceReachString += '; '
-    }
-    spaceReachString += reach;
-    if (spaceReachString != ''){
-      spaceReachString = '<div>' + spaceReachString + '</div>';
-    }
-  }
 
-  //defences String
-  var defencesString = '';
-  //defensive abbilities
-  defencesString += defensiveAbilitiesString;
+    //defences String
+    var defencesString = '';
+    //defensive abbilities
+    defencesString += defensiveAbilitiesString;
 
-  //DR
-  if (statBlock.hasOwnProperty('DRapplied')){
-    if (defencesString != '') {
-      defencesString += '; ';
+    //DR
+    if (statBlock.hasOwnProperty('DRapplied')){
+      if (defencesString != '') {
+        defencesString += '; ';
+      }
+      defencesString += '<b>DR </b>'+statBlock.DRapplied;
     }
-    defencesString += '<b>DR </b>'+statBlock.DRapplied;
-  }
-  //immunities
-  if (statBlock.hasOwnProperty('Immunities')){
-    if (defencesString != '') {
-      defencesString += '; ';
+    //immunities
+    if (statBlock.hasOwnProperty('Immunities')){
+      if (defencesString != '') {
+        defencesString += '; ';
+      }
+      defencesString += '<b>Immunities </b>'+statBlock.Immunities.join(', ');
     }
-    defencesString += '<b>Immunities </b>'+statBlock.Immunities.join(', ');
-  }
-  //resistances
-  if (statBlock.hasOwnProperty('Resistance')){
-    if (defencesString != '') {
-      defencesString += '; ';
+    //resistances
+    if (statBlock.hasOwnProperty('Resistance')){
+      if (defencesString != '') {
+        defencesString += '; ';
+      }
+      defencesString += '<b>Resistances </b>'+statBlock.Resistance.join(', ');
     }
-    defencesString += '<b>Resistances </b>'+statBlock.Resistance.join(', ');
-  }
-  //SR
-  if (statBlock.hasOwnProperty('SRapplied')){
-    if (defencesString != '') {
-      defencesString += '; ';
+    //SR
+    if (statBlock.hasOwnProperty('SRapplied')){
+      if (defencesString != '') {
+        defencesString += '; ';
+      }
+      defencesString += '<b>SR </b>'+statBlock.SRapplied;
     }
-    defencesString += '<b>SR </b>'+statBlock.SRapplied;
-  }
-  //weaknesses
-  var weaknessString = '';
+    //weaknesses
+    var weaknessString = '';
 
-  if (statBlock.hasOwnProperty('weaknessAbilities')){
-    weaknessString += statBlock.weaknessAbilities;
-  }
+    if (statBlock.hasOwnProperty('weaknessAbilities')){
+      weaknessString += statBlock.weaknessAbilities;
+    }
 
-  if (statBlock.hasOwnProperty('Vulnerable')){
+    if (statBlock.hasOwnProperty('Vulnerable')){
+      if (weaknessString != '') {
+        weaknessString += '; ';
+      }
+      weaknessString += 'vulnerable to ' + statBlock.Vulnerable.join(', vulnerable to ');
+    }
+
+    if (statBlock.hasOwnProperty('Dependencies')){
+      if (weaknessString != '') {
+        weaknessString += '; ';
+      }
+      weaknessString += statBlock.Dependencies.join(' dependent, ') + ' dependent';
+    }
+
     if (weaknessString != '') {
-      weaknessString += '; ';
+      if (defencesString != '') {
+        defencesString += '; ';
+      }
+      defencesString += '<b>Weaknesses </b>' + weaknessString;
     }
-    weaknessString += 'vulnerable to ' + statBlock.Vulnerable.join(', vulnerable to ');
-  }
-
-  if (statBlock.hasOwnProperty('Dependencies')){
-    if (weaknessString != '') {
-      weaknessString += '; ';
-    }
-    weaknessString += statBlock.Dependencies.join(' dependent, ') + ' dependent';
-  }
-
-  if (weaknessString != '') {
     if (defencesString != '') {
-      defencesString += '; ';
+      defencesString = '<div>' + defencesString + '</div>';
     }
-    defencesString += '<b>Weaknesses </b>' + weaknessString;
-  }
-  if (defencesString != '') {
-    defencesString = '<div>' + defencesString + '</div>';
-  }
 
-  //save string
-  var saveString = "<div><b>Fort</b> +"+statBlock.fortitude + "; <b>Ref</b> +"+statBlock.reflex+ "; <b>Will</b> +"+statBlock.will;
-  if (statBlock.hasOwnProperty('PlusAbilities')){
-    saveString += '; ' + statBlock.PlusAbilities.join(', ').replace('+CR','+'+statBlock.Cr.toString());
-  }
-  saveString += "</div>";
-
-  //speedString
-  var speedInput = $('#inputSpeed').val().trim();
-  var speedString = '<div><b>Speed</b> '+speedInput+' ft.';
-  if (statBlock.hasOwnProperty('Speed')){
-    var speeds = statBlock.Speed;
-    speeds.sort()
-    speedString += ', ' + speeds.join(', ');
-  }
-  speedString += "</div>";
-
-  classString = '';
-  if (statBlock.hasOwnProperty('Class')) {
-    classString += '<div><b>' + statBlock.Class.toUpperCase() + ' ABILITIES</b></div>';
-    classString += '<hr>';
-    classString += '<div><b>Resolve points</b> ' + statBlock.ClassResolvePoints + '</div>';
-    classString += '<div><b>Class abilities</b> '.replace('Class',statBlock.Class) + statBlock.ClassAbilities + '</div>';
-    if (statBlock.hasOwnProperty('ClassSpecialRules')) {
-      classString += '<div><b>Class special rules</b> '.replace('Class',statBlock.Class) + statBlock.ClassSpecialRules + '</div>';
+    //save string
+    var saveString = "<div><b>Fort</b> +"+statBlock.fortitude + "; <b>Ref</b> +"+statBlock.reflex+ "; <b>Will</b> +"+statBlock.will;
+    if (statBlock.hasOwnProperty('PlusAbilities')){
+      saveString += '; ' + statBlock.PlusAbilities.join(', ').replace('+CR','+'+statBlock.Cr.toString());
     }
-    classString += '<div><b>Class gear</b> '.replace('Class',statBlock.Class) + statBlock.ClassGear + '</div>';
-    classString += '<br>';
+    saveString += "</div>";
 
-  }
+    //speedString
+    var speedInput = $('#inputSpeed').val().trim();
+    var speedString = '<div><b>Speed</b> '+speedInput+' ft.';
+    if (statBlock.hasOwnProperty('Speed')){
+      var speeds = statBlock.Speed;
+      speeds.sort()
+      speedString += ', ' + speeds.join(', ');
+    }
+    speedString += "</div>";
 
-  //Aura string
-  auraString = '';
-  if (statBlock.hasOwnProperty('Aura')){
-    auraString = '<div><b>Aura</b> ' + statBlock.Aura.join(', ') + '</div>'
-  }
+    classString = '';
+    if (statBlock.hasOwnProperty('Class')) {
+      classString += '<div><b>' + statBlock.Class.toUpperCase() + ' ABILITIES</b></div>';
+      classString += '<hr>';
+      classString += '<div><b>Resolve points</b> ' + statBlock.ClassResolvePoints + '</div>';
+      classString += '<div><b>Class abilities</b> '.replace('Class',statBlock.Class) + statBlock.ClassAbilities + '</div>';
+      if (statBlock.hasOwnProperty('ClassSpecialRules')) {
+        classString += '<div><b>Class special rules</b> '.replace('Class',statBlock.Class) + statBlock.ClassSpecialRules + '</div>';
+      }
+      classString += '<div><b>Class gear</b> '.replace('Class',statBlock.Class) + statBlock.ClassGear + '</div>';
+      classString += '<br>';
 
-  //Text string
-  textString = '';
-  if (statBlock.hasOwnProperty('Text')){
-    textString = '<div><b>Text</b> ' + statBlock.Text + '<br></div>'
-  }
+    }
 
+    //Aura string
+    auraString = '';
+    if (statBlock.hasOwnProperty('Aura')){
+      auraString = '<div><b>Aura</b> ' + statBlock.Aura.join(', ') + '</div>'
+    }
+
+    //Text string
+    textString = '';
+    if (statBlock.hasOwnProperty('Text')){
+      textString = '<div><b>Text</b> ' + statBlock.Text + '<br></div>'
+    }
 
 
   //
   //Stat Block
   //
 
-  textBlock = "";
-  //description
-  textBlock += '<hr>';
-  textBlock += leftAndRight('<b>' + nameString + '</b>','<b>CR '+statBlock.Cr+'</b>');
-  textBlock += '<hr>';
-  textBlock += "<div><b>XP "+statBlock.Xp+"</b></div>";
-  textBlock += typeString;
-  textBlock += "<div><b>Init</b> "+statBlock.initiative+sensesString+'; <b>Perception</b> +'+perceptionValue+"</div>";
-  textBlock += auraString;
-  textBlock += "<br>";
+    textBlock = "";
+    //description
+    textBlock += '<hr>';
+    textBlock += leftAndRight('<b>' + nameString + '</b>','<b>CR '+statBlock.Cr+'</b>');
+    textBlock += '<hr>';
+    textBlock += "<div><b>XP "+statBlock.Xp+"</b></div>";
+    textBlock += typeString;
+    textBlock += "<div><b>Init</b> "+statBlock.initiative+sensesString+'; <b>Perception</b> +'+perceptionValue+"</div>";
+    textBlock += auraString;
+    textBlock += "<br>";
 
-  //Defence
-  textBlock += leftAndRight('<b>DEFENCE</b>','<b>HP</b> '+statBlock.hitPoints);
-  textBlock += "<hr>";
-  textBlock += "<div><b>EAC</b> "+statBlock.eac + "; <b>KAC</b> "+statBlock.kac+"</div>";
-  textBlock += saveString;
-  textBlock += defencesString;
-  textBlock += "<br>";
+    //Defence
+    textBlock += leftAndRight('<b>DEFENCE</b>','<b>HP</b> '+statBlock.hitPoints);
+    textBlock += "<hr>";
+    textBlock += "<div><b>EAC</b> "+statBlock.eac + "; <b>KAC</b> "+statBlock.kac+"</div>";
+    textBlock += saveString;
+    textBlock += defencesString;
+    textBlock += "<br>";
 
-  //Offence
-  textBlock += '<div><b>OFFENCE</b></div>';
-  textBlock += '<hr>';
-  textBlock += speedString;
-  textBlock += MeleeString;
-  textBlock += RangedString;
-  textBlock += spaceReachString;
-  textBlock += offensiveAbilitiesString;
-  textBlock += spellString;
-  textBlock += "<br>";
+    //Offence
+    textBlock += '<div><b>OFFENCE</b></div>';
+    textBlock += '<hr>';
+    textBlock += speedString;
+    textBlock += MeleeString;
+    textBlock += RangedString;
+    textBlock += spaceReachString;
+    textBlock += offensiveAbilitiesString;
+    textBlock += spellString;
+    textBlock += "<br>";
 
-  //tactics
-  textBlock += TacticsString;
+    //tactics
+    textBlock += TacticsString;
 
-  //statistics
-  textBlock += '<div><b>STATISTICS</b></div>';
-  textBlock += '<hr>';
-  textBlock += "<div><b>Str</b> "+statBlock.str + "; <b>Dex</b> "+statBlock.dex+ "; <b>Con</b> "+statBlock.con+ "; <b>Int</b> "+statBlock.int+ "; <b>Wis</b> "+statBlock.wis+ "; <b>Cha</b> "+statBlock.cha+"</div>";
-  textBlock += '<div><b>Skills </b>'+skillString+'</div>';
-  textBlock += languageString;
-  textBlock += otherAbilitiesString;
-  textBlock += GearString;
-  textBlock += "<br>";
+    //statistics
+    textBlock += '<div><b>STATISTICS</b></div>';
+    textBlock += '<hr>';
+    textBlock += "<div><b>Str</b> "+statBlock.str + "; <b>Dex</b> "+statBlock.dex+ "; <b>Con</b> "+statBlock.con+ "; <b>Int</b> "+statBlock.int+ "; <b>Wis</b> "+statBlock.wis+ "; <b>Cha</b> "+statBlock.cha+"</div>";
+    textBlock += '<div><b>Skills </b>'+skillString+'</div>';
+    textBlock += languageString;
+    textBlock += otherAbilitiesString;
+    textBlock += GearString;
+    textBlock += "<br>";
 
-  //ecology
-  textBlock += EcologyString;
+    //ecology
+    textBlock += EcologyString;
 
-  //warning
-  if (classString != '' || specialString != '' || textString != '') {
-    textBlock += '<br>';
-    textBlock += '<div><b>Heads up!</b> if there are any required stat block changes below this warning, they will need to be added manually.</div>';
-    textBlock += '<br>';
+    //warning
+    if (classString != '' || specialString != '' || textString != '') {
+      textBlock += '<br>';
+      textBlock += '<div><b>Heads up!</b> if there are any required stat block changes below this warning, they will need to be added manually.</div>';
+      textBlock += '<br>';
+    }
+    //extra text
+    textBlock += textString;
+    //class abilities
+    textBlock += classString;
+    //special Abilities
+    textBlock += specialString;
+
+    //statBlock.CreatureType
+    var $StatBlock = $(".summernoteEdit").first();
+    $StatBlock.empty();
+    $StatBlock.append(textBlock);
+
+    //log event in analytics
+    ga('send', 'event', 'Generation', 'monster', statBlock.Cr+":"+statBlock.Base+":"+statBlock.CreatureType);
+
+  } catch(err) {
+    document.getElementById("errorMessage").innerHTML = "statblock building error: " + err.message + '<br><br>' + err.stack;
+    $('.alert-this-red').show();
+    return false;
   }
-  //extra text
-  textBlock += textString;
-  //class abilities
-  textBlock += classString;
-  //special Abilities
-  textBlock += specialString;
-
-  //statBlock.CreatureType
-  var $StatBlock = $(".summernoteEdit").first();
-  $StatBlock.empty();
-  $StatBlock.append(textBlock);
-
-  //log event in analytics
-  ga('send', 'event', 'Generation', 'monster', statBlock.Cr+":"+statBlock.Base+":"+statBlock.CreatureType);
 
   /* debugging ouput
   var $outputArea = $(".output.area").first();
@@ -1176,6 +1198,8 @@ function buildStatBlock() {
     }
   }
   $outputArea.append("<p>"+print+"</div>"); */
+
+  return true;
 
 }
 
@@ -3339,10 +3363,9 @@ $('.wizard-card').bootstrapWizard({
           }
 
           if (validated){
-
-            buildStatBlock();
+            return buildStatBlock();
           } else {
-              return false;
+            return false;
           }
         }
     },
@@ -3468,4 +3491,8 @@ function save() {
 function dismissAlert() {
   $('.alert-this').hide()
   sessionStorage.showAlert = 'key';
+}
+
+function dismissErrorAlert() {
+  $('.alert-this-red').hide()
 }
