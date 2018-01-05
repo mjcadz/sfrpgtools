@@ -52,6 +52,12 @@ function randomChoice(array) {
   }
 }
 
+//Choose a random element from an array
+//TODO: Replace all instances of randomChoice with this and remove it
+Array.prototype.selectRandom = function() {
+  return this[Math.floor(Math.random() * this.length)];
+}
+
 function randomWeightedChoice(list, weight) {
     var total_weight = weight.reduce(function (prev, cur, i, arr) {
         return prev + cur;

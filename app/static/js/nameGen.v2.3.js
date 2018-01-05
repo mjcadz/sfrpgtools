@@ -30,7 +30,7 @@ function getrandomName(weaponName){
 
   //stack the deck
   for (i = 0; i < 10; i++) {
-    deck.push(randomChoice(nameGenNouns));
+    deck.push(nameGenNouns.selectRandom());
   }
 
   weaponName.split(' ').forEach(function(word) {
@@ -43,9 +43,9 @@ function getrandomName(weaponName){
     return removedWords.indexOf(word) === -1;
   }).join(' ');
 
-  name[0] = randomChoice(nameGenAdjectives) + " " + randomChoice(deck);
-  name[1] = randomChoice(nameGenManufacturers);
-  name[2] = randomChoice(nameGenSeries) + getRandomInt(1, 990).toString();
+  name[0] = nameGenAdjectives.selectRandom() + " " + deck.selectRandom();
+  name[1] = nameGenManufacturers.selectRandom();
+  name[2] = nameGenSeries.selectRandom() + getRandomInt(1, 990).toString();
   name[3] = stripName;
 
   return name;
