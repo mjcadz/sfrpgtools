@@ -1,0 +1,67 @@
+<!-- index.html-->
+
+{% extends "base.html" %}
+{% block title %}Starfinder Armor Generator{% endblock %}
+{% block description %}Random armor generator to add balanced armor to your starfinder game{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <h1></h1>
+    <p class="lead">Generates balanced armor for the Starfinder RPG with AC curves matched as closely as possible to the core rulebook armor entries.</p>
+    <p></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <select class="selectpicker show-tick" id="levelPicker" data-style="btn-default" data-width="100%" data-size="10">
+                  <option selected>Any level</option>
+                  <option data-divider="true"></option>
+                  <option>Tier 1</option>
+                  <option>Tier 2</option>
+                  <option>Tier 3</option>
+                  <option>Tier 4</option>
+                  <option>Tier 5</option>
+                  <option data-divider="true"></option>
+                  <option>Level 1</option>
+                  <option>Level 2</option>
+                  <option>Level 3</option>
+                  <option>Level 4</option>
+                  <option>Level 5</option>
+                  <option>Level 6</option>
+                  <option>Level 7</option>
+                  <option>Level 8</option>
+                  <option>Level 9</option>
+                  <option>Level 10</option>
+                  <option>Level 11</option>
+                  <option>Level 12</option>
+                  <option>Level 13</option>
+                  <option>Level 14</option>
+                  <option>Level 15</option>
+                  <option>Level 16</option>
+                  <option>Level 17</option>
+                  <option>Level 18</option>
+                  <option>Level 19</option>
+                  <option>Level 20</option>
+                </select>
+                <select class="selectpicker show-tick" id="armorPicker" data-style="btn-default" data-width="100%" data-size="10">
+                  <option selected>Any armor</option>
+                  <option data-divider="true"></option>
+                  <option>Light armor</option>
+                  <option>Heavy armor</option>
+                </select>
+                <P></P>
+                <button type="button" onclick="generateArmor()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
+                <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
+                <P></P>
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+
+    <div class="output area">
+
+    </div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/armorGen.v2.0.js') }}"></script>
+{% endblock %}

@@ -33,3 +33,9 @@ def monsterBuilder():
     resp = make_response(render_template('monster-builder.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
+
+@app.route('/armor-generator')
+def armorGenerator():
+    resp = make_response(render_template('armor-generator.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp
