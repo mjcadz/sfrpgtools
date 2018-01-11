@@ -20,7 +20,9 @@ var armorNameLight1 = [
   "Reactive",
   "Ace-tech",
   "Icon",
-  "Full Metal"
+  "Full Metal",
+  "Padded",
+  "Environmental"
 ]
 
 var armorNameLight2 = [
@@ -41,7 +43,10 @@ var armorNameLight2 = [
   "Vest",
   "Shirt",
   "Hardlight plate",
-  "Jacket"
+  "Jacket",
+  "Absorber",
+  "Safeguard",
+  "Undersuit"
 ]
 
 var armorNameHeavy1 = [
@@ -62,7 +67,8 @@ var armorNameHeavy1 = [
   "Energised",
   "Extra",
   "Cold Weather",
-  "Armored"
+  "Armored",
+  "Nuar"
 
 ]
 
@@ -81,7 +87,10 @@ var armorNameHeavy2 = [
   "Breatplate",
   "Exoskeleton",
   "Super Suit",
-  "Assistive Armor"
+  "Assistive Armor",
+  "Bulwark",
+  "Battle Suit",
+  "Assault Suit"
 ]
 
 var indexCounter = 0;
