@@ -1,3 +1,88 @@
+var numerals = ['','I','II','III','IV','V','VI']
+
+var armorNameLight1 = [
+  "Estex",
+  "Free booter",
+  "Hazmat",
+  "Skin",
+  "Lashunta",
+  "Kasatha",
+  "Ysoki",
+  "AbadarCorp",
+  "Carbon",
+  "Specialist",
+  "Light",
+  "Nanotube",
+  "Complex",
+  "Leather",
+  "Aritificial",
+  "Variable",
+  "Reactive",
+  "Ace-tech",
+  "Icon",
+  "Full Metal"
+]
+
+var armorNameLight2 = [
+  "Armor",
+  "Suit",
+  "Flight Suit",
+  "Microcord",
+  "Stationwear",
+  "Skin",
+  "Travel Wear",
+  "A","B","C","D",
+  "Tempweave",
+  "Series",
+  "Microweave",
+  "Night Shirt",
+  "Shield",
+  "Unisuit",
+  "Vest",
+  "Shirt",
+  "Hardlight plate",
+  "Jacket"
+]
+
+var armorNameHeavy1 = [
+  "Re-entry",
+  "Hard Weave",
+  "Golemforged",
+  "Vesk",
+  "Voidshield",
+  "Ceremonial",
+  "Aegis",
+  "Heavy",
+  "Voidforged",
+  "Reinforced",
+  "Skyfire",
+  "Metal",
+  "Fused",
+  "Temporal",
+  "Energised",
+  "Extra",
+  "Cold Weather",
+  "Armored"
+
+]
+
+var armorNameHeavy2 = [
+  "Armor",
+  "Suit",
+  "Flight Suit",
+  "Space Suit",
+  "Series",
+  "Overplate",
+  "Plate",
+  "Plating",
+  "Monolith",
+  "Ringwear",
+  "Shield",
+  "Breatplate",
+  "Exoskeleton",
+  "Super Suit",
+  "Assistive Armor"
+]
 
 var indexCounter = 0;
 
@@ -45,6 +130,28 @@ function getPrice(level) {
   return price;
 }
 
+/**
+ * Get the weapon's tier based on its item level.
+ * @param level number
+ *   An integer from 1 to 20.
+ * @return number
+ */
+function getTier(level) {
+  switch (level) {
+    case 1: case 2: case 3: case 4:
+      return 1;
+    case 5: case 6: case 7: case 8:
+      return 2;
+    case 9: case 10: case 11: case 12:
+      return 3;
+    case 13: case 14: case 15: case 16:
+      return 4;
+    case 17: case 18: case 19: case 20:
+      return 5;
+    default:
+      return NaN;
+  }
+}
 
 function clearOutput() {
   var $outputArea = $(".output.area").first();
@@ -52,7 +159,7 @@ function clearOutput() {
   indexCounter = 0;
 }
 
-function printPanel(level,type,eac,kac,dex,acheck,speed,slots,bulk) {
+function printPanel(level,name,type,eac,kac,dex,acheck,speed,slots,bulk) {
   var $outputArea = $(".output.area").first();
   var storeOutput = $( "div.output.area" ).html();
   $outputArea.empty();
@@ -60,14 +167,14 @@ function printPanel(level,type,eac,kac,dex,acheck,speed,slots,bulk) {
   indexCounter += 1;
   indexString = "index" + indexCounter.toString();
 
-  var panelTitle =  "Level " + level;
+  var panelTitle =  "Level " + level + " " + name;
   var panelBody =   "<h5 class=\"text-muted text-muted-one\">" + type + "</h5>" +
                     "<p><b>Price: </b>"+  getPrice(level) +
                     "<br><b>EAC: </b>" + eac +
                     "<br><b>KAC: </b>" + kac +
-                    "<br><b>Max Dex: </b>" + dex +
-                    "<br><b>Armor acheck: </b>" + acheck +
-                    "<br><b>Speed: </b>" + speed +
+                    "<br><b>Max Dex Bonus: </b>" + dex +
+                    "<br><b>Armor Check Penalty: </b>" + acheck +
+                    "<br><b>Speed Adjustment: </b>" + speed +
                     "<br><b>Upgrade Slots: </b>" + slots +
                     "<br><b>Bulk: </b>" + bulk + "</p>";
 
@@ -91,8 +198,8 @@ function removeEntry(index) {
 
 function generateArmor() {
 
-  var level;
-  var eac,kac,acheck,speed,bulk;
+  var level,tier,name;
+  var armor,eac,kac,acheck,dex,speed,slots,bulk;
 
   var levelDrop = $('#levelPicker').val().trim();
   var armorDrop = $('#armorPicker').val().trim();
@@ -109,35 +216,99 @@ function generateArmor() {
     level = NaN;
     console.log('error getting level');
   }
+  //tier
+  tier = getTier(level);
 
-
-
-  //TODO make weighted random selection
-  if (level < 3) {
-    eac = level + [-1,0].selectRandom();
-  } else if (level < 6) {
-    eac = level + [-2,-1,0,1].selectRandom();
-  } else if (level < 11) {
-    eac = level + [-1,0,1].selectRandom();
+  //level
+  if (armorDrop.includes("Any")) {
+    armor = ["Light armor","Heavy armor"].selectRandom();
   } else {
-    eac = level + [-1,0,1,2,3].selectRandom();
+    armor = armorDrop;
   }
 
+  if (armor == "Light armor") {
 
-  if (level < 4) {
-    kac = eac + [1,2].selectRandom();
-  } else if (level < 6) {
-    kac = eac + [1].selectRandom();
-  } else {
-    kac = eac + [0,1,2].selectRandom();
+    //name
+    name = armorNameLight1.selectRandom() + " " + armorNameLight2.selectRandom();
+    name += ['',' ' + numerals[tier + [-1,0,1].selectRandom()]].selectRandom();
+
+    //EAC
+    if (level < 3) {
+      eac = level + [-1,0].selectRandom();
+    } else if (level < 6) {
+      eac = level + [-2,-1,0,1].selectRandom();
+    } else if (level < 11) {
+      eac = level + [-1,0,1].selectRandom();
+    } else {
+      eac = level + [-1,0,1,2,3].selectRandom();
+    }
+
+    //KAC
+    if (level < 4) {
+      kac = eac + [1,2].selectRandom();
+    } else if (level < 6) {
+      kac = eac + [1].selectRandom();
+    } else {
+      kac = eac + [0,1,2].selectRandom();
+    }
+
+    //Max Dex
+    dex = 2 + tier + [0,1,2,3].selectRandom();
+    if (dex > 8){
+      dex = 8;
+    }
+
+    //upgrade slots
+    slots = tier + [-1,0,0,1,(-1*tier)].selectRandom();
+    //armor check
+    acheck = ['-','-','-','-1'].selectRandom();
+    //speed adjustment
+    speed = '-';
+    //bulk
+    bulk = ['L','L','1'].selectRandom();
+  }
+  else if (armor == "Heavy armor"){
+
+    //name
+    name = armorNameHeavy1.selectRandom() + " " + armorNameHeavy2.selectRandom();
+    name += ['',' ' + numerals[tier + [-1,0,1].selectRandom()]].selectRandom();
+
+    //EAC
+    if (level < 3) {
+      eac = level + [0,1,2].selectRandom();
+    } else if (level < 6) {
+      eac = level + [2,3,4,5].selectRandom();
+    } else if (level < 11) {
+      eac = level + [3,4,5].selectRandom();
+    } else {
+      eac = level + [4,5,6].selectRandom();
+    }
+
+    //KAC
+    if (level < 4) {
+      kac = eac + [1,2].selectRandom();
+    } else {
+      kac = eac + [1,2,3,1,2,3,4].selectRandom();
+    }
+
+    //Max Dex
+    dex = tier + [-1,0,1].selectRandom();
+    if (dex > 5){
+      dex = 5;
+    }
+
+    //upgrade slots
+    slots = tier + [-1,0,1,2].selectRandom();
+    //armor check
+    acheck = ['-','-2','-2','-3','-3','-4','-5'].selectRandom();
+    //speed adjustment
+    speed = ['-','-5 ft.','-5 ft.','-10 ft.','-10 ft.'].selectRandom();
+    //bulk
+    bulk = [1,2,2,3,3].selectRandom();
+
   }
 
-  acheck = ['-','-','-','-1'].selectRandom();
-  speed = '-';
-  bulk = ['L','L','1'].selectRandom();
-
-  printPanel(level,'Light Armor',eac,kac,'3',acheck,speed,'2',bulk);
-  //printPanel(level,type,eac,kac,dex,acheck,speed,slots,bulk)
+  printPanel(level,name,armor,eac,kac,dex,acheck,speed,slots,bulk);
 }
 
 //runs when page is loaded
