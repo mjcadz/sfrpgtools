@@ -19,7 +19,7 @@ body {
     height: 65px;
   }
   .nav-height-calc {
-    height: calc(100vh - 280px);
+    height: calc(100vh - 350px);
   }
 }
 @media (max-width: 767px) {
@@ -30,7 +30,7 @@ body {
     height: 65px;
   }
   .nav-height-calc {
-    height: calc(100vh - 390px);
+    height: calc(100vh - 420px);
   }
 }
 
