@@ -39,3 +39,9 @@ def armorGenerator():
     resp = make_response(render_template('armor-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
+
+@app.route('/character-sheet')
+def characterSheet():
+    resp = make_response(render_template('character-sheet.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp
