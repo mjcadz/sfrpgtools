@@ -224,7 +224,30 @@ var heavyKineticDamageCurve = {
   "20": ["9d12", "12d10"]
 };
 
-var sniperDamageCurve = {
+var sniperEnergyDamageCurve = {
+  "1": ["1d8"],
+  "2": ["1d8"],
+  "3": ["1d8"],
+  "4": ["1d8"],
+  "5": ["2d8"],
+  "6": ["2d8"],
+  "7": ["2d8"],
+  "8": ["2d8"],
+  "9": ["3d8"],
+  "10": ["4d8"],
+  "11": ["4d8"],
+  "12": ["4d8"],
+  "13": ["5d8"],
+  "14": ["5d8"],
+  "15": ["6d8"],
+  "16": ["6d8"],
+  "17": ["6d8"],
+  "18": ["8d8"],
+  "19": ["8d8"],
+  "20": ["10d8"]
+};
+
+var sniperKineticDamageCurve = {
   "1": ["1d10"],
   "2": ["1d10"],
   "3": ["1d10"],
@@ -234,12 +257,12 @@ var sniperDamageCurve = {
   "7": ["2d10"],
   "8": ["2d10"],
   "9": ["3d10"],
-  "10": ["3d10"],
-  "11": ["3d10"],
+  "10": ["4d10"],
+  "11": ["4d10"],
   "12": ["4d10"],
-  "13": ["4d10"],
+  "13": ["5d10"],
   "14": ["5d10"],
-  "15": ["5d10"],
+  "15": ["6d10"],
   "16": ["6d10"],
   "17": ["6d10"],
   "18": ["8d10"],
@@ -1227,7 +1250,12 @@ function sniperWeapon(level) {
   if (gunType === "FX Beam Rifle" && randomDamageType === "Projectile") {
     randomDamageType = "Laser";
   }
-  var damage = randomChoice(sniperDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+
+  if (randomDamageType === "Projectile") {
+    damage = randomChoice(sniperKineticDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+  } else {
+    damage = randomChoice(sniperEnergyDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+  }
 
   var gunName = gunType.replace("FX", randomDamageType).replace("Projectile ", "");
 
@@ -1257,24 +1285,22 @@ function sniperWeapon(level) {
   }
   else if (gunType === "Semi-Auto FX Rifle") {
     var semiAuto1 = [
-      randomChoice(["20", "40", "60", "80"]) + " charges",
-      randomChoice(["5", "10", "20"])
+      randomChoice(["10", "20", "30"]) + " charges", "1"
     ];
     var semiAuto2 = [randomChoice(["4", "8", "12", "16"]) + " rounds", "1"];
     ammo = randomChoice([semiAuto1, semiAuto2]);
   }
   else if (gunType === "Gas-operated FX Rifle") {
     var semiAuto1 = [
-      randomChoice(["20", "40"]) + " charges",
-      randomChoice(["2", "4", "10"])
+      randomChoice(["10", "20", "30"]) + " charges", "1"
     ];
     var semiAuto2 = [randomChoice(["4", "8", "12"]) + " rounds", "1"];
     ammo = randomChoice([semiAuto1, semiAuto2]);
   }
   else if (gunType === "FX Beam Rifle") {
     ammo = [
-      randomChoice(["20", "40", "60"]) + " charges",
-      randomChoice(["2", "4", "10"])
+      randomChoice(["10", "20", "30"]) + " charges",
+      randomChoice(["5", "10"])
     ];
     special.push("Bright");
   }
