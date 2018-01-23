@@ -45,3 +45,9 @@ def characterSheet():
     resp = make_response(render_template('character-sheet.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
+
+@app.route('/thank-you')
+def thankYou():
+    resp = make_response(render_template('thank-you.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp
