@@ -279,7 +279,7 @@ function generateArmor() {
     if (level < 3) {
       eac = level + [-1,0].selectRandom();
     } else if (level < 6) {
-      eac = level + [-2,-1,0,1].selectRandom();
+      eac = level + [-2,-1,0].selectRandom();
     } else if (level < 11) {
       eac = level + [-1,0,1].selectRandom();
     } else {
@@ -330,6 +330,8 @@ function generateArmor() {
     //KAC
     if (level < 4) {
       kac = eac + [1,2].selectRandom();
+    } else if (level < 12) {
+      kac = eac + [1,2,1,2,3].selectRandom();
     } else {
       kac = eac + [1,2,3,1,2,3,4].selectRandom();
     }
@@ -352,6 +354,9 @@ function generateArmor() {
   }
 
   printPanel(level,name,armor,eac,kac,dex,acheck,speed,slots,bulk);
+
+  //log event in analytics
+  ga('send', 'event', 'Generation', 'armor', armor);
 }
 
 //runs when page is loaded
