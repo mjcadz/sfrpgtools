@@ -1,3 +1,27 @@
+V2.3
+New Features:
+  - armor generator
+  - character sheets v1.0
+  - new svg logo
+Changes:
+  - nerf low level battery sizes in weapon generator
+  - buff 2 handed weapons in weapon generator
+  - fix sniper energy damage in weapon generator
+  - refactor weapon name generation
+  - add error alert to monster builder
+
+V2.2
+New Features:
+  - monster builder v1.0 beta
+Changes:
+  - make html files more readable
+
+V2.1
+New Features:
+  - Sign up to feature notification using formspree
+Changes:
+  - restructure static files
+
 V2.0
 New Features:
   - New responsive side nav menu
