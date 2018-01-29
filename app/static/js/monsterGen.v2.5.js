@@ -1123,7 +1123,7 @@ function buildStatBlock() {
     textBlock += "<br>";
 
     //Defence
-    textBlock += leftAndRight('<b>DEFENCE</b>','<b>HP</b> '+statBlock.hitPoints);
+    textBlock += leftAndRight('<b>DEFENSE</b>','<b>HP</b> '+statBlock.hitPoints);
     textBlock += "<hr>";
     textBlock += "<div><b>EAC</b> "+statBlock.eac + "; <b>KAC</b> "+statBlock.kac+"</div>";
     textBlock += saveString;
@@ -1131,7 +1131,7 @@ function buildStatBlock() {
     textBlock += "<br>";
 
     //Offence
-    textBlock += '<div><b>OFFENCE</b></div>';
+    textBlock += '<div><b>OFFENSE</b></div>';
     textBlock += '<hr>';
     textBlock += speedString;
     textBlock += MeleeString;
