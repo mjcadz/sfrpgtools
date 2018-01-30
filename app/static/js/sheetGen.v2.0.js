@@ -14,7 +14,7 @@ function changePriceButton(price) {
   }
 
   pricelink = '<a href="https://transactions.sendowl.com/products/' + product + '/purchase" rel="nofollow" class="btn btn-grn">BUY NOW</a><script type="text/javascript" src="https://transactions.sendowl.com/assets/sendowl.js"></script>'
-  console.log(pricelink)
+
   $buttonArea.append(pricelink);
   //update sendowl
   sendOwl.captureLinks();
@@ -25,6 +25,11 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
     var selected = $(e.currentTarget).val();
     changePriceButton(selected)
 }
+
+$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
 
 //runs when page is loaded
 $( document ).ready(function() {

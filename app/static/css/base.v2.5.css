@@ -419,3 +419,19 @@ line-height: 1.4;
   margin-top: 15px;
   margin-bottom: 15px;
 }
+
+/*carousel change colours to darker theme*/
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+.carousel-control span.glyphicon {
+    color: black;
+}
+
+.carousel-indicators .active{
+    background-color: #666666;
+}
+.carousel-indicators li{
+    border: 1px solid #666666;
+}

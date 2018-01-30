@@ -6,19 +6,9 @@
 {% block body %}
 <div class="jumbotron">
     <h1>Alternative Character Sheet</h1>
-    <p class="lead">Pay what you want to support sfrpgtools and recieve an alternative character sheet pack, available in multiple accent colors. Your support helps keep sfrpgtools online and ad free.</p>
-    <p style="margin: 0">The pack contains alternatives for the following sheets:</p>
-    <ul>
-      <li>Main character sheet</li>
-      <li>Secondary character sheet</li>
-      <li>Spell sheet</li>
-      <li>Journal sheet (MAKE THIS ONE BETTER)</li>
-      <li>Drone sheet</li>
-      <li>NPC sheet (2 per page)</li>
-      <li>Ship sheet (single page)</li>
-      <li>Ship folio (2 pages)</li>
-    </ul>
-    <p></p>
+    <hr>
+    <p><strong>Pay what you want to support sfrpgtools</strong></p>
+    <p>Alternative character sheet pack</p>
     <select class="selectpicker show-tick" id="pricePicker" data-style="btn-default" data-size="10">
       <option>$1</option>
       <option>$2</option>
@@ -27,10 +17,71 @@
       <a href="https://transactions.sendowl.com/products/77716581/E8FBF228/purchase" rel="nofollow" class="btn btn-grn">BUY NOW</a><script type="text/javascript" src="https://transactions.sendowl.com/assets/sendowl.js" ></script>
     </div>
 
+    <p></p>
+    <p class="lead">Pay what you want to support sfrpgtools and recieve an alternative character sheet pack. Your support helps keep sfrpgtools online and ad free.</p>
+
+    <p></p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+              <div id="sheetCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                    <li data-target="#sheetCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#sheetCarousel" data-slide-to="1"></li>
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner">
+                    <div class="item active">
+                      <a href="/static/charsheet_v3.jpg" class="thumbnail" data-toggle="lightbox">
+                          <img src="/static/charsheet_v3.jpg" alt="First sheet">
+                      </a>
+                    </div>
+
+                    <div class="item">
+                      <a href="/static/charsheet2_v3.jpg" class="thumbnail" data-toggle="lightbox">
+                          <img src="/static/charsheet2_v3.jpg" alt="First sheet">
+                      </a>
+                    </div>
+
+                  </div>
+
+                  <!-- Left and right controls -->
+                  <a class="left carousel-control" href="#sheetCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="right carousel-control" href="#sheetCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+              </div>
+
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+    <p style="margin: 0">The pack contains alternatives for the following sheets:</p>
+    <ul>
+      <li>Main character sheet</li>
+      <li>Secondary character sheet</li>
+      <li>Spell sheet</li>
+      <li>Journal sheet</li>
+      <li>Drone sheet</li>
+      <li>NPC sheet (2 per page)</li>
+      <li>Compact ship sheet</li>
+      <li>Ship folio</li>
+    </ul>
+
+    <p class="lead">Note that references to "The Drift" have been changed to "Hyperspace" as per the Open Game License.</p>
+
 </div>
 {% endblock %}
 {% block includes %}
 <script type="text/javascript" src="https://transactions.sendowl.com/assets/sendowl.js" ></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js" ></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/sheetGen.v2.0.js') }}"></script>
 {% endblock %}
