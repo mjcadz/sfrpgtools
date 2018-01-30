@@ -8,10 +8,18 @@
     <h1>Alternative Character Sheet</h1>
     <p class="lead">Pay what you want to support sfrpgtools and recieve an alternative character sheet for use with starfinder. Your support contributes directly to hosting costs and helps keep sfrpgtools online and ad free.</p>
     <p></p>
-    <div class="container">
-
+    <select class="selectpicker show-tick" id="pricePicker" data-style="btn-default" data-size="10">
+      <option>$1</option>
+      <option>$2</option>
+    </select>
+    <div class="buybutton">
+      <a href="https://transactions.sendowl.com/products/77716581/E8FBF228/purchase" rel="nofollow" class="btn btn-grn">BUY NOW</a><script type="text/javascript" src="https://transactions.sendowl.com/assets/sendowl.js" ></script>
     </div>
+
 </div>
 {% endblock %}
 {% block includes %}
+<script type="text/javascript" src="https://transactions.sendowl.com/assets/sendowl.js" ></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/sheetGen.v2.0.js') }}"></script>
 {% endblock %}
