@@ -86,7 +86,6 @@ var armorNameHeavy1 = [
   "Reflective",
   "Reinforced",
   "Riot",
-  "Skyfire",
   "Superdense",
   "Synthetic",
   "Temporal",

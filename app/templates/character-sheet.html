@@ -1,77 +1,66 @@
 <!-- index.html-->
-
 {% extends "base.html" %}
-{% block title %}Alternative Starfinder Character Sheet{% endblock %}
-{% block description %}Alternative character sheets for the starfinder roleplaying game{% endblock %}
+{% block title %}Alternate Starfinder Character Sheet{% endblock %}
+{% block description %}Alternate character sheets for the starfinder roleplaying game{% endblock %}
 {% block body %}
 <div class="jumbotron">
-    <h1>Alternative Character Sheet</h1>
-
-
-    <p></p>
-    <p class="lead"><strong>Pay what you want to support sfrpgtools</strong> and recieve an alternative character sheet pack. Your support helps keep sfrpgtools online and ad free.</p>
-
-    <p></p>
-    <hr>
-    <p></p>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-              <div id="sheetCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-                  <!-- Indicators -->
-                  <ol class="carousel-indicators">
-                    <li data-target="#sheetCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#sheetCarousel" data-slide-to="1"></li>
-                  </ol>
-
-                  <!-- Wrapper for slides -->
-                  <div class="carousel-inner">
-                    <div class="item active">
-                      <a href="/static/charsheet_v3.jpg" class="thumbnail" data-toggle="lightbox">
-                          <img src="/static/charsheet_v3.jpg" alt="First sheet">
-                      </a>
-                    </div>
-
-                    <div class="item">
-                      <a href="/static/charsheet2_v3.jpg" class="thumbnail" data-toggle="lightbox">
-                          <img src="/static/charsheet2_v3.jpg" alt="First sheet">
-                      </a>
-                    </div>
-
+   <h1>Alternate Character Sheet</h1>
+   <p></p>
+   <p class="lead"><strong>Pay what you want to support sfrpgtools</strong> and recieve an alternate character sheet pack designed by me. The sheets come in pdf and are form fillable and printable. Your support helps keep sfrpgtools online and ad free.</p>
+   <p></p>
+   <hr>
+   <p></p>
+   <div class="container">
+      <div class="row">
+         <div class="col-md-4">
+            <div id="sheetCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+               <!-- Indicators -->
+               <ol class="carousel-indicators">
+                  <li data-target="#sheetCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#sheetCarousel" data-slide-to="1"></li>
+               </ol>
+               <!-- Wrapper for slides -->
+               <div class="carousel-inner">
+                  <div class="item active">
+                     <a href="/static/charsheet_v3.jpg" class="thumbnail" data-toggle="lightbox">
+                     <img src="/static/charsheet_v3.jpg" alt="First sheet">
+                     </a>
                   </div>
-
-                  <!-- Left and right controls -->
-                  <a class="left carousel-control" href="#sheetCarousel" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="right carousel-control" href="#sheetCarousel" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
-              </div>
-
+                  <div class="item">
+                     <a href="/static/charsheet2_v3.jpg" class="thumbnail" data-toggle="lightbox">
+                     <img src="/static/charsheet2_v3.jpg" alt="First sheet">
+                     </a>
+                  </div>
+               </div>
+               <!-- Left and right controls -->
+               <a class="left carousel-control" href="#sheetCarousel" data-slide="prev">
+               <span class="glyphicon glyphicon-chevron-left"></span>
+               <span class="sr-only">Previous</span>
+               </a>
+               <a class="right carousel-control" href="#sheetCarousel" data-slide="next">
+               <span class="glyphicon glyphicon-chevron-right"></span>
+               <span class="sr-only">Next</span>
+               </a>
             </div>
-            <div class="col-md-8">
-
-                <p>Alternative character sheet pack</p>
-                <select class="selectpicker show-tick" id="pricePicker" data-style="btn-default" data-size="10">
-                  <option>$1</option>
-                  <option>$2</option>
-                </select>
-                <div class="buybutton">
-                  <a href="https://transactions.sendowl.com/products/77716581/E8FBF228/purchase" rel="nofollow" class="btn btn-grn">BUY NOW</a><script type="text/javascript" src="https://transactions.sendowl.com/assets/sendowl.js" ></script>
-                </div>
+         </div>
+         <div class="col-md-8">
+            <p>Alternate character sheet pack</p>
+            <label>Pay what you want:</label>
+            <div></div>
+            <select class="selectpicker show-tick" id="pricePicker" data-style="btn-default" data-size="10">
+               <option>$1</option>
+               <option>$2</option>
+            </select>
+            <div class="buybutton">
+               <a href="https://transactions.sendowl.com/products/77716581/E8FBF228/purchase" rel="nofollow" class="btn btn-grn">BUY NOW</a><script type="text/javascript" src="https://transactions.sendowl.com/assets/sendowl.js" ></script>
             </div>
-        </div>
-    </div>
-
-    <hr>
-    <p></p>
-
-    <p style="margin: 0">The pack contains the following sheets:</p>
-    <ul>
+         </div>
+      </div>
+   </div>
+   <hr>
+   <p></p>
+   <p style="margin: 0">This pack contains the following sheets:</p>
+   <ul>
       <li>Main character sheet</li>
       <li>Secondary character sheet</li>
       <li>Spell sheet</li>
@@ -80,10 +69,8 @@
       <li>NPC sheet (2 per page)</li>
       <li>Compact ship sheet</li>
       <li>Ship folio</li>
-    </ul>
-
-    <p class="lead">Note that references to "The Drift" have been changed to "Hyperspace" as per the Open Game License.</p>
-
+   </ul>
+   <p class="lead">Note that references to "The Drift" have been changed to "Hyperspace" as per the Open Game License.</p>
 </div>
 {% endblock %}
 {% block includes %}
