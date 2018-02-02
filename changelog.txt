@@ -1,9 +1,10 @@
 V2.3
 New Features:
   - armor generator
-  - character sheets v1.0
+  - character sheets
   - new svg logo
   - digital delivery of charsheet handling with sendowl
+  - ssl certs & force ssl
 Changes:
   - nerf low level battery sizes in weapon generator
   - buff 2 handed weapons in weapon generator
