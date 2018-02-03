@@ -435,3 +435,13 @@ line-height: 1.4;
 .carousel-indicators li{
     border: 1px solid #666666;
 }
+
+.carousel-caption p{
+    color: #666666;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+.carousel-caption{
+    padding-bottom: 15px;
+}
