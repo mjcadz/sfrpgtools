@@ -224,7 +224,30 @@ var heavyKineticDamageCurve = {
   "20": ["9d12", "12d10"]
 };
 
-var sniperDamageCurve = {
+var sniperEnergyDamageCurve = {
+  "1": ["1d8"],
+  "2": ["1d8"],
+  "3": ["1d8"],
+  "4": ["1d8"],
+  "5": ["2d8"],
+  "6": ["2d8"],
+  "7": ["2d8"],
+  "8": ["2d8"],
+  "9": ["3d8"],
+  "10": ["4d8"],
+  "11": ["4d8"],
+  "12": ["4d8"],
+  "13": ["5d8"],
+  "14": ["5d8"],
+  "15": ["6d8"],
+  "16": ["6d8"],
+  "17": ["6d8"],
+  "18": ["8d8"],
+  "19": ["8d8"],
+  "20": ["10d8"]
+};
+
+var sniperKineticDamageCurve = {
   "1": ["1d10"],
   "2": ["1d10"],
   "3": ["1d10"],
@@ -234,12 +257,12 @@ var sniperDamageCurve = {
   "7": ["2d10"],
   "8": ["2d10"],
   "9": ["3d10"],
-  "10": ["3d10"],
-  "11": ["3d10"],
+  "10": ["4d10"],
+  "11": ["4d10"],
   "12": ["4d10"],
-  "13": ["4d10"],
+  "13": ["5d10"],
   "14": ["5d10"],
-  "15": ["5d10"],
+  "15": ["6d10"],
   "16": ["6d10"],
   "17": ["6d10"],
   "18": ["8d10"],
@@ -270,7 +293,7 @@ var basicMeleeDamageCurve = {
   "20":["6d12", "12d6"]
 };
 
-var advMeleeEnergyDamageCurve = {
+var advMeleeEnergy1HDamageCurve = {
   "1":["1d4", "1d6"],
   "2":["1d4", "1d6"],
   "3":["1d6", "1d8"],
@@ -293,7 +316,7 @@ var advMeleeEnergyDamageCurve = {
   "20":["8d10", "10d8"]
 };
 
-var advMeleeKineticDamageCurve = {
+var advMeleeKinetic1HDamageCurve = {
   "1":["1d4", "1d6"],
   "2":["1d6", "1d8"],
   "3":["1d6", "1d8"],
@@ -316,6 +339,75 @@ var advMeleeKineticDamageCurve = {
   "20":["10d12", "12d10"]
 };
 
+var advMeleeEnergy2HDamageCurve = {
+  "1":["1d6", "1d8"],
+  "2":["1d8", "1d10"],
+  "3":["1d8", "1d10"],
+  "4":["1d10", "1d12"],
+  "5":["1d10", "1d12"],
+  "6":["1d10", "1d12"],
+  "7":["1d12", "2d6"],
+  "8":["3d4", "2d8"],
+  "9":["2d8", "2d8"],
+  "10":["3d6", "2d10"],
+  "11":["2d10", "5d4"],
+  "12":["4d6", "6d4"],
+  "13":["5d6", "4d8"],
+  "14":["4d8", "3d12"],
+  "15":["4d10", "10d4"],
+  "16":["8d6", "6d10"],
+  "17":["10d6", "8d8"],
+  "18":["8d8", "7d10"],
+  "19":["6d12", "9d8"],
+  "20":["8d10", "10d8"]
+};
+
+var advMeleeKinetic2HDamageCurve = {
+  "1":["1d10", "1d12"],
+  "2":["1d10", "1d12"],
+  "3":["1d10", "1d12"],
+  "4":["1d12", "2d6"],
+  "5":["1d12", "2d6"],
+  "6":["1d12", "2d6"],
+  "7":["2d6", "2d8"],
+  "8":["4d4", "3d6"],
+  "9":["2d12", "3d10"],
+  "10":["4d6", "3d10"],
+  "11":["7d4", "4d8"],
+  "12":["3d12", "7d6"],
+  "13":["10d4", "6d8"],
+  "14":["8d6", "7d8"],
+  "15":["9d6", "5d12"],
+  "16":["7d10", "6d12"],
+  "17":["8d10", "10d8"],
+  "18":["8d12", "12d8"],
+  "19":["9d12", "14d8"],
+  "20":["12d10", "14d10"]
+};
+
+var batteryCurve = {
+  "1":["20"],
+  "2":["20"],
+  "3":["20"],
+  "4":["20", "40"],
+  "5":["20", "40"],
+  "6":["20", "40"],
+  "7":["20", "40"],
+  "8":["40", "80"],
+  "9":["40", "80"],
+  "10":["40", "80"],
+  "11":["40", "80"],
+  "12":["40", "80"],
+  "13":["40", "80", "100"],
+  "14":["40", "80", "100"],
+  "15":["40", "80", "100"],
+  "16":["40", "80", "100"],
+  "17":["40", "80", "100"],
+  "18":["40", "80", "100"],
+  "19":["40", "80", "100"],
+  "20":["80", "100"]
+};
+
 var basePrice = [260,625,1415,2195,3230,4425,6350,9175,13300,17950,24400,35300,49600,72400,109750,170350,243850,370000,557450,832900];
 
 var priceVariance = {
@@ -326,19 +418,6 @@ var priceVariance = {
 };
 
 var indexCounter = 0;
-
-function sayHello() {
-    //get radio button values
-   var val = $('#weaponType label.active input').val();
-   var val2 = $('#weaponTier label.active input').val();
-
-   //print to div output area
-   var $outputArea = $(".output.area").first();
-	 $outputArea.empty();
-
-   $outputArea.append("<div>" + val + " "+ val2 + "</div>");
-
-}
 
 function clearOutput() {
   var $outputArea = $(".output.area").first();
@@ -448,6 +527,10 @@ function getCritDice(critical,level){
     critical = critical + " " + num + "d" + die;
   }
   return critical;
+}
+
+function getBattery(level) {
+  return batteryCurve[level].selectRandom()
 }
 
 function printNeat(level,gunName,type,damage,range,critical,capacity,usage,special,bulk) {
@@ -762,19 +845,38 @@ function advancedMelee(level) {
   special = removeBlankValues(special);
   var printSpecial = special.join(", ");
   type = "Advanced melee - " + handed + "-handed";
-  if (damageType === "Uncat"){
-    if (weaponType === "FX Doshko" || weaponType === "FX Longhammer") {
-      damage = advMeleeKineticDamageCurve[level][1] + damageShorthand;
+  if (handed == "one") {
+    if (damageType === "Uncat"){
+      if (weaponType === "FX Doshko" || weaponType === "FX Longhammer") {
+        damage = advMeleeKinetic1HDamageCurve[level][1] + damageShorthand;
+      } else {
+        damage = randomChoice(advMeleeKinetic1HDamageCurve[level]) + damageShorthand;
+      }
     } else {
-      damage = randomChoice(advMeleeKineticDamageCurve[level]) + damageShorthand;
+      damageShorthand = damageTypeAbbrv[damageType];
+      critical = randomChoice(criticalTypeAdvanced[damageType]);
+      if (weaponType === "FX Doshko" || weaponType === "FX Longhammer") {
+        damage = randomChoice(advMeleeKinetic1HDamageCurve[level]) + damageShorthand;
+      } else {
+        damage = randomChoice(advMeleeEnergy1HDamageCurve[level]) + damageShorthand;
+      }
     }
-  } else {
-    damageShorthand = damageTypeAbbrv[damageType];
-    critical = randomChoice(criticalTypeAdvanced[damageType]);
-    if (weaponType === "FX Doshko" || weaponType === "FX Longhammer") {
-      damage = advMeleeKineticDamageCurve[level][1] + damageShorthand;
+  }
+  else if (handed =="two") {
+    if (damageType === "Uncat"){
+      if (weaponType === "FX Doshko" || weaponType === "FX Longhammer") {
+        damage = advMeleeKinetic2HDamageCurve[level][1] + damageShorthand;
+      } else {
+        damage = randomChoice(advMeleeKinetic2HDamageCurve[level]) + damageShorthand;
+      }
     } else {
-      damage = randomChoice(advMeleeEnergyDamageCurve[level]) + damageShorthand;
+      damageShorthand = damageTypeAbbrv[damageType];
+      critical = randomChoice(criticalTypeAdvanced[damageType]);
+      if (weaponType === "FX Doshko" || weaponType === "FX Longhammer") {
+        damage = randomChoice(advMeleeKinetic2HDamageCurve[level]) + damageShorthand;
+      } else {
+        damage = randomChoice(advMeleeEnergy2HDamageCurve[level]) + damageShorthand;
+      }
     }
   }
   critical = getCritDice(critical,level);
@@ -789,6 +891,7 @@ function smallArm(level) {
   var randomDamageType = randomChoice(damageType);
   var gunType = randomChoice(smallSubType);
   var printLevel = level;
+  var battery = getBattery(level)
 
   // Hand-Cannon has higher damage compared to other typed
   if (gunType === "FX Hand-Cannon" && level !== 20) {
@@ -857,7 +960,7 @@ function smallArm(level) {
   }
   else if (gunType === "Semi-Auto FX Pistol") {
     var semiAuto1 = [
-      randomChoice(["20", "20", "40", "80"]) + " charges",
+      battery + " charges",
       randomChoice(["1", "1", "2", "4"])
     ];
     var semiAuto2= [randomChoice(["10", "12", "16", "18"]) + " rounds", "1"];
@@ -872,7 +975,7 @@ function smallArm(level) {
   }
   else if (gunType === "FX Machine Pistol") {
     var semiAuto1 = [
-      randomChoice(["20", "20", "40", "40"]) + " charges",
+      battery + " charges",
       randomChoice(["1", "1", "2", "4"])
     ];
     var semiAuto2 = [randomChoice(["10", "12", "12", "24", "48"]) + " rounds", "1"];
@@ -890,14 +993,13 @@ function smallArm(level) {
   }
   else if (gunType === "FX Blaster") {
     ammo = [
-      randomChoice(["20", "40", "80", "100"]) + " charges",
+      battery + " charges",
       randomChoice(["1", "4", "5", "10"])
     ];
     special.push(randomChoice([
       "Boost "+ randomChoice(boostDice[tier-1]),
       "Bright",
       "Quick Reload",
-      "Stun"
     ]));
   }
 
@@ -929,6 +1031,7 @@ function longarm(level) {
   var randomDamageType = randomChoice(damageType);
   var gunType = randomChoice(longSubType);
   var printLevel = level;
+  var battery = getBattery(level);
 
   // Rifle has higher damage compared to other types
   if (gunType === "FX Assault Rifle" && level != 20) {
@@ -968,10 +1071,10 @@ function longarm(level) {
   // Ammo
   if (gunType === "FX Assault Rifle") {
     var semiAuto1 = [
-      randomChoice(["60", "80", "100"]) + " charges",
+      battery + " charges",
       randomChoice(["1", "2", "4", "10"])
     ];
-    var semiAuto2 = [randomChoice(["6", "12", "18"]) + " rounds", "1"];
+    var semiAuto2 = [randomChoice(["12", "18", "24"]) + " rounds", "1"];
     ammo = randomChoice([semiAuto1, semiAuto2]);
     special.push(randomChoice([
       "Automatic",
@@ -981,7 +1084,7 @@ function longarm(level) {
     bulk = randomChoice(["1","1","2"]);
   }
   else if (gunType === "FX Carbine") {
-    var semiAuto1 = [randomChoice(["60", "80", "100"]) + " charges",randomChoice(["1", "2", "4", "10"])];
+    var semiAuto1 = [battery + " charges",randomChoice(["1", "2", "4", "10"])];
     var semiAuto2 = [randomChoice(["12", "24", "48"]) + " rounds", "1"];
     ammo = randomChoice([semiAuto1, semiAuto2]);
     special.push(randomChoice([
@@ -1014,7 +1117,7 @@ function longarm(level) {
   else if (gunType === "FX Submachine Gun") {
     special.push("Automatic");
     var semiAuto1 = [
-      randomChoice(["20", "40"]) + " charges",
+      battery + " charges",
       randomChoice(["1", "1", "2", "4"])
     ];
     var semiAuto2 = [randomChoice(["10", "12", "12", "24", "48"]) + " rounds", "1"];
@@ -1071,6 +1174,7 @@ function heavyWeapon(level) {
   var gunType = randomChoice(heavySubType);
   var printLevel = level;
   var damage;
+  var battery = getBattery(level);
 
   // Railgun increase damage compared to other types
   if (gunType === "FX Railgun" && level != 20) {
@@ -1112,7 +1216,7 @@ function heavyWeapon(level) {
 
   if (gunType === "FX Cannon") {
     ammo = [
-      randomChoice(["40", "80", "100"]) + " charges",
+      battery + " charges",
       randomChoice(["2", "4", "5", "10"])
     ];
     var radius = 5 * tier;
@@ -1125,8 +1229,7 @@ function heavyWeapon(level) {
   }
   else if (gunType === "Heavy FX Repeater") {
     var semiAuto1= [
-      randomChoice(["60", "80", "100"]) + " charges",
-      randomChoice(["1", "2", "4", "10"])
+      battery + " charges","1"
     ];
     var semiAuto2= [randomChoice(["12", "24", "48"]) + " rounds", "1"];
     ammo = randomChoice([semiAuto1, semiAuto2]);
@@ -1151,7 +1254,7 @@ function heavyWeapon(level) {
     special.push(specialloc);
     special.push("Unwieldy");
     ammo = [
-      randomChoice(["60", "80", "100"]) + " charges",
+      battery + " charges",
       randomChoice(["2", "4", "10"])
     ];
   }
@@ -1164,15 +1267,15 @@ function heavyWeapon(level) {
     special.push("Penetrating");
     special.push("Unwieldy");
     var semiAuto1= [
-      randomChoice(["20", "40"]) + " charges",
+      battery + " charges",
       randomChoice(["2", "4", "10"])
     ];
-    var semiAuto2= [randomChoice(["8", "12", "18", "24"]) + " rounds", "1"]
+    var semiAuto2= [randomChoice(["8", "12", "18"]) + " rounds", "1"]
     ammo = randomChoice([semiAuto1, semiAuto2]);
   }
   else if (gunType === "Smart Gun - FX") {
     var semiAuto1= [
-      randomChoice(["60", "80", "100"]) + " charges",
+      battery + " charges",
       randomChoice(["2", "4", "10"])
     ];
     var semiAuto2= [randomChoice(["12", "24", "48"]) + " rounds", "1"];
@@ -1183,7 +1286,7 @@ function heavyWeapon(level) {
   }
   if (gunType === "FX Mass Driver") {
     ammo = [
-      randomChoice(["40", "60", "80"]) + " charges",
+      battery + " charges",
       randomChoice(["5", "10"])
     ];
     var radius = 5 * tier;
@@ -1227,7 +1330,12 @@ function sniperWeapon(level) {
   if (gunType === "FX Beam Rifle" && randomDamageType === "Projectile") {
     randomDamageType = "Laser";
   }
-  var damage = randomChoice(sniperDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+
+  if (randomDamageType === "Projectile") {
+    damage = randomChoice(sniperKineticDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+  } else {
+    damage = randomChoice(sniperEnergyDamageCurve[level]) + damageTypeAbbrv[randomDamageType];
+  }
 
   var gunName = gunType.replace("FX", randomDamageType).replace("Projectile ", "");
 
@@ -1257,24 +1365,22 @@ function sniperWeapon(level) {
   }
   else if (gunType === "Semi-Auto FX Rifle") {
     var semiAuto1 = [
-      randomChoice(["20", "40", "60", "80"]) + " charges",
-      randomChoice(["5", "10", "20"])
+      randomChoice(["10", "20", "30"]) + " charges", "1"
     ];
     var semiAuto2 = [randomChoice(["4", "8", "12", "16"]) + " rounds", "1"];
     ammo = randomChoice([semiAuto1, semiAuto2]);
   }
   else if (gunType === "Gas-operated FX Rifle") {
     var semiAuto1 = [
-      randomChoice(["20", "40"]) + " charges",
-      randomChoice(["2", "4", "10"])
+      randomChoice(["10", "20", "30"]) + " charges", "1"
     ];
     var semiAuto2 = [randomChoice(["4", "8", "12"]) + " rounds", "1"];
     ammo = randomChoice([semiAuto1, semiAuto2]);
   }
   else if (gunType === "FX Beam Rifle") {
     ammo = [
-      randomChoice(["20", "40", "60"]) + " charges",
-      randomChoice(["2", "4", "10"])
+      randomChoice(["10", "20", "30"]) + " charges",
+      randomChoice(["5", "10"])
     ];
     special.push("Bright");
   }

@@ -19,7 +19,7 @@ body {
     height: 65px;
   }
   .nav-height-calc {
-    height: calc(100vh - 280px);
+    height: calc(100vh - 350px);
   }
 }
 @media (max-width: 767px) {
@@ -30,7 +30,7 @@ body {
     height: 65px;
   }
   .nav-height-calc {
-    height: calc(100vh - 390px);
+    height: calc(100vh - 420px);
   }
 }
 
@@ -418,4 +418,30 @@ line-height: 1.4;
 .summernoteEdit {
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+/*carousel change colours to darker theme*/
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+.carousel-control span.glyphicon {
+    color: black;
+}
+
+.carousel-indicators .active{
+    background-color: #666666;
+}
+.carousel-indicators li{
+    border: 1px solid #666666;
+}
+
+.carousel-caption p{
+    color: #666666;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+.carousel-caption{
+    padding-bottom: 15px;
 }
