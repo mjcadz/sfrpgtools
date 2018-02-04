@@ -49,9 +49,11 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
 
 //runs when page is loaded
 $( document ).ready(function() {
-  //initialise pickers
+  //initialise picker
   $('.selectpicker').selectpicker();
   $('.selectpicker').on('changed.bs.select', dropClickHandler);
+  $('.selectpicker').selectpicker('val', '$3');
+  $('.selectpicker').selectpicker('refresh');
   //grab sendowl purchase forms
   sendOwl.captureLinks();
 });
