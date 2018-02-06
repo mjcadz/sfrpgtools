@@ -418,6 +418,15 @@ line-height: 1.4;
 .summernoteEdit {
   margin-top: 15px;
   margin-bottom: 15px;
+  margin-left: -1.5em;
+}
+
+.summernoteEdit > div{
+    padding-left: 1.5em;
+    text-indent:-1.5em;
+}
+.summernoteEdit > hr {
+    margin-left: -2.5em;
 }
 
 /*carousel change colours to darker theme*/

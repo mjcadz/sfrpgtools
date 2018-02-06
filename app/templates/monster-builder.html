@@ -316,9 +316,14 @@
                                     <hr>
                                     <button type="button" class="btn btn-edit btn-grn" onclick="edit()" type="button">Edit statblock</button>
                                     <button type="button" class="btn btn-save btn-grn" onclick="save()" type="button">Save statblock</button>
+                                    <button type="button" class="btn btn-image btn-grn" onclick="toimage()" type="button">Save statblock as image</button>
                                     <p></p>
-                                    <div class="summernoteEdit edit-block">
+                                    <div id="capture" style="max-width: 600px;">
+                                        <div id="overEdit" style="margin-left: 4.5em; margin-right: 1em;">
+                                            <div class="summernoteEdit edit-block" style="padding-top: 15px; padding-bottom: 15px; padding-right: 15px;">
 
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -431,9 +436,11 @@
 {% block includes %}
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-wizard.js') }}"></script>
+<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote-ext-print.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/html2canvas.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/spellData.v2.2.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterGenData.v2.3.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterGen.v2.5.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterGen.v2.6.js') }}"></script>
 {% endblock %}

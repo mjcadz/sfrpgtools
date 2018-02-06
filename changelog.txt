@@ -1,3 +1,9 @@
+V2.4
+New Features:
+  - monster builder can now save statblock as an image
+Changes:
+  -
+
 V2.3
 New Features:
   - armor generator

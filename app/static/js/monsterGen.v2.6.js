@@ -3464,6 +3464,8 @@ $('.btn-graft').click(function(){
 function edit() {
   $('.btn-save').show();
   $('.btn-edit').hide();
+  $('.btn-image').hide();
+  $('#overEdit').css({'margin-left': '0em', 'margin-right': '0em'});
   $('.summernoteEdit').summernote({
     focus: true,
     toolbar: [
@@ -3484,8 +3486,20 @@ function edit() {
 function save() {
   $('.btn-save').hide();
   $('.btn-edit').show();
+  $('.btn-image').show();
+  $('#overEdit').css({'margin-left': '4.5em', 'margin-right': '1em'});
   var markup = $('.summernoteEdit').summernote('code');
   $('.summernoteEdit').summernote('destroy');
+};
+
+//generate image from statblock so user can save
+function toimage() {
+  html2canvas(document.querySelector("#capture")).then(canvas => {
+
+    canvas.toBlob(function(blob) {
+    	saveAs(blob, "statblock.png");
+    });
+  });
 };
 
 function dismissAlert() {
