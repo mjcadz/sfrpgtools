@@ -1,15 +1,15 @@
 V2.4
 New Features:
   - monster builder can now save statblock as an image
+  - changelog now displayed on site
 Changes:
-  -
+  - monster statblock format fixes (class and RP)
 
 V2.3
 New Features:
   - armor generator
   - character sheets
   - new svg logo
-  - digital delivery of charsheet handling with sendowl
   - ssl certs & force ssl
 Changes:
   - nerf low level battery sizes in weapon generator
@@ -36,9 +36,8 @@ New Features:
   - Homepage
   - Star System Generator v1.0
   - Loot Generator v1.0
-  - notify contact form
 Changes:
-  - Bootstrap version rolled back to 3.3.7
+  - Bootstrap version rolled back to 3.3.7 (previously 4 beta)
 
 V1.2
 New Features:
@@ -62,3 +61,7 @@ Changes:
   - add background, pixel stars
   - refactor crit dice
   - Kinetic weapons damage increased compared to Energy weapons (didn't notice this trend in initial generator)
+
+v1.0
+New Features:
+  - web release (www.sfrpgtools.com)
