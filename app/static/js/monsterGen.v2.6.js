@@ -583,22 +583,54 @@ function buildStatBlock() {
       nameString = nameInput;
     }
 
-    //build creature type String
+    //build class type String
+    var classTypeString = '';
+
+    var genderString = $('#inputGender').val().trim();
+
     var subTypeString = '';
     if (statBlock.hasOwnProperty('SubType')){
-      subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
+      subTypeString = statBlock.SubType.toLowerCase();
     }
 
     var className = $('#classDrop').val().trim();
     if ( className != '' && className != 'None'){
-      var classSString = ' ' + className.toLowerCase()
+      var classSString = className.toLowerCase()
     } else {
-      classSString = ' ';
+      var classSString = '';
+    }
+
+    if (genderString != ''){
+      classTypeString = genderString;
+    }
+    if (subTypeString != ''){
+      if (classTypeString != ''){
+        classTypeString += ' ';
+      }
+      classTypeString += subTypeString;
+    }
+    if (classSString != ''){
+      if (classTypeString != ''){
+        classTypeString += ' ';
+      }
+      classTypeString += classSString;
+    }
+    //don't include subtype by itself
+    if (classTypeString == subTypeString){
+      classTypeString = '';
+    }
+    if (classTypeString != ''){
+      classTypeString = '<div>'+ classTypeString.capitalise() + '</div>';
+    }
+
+    //build creature type String
+    if (statBlock.hasOwnProperty('SubType')){
+      subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
     }
 
     var alignString = alignments[$('#align1Drop').val().trim() + $('#align2Drop').val().trim()];
 
-    var typeString = '<div>'+ alignString +' ' + statBlock.creatureSize + ' ' + statBlock.CreatureType.toLowerCase() + subTypeString + classSString + '</div>';
+    var typeString = '<div>'+ alignString +' ' + statBlock.creatureSize + ' ' + statBlock.CreatureType.toLowerCase() + subTypeString + '</div>';
 
     //build skills string
     listOfSkills = Object.keys(skillNames);
@@ -1081,10 +1113,11 @@ function buildStatBlock() {
     speedString += "</div>";
 
     classString = '';
+    rpBlock='';
     if (statBlock.hasOwnProperty('Class')) {
       classString += '<div><b>' + statBlock.Class.toUpperCase() + ' ABILITIES</b></div>';
       classString += '<hr>';
-      classString += '<div><b>Resolve points</b> ' + statBlock.ClassResolvePoints + '</div>';
+      rpBlock = ' <b>RP</b> ' + statBlock.ClassResolvePoints;
       classString += '<div><b>Class abilities</b> '.replace('Class',statBlock.Class) + statBlock.ClassAbilities + '</div>';
       if (statBlock.hasOwnProperty('ClassSpecialRules')) {
         classString += '<div><b>Class special rules</b> '.replace('Class',statBlock.Class) + statBlock.ClassSpecialRules + '</div>';
@@ -1093,6 +1126,8 @@ function buildStatBlock() {
       classString += '<br>';
 
     }
+    //defense title string, this far down because its waiting for RP
+    var defenceTitle = leftAndRight('<b>DEFENSE</b>','<b>HP</b> ' + statBlock.hitPoints + rpBlock);
 
     //Aura string
     auraString = '';
@@ -1117,13 +1152,14 @@ function buildStatBlock() {
     textBlock += leftAndRight('<b>' + nameString + '</b>','<b>CR '+statBlock.Cr+'</b>');
     textBlock += '<hr>';
     textBlock += "<div><b>XP "+statBlock.Xp+"</b></div>";
+    textBlock += classTypeString;
     textBlock += typeString;
     textBlock += "<div><b>Init</b> "+statBlock.initiative+sensesString+'; <b>Perception</b> +'+perceptionValue+"</div>";
     textBlock += auraString;
     textBlock += "<br>";
 
     //Defence
-    textBlock += leftAndRight('<b>DEFENSE</b>','<b>HP</b> '+statBlock.hitPoints);
+    textBlock += defenceTitle;
     textBlock += "<hr>";
     textBlock += "<div><b>EAC</b> "+statBlock.eac + "; <b>KAC</b> "+statBlock.kac+"</div>";
     textBlock += saveString;
