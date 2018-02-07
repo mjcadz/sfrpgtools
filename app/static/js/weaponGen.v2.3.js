@@ -1,3 +1,37 @@
+var gunParts = ["Muzzle","Barrel","Sights","Stock"]
+
+var flavourText = ["The weapon features an oversized scope",
+"Three barrels! that seems excessive",
+"This weapon looks quite old",
+"The sights are on the side of this weapon",
+"The barrel looks like the end of a trumpet",
+"Under the barrel of this weapon is a knife",
+"The serial number of this weapon has been filed off",
+"The grip of this weapon is odd and mishapen as if for an alien hand",
+"This weapon is made from a strange material that absorbs light",
+"This weapon sparkles and glitters in the light",
+"This weapon is surplus military stock",
+"Someone has taken great care to keep this weapon in pristine",
+"The model number is scrawled on to this weapon in some alien text",
+"This weapon in small, half the size of similar makes",
+"This weapon in large, double the size of similar makes",
+"This weapon is pretty underwhelming",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+]
 
 var damageType = ["Acid", "Cryo", "Flame", "Laser", "Plasma", "Projectile", "Shock", "Sonic"];
 var meleeDamageType = ["Acid", "Cryo", "Flame", "Plasma", "Shock", "Sonic", "Uncat","Uncat"];
