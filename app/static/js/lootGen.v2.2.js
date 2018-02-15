@@ -1,5 +1,5 @@
 
-
+var sources = ["crb","aa"];
 var limitedGroups = ["Solarion Weapon Crystals", "Heavy Weapons", "Advanced Melee Weapons", "Light Armor", "Longarms", "Basic Melee Weapons", "Heavy Armor", "Sniper Weapons", "Small Arms", "Special Weapons", "Grenades"];
 var moreGroups = ["Spell Ampoules","Spell Gems","Healing Serum"];
 var professions = ["Accountant","Actor","Archaeologist","Architect","Artist","Bounty Hunter","Comedian","Con Artist","Cook","Corporate Professional","Courtesan","Counselor","Dancer","Dockworker","Electrician","Farmer","Gambler","General Contractor","Herbalist","Lab Technician","Lawyer","Maintenance Worker","Manager","Mathematician","Mercenary","Merchant","Miner","Musician","Orator","Philosopher","Poet","Politician","Professor","Psychologist","Smuggler","Video Personality","Vidgamer","Writer"]
@@ -330,35 +330,39 @@ function getDataArray(groups,json){
   for (itemGroup in json) {
     if (groups.includes(itemGroup) || groups.includes("All")) {
       for (itemName in json[itemGroup]) {
-        item = [];
-        itemLevel = Number(json[itemGroup][itemName]['level']);
-        //set minimum level for weapons and armor
-        minLevel = limitedGroups.includes(itemGroup) ? aplmod - 2 : 0;
+        source = json[itemGroup][itemName]['sourcebook']
+        if (sources.includes(source)){
 
-        if ( itemLevel <= aplmod+1 && itemLevel >= minLevel ){
-          item[0] = itemName.replace("Iii","III").replace("Ii","II").replace("Iv","IV").replace("Viii","VIII").replace("Vii","VII").replace("Vi","VI").replace("Fxprofession",randomChoice(professions));//name
-          item[1] = json[itemGroup][itemName]['level'];//level
+          item = [];
+          itemLevel = Number(json[itemGroup][itemName]['level']);
+          //set minimum level for weapons and armor
+          minLevel = limitedGroups.includes(itemGroup) ? aplmod - 2 : 0;
 
-          if (itemName.includes("Fusion Seal")){
-            sealLevel = (aplmod+randomChoice([0,1])).toString();
-            sealLevel = (Number(sealLevel) > 20) ? "20" : sealLevel;
-            sealLevel = (Number(sealLevel) < Number(item[1])) ? item[1] : sealLevel
+          if ( itemLevel <= aplmod+1 && itemLevel >= minLevel ){
+            item[0] = itemName.replace("Iii","III").replace("Ii","II").replace("Iv","IV").replace("Viii","VIII").replace("Vii","VII").replace("Vi","VI").replace("Fxprofession",randomChoice(professions));//name
+            item[1] = json[itemGroup][itemName]['level'];//level
 
-            item[2] = fusionSeal[sealLevel];//fusion seal cost
-            sealText = (item[1] == sealLevel) ? " (level " + item[1] +")" : " (level " + item[1] + "-" + sealLevel+")"//check if same number
-            item[0] = item[0] + sealText;//add seal level to name
-            item[1] = sealLevel;
-          } else {
-            item[2] = json[itemGroup][itemName]['cost'];//cost
-          }
+            if (itemName.includes("Fusion Seal")){
+              sealLevel = (aplmod+randomChoice([0,1])).toString();
+              sealLevel = (Number(sealLevel) > 20) ? "20" : sealLevel;
+              sealLevel = (Number(sealLevel) < Number(item[1])) ? item[1] : sealLevel
 
-          item[3] = json[itemGroup][itemName]['bulk'];//bulk
-          item[4] = json[itemGroup][itemName]['sourcepage'];//sourcepage
-          dataArray.push(item);
-          //extra entries for these groups
-          if (moreGroups.includes(itemGroup)){
+              item[2] = fusionSeal[sealLevel];//fusion seal cost
+              sealText = (item[1] == sealLevel) ? " (level " + item[1] +")" : " (level " + item[1] + "-" + sealLevel+")"//check if same number
+              item[0] = item[0] + sealText;//add seal level to name
+              item[1] = sealLevel;
+            } else {
+              item[2] = json[itemGroup][itemName]['cost'];//cost
+            }
+
+            item[3] = json[itemGroup][itemName]['bulk'];//bulk
+            item[4] = json[itemGroup][itemName]['sourcebook'].toUpperCase() + ' ' + json[itemGroup][itemName]['sourcepage'];//sourcepage
             dataArray.push(item);
-            dataArray.push(item);
+            //extra entries for these groups
+            if (moreGroups.includes(itemGroup)){
+              dataArray.push(item);
+              dataArray.push(item);
+            }
           }
         }
       }
