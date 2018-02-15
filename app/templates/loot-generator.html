@@ -79,6 +79,8 @@
                     <ul class="dropdown-menu pull-right">
                         <li><a href="#">Random Generation</a></li>
                         <li role="separator" class="divider"></li>
+                        <li><a href="#">No credits</a></li>
+                        <li role="separator" class="divider"></li>
                         <li><a href="#">More ammo</a></li>
                         <li><a href="#">More armor</a></li>
                         <li><a href="#">More credits</a></li>
@@ -106,5 +108,6 @@
 </div>
 {% endblock %}
 {% block includes %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/equipmentData.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/lootGen.v2.2.js') }}"></script>
 {% endblock %}
