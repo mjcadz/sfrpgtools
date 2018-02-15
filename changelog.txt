@@ -2,8 +2,10 @@ V2.4
 New Features:
   - monster builder can now save statblock as an image
   - changelog now displayed on site
+  - add 'no credits' mode to loot gen
 Changes:
   - monster statblock format fixes (class and RP)
+  - switch loot gen to easier to maintain data
 
 V2.3
 New Features:
