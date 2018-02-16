@@ -11,88 +11,69 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <div class="btn-group btn-block" role="group">
-                    <button id="APLDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="pull-left">Average Party Level - 1</span>
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu pull-right">
-                        <li><a href="#">APL 1</a></li>
-                        <li><a href="#">APL 2</a></li>
-                        <li><a href="#">APL 3</a></li>
-                        <li><a href="#">APL 4</a></li>
-                        <li><a href="#">APL 5</a></li>
-                        <li><a href="#">APL 6</a></li>
-                        <li><a href="#">APL 7</a></li>
-                        <li><a href="#">APL 8</a></li>
-                        <li><a href="#">APL 9</a></li>
-                        <li><a href="#">APL 10</a></li>
-                        <li><a href="#">APL 11</a></li>
-                        <li><a href="#">APL 12</a></li>
-                        <li><a href="#">APL 13</a></li>
-                        <li><a href="#">APL 14</a></li>
-                        <li><a href="#">APL 15</a></li>
-                        <li><a href="#">APL 16</a></li>
-                        <li><a href="#">APL 17</a></li>
-                        <li><a href="#">APL 18</a></li>
-                        <li><a href="#">APL 19</a></li>
-                        <li><a href="#">APL 20</a></li>
-                    </ul>
-                </div>
-                <P></P>
-                <div class="btn-group btn-block" role="group">
-                    <button id="CRDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="pull-left">Challenge Rating - 1</span>
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu pull-right">
-                        <li><a href="#">CR 1/3</a></li>
-                        <li><a href="#">CR 1/2</a></li>
-                        <li><a href="#">CR 1</a></li>
-                        <li><a href="#">CR 2</a></li>
-                        <li><a href="#">CR 3</a></li>
-                        <li><a href="#">CR 4</a></li>
-                        <li><a href="#">CR 5</a></li>
-                        <li><a href="#">CR 6</a></li>
-                        <li><a href="#">CR 7</a></li>
-                        <li><a href="#">CR 8</a></li>
-                        <li><a href="#">CR 9</a></li>
-                        <li><a href="#">CR 10</a></li>
-                        <li><a href="#">CR 11</a></li>
-                        <li><a href="#">CR 12</a></li>
-                        <li><a href="#">CR 13</a></li>
-                        <li><a href="#">CR 14</a></li>
-                        <li><a href="#">CR 15</a></li>
-                        <li><a href="#">CR 16</a></li>
-                        <li><a href="#">CR 17</a></li>
-                        <li><a href="#">CR 18</a></li>
-                        <li><a href="#">CR 19</a></li>
-                        <li><a href="#">CR 20</a></li>
-                    </ul>
-                </div>
-                <P></P>
-                <div class="btn-group btn-block" role="group">
-                    <button id="moreDrop" type="button" class="btn btn-default dropdown-toggle btn-block btn-notblack" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="pull-left">Random Generation</span>
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu pull-right">
-                        <li><a href="#">Random Generation</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">No credits</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">More ammo</a></li>
-                        <li><a href="#">More armor</a></li>
-                        <li><a href="#">More credits</a></li>
-                        <li><a href="#">More grenades</a></li>
-                        <li><a href="#">More heals</a></li>
-                        <li><a href="#">More magic</a></li>
-                        <li><a href="#">More tech</a></li>
-                        <li><a href="#">More upgrades</a></li>
-                        <li><a href="#">More weapons</a></li>
-                    </ul>
-                </div>
-                <P></P>
+                <select class="selectpicker show-tick" id="sourceDrop" multiple data-style="btn-default" data-width="100%" data-size="10" data-title="Sources" data-selected-text-format="static">
+                  <option selected title="Sources">Core Rulebook</option>
+                  <option selected title="Sources">Alien Archive</option>
+                </select>
+                <select class="selectpicker show-tick" id="APLDrop" data-style="btn-default" data-width="100%" data-size="10">
+                    <option selected title="Average Party Level - 1">APL 1</option>
+                    <option title="Average Party Level - 2">APL 2</option>
+                    <option title="Average Party Level - 3">APL 3</option>
+                    <option title="Average Party Level - 4">APL 4</option>
+                    <option title="Average Party Level - 5">APL 5</option>
+                    <option title="Average Party Level - 6">APL 6</option>
+                    <option title="Average Party Level - 7">APL 7</option>
+                    <option title="Average Party Level - 8">APL 8</option>
+                    <option title="Average Party Level - 9">APL 9</option>
+                    <option title="Average Party Level - 10">APL 10</option>
+                    <option title="Average Party Level - 11">APL 11</option>
+                    <option title="Average Party Level - 12">APL 12</option>
+                    <option title="Average Party Level - 13">APL 13</option>
+                    <option title="Average Party Level - 14">APL 14</option>
+                    <option title="Average Party Level - 15">APL 15</option>
+                    <option title="Average Party Level - 16">APL 16</option>
+                    <option title="Average Party Level - 17">APL 17</option>
+                    <option title="Average Party Level - 18">APL 18</option>
+                    <option title="Average Party Level - 19">APL 19</option>
+                    <option title="Average Party Level - 20">APL 20</option>
+                </select>
+                <select class="selectpicker show-tick" id="CRDrop" data-style="btn-default" data-width="100%" data-size="10">
+                    <option selected title="Challenge Rating - 1">CR 1</option>
+                    <option title="Challenge Rating - 2">CR 2</option>
+                    <option title="Challenge Rating - 3">CR 3</option>
+                    <option title="Challenge Rating - 4">CR 4</option>
+                    <option title="Challenge Rating - 5">CR 5</option>
+                    <option title="Challenge Rating - 6">CR 6</option>
+                    <option title="Challenge Rating - 7">CR 7</option>
+                    <option title="Challenge Rating - 8">CR 8</option>
+                    <option title="Challenge Rating - 9">CR 9</option>
+                    <option title="Challenge Rating - 10">CR 10</option>
+                    <option title="Challenge Rating - 11">CR 11</option>
+                    <option title="Challenge Rating - 12">CR 12</option>
+                    <option title="Challenge Rating - 13">CR 13</option>
+                    <option title="Challenge Rating - 14">CR 14</option>
+                    <option title="Challenge Rating - 15">CR 15</option>
+                    <option title="Challenge Rating - 16">CR 16</option>
+                    <option title="Challenge Rating - 17">CR 17</option>
+                    <option title="Challenge Rating - 18">CR 18</option>
+                    <option title="Challenge Rating - 19">CR 19</option>
+                    <option title="Challenge Rating - 20">CR 20</option>
+                </select>
+                <select class="selectpicker show-tick" id="moreDrop" data-style="btn-default" data-width="100%" data-size="10">
+                    <option selected>Random Generation</option>
+                    <option data-divider="true"></option>
+                    <option>No credits</option>
+                    <option data-divider="true"></option>
+                    <option>More ammo</option>
+                    <option>More armor</option>
+                    <option>More credits</option>
+                    <option>More grenades</option>
+                    <option>More heals</option>
+                    <option>More magic</option>
+                    <option>More tech</option>
+                    <option>More upgrades</option>
+                    <option>More weapons</option>
+                </select>
                 <button type="button" onclick="generateLoot()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
                 <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
                 <P></P>
@@ -109,5 +90,6 @@
 {% endblock %}
 {% block includes %}
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/equipmentData.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/lootGen.v2.2.js') }}"></script>
 {% endblock %}

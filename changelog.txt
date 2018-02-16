@@ -2,7 +2,9 @@ V2.4
 New Features:
   - monster builder can now save statblock as an image
   - changelog now displayed on site
-  - add 'no credits' mode to loot gen
+  - added 'no credits' mode to loot gen
+  - alien archive equipment added to loot generator
+  - source selection added to loot generator
 Changes:
   - monster statblock format fixes (class and RP)
   - switch loot gen to easier to maintain data

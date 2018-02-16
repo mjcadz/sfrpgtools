@@ -1,5 +1,3 @@
-
-var sources = ["crb","aa"];
 var limitedGroups = ["Solarion Weapon Crystals", "Heavy Weapons", "Advanced Melee Weapons", "Light Armor", "Longarms", "Basic Melee Weapons", "Heavy Armor", "Sniper Weapons", "Small Arms", "Special Weapons", "Grenades"];
 var moreGroups = ["Spell Ampoules","Spell Gems","Healing Serum"];
 var professions = ["Accountant","Actor","Archaeologist","Architect","Artist","Bounty Hunter","Comedian","Con Artist","Cook","Corporate Professional","Courtesan","Counselor","Dancer","Dockworker","Electrician","Farmer","Gambler","General Contractor","Herbalist","Lab Technician","Lawyer","Maintenance Worker","Manager","Mathematician","Mercenary","Merchant","Miner","Musician","Orator","Philosopher","Poet","Politician","Professor","Psychologist","Smuggler","Video Personality","Vidgamer","Writer"]
@@ -83,16 +81,27 @@ function generateLoot() {
   var itemArray = [];
   var item = [];
 
-  var aplmod = Number($('#APLDrop').text().replace("Average Party Level - ","").trim());
-  var crmod = ($('#CRDrop').text().replace("Challenge Rating - ","")).trim();
-  var moremod = ($('#moreDrop').text().replace("More ","")).trim();
+  var aplmod = Number($('#APLDrop').val().replace("APL ","").trim());
+  var crmod = ($('#CRDrop').val().replace("CR ","")).trim();
+  var moremod = ($('#moreDrop').val().replace("More ","")).trim();
+  var sourcebooks = $('#sourceDrop').val();
   var wealth = crWealth[crmod];
 
+  if (sourcebooks.length == 0){
+    var $outputArea = $(".output.area").first();
+    $outputArea.empty();
+    $outputArea.append('<p>No sources selected</p>');
+    return
+  }
+
+  //replace book names with shortened name
+  sourcebooks = sourcebooks.map(function(x){ return x.replace("Core Rulebook","crb") });
+  sourcebooks = sourcebooks.map(function(x){ return x.replace("Alien Archive","aa") });
   //
   //BUILD LIST
   //
 
-  itemArray = getDataArray("All",myjson)
+  itemArray = getDataArray("All",myjson,sourcebooks)
 
   //
   //CHOOSE ITEMS AND BUILD TABLE
@@ -113,7 +122,7 @@ function generateLoot() {
   //more ammo
   if (moremod == "ammo") {
     var ammoItems;
-    ammoItems = getDataArray(["Ammunition","Special Ammunition"],myjson);
+    ammoItems = getDataArray(["Ammunition","Special Ammunition"],myjson,sourcebooks);
      for (var i = randomWeightedChoice([2,3,4,5,6],[1,3,2,1,1]); i > 0; i--){
        if (wealthCount > 0) {
          thisItem = randomChoice(ammoItems);
@@ -126,7 +135,7 @@ function generateLoot() {
   //more armor
   if (moremod == "armor") {
     var armorItems;
-    armorItems = getDataArray(["Light Armor","Heavy Armor"],myjson);
+    armorItems = getDataArray(["Light Armor","Heavy Armor"],myjson,sourcebooks);
      for (var i = randomWeightedChoice([2,3,4,5,6],[1,3,2,1,1]); i > 0; i--){
        if (wealthCount > 0) {
          thisItem = randomChoice(armorItems);
@@ -139,7 +148,7 @@ function generateLoot() {
   //more grenades
   if (moremod == "grenades") {
     var grenadeItems;
-    grenadeItems = getDataArray(["Grenades"],myjson);
+    grenadeItems = getDataArray(["Grenades"],myjson,sourcebooks);
      for (var i = randomWeightedChoice([2,3,4,5],[1,3,2,1]); i > 0; i--){
        if (wealthCount > 0) {
          thisItem = randomChoice(grenadeItems);
@@ -152,7 +161,7 @@ function generateLoot() {
   //more heals
   if (moremod == "heals") {
     var healsItems;
-    healsItems = getDataArray(["Healing Serum","Medical Gear"],myjson);
+    healsItems = getDataArray(["Healing Serum","Medical Gear"],myjson,sourcebooks);
      for (var i = randomWeightedChoice([2,3,4,5],[1,3,2,1]); i > 0; i--){
        if (wealthCount > 0) {
          thisItem = randomChoice(healsItems);
@@ -165,7 +174,7 @@ function generateLoot() {
   //more magic
   if (moremod == "magic") {
     var magicItems;
-    magicItems = getDataArray(["Spell Ampoules","Spell Gems", "Magic Items"],myjson);
+    magicItems = getDataArray(["Spell Ampoules","Spell Gems", "Magic Items"],myjson,sourcebooks);
      for (var i = randomWeightedChoice([2,3,4,5],[1,3,2,1]); i > 0; i--){
        if (wealthCount > 0) {
          thisItem = randomChoice(magicItems);
@@ -185,7 +194,7 @@ function generateLoot() {
   //more tech
   if (moremod == "tech") {
     var techItems;
-    techItems = getDataArray(["Technological Items","Hybrid Items"],myjson);
+    techItems = getDataArray(["Technological Items","Hybrid Items"],myjson,sourcebooks);
      for (var i = randomWeightedChoice([2,3,4,5],[1,3,2,1]); i > 0; i--){
        if (wealthCount > 0) {
          thisItem = randomChoice(techItems);
@@ -198,7 +207,7 @@ function generateLoot() {
   //more upgrades
   if (moremod == "upgrades") {
     var upgradeItems;
-    upgradeItems = getDataArray(["Armor Upgrades","Fusion Seals","Solarion Weapon Crystals"],myjson);
+    upgradeItems = getDataArray(["Armor Upgrades","Fusion Seals","Solarion Weapon Crystals"],myjson,sourcebooks);
      for (var i = randomWeightedChoice([2,3,4,5],[1,3,2,1]); i > 0; i--){
        if (wealthCount > 0) {
          thisItem = randomChoice(upgradeItems);
@@ -211,7 +220,7 @@ function generateLoot() {
   //more weapons
   if (moremod == "weapons") {
     var weaponsItems;
-    weaponsItems = getDataArray(["Heavy Weapons","Advanced Melee Weapons","Basic Melee Weapons","Longarms","Sniper Weapons","Small Arms","Special Weapons"],myjson);
+    weaponsItems = getDataArray(["Heavy Weapons","Advanced Melee Weapons","Basic Melee Weapons","Longarms","Sniper Weapons","Small Arms","Special Weapons"],myjson,sourcebooks);
      for (var i = randomWeightedChoice([2,3,4,5],[1,3,2,1]); i > 0; i--){
        if (wealthCount > 0) {
          thisItem = randomChoice(weaponsItems);
@@ -318,20 +327,20 @@ function addTableItem (item,trueTable){
 
 }
 
-function getDataArray(groups,json){
+function getDataArray(groups,json,sourcebooks){
   var dataArray = [];
   var item = [];
   var itemGroup,itemName;
   var itemLevel, minLevel,aplmod;
 
 
-  aplmod = Number($('#APLDrop').text().replace("Average Party Level - ","").trim());
+  aplmod = Number($('#APLDrop').val().replace("APL ","").trim());
 
   for (itemGroup in json) {
     if (groups.includes(itemGroup) || groups.includes("All")) {
       for (itemName in json[itemGroup]) {
         source = json[itemGroup][itemName]['sourcebook']
-        if (sources.includes(source)){
+        if (sourcebooks.includes(source)){
 
           item = [];
           itemLevel = Number(json[itemGroup][itemName]['level']);
@@ -371,20 +380,8 @@ function getDataArray(groups,json){
   return dataArray;
 }
 
-//Sets selected dropdown to dropdown display
-//BOOTSTRAP 3
-$(".dropdown-menu li a").click(function(){
-  var selected = $(this).text();
-  if (selected.includes("APL")) {
-    $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">Average Party Level - ' + selected.replace("APL ","") + '</span><span class="caret"></span>');
-    $(this).closest('.btn-group').find('.dropdown-toggle').val("Average Party Level - " + selected.replace("APL ",""));
-  }
-  else if (selected.includes("CR")){
-    $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">Challenge Rating - ' + selected.replace("CR ","") + '</span><span class="caret"></span>');
-    $(this).closest('.btn-group').find('.dropdown-toggle').val("Challenge Rating - " + selected.replace("CR ",""));
-  }
-  else if (selected.includes("More") || selected.includes("Random") || selected.includes("No")){
-    $(this).closest('.btn-group').find('.dropdown-toggle').html('<span class="pull-left">'+selected+'</span><span class="caret"></span>');
-    $(this).closest('.btn-group').find('.dropdown-toggle').val(selected);
-  }
+//runs when page is loaded
+$( document ).ready(function() {
+  //initialise pickers
+  $('.selectpicker').selectpicker();
 });
