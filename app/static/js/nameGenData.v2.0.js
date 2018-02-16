@@ -446,6 +446,7 @@ var nameGenTerms = [
     outputs: [
       "Corroder",
       "Decay",
+      "Disintegrator",
       "Scorpion",
       "Dart-Frog",
       "Green Lotus",
@@ -456,6 +457,7 @@ var nameGenTerms = [
       "Heart Burn",
       "Fume Extraction",
       "Industrial Waste",
+      "Liquefier",
     ]
   },
   {

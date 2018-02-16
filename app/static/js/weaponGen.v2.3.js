@@ -1,36 +1,50 @@
 var gunParts = ["Muzzle","Barrel","Sights","Stock"]
 
 var flavourText = ["The weapon features an oversized scope",
-"Three barrels! that seems excessive",
-"This weapon looks quite old",
-"The sights are on the side of this weapon",
-"The barrel looks like the end of a trumpet",
-"Under the barrel of this weapon is a knife",
-"The serial number of this weapon has been filed off",
-"The grip of this weapon is odd and mishapen as if for an alien hand",
-"This weapon is made from a strange material that absorbs light",
-"This weapon sparkles and glitters in the light",
-"This weapon is surplus military stock",
-"Someone has taken great care to keep this weapon in pristine",
-"The model number is scrawled on to this weapon in some alien text",
-"This weapon in small, half the size of similar makes",
-"This weapon in large, double the size of similar makes",
-"This weapon is pretty underwhelming",
-"",
-"",
-"",
-"",
-"",
-"",
-"",
-"",
-"",
-"",
-"",
-"",
-"",
-"",
-"",
+  "Three barrels! that seems excessive",
+  "This weapon looks quite old",
+  "The sights are on the side of this weapon",
+  "The barrel looks like the end of a trumpet",
+  "Under the barrel of this weapon is a knife",
+  "The serial number of this weapon has been filed off",
+  "The grip of this weapon is odd and mishapen as if for an alien hand",
+  "This weapon is made from a strange material that absorbs light",
+  "This weapon sparkles and glitters in the light",
+  "This weapon is surplus military stock",
+  "Someone has taken great care to keep this weapon in pristine",
+  "The model number is scrawled on to this weapon in some alien text",
+  "This weapon in small, half the size of similar makes",
+  "This weapon is large, double the size of similar makes",
+  "This weapon is pretty underwhelming",
+  "This weapon generates a small electrical field, attracting nearby dust and particles",
+  "Dings and dents cover this old weapon",
+  "At some point this weapon was painted dark colours",
+  "This weapons grease ducts have long since covered over",
+  "Covered in rust",
+  "Looks like it just came off the assembly line",
+  "The smell of fresh wrought metal emenates from this weapon",
+  "This weapon is entirely made from plastics",
+  "This weapon is two sizes too big, as if it were made for large hands",
+  "Sturdy and reliable",
+  "This particular model is favoured by the Hellnights",
+  "This weapon glows warmly in dim and dark light",
+  "This weapon has had many owners",
+  "This model is reliable and trustworthy",
+  "The more this weapon is used the smoother it feels to fire",
+  "Looks like it might break at any minute",
+  "This model has proven itself in combat",
+  "Leftover stock from the Vesk wars",
+  "Old stock, battle proven",
+  "A lucky skittermander foot is attached to the barrel",
+  "This weapon has been mirror polished",
+  "This weapon has been plated with a strange blue material",
+  "Constructed entirely from advanced lightweight fibres",
+  "This weapon feels heavier than it looks",
+  "Left handed",
+  "This weapon needs to be greased reguarly",
+  "Covered in dirt and grime",
+  "Advanced technologies keep this weapon firing with no maintenance required",
+  "Red lights indicate when this weapon is ready to fire"
 ]
 
 var damageType = ["Acid", "Cryo", "Flame", "Laser", "Plasma", "Projectile", "Shock", "Sonic"];
@@ -601,7 +615,9 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
                         "<br><b>Capacity: </b>" + capacity +
                         "<br><b>Usage: </b>" + usage +
                         "<br><b>Bulk: </b>" + bulk +
-                        "<br><b>Special: </b>" + special + "</p>";
+                        "<br><b>Special: </b>" + special +
+                        "<br>" +
+                        "<br><i>" + flavourText.selectRandom() + ".</i></p>";
 
   }
   $outputArea.append("<div class=\"panel " + indexString + "\">");
