@@ -1,5 +1,6 @@
 V2.4
 New Features:
+  - A character concept generator
   - monster builder can now save statblock as an image
   - changelog now displayed on site
   - added 'no credits' mode to loot gen

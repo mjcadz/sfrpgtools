@@ -46,6 +46,12 @@ def characterSheet():
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
+@app.route('/character-concept-generator')
+def characterGenerator():
+    resp = make_response(render_template('character-concept-generator.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp
+
 @app.route('/changelog')
 def changelog():
     resp = make_response(render_template('changelog.html'))

@@ -2545,11 +2545,6 @@ function stepFiveDescription(selected) {
   $('#stepFiveSave').text(selected);
 }
 
-//prototype to capitalise only the first char in a string
-String.prototype.capitalise = function() {
-    return this.charAt(0).toUpperCase() + this.slice(1);
-}
-
 //removes the selected element from selected array
 function removeElement(array,element) {
 

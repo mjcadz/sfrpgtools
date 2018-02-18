@@ -58,6 +58,11 @@ Array.prototype.selectRandom = function() {
   return this[Math.floor(Math.random() * this.length)];
 }
 
+//prototype to capitalise only the first char in a string
+String.prototype.capitalise = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
 function randomWeightedChoice(list, weight) {
     var total_weight = weight.reduce(function (prev, cur, i, arr) {
         return prev + cur;
