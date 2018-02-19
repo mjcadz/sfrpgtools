@@ -5,7 +5,13 @@ var AgeList =['Child', 'Young', 'Adult', 'Mature', 'Old'];
 var ClassList = ["Envoy","Mechanic","Mystic","Operative","Solarian","Soldier","Technomancer"];
 var AlignList = ["Lawful Good","Neutral Good","Chaotic Good","Lawful Neutral","Neutral","Chaotic Neutral","Lawful Evil","Neutral Evil","Chaotic Evil"];
 var ThemeList = ["Ace Pilot","Bounty Hunter","Icon","Mercenary","Outlaw","Priest","Scholar","Spacefarer","Xenoseeker"];
-var ProfessionList = ["Accountant","Actor","Archaeologist","Architect","Artist","Bounty Hunter","Comedian","Con Artist","Cook","Corporate Professional","Courtesan","Counselor","Dancer","Dockworker","Electrician","Farmer","Gambler","General Contractor","Herbalist","Lab Technician","Lawyer","Maintenance Worker","Manager","Mathematician","Mercenary","Merchant","Miner","Musician","Orator","Philosopher","Poet","Politician","Professor","Smuggler","Video Personality","Vidgamer","Writer"];
+
+var ProfessionList = ["Accountant","Actor","Archaeologist","Architect","Artist","Builder","Bounty Hunter","Comedian","Con Artist",
+    "Cook","Cop","Corporate Professional","Courtesan","Counselor","Dancer","Dockworker","Electrician","Engineer","Factory Worker",
+    "Farmer","Gambler","General Contractor","Ghost Buster","Hacker","Herbalist","Hologram Designer","Hunter","Illustrator","Janitor","Lab Technician",
+    "Laser beam operator","Lawyer","Librarian","Maintenance Worker","Manager","Mathematician","Mercenary","Merchant","Miner","Musician",
+    "Orator","Philosopher","Pilot","Plumber","Poet","Politician","Professor","Programmer","Salesperson","Smuggler","Tech Support","Tour Guide","Video Personality",
+    "Vidgamer","Writer"];
 
 var PersonalityList = ['Accusative', 'Active', 'Adventurous', 'Affable', 'Aggressive',
     'Agreeable', 'Aimless', 'Aloof', 'Altruistic', 'Analytical', 'Angry',
@@ -41,11 +47,11 @@ var PersonalityList = ['Accusative', 'Active', 'Adventurous', 'Affable', 'Aggres
     'Insecure', 'Insensitive', 'Instructive', 'Intolerant', 'Intransigent',
     'Introverted', 'Irreligious', 'Irresponsible', 'Irreverent', 'Irritable',
     'Jealous', 'Jocular', 'Joking', 'Jolly', 'Joyous', 'Judgmental', 'Jumpy',
-    'Kind', 'Know-it-all', 'Languid', 'Lazy', 'Lethargic', 'Lewd', 'Liar',
+    'Kind', 'Know-it-all', 'Languid', 'Lazy', 'Lethargic', 'Lewd', 'Lying',
     'Likable', 'Lippy', 'Listless', 'Loquacious', 'Loving', 'Loyal', 'Lust',
     'Madcap', 'Magnanimous', 'Malicious', 'Maudlin', 'Mean', 'Meddlesome',
     'Melancholy', 'Melodramatic', 'Merciless', 'Merry', 'Meticulous',
-    'Mischievous', 'Miscreant', 'Miserly', 'Modest', 'Moody', 'Moralistic',
+    'Mischievous', 'Miscreant', 'Miserable', 'Modest', 'Moody', 'Moralistic',
     'Morbid', 'Morose', 'Mournful', 'Mousy', 'Mouthy', 'Mysterious', 'Naive',
     'Narrow-minded', 'Needy', 'Nefarious', 'Nervous', 'Nettlesome', 'Neurotic',
     'Noble', 'Nonchalant', 'Nurturing', 'Obdurate', 'Obedient', 'Oblivious',
@@ -473,7 +479,9 @@ function printPanel(Age,Align,Race,Class,Theme,Profession,Who,Personality,From) 
   var storeOutput = $( "div.output.area" ).html();
   $outputArea.empty();
 
-  var panelTitle =  "<p><i>" + getArticle(Personality.toLowerCase()).capitalise() + " " + Race.toLowerCase() + " " + Class.toLowerCase() + ", who " + Who + " and comes from " + From + "</i>.</p>";
+  var panelTitle =  "<p><i>" + getArticle(Age.toLowerCase()).capitalise() + " <b>" + Race.toLowerCase() + " " + Class.toLowerCase() + "</b>, who " + Who + " and comes from " + From + ". They are " + Personality.toLowerCase() +", and have found work as " + getArticle(Profession.toLowerCase()) + ".</i></p>";
+
+  //"<p><i>" + getArticle(Personality.toLowerCase()).capitalise() + " " + Race.toLowerCase() + " " + Class.toLowerCase() + ", who " + Who + " and comes from " + From + "</i>.</p>";
 
   var panelBody =   "<p><b>Age: </b>" + Age +
                     "<br><b>Alignment: </b>" + Align +
@@ -532,7 +540,7 @@ function generateCharacter() {
   printPanel(Age,Align,Race,Class,Theme,Profession,Who,Personality,From);
 
   //log event in analytics
-  //ga('send', 'event', 'Generation', 'concept', Race + ' ' + Class);
+  ga('send', 'event', 'Generation', 'concept', Race + ' ' + Class);
 }
 
 //runs when page is loaded
