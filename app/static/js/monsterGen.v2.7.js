@@ -3492,10 +3492,11 @@ $('.btn-graft').click(function(){
 });
 
 //show the summernote edit box wrapped around the statblock text
-function edit() {
+function editBlock() {
   $('.btn-save').show();
   $('.btn-edit').hide();
   $('.btn-image').hide();
+  $('.btn-print').hide();
   $('#overEdit').css({'margin-left': '0em', 'margin-right': '0em'});
   $('.summernoteEdit').summernote({
     focus: true,
@@ -3505,7 +3506,6 @@ function edit() {
       ['fontsize', ['fontsize']],
       ['insert', ['link','hr','picture']],
       ['misc', ['fullscreen','codeview',]],
-      ['miscc', ['print']]
     ],
     print: {
         'stylesheetUrl': 'static/css/print.css'
@@ -3514,23 +3514,29 @@ function edit() {
 };
 
 //remove the edit box and show straight html
-function save() {
+function saveBlock() {
   $('.btn-save').hide();
   $('.btn-edit').show();
   $('.btn-image').show();
+  $('.btn-print').show();
   $('#overEdit').css({'margin-left': '4.5em', 'margin-right': '1em'});
   var markup = $('.summernoteEdit').summernote('code');
   $('.summernoteEdit').summernote('destroy');
 };
 
 //generate image from statblock so user can save
-function toimage() {
+function blockToImage() {
   html2canvas(document.querySelector("#capture")).then(canvas => {
 
     canvas.toBlob(function(blob) {
     	saveAs(blob, "statblock.png");
     });
   });
+};
+
+//print the statblock
+function printBlock() {
+    window.print();
 };
 
 function dismissAlert() {

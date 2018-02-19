@@ -3,6 +3,9 @@
 {% extends "base.html" %}
 {% block title %}Starfinder Monster Builder{% endblock %}
 {% block description %}NPC and monster creator for starfinder roleplaying game{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/monsterPrint.v2.0.css') }}">
+{% endblock %}
 {% block body %}
 <div class="jumbotron">
     <h1>Monster Builder</h1>
@@ -317,10 +320,11 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h4 class="info-text">Stat Block</h4>
-                                    <hr>
-                                    <button type="button" style="margin-left: 20px;" class="btn btn-edit btn-grn" onclick="edit()" type="button">Edit statblock</button>
-                                    <button type="button" style="margin-left: 20px;" class="btn btn-save btn-grn" onclick="save()" type="button">Save statblock</button>
-                                    <button type="button" style="margin-left: 20px;" class="btn btn-image btn-grn" onclick="toimage()" type="button">Save statblock as image</button>
+                                    <hr class="dontPrint">
+                                    <button type="button" style="margin-left: 20px;" class="btn btn-edit btn-grn" onclick="editBlock()" type="button">Edit statblock</button>
+                                    <button type="button" style="margin-left: 20px;" class="btn btn-save btn-grn" onclick="saveBlock()" type="button">Save statblock</button>
+                                    <button type="button" style="margin-left: 20px;" class="btn btn-image btn-grn" onclick="blockToImage()" type="button">Save statblock as image</button>
+                                    <button type="button" style="margin-left: 20px;" class="btn btn-print btn-grn" onclick="printBlock()" type="button">Print statblock</button>
                                     <p></p>
                                     <div id="capture" style="max-width: 600px;">
                                         <div id="overEdit" style="margin-left: 4.5em; margin-right: 1em;">
@@ -442,7 +446,6 @@
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-wizard.js') }}"></script>
 <script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote-ext-print.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/html2canvas.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/spellData.v2.2.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterGenData.v2.3.js') }}"></script>
