@@ -13,7 +13,7 @@ function share(id) {
     window.open('http://www.reddit.com/submit?url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title));
   }
   else if (id == "github"){
-    window.open('https://github.com/mjcadz/weapon-gen-app');
+    window.open('https://github.com/mjcadz/sfrpgtools');
   }
   ga('send', 'event', 'Share', id);
   return false;
