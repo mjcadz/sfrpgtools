@@ -1281,7 +1281,7 @@ function getClassStats(statObject){
     statObject.ClassResolvePoints = Math.round(cr/5) + 3;
 
     //read and apply class data
-    statObject.ClassAbilities = getClassAbilities(classDrop,cr);
+    statObject.ClassAbilities = getClassAbilities(classDrop,cr).description;
 
     if (classObject.hasOwnProperty("SpecialRules")){
       statObject.ClassSpecialRules = classObject.SpecialRules;
@@ -1325,6 +1325,11 @@ function getClassAbilities(selectedClass,cr){
 
   var keyNums = [];
   var crBottom = 0;
+
+  if (cr < 1) {
+    cr = 1;
+  }
+
   //get array of CR values
   for (key in classData[selectedClass].AbilitiesByCr){
     keyNums.push(Number(key));
@@ -1450,18 +1455,31 @@ function generateMultiDropdown(parentID,label,dropID,title,searchTitle,array,max
   } else {
     searTitl = 'data-live-search="true" data-live-search-placeholder="'+searchTitle+'" ';
   }
+  //check if overall max options
+  if (maxOptions === 0){
+    dataMax = ''
+  } else {
+    dataMax = 'data-max-options="'+maxOptions+'" ';
+  }
+
   //add select options
   var dropHtml = "";
   if (label != "") {
     dropHtml += '<label>' + label + '</label>'
   }
-  dropHtml += '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10" multiple ' + searTitl + 'data-max-options="'+maxOptions+'" data-selected-text-format="count">'
+  dropHtml += '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10" multiple ' + searTitl + dataMax + 'data-selected-text-format="count">'
   //build list, apply BREAKS or LABELS if words present in array
   for (i = 0; i < array.length; i++) {
+
     if (array[i] == 'BREAK'){
       dropHtml += '<option data-divider="true"></option>';
     } else if (array[i].includes('LABEL=')) {
-      dropHtml += '<optgroup label="' + array[i].replace('LABEL=','') + '">';
+      if (array[i].includes('MAX=')){
+        var split = array[i].split('MAX=')
+        dropHtml += '<optgroup label="' + split[0].replace('LABEL=','') + '" data-max-options="' + split[1] + '">';
+      } else {
+        dropHtml += '<optgroup label="' + array[i].replace('LABEL=','') + '">';
+      }
     } else if (array[i].includes('ENDLABEL')) {
       dropHtml += '</optgroup>';
     }
@@ -1869,10 +1887,15 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
           }
 
         } else {
-          $('#stepFourSave').text(selected+":"+"None"+":"+"chosen");
+          $('#stepFourSave').text(selected+":"+"None"+":"+"None"+":"+"chosen");
           var $descriptionArea = $(".stepFourDescription").first();
           $descriptionArea.empty();
+          var $descriptionArea = $(".classFeaturesDescription").first();
+          $descriptionArea.empty();
           $("#stepFourOptionalDropdown").first().empty();
+          $("#stepFourOptionalDropdownTwo").first().empty();
+          $("#stepFourOptionalDropdownThree").first().empty();
+          $("#stepFourOptionalDropdownFour").first().empty();
         }
     } else if (id=='graftDrop') {
 
@@ -2513,18 +2536,86 @@ function stepFourDescription(selected,selectedArray) {
 
   $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
 
+  var crString = $('[data-id="CRDrop"]').text().trim();
+  var cr = Number(crString.replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
+  var classFeatures = getClassAbilities(selected,cr);
+  var $descriptionOneArea = $(".classFeaturesDescription").first();
+  $descriptionOneArea.empty();
+
+  $descriptionOneArea.append("<p><b>" + crString + " " + selected + " Abilities: </b>" + classFeatures.description + "</p>");
 
   //set secondary dropdowns
-  if ($('#stepFourSave').text() != selected+":"+selectedArray+":"+"None"){
+  if ($('#stepFourSave').text() != selected+":"+selectedArray+":"+crString+":"+"None"){
     if (selected == "Soldier"){
+
+      //Soldier
+
+      styleKeys = Object.keys(allClassFeatures["Soldier"]["Fighting style"]).sort();
+
       generateDropdown("stepFourOptionalDropdown","Attack focus","stepFourOptionDrop","Choose attack focus",["Melee","Ranged"]);
+      generateDropdown("stepFourOptionalDropdownTwo","Primary fighting style","stepFourOptionDropTwo","Choose fighting style",styleKeys);
+      if (classFeatures["Fighting style"].hasOwnProperty("second")) {
+        //secondary style
+        generateDropdown("stepFourOptionalDropdownThree","Secondary fighting style","stepFourOptionDropThree","Choose fighting style",styleKeys);
+      } else {
+        $("#stepFourOptionalDropdownThree").first().empty();
+      }
+
+      if (classFeatures.hasOwnProperty("Gear boost")) {
+        var boosts = Object.keys(allClassFeatures["Soldier"]["Gear Boost"]).sort();
+        generateMultiDropdown("stepFourOptionalDropdownFour","Gear boosts","stepFourOptionDropFour","Choose gear boosts","Search boosts",boosts,classFeatures["Gear boost"]);
+      } else {
+        $("#stepFourOptionalDropdownFour").first().empty();
+      }
+
     } else if (selected == "Envoy"){
+
+      //Envoy
+
+      improvKeys = Object.keys(classFeatures.improvisations)
+      var improvisationArray = [];
+
+      for (var i = 0; i < improvKeys.length; i++) {
+          improvisationArray = improvisationArray.concat(['LABEL=' + improvKeys[i] +'-levelMAX=' + classFeatures.improvisations[improvKeys[i]]]);
+          improvisationArray = improvisationArray.concat(Object.keys(allClassFeatures["Envoy"]["Envoy Improvisations"][improvKeys[i]]).sort());
+          improvisationArray = improvisationArray.concat(['ENDLABEL']);
+      }
       generateDropdown("stepFourOptionalDropdown","Additional master skill","stepFourOptionDrop","Choose additional master skill",["Bluff", "Diplomacy" ,"Intimidate"]);
+      generateMultiDropdown("stepFourOptionalDropdownTwo","Envoy improvisations","stepFourOptionDropTwo","Choose improvisations","Search improvisations",improvisationArray,0);
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
+
+    } else if (selected == "Solarian") {
+
+      //Solarian
+
+      generateDropdown("stepFourOptionalDropdown","Solar manifestation","stepFourOptionDrop","Choose manifestation",["Solar armor","Solar weapon"]);
+
+      if (classFeatures.hasOwnProperty("revelations")) {
+        revelKeys = Object.keys(classFeatures.revelations);
+        var revelationArray = [];
+
+        for (var i = 0; i < revelKeys.length; i++) {
+            revelationArray = revelationArray.concat(['LABEL=' + revelKeys[i] +'-levelMAX=' + classFeatures.revelations[revelKeys[i]]]);
+            revelationArray = revelationArray.concat(Object.keys(allClassFeatures["Solarian"]["Stellar Revelations"][revelKeys[i]]).sort());
+            revelationArray = revelationArray.concat(['ENDLABEL']);
+        }
+        generateMultiDropdown("stepFourOptionalDropdownTwo","Stellar revelations","stepFourOptionDropTwo","Choose revelations","Search revelations",revelationArray,0);
+      } else {
+        $("#stepTwoOptionalDropdownThree").first().empty();
+      }
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
+
+
     } else {
       $("#stepFourOptionalDropdown").first().empty();
+      $("#stepFourOptionalDropdownTwo").first().empty();
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
     }
   }
-  $('#stepFourSave').text(selected+":"+selectedArray+":"+"None");
+  $('#stepFourSave').text(selected+":"+selectedArray+":"+crString+":"+"None");
 
 }
 
@@ -2774,7 +2865,7 @@ $('.wizard-card').bootstrapWizard({
               if (prev[0] != 'None' && prev[1] == arrayDrop) {
                 $('#classDrop').selectpicker('val', prev[0]);
                 stepFourDescription(prev[0],prev[1]);
-              } else if (prev[2] == 'chosen'){
+              } else if (prev[3] == 'chosen'){
                 $('#classDrop').selectpicker('val', "None");
                 $('#stepFourSave').text("None:None");
               } else if (prev[1] != arrayDrop) {

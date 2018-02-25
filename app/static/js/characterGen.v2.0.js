@@ -418,7 +418,7 @@ var WhoList = [
     "was grown in a vat and has no family",
     "has stolen someones identity",
     "really knows how to party",
-    "is the firt to loot every enemy",
+    "is the first to loot every enemy",
     "thinks that they are amazing at combat, but are the worst in the party",
     "knows the location of a huge weapons cache",
     "knows a guy",

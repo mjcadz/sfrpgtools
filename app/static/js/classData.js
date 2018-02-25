@@ -1,4 +1,4 @@
-{
+allClassFeatures = {
 	"Mystic": {
 		"Connections": {
 			"Overlord": {
@@ -378,135 +378,125 @@
 			}
 		},
 		"Envoy Improvisations": {
-			"Hidden Agenda": {
-				"SOURCEPAGE": "p.64",
-				"description": "You're an expert at veiling your true thoughts and goals. Whenever a creature attempts a Sense Motive check to detect a deception of yours, the creature must roll twice and take the worse of the two results. When you attempt a saving throw against an effect or ability that would read your thoughts or reveal your motives, you can roll twice and take the better of the two results.",
-				"minLevel": "8"
+			"1st":{
+				"Get 'Em": {
+				  "SOURCEPAGE": "p.62",
+				  "description": "As a move action, you can choose one enemy within 60 feet. Until the start of your next turn, you and your allies gain a +1 morale bonus to attack rolls made against that enemy. The bonus persists even if the enemy moves beyond 60 feet or out of line of sight or hearing. At 6th level, you can spend 1 Resolve Point to grant this bonus to attack rolls and damage rolls against all enemies who are within 60 feet."
+				},
+				"Universal Expression": {
+				  "SOURCEPAGE": "p.62",
+				  "description": "When using a language-dependent improvisation that affects an enemy, you can use the improvisation against that enemy even if the two of you do not share a language."
+				},
+				"Dispiriting Taunt": {
+				  "SOURCEPAGE": "p.62",
+				  "description": "As a standard action, you can taunt an enemy within 60 feet. Attempt an Intimidate check with the same DC as a check to demoralize that enemy (though this isn't a check to demoralize, so you can't use abilities that would apply to a demoralization attempt, like the rattling presence expertise talent). If you fail, that enemy is off-target (see page 276) until the end of your next turn. If you succeed, that enemy is instead shaken (see page 277) until the end of your next turn. This is an emotion and fear effect. At 6th level, you can spend 1 Resolve Point to treat a failed Intimidate check for dispiriting taunt as if it were a success."
+				},
+				"Look Alive": {
+				  "SOURCEPAGE": "p.62",
+				  "description": "When you spend a Resolve Point to regain Stamina Points after a 10-minute rest, all allies who stay within 60 feet of you throughout the rest gain a +2 morale bonus to Perception and initiative checks for the next hour or until the next 10-minute rest to recover Stamina Points, whichever comes first."
+				},
+				"Expanded Attunement": {
+				  "SOURCEPAGE": "p.62",
+				  "description": "You can use beneficial mind-affecting envoy improvisations to aid allies who usually would not be able to gain benefits from mind-affecting effects, such as constructs, robots, and undead. If the improvisation grants a morale bonus, even allies who can't normally benefit from morale bonuses gain that bonus."
+				},
+				"Clever Feint": {
+				  "SOURCEPAGE": "p.62",
+				  "description": "As a standard action, you can fake out an enemy within 60 feet, making that enemy open to your attacks. Attempt a Bluff check with the same DC as a check to feint against that enemy (though this isn't a standard check to feint, so Improved Feint and Greater Feint don't apply). Even if you fail, that enemy is flat-footed against your attacks (see page 276) until the end of your next turn. If you succeed, the enemy is also flat-footed against your allies' attacks until the end of your next turn. You can't use clever feint against a creature that lacks an Intelligence score. At 6th level, you can spend 1 Resolve Point to treat a failed Bluff check for clever feint as if it were a success."
+				},
+				"Watch Your Step": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "When an ally within 60 feet must succeed at a Reflex save to avoid a harmful effect, as a reaction before your ally attempts the saving throw, you can grant the ally a +2 bonus to that saving throw. At 6th level, you can spend 1 Resolve Point to have the ally roll twice on the saving throw and take the better result. Both of those rolls benefit from the +2 bonus provided by this ability. "
+				},
+				"Don't Quit": {
+				  "SOURCEPAGE": "p.62",
+				  "description": "As a standard action, you can signal a single ally within 60 feet. That ally ignores one condition (see page 273) of your choice until the start of your next turn, chosen from the following list"
+				},
+				"Inspiring Boost": {
+				  "SOURCEPAGE": "p.62",
+				  "description": "As a standard action, you can signal an ally within 30 feet who has taken damage from any attack made by a significant enemy (see page 242) at any point after your last turn ended. That ally regains a number of Stamina Points (up to his maximum) equal to twice your envoy level + your Charisma modifier; at 15th level, this increases to three times your envoy level + your Charisma modifier. Once an ally has benefited from your inspiring boost, that ally can't gain the benefits of your inspiring boost again until he takes a 10-minute rest to recover Stamina Points. At 6th level, you can spend 1 Resolve Point to add your envoy level to the number of Stamina Points regained."
+				},
+				"Not in the Face": {
+				  "SOURCEPAGE": "p.62",
+				  "description": "As a move action, you can choose one enemy within 60 feet. That enemy must succeed at a Will save or take a -4 penalty to all attacks it makes against you until the end of your next turn. At 6th level, you can spend 1 Resolve Point to make the enemy take the penalty with no saving throw allowed."
+				}
 			},
-			"Get 'Em": {
-				"SOURCEPAGE": "p.62",
-				"description": "As a move action, you can choose one enemy within 60 feet. Until the start of your next turn, you and your allies gain a +1 morale bonus to attack rolls made against that enemy. The bonus persists even if the enemy moves beyond 60 feet or out of line of sight or hearing. At 6th level, you can spend 1 Resolve Point to grant this bonus to attack rolls and damage rolls against all enemies who are within 60 feet."
+			"4th":{
+				"Focus": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "As a standard action, you can encourage a single ally within 60 feet to focus on the danger at hand. If that ally is flat-footed or off-target, you end that condition. If circumstances would cause the ally to immediately become flat-footed or off-target again, you instead suppress that condition for 1 round."
+				},
+				"Long-Range Improvisation": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "Double the range of your improvisations with ranges of at least 30 feet."
+				},
+				"Hurry": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "As a standard action, you can grant a single move action to an ally within 60 feet. The ally can use that move action during her next turn to take a guarded step, move up to her speed, or draw or sheathe a weapon. The ally can use her extra move action in between her other actions, and she can even use it before or after a full action. A character can use no more than one extra action from hurry in a single round."
+				},
+				"Duck Under": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "You can duck under a foe's melee attack, causing it to overextend and move into a position more favorable to you. You must take the total defense action (see page 247) to use this ability. If, before the start of your next turn, a foe misses you with a melee attack, as a reaction you can attempt a reposition combat maneuver with a +8 bonus to your attack roll against that foe."
+				},
+				"Quick Dispiriting Taunt": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "You can use dispiriting taunt as a move action instead of a standard action. You must have the dispiriting taunt envoy improvisation to choose this improvisation."
+				},
+				"Clever Attack": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "You can make an attack that throws your enemy off-balance. As a standard action, you can make a single attack against a target within 60 feet and gain the benefits of clever feint (attempting a Bluff check against the target as normal). Apply the effects of clever feint before resolving your attack. You must have the clever feint envoy improvisation to choose this improvisation."
+				},
+				"Watch Out": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "As a reaction, when an enemy makes a ranged attack against an ally within 60 feet of you, you can warn that ally of the danger. You must spend your reaction when the enemy declares the attack but before it makes the attack roll. Your ally can spend a reaction to gain a +4 to AC against the triggering attack. Once the triggering attack is resolved, the ally falls prone. At 8th level, you can spend 1 Resolve Point to prevent your ally from falling prone after the attack."
+				},
+				"Quick Inspiring Boost": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "You can use inspiring boost as a move action instead of a standard action, though when you do so, the number of Stamina Points your ally recovers is reduced by your envoy level. You must have the inspiring boost envoy improvisation to choose this improvisation."
+				}
 			},
-			"Focus": {
-				"SOURCEPAGE": "p.63",
-				"description": "As a standard action, you can encourage a single ally within 60 feet to focus on the danger at hand. If that ally is flat-footed or off-target, you end that condition. If circumstances would cause the ally to immediately become flat-footed or off-target again, you instead suppress that condition for 1 round.",
-				"minLevel": "4"
+			"6th":{
+				"Improved Get 'Em": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "Your morale bonus from get 'em increases to +2. As a standard action, you can make a single attack against a target within 60 feet. You and your allies within 60 feet gain the benefits of get 'em against that target (applying these effects before making the attack roll). As with get 'em, you can spend 1 Resolve Point to grant the benefits against all enemies within 60 feet. You must have the get 'em envoy improvisation to choose this improvisation. "
+				},
+				"Draw Fire": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "As a standard action, you can spend 1 Resolve Point to make all enemies within 100 feet take a -4 penalty to all ranged attacks they make that don't target you until the end of your next turn. This penalty remains even if you and an enemy move more than 100 feet away from each other, and enemies that weren't within 100 feet when you used draw fire don't take the penalty if they later come within range."
+				},
+				"Heads Up": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "When you succeed at a Perception check, as a reaction, you can signal a single ally within 60 feet. That ally can act as if he had also succeeded at the Perception check with the same result."
+				},
+				"Clever Improvisations": {
+				  "SOURCEPAGE": "p.63",
+				  "description": "The first time you would spend Resolve Points on one of your envoy improvisations, reduce the cost by 1 Resolve Point (minimum 0). This ability refreshes whenever you take a 10-minute rest to recover Stamina Points and after an 8-hour rest to recover Resolve Points, reducing the Resolve Point cost of your next envoy improvisation after the rest."
+				}
 			},
-			"Long-Range Improvisation": {
-				"SOURCEPAGE": "p.63",
-				"description": "Double the range of your improvisations with ranges of at least 30 feet.",
-				"minLevel": "4"
-			},
-			"Improved Get 'Em": {
-				"SOURCEPAGE": "p.63",
-				"description": "Your morale bonus from get 'em increases to +2. As a standard action, you can make a single attack against a target within 60 feet. You and your allies within 60 feet gain the benefits of get 'em against that target (applying these effects before making the attack roll). As with get 'em, you can spend 1 Resolve Point to grant the benefits against all enemies within 60 feet. You must have the get 'em envoy improvisation to choose this improvisation. ",
-				"minLevel": "6"
-			},
-			"Universal Expression": {
-				"SOURCEPAGE": "p.62",
-				"description": "When using a language-dependent improvisation that affects an enemy, you can use the improvisation against that enemy even if the two of you do not share a language."
-			},
-			"Improved Hurry": {
-				"SOURCEPAGE": "p.64",
-				"description": "You can use the hurry envoy improvisation as a move action instead of a standard action. You must have the hurry envoy improvisation to choose this improvisation. At 12th level, you can use hurry as a standard action and spend 1 Resolve Point to grant a standard action instead of a move action.",
-				"minLevel": "8"
-			},
-			"Draw Fire": {
-				"SOURCEPAGE": "p.63",
-				"description": "As a standard action, you can spend 1 Resolve Point to make all enemies within 100 feet take a -4 penalty to all ranged attacks they make that don't target you until the end of your next turn. This penalty remains even if you and an enemy move more than 100 feet away from each other, and enemies that weren't within 100 feet when you used draw fire don't take the penalty if they later come within range.",
-				"minLevel": "6"
-			},
-			"Dispiriting Taunt": {
-				"SOURCEPAGE": "p.62",
-				"description": "As a standard action, you can taunt an enemy within 60 feet. Attempt an Intimidate check with the same DC as a check to demoralize that enemy (though this isn't a check to demoralize, so you can't use abilities that would apply to a demoralization attempt, like the rattling presence expertise talent). If you fail, that enemy is off-target (see page 276) until the end of your next turn. If you succeed, that enemy is instead shaken (see page 277) until the end of your next turn. This is an emotion and fear effect. At 6th level, you can spend 1 Resolve Point to treat a failed Intimidate check for dispiriting taunt as if it were a success."
-			},
-			"Situational Awareness": {
-				"SOURCEPAGE": "p.64",
-				"description": "If you ready an action, once before the trigger you selected occurs, you can spend 1 Resolve Point to change both the trigger and the action you have ready. You must ready an action that takes the same kind of action as your originally readied action, or you must ready a lesser action. (For example, if you readied a standard action, you could switch to another standard action, a move action, or a swift action, and if you readied a move action, you could switch to another move action or a swift action.)",
-				"minLevel": "8"
-			},
-			"Look Alive": {
-				"SOURCEPAGE": "p.62",
-				"description": "When you spend a Resolve Point to regain Stamina Points after a 10-minute rest, all allies who stay within 60 feet of you throughout the rest gain a +2 morale bonus to Perception and initiative checks for the next hour or until the next 10-minute rest to recover Stamina Points, whichever comes first."
-			},
-			"Desperate Defense": {
-				"SOURCEPAGE": "p.64",
-				"description": "As a move action, you can cause one ally adjacent to you to not be considered helpless (see page 276) for the purpose of actions that can be used only against helpless creatures (such as a coup de grace). This effect ends if the creature ceases to be adjacent to you or at the beginning of your next turn, whichever comes first.",
-				"minLevel": "8"
-			},
-			"Hurry": {
-				"SOURCEPAGE": "p.63",
-				"description": "As a standard action, you can grant a single move action to an ally within 60 feet. The ally can use that move action during her next turn to take a guarded step, move up to her speed, or draw or sheathe a weapon. The ally can use her extra move action in between her other actions, and she can even use it before or after a full action. A character can use no more than one extra action from hurry in a single round.",
-				"minLevel": "4"
-			},
-			"Duck Under": {
-				"SOURCEPAGE": "p.63",
-				"description": "You can duck under a foe's melee attack, causing it to overextend and move into a position more favorable to you. You must take the total defense action (see page 247) to use this ability. If, before the start of your next turn, a foe misses you with a melee attack, as a reaction you can attempt a reposition combat maneuver with a +8 bonus to your attack roll against that foe.",
-				"minLevel": "4"
-			},
-			"Expanded Attunement": {
-				"SOURCEPAGE": "p.62",
-				"description": "You can use beneficial mind-affecting envoy improvisations to aid allies who usually would not be able to gain benefits from mind-affecting effects, such as constructs, robots, and undead. If the improvisation grants a morale bonus, even allies who can't normally benefit from morale bonuses gain that bonus."
-			},
-			"Heads Up": {
-				"SOURCEPAGE": "p.63",
-				"description": "When you succeed at a Perception check, as a reaction, you can signal a single ally within 60 feet. That ally can act as if he had also succeeded at the Perception check with the same result.",
-				"minLevel": "6"
-			},
-			"Quick Dispiriting Taunt": {
-				"SOURCEPAGE": "p.63",
-				"description": "You can use dispiriting taunt as a move action instead of a standard action. You must have the dispiriting taunt envoy improvisation to choose this improvisation.",
-				"minLevel": "4"
-			},
-			"Clever Feint": {
-				"SOURCEPAGE": "p.62",
-				"description": "As a standard action, you can fake out an enemy within 60 feet, making that enemy open to your attacks. Attempt a Bluff check with the same DC as a check to feint against that enemy (though this isn't a standard check to feint, so Improved Feint and Greater Feint don't apply). Even if you fail, that enemy is flat-footed against your attacks (see page 276) until the end of your next turn. If you succeed, the enemy is also flat-footed against your allies' attacks until the end of your next turn. You can't use clever feint against a creature that lacks an Intelligence score. At 6th level, you can spend 1 Resolve Point to treat a failed Bluff check for clever feint as if it were a success."
-			},
-			"Watch Your Step": {
-				"SOURCEPAGE": "p.63",
-				"description": "When an ally within 60 feet must succeed at a Reflex save to avoid a harmful effect, as a reaction before your ally attempts the saving throw, you can grant the ally a +2 bonus to that saving throw. At 6th level, you can spend 1 Resolve Point to have the ally roll twice on the saving throw and take the better result. Both of those rolls benefit from the +2 bonus provided by this ability. "
-			},
-			"Don't Quit": {
-				"SOURCEPAGE": "p.62",
-				"description": "As a standard action, you can signal a single ally within 60 feet. That ally ignores one condition (see page 273) of your choice until the start of your next turn, chosen from the following list"
-			},
-			"Clever Attack": {
-				"SOURCEPAGE": "p.63",
-				"description": "You can make an attack that throws your enemy off-balance. As a standard action, you can make a single attack against a target within 60 feet and gain the benefits of clever feint (attempting a Bluff check against the target as normal). Apply the effects of clever feint before resolving your attack. You must have the clever feint envoy improvisation to choose this improvisation.",
-				"minLevel": "4"
-			},
-			"Inspiring Boost": {
-				"SOURCEPAGE": "p.62",
-				"description": "As a standard action, you can signal an ally within 30 feet who has taken damage from any attack made by a significant enemy (see page 242) at any point after your last turn ended. That ally regains a number of Stamina Points (up to his maximum) equal to twice your envoy level + your Charisma modifier; at 15th level, this increases to three times your envoy level + your Charisma modifier. Once an ally has benefited from your inspiring boost, that ally can't gain the benefits of your inspiring boost again until he takes a 10-minute rest to recover Stamina Points. At 6th level, you can spend 1 Resolve Point to add your envoy level to the number of Stamina Points regained."
-			},
-			"Watch Out": {
-				"SOURCEPAGE": "p.63",
-				"description": "As a reaction, when an enemy makes a ranged attack against an ally within 60 feet of you, you can warn that ally of the danger. You must spend your reaction when the enemy declares the attack but before it makes the attack roll. Your ally can spend a reaction to gain a +4 to AC against the triggering attack. Once the triggering attack is resolved, the ally falls prone. At 8th level, you can spend 1 Resolve Point to prevent your ally from falling prone after the attack. ",
-				"minLevel": "4"
-			},
-			"Quick Inspiring Boost": {
-				"SOURCEPAGE": "p.63",
-				"description": "You can use inspiring boost as a move action instead of a standard action, though when you do so, the number of Stamina Points your ally recovers is reduced by your envoy level. You must have the inspiring boost envoy improvisation to choose this improvisation.",
-				"minLevel": "4"
-			},
-			"Not in the Face": {
-				"SOURCEPAGE": "p.62",
-				"description": "As a move action, you can choose one enemy within 60 feet. That enemy must succeed at a Will save or take a -4 penalty to all attacks it makes against you until the end of your next turn. At 6th level, you can spend 1 Resolve Point to make the enemy take the penalty with no saving throw allowed."
-			},
-			"Expert Attack": {
-				"SOURCEPAGE": "p.64",
-				"description": "As a move action, you can spend 2 Resolve Points to add your bonus from expertise to your next attack roll before the end of your turn.",
-				"minLevel": "8"
-			},
-			"Sustained Determination": {
-				"SOURCEPAGE": "p.64",
-				"description": "As a move action, you can spend 2 Resolve Points to grant an ally within 60 feet 1 Resolve Point that he can spend to empower one of his abilities, even if he has spent all of his own Resolve Points. The ally must spend the Resolve Point before the start of your next turn; if he does not do so, he loses the Resolve Point and you still lose the Resolve Points you spent. You can't grant the same ally the benefits of this ability again until both you and your ally have recovered your Resolve Points after an 8-hour rest or its equivalent.",
-				"minLevel": "8"
-			},
-			"Clever Improvisations": {
-				"SOURCEPAGE": "p.63",
-				"description": "The first time you would spend Resolve Points on one of your envoy improvisations, reduce the cost by 1 Resolve Point (minimum 0). This ability refreshes whenever you take a 10-minute rest to recover Stamina Points and after an 8-hour rest to recover Resolve Points, reducing the Resolve Point cost of your next envoy improvisation after the rest.",
-				"minLevel": "6"
+			"8th":{
+				"Hidden Agenda": {
+				  "SOURCEPAGE": "p.64",
+				  "description": "You're an expert at veiling your true thoughts and goals. Whenever a creature attempts a Sense Motive check to detect a deception of yours, the creature must roll twice and take the worse of the two results. When you attempt a saving throw against an effect or ability that would read your thoughts or reveal your motives, you can roll twice and take the better of the two results."
+				},
+				"Improved Hurry": {
+				  "SOURCEPAGE": "p.64",
+				  "description": "You can use the hurry envoy improvisation as a move action instead of a standard action. You must have the hurry envoy improvisation to choose this improvisation. At 12th level, you can use hurry as a standard action and spend 1 Resolve Point to grant a standard action instead of a move action."
+				},
+				"Situational Awareness": {
+				  "SOURCEPAGE": "p.64",
+				  "description": "If you ready an action, once before the trigger you selected occurs, you can spend 1 Resolve Point to change both the trigger and the action you have ready. You must ready an action that takes the same kind of action as your originally readied action, or you must ready a lesser action. (For example, if you readied a standard action, you could switch to another standard action, a move action, or a swift action, and if you readied a move action, you could switch to another move action or a swift action.)"
+				},
+				"Desperate Defense": {
+				  "SOURCEPAGE": "p.64",
+				  "description": "As a move action, you can cause one ally adjacent to you to not be considered helpless (see page 276) for the purpose of actions that can be used only against helpless creatures (such as a coup de grace). This effect ends if the creature ceases to be adjacent to you or at the beginning of your next turn, whichever comes first."
+				},
+				"Expert Attack": {
+				  "SOURCEPAGE": "p.64",
+				  "description": "As a move action, you can spend 2 Resolve Points to add your bonus from expertise to your next attack roll before the end of your turn."
+				},
+				"Sustained Determination": {
+				  "SOURCEPAGE": "p.64",
+				  "description": "As a move action, you can spend 2 Resolve Points to grant an ally within 60 feet 1 Resolve Point that he can spend to empower one of his abilities, even if he has spent all of his own Resolve Points. The ally must spend the Resolve Point before the start of your next turn; if he does not do so, he loses the Resolve Point and you still lose the Resolve Points you spent. You can't grant the same ally the benefits of this ability again until both you and your ally have recovered your Resolve Points after an 8-hour rest or its equivalent."
+				}
 			}
 		},
 		"Class features": {
@@ -537,7 +527,7 @@
 		}
 	},
 	"Soldier": {
-		"GEAR BOOST": {
+		"Gear Boost": {
 			"Heavy Onslaught": {
 				"SOURCEPAGE": "p.112",
 				"description": "Your attacks with heavy weapons bypass part of the target's damage reduction. If your heavy weapon does not already overcome the target's damage  reduction, treat the target's damage reduction as though it were 5 lower. At 15th level, treat the target's damage reduction as 10 lower.",
@@ -632,343 +622,310 @@
 				"description": "At 9th level and every 4 levels thereafter, you gain a style technique unique to your secondary fighting style. For the purposes of these style techniques, treat your soldier level as equal to your soldier level - 8."
 			}
 		},
-		"FIGHTING STYLES": {
-			"Bombard": {
-				"SOURCEPAGE": "p.114",
-				"description": "The bombard fighting style emphasizes attacking multiple targets, often using grenades, and leverages substantial physical strength to control large weapons with significant recoil. At higher levels, you can use launchers, missiles, and other heavy weapons."
-			},
-			"Blitz Fighting Style": {
-				"Keep Fighting": {
+		"Fighting style": {
+			"Blitz": {
+				"description": "The blitz fighting style is all about using speed and aggression to get into the thick of melee. You increase your speed and responsiveness, gain abilities that make you better at melee combat than your enemies, and keep on fighting even when surrounded by foes.",
+				"9th - Keep Fighting": {
 					"SOURCEPAGE": "p.114",
 					"description": "As a move action, you can spend 1 Resolve Point to regain Stamina Points equal to 2d6 + your soldier level. You can't use this ability again until after you regain Stamina Points from a 10-minute rest. The number of Stamina Points you regain increases by 1d6 at 10th level, 15th level, and 20th level."
 				},
-				"Perfect Opportunity": {
+				"13th - Perfect Opportunity": {
 					"SOURCEPAGE": "p.114",
 					"description": "When you hit a creature with an attack of opportunity, that creature can't move out of the squares you threaten until the start of its next turn. In addition, when an enemy takes a guarded step (see page 247) out of a square you threaten, you can make an attack of opportunity against it with a -2 penalty to the attack roll. If the target provoked an attack of opportunity by moving, hitting with your attack of opportunity ends the target's movement immediately, preventing it from carrying out the rest of its movement."
 				},
-				"Rapid Response": {
+				"1st - Rapid Response": {
 					"SOURCEPAGE": "p.114",
 					"description": "You gain a +4 bonus to initiative checks and increase your land speed by 10 feet."
 				},
-				"Against the Odds": {
+				"17th - Against the Odds": {
 					"SOURCEPAGE": "p.114",
 					"description": "You gain a bonus to melee damage rolls equal to double the number of enemies within 10 feet of you. Enemies who don't constitute a significant threat (those with a CR equal to your level - 4 or less, or as determined by the GM) don't count when calculating this bonus."
 				},
-				"Charge Attack": {
+				"5th - Charge Attack": {
 					"SOURCEPAGE": "p.114",
 					"description": "As a standard action, you can make a charge without the charge penalties (see page 248), and you can substitute a bull rush for the melee attack at the end of the charge. When you gain the soldier's onslaught class feature, you can make two attacks instead of one at the end of your charge, both with a -4 penalty."
 				}
 			},
-			"Arcane Assailant Fighting Style": {
-				"Secret of the Archmagi": {
+			"Arcane Assailant": {
+				"description": "The arcane assailant fighting style supplements its combat effectiveness with magic powers, drawing on traditions of warrior-wizards dating back to well before the Gap. This allows you to use magic runes to augment your weapons and call on legendary powers, giving you access to arcane options even when you don't have a magic weapon in your possession.",
+				"13th - Secret of the Archmagi": {
 					"SOURCEPAGE": "p.113",
 					"description": "You can imbue two weapons with the rune of the eldritch knight. If you attempt to imbue a third weapon, the weapon infused first loses its rune and all benefits. In addition to the normal benefits, the runes grant the weapons one or more of the following weapon fusions (see page 191) of your choice"
 				},
-				"Rune of the Eldritch Knight": {
+				"1st - Rune of the Eldritch Knight": {
 					"SOURCEPAGE": "p.112",
 					"description": "You can imbue a weapon with a magic sigil, the rune of the eldritch knight, allowing the weapon to act as a magic weapon for the purposes of bypassing DR and affecting incorporeal creatures. This takes 10 minutes, and you can imbue only a single weapon at a time. If you imbue a new weapon with the rune of the eldritch knight, any previously imbued weapon loses this benefit. When calculating the Hit Points and hardness of a weapon imbued with the rune of the eldritch knight, treat its item level as 5 higher."
 				},
-				"Power of Legend": {
+				"9th - Power of Legend": {
 					"SOURCEPAGE": "p.113",
 					"description": "You can call on the link between you and the legendary heroes who wielded powerful magic weapons eons ago to overcome adversity. As a move action when wielding a magic weapon or a weapon imbued with the rune of the eldritch knight, you can spend 1 Resolve Point to end one of the following conditions affecting you"
 				},
-				"Secret of the Magi": {
+				"5th - Secret of the Magi": {
 					"SOURCEPAGE": "p.112",
 					"description": "When you imbue a weapon with the rune of the eldritch knight, in addition to its normal benefits, the rune grants the weapon one of the following weapon fusions of your choice"
 				},
-				"Arcane Attack": {
+				"17th - Arcane Attack": {
 					"SOURCEPAGE": "p.113",
 					"description": "As a standard action, you can spend 1 Resolve Point to use a weapon imbued with the rune of the eldritch knight to make an attack that strikes true. This attack ignores all cover and concealment, including total concealment (though you must at least be aware of a creature's presence to target it with this attack). If the attack is a ranged attack, the target must be within the first range increment. The attack only affects your selected target, even if it normally affects an area or multiple targets. You still must make a normal attack roll, and if your attack misses, it has no effect."
 				}
 			},
-			"Sharpshoot Fighting Style": {
-				"Sniper's Aim": {
+			"Sharpshoot": {
+				"description": "The sharpshoot fighting style enables you to excel at making accurate attacks, usually with ranged weapons at a long distance. You can ignore cover and other impediments to your shots, and your attacks are improved by your intense focus.",
+				"1st - Sniper's Aim": {
 					"SOURCEPAGE": "p.115",
 					"description": "When you make a ranged attack against a target with cover, reduce the AC bonus from cover by 2. You can't use sniper's aim against an enemy with total cover."
 				},
-				"Focused Damage": {
+				"13th - Focused Damage": {
 					"SOURCEPAGE": "p.115",
 					"description": "When you use focus fire, each attack against the first target deals 2d6 additional damage. Additional creatures you attack after killing or knocking out your first target don't take this extra damage."
 				},
-				"Prepared Shot": {
+				"17th - Prepared Shot": {
 					"SOURCEPAGE": "p.115",
 					"description": "As a standard action, you can study a target before you attack. The target must be within line of sight of you and either flat-footed or unaware of your presence. On the first attack you make against that target on your next turn, you gain a +2 bonus to your attack roll. If your attack hits, the target is staggered for 1 round; if you score a critical hit, the target is instead stunned for 1 round. Once you make a prepared shot, you can't use this ability again against the same target for 24 hours. You can't make an attack on the same round you study the target, even if an ability would let you attack without spending a standard or full action."
 				},
-				"Focus Fire": {
+				"5th - Focus Fire": {
 					"SOURCEPAGE": "p.115",
 					"description": "When you make a full attack with a ranged weapon, you can make both attacks with a -3 penalty instead of a -4 penalty as long as they both target the same creature. If your first attack kills or knocks out the target, you can instead make the second attack against a different creature at a -4 penalty. Once you have the soldier's onslaught class feature (see page 112), you can use this ability with it, making three attacks against the same creature at a -5 penalty; if your first or second attack kills or knocks out your target, you can make your remaining attacks against a different creature at a -6 penalty."
 				},
-				"Intense Focus": {
+				"9th - Intense Focus": {
 					"SOURCEPAGE": "p.115",
 					"description": "When you make a ranged attack against a target with cover or concealment, you can spend 1 Resolve Point to negate its AC bonus from cover and reduce its concealment by one category (from total concealment to concealment or from concealment to no concealment). This benefit applies to all ranged attacks you make against that target this round. You can't use intense focus more than once per round, nor can you use it against an enemy with total cover."
 				}
 			},
-			"Armor Storm": {
-				"SOURCEPAGE": "p.113",
-				"description": "The armor storm fighting style focuses on using armor as a weapon by maximizing the damage of armor-based weapons while withstanding enemy fire. You learn to increase the effectiveness of attacks made with your armor and to add equipment normally beyond your armor's capacity."
-			},
-			"Hit-and-Run Fighting Style": {
-				"Duck and Weave": {
+			"Hit-and-Run": {
+				"description": "The hit-and-run fighting style focuses on tactical movement as you move in and out of combat. You use ranged weapons but fight close up, and you can even mix ranged and melee attacks. Your abilities allow you to move even when you make full attacks and to avoid getting locked down by your enemies.",
+				"9th - Duck and Weave": {
 					"SOURCEPAGE": "p.115",
 					"description": "When you move or make a ranged attack, you can spend 1  Resolve Point to avoid provoking attacks of opportunity from that movement or ranged attack."
 				},
-				"Opening Volley": {
+				"1st - Opening Volley": {
 					"SOURCEPAGE": "p.115",
 					"description": "You gain Opening Volley as a bonus feat. If you already have this feat, choose a bonus combat feat instead. At 9th level, you can use Opening Volley on both your first and second turns in combat."
 				},
-				"Elusive Target": {
+				"13th - Elusive Target": {
 					"SOURCEPAGE": "p.115",
 					"description": "On any turn in which you move, you gain a +1 insight bonus to your AC until the start of your next turn."
 				},
-				"Nimble Fusillade": {
+				"5th - Nimble Fusillade": {
 					"SOURCEPAGE": "p.115",
 					"description": "When you make a full attack, you can also either take a guarded step or move up to half your speed. This movement can come before, between, or after your attacks, but it can't be split up."
 				},
-				"Harrying Shot": {
+				"17th - Harrying Shot": {
 					"SOURCEPAGE": "p.115",
 					"description": "As a full action, you can make one attack and give the benefit of harrying fire (see page 247) against any creature you hit with that attack. If you use a blast weapon or automatic weapon, the benefit applies against all targets hit. You can also take your nimble fusillade movement before or after this attack."
 				}
 			},
-			"Sharpshoot": {
-				"SOURCEPAGE": "p.115",
-				"description": "The sharpshoot fighting style enables you to excel at making accurate attacks, usually with ranged weapons at a long distance. You can ignore cover and other impediments to your shots, and your attacks are improved by your intense focus."
-			},
-			"Blitz": {
-				"SOURCEPAGE": "p.113",
-				"description": "The blitz fighting style is all about using speed and aggression to get into the thick of melee. You increase your speed and responsiveness, gain abilities that make you better at melee combat than your enemies, and keep on fighting even when surrounded by foes."
-			},
-			"Bombard Fighting Style": {
-				"Heavy Fire": {
+			"Bombard": {
+				"description": "The bombard fighting style emphasizes attacking multiple targets, often using grenades, and leverages substantial physical strength to control large weapons with significant recoil. At higher levels, you can use launchers, missiles, and other heavy weapons.",
+				"5th - Heavy Fire": {
 					"SOURCEPAGE": "p.114",
 					"description": "You can use your physical power to steady your weapon and make your attacks more dangerous. As a full action, you can make a single ranged attack that deals additional damage equal to your Strength bonus to all targets. You can use this ability in conjunction with the automatic, explode, or unwieldy special property (see pages 180-182)."
 				},
-				"Explosives Acumen": {
+				"13th - Explosives Acumen": {
 					"SOURCEPAGE": "p.114",
 					"description": "You increase the DC to avoid attacks you make using weapons with the explode special property by 1. You reduce the amount of any damage you take from any weapon with the explode special property by an amount equal to your Strength bonus."
 				},
-				"Grenade Expert": {
+				"1st - Grenade Expert": {
 					"SOURCEPAGE": "p.114",
 					"description": "You increase the range increment of your thrown grenades by 5 x your Strength bonus. In addition, you're able to salvage enough materials to create a grenade without paying for it. Creating a grenade takes 10 minutes. You can create any grenade whose item level is less than or equal to your soldier level, but this grenade is unstable and only you can use it effectively. If anyone else tries to use the grenade, it is a dud. You can have only one grenade created by this ability at one time (if you create a new grenade using this ability, the old grenade no longer works)."
 				},
-				"Debilitating Attack": {
+				"9th - Debilitating Attack": {
 					"SOURCEPAGE": "p.114",
 					"description": "When you hit an enemy with a ranged attack or an attack with a weapon with the blast or explode special property, you can spend 1 Resolve Point to inflict a debilitating effect on that enemy for a number of rounds equal to your Strength bonus. You can choose to make the target deafened, flatfooted, or off-target (see pages 275-277), or to reduce its speeds by half (to a minimum of 10 feet). The target can negate this effect with a successful Fortitude save (DC = 10 + half your soldier level + your Strength modifier)."
 				},
-				"Impactful Attack": {
+				"17th - Impactful Attack": {
 					"SOURCEPAGE": "p.114",
 					"description": "As a full action, you can make a ranged attack that knocks enemies back. Targets you hit are knocked back 5 feet from you. If you use a weapon with the explode special property, all targets that fail their saving throws are instead knocked back 5 feet from the center of the explosion. An enemy that you critically hit or that rolls a natural 1 on its saving throw is also knocked prone. You can't make an impactful attack with an automatic weapon, but you can use this ability with a weapon that has the blast special property"
 				}
 			},
-			"Arcane Assailant": {
-				"SOURCEPAGE": "p.112",
-				"description": "The arcane assailant fighting style supplements its combat effectiveness with magic powers, drawing on traditions of warrior-wizards dating back to well before the Gap. This allows you to use magic runes to augment your weapons and call on legendary powers, giving you access to arcane options even when you don't have a magic weapon in your possession."
-			},
 			"Guard": {
-				"SOURCEPAGE": "p.114",
-				"description": "The guard fighting style focuses on defense. You become adept at wearing armor, protecting against attacks, and enduring damage and other setbacks from attacks that get through your defenses."
-			},
-			"Guard Fighting Style": {
-				"Kinetic Resistance": {
+				"description": "The guard fighting style focuses on defense. You become adept at wearing armor, protecting against attacks, and enduring damage and other setbacks from attacks that get through your defenses.",
+				"13th - Kinetic Resistance": {
 					"SOURCEPAGE": "p.115",
-					"DR": "GuardFIGHTINGSTYLE_KR/-",
 					"description": "You gain DR 3/-. At 17th level, this DR increases to 5/-."
 				},
-				"Armor Training": {
+				"1st - Armor Training": {
 					"SOURCEPAGE": "p.114",
 					"description": "You reduce the armor check penalty of armor you wear by 1 (to a minimum of 0) and increase the maximum Dexterity bonus allowed by your armor by 1."
 				},
-				"Guard's Protection": {
+				"5th - Guard's Protection": {
 					"SOURCEPAGE": "p.114",
 					"description": "When an ally adjacent to you is damaged by an attack, you can use your reaction to intercede. You take half the damage, and your ally takes the other half. This has no effect on spells, and any conditions delivered by the attack apply to both of you. In addition, you are now proficient with powered armor."
 				},
-				"Rapid Recovery": {
+				"9th - Rapid Recovery": {
 					"SOURCEPAGE": "p.115",
 					"description": "You can spend Resolve Points to ignore detrimental conditions. As a move action, you can spend 1 Resolve Point to suppress one of the following conditions for 10 minutes"
 				},
-				"Impenetrable Defense": {
+				"17th - Impenetrable Defense": {
 					"SOURCEPAGE": "p.115",
 					"description": "As a standard action, you can set up a strong defense for yourself and an adjacent ally. Until the start of your next turn, you gain three benefits"
 				}
 			},
-			"Hit-and-Run": {
-				"SOURCEPAGE": "p.115",
-				"description": "The hit-and-run fighting style focuses on tactical movement as you move in and out of combat. You use ranged weapons but fight close up, and you can even mix ranged and melee attacks. Your abilities allow you to move even when you make full attacks and to avoid getting locked down by your enemies."
-			},
-			"Armor Storm Fighting Style": {
-				"On the Bounce": {
+			"Armor Storm": {
+				"description": "The armor storm fighting style focuses on using armor as a weapon by maximizing the damage of armor-based weapons while withstanding enemy fire. You learn to increase the effectiveness of attacks made with your armor and to add equipment normally beyond your armor's capacity.",
+				"17th - On the Bounce": {
 					"SOURCEPAGE": "p.113",
-					"description": "[Not Implemented]You learn to control your armor with such ease, you are actually more maneuverable in it than out of it. While wearing heavy armor or powered armor, you can move up to your speed when you make a full attack. You can move before or after all your attacks, but not both. If you have the Shot on the Run feat, you can divide your movement to move both before and after making a full attack as long as all the attacks are ranged attacks. If you have the Spring Attack feat, you can divide your movement to move both before and after making a full attack as long as all the attacks are melee attacks. If you have both feats, your attacks can be any combination of melee and ranged attacks."
+					"description": "You learn to control your armor with such ease, you are actually more maneuverable in it than out of it. While wearing heavy armor or powered armor, you can move up to your speed when you make a full attack. You can move before or after all your attacks, but not both. If you have the Shot on the Run feat, you can divide your movement to move both before and after making a full attack as long as all the attacks are ranged attacks. If you have the Spring Attack feat, you can divide your movement to move both before and after making a full attack as long as all the attacks are melee attacks. If you have both feats, your attacks can be any combination of melee and ranged attacks."
 				},
-				"Smash Through": {
+				"9th - Smash Through": {
 					"SOURCEPAGE": "p.113",
 					"description": "While you are wearing heavy armor or powered armor, you gain a +4 bonus to attack rolls to perform a bull rush combat maneuver (see page 246). If you successfully push the target back 10 feet or more, you can also damage the target with an unarmed attack (and can use your hammer fist ability when doing so)."
 				},
-				"Hammer Fist": {
+				"1st - Hammer Fist": {
 					"SOURCEPAGE": "p.113",
-					"description": "[Not Implemented]You treat any unarmed attack you make while wearing heavy or powered armor as being made with a battleglove (see page 187) with an item level equal to or lower than your soldier level, and you calculate damage for these attacks as if you had the melee striker gear boost (see page 112). If you have the melee striker gear boost, you gain a +2 bonus to damage rolls with your unarmed attacks when using this ability. These unarmed attacks don't benefit from other abilities that apply specifically to unarmed attacks (such as the Improved Unarmed Strike feat)."
+					"description": "You treat any unarmed attack you make while wearing heavy or powered armor as being made with a battleglove (see page 187) with an item level equal to or lower than your soldier level, and you calculate damage for these attacks as if you had the melee striker gear boost (see page 112). If you have the melee striker gear boost, you gain a +2 bonus to damage rolls with your unarmed attacks when using this ability. These unarmed attacks don't benefit from other abilities that apply specifically to unarmed attacks (such as the Improved Unarmed Strike feat)."
 				},
-				"Mobile Army": {
+				"13th - Mobile Army": {
 					"SOURCEPAGE": "p.113",
-					"description": "[Not Implemented]You become a master of all weapons associated with your armor. You deal 1d6 additional damage with any attack from a weapon that is part of your armor, including unarmed attacks using the hammer fist ability and weapons that have been attached to your armor as an armor upgrade. The additional damage is of the same type as the weapon's normal type. Also, while wearing heavy or powered armor, you gain a +2 bonus to your KAC against combat maneuvers."
+					"description": "You become a master of all weapons associated with your armor. You deal 1d6 additional damage with any attack from a weapon that is part of your armor, including unarmed attacks using the hammer fist ability and weapons that have been attached to your armor as an armor upgrade. The additional damage is of the same type as the weapon's normal type. Also, while wearing heavy or powered armor, you gain a +2 bonus to your KAC against combat maneuvers."
 				},
-				"Enhanced Tank": {
+				"5th - Enhanced Tank": {
 					"SOURCEPAGE": "p.113",
-					"description": "[PartialImplementation]You gain the Powered Armored Proficiency feat and access to improved armor. This might be the result of your own engineering abilities, having earned the trust of contacts that can get you experimental equipment, or a powerful patron giving you gear not available to the general public to help you achieve mutual goals. You can add one more upgrade to your armor than its normal maximum number of upgrade slots. If you add this bonus upgrade to heavy armor, you can select an upgrade normally limited to powered armor. An upgrade placed in this bonus slot costs half the normal credit amount."
+					"description": "You gain the Powered Armored Proficiency feat and access to improved armor. This might be the result of your own engineering abilities, having earned the trust of contacts that can get you experimental equipment, or a powerful patron giving you gear not available to the general public to help you achieve mutual goals. You can add one more upgrade to your armor than its normal maximum number of upgrade slots. If you add this bonus upgrade to heavy armor, you can select an upgrade normally limited to powered armor. An upgrade placed in this bonus slot costs half the normal credit amount."
 				}
 			}
 		}
 	},
-	"Solarian,": {
-		"STELLAR REVELATIONS": {
-			"Glow of Life": {
-				"SOURCEPAGE": "p.105",
-				"description": "As a move action, you can spend 1 Resolve Point to recover a number of Hit Points equal to twice your solarian level. Once you use this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, increase the amount you heal with this revelation to three times your solarian level.",
-				"minLevel": "6"
+	"Solarian": {
+		"Stellar Revelations": {
+			"2nd":{
+				"Radiation": {
+				  "SOURCEPAGE": "p.104",
+				  "description": "As a standard action, you can emit an aura of low-level radiation. Creatures within 5 feet of you must succeed at a Fortitude save or be sickened. A sickened creature recovers as soon as it moves out of your aura, and a creature that succeeds at its saving throw is immune to your radiation for 24 hours. This is a poison effect (see page 415). The radiation lasts for 1 round or until you leave photon mode. When you are attuned or fully attuned, the size of your aura increases to 10 feet."
+				},
+				"Stellar Rush": {
+				  "SOURCEPAGE": "p.104",
+				  "description": "As a standard action, you can wreathe yourself in stellar fire and make a charge without the penalties (see page 248). When you are attuned or fully attuned, you can substitute a bull rush for the melee attack at the end of the charge. Whether or not you succeed at the bull rush, the target takes 2d6 fire damage (Reflex half). This damage increases by 1d6 at 6th level and every 2 levels thereafter. "
+				},
+				"Gravity Boost": {
+				  "SOURCEPAGE": "p.104",
+				  "description": "You can increase or reduce the gravitational attraction between yourself and the terrain around you. You can add a bonus equal to one-third your solarian level (minimum +1) to Athletics checks to climb, jump, or swim as part of the action you take to attempt the skill check. In addition, as a reaction when you are falling, you can reduce the falling damage you take by half. At 6th level, you can move along vertical surfaces and even upside down along ceilings for 1 round. This functions as spider climb, but it leaves your hands free and you can also run. You must end your movement on a surface that can support you normally. If you end your movement while you are standing on a vertical surface or ceiling, you fall unless you succeed at an Athletics check to climb to remain in position. When you are attuned or fully attuned, the bonus you gain from this revelation to checks to climb, jump, or swim doubles."
+				},
+				"Gravity Hold": {
+				  "SOURCEPAGE": "p.104",
+				  "description": "This revelation allows you to move objects at a distance as per psychokinetic hand (see page 370). When you are attuned or fully attuned, you can use the psychokinetic hand ability of your gravity hold to immobilize, lift, or move a Medium or smaller creature. The creature can attempt a Fortitude save to negate the effect. While under this effect, the target creature cannot move, but can take any other normal actions. This ability follows all of the restrictions of the spell other than the weight limit, but you can't lift a creature higher than 5 feet off the ground. When you spend a standard action concentrating to maintain the gravity hold, the target can attempt a new save to end the effect. Once a creature successfully saves against this ability, it becomes immune to further uses of this revelation for 24 hours."
+				},
+				"Dark Matter": {
+				  "SOURCEPAGE": "p.104",
+				  "description": "As a move action, you can draw on the properties of dark matter to increase your density, allowing you to resist physical damage. You gain damage reduction 1/-. This increases to DR 2/- at 6th level and increases by 1 again every 3 solarian levels thereafter. This benefit lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, your DR from dark matter is equal to half your solarian level."
+				},
+				"Flare": {
+				  "SOURCEPAGE": "p.104",
+				  "description": "As a move action, you can shed light in a 30-foot radius for 1 minute. You choose dim, normal, or bright light each time you activate this revelation. As a standard action, you can create a flash of brilliant light, forcing one creature within 30 feet to succeed at a Reflex save or be blinded for 1 round. Once you've targeted a creature with flare, you can't target it with this revelation again for 10 minutes. Blind or sightless creatures are not affected by this use of this revelation. When you create a flash of light as a standard action and you are attuned or fully attuned, you can instead choose to make all enemies within range dazzled for 1 round (no save)."
+				},
+				"Plasma Sheath": {
+				  "SOURCEPAGE": "p.104",
+				  "description": "As a move action, you can cause all of your melee attacks to deal fire damage instead of their normal damage type. (The attacks are still made against the target's EAC or KAC as normal for the weapon.) This benefit lasts for 1 round or until you leave photon mode. When you are attuned or fully attuned, your attacks with plasma sheath deal additional fire damage equal to half your level."
+				},
+				"Gravity Anchor": {
+				  "SOURCEPAGE": "p.104",
+				  "description": "As a move action, you can form a gravitational bond between yourself and either the surface you're standing on or the objects you are holding. This grants you a +4 bonus to your AC against bull rush, reposition, and trip combat maneuvers if you choose the surface underfoot, or against disarm combat maneuvers if you choose objects. The bonus lasts for 1 round or until you leave graviton mode. You can have only one gravity anchor active at a time. When you are attuned or fully attuned, you can activate this revelation as a reaction when targeted by a bull rush, disarm, reposition, or trip combat maneuver, in which case it defends against only that attack."
+				}
 			},
-			"Wormholes": {
-				"SOURCEPAGE": "p.107",
-				"description": "When you're fully graviton-attuned, you can create two linked wormholes as a standard action. One wormhole must be adjacent to you, and the other appears anywhere in line of sight within medium range (100 feet + 10 feet per solarian level). Each wormhole is 5 feet across and appears at an intersection between two squares. You and any Large or smaller creatures you mentally designate (you can designate \"all creatures"
+			"6th":{
+				"Glow of Life": {
+				  "SOURCEPAGE": "p.105",
+				  "description": "As a move action, you can spend 1 Resolve Point to recover a number of Hit Points equal to twice your solarian level. Once you use this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, increase the amount you heal with this revelation to three times your solarian level."
+				},
+				"Crush": {
+				  "SOURCEPAGE": "p.105",
+				  "description": "As a standard action, you can increase the effects of gravity on the internal organs or workings of a target within 30 feet, causing it to have difficulty maintaining its normal functionality. The target must succeed at a Fortitude save or become staggered for 1 round. This revelation also affects  constructs. You can maintain this effect as a move action each round, but the target can attempt a new saving throw each round to end the effect. Once a creature succeeds at this save or the effect ends, you can't target that creature with crush again for 24 hours. When you are attuned or fully attuned, you can spend 1 Resolve Point to also stun the target for 1 round. Maintaining crush on subsequent rounds extends the staggered effect, but not the stunned effect."
+				},
+				"Astrologic Sense": {
+				  "SOURCEPAGE": "p.105",
+				  "description": "You can sense the movement of all objects influencing you to gain insight into upcoming events. Once per day as a full action, you can try to determine whether a particular action of yours will bring good or bad results for you in the immediate future. This functions as augury (see page 340) with your effective caster level equal to your solarian level. You can spend 1 Resolve Point to use this revelation again on the same day, but you still can't use it more than once per hour. When you are attuned or fully attuned, you can see 1 hour into the future (instead of half an hour as is normal for augury) when you use this revelation."
+				},
+				"Hypnotic Glow": {
+				  "SOURCEPAGE": "p.105",
+				  "description": "As a standard action, you can convince one living creature that you are to be trusted. This functions as charm person (see page 342), but with a duration of 1 round per solarian level you have. When the effect ends, if you are out of line of sight and the target is not engaged in an activity it wouldn't have begun without being charmed, the target does not realize it was charmed or has acted unusually unless someone else points it out. You can't use this revelation again while you currently have a creature charmed via this ability, and once you've attempted to charm a creature, whether or not the attempt was successful, you can't charm the same creature again for 24 hours. Your influence over the creature ends once the duration has expired, and at that time the target likely ceases doing anything you've requested of it. At 9th level, hypnotic glow functions as charm monster (see page 342). When you are attuned or fully attuned and you successfully charm a creature using this ability, you can also command it to approach, flee, or halt on its next turn, as per the command spell (no save; see page 343)."
+				},
+				"Defy Gravity": {
+				  "SOURCEPAGE": "p.105",
+				  "description": "As a move action, you can fly up to your speed. You must end this movement on solid ground or you fall. At 12th level or higher, you don't have to land if you immediately follow your flight with another move action to use defy gravity. On your last move action of the turn, you still have to land or fall. When you are attuned or fully attuned, your fly speed from this revelation increases by 10 feet."
+				},
+				"Reflection": {
+				  "SOURCEPAGE": "p.106",
+				  "description": "You can reflect ranged attacks back at your enemies. If you took the total defense action on your last turn, or if you were fighting defensively and spend 1 Resolve Point, as a reaction you can redirect a ranged attack that misses you. Select a new target within 30 feet and make a ranged attack roll with a -4 penalty. If your attack hits, the new target is damaged as if it had been the intended target of the original ranged attack. When you are attuned or fully attuned, you don't take a -4 penalty to your redirected attack roll."
+				},
+				"Corona": {
+				  "SOURCEPAGE": "p.105",
+				  "description": "As a standard action, you can surround your body with an envelope of fiery plasma. You gain cold resistance 10, and any adjacent creature that hits you with a natural weapon or a melee weapon takes 2d6 fire damage. The corona lasts for 1 round or until you leave photon mode. At 12th level, the damage increases to 3d6 and the cold resistance increases to 15. At 18th level, the damage increases to 4d6 and the cold resistance increases to 20. When you are attuned or fully attuned, any creature that starts its turn adjacent to you while your corona is in effect takes fire damage equal to half your solarian level."
+				},
+				"Gravity Surge": {
+				  "SOURCEPAGE": "p.105",
+				  "description": "As a full action, you can perform a disarm or trip combat maneuver against a target within 30 feet. Use your Charisma modifier on your attack roll instead of your Strength modifier, and you gain a +4 bonus to this attack roll that doesn't stack with the bonus from the Improved Combat Maneuver feat. When you are attuned or fully attuned, if you disarm a target with gravity surge and have a hand free, the dropped item flies toward you and you can snatch it from the air. If you trip a target with gravity surge, you can pull the target up to 10 feet closer to you."
+				},
+				"Blazing Orbit": {
+				  "SOURCEPAGE": "p.105",
+				  "description": "As a move action, you can move up to your speed, gaining concealment against any attack made against you during the move, and you can leave a trail of flames in every square you pass through. The flames last for 1 round and deal 2d6 fire damage to anyone who moves into them. You can't move through another creature's space during this movement. If you use blazing orbit again, any flames you previously created with it go out. The damage from the flames increases by 1d6 at 8th level and every 2 levels thereafter. When you are attuned or fully attuned, any creature damaged by the flames also gains the burning condition (1d6 fire damage; see page 273)."
+				}
 			},
-			"Radiation": {
-				"SOURCEPAGE": "p.104",
-				"description": "As a standard action, you can emit an aura of low-level radiation. Creatures within 5 feet of you must succeed at a Fortitude save or be sickened. A sickened creature recovers as soon as it moves out of your aura, and a creature that succeeds at its saving throw is immune to your radiation for 24 hours. This is a poison effect (see page 415). The radiation lasts for 1 round or until you leave photon mode. When you are attuned or fully attuned, the size of your aura increases to 10 feet.",
-				"minLevel": "2"
+			"10th":{
+				"Stealth Warp": {
+				  "SOURCEPAGE": "p.106",
+				  "description": "You can bend light, sound, and even vibrations around your body, making you harder to notice. As a move action, you can grant yourself a +4 bonus to Stealth checks. This lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, you can use this revelation to reduce your sensory output so much that you can attempt a Stealth check even when you're directly observed and lack cover or a distraction. You are not invisible, simply difficult to see clearly, and if a creature was observing you prior to your Stealth check, it remains aware of your location until you successfully reach cover or  concealment. Your stealth warp ends if you make an attack or cause another creature to attempt a saving throw, or at the beginning of your next turn unless you immediately take another move action to use this revelation."
+				},
+				"Soul Furnace": {
+				  "SOURCEPAGE": "p.106",
+				  "description": "You can stoke the internal energy of your entire physiology, allowing you to boost your life processes. As a move action, you can spend 1 Resolve Point. If you are suffering from an affliction (a curse, disease, drug or poison), you can immediately attempt an additional saving throw at the affliction's normal save DC. If you succeed at this saving throw, the affliction ends (regardless of how many successful saving throws it normally takes to end the affliction). Once you have used this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, you can also use this revelation to end any one of the following conditions you have"
+				}
 			},
-			"Crush": {
-				"SOURCEPAGE": "p.105",
-				"description": "As a standard action, you can increase the effects of gravity on the internal organs or workings of a target within 30 feet, causing it to have difficulty maintaining its normal functionality. The target must succeed at a Fortitude save or become staggered for 1 round. This revelation also affects  constructs. You can maintain this effect as a move action each round, but the target can attempt a new saving throw each round to end the effect. Once a creature succeeds at this save or the effect ends, you can't target that creature with crush again for 24 hours. When you are attuned or fully attuned, you can spend 1 Resolve Point to also stun the target for 1 round. Maintaining crush on subsequent rounds extends the staggered effect, but not the stunned effect.",
-				"minLevel": "6"
+			"14th":{
+				"Sunbolt": {
+				  "SOURCEPAGE": "p.106",
+				  "description": "As a standard action, you can fire a bolt of concentrated solar energy at one target within long range (400 feet + 40 feet per solarian level you have) as a ranged attack targeting the foe's EAC. If you hit, you deal 9d6 fire damage. If you have a solarian crystal (see Solarian Weapon Crystals on page 170) that changes the type of damage dealt by a solar weapon, you can use it to change the type of damage you deal with your sunbolt. Once you have used this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, you gain a +2 bonus to your ranged attack roll to use this revelation."
+				},
+				"Gravity Shield": {
+				  "SOURCEPAGE": "p.106",
+				  "description": "As a move action, you can create a minor shield of compressed gravity waves, granting you a +1 circumstance bonus to your AC. The shield lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, as a move action, you can create a disk of massive gravitational energies that is capable of deflecting incoming attacks. Choose one edge of your space. The shield extends along three continuous edges in a straight line centered on the chosen edge. The shield provides cover against attacks coming from its far side, but not against attacks originating from the side you're on. If you move, you can reposition your shield as part of your move action, moving it to a different edge of your space. You must use one of your hands to direct and maintain an active gravity shield. You cannot use this version of the gravity shield at the same time you use this revelation to gain a circumstance bonus to your AC. This gravity shield also lasts 1 round or until you leave graviton mode."
+				}
 			},
-			"Ultimate Photon": {
-				"SOURCEPAGE": "p.107",
-				"description": "Your ability to manipulate powers of light and energy expand greatly. The radius of any photon revelation (but not zenith revelation) you have with a radius expands by 10 feet. Any photon revelation (but not zenith revelation) that lasts for 1 round or until you leave photon mode now lasts for 1d4 rounds if you are not in photon mode. You also increase the power of any of the following photon revelations you have. Astrologic Sense",
-				"minLevel": "16"
+			"16th":{
+				"Ultimate Photon": {
+				  "SOURCEPAGE": "p.107",
+				  "description": "Your ability to manipulate powers of light and energy expand greatly. The radius of any photon revelation (but not zenith revelation) you have with a radius expands by 10 feet. Any photon revelation (but not zenith revelation) that lasts for 1 round or until you leave photon mode now lasts for 1d4 rounds if you are not in photon mode. You also increase the power of any of the following photon revelations you have. Astrologic Sense"
+				},
+				"Ultimate Graviton": {
+				  "SOURCEPAGE": "p.106",
+				  "description": "As your ability to manipulate powers of gravity expands, the range of any graviton revelation (but not zenith revelation) you have with a range doubles. Any graviton revelation (but not zenith revelation) you have that targets a single creature can now simultaneously target two creatures, who must be within 20 feet of each other. You also increase the power of any of the following gravity revelations you have. Defy Gravity"
+				}
 			},
-			"Stellar Rush": {
-				"SOURCEPAGE": "p.104",
-				"description": "As a standard action, you can wreathe yourself in stellar fire and make a charge without the penalties (see page 248). When you are attuned or fully attuned, you can substitute a bull rush for the melee attack at the end of the charge. Whether or not you succeed at the bull rush, the target takes 2d6 fire damage (Reflex half). This damage increases by 1d6 at 6th level and every 2 levels thereafter. ",
-				"minLevel": "2"
+			"Zenith":{
+				"Wormholes": {
+				  "SOURCEPAGE": "p.107",
+				  "description": "When you're fully graviton-attuned, you can create two linked wormholes as a standard action. One wormhole must be adjacent to you, and the other appears anywhere in line of sight within medium range (100 feet + 10 feet per solarian level). Each wormhole is 5 feet across and appears at an intersection between two squares. You and any Large or smaller creatures you mentally designate (you can designate \"all creatures"
+				},
+				"Solar Acceleration": {
+				  "SOURCEPAGE": "p.107",
+				  "description": "When you're fully photon-attuned, you can make a full attack as a standard action. In addition, you and up to six allies within 30 feet are affected by haste (see page 358) for 1 minute after you use this revelation. At 17th level, the extra speed from the haste effect increases to 60 feet (to a maximum of three times the creature's normal speed)."
+				},
+				"Starquake": {
+				  "SOURCEPAGE": "p.107",
+				  "description": "When you're fully graviton-attuned, you can create a violent ripple of movement to knock down your foes. As a move action, you can move up to your speed along the ground without provoking attacks of opportunity. Each creature you are adjacent to at any point during that movement takes 1d8 bludgeoning damage and must succeed at a Reflex save or be knocked prone. The affected creatures don't need to be standing on solid ground to fall prone, and any that were in the air (but still adjacent to you) fall to the ground on a failed save. The damage increases by 1d8 for every 3 solarian levels you have beyond 7th. At 17th level, you can move up to twice your speed along the ground with this revelation."
+				},
+				"Time Dilation": {
+				  "SOURCEPAGE": "p.107",
+				  "description": "When you're fully graviton-attuned, you can make time pass more slowly for your enemies. As a standard action, you can project a gravitational wave in a 30-foot cone. You choose which creatures in the cone are affected and which ones aren't. Each target must succeed at a Fortitude save or by affected by slow (see page 377) for a number of rounds equal to your solarian level. At 17th level, even targets that succeed at their saving throws are affected by slow for 1 round."
+				},
+				"Miniature Star": {
+				  "SOURCEPAGE": "p.107",
+				  "description": "When you're fully photon-attuned, you can create a simulacrum of a star as a standard action. The star is a 10-foot-radius sphere that fills your square (or one square of your space, if you're larger than Medium) and all squares within 5 feet of that space. Any creature that starts its turn in the same space as the star takes 1d6 fire damage for every 2 solarian levels you have, and any creature that starts its turn outside the star but within 5 feet of it takes half that damage. At 17th level, you can create your star simulacrum as a 15-foot-radius sphere that affects your square and all squares within 10 feet of that space (a total of 21 squares). Creatures can move through the star, but it exerts a gravitational pull, and any creature inside it or within 5 feet of it must spend twice as much movement for each square of movement that takes it away from the center of the star. The star remains for 1d4+1 rounds, and stays in place even if you later move. You are immune to all effects of your own miniature star."
+				},
+				"Ray of Light": {
+				  "SOURCEPAGE": "p.107",
+				  "description": "When you're fully photon-attuned, as a move action, you can transform yourself into a ray of light and move at light speed to any space you can see within long range. Any barrier that would block, reflect, or scatter light prevents you from moving through it. No creature can use a reaction to interfere with your movement or make attacks of opportunity against you unless it's capable of reacting faster than the speed of  light. At 17th level, you can touch one willing or unconscious creature to convert it to light and bring it with you as part of the same action."
+				}
 			},
-			"Astrologic Sense": {
-				"SOURCEPAGE": "p.105",
-				"description": "You can sense the movement of all objects influencing you to gain insight into upcoming events. Once per day as a full action, you can try to determine whether a particular action of yours will bring good or bad results for you in the immediate future. This functions as augury (see page 340) with your effective caster level equal to your solarian level. You can spend 1 Resolve Point to use this revelation again on the same day, but you still can't use it more than once per hour. When you are attuned or fully attuned, you can see 1 hour into the future (instead of half an hour as is normal for augury) when you use this revelation.",
-				"minLevel": "6"
-			},
-			"Black Hole": {
-				"SOURCEPAGE": "p.103",
-				"description": "When you're fully graviton-attuned, as a standard action, you can pull any number of creatures within 20 feet of you closer. You choose which creatures are affected and which ones aren't. Each target must succeed at a Fortitude save or be pulled 10 feet toward you. The range of this revelation and the distance pulled increase by 5 feet at 5th level and every 4 levels thereafter. Solid objects do not block this ability, but any creature that runs into a solid object ceases moving closer to you. Creatures moved by this ability do not provoke attacks of opportunity from this movement. After you use this revelation, you immediately become unattuned. Black hole functions as a zenith revelation for the purposes of abilities that reference them."
-			},
-			"Supernova": {
-				"SOURCEPAGE": "p.103",
-				"description": "When you're fully photon-attuned, as a standard action, you can deal 1d6 fire damage plus 1d6 additional fire damage per solarian level to all creatures within 10 feet of you. A creature that succeeds at a Reflex save takes half damage. At 9th level, you can increase the radius to 15 feet, and at 17th level, you can increase the radius to 20 feet. After you use this revelation, you immediately become unattuned. Supernova functions as a zenith revelation for the purposes of abilities that reference them. "
-			},
-			"Hypnotic Glow": {
-				"SOURCEPAGE": "p.105",
-				"description": "As a standard action, you can convince one living creature that you are to be trusted. This functions as charm person (see page 342), but with a duration of 1 round per solarian level you have. When the effect ends, if you are out of line of sight and the target is not engaged in an activity it wouldn't have begun without being charmed, the target does not realize it was charmed or has acted unusually unless someone else points it out. You can't use this revelation again while you currently have a creature charmed via this ability, and once you've attempted to charm a creature, whether or not the attempt was successful, you can't charm the same creature again for 24 hours. Your influence over the creature ends once the duration has expired, and at that time the target likely ceases doing anything you've requested of it. At 9th level, hypnotic glow functions as charm monster (see page 342). When you are attuned or fully attuned and you successfully charm a creature using this ability, you can also command it to approach, flee, or halt on its next turn, as per the command spell (no save; see page 343).",
-				"minLevel": "6"
-			},
-			"Gravity Boost": {
-				"SOURCEPAGE": "p.104",
-				"description": "You can increase or reduce the gravitational attraction between yourself and the terrain around you. You can add a bonus equal to one-third your solarian level (minimum +1) to Athletics checks to climb, jump, or swim as part of the action you take to attempt the skill check. In addition, as a reaction when you are falling, you can reduce the falling damage you take by half. At 6th level, you can move along vertical surfaces and even upside down along ceilings for 1 round. This functions as spider climb, but it leaves your hands free and you can also run. You must end your movement on a surface that can support you normally. If you end your movement while you are standing on a vertical surface or ceiling, you fall unless you succeed at an Athletics check to climb to remain in position. When you are attuned or fully attuned, the bonus you gain from this revelation to checks to climb, jump, or swim doubles.",
-				"minLevel": "2"
-			},
-			"Solar Acceleration": {
-				"SOURCEPAGE": "p.107",
-				"description": "When you're fully photon-attuned, you can make a full attack as a standard action. In addition, you and up to six allies within 30 feet are affected by haste (see page 358) for 1 minute after you use this revelation. At 17th level, the extra speed from the haste effect increases to 60 feet (to a maximum of three times the creature's normal speed)."
-			},
-			"Starquake": {
-				"SOURCEPAGE": "p.107",
-				"description": "When you're fully graviton-attuned, you can create a violent ripple of movement to knock down your foes. As a move action, you can move up to your speed along the ground without provoking attacks of opportunity. Each creature you are adjacent to at any point during that movement takes 1d8 bludgeoning damage and must succeed at a Reflex save or be knocked prone. The affected creatures don't need to be standing on solid ground to fall prone, and any that were in the air (but still adjacent to you) fall to the ground on a failed save. The damage increases by 1d8 for every 3 solarian levels you have beyond 7th. At 17th level, you can move up to twice your speed along the ground with this revelation."
-			},
-			"Gravity Hold": {
-				"SOURCEPAGE": "p.104",
-				"description": "This revelation allows you to move objects at a distance as per psychokinetic hand (see page 370). When you are attuned or fully attuned, you can use the psychokinetic hand ability of your gravity hold to immobilize, lift, or move a Medium or smaller creature. The creature can attempt a Fortitude save to negate the effect. While under this effect, the target creature cannot move, but can take any other normal actions. This ability follows all of the restrictions of the spell other than the weight limit, but you can't lift a creature higher than 5 feet off the ground. When you spend a standard action concentrating to maintain the gravity hold, the target can attempt a new save to end the effect. Once a creature successfully saves against this ability, it becomes immune to further uses of this revelation for 24 hours.",
-				"minLevel": "2"
-			},
-			"Defy Gravity": {
-				"SOURCEPAGE": "p.105",
-				"description": "As a move action, you can fly up to your speed. You must end this movement on solid ground or you fall. At 12th level or higher, you don't have to land if you immediately follow your flight with another move action to use defy gravity. On your last move action of the turn, you still have to land or fall. When you are attuned or fully attuned, your fly speed from this revelation increases by 10 feet.",
-				"minLevel": "6"
-			},
-			"Time Dilation": {
-				"SOURCEPAGE": "p.107",
-				"description": "When you're fully graviton-attuned, you can make time pass more slowly for your enemies. As a standard action, you can project a gravitational wave in a 30-foot cone. You choose which creatures in the cone are affected and which ones aren't. Each target must succeed at a Fortitude save or by affected by slow (see page 377) for a number of rounds equal to your solarian level. At 17th level, even targets that succeed at their saving throws are affected by slow for 1 round."
-			},
-			"Sunbolt": {
-				"SOURCEPAGE": "p.106",
-				"description": "As a standard action, you can fire a bolt of concentrated solar energy at one target within long range (400 feet + 40 feet per solarian level you have) as a ranged attack targeting the foe's EAC. If you hit, you deal 9d6 fire damage. If you have a solarian crystal (see Solarian Weapon Crystals on page 170) that changes the type of damage dealt by a solar weapon, you can use it to change the type of damage you deal with your sunbolt. Once you have used this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, you gain a +2 bonus to your ranged attack roll to use this revelation.",
-				"minLevel": "14"
-			},
-			"Reflection": {
-				"SOURCEPAGE": "p.106",
-				"description": "You can reflect ranged attacks back at your enemies. If you took the total defense action on your last turn, or if you were fighting defensively and spend 1 Resolve Point, as a reaction you can redirect a ranged attack that misses you. Select a new target within 30 feet and make a ranged attack roll with a -4 penalty. If your attack hits, the new target is damaged as if it had been the intended target of the original ranged attack. When you are attuned or fully attuned, you don't take a -4 penalty to your redirected attack roll.",
-				"minLevel": "6"
-			},
-			"Miniature Star": {
-				"SOURCEPAGE": "p.107",
-				"description": "When you're fully photon-attuned, you can create a simulacrum of a star as a standard action. The star is a 10-foot-radius sphere that fills your square (or one square of your space, if you're larger than Medium) and all squares within 5 feet of that space. Any creature that starts its turn in the same space as the star takes 1d6 fire damage for every 2 solarian levels you have, and any creature that starts its turn outside the star but within 5 feet of it takes half that damage. At 17th level, you can create your star simulacrum as a 15-foot-radius sphere that affects your square and all squares within 10 feet of that space (a total of 21 squares). Creatures can move through the star, but it exerts a gravitational pull, and any creature inside it or within 5 feet of it must spend twice as much movement for each square of movement that takes it away from the center of the star. The star remains for 1d4+1 rounds, and stays in place even if you later move. You are immune to all effects of your own miniature star."
-			},
-			"Dark Matter": {
-				"SOURCEPAGE": "p.104",
-				"description": "As a move action, you can draw on the properties of dark matter to increase your density, allowing you to resist physical damage. You gain damage reduction 1/-. This increases to DR 2/- at 6th level and increases by 1 again every 3 solarian levels thereafter. This benefit lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, your DR from dark matter is equal to half your solarian level.",
-				"minLevel": "2"
-			},
-			"Flare": {
-				"SOURCEPAGE": "p.104",
-				"description": "As a move action, you can shed light in a 30-foot radius for 1 minute. You choose dim, normal, or bright light each time you activate this revelation. As a standard action, you can create a flash of brilliant light, forcing one creature within 30 feet to succeed at a Reflex save or be blinded for 1 round. Once you've targeted a creature with flare, you can't target it with this revelation again for 10 minutes. Blind or sightless creatures are not affected by this use of this revelation. When you create a flash of light as a standard action and you are attuned or fully attuned, you can instead choose to make all enemies within range dazzled for 1 round (no save).",
-				"minLevel": "2"
-			},
-			"Ultimate Graviton": {
-				"SOURCEPAGE": "p.106",
-				"description": "As your ability to manipulate powers of gravity expands, the range of any graviton revelation (but not zenith revelation) you have with a range doubles. Any graviton revelation (but not zenith revelation) you have that targets a single creature can now simultaneously target two creatures, who must be within 20 feet of each other. You also increase the power of any of the following gravity revelations you have. Defy Gravity",
-				"minLevel": "16"
-			},
-			"Corona": {
-				"SOURCEPAGE": "p.105",
-				"description": "As a standard action, you can surround your body with an envelope of fiery plasma. You gain cold resistance 10, and any adjacent creature that hits you with a natural weapon or a melee weapon takes 2d6 fire damage. The corona lasts for 1 round or until you leave photon mode. At 12th level, the damage increases to 3d6 and the cold resistance increases to 15. At 18th level, the damage increases to 4d6 and the cold resistance increases to 20. When you are attuned or fully attuned, any creature that starts its turn adjacent to you while your corona is in effect takes fire damage equal to half your solarian level.",
-				"minLevel": "6"
-			},
-			"Stealth Warp": {
-				"SOURCEPAGE": "p.106",
-				"description": "You can bend light, sound, and even vibrations around your body, making you harder to notice. As a move action, you can grant yourself a +4 bonus to Stealth checks. This lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, you can use this revelation to reduce your sensory output so much that you can attempt a Stealth check even when you're directly observed and lack cover or a distraction. You are not invisible, simply difficult to see clearly, and if a creature was observing you prior to your Stealth check, it remains aware of your location until you successfully reach cover or  concealment. Your stealth warp ends if you make an attack or cause another creature to attempt a saving throw, or at the beginning of your next turn unless you immediately take another move action to use this revelation.",
-				"minLevel": "10"
-			},
-			"Gravity Shield": {
-				"SOURCEPAGE": "p.106",
-				"description": "As a move action, you can create a minor shield of compressed gravity waves, granting you a +1 circumstance bonus to your AC. The shield lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, as a move action, you can create a disk of massive gravitational energies that is capable of deflecting incoming attacks. Choose one edge of your space. The shield extends along three continuous edges in a straight line centered on the chosen edge. The shield provides cover against attacks coming from its far side, but not against attacks originating from the side you're on. If you move, you can reposition your shield as part of your move action, moving it to a different edge of your space. You must use one of your hands to direct and maintain an active gravity shield. You cannot use this version of the gravity shield at the same time you use this revelation to gain a circumstance bonus to your AC. This gravity shield also lasts 1 round or until you leave graviton mode.",
-				"minLevel": "14"
-			},
-			"Plasma Sheath": {
-				"SOURCEPAGE": "p.104",
-				"description": "As a move action, you can cause all of your melee attacks to deal fire damage instead of their normal damage type. (The attacks are still made against the target's EAC or KAC as normal for the weapon.) This benefit lasts for 1 round or until you leave photon mode. When you are attuned or fully attuned, your attacks with plasma sheath deal additional fire damage equal to half your level.",
-				"minLevel": "2"
-			},
-			"Ray of Light": {
-				"SOURCEPAGE": "p.107",
-				"description": "When you're fully photon-attuned, as a move action, you can transform yourself into a ray of light and move at light speed to any space you can see within long range. Any barrier that would block, reflect, or scatter light prevents you from moving through it. No creature can use a reaction to interfere with your movement or make attacks of opportunity against you unless it's capable of reacting faster than the speed of  light. At 17th level, you can touch one willing or unconscious creature to convert it to light and bring it with you as part of the same action."
-			},
-			"Gravity Surge": {
-				"SOURCEPAGE": "p.105",
-				"description": "As a full action, you can perform a disarm or trip combat maneuver against a target within 30 feet. Use your Charisma modifier on your attack roll instead of your Strength modifier, and you gain a +4 bonus to this attack roll that doesn't stack with the bonus from the Improved Combat Maneuver feat. When you are attuned or fully attuned, if you disarm a target with gravity surge and have a hand free, the dropped item flies toward you and you can snatch it from the air. If you trip a target with gravity surge, you can pull the target up to 10 feet closer to you.",
-				"minLevel": "6"
-			},
-			"Soul Furnace": {
-				"SOURCEPAGE": "p.106",
-				"description": "You can stoke the internal energy of your entire physiology, allowing you to boost your life processes. As a move action, you can spend 1 Resolve Point. If you are suffering from an affliction (a curse, disease, drug or poison), you can immediately attempt an additional saving throw at the affliction's normal save DC. If you succeed at this saving throw, the affliction ends (regardless of how many successful saving throws it normally takes to end the affliction). Once you have used this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, you can also use this revelation to end any one of the following conditions you have",
-				"minLevel": "10"
-			},
-			"Blazing Orbit": {
-				"SOURCEPAGE": "p.105",
-				"description": "As a move action, you can move up to your speed, gaining concealment against any attack made against you during the move, and you can leave a trail of flames in every square you pass through. The flames last for 1 round and deal 2d6 fire damage to anyone who moves into them. You can't move through another creature's space during this movement. If you use blazing orbit again, any flames you previously created with it go out. The damage from the flames increases by 1d6 at 8th level and every 2 levels thereafter. When you are attuned or fully attuned, any creature damaged by the flames also gains the burning condition (1d6 fire damage; see page 273).",
-				"minLevel": "6"
-			},
-			"Gravity Anchor": {
-				"SOURCEPAGE": "p.104",
-				"description": "As a move action, you can form a gravitational bond between yourself and either the surface you're standing on or the objects you are holding. This grants you a +4 bonus to your AC against bull rush, reposition, and trip combat maneuvers if you choose the surface underfoot, or against disarm combat maneuvers if you choose objects. The bonus lasts for 1 round or until you leave graviton mode. You can have only one gravity anchor active at a time. When you are attuned or fully attuned, you can activate this revelation as a reaction when targeted by a bull rush, disarm, reposition, or trip combat maneuver, in which case it defends against only that attack.",
-				"minLevel": "2"
-			}
 		},
 		"Class features": {
+			"Black Hole": {
+			  "SOURCEPAGE": "p.103",
+			  "description": "When you're fully graviton-attuned, as a standard action, you can pull any number of creatures within 20 feet of you closer. You choose which creatures are affected and which ones aren't. Each target must succeed at a Fortitude save or be pulled 10 feet toward you. The range of this revelation and the distance pulled increase by 5 feet at 5th level and every 4 levels thereafter. Solid objects do not block this ability, but any creature that runs into a solid object ceases moving closer to you. Creatures moved by this ability do not provoke attacks of opportunity from this movement. After you use this revelation, you immediately become unattuned. Black hole functions as a zenith revelation for the purposes of abilities that reference them."
+			},
+			"Supernova": {
+			  "SOURCEPAGE": "p.103",
+			  "description": "When you're fully photon-attuned, as a standard action, you can deal 1d6 fire damage plus 1d6 additional fire damage per solarian level to all creatures within 10 feet of you. A creature that succeeds at a Reflex save takes half damage. At 9th level, you can increase the radius to 15 feet, and at 17th level, you can increase the radius to 20 feet. After you use this revelation, you immediately become unattuned. Supernova functions as a zenith revelation for the purposes of abilities that reference them. "
+			},
 			"Skill Adept": {
 				"SOURCEPAGE": "p.101",
 				"description": "As part of the process that led you to become a solarian, you gained additional insight and training. Choose two additional skills and add them to your list of class skills."
@@ -979,7 +936,7 @@
 			},
 			"Solar Manifestation": {
 				"SOURCEPAGE": "p.101",
-				"description": "]."
+				"description": "."
 			},
 			"Zenith Revelations": {
 				"SOURCEPAGE": "p.103",

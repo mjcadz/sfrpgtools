@@ -1,5 +1,3 @@
-<!-- index.html-->
-
 {% extends "base.html" %}
 {% block title %}Starfinder Monster Builder{% endblock %}
 {% block description %}NPC and monster creator for starfinder roleplaying game{% endblock %}
@@ -103,10 +101,15 @@
                                     <hr>
                                     <div id="classDropdown"></div>
                                     <div id="stepFourOptionalDropdown"></div>
+                                    <div id="stepFourOptionalDropdownTwo"></div>
+                                    <div id="stepFourOptionalDropdownThree"></div>
+                                    <div id="stepFourOptionalDropdownFour"></div>
                                 </div>
                                 <div class="col-sm-6">
                                   <hr>
                                   <div class="stepFourDescription wizardp">
+                                  </div>
+                                  <div class="classFeaturesDescription wizardp">
                                   </div>
                                 </div>
                             </div>
@@ -448,6 +451,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/html2canvas.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/spellData.v2.2.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/classData.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterGenData.v2.3.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterGen.v2.7.js') }}"></script>
 {% endblock %}
