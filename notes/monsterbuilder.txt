@@ -9,8 +9,9 @@ git remote set-url origin https://github.com/mjcadz/sfrpgtools.git
 https://github.com/silviomoreto/bootstrap-select
 bootstrap dropdown select
 
-don't forget to add even handler
-
+CLASS INTEGRATIONS
+master skills for Operative
+spells for spellcasters
 
 
 

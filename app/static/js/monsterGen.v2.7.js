@@ -2553,6 +2553,7 @@ function stepFourDescription(selected,selectedArray) {
       styleKeys = Object.keys(allClassFeatures["Soldier"]["Fighting style"]).sort();
 
       generateDropdown("stepFourOptionalDropdown","Attack focus","stepFourOptionDrop","Choose attack focus",["Melee","Ranged"]);
+      //choose primary fighting style
       generateDropdown("stepFourOptionalDropdownTwo","Primary fighting style","stepFourOptionDropTwo","Choose fighting style",styleKeys);
       if (classFeatures["Fighting style"].hasOwnProperty("second")) {
         //secondary style
@@ -2560,7 +2561,7 @@ function stepFourDescription(selected,selectedArray) {
       } else {
         $("#stepFourOptionalDropdownThree").first().empty();
       }
-
+      //choose gear boosts
       if (classFeatures.hasOwnProperty("Gear boost")) {
         var boosts = Object.keys(allClassFeatures["Soldier"]["Gear Boost"]).sort();
         generateMultiDropdown("stepFourOptionalDropdownFour","Gear boosts","stepFourOptionDropFour","Choose gear boosts","Search boosts",boosts,classFeatures["Gear boost"]);
@@ -2572,6 +2573,7 @@ function stepFourDescription(selected,selectedArray) {
 
       //Envoy
 
+      //choose envoy improvisations
       improvKeys = Object.keys(classFeatures.improvisations)
       var improvisationArray = [];
 
@@ -2592,6 +2594,7 @@ function stepFourDescription(selected,selectedArray) {
       generateDropdown("stepFourOptionalDropdown","Solar manifestation","stepFourOptionDrop","Choose manifestation",["Solar armor","Solar weapon"]);
 
       if (classFeatures.hasOwnProperty("revelations")) {
+        //choose solar evelations
         revelKeys = Object.keys(classFeatures.revelations);
         var revelationArray = [];
 
@@ -2607,6 +2610,53 @@ function stepFourDescription(selected,selectedArray) {
       $("#stepFourOptionalDropdownThree").first().empty();
       $("#stepFourOptionalDropdownFour").first().empty();
 
+
+    } else if (selected == "Technomancer") {
+
+      //Technomancer
+
+      if (classFeatures.hasOwnProperty("Magic hack")) {
+        //choose magic hacks
+        hackKeys = Object.keys(classFeatures["Magic hack"]);
+        var hackArray = [];
+
+        for (var i = 0; i < hackKeys.length; i++) {
+            hackArray = hackArray.concat(['LABEL=' + hackKeys[i] +'-levelMAX=' + classFeatures["Magic hack"][hackKeys[i]]]);
+            hackArray = hackArray.concat(Object.keys(allClassFeatures["Technomancer"]["Magic Hacks"][hackKeys[i]]).sort());
+            hackArray = hackArray.concat(['ENDLABEL']);
+        }
+        generateMultiDropdown("stepFourOptionalDropdown","Magic hacks","stepFourOptionDrop","Choose hacks","Search hacks",hackArray,0);
+      } else {
+        $("#stepTwoOptionalDropdown").first().empty();
+      }
+      $("#stepFourOptionalDropdownTwo").first().empty();
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
+
+    } else if (selected == "Operative") {
+
+      //Operative
+
+      specialKeys = Object.keys(allClassFeatures["Operative"]["Operative Specializations"]).sort();
+      //choose specialisation
+      generateDropdown("stepFourOptionalDropdown","Operative specialization","stepFourOptionDrop","Choose specialization",specialKeys);
+
+      if (classFeatures.hasOwnProperty("exploit")) {
+        //choose exploits
+        exploitKeys = Object.keys(classFeatures["exploit"]);
+        var exploitArray = [];
+
+        for (var i = 0; i < exploitKeys.length; i++) {
+            exploitArray = exploitArray.concat(['LABEL=' + exploitKeys[i] +'-levelMAX=' + classFeatures["exploit"][exploitKeys[i]]]);
+            exploitArray = exploitArray.concat(Object.keys(allClassFeatures["Operative"]["Operative Exploits"][exploitKeys[i]]).sort());
+            exploitArray = exploitArray.concat(['ENDLABEL']);
+        }
+        generateMultiDropdown("stepFourOptionalDropdownTwo","Operative exploits","stepFourOptionDropTwo","Choose exploits","Search exploits",exploitArray,0);
+      } else {
+        $("#stepTwoOptionalDropdownTwo").first().empty();
+      }
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
 
     } else {
       $("#stepFourOptionalDropdown").first().empty();
