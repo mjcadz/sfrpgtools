@@ -2405,6 +2405,26 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       $('#DT'+indexString+'Drop').selectpicker('refresh');
 
 
+    } else if (id == 'artificialDrop'){
+      //hande the mechanic class drone/exocortex choices
+
+      var crString = $('[data-id="CRDrop"]').text().trim();
+      var cr = Number(crString.replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
+      var classFeatures = getClassAbilities("Mechanic",cr);
+      var $descriptionOneArea = $(".classFeaturesDescription").first();
+      $descriptionOneArea.empty();
+
+      var droneCr = cr - 2;
+      if (droneCr < 1){
+        droneCr = 1;
+      }
+
+      if (selected == "Drone") {
+        $descriptionOneArea.append("<p><b>" + crString + " " + "Mechanic Abilities: </b>" + classFeatures.description + "<br><br>For a mechanic creature with a drone, build the drone as a separate technological construct of CR " + droneCr.toString() + " or use an existing technological construct with a CR " + droneCr.toString() + ". The drone does not get a full suite of actions on its own; each round, the mechanic creature and the drone can each take a move action, a swift action, and a reaction, but only one of them can take a standard action or combine its move and standard actions into a full action. The drone doesn’t have its own CR, it doesn’t contribute to the CR of the encounter, and PCs receive no XP for defeating a drone." + "</p>");
+      } else if (selected == "Exocortex") {
+        $descriptionOneArea.append("<p><b>" + crString + " " + "Mechanic Abilities: </b>" + classFeatures.exocortex.join(", ").capitalise() + ", " + classFeatures.description.toLowerCase() + "</p>");
+      }
+
     }
     //remove any highlight that has been applied for form validation
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');
@@ -2652,6 +2672,30 @@ function stepFourDescription(selected,selectedArray) {
             exploitArray = exploitArray.concat(['ENDLABEL']);
         }
         generateMultiDropdown("stepFourOptionalDropdownTwo","Operative exploits","stepFourOptionDropTwo","Choose exploits","Search exploits",exploitArray,0);
+      } else {
+        $("#stepTwoOptionalDropdownTwo").first().empty();
+      }
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
+
+    } else if (selected == "Mechanic") {
+
+      //MECHANIC
+
+      //choose artificial inteligence
+      generateDropdown("stepFourOptionalDropdown","Artificial intelligence","artificialDrop","Choose intelligence",["Drone","Exocortex"]);
+
+      if (classFeatures.hasOwnProperty("trick")) {
+        //choose exploits
+        trickKeys = Object.keys(classFeatures["trick"]);
+        var trickArray = [];
+
+        for (var i = 0; i < trickKeys.length; i++) {
+            trickArray = trickArray.concat(['LABEL=' + trickKeys[i] +'-levelMAX=' + classFeatures["trick"][trickKeys[i]]]);
+            trickArray = trickArray.concat(Object.keys(allClassFeatures["Mechanic"]["Mechanic Tricks"][trickKeys[i]]).sort());
+            trickArray = trickArray.concat(['ENDLABEL']);
+        }
+        generateMultiDropdown("stepFourOptionalDropdownTwo","Mechanic tricks","stepFourOptionDropTwo","Choose tricks","Search tricks",trickArray,0);
       } else {
         $("#stepTwoOptionalDropdownTwo").first().empty();
       }

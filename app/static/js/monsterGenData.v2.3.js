@@ -1113,21 +1113,118 @@ classData = {
     },
     "Mechanic": {
         "AbilitiesByCr": {
-            "1": {"description":"Artificial intelligence (see Special Rules above), custom rig, one special ability."},
-            "2": {"description":"Artificial intelligence, custom rig, one 2ndlevel mechanic trick, and one special ability."},
-            "3": {"description":"Artificial intelligence, custom rig, overload, and one 2ndlevel mechanic trick."},
-            "4": {"description":"Artificial intelligence, custom rig, overload, and two 2ndlevel mechanic tricks."},
-            "5": {"description":"Artificial intelligence, custom rig, overload, remote hack, and two 2nd-level mechanic tricks."},
-            "7": {"description":"Artificial intelligence, overload, remote hack, expert rig, miracle worker 1/day, and two 2nd-level mechanic tricks."},
-            "8": {"description":"Artificial intelligence, overload, remote hack, expert rig, miracle worker 1/day, one 8th-level mechanic trick, and one 2nd-level mechanic trick."},
-            "9": {"description":"Artificial intelligence, overload, remote hack, expert rig, miracle worker 1/day, override, one 8th-level mechanic trick, and one 2nd-level mechanic trick."},
-            "11": {"description":"Artificial intelligence, overload, remote hack, expert rig, miracle worker 2/day, override, and two 8th-level mechanic tricks."},
-            "13": {"description":"Artificial intelligence, overload, remote hack, miracle worker 2/day, override, advanced rig, and two 8th-level mechanic tricks."},
-            "14": {"description":"Artificial intelligence, overload, remote hack, miracle worker 2/day, override, advanced rig, one 14th-level mechanic trick, and one 8th-level mechanic trick."},
-            "16": {"description":"Artificial intelligence, overload, remote hack, miracle worker 3/day, override, advanced rig, and two 14th-level mechanic tricks."},
-            "18": {"description":"Artificial intelligence, overload, remote hack, miracle worker 3/day, override, advanced rig, and three 14th-level mechanic tricks."},
-            "19": {"description":"Artificial intelligence, overload, remote hack, miracle worker 3/day, override, ghost in the machine, superior rig, and three 14th-level mechanic tricks."},
-            "20": {"description":"Artificial intelligence, overload, remote hack, miracle worker 3/day, override, ghost in the machine, superior rig, and four 14th-level mechanic tricks."}
+            "1": {
+              "description":"Artificial intelligence, custom rig, one special ability.",
+              "features":["Artificial intelligence","custom rig"],
+              "exocortex":["target tracking"],
+              "special":1
+            },
+            "2": {
+              "description":"Artificial intelligence, custom rig, one 2nd-level mechanic trick, and one special ability.",
+              "features":["Artificial intelligence","custom rig"],
+              "trick":{"2nd":1},
+              "exocortex":["target tracking"],
+              "special":1
+            },
+            "3": {
+              "description":"Artificial intelligence, custom rig, overload, and one 2nd-level mechanic trick.",
+              "features":["Artificial intelligence","custom rig","overload"],
+              "exocortex":["target tracking"],
+              "trick":{"2nd":1}
+            },
+            "4": {
+              "description":"Artificial intelligence, custom rig, overload, and two 2nd-level mechanic tricks.",
+              "features":["Artificial intelligence","custom rig","overload"],
+              "exocortex":["target tracking"],
+              "trick":{"2nd":2}
+            },
+            "5": {
+              "description":"Artificial intelligence, custom rig, overload, remote hack, and two 2nd-level mechanic tricks.",
+              "features":["Artificial intelligence","custom rig","overload","remote hack"],
+              "exocortex":["target tracking","wireless hack"],
+              "trick":{"2nd":2}
+            },
+            "7": {
+              "description":"Artificial intelligence, overload, remote hack, expert rig, miracle worker 1/day, and two 2nd-level mechanic tricks.",
+              "features":["Artificial intelligence","overload","remote hack","expert rig","miracle worker 1/day"],
+              "exocortex":["target tracking","wireless hack"],
+              "trick":{"2nd":2}
+            },
+            "8": {
+              "description":"Artificial intelligence, overload, remote hack, expert rig, miracle worker 1/day, one 8th-level mechanic trick, and one 2nd-level mechanic trick.",
+              "features":["Artificial intelligence","overload","remote hack","expert rig","miracle worker 1/day"],
+              "exocortex":["target tracking","wireless hack"],
+              "trick":{
+                "8th":1,
+                "2nd":1
+              }
+            },
+            "9": {
+              "description":"Artificial intelligence, overload, remote hack, expert rig, miracle worker 1/day, override, one 8th-level mechanic trick, and one 2nd-level mechanic trick.",
+              "features":["Artificial intelligence","overload","remote hack","expert rig","miracle worker 1/day","override"],
+              "exocortex":["target tracking","wireless hack"],
+              "trick":{
+                "8th":1,
+                "2nd":1
+              }
+            },
+            "11": {
+              "description":"Artificial intelligence, overload, remote hack, expert rig, miracle worker 2/day, override, and two 8th-level mechanic tricks.",
+              "features":["Artificial intelligence","overload","remote hack","expert rig","miracle worker 2/day","override"],
+              "exocortex":["twin tracking","wireless hack"],
+              "trick":{
+                "8th":2
+              }
+            },
+            "13": {
+              "description":"Artificial intelligence, overload, remote hack, miracle worker 2/day, override, advanced rig, and two 8th-level mechanic tricks.",
+              "features":["Artificial intelligence","overload","remote hack","miracle worker 2/day","override","advanced rig"],
+              "exocortex":["twin tracking","wireless hack"],
+              "trick":{
+                "8th":2
+              }
+            },
+            "14": {
+              "description":"Artificial intelligence, overload, remote hack, miracle worker 2/day, override, advanced rig, one 14th-level mechanic trick, and one 8th-level mechanic trick.",
+              "features":["Artificial intelligence","overload","remote hack","miracle worker 2/day","override","advanced rig"],
+              "exocortex":["twin tracking","wireless hack"],
+              "trick":{
+                "8th":1,
+                "14th":1
+              }
+            },
+            "16": {
+              "description":"Artificial intelligence, overload, remote hack, miracle worker 3/day, override, advanced rig, and two 14th-level mechanic tricks.",
+              "features":["Artificial intelligence","overload","remote hack","miracle worker 3/day","override","advanced rig"],
+              "exocortex":["twin tracking","wireless hack","multitasking"],
+              "trick":{
+                "14th":2
+              }
+            },
+            "18": {
+              "description":"Artificial intelligence, overload, remote hack, miracle worker 3/day, override, advanced rig, and three 14th-level mechanic tricks.",
+              "features":["Artificial intelligence","overload","remote hack","miracle worker 3/day","override","advanced rig"],
+              "exocortex":["twin tracking","wireless hack","multitasking"],
+              "trick":{
+                "14th":3
+              }
+            },
+            "19": {
+              "description":"Artificial intelligence, overload, remote hack, miracle worker 3/day, override, ghost in the machine, superior rig, and three 14th-level mechanic tricks.",
+              "features":["Artificial intelligence","overload","remote hack","miracle worker 3/day","override","ghost in the machine","superior rig"],
+              "exocortex":["twin tracking","wireless hack","multitasking"],
+              "trick":{
+                "14th":3
+              }
+            },
+            "20": {
+              "description":"Artificial intelligence, overload, remote hack, miracle worker 3/day, override, ghost in the machine, superior rig, and four 14th-level mechanic tricks.",
+              "features":["Artificial intelligence","overload","remote hack","miracle worker 3/day","override","ghost in the machine","superior rig"],
+              "exocortex":["quad tracking","wireless hack","multitasking"],
+              "trick":{
+                "14th":4
+              }
+            }
         },
         "AbilityScoreModifiers": ["Int","Dex","Con"],
         "Adjustments": {"fortitude":2,"reflex":2,"will":-2},
@@ -1138,7 +1235,7 @@ classData = {
           "computers",
           "engineering"
         ],
-        "SpecialRules": " All mechanic creatures get the artificial intelligence class feature, which requires a choice between a drone and an exocortex. For a mechanic creature with a drone, build the drone as a separate technological construct of the mechanic’s CR - 2 or use an existing technological construct with the mechanic’s CR - 2. The drone does not get a full suite of actions on its own; each round, the mechanic creature and the drone can each take a move action, a swift action, and a reaction, but only one of them can take a standard action or combine its move and standard actions into a full action. The drone doesn’t have its own CR, it doesn’t contribute to the CR of the encounter, and PCs receive no XP for defeating a drone. For a mechanic creature with an exocortex, add target tracking at CR 1 (see below), wireless hack at CR 5, twin tracking at CR 10, multitasking at CR 15, and quad tracking at CR 20. Target Tracking (Ex)"
+        "SpecialRules": " All mechanic creatures get the artificial intelligence class feature, which requires a choice between a drone and an exocortex. For a mechanic creature with a drone, build the drone as a separate technological construct of the mechanic’s CR - 2 or use an existing technological construct with the mechanic’s CR - 2. The drone does not get a full suite of actions on its own; each round, the mechanic creature and the drone can each take a move action, a swift action, and a reaction, but only one of them can take a standard action or combine its move and standard actions into a full action. The drone doesn’t have its own CR, it doesn’t contribute to the CR of the encounter, and PCs receive no XP for defeating a drone. For a mechanic creature with an exocortex, add target tracking at CR 1 (see below), wireless hack at CR 5, twin tracking at CR 10, multitasking at CR 15, and quad tracking at CR 20."
     },
     "Mystic": {
         "AbilitiesByCr": {

@@ -522,7 +522,7 @@ allClassFeatures = {
 			},
 			"True Expertise": {
 				"SOURCEPAGE": "p.61",
-				"description": "[Not Implemented]You gain total mastery over one of your envoy improvisations and can use it with but a thought. When you gain this ability, choose one improvisation you know that has an effect when you spend 1 Resolve Point. As long as you have at least 1 Resolve Point remaining, you can gain the improvisation's effect without spending the Resolve Point. This ability has no benefit if the improvisation requires more than 1 Resolve Point. In addition, when you roll your expertise die, you can add 2d8 rather than 1d8+4 to the result of your skill check. If, for some reason, your bonus gained from expertise isn't 1d8+4, you can't use this option. "
+				"description": "You gain total mastery over one of your envoy improvisations and can use it with but a thought. When you gain this ability, choose one improvisation you know that has an effect when you spend 1 Resolve Point. As long as you have at least 1 Resolve Point remaining, you can gain the improvisation's effect without spending the Resolve Point. This ability has no benefit if the improvisation requires more than 1 Resolve Point. In addition, when you roll your expertise die, you can add 2d8 rather than 1d8+4 to the result of your skill check. If, for some reason, your bonus gained from expertise isn't 1d8+4, you can't use this option. "
 			}
 		}
 	},
@@ -986,7 +986,7 @@ allClassFeatures = {
 			},
 			"Exocortex Mods": {
 				"SOURCEPAGE": "p.79",
-				"description": "[Not Implemented]Your exocortex allows you to apply any one of the following drone mods to yourself as if you were a drone with that mod installed"
+				"description": "Your exocortex allows you to apply any one of the following drone mods to yourself as if you were a drone with that mod installed"
 			},
 			"Wireless Hack": {
 				"SOURCEPAGE": "p.79",
@@ -1002,155 +1002,131 @@ allClassFeatures = {
 			}
 		},
 		"Mechanic Tricks": {
-			"Improved Resistant Energy": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]Choose an additional energy type from resistant energy. You gain resistance 15 against both this and your original energy type. You must have the energy shield and resistant energy mechanic tricks to learn this trick.",
-				"minLevel": "14"
+			"2nd":{
+				"Quick Repair": {
+				  "SOURCEPAGE": "p.72",
+				  "description": "When you attempt to repair an item, you can do so in half the time normally required (to a minimum of a full action)."
+				},
+				"Distracting Hack": {
+				  "SOURCEPAGE": "p.71",
+				  "description": "You can hack a computer within 30 feet of a foe to distract that foe, such as with a sudden noise or an image. You must be able to access the computer (whether it is your own computer or you are within range to access one manually or via remote hack). This functions as a feint action except that it uses your Computers skill instead of Bluff, so you can apply the benefits of Improved Feint and Greater Feint if you have them."
+				},
+				"Overcharge": {
+				  "SOURCEPAGE": "p.72",
+				  "description": "As a standard action, you can use your custom rig to overcharge and attack with a ranged energy weapon or a melee weapon with the powered special property (see page  181) that you're holding. If you hit, you deal 1d6 additional damage of the same type the weapon normally deals. This attack uses three times as many charges from the battery or power cell as normal and can't be used if the weapon doesn't have enough charges. This trick has no effect on a weapon without a battery or power cell. You can instead use this ability as a move action on a touched powered weapon that is unattended or attended by an ally to grant the same effect to that weapon's next attack before the beginning of your next turn."
+				},
+				"Portable Power": {
+				  "SOURCEPAGE": "p.72",
+				  "description": "You can use your custom rig to supply limited power for up to 1 minute to a computer or starship system that lacks power. If this system is part of a much larger network, this trick does not supply power to the entire network, just to a limited point of access (typically a terminal), which might greatly limit functionality. Once you have used portable power on a system, you cannot do so again on that system for 24 hours."
+				},
+				"Overload Weapon": {
+				  "SOURCEPAGE": "p.72",
+				  "description": "As a full action or as a move action by spending 1 Resolve Point, you can cause a powered weapon (either a ranged energy weapon or a melee weapon with the powered special property) in your possession to explode. You can use the weapon as if it were a grenade of the weapon's item level or lower dealing the weapon's normal damage type, except the weapon has a range increment of only 10 feet unless it is a thrown weapon. If someone tries to attack with the weapon, it explodes as a grenade would instead, centered on the user, and the user doesn't receive a Reflex save to negate the grenade's effect (if any). Once you've primed a weapon to explode in this way, it's difficult to reverse the effect, requiring 8 hours of work and a successful Engineering check (DC = 15 + your Engineering bonus); failing the check by 5 or more detonates the weapon. Once detonated, the weapon is destroyed, just like a grenade."
+				},
+				"Nightvision Processor": {
+				  "SOURCEPAGE": "p.72",
+				  "description": "Your visual data processor allows you to see better in conditions of poor lighting, granting you low-light vision and darkvision to a range of 60 feet. You must have the visual data processor mechanic trick to learn this trick."
+				},
+				"Overclocking": {
+				  "SOURCEPAGE": "p.72",
+				  "description": "You have augmented the performance of your AI for maximum response timing. You gain a +2 insight bonus to initiative checks, and either you (if you have an exocortex) or your drone (if you have a drone) gains a +2 insight bonus to Reflex saves."
+				},
+				"Hack Directory": {
+				  "SOURCEPAGE": "p.71",
+				  "description": "Whenever you attempt to hack a system and fail the check, you immediately become aware of any countermeasures that were activated due to your failure. You can then select one of these countermeasures and attempt another Computers check (with the same DC as the original). If you succeed at this second check, you can prevent that countermeasure from activating, as if you had not attempted to access the system at all. Any other countermeasures have their normal effect."
+				},
+				"Energy Shield": {
+				  "SOURCEPAGE": "p.71",
+				  "description": "As a standard action, you can use your custom rig to activate an energy shield around yourself. This shield provides you with a number of temporary Hit Points equal to your Intelligence modifier plus your mechanic level. The shield remains active for 1 minute per mechanic level or until all of its temporary Hit Points are depleted, whichever comes first. Once used, you cannot use this ability again until you spend 1 Resolve Point to regain Stamina Points after a 10-minute rest; your shield automatically shuts off during this period of rest."
+				},
+				"Visual Data Processor": {
+				  "SOURCEPAGE": "p.72",
+				  "description": "You notice even the smallest shifts in movement, temperature, and vibration, gaining the insight bonus from your bypass class feature to Perception skill checks."
+				},
+				"Neural Shunt": {
+				  "SOURCEPAGE": "p.72",
+				  "description": "Once per day, as a reaction when you fail a saving throw against a mind-affecting effect, you can shunt that effect into your exocortex instead. When you do so, you are not affected by the mind-affecting effect, but for the normal duration of that effect, you lose the Skill Focus feat granted by your exocortex's memory module and cannot use any of the exocortex's abilities in any way (including any proficiencies and mods it grants you). When a mind-affecting effect is shunted into the exocortex, spells such as dispel magic or break enchantment can be cast on you to end the effect as if you were affected by it. Once the duration of the mindaffecting effect has ended, your exocortex resumes its normal functions. You must have an exocortex to learn this trick."
+				},
+				"Quick Patch": {
+				  "SOURCEPAGE": "p.72",
+				  "description": "When you attempt to patch a system on a starship, you reduce the number of actions required to do so by one. This does not reduce the time needed to patch a glitching system, but you can patch two systems with one action."
+				},
+				"Repair Drone": {
+				  "SOURCEPAGE": "p.72",
+				  "description": "When you spend 10 minutes to repair your drone, you repair 25%% of its maximum Hit Points instead of 10%%. You must have a drone to learn this trick."
+				}
 			},
-			"Quick Repair": {
-				"SOURCEPAGE": "p.72",
-				"description": "[NOT IMPLEMENTED]When you attempt to repair an item, you can do so in half the time normally required (to a minimum of a full action).",
-				"minLevel": "2"
+			"8th":{
+				"Boost Shield": {
+				  "SOURCEPAGE": "p.72",
+				  "description": "Your energy shield grants you a number of temporary Hit Points equal to your Intelligence modifier + double your mechanic level. In addition, if you have already used your shield, you can spend 1 Resolve Point to use it again without having to regain Stamina Points first. This replenishes your shield's temporary Hit Points to full. You must have the energy shield mechanic trick to learn this trick."
+				},
+				"Scoutbot": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "You're always crafting rudimentary bots in your spare time, and can use them to scout. It takes you 10 minutes and 1 Resolve Point to create a scoutbot. A scoutbot is a Small technological construct, its EAC and KAC are equal to 10 + your mechanic level, and it has 1 Hit Point per mechanic level you have (and no Stamina Points). It has a land speed of 30 feet, and you can control its movements with your custom rig as a move action. It has a camera that streams visual and auditory data back to your rig. The scoutbot uses your saving throw bonuses if necessary. It is untrained in all skills and has a +0 bonus in all of them, though you can use your own Perception skill when examining the feed from its stream. Once created, the scoutbot lasts for 1 minute per mechanic level you have before falling apart unless otherwise destroyed."
+				},
+				"Hyperclocking": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "You further improve the response time of your AI. If you have a drone, your drone gains a +1 insight bonus to AC. In addition, if your drone is subjected to an attack that normally allows a Reflex save for half damage, it takes no damage if it succeeds at its saving throw. If you have an exocortex, you gain a +1 insight bonus to AC. In addition, whenever you fail a Reflex saving throw, you can spend 1 Resolve Point to reroll the saving throw (see page 243) and take the higher result. You must have the overclocking mechanic trick to learn this trick."
+				},
+				"Resistant Energy": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "Even when your energy shield is inactive, the ambient energy protects you from a particular type of energy attack. Choose acid, cold, electricity, fire, or sonic. You gain resistance 5 against that energy type. You must have the energy shield mechanic trick to learn this trick."
+				},
+				"Ghost Intrusion": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "Whenever you use the Computers skill to access a system and you fail to overcome its defenses by 4 or less, you do not trigger any countermeasures and there is no log of your attempt. If you fail by 5 or more, any countermeasures take effect against you as normal."
+				},
+				"Holographic Projector": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "Your custom rig can project holographic images as a standard action as often as you like, as per 2nd-level holographic image except it can create speech and has a range of only 120 feet."
+				},
+				"Engineer's Eye": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "When you are within 10 feet of a trapped or malfunctioning machine or computer, you receive a free Computers, Engineering, or Perception check (as decided by the GM) to notice the trap or defect, whether or not you are actively looking. In addition, due to your intimate knowledge of your ship, you receive one of these checks whenever you board your ship to notice if anything is wrong with the ship's systems."
+				},
+				"Improved Overcharge": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "The additional damage of the overcharge mechanic trick increases to 2d6. You must have the overcharge mechanic trick to learn this trick."
+				},
+				"Drone Meld": {
+				  "SOURCEPAGE": "p.72",
+				  "description": "As a full action while in contact with your drone, you can reconfigure it into a mechanical drone suit (or a backpack-like apparatus, for the Tiny hover drone) that you can wear. While in this form, the drone can't take any actions or use any of its abilities, but you gain either the drone's flight system mods if you have a hover drone, reactive camouflage (and an invisibility field if your drone has it) if you have a stealth drone, or reductive plating if you have a combat drone. You can end the meld and return the drone to its normal form as a full action. Though it normally acts on your turn just after you, the drone can take no actions on that turn other than transforming back."
+				},
+				"Invisibility Bypass Processor": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "Your visual data processor now allows you to see invisible creatures as per see invisibility. You must have the visual data processor mechanic trick to learn this trick."
+				},
 			},
-			"Distracting Hack": {
-				"SOURCEPAGE": "p.71",
-				"description": "[NOT IMPLEMENTED]You can hack a computer within 30 feet of a foe to distract that foe, such as with a sudden noise or an image. You must be able to access the computer (whether it is your own computer or you are within range to access one manually or via remote hack). This functions as a feint action except that it uses your Computers skill instead of Bluff, so you can apply the benefits of Improved Feint and Greater Feint if you have them.",
-				"minLevel": "2"
-			},
-			"Boost Shield": {
-				"SOURCEPAGE": "p.72",
-				"description": "[NOT IMPLEMENTED]Your energy shield grants you a number of temporary Hit Points equal to your Intelligence modifier + double your mechanic level. In addition, if you have already used your shield, you can spend 1 Resolve Point to use it again without having to regain Stamina Points first. This replenishes your shield's temporary Hit Points to full. You must have the energy shield mechanic trick to learn this trick.",
-				"minLevel": "8"
-			},
-			"Superior Overcharge": {
-				"SOURCEPAGE": "p.74",
-				"description": "[NOT IMPLEMENTED]The additional damage of the overcharge mechanic trick increases to 4d6. You must have the overcharge and improved overcharge mechanic tricks to learn this trick. You can select this trick multiple times. Each time you do after the first, increase the damage by 1d6 (to a maximum of 7d6 if you select it all four times).",
-				"minLevel": "14"
-			},
-			"Scoutbot": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]You're always crafting rudimentary bots in your spare time, and can use them to scout. It takes you 10 minutes and 1 Resolve Point to create a scoutbot. A scoutbot is a Small technological construct, its EAC and KAC are equal to 10 + your mechanic level, and it has 1 Hit Point per mechanic level you have (and no Stamina Points). It has a land speed of 30 feet, and you can control its movements with your custom rig as a move action. It has a camera that streams visual and auditory data back to your rig. The scoutbot uses your saving throw bonuses if necessary. It is untrained in all skills and has a +0 bonus in all of them, though you can use your own Perception skill when examining the feed from its stream. Once created, the scoutbot lasts for 1 minute per mechanic level you have before falling apart unless otherwise destroyed.",
-				"minLevel": "8"
-			},
-			"Overcharge": {
-				"SOURCEPAGE": "p.72",
-				"description": "[NOT IMPLEMENTED]As a standard action, you can use your custom rig to overcharge and attack with a ranged energy weapon or a melee weapon with the powered special property (see page  181) that you're holding. If you hit, you deal 1d6 additional damage of the same type the weapon normally deals. This attack uses three times as many charges from the battery or power cell as normal and can't be used if the weapon doesn't have enough charges. This trick has no effect on a weapon without a battery or power cell. You can instead use this ability as a move action on a touched powered weapon that is unattended or attended by an ally to grant the same effect to that weapon's next attack before the beginning of your next turn.",
-				"minLevel": "2"
-			},
-			"Hyperclocking": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]You further improve the response time of your AI. If you have a drone, your drone gains a +1 insight bonus to AC. In addition, if your drone is subjected to an attack that normally allows a Reflex save for half damage, it takes no damage if it succeeds at its saving throw. If you have an exocortex, you gain a +1 insight bonus to AC. In addition, whenever you fail a Reflex saving throw, you can spend 1 Resolve Point to reroll the saving throw (see page 243) and take the higher result. You must have the overclocking mechanic trick to learn this trick.",
-				"minLevel": "8"
-			},
-			"Portable Power": {
-				"SOURCEPAGE": "p.72",
-				"description": "[NOT IMPLEMENTED]You can use your custom rig to supply limited power for up to 1 minute to a computer or starship system that lacks power. If this system is part of a much larger network, this trick does not supply power to the entire network, just to a limited point of access (typically a terminal), which might greatly limit functionality. Once you have used portable power on a system, you cannot do so again on that system for 24 hours.",
-				"minLevel": "2"
-			},
-			"Overload Weapon": {
-				"SOURCEPAGE": "p.72",
-				"description": "[NOT IMPLEMENTED]As a full action or as a move action by spending 1 Resolve Point, you can cause a powered weapon (either a ranged energy weapon or a melee weapon with the powered special property) in your possession to explode. You can use the weapon as if it were a grenade of the weapon's item level or lower dealing the weapon's normal damage type, except the weapon has a range increment of only 10 feet unless it is a thrown weapon. If someone tries to attack with the weapon, it explodes as a grenade would instead, centered on the user, and the user doesn't receive a Reflex save to negate the grenade's effect (if any). Once you've primed a weapon to explode in this way, it's difficult to reverse the effect, requiring 8 hours of work and a successful Engineering check (DC = 15 + your Engineering bonus); failing the check by 5 or more detonates the weapon. Once detonated, the weapon is destroyed, just like a grenade.",
-				"minLevel": "2"
-			},
-			"Nightvision Processor": {
-				"SOURCEPAGE": "p.72",
-				"description": "[NOT IMPLEMENTED]Your visual data processor allows you to see better in conditions of poor lighting, granting you low-light vision and darkvision to a range of 60 feet. You must have the visual data processor mechanic trick to learn this trick.",
-				"minLevel": "2"
-			},
-			"Overclocking": {
-				"SOURCEPAGE": "p.72",
-				"description": "[NOT IMPLEMENTED]You have augmented the performance of your AI for maximum response timing. You gain a +2 insight bonus to initiative checks, and either you (if you have an exocortex) or your drone (if you have a drone) gains a +2 insight bonus to Reflex saves.",
-				"minLevel": "2"
-			},
-			"Resistant Energy": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]Even when your energy shield is inactive, the ambient energy protects you from a particular type of energy attack. Choose acid, cold, electricity, fire, or sonic. You gain resistance 5 against that energy type. You must have the energy shield mechanic trick to learn this trick.",
-				"minLevel": "8"
-			},
-			"Ghost Intrusion": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]Whenever you use the Computers skill to access a system and you fail to overcome its defenses by 4 or less, you do not trigger any countermeasures and there is no log of your attempt. If you fail by 5 or more, any countermeasures take effect against you as normal.",
-				"minLevel": "8"
-			},
-			"Mod Tinkerer": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]You can spend 24 hours of uninterrupted work to exchange all your drone or exocortex mods at any time, even if you haven't gained a level. Any other drone features (such as its chassis or bonus feats) can still be exchanged only when you gain a level.",
-				"minLevel": "14"
-			},
-			"Invisibility-Hampering Projector": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]As a move action, you can use your custom rig's holographic projector to project a holographic image in a direct overlay over an invisible creature within 120 feet, and your custom rig's computer moves the image to follow the invisible creature, effectively negating the creature's invisibility as long as it remains within 120 feet of you. If it moves beyond that range, it breaks the effect until you use this ability again. You must have the holographic projector, invisibility bypass processor, and visual data processor mechanic tricks to learn this trick.",
-				"minLevel": "14"
-			},
-			"Holographic Projector": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]Your custom rig can project holographic images as a standard action as often as you like, as per 2nd-level holographic image except it can create speech and has a range of only 120 feet.",
-				"minLevel": "8"
-			},
-			"Saboteur": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]Whenever you use the Engineering skill to sabotage or disable a device, you can roll twice and take the better result. In addition, if you have the appropriate tools (including your custom rig), performing these tasks takes half the normal amount of time, to a minimum of 1 move action.",
-				"minLevel": "14"
-			},
-			"Engineer's Eye": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]When you are within 10 feet of a trapped or malfunctioning machine or computer, you receive a free Computers, Engineering, or Perception check (as decided by the GM) to notice the trap or defect, whether or not you are actively looking. In addition, due to your intimate knowledge of your ship, you receive one of these checks whenever you board your ship to notice if anything is wrong with the ship's systems.",
-				"minLevel": "8"
-			},
-			"Improved Overcharge": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]The additional damage of the overcharge mechanic trick increases to 2d6. You must have the overcharge mechanic trick to learn this trick.",
-				"minLevel": "8"
-			},
-			"Hack Directory": {
-				"SOURCEPAGE": "p.71",
-				"description": "[NOT IMPLEMENTED]Whenever you attempt to hack a system and fail the check, you immediately become aware of any countermeasures that were activated due to your failure. You can then select one of these countermeasures and attempt another Computers check (with the same DC as the original). If you succeed at this second check, you can prevent that countermeasure from activating, as if you had not attempted to access the system at all. Any other countermeasures have their normal effect.",
-				"minLevel": "2"
-			},
-			"Energy Shield": {
-				"SOURCEPAGE": "p.71",
-				"description": "[NOT IMPLEMENTED]As a standard action, you can use your custom rig to activate an energy shield around yourself. This shield provides you with a number of temporary Hit Points equal to your Intelligence modifier plus your mechanic level. The shield remains active for 1 minute per mechanic level or until all of its temporary Hit Points are depleted, whichever comes first. Once used, you cannot use this ability again until you spend 1 Resolve Point to regain Stamina Points after a 10-minute rest; your shield automatically shuts off during this period of rest.",
-				"minLevel": "2"
-			},
-			"Visual Data Processor": {
-				"SOURCEPAGE": "p.72",
-				"description": "[NOT IMPLEMENTED]You notice even the smallest shifts in movement, temperature, and vibration, gaining the insight bonus from your bypass class feature to Perception skill checks.",
-				"minLevel": "2"
-			},
-			"Neural Shunt": {
-				"SOURCEPAGE": "p.72",
-				"description": "[NOT IMPLEMENTED]Once per day, as a reaction when you fail a saving throw against a mind-affecting effect, you can shunt that effect into your exocortex instead. When you do so, you are not affected by the mind-affecting effect, but for the normal duration of that effect, you lose the Skill Focus feat granted by your exocortex's memory module and cannot use any of the exocortex's abilities in any way (including any proficiencies and mods it grants you). When a mind-affecting effect is shunted into the exocortex, spells such as dispel magic or break enchantment can be cast on you to end the effect as if you were affected by it. Once the duration of the mindaffecting effect has ended, your exocortex resumes its normal functions. You must have an exocortex to learn this trick.",
-				"minLevel": "2"
-			},
-			"Drone Meld": {
-				"SOURCEPAGE": "p.72",
-				"description": "[NOT IMPLEMENTED]As a full action while in contact with your drone, you can reconfigure it into a mechanical drone suit (or a backpack-like apparatus, for the Tiny hover drone) that you can wear. While in this form, the drone can't take any actions or use any of its abilities, but you gain either the drone's flight system mods if you have a hover drone, reactive camouflage (and an invisibility field if your drone has it) if you have a stealth drone, or reductive plating if you have a combat drone. You can end the meld and return the drone to its normal form as a full action. Though it normally acts on your turn just after you, the drone can take no actions on that turn other than transforming back.",
-				"minLevel": "8"
-			},
-			"Ultraclocking": {
-				"SOURCEPAGE": "p.74",
-				"description": "[NOT IMPLEMENTED]If you have a drone, you can grant the effects of haste to your drone for 1 minute as a move action. If you have an exocortex, you can gain the effects of haste for 1 minute as a move action. Once you or your drone has used this ability, you cannot use it again until you spend 1 Resolve Point to regain Stamina Points from a 10-minute rest. You must have the overclocking and hyperclocking mechanic tricks to learn this trick.",
-				"minLevel": "14"
-			},
-			"Invisibility Bypass Processor": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]Your visual data processor now allows you to see invisible creatures as per see invisibility. You must have the visual data processor mechanic trick to learn this trick.",
-				"minLevel": "8"
-			},
-			"Quick Patch": {
-				"SOURCEPAGE": "p.72",
-				"description": "[NOT IMPLEMENTED]When you attempt to patch a system on a starship, you reduce the number of actions required to do so by one. This does not reduce the time needed to patch a glitching system, but you can patch two systems with one action.",
-				"minLevel": "2"
-			},
-			"Extra Mod": {
-				"SOURCEPAGE": "p.73",
-				"description": "[NOT IMPLEMENTED]If you have a drone, your drone gains an additional basic mod. If you have an exocortex, you gain an additional basic mod. It can't be a basic mod taken a second time as an advanced mod. You can rebuild this extra mod when you gain a mechanic level as with any other mod, but you can't rebuild this mod to convert it into the advanced version of the mod.",
-				"minLevel": "14"
-			},
-			"Repair Drone": {
-				"SOURCEPAGE": "p.72",
-				"description": "[NOT IMPLEMENTED]When you spend 10 minutes to repair your drone, you repair 25%% of its maximum Hit Points instead of 10%%. You must have a drone to learn this trick.",
-				"minLevel": "2"
+			"14th":{
+				"Improved Resistant Energy": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "Choose an additional energy type from resistant energy. You gain resistance 15 against both this and your original energy type. You must have the energy shield and resistant energy mechanic tricks to learn this trick."
+				},
+				"Superior Overcharge": {
+				  "SOURCEPAGE": "p.74",
+				  "description": "The additional damage of the overcharge mechanic trick increases to 4d6. You must have the overcharge and improved overcharge mechanic tricks to learn this trick. You can select this trick multiple times. Each time you do after the first, increase the damage by 1d6 (to a maximum of 7d6 if you select it all four times)."
+				},
+				"Mod Tinkerer": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "You can spend 24 hours of uninterrupted work to exchange all your drone or exocortex mods at any time, even if you haven't gained a level. Any other drone features (such as its chassis or bonus feats) can still be exchanged only when you gain a level."
+				},
+				"Invisibility-Hampering Projector": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "As a move action, you can use your custom rig's holographic projector to project a holographic image in a direct overlay over an invisible creature within 120 feet, and your custom rig's computer moves the image to follow the invisible creature, effectively negating the creature's invisibility as long as it remains within 120 feet of you. If it moves beyond that range, it breaks the effect until you use this ability again. You must have the holographic projector, invisibility bypass processor, and visual data processor mechanic tricks to learn this trick."
+				},
+				"Saboteur": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "Whenever you use the Engineering skill to sabotage or disable a device, you can roll twice and take the better result. In addition, if you have the appropriate tools (including your custom rig), performing these tasks takes half the normal amount of time, to a minimum of 1 move action."
+				},
+				"Ultraclocking": {
+				  "SOURCEPAGE": "p.74",
+				  "description": "If you have a drone, you can grant the effects of haste to your drone for 1 minute as a move action. If you have an exocortex, you can gain the effects of haste for 1 minute as a move action. Once you or your drone has used this ability, you cannot use it again until you spend 1 Resolve Point to regain Stamina Points from a 10-minute rest. You must have the overclocking and hyperclocking mechanic tricks to learn this trick."
+				},
+				"Extra Mod": {
+				  "SOURCEPAGE": "p.73",
+				  "description": "If you have a drone, your drone gains an additional basic mod. If you have an exocortex, you gain an additional basic mod. It can't be a basic mod taken a second time as an advanced mod. You can rebuild this extra mod when you gain a mechanic level as with any other mod, but you can't rebuild this mod to convert it into the advanced version of the mod."
+				},
 			}
 		},
 		"Class features": {

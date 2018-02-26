@@ -13,6 +13,10 @@ CLASS INTEGRATIONS
 master skills for Operative
 spells for spellcasters
 
+class gear + other gear
+class special abilities
+verify class choices have been made
+
 
 
 Nice To Have
