@@ -325,6 +325,8 @@ function buildStatBlock() {
       if (spellSlot.length > 2){
         var spells = spellSlot.split(': ');
         var frequency = spells[0];
+        //remove connection tag from mytic spell lists
+        spells[1] = spells[1].replace(' (from connection)','')
         //make sure values are arrays even if only 1 value
         if (spells[1].includes(',')){
           var subArray = spells[1].split(', ');
@@ -2269,8 +2271,18 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       saved = $('#stepEightSave').text().split(',');
       var $descriptionArea = $(".stepEight1Description").first();
       $descriptionArea.empty();
+
+      var currentLevel = ordinalNumber(Number(saved[2]));
+      var classDrop = $('#classDrop').val().trim();
       if (selected != ''){
-        $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[2]))+" ("+saved[1]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
+        //list mystic connection spells or list spells as normal
+        if (classDrop == 'Mystic' && currentLevel != "0") {
+          var connectionDrop = $('#stepFourOptionDrop').val().trim();
+          var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+          $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[2]))+" ("+saved[1]+"):</b> "+ chosenSpell + " (from connection), " +selected.replace(/,/g,', ')+"</p>");
+        } else {
+          $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[2]))+" ("+saved[1]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
+        }
       }
 
     } else if (id=='spells2Drop') {
@@ -2279,8 +2291,17 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       saved = $('#stepEightSave').text().split(',');
       var $descriptionArea = $(".stepEight2Description").first();
       $descriptionArea.empty();
+      var currentLevel = ordinalNumber(Number(saved[4]));
+      var classDrop = $('#classDrop').val().trim();
       if (selected != ''){
-        $descriptionArea.append(("<p><b>"+ordinalNumber(Number(saved[4]))+" ("+saved[3]+"):</b> "+selected.replace(/,/g,', ')+"</p>"));
+        //list mystic connection spells or list spells as normal
+        if (classDrop == 'Mystic' && currentLevel != "0") {
+          var connectionDrop = $('#stepFourOptionDrop').val().trim();
+          var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+          $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[4]))+" ("+saved[3]+"):</b> "+ chosenSpell + " (from connection), " +selected.replace(/,/g,', ')+"</p>");
+        } else {
+          $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[4]))+" ("+saved[3]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
+        }
       }
 
     } else if (id=='spells3Drop') {
@@ -2289,8 +2310,17 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       saved = $('#stepEightSave').text().split(',');
       var $descriptionArea = $(".stepEight3Description").first();
       $descriptionArea.empty();
+      var currentLevel = ordinalNumber(Number(saved[6]));
+      var classDrop = $('#classDrop').val().trim();
       if (selected != ''){
-        $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[6]))+" ("+saved[5]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
+        //list mystic connection spells or list spells as normal
+        if (classDrop == 'Mystic' && currentLevel != "0") {
+          var connectionDrop = $('#stepFourOptionDrop').val().trim();
+          var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+          $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[6]))+" ("+saved[5]+"):</b> "+ chosenSpell + " (from connection), " +selected.replace(/,/g,', ')+"</p>");
+        } else {
+          $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[6]))+" ("+saved[5]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
+        }
       }
 
     } else if (id == 'casterDrop'){
@@ -2454,18 +2484,36 @@ function showSpellDropdowns(caster,className){
     var save = "dummy";
 
     //do all casting categories eg 1/day
-    for (castCat in spellObject){
+    for (castingCategory in spellObject){
       i += 1;
-      var spellNum = spellObject[castCat][0];
-      var spellLevel = spellObject[castCat][1].toString();
+      var spellNum = spellObject[castingCategory][0];
+      var spellLevel = spellObject[castingCategory][1].toString();
       var spellList = getSpellsByLevel(spellLevel,className);
+
+      //mystic connections have required spells per level
+      if (className == 'Mystic') {
+        var connectionDrop = $('#stepFourOptionDrop').val().trim();
+        var currentLevel = ordinalNumber(Number(spellLevel));
+        if (currentLevel != "0"){
+          var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+          spellList = removeElement(spellList,chosenSpell);
+          console.log(spellNum)
+          spellNum = spellNum - 1;
+          console.log(spellNum)
+
+          var $descriptionArea = $(".stepEight" + i + "Description").first();
+          $descriptionArea.empty();
+          $descriptionArea.append("<p><b>"+currentLevel+" ("+castingCategory+"):</b> "+ chosenSpell + " (from connection)"+"</p>");
+
+        }
+      }
 
       var $descriptionAbility = $(".stepEight"+i).first();
       $descriptionAbility.empty();
-      $descriptionAbility.append("<p><b>"+castCat+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
+      $descriptionAbility.append("<p><b>"+castingCategory+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
 
       generateMultiDropdown("spells"+i+"Dropdown","","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
-      save += ","+castCat+","+spellLevel;
+      save += ","+castingCategory+","+spellLevel;
     }
   } else {
 
@@ -2473,32 +2521,32 @@ function showSpellDropdowns(caster,className){
     var spellObject = spellCounts[crString]['spell-like'];
     var save = "dummy";
 
-    for (castCat in spellObject){
+    for (castingCategory in spellObject){
       i += 1;
-      var spellNum = spellObject[castCat][0];
+      var spellNum = spellObject[castingCategory][0];
       if (caster == 'once-per-freq') {
         spellNum = 1;
       }
-      var spellLevel = spellObject[castCat][1].toString();
+      var spellLevel = spellObject[castingCategory][1].toString();
       var spellList = getSpellsByLevel(spellLevel,className);
       if (caster == 'once-per-day'){
-        if (castCat == "1/day"){
+        if (castingCategory == "1/day"){
           i = 1;
           var $descriptionAbility = $(".stepEight"+i).first();
           $descriptionAbility.empty();
-          $descriptionAbility.append("<p><b>"+castCat+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
+          $descriptionAbility.append("<p><b>"+castingCategory+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
 
           generateMultiDropdown("spells"+i+"Dropdown","","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
-          save += ","+castCat;
+          save += ","+castingCategory;
 
         }
       } else {
         var $descriptionAbility = $(".stepEight"+i).first();
         $descriptionAbility.empty();
-        $descriptionAbility.append("<p><b>"+castCat+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
+        $descriptionAbility.append("<p><b>"+castingCategory+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
 
         generateMultiDropdown("spells"+i+"Dropdown","","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
-        save += ","+castCat+","+spellLevel;
+        save += ","+castingCategory+","+spellLevel;
 
       }
     }
@@ -3237,7 +3285,7 @@ $('.wizard-card').bootstrapWizard({
 
               //if mystic or operative be more specific
               if (classDrop == "Mystic" || classDrop == "Operative") {
-                connectionDrop = $('#stepFourOptionDrop').val().trim();
+                var connectionDrop = $('#stepFourOptionDrop').val().trim();
                 classDrop = classDrop + connectionDrop;
               }
 
@@ -3489,7 +3537,7 @@ $('.wizard-card').bootstrapWizard({
             }
         }
 
-        //Validation tab 9
+        //Validation tab 9 - Spells
         if (index == 9) {
 
             var validated = true;

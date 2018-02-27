@@ -11,6 +11,12 @@ bootstrap dropdown select
 
 CLASS INTEGRATIONS
 spells for spellcasters
+cache capacitor choices
+
+mystic spells work when none selected
+mystic spells when spells selected and then unselected
+mystic spells for connections that have all level spells
+2275
 
 class gear + other gear
 class special abilities
