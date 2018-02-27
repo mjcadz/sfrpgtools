@@ -1239,26 +1239,135 @@ classData = {
     },
     "Mystic": {
         "AbilitiesByCr": {
-            "1": {"description":"1st-level connection power and one special ability."},
-            "2": {"description":"1st-level connection power, mindlink, and one special ability."},
-            "3": {"description":"1st- and 3rd-level connection powers and mindlink."},
-            "6": {"description":"1st-, 3rd-, and 6th-level connection powers and mindlink."},
-            "9": {"description":"1st-, 3rd-, 6th-, and 9th-level connection powers and mindlink."},
-            "11": {"description":"1st-, 3rd-, 6th-, and 9th-level connection powers; mindlink; and telepathic bond."},
-            "12": {"description":"1st-, 3rd-, 6th-, 9th-, and 12th-level connection powers; mindlink; and telepathic bond."},
-            "15": {"description":"1st-, 3rd-, 6th-, 9th-, 12th-, and 15th-level connection powers; mindlink; and telepathic bond."},
-            "18": {"description":"All connection powers, mindlink, and telepathic bond."},
-            "19": {"description":"All connection powers, mindlink, telepathic bond, and transcendence."},
-            "20": {"description":"All connection powers, mindlink, telepathic bond, transcendence, and enlightenment."}
+            "1": {
+              "description":"1st-level connection power and one special ability.",
+                "connection":[
+                  "1st"
+                ],
+                "special":1
+            },
+            "2": {
+              "description":"1st-level connection power, mindlink, and one special ability.",
+              "features":["mindlink"],
+              "connection":[
+                "1st"
+              ],
+              "special":1
+            },
+            "3": {
+              "description":"1st- and 3rd-level connection powers and mindlink.",
+              "features":["mindlink"],
+              "connection":[
+                "1st",
+                "3rd"
+              ]
+            },
+            "6": {
+              "description":"1st-, 3rd-, and 6th-level connection powers and mindlink.",
+              "features":["mindlink"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th"
+              ]
+            },
+            "9": {
+              "description":"1st-, 3rd-, 6th-, and 9th-level connection powers and mindlink.",
+              "features":["mindlink"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th"
+              ]
+            },
+            "11": {
+              "description":"1st-, 3rd-, 6th-, and 9th-level connection powers; mindlink; and telepathic bond.",
+              "features":["mindlink","telepathic bond"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th"
+              ]
+            },
+            "12": {
+              "description":"1st-, 3rd-, 6th-, 9th-, and 12th-level connection powers; mindlink; and telepathic bond.",
+              "features":["mindlink","telepathic bond"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th",
+                "12th"
+              ]
+            },
+            "15": {
+              "description":"1st-, 3rd-, 6th-, 9th-, 12th-, and 15th-level connection powers; mindlink; and telepathic bond.",
+              "features":["mindlink","telepathic bond"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th",
+                "12th",
+                "15th"
+              ]
+            },
+            "18": {
+              "description":"All connection powers, mindlink, and telepathic bond.",
+              "features":["mindlink","telepathic bond"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th",
+                "12th",
+                "15th",
+                "18th"
+              ]
+            },
+            "19": {
+              "description":"All connection powers, mindlink, telepathic bond, and transcendence.",
+              "features":["mindlink","telepathic bond","trancendence"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th",
+                "12th",
+                "15th",
+                "18th"
+              ]
+            },
+            "20": {
+              "description":"All connection powers, mindlink, telepathic bond, transcendence, and enlightenment.",
+              "features":["mindlink","telepathic bond","trancendence","enlightenment"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th",
+                "12th",
+                "15th",
+                "18th"
+              ]
+            }
         },
         "AbilityScoreModifiers": ["Wis","Con","Cha"],
         "Adjustments": {"None":0},
         "Description": "Calling on connections to supernatural forces, mystics can manifest magic in a number of different ways.",
         "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
         "RequiredArray": "Spellcaster",
-        "MasterSkills": [
-          "mysticism"
-        ],
+        "MasterSkills": {
+          "Overlord":["diplomacy","intimidate","mysticism"],
+          "Xenodruid":["life science","survival","mysticism"],
+          "Mindbreaker":["bluff","intimidate","mysticism"],
+          "Star Shaman":["perception","piloting","mysticism"],
+          "Healer":["medicine","mysticism"],
+          "Empath":["perception","sense motive","mysticism"],
+          "Akashic":["culture","mysticism"]
+        },
         "SpecialRules": " Choose one mystic connection. The mystic creature’s connection powers must come from that connection. Any connection powers that aren’t relevant to the creature (or that can simply be incorporated into the creature’s statistics) don’t need to appear in its stat block. Spells must come from the mystic spell list. Start with connection spells of the corresponding levels and then fill in the remaining slots.Good or master skills chosen from the connection’s associated skills."
     },
     "Operative": {

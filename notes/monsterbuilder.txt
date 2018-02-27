@@ -10,12 +10,13 @@ https://github.com/silviomoreto/bootstrap-select
 bootstrap dropdown select
 
 CLASS INTEGRATIONS
-master skills for Operative
 spells for spellcasters
 
 class gear + other gear
 class special abilities
 verify class choices have been made
+handle master skills for mystic
+solar manifestations
 
 
 

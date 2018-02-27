@@ -1770,9 +1770,21 @@ function getGraftSkills(type){
   //check step 4 class graft
   var classDrop = $('#classDrop').val().trim();
   if (classDrop != '' && classDrop != 'None') {
-    if (classData[classDrop].hasOwnProperty(skillString)){
-      skillList = skillList.concat(classData[classDrop][skillString]);
+
+    //operative and mystic skills depend on class choices
+    if (classDrop == "Mystic" || classDrop == "Operative") {
+      if (classData[classDrop].hasOwnProperty(skillString)){
+        var connectionDrop = $('#stepFourOptionDrop').val().trim();
+        skillList = skillList.concat(classData[classDrop][skillString][connectionDrop]);
+      }
+    } else {
+      if (classData[classDrop].hasOwnProperty(skillString)){
+        skillList = skillList.concat(classData[classDrop][skillString]);
+      }
     }
+
+
+
   }
   //check step 5 graft
   var graft = $('#graftDrop').val().trim();
@@ -2702,6 +2714,18 @@ function stepFourDescription(selected,selectedArray) {
       $("#stepFourOptionalDropdownThree").first().empty();
       $("#stepFourOptionalDropdownFour").first().empty();
 
+    } else if (selected == "Mystic") {
+
+      //Mystic
+
+      connectionKeys = Object.keys(allClassFeatures["Mystic"]["Connections"]).sort();
+      //choose connection
+      generateDropdown("stepFourOptionalDropdown","Mystic connection","stepFourOptionDrop","Choose connection",connectionKeys);
+
+      $("#stepFourOptionalDropdownTwo").first().empty();
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
+
     } else {
       $("#stepFourOptionalDropdown").first().empty();
       $("#stepFourOptionalDropdownTwo").first().empty();
@@ -2976,9 +3000,35 @@ $('.wizard-card').bootstrapWizard({
 
             var validated = true;
 
+            //verify that class extra options have been selected
+
             if ($('[data-id="stepFourOptionDrop"]').length){
               if ($('[data-id="stepFourOptionDrop"]').text().includes("Choose")) {
                   $('[data-id="stepFourOptionDrop"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+            if ($('[data-id="stepFourOptionDropTwo"]').length){
+              if ($('[data-id="stepFourOptionDropTwo"]').text().includes("Choose")) {
+                  $('[data-id="stepFourOptionDropTwo"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+            if ($('[data-id="stepFourOptionDropThree"]').length){
+              if ($('[data-id="stepFourOptionDropThree"]').text().includes("Choose")) {
+                  $('[data-id="stepFourOptionDropThree"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+            if ($('[data-id="stepFourOptionDropFour"]').length){
+              if ($('[data-id="stepFourOptionDropFour"]').text().includes("Choose")) {
+                  $('[data-id="stepFourOptionDropFour"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+            if ($('[data-id="artificialDrop"]').length){
+              if ($('[data-id="artificialDrop"]').text().includes("Choose")) {
+                  $('[data-id="artificialDrop"]').addClass('wizard-shadow');
                   validated = false;
               }
             }
@@ -3184,6 +3234,13 @@ $('.wizard-card').bootstrapWizard({
               var array = $('#arrayDrop').val().trim();
               var graft = $('#graftDrop').val().trim();
               var classDrop = $('#classDrop').val().trim();
+
+              //if mystic or operative be more specific
+              if (classDrop == "Mystic" || classDrop == "Operative") {
+                connectionDrop = $('#stepFourOptionDrop').val().trim();
+                classDrop = classDrop + connectionDrop;
+              }
+
               var subtype = $('#creatureSubTypeDrop').val().trim();
 
               //check if envoy for extra master skill

@@ -2,8 +2,15 @@ allClassFeatures = {
 	"Mystic": {
 		"Connections": {
 			"Overlord": {
-				"Spells": " 1st-command, 2nd-hold person, 3rd-suggestion, 4th-confusion, 5th-dominate person, 6th-mass suggestion",
-				"Associated Skills": " Diplomacy and Intimidate",
+				"Spells": {
+					"1st":["Command"],
+					"2nd":["Hold Person"],
+					"3rd":["Suggestion"],
+					"4th":["Confusion"],
+					"5th":["Dominate Person"],
+					"6th":["Mass Suggestion"],
+				},
+				"Associated Skills": "Diplomacy and Intimidate",
 				"description": "You realize that not all connections are symmetrical, and seek to be the dominant force in any situation. You aren't necessarily evil; perhaps you consider yourself a benevolent philosophermonarch who takes control for the good of your charges. You might also be a cult leader, a criminal mastermind, or a hypnotist.",
 				"Associated Deities": " Abadar, Besmara, Damoritosh, Lao Shu Po, Zon-Kuthon",
 				"Connection Powers": {
@@ -38,8 +45,15 @@ allClassFeatures = {
 				}
 			},
 			"Xenodruid": {
-				"Spells": " 1st-life bubble, 2nd-fog cloud, 3rd-entropic grasp, 4th-reincarnate, 5th-commune with nature, 6th-terraform",
-				"Associated Skills": " Life Science and Survival",
+				"Spells": {
+					"1st":["Life Bubble"],
+					"2nd":["Fog Cloud"],
+					"3rd":["Entropic Grasp"],
+					"4th":["Reincarnate"],
+					"5th":["Commune With Nature"],
+					"6th":["Terraform"],
+				},
+				"Associated Skills": "Life Science and Survival",
 				"description": "You channel the energy inherent in the ecosystems around you, taking inspiration from the endless cycles of the natural world. You might be a corporate biotech researcher, a hermitic shaman of the Green Faith, or one of the legendary Xenowardens.",
 				"Associated Deities": " Green Faith (philosophy), Oras",
 				"Connection Powers": {
@@ -74,10 +88,17 @@ allClassFeatures = {
 				}
 			},
 			"Mindbreaker": {
-				"Spells": " 1st-6th mind thrust; replaced by 1st-lesser confusion, 2nd-inflict pain, 3rd-synaptic pulse, 4th-confusion, 5th- feeblemind",
-				"Associated Skills": " Bluff and Intimidate",
+				"Spells": {
+					"All":["Mind Thrust"],
+					"1st":["Lesser Confusion"],
+					"2nd":["Inflict Pain"],
+					"3rd":["Synaptic Pulse"],
+					"4th":["Confusion"],
+					"5th":["Feeblemind"]
+				},
+				"Associated Skills": "Bluff and Intimidate",
 				"description": "You use your raw will and understanding of the mind's structure to crush and demoralize your enemies. You might be a special ops assassin, a psychic interrogator, or a righteous military crusader breaking the enemy's spirit on the battlefield.",
-				"Associated Deities": " Besmara, Damoritosh, The Devourer, Iomedae, Urgathoa, Zon-Kuthon",
+				"Associated Deities": "Besmara, Damoritosh, The Devourer, Iomedae, Urgathoa, Zon-Kuthon",
 				"Connection Powers": {
 					"Sow Doubt": {
 						"SOURCEPAGE": "p.87",
@@ -110,7 +131,14 @@ allClassFeatures = {
 				}
 			},
 			"Star Shaman": {
-				"Spells": " 1st-shooting stars (as magic missile), 2nd-darkvision, 3rd-irradiate, 4th-remove radioactivity, 5th-telekinesis, 6th-control gravity",
+				"Spells": {
+					"1st":["Magic Missile"],
+					"2nd":["Darkvision"],
+					"3rd":["Irradiate"],
+					"4th":["Remove Radioactivity"],
+					"5th":["Telekinesis"],
+					"6th":["Control Gravity"],
+				},
 				"Associated Skills": " Perception and Piloting",
 				"description": "Your connection channels the energy of the cosmos, its celestial bodies, and the dark voids between them. You might be a brilliant astronomer, a daredevil starpilot, a Drift explorer, a prophetic astrologer, or a would-be transhuman godling.",
 				"Associated Deities": " Desna, The Devourer, Ibra, Nyarlathotep, Sarenrae, Triune",
@@ -146,7 +174,14 @@ allClassFeatures = {
 				}
 			},
 			"Healer": {
-				"Spells": " 1st-6th Mystic Cure; replaced by 1st-lesser remove condition, 2nd-remove condition, 3rd-remove affliction, 4th-restoration, 5th-greater remove condition",
+				"Spells": {
+					"All":["Mystic Cure"],
+					"1st":["Lesser Remove Condition"],
+					"2nd":["Remove Condition"],
+					"3rd":["Remove Affliction"],
+					"4th":["Restoration"],
+					"5th":["Greater Remove Condition"]
+				},
 				"Associated Skills": " Medicine and Mysticism",
 				"description": "Your connection channels the life force of all things-as well as its counterpart, death. You're an expert healer, but not necessarily a selfless one. You might be a traveling doctor, a haunted medium, a military medic, or a tyrannical necromancer.",
 				"Associated Deities": " Desna, Hylax, Iomedae, Pharasma, Sarenrae, Talavet, Urgathoa, Weydan",
@@ -182,7 +217,14 @@ allClassFeatures = {
 				}
 			},
 			"Empath": {
-				"Spells": " 1st-detect thoughts, 2nd-zone of truth, 3rd-clairaudience/clairvoyance, 4th-mind probe, 5th-telepathy, 6th-true seeing",
+				"Spells": {
+					"1st":["Detect Thoughts"],
+					"2nd":["Zone Of Truth"],
+					"3rd":["Clairaudience/Clairvoyance"],
+					"4th":["Mind Probe"],
+					"5th":["Telepathy"],
+					"6th":["True Seeing"],
+				},
 				"Associated Skills": " Perception and Sense Motive",
 				"description": "Your connection helps you sense emotions and notice details others can't. You might be a diplomat, an investigator, a mindreading bodyguard, a ship's psychologist, or a psychic con artist.",
 				"Associated Deities": " Abadar, Hylax, Iomedae, Sarenrae, Talavet, Triune (Casandalee)",
@@ -218,10 +260,17 @@ allClassFeatures = {
 				}
 			},
 			"Akashic": {
-				"Spells": " 1st-identify, 2nd-augury, 3rd-tongues, 4th-divination, 5th-contact other plane, 6th-vision",
-				"Associated Skills": " Culture and Mysticism",
+				"Spells": {
+					"1st":["Identify"],
+					"2nd":["Augury"],
+					"3rd":["Tongues"],
+					"4th":["Divination"],
+					"5th":["Contact Other Plane"],
+					"6th":["Vision"],
+				},
+				"Associated Skills": "Culture and Mysticism",
 				"description": "You're linked to the collective knowledge of every sentient species that ever lived that's held in the Akashic Record, an Astral library of perfect psychic records of every moment in history. You might be an ancient lorekeeper, an inquisitive student of the occult, an intuitive consulting detective, or a secret-hoarding spy.",
-				"Associated Deities": " Eloritu, Nyarlathotep, Pharasma, Talavet, Triune, Weydan, Yaraesa",
+				"Associated Deities": "Eloritu, Nyarlathotep, Pharasma, Talavet, Triune, Weydan, Yaraesa",
 				"Connection Powers": {
 					"Peer into the Future": {
 						"SOURCEPAGE": "p.85",
@@ -253,48 +302,48 @@ allClassFeatures = {
 					}
 				}
 			}
-		}
-	},
-	"Class features": {
-		"Transcendence": {
-			"SOURCEPAGE": "p.84",
-			"description": "You are close to becoming one with your connection. You can cast each of your connection spells once per day without consuming a spell slot. In addition, you learn how to temporarily transcend your physical form. Once per day, you can spend 1 Resolve Point to project your consciousness outside of your physical body in the form of an intangible psychic image of yourself. This counts as a 6th-level illusion effect and lasts for a number of rounds equal to your mystic level. While your consciousness is projected, your physical body is considered blind, deaf, and helpless, but you can return to your body as a swift action. You control your psychic image as though it was your own body, and your senses perceive only what the image can see and hear. You move with a fly speed of 60 feet and perfect maneuverability. You can pass through solid objects as though you were incorporeal, but you can't go farther into a solid object than your space (5 feet for a Medium creature). You can't directly affect physical objects. Your projected consciousness is immune to most attacks or effects, whether or not they affect incorporeal creatures, but mindaffecting effects have their full effect on you. You can cast any mystic spell or spell-like ability with a range of touch or greater from your projected consciousness. The spells affect other targets normally. You can't cast any spells on your projected consciousness except for illusion spells. You need not maintain line of effect to your projected consciousness, but if you cross into another plane, even momentarily (including via Drift travel), your mind immediately returns to your physical body."
 		},
-		"Channel Skill": {
-			"SOURCEPAGE": "p.84",
-			"description": "You draw strange feelings, instincts, knowledge, and urges from your connection, augmenting your prowess in certain tasks. Each connection has two skills associated with it. You gain a +1 insight bonus to skill checks with your connection's associated skills. This bonus increases by 1 at 5th level and every 3 levels thereafter."
-		},
-		"Enlightenment": {
-			"SOURCEPAGE": "p.84",
-			"description": "You achieve enlightenment, becoming a living incarnation of your connection. You no longer age, nor do you die of old age. Once per day as a move action, you can enter a state of total communion with your connection that lasts for 1 minute. During this time, you gain a +4 insight bonus to attack rolls, saving throws, and skill checks, and you gain 20 temporary Resolve Points that you can use only on connection powers. Any unspent temporary Resolve Points disappear at the end of this minute. In addition, once per week, you can cast miracle as a spell-like ability"
-		},
-		"Weapon Specialization": {
-			"SOURCEPAGE": "p.84",
-			"description": "You gain Weapon Specialization as a bonus feat for each weapon type this class grants you proficiency with."
-		},
-		"Telepathic Bond": {
-			"SOURCEPAGE": "p.84",
-			"description": "As a standard action, you can form a telepathic link with up to six other willing creatures, allowing you to communicate telepathically at great distances. This functions as telepathic bond, except the duration is permanent. You can have only one telepathic bond active in this way at any given time; creating a new telepathic bond immediately ends the previous one."
-		},
-		"Mindlink": {
-			"SOURCEPAGE": "p.84",
-			"description": "You can form a mental link with creatures you touch, communicating information rapidly through it. You can use mindlink at will as a spell-like ability, though only once per day on any given individual."
-		},
-		"Connection": {
-			"SOURCEPAGE": "p.83",
-			"description": "You have a mysterious connection with some force that grants you magical powers. The exact nature of your connection can vary widely, and even mystics who share the same connection may interpret it differently. You must pick one connection upon taking your first level of mystic-once made, this choice can't be changed. Connections you can choose from begin on page 85. Many mystics serve as priests of various gods, and while you can theoretically choose any type of connection with any entity or concept, deities rarely grant connections that don't fit within their ethos (for example, Weydan, the god of freedom, is unlikely to look kindly on overlords). As such, each connection lists the deities and philosophies commonly associated with it."
-		},
-		"Connection Spell": {
-			"SOURCEPAGE": "p.83",
-			"description": "Your connection grants you additional spells known, one for each level of mystic spell you can cast, starting at 1st level and at any level when you normally gain access to a new spell level. These spells are in addition to the spells known listed on Table 4-6"
-		},
-		"Healing Touch": {
-			"SOURCEPAGE": "p.84",
-			"description": "Once per day, you can spend 10 minutes to magically heal an ally up to 5 Hit Points per mystic level."
-		},
-		"Connection Power": {
-			"SOURCEPAGE": "p.83",
-			"description": "At 1st level, 3rd level, and every 3 levels thereafter, you gain a connection power unique to your connection. If a connection power allows a saving throw to resist its effects, the DC is equal to 10 + half your mystic level + your Wisdom modifier. If the power requires an enemy to attempt a skill check, the DC is equal to 10 + 1-1/2 x your mystic level + your Wisdom modifier."
+		"Class features": {
+			"Transcendence": {
+				"SOURCEPAGE": "p.84",
+				"description": "You are close to becoming one with your connection. You can cast each of your connection spells once per day without consuming a spell slot. In addition, you learn how to temporarily transcend your physical form. Once per day, you can spend 1 Resolve Point to project your consciousness outside of your physical body in the form of an intangible psychic image of yourself. This counts as a 6th-level illusion effect and lasts for a number of rounds equal to your mystic level. While your consciousness is projected, your physical body is considered blind, deaf, and helpless, but you can return to your body as a swift action. You control your psychic image as though it was your own body, and your senses perceive only what the image can see and hear. You move with a fly speed of 60 feet and perfect maneuverability. You can pass through solid objects as though you were incorporeal, but you can't go farther into a solid object than your space (5 feet for a Medium creature). You can't directly affect physical objects. Your projected consciousness is immune to most attacks or effects, whether or not they affect incorporeal creatures, but mindaffecting effects have their full effect on you. You can cast any mystic spell or spell-like ability with a range of touch or greater from your projected consciousness. The spells affect other targets normally. You can't cast any spells on your projected consciousness except for illusion spells. You need not maintain line of effect to your projected consciousness, but if you cross into another plane, even momentarily (including via Drift travel), your mind immediately returns to your physical body."
+			},
+			"Channel Skill": {
+				"SOURCEPAGE": "p.84",
+				"description": "You draw strange feelings, instincts, knowledge, and urges from your connection, augmenting your prowess in certain tasks. Each connection has two skills associated with it. You gain a +1 insight bonus to skill checks with your connection's associated skills. This bonus increases by 1 at 5th level and every 3 levels thereafter."
+			},
+			"Enlightenment": {
+				"SOURCEPAGE": "p.84",
+				"description": "You achieve enlightenment, becoming a living incarnation of your connection. You no longer age, nor do you die of old age. Once per day as a move action, you can enter a state of total communion with your connection that lasts for 1 minute. During this time, you gain a +4 insight bonus to attack rolls, saving throws, and skill checks, and you gain 20 temporary Resolve Points that you can use only on connection powers. Any unspent temporary Resolve Points disappear at the end of this minute. In addition, once per week, you can cast miracle as a spell-like ability"
+			},
+			"Weapon Specialization": {
+				"SOURCEPAGE": "p.84",
+				"description": "You gain Weapon Specialization as a bonus feat for each weapon type this class grants you proficiency with."
+			},
+			"Telepathic Bond": {
+				"SOURCEPAGE": "p.84",
+				"description": "As a standard action, you can form a telepathic link with up to six other willing creatures, allowing you to communicate telepathically at great distances. This functions as telepathic bond, except the duration is permanent. You can have only one telepathic bond active in this way at any given time; creating a new telepathic bond immediately ends the previous one."
+			},
+			"Mindlink": {
+				"SOURCEPAGE": "p.84",
+				"description": "You can form a mental link with creatures you touch, communicating information rapidly through it. You can use mindlink at will as a spell-like ability, though only once per day on any given individual."
+			},
+			"Connection": {
+				"SOURCEPAGE": "p.83",
+				"description": "You have a mysterious connection with some force that grants you magical powers. The exact nature of your connection can vary widely, and even mystics who share the same connection may interpret it differently. You must pick one connection upon taking your first level of mystic-once made, this choice can't be changed. Connections you can choose from begin on page 85. Many mystics serve as priests of various gods, and while you can theoretically choose any type of connection with any entity or concept, deities rarely grant connections that don't fit within their ethos (for example, Weydan, the god of freedom, is unlikely to look kindly on overlords). As such, each connection lists the deities and philosophies commonly associated with it."
+			},
+			"Connection Spell": {
+				"SOURCEPAGE": "p.83",
+				"description": "Your connection grants you additional spells known, one for each level of mystic spell you can cast, starting at 1st level and at any level when you normally gain access to a new spell level. These spells are in addition to the spells known listed on Table 4-6"
+			},
+			"Healing Touch": {
+				"SOURCEPAGE": "p.84",
+				"description": "Once per day, you can spend 10 minutes to magically heal an ally up to 5 Hit Points per mystic level."
+			},
+			"Connection Power": {
+				"SOURCEPAGE": "p.83",
+				"description": "At 1st level, 3rd level, and every 3 levels thereafter, you gain a connection power unique to your connection. If a connection power allows a saving throw to resist its effects, the DC is equal to 10 + half your mystic level + your Wisdom modifier. If the power requires an enemy to attempt a skill check, the DC is equal to 10 + 1-1/2 x your mystic level + your Wisdom modifier."
+			}
 		}
 	},
 	"Envoy": {
