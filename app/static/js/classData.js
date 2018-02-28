@@ -90,7 +90,7 @@ allClassFeatures = {
 			"Mindbreaker": {
 				"Spells": {
 					"All":["Mind Thrust"],
-					"1st":["Lesser Confusion"],
+					"1st":["Confusion (Lesser)"],
 					"2nd":["Inflict Pain"],
 					"3rd":["Synaptic Pulse"],
 					"4th":["Confusion"],
@@ -176,11 +176,11 @@ allClassFeatures = {
 			"Healer": {
 				"Spells": {
 					"All":["Mystic Cure"],
-					"1st":["Lesser Remove Condition"],
+					"1st":["Remove Condition (Lesser)"],
 					"2nd":["Remove Condition"],
 					"3rd":["Remove Affliction"],
 					"4th":["Restoration"],
-					"5th":["Greater Remove Condition"]
+					"5th":["Remove Condition (Greater)"]
 				},
 				"Associated Skills": " Medicine and Mysticism",
 				"description": "Your connection channels the life force of all things-as well as its counterpart, death. You're an expert healer, but not necessarily a selfless one. You might be a traveling doctor, a haunted medium, a military medic, or a tyrannical necromancer.",
@@ -219,7 +219,7 @@ allClassFeatures = {
 			"Empath": {
 				"Spells": {
 					"1st":["Detect Thoughts"],
-					"2nd":["Zone Of Truth"],
+					"2nd":["Zone of Truth"],
 					"3rd":["Clairaudience/Clairvoyance"],
 					"4th":["Mind Probe"],
 					"5th":["Telepathy"],

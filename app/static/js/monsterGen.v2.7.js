@@ -346,7 +346,8 @@ function buildStatBlock() {
     statBlock.creatureSize = $('#sizeDrop').val().trim();
 
   } catch(err) {
-    document.getElementById("errorMessage").innerHTML = "statblock data gathering error: " + err.message + '<br><br>' + err.stack;
+    var status = getErrorStatus();
+    document.getElementById("errorMessage").innerHTML = "statblock building error: " + err.message + '<br><br>' + err.stack + status;
     $('.alert-this-red').show();
     return false;
   }
@@ -564,7 +565,8 @@ function buildStatBlock() {
       }
     }
   } catch(err) {
-    document.getElementById("errorMessage").innerHTML = "statblock adjustment error: " + err.message + '<br><br>' + err.stack;
+    var status = getErrorStatus();
+    document.getElementById("errorMessage").innerHTML = "statblock building error: " + err.message + '<br><br>' + err.stack + status;
     $('.alert-this-red').show();
     return false;
   }
@@ -652,16 +654,19 @@ function buildStatBlock() {
     //build spell casting string
     var spellString = '';
 
+    // calc caster level
+    var clVal = ordinalNumber(Number(statBlock.Cr));
+
     //racial spell-like abilitiesArray
     if (statBlock.hasOwnProperty('spellLikeFromGrafts')){
       var spells = statBlock.spellLikeFromGrafts;
-      spellString += '<div><b>Racial spell-like abilities</b> ';
+      spellString += '<div><b>' + statBlock.SubType + ' Spell-Like Abilities</b> (CL ' + clVal +')';
       for (key in spells) {
         var Key = key;
         if (Key == "atWill"){
           Key = "at will";
         }
-        spellString += '; (' + Key + "): " + spells[key].join(', ');
+        spellString += '<br>' + Key + " - <i>" + spells[key].join(', ') + "</i>";
       }
       spellString += '</div>';
       spellString = spellString.replace('; ','')
@@ -693,16 +698,17 @@ function buildStatBlock() {
 
       var rangeAttackVal = (statBlock.attackFocus == 'Ranged') ? statBlock.highAttackBonus:statBlock.lowAttackBonus;
       //Caster Level
-      var clVal = ordinalNumber(Number(statBlock.Cr));
-      spellString += '<div><b>'+typeTitle+'</b> (CL ' + clVal +'; ranged '+rangeAttackVal+')</div>';
+
+      spellString += '<div><b>'+typeTitle+'</b> (CL ' + clVal +'; ranged '+rangeAttackVal+')';
       //for each frequency
       for (var i = 0; i < statBlock.Spellcasting.length; i++) {
         spellBlock = statBlock.Spellcasting[i];
+        console.log(spellBlock)
         //add new line for each frequency
         spellString += '<div>' + spellBlock[0] + ' - ';
         //for each spell
         for (var j = 1; j < spellBlock.length; j++) {
-          spell = spellBlock[j];
+          spell = '<i>' + spellBlock[j].toLowerCase() + '</i>';
           dc = '';
           //check if the spell needs a DC save and add in if necessary
           if (spellsData[spellBlock[j]].hasOwnProperty("SAVEINFO")){
@@ -717,11 +723,12 @@ function buildStatBlock() {
             spellString += ', ';
           }
           spellString += spell;
+
         }
         // finalise the spell string
-
         spellString += '</div>';
       }
+      spellString += '</div>';
     }
 
     var specialString = '';
@@ -1217,29 +1224,28 @@ function buildStatBlock() {
     ga('send', 'event', 'Generation', 'monster', statBlock.Cr+":"+statBlock.Base+":"+statBlock.CreatureType);
 
   } catch(err) {
-    document.getElementById("errorMessage").innerHTML = "statblock building error: " + err.message + '<br><br>' + err.stack;
+    var status = getErrorStatus();
+    document.getElementById("errorMessage").innerHTML = "statblock building error: " + err.message + '<br><br>' + err.stack + status;
     $('.alert-this-red').show();
     return false;
   }
 
-  /* debugging ouput
-  var $outputArea = $(".output.area").first();
-  $outputArea.empty();
-  var print = '';
-  for (stat in statBlock){
-    if (typeof statBlock[stat] === 'object' && !Array.isArray(statBlock[stat])) {
-      for (entry in statBlock[stat]) {
-        print += "stat:" + entry +": " +statBlock[stat][entry] + ' <br>'
-      }
-    } else {
-      print += stat +": " +statBlock[stat] + ' <br>'
-    }
-  }
-  $outputArea.append("<p>"+print+"</div>"); */
-
   return true;
 
 }
+
+//gathers current status for error printed
+function getErrorStatus() {
+  var CRDrop = $('[data-id="CRDrop"]').text().trim().replace("CR ","");
+  var arrayDrop = $('[data-id="arrayDrop"]').text().trim();
+  var creatureTypeDrop = $('[data-id="creatureTypeDrop"]').text().trim();
+  var subTypeDrop = $('#creatureSubTypeDrop').val().trim()
+  var classDrop = $('#classDrop').val().trim();
+  var graft = $('#graftDrop').val().trim();
+
+  return "<br><br>cr:" + CRDrop + "<br>array:" + arrayDrop + "<br>creatureType:" + creatureTypeDrop + "<br>subType:" + subTypeDrop + "<br>class:" + classDrop +  "<br>graft:" + graft;
+}
+
 
 //returns a string div with right aligned and left alignedtext on the same line
 function leftAndRight(left,right){
@@ -2278,11 +2284,27 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         //list mystic connection spells or list spells as normal
         if (classDrop == 'Mystic' && currentLevel != "0") {
           var connectionDrop = $('#stepFourOptionDrop').val().trim();
-          var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+          //check if mystic has all level spells
+          if (allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"].hasOwnProperty("All")){
+            var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"]["All"][0] + " (Level " + saved[2] + ")";
+          } else {
+            var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+          }
+
           $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[2]))+" ("+saved[1]+"):</b> "+ chosenSpell + " (from connection), " +selected.replace(/,/g,', ')+"</p>");
         } else {
           $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[2]))+" ("+saved[1]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
         }
+      } else if (selected == '' && classDrop == 'Mystic') {
+        //mystic default to connection spells
+        var connectionDrop = $('#stepFourOptionDrop').val().trim();
+        //check if mystic has all level spells
+        if (allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"].hasOwnProperty("All")){
+          var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"]["All"][0] + " (Level " + saved[2] + ")";
+        } else {
+          var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+        }
+        $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[2]))+" ("+saved[1]+"):</b> "+ chosenSpell + " (from connection)"+"</p>");
       }
 
     } else if (id=='spells2Drop') {
@@ -2302,6 +2324,11 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         } else {
           $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[4]))+" ("+saved[3]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
         }
+      } else if (selected == '' && classDrop == 'Mystic') {
+        //mystic default to connection spells
+        var connectionDrop = $('#stepFourOptionDrop').val().trim();
+        var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+        $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[4]))+" ("+saved[3]+"):</b> "+ chosenSpell + " (from connection)"+"</p>");
       }
 
     } else if (id=='spells3Drop') {
@@ -2321,6 +2348,11 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         } else {
           $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[6]))+" ("+saved[5]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
         }
+      } else if (selected == '' && classDrop == 'Mystic') {
+        //mystic default to connection spells
+        var connectionDrop = $('#stepFourOptionDrop').val().trim();
+        var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+        $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[6]))+" ("+saved[5]+"):</b> "+ chosenSpell + " (from connection)"+"</p>");
       }
 
     } else if (id == 'casterDrop'){
@@ -2482,6 +2514,7 @@ function showSpellDropdowns(caster,className){
     var i = 0;
     var spellObject = spellCounts[crString][caster]; //return cr and type specific spell categories and numbers
     var save = "dummy";
+    var highestLevel = "None";
 
     //do all casting categories eg 1/day
     for (castingCategory in spellObject){
@@ -2495,7 +2528,18 @@ function showSpellDropdowns(caster,className){
         var connectionDrop = $('#stepFourOptionDrop').val().trim();
         var currentLevel = ordinalNumber(Number(spellLevel));
         if (currentLevel != "0"){
-          var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+
+          //check if mystic connection has an all level spell choice
+          if (i == 1) {
+            if (allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"].hasOwnProperty("All")){
+              var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"]["All"][0] + " (Level " + spellLevel + ")";
+            } else {
+              var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+            }
+          } else {
+            var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+          }
+
           spellList = removeElement(spellList,chosenSpell);
           console.log(spellNum)
           spellNum = spellNum - 1;
@@ -3469,7 +3513,15 @@ $('.wizard-card').bootstrapWizard({
                 graftSpells = {};
               }
 
-              if ($('#stepEightTwoSave').text() != array+":"+special+":"+crString+":"+subtype+":"+graft+":"+classDrop){
+              //if mystic be more specific
+              if (classDrop == "Mystic") {
+                var connectionDrop = $('#stepFourOptionDrop').val().trim();
+                var currentClass = classDrop + connectionDrop;
+              } else {
+                var currentClass = classDrop
+              }
+
+              if ($('#stepEightTwoSave').text() != array+":"+special+":"+crString+":"+subtype+":"+graft+":"+currentClass){
 
                 //clear page
                 $("#casterTypeDropdown").first().empty();
@@ -3488,7 +3540,10 @@ $('.wizard-card').bootstrapWizard({
                 if (!isObjectEmpty(graftSpells)){
                   var $description = $(".stepEight0Description").first();
                   $description.empty();
-                  graftString = "<p>"+"Racial spell-like abilities:"+"</p>";
+
+                  var Race = $('#creatureSubTypeDrop').val().trim()
+
+                  graftString = "<p>" + Race + " spell-like abilities:"+"</p>";
                   for (key in graftSpells) {
                     var Key = key;
                     if (Key == "atWill"){
@@ -3508,7 +3563,12 @@ $('.wizard-card').bootstrapWizard({
                   //spell caster base array
                   if (classDrop == 'Mystic' || classDrop == 'Technomancer'){
                     //spelcaster classes
-                    descSpell = "This creature has the " + classDrop + " class. Spell choices are only from the " + classDrop + " spell list.";
+                    if (classDrop == 'Mystic') {
+                      var connectionDrop = $('#stepFourOptionDrop').val().trim();
+                      descSpell = "This creature has the " + classDrop + " class (" + connectionDrop + " connection). Spell choices are only from the " + classDrop + " spell list.";
+                    } else {
+                      descSpell = "This creature has the " + classDrop + " class. Spell choices are only from the " + classDrop + " spell list.";
+                    }
                     showSpellDropdowns("caster",classDrop);
                   } else {
                     //spellcasters can choose between full caster or spell-like abilities

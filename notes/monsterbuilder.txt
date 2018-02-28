@@ -13,10 +13,6 @@ CLASS INTEGRATIONS
 spells for spellcasters
 cache capacitor choices
 
-mystic spells work when none selected
-mystic spells when spells selected and then unselected
-mystic spells for connections that have all level spells
-2275
 
 class gear + other gear
 class special abilities
@@ -55,3 +51,5 @@ check oozes only natural skills,
 if possible make print style sheet work with values on the same line
 
 text attribute in grafts
+
+add DCs to racial spell like abilities
