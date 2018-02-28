@@ -31,6 +31,7 @@
                             <li><a href="#step9" data-toggle="tab">Step9</a></li>
                             <li><a href="#step10" data-toggle="tab">Step10</a></li>
                             <li><a href="#step11" data-toggle="tab">Step11</a></li>
+                            <li><a href="#step12" data-toggle="tab">Step12</a></li>
                         </ul>
                     </div>
                     <div id="bar" class="progress">
@@ -212,6 +213,23 @@
                         <div class="tab-pane" id="step8">
                             <div class="row">
                                 <div class="col-sm-12">
+                                    <h4 class="info-text">Gear</h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <hr>
+                                    <div class="gearLevelDescription wizardp"></div>
+                                    <div id="armorDropdown"></div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <hr>
+                                    <div class="stepTenDescription wizardp">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="step9">
+                            <div class="row">
+                                <div class="col-sm-12">
                                     <h4 class="info-text">Attacks</h4>
                                 </div>
                                 <div class="col-sm-4">
@@ -236,7 +254,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="step9">
+                        <div class="tab-pane" id="step10">
                             <span id="stepEightSave" hidden></span>
                             <span id="stepEightTwoSave" hidden>None</span>
                             <div class="row">
@@ -267,7 +285,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="step10">
+                        <div class="tab-pane" id="step11">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h4 class="info-text">Final checks</h4>
@@ -319,7 +337,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="step11">
+                        <div class="tab-pane" id="step12">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h4 class="info-text">Stat Block</h4>
@@ -451,6 +469,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/html2canvas.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/spellData.v2.2.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/equipmentData.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/classData.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterGenData.v2.3.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterGen.v2.7.js') }}"></script>

@@ -3452,6 +3452,49 @@ $('.wizard-card').bootstrapWizard({
 
             if (validated) {
 
+              //setup gear
+
+              var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','').replace("1/2","1").replace("1/3","1");
+
+              crMin = Number(crString) - 3;
+              if (crMin < 1){crMin = 1;}
+              crMax = Number(crString) + 1
+
+              var $descriptionArea = $(".gearLevelDescription").first();
+              $descriptionArea.empty();
+              $descriptionArea.append('<p><b>Gear level = ' + crString + '</b> (showing items in range ' + crMin + ' - ' + crMax + ')</p>');
+
+              //generate armor
+
+              var armorGroups = ["Light Armor","Heavy Armor"]
+              var armorList = ['None','BREAK'];
+
+              for (var i = 0; i < armorGroups.length; i++)  {
+                armorList = armorList.concat(['LABEL=' + armorGroups[i] ]);
+                for (itemName in equipmentData[armorGroups[i]]) {
+                  if (Number(equipmentData[armorGroups[i]][itemName].level) >= crMin && Number(equipmentData[armorGroups[i]][itemName].level) <= crMin){
+                    armorList = armorList.concat(itemName);
+                  }
+                }
+                armorList = armorList.concat(['ENDLABEL']);
+
+              }
+
+              generateDropdown("armorDropdown","Armor","armorDrop","Optional armor",armorList);
+
+
+            } else {
+                return false;
+            }
+        }
+        //Validation tab 8 - gear
+        if (index == 8) {
+
+            var validated = true;
+
+
+            if (validated) {
+
               var crString = $('[data-id="CRDrop"]').text().trim();
               $(".attackCR").html('<h5>'+crString+'</h5>')
 
@@ -3459,8 +3502,8 @@ $('.wizard-card').bootstrapWizard({
                 return false;
             }
         }
-        //Validation tab 8 - attacks
-        if (index == 8) {
+        //Validation tab 9 - attacks
+        if (index == 9) {
 
             var validated = true;
 
@@ -3597,8 +3640,8 @@ $('.wizard-card').bootstrapWizard({
             }
         }
 
-        //Validation tab 9 - Spells
-        if (index == 9) {
+        //Validation tab 10 - Spells
+        if (index == 10) {
 
             var validated = true;
 
@@ -3716,8 +3759,8 @@ $('.wizard-card').bootstrapWizard({
                 return false;
             }
         }
-        //Validation tab 10
-        if (index == 10) {
+        //Validation tab 11
+        if (index == 11) {
 
           //final tab validation
           var validated = true;

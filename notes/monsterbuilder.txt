@@ -13,6 +13,10 @@ CLASS INTEGRATIONS
 spells for spellcasters
 cache capacitor choices
 
+Tactics
+before combat
+during combat
+Morale
 
 class gear + other gear
 class special abilities
