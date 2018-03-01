@@ -288,18 +288,25 @@ function buildStatBlock() {
       statBlock.FreeAbilities = subArray
     }
 
+    //Step 7 - gear
 
-    //step 7 - attacks
+    var gearTabDescription = $(".stepEightGearDescription").first().text().replace('Gear: ','');
+    if (gearTabDescription != '') {
+      statBlock.gear = gearTabDescription;
+    }
+
+
+    //step 8 - attacks
     statBlock.attackFocus = $("#attackDrop").val().trim();
 
-    //step 8 - skills and Modifiers
+    //step 9 - skills and Modifiers
 
     //overwrite master+ good skills with selected + graft skills
     statBlock.MainAbilityScores = $(".stepSevenAbilityDescription").first().text().replace('Main ability scores: (','').replace(')','').split(',')
     statBlock.MasterSkills = $(".stepSevenMasterDescription").first().text().replace('Master skills: ','').replace(/\*/g,'').split(',');
     statBlock.GoodSkills = $(".stepSevenGoodDescription").first().text().replace('Good skills: ','').replace(/\*/g,'').split(',');
 
-    //step 9 - spells
+    //step 10 - spells
 
     //TODO checks only step 3 grafts not step 5
     //get any spelllike abilities from grafts
@@ -341,7 +348,7 @@ function buildStatBlock() {
       statBlock.Spellcasting = spellArray;
     }
 
-    //step 10 - final checks
+    //step 11 - final checks
 
     statBlock.creatureSize = $('#sizeDrop').val().trim();
 
@@ -996,15 +1003,11 @@ function buildStatBlock() {
 
     //Extra user fillable entries
     var EcologyString = '';
-    var GearString = '';
     var TacticsString = '';
     var extraEntries = $('#OSDrop').val().toString().trim();
 
     if (extraEntries.includes("Ecology")){
       EcologyString = '<div><b>ECOLOGY</b></div><hr><div>ecology details here e.g. Environment, Organisation</div><br>';
-    }
-    if (extraEntries.includes("Gear")){
-      GearString = '<div><b>Gear</b> list gear here e.g. Armor, Ammunition</div>';
     }
     if (extraEntries.includes("Tactics")){
       TacticsString = '<div><b>TACTICS</b></div><hr><div>tactics details here e.g. During combat, Morale</div><br>';
@@ -1150,6 +1153,11 @@ function buildStatBlock() {
       textString = '<div><b>Text</b> ' + statBlock.Text + '<br></div>'
     }
 
+    //Gear string
+    gearString = '';
+    if (statBlock.hasOwnProperty('gear')){
+      gearString = '<div><b>Gear</b> ' + statBlock.gear + '<br></div>'
+    }
 
   //
   //Stat Block
@@ -1196,7 +1204,7 @@ function buildStatBlock() {
     textBlock += '<div><b>Skills </b>'+skillString+'</div>';
     textBlock += languageString;
     textBlock += otherAbilitiesString;
-    textBlock += GearString;
+    textBlock += gearString;
     textBlock += "<br>";
 
     //ecology
@@ -2499,9 +2507,61 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
         $descriptionOneArea.append("<p><b>" + crString + " " + "Mechanic Abilities: </b>" + classFeatures.exocortex.join(", ").capitalise() + ", " + classFeatures.description.toLowerCase() + "</p>");
       }
 
+    } else if (id == 'armorGearDrop'){
+      printGearString()
+    } else if (id == 'weaponGearDrop'){
+      printGearString()
+    } else if (id == 'equipmentGearDrop'){
+      printGearString()
     }
     //remove any highlight that has been applied for form validation
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');
+}
+
+function printGearString(){
+
+  //prints which gear is selected
+
+  var $descriptionArea = $(".stepEightGearDescription").first();
+  $descriptionArea.empty();
+
+  gearString = '';
+  var aGear = $('#armorGearDrop').val().toString().trim();
+  if (aGear == 'None') { aGear = ''; }
+  var wGear = $('#weaponGearDrop').val().toString().trim();
+  var eGear = $('#equipmentGearDrop').val().toString().trim();
+
+  if (aGear != '' || wGear != '' || eGear != '') {
+
+    if (aGear != '') {
+      gearString += aGear;
+    }
+
+    if (wGear != '') {
+      if (gearString != ''){
+        gearString += ', ' + wGear;
+      } else {
+        gearString += wGear;
+      }
+    }
+
+    if (eGear != '') {
+      if (gearString != ''){
+        gearString += ', ' + eGear;
+      } else {
+        gearString += eGear;
+      }
+    }
+    //formating
+    gearString = gearString.replace(/Level .?. - /g,'');
+    gearString = gearString.toLowerCase();
+    gearString = gearString.replace(/([\w ]+)\s-\s([\w -]+)/g, "$2 $1");
+    gearString = gearString.replace(/,/g, ', ');
+    gearString = gearString.replace(/ iii/g," III").replace(/ ii/g," II").replace(/ i/g," I").replace(/ iv/g,"IV").replace(/ v/g," V").replace(/ viii/g," VIII").replace(/ vii/g," VII").replace(/ vi/g," VI");
+
+    $descriptionArea.append("<p><b>Gear:</b> " + gearString + "</p>");
+
+  }
 }
 
 //populates the dropdowns on step eight, either spell-like, secondary magic, or full caster abilities
@@ -3455,32 +3515,80 @@ $('.wizard-card').bootstrapWizard({
               //setup gear
 
               var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','').replace("1/2","1").replace("1/3","1");
+              var classDrop = $('#classDrop').val().trim();
 
-              crMin = Number(crString) - 3;
-              if (crMin < 1){crMin = 1;}
-              crMax = Number(crString) + 1
+              if ($('#stepEightGearSave').text() != crString + ":" + classDrop) {
 
-              var $descriptionArea = $(".gearLevelDescription").first();
-              $descriptionArea.empty();
-              $descriptionArea.append('<p><b>Gear level = ' + crString + '</b> (showing items in range ' + crMin + ' - ' + crMax + ')</p>');
+                var $descriptionArea = $(".stepEightGearDescription").first();
+                $descriptionArea.empty();
 
-              //generate armor
+                crMin = Number(crString) - 3;
+                if (crMin < 1){crMin = 1;}
+                crMax = Number(crString) + 1
 
-              var armorGroups = ["Light Armor","Heavy Armor"]
-              var armorList = ['None','BREAK'];
+                var $descriptionArea = $(".gearLevelDescription").first();
+                $descriptionArea.empty();
+                $descriptionArea.append('<p><b>Recommended gear level ' + crString + '</b><br>(showing level ' + crMin + ' - ' + crMax + ' items)</p>');
 
-              for (var i = 0; i < armorGroups.length; i++)  {
-                armorList = armorList.concat(['LABEL=' + armorGroups[i] ]);
-                for (itemName in equipmentData[armorGroups[i]]) {
-                  if (Number(equipmentData[armorGroups[i]][itemName].level) >= crMin && Number(equipmentData[armorGroups[i]][itemName].level) <= crMin){
-                    armorList = armorList.concat(itemName);
+                //generate armor
+                var armorGroups = ["Light Armor","Heavy Armor"]
+                var armorList = ['None'];
+
+                for (var i = 0; i < armorGroups.length; i++)  {
+                  var armor = [];
+                  for (itemName in equipmentData[armorGroups[i]]) {
+                    if (Number(equipmentData[armorGroups[i]][itemName].level) >= crMin && Number(equipmentData[armorGroups[i]][itemName].level) <= crMax){
+                      armor = armor.concat('Level ' + equipmentData[armorGroups[i]][itemName].level + ' - ' + itemName);
+                    }
+                  }
+                  if (armor.length > 0) {
+                    armorList = armorList.concat(['LABEL=' + armorGroups[i] ]);
+                    armorList = armorList.concat(armor.sort());
+                    armorList = armorList.concat(['ENDLABEL']);
                   }
                 }
-                armorList = armorList.concat(['ENDLABEL']);
+                generateDropdown("armorGearDropdown","Armor","armorGearDrop","Optional armor",armorList);
 
+                //generate weapons list
+                var weaponGroups = ["Basic Melee Weapons","Advanced Melee Weapons","Small Arms","Longarms","Heavy Weapons","Sniper Weapons","Grenades"]
+                var weaponList = [];
+
+                for (var i = 0; i < weaponGroups.length; i++)  {
+                  var weapons = [];
+                  for (itemName in equipmentData[weaponGroups[i]]) {
+                    if (Number(equipmentData[weaponGroups[i]][itemName].level) >= crMin && Number(equipmentData[weaponGroups[i]][itemName].level) <= crMax){
+                      weapons = weapons.concat('Level ' + equipmentData[weaponGroups[i]][itemName].level + ' - ' + itemName);
+                    }
+                  }
+                  if (weapons.length > 0) {
+                    weaponList = weaponList.concat(['LABEL=' + weaponGroups[i] ]);
+                    weaponList = weaponList.concat(weapons.sort());
+                    weaponList = weaponList.concat(['ENDLABEL']);
+                  }
+                }
+                generateMultiDropdown("weaponGearDropdown","Weapons","weaponGearDrop","Optional weapons",0,weaponList,100);
+
+                //generate equipment list
+                var equipmentGroups = ["Food And Drink","Hybrid Items","Magic Items","Personal Items","Technological Items","Healing Serum","Medical Gear","Armor Upgrades","Solarion Weapon Crystals"]
+                var equipmentList = [];
+
+                for (var i = 0; i < equipmentGroups.length; i++)  {
+                  var equipment = [];
+                  for (itemName in equipmentData[equipmentGroups[i]]) {
+                    if (Number(equipmentData[equipmentGroups[i]][itemName].level) >= crMin && Number(equipmentData[equipmentGroups[i]][itemName].level) <= crMax){
+                      equipment = equipment.concat('Level ' + equipmentData[equipmentGroups[i]][itemName].level + ' - ' + itemName);
+                    }
+                  }
+                  if (equipment.length > 0) {
+                    equipmentList = equipmentList.concat(['LABEL=' + equipmentGroups[i] ]);
+                    equipmentList = equipmentList.concat(equipment.sort());
+                    equipmentList = equipmentList.concat(['ENDLABEL']);
+                  }
+                }
+                generateMultiDropdown("equipmentGearDropdown","Equipment","equipmentGearDrop","Optional equipment","Search equipment",equipmentList,100);
+
+                $('#stepEightGearSave').text(crString + ":" + classDrop);
               }
-
-              generateDropdown("armorDropdown","Armor","armorDrop","Optional armor",armorList);
 
 
             } else {

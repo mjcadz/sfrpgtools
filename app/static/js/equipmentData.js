@@ -1117,252 +1117,252 @@ var equipmentData = {
         }
     },
     "Armor Upgrades": {
-        "Armor Upgrade - Automated Loader": {
+        "Automated Loader": {
             "bulk": "1",
             "cost": "750",
             "sourcebook": "crb",
             "level": "2",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Backup Generator": {
+        "Backup Generator": {
             "bulk": "1",
             "cost": "2100",
             "sourcebook": "crb",
             "level": "4",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Deflective Reinforcement": {
+        "Deflective Reinforcement": {
             "bulk": "1",
             "cost": "7500",
             "sourcebook": "crb",
             "level": "7",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Electrostatic Field - Mk 1": {
+        "Electrostatic Field - Mk 1": {
             "bulk": "-",
             "cost": "3000",
             "sourcebook": "crb",
             "level": "5",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Electrostatic Field - Mk 2": {
+        "Electrostatic Field - Mk 2": {
             "bulk": "-",
             "cost": "13000",
             "sourcebook": "crb",
             "level": "9",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Electrostatic Field - Mk 3": {
+        "Electrostatic Field - Mk 3": {
             "bulk": "-",
             "cost": "35000",
             "sourcebook": "crb",
             "level": "12",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Exit Pod": {
+        "Exit Pod": {
             "bulk": "2",
             "cost": "1750",
             "sourcebook": "crb",
             "level": "4",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Filtered Rebreather": {
+        "Filtered Rebreather": {
             "bulk": "1",
             "cost": "4600",
             "sourcebook": "crb",
             "level": "6",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Force Field - Black": {
+        "Force Field - Black": {
             "bulk": "L",
             "cost": "10500",
             "sourcebook": "crb",
             "level": "8",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Force Field - Blue": {
+        "Force Field - Blue": {
             "bulk": "L",
             "cost": "280000",
             "sourcebook": "crb",
             "level": "17",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Force Field - Brown": {
+        "Force Field - Brown": {
             "bulk": "L",
             "cost": "1600",
             "sourcebook": "crb",
             "level": "3",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Force Field - Gray": {
+        "Force Field - Gray": {
             "bulk": "L",
             "cost": "40000",
             "sourcebook": "crb",
             "level": "12",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Force Field - Green": {
+        "Force Field - Green": {
             "bulk": "L",
             "cost": "80000",
             "sourcebook": "crb",
             "level": "14",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Force Field - Orange": {
+        "Force Field - Orange": {
             "bulk": "L",
             "cost": "400000",
             "sourcebook": "crb",
             "level": "18",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Force Field - Prismatic": {
+        "Force Field - Prismatic": {
             "bulk": "L",
             "cost": "1000000",
             "sourcebook": "crb",
             "level": "20",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Force Field - Purple": {
+        "Force Field - Purple": {
             "bulk": "L",
             "cost": "4550",
             "sourcebook": "crb",
             "level": "6",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Force Field - Red": {
+        "Force Field - Red": {
             "bulk": "L",
             "cost": "180000",
             "sourcebook": "crb",
             "level": "16",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Force Field - White": {
+        "Force Field - White": {
             "bulk": "L",
             "cost": "20000",
             "sourcebook": "crb",
             "level": "10",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Forcepack": {
+        "Forcepack": {
             "bulk": "1",
             "cost": "13100",
             "sourcebook": "crb",
             "level": "9",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Haste Circuit": {
+        "Haste Circuit": {
             "bulk": "L",
             "cost": "9250",
             "sourcebook": "crb",
             "level": "8",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Infrared Sensors": {
+        "Infrared Sensors": {
             "bulk": "L",
             "cost": "200",
             "sourcebook": "crb",
             "level": "1",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Jetpack": {
+        "Jetpack": {
             "bulk": "1",
             "cost": "3100",
             "sourcebook": "crb",
             "level": "5",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Jump Jets": {
+        "Jump Jets": {
             "bulk": "L",
             "cost": "1000",
             "sourcebook": "crb",
             "level": "2",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Load Lifter": {
+        "Load Lifter": {
             "bulk": "-",
             "cost": "2550",
             "sourcebook": "crb",
             "level": "5",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Phase Shield": {
+        "Phase Shield": {
             "bulk": "1",
             "cost": "4325",
             "sourcebook": "crb",
             "level": "6",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Quick-Release Sheath": {
+        "Quick-Release Sheath": {
             "bulk": "L",
             "cost": "325",
             "sourcebook": "crb",
             "level": "1",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Radiation Buffer": {
+        "Radiation Buffer": {
             "bulk": "L",
             "cost": "200",
             "sourcebook": "crb",
             "level": "1",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Sonic Dampener": {
+        "Sonic Dampener": {
             "bulk": "L",
             "cost": "7150",
             "sourcebook": "crb",
             "level": "7",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Spell Reflector - Mk 1": {
+        "Spell Reflector - Mk 1": {
             "bulk": "1",
             "cost": "47950",
             "sourcebook": "crb",
             "level": "13",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Spell Reflector - Mk 2": {
+        "Spell Reflector - Mk 2": {
             "bulk": "1",
             "cost": "360000",
             "sourcebook": "crb",
             "level": "18",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Targeting Computer": {
+        "Targeting Computer": {
             "bulk": "-",
             "cost": "2250",
             "sourcebook": "crb",
             "level": "4",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Tensile Reinforcement": {
+        "Tensile Reinforcement": {
             "bulk": "-",
             "cost": "150",
             "sourcebook": "crb",
             "level": "1",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Thermal Capacitor - Mk 1": {
+        "Thermal Capacitor - Mk 1": {
             "bulk": "-",
             "cost": "3600",
             "sourcebook": "crb",
             "level": "5",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Thermal Capacitor - Mk 2": {
+        "Thermal Capacitor - Mk 2": {
             "bulk": "-",
             "cost": "36250",
             "sourcebook": "crb",
             "level": "12",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Thermal Capacitor - Mk 3": {
+        "Thermal Capacitor - Mk 3": {
             "bulk": "-",
             "cost": "120000",
             "sourcebook": "crb",
             "level": "15",
             "sourcepage": "p.204"
         },
-        "Armor Upgrade - Titan Shield": {
+        "Titan Shield": {
             "bulk": "2",
             "cost": "75000",
             "sourcebook": "crb",
@@ -6931,168 +6931,168 @@ var equipmentData = {
         }
     },
     "Solarion Weapon Crystals": {
-        "Solarion Weapon Crystal - Gluon Crystal (Greater)": {
+        "Gluon Crystal (Greater)": {
             "bulk": "-",
             "cost": "330300",
             "sourcebook": "crb",
             "level": "18",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Gluon Crystal (Least)": {
+        "Gluon Crystal (Least)": {
             "bulk": "-",
             "cost": "3900",
             "sourcebook": "crb",
             "level": "6",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Gluon Crystal (Lesser)": {
+        "Gluon Crystal (Lesser)": {
             "bulk": "-",
             "cost": "30800",
             "sourcebook": "crb",
             "level": "12",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Gluon Crystal (Minor)": {
+        "Gluon Crystal (Minor)": {
             "bulk": "-",
             "cost": "11500",
             "sourcebook": "crb",
             "level": "9",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Gluon Crystal (Standard)": {
+        "Gluon Crystal (Standard)": {
             "bulk": "-",
             "cost": "94200",
             "sourcebook": "crb",
             "level": "15",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Gluon Crystal (True)": {
+        "Gluon Crystal (True)": {
             "bulk": "-",
             "cost": "916200",
             "sourcebook": "crb",
             "level": "20",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Graviton Crystal (Greater)": {
+        "Graviton Crystal (Greater)": {
             "bulk": "-",
             "cost": "251000",
             "sourcebook": "crb",
             "level": "17",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Graviton Crystal (Least)": {
+        "Graviton Crystal (Least)": {
             "bulk": "-",
             "cost": "2900",
             "sourcebook": "crb",
             "level": "5",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Graviton Crystal (Lesser)": {
+        "Graviton Crystal (Lesser)": {
             "bulk": "-",
             "cost": "24000",
             "sourcebook": "crb",
             "level": "11",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Graviton Crystal (Minor)": {
+        "Graviton Crystal (Minor)": {
             "bulk": "-",
             "cost": "9200",
             "sourcebook": "crb",
             "level": "8",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Graviton Crystal (Standard)": {
+        "Graviton Crystal (Standard)": {
             "bulk": "-",
             "cost": "69800",
             "sourcebook": "crb",
             "level": "14",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Graviton Crystal (True)": {
+        "Graviton Crystal (True)": {
             "bulk": "-",
             "cost": "727100",
             "sourcebook": "crb",
             "level": "20",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Photon Crystal (Greater)": {
+        "Photon Crystal (Greater)": {
             "bulk": "-",
             "cost": "246200",
             "sourcebook": "crb",
             "level": "17",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Photon Crystal (Least)": {
+        "Photon Crystal (Least)": {
             "bulk": "-",
             "cost": "2950",
             "sourcebook": "crb",
             "level": "5",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Photon Crystal (Lesser)": {
+        "Photon Crystal (Lesser)": {
             "bulk": "-",
             "cost": "25100",
             "sourcebook": "crb",
             "level": "11",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Photon Crystal (Minor)": {
+        "Photon Crystal (Minor)": {
             "bulk": "-",
             "cost": "9300",
             "sourcebook": "crb",
             "level": "8",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Photon Crystal (Standard)": {
+        "Photon Crystal (Standard)": {
             "bulk": "-",
             "cost": "71200",
             "sourcebook": "crb",
             "level": "14",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - Photon Crystal (True)": {
+        "Photon Crystal (True)": {
             "bulk": "-",
             "cost": "729500",
             "sourcebook": "crb",
             "level": "20",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - W-Boson Crystal (Greater)": {
+        "W-Boson Crystal (Greater)": {
             "bulk": "-",
             "cost": "274100",
             "sourcebook": "crb",
             "level": "17",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - W-Boson Crystal (Least)": {
+        "W-Boson Crystal (Least)": {
             "bulk": "-",
             "cost": "3050",
             "sourcebook": "crb",
             "level": "5",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - W-Boson Crystal (Lesser)": {
+        "W-Boson Crystal (Lesser)": {
             "bulk": "-",
             "cost": "26200",
             "sourcebook": "crb",
             "level": "11",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - W-Boson Crystal (Minor)": {
+        "W-Boson Crystal (Minor)": {
             "bulk": "-",
             "cost": "9800",
             "sourcebook": "crb",
             "level": "8",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - W-Boson Crystal (Standard)": {
+        "W-Boson Crystal (Standard)": {
             "bulk": "-",
             "cost": "81300",
             "sourcebook": "crb",
             "level": "14",
             "sourcepage": "p.189"
         },
-        "Solarion Weapon Crystal - W-Boson Crystal (True)": {
+        "W-Boson Crystal (True)": {
             "bulk": "-",
             "cost": "806000",
             "sourcebook": "crb",
