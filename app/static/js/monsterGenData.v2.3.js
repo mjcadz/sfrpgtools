@@ -1104,7 +1104,7 @@ classData = {
         "AbilityScoreModifiers": ["Cha","Int","Dex"],
         "Adjustments": {"reflex":2},
         "Description": "Charismatic envoys assist their allies through inspiration and tactical orders.",
-        "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
+        "Gear": "Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR-1).",
         "RequiredArray": "Expert",
         "MasterSkills": [
           "sense Motive"
@@ -1229,7 +1229,7 @@ classData = {
         "AbilityScoreModifiers": ["Int","Dex","Con"],
         "Adjustments": {"fortitude":2,"reflex":2,"will":-2},
         "Description": "Experts at dealing with machines, mechanics either use exocortexes to enhance their combat abilities or are accompanied by robotic drones that they can control remotely.",
-        "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
+        "Gear": "Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR-1).",
         "RequiredArray": "Expert",
         "MasterSkills": [
           "computers",
@@ -1357,7 +1357,7 @@ classData = {
         "AbilityScoreModifiers": ["Wis","Con","Cha"],
         "Adjustments": {"None":0},
         "Description": "Calling on connections to supernatural forces, mystics can manifest magic in a number of different ways.",
-        "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
+        "Gear": "Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR-1).",
         "RequiredArray": "Spellcaster",
         "MasterSkills": {
           "Overlord":["diplomacy","intimidate","mysticism"],
@@ -1504,7 +1504,7 @@ classData = {
           "Thief":["perception","sleight of hand"]
         },
         "Description": "Cunning and swift, operatives are especially skilled and can cause foes to drop their guards, paving the way for devastating attacks.",
-        "Gear": "Light armor (item level = CR), small arm (item level = CR), sniper rifle (item level = CR), and basic melee weapon with operative special quality (item level = CR - 1).",
+        "Gear": "Light armor (item level = CR), small arm (item level = CR), sniper rifle (item level = CR), and basic melee weapon with operative special quality (item level = CR-1).",
         "RequiredArray": "Expert",
         "SpecialRules": "Choose one operative specialization. The operative creature’s specialization exploit and specialization power must come from that specialization. Any exploits that aren’t relevant to the creature (or that can simply be incorporated into the creature’s statistics) don’t need to appear in the creature’s stat block. Master skills from operative specialization."
     },
@@ -1605,7 +1605,10 @@ classData = {
         "AbilityScoreModifiers": ["Str","Dex","Cha"],
         "Adjustments": {"reflex":-2,"will":2},
         "Description": "Drawing power from the eternal cycles of stars, solarians fight with the power of photons and gravitons.",
-        "Gear": "A solarian’s gear selection depends on whether you choose solar armor or solar weapon for its solar manifestation. Solar Armor: Light armor (item level = CR), small arm (item level = CR), and advanced melee weapon (item level = CR + 1). Solar Weapon: Light armor (item level = CR), small arm (item level = CR), and solarian crystal (item level = CR).",
+        "Gear": {
+          "Solar armor": "Light armor (item level = CR), small arm (item level = CR), and advanced melee weapon (item level =CR+1)",
+          "Solar weapon": "Light armor (item level = CR), small arm (item level = CR), and solarian crystal (item level = CR).",
+        },
         "RequiredArray": "Combatant",
         "GoodSkills": [
           "mysticism"
@@ -1696,11 +1699,11 @@ classData = {
         },
         "MeleeStyle":{
           "AbilityScoreModifiers":["Str","Dex","Con"],
-          "Gear":"Heavy armor (item level = CR), advanced melee weapon (item level = CR + 1), longarm (item level = CR), and two grenades (item level = CR)."
+          "Gear":"Heavy armor (item level = CR), advanced melee weapon (item level = CR+1), longarm (item level = CR), and two grenades (item level = CR)."
         },
         "RangedStyle":{
           "AbilityScoreModifiers":["Dex","Str","Con"],
-          "Gear":"Heavy armor (item level = CR), advanced melee weapon (item level = CR), longarm (item level = CR + 1) or heavy weapon (item level = CR), and two grenades (item level = CR)."
+          "Gear":"Heavy armor (item level = CR), advanced melee weapon (item level = CR), longarm (item level = CR+1) or heavy weapon (item level = CR), and two grenades (item level = CR)."
         },
         "Adjustments": {"reflex":-2,"will":2},
         "Description": "Equipped with powerful weapons and armor, soldiers are trained to serve in the front line of battle and to both dish out and withstand massive force.",
@@ -1787,7 +1790,7 @@ classData = {
         "AbilityScoreModifiers": ["Int","Dex","Wis"],
         "Adjustments": {"None":0},
         "Description": "These spellcasters meld magic and technology.",
-        "Gear": "Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
+        "Gear": "Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR-1).",
         "RequiredArray": "Spellcaster",
         "MasterSkills": [
           "mysticism",

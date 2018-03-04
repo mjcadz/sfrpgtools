@@ -2518,6 +2518,11 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');
 }
 
+//callback for gear input typing
+$('#inputGear').on('input',function(e){
+    printGearString()
+});
+
 function printGearString(){
 
   //prints which gear is selected
@@ -2530,8 +2535,9 @@ function printGearString(){
   if (aGear == 'None') { aGear = ''; }
   var wGear = $('#weaponGearDrop').val().toString().trim();
   var eGear = $('#equipmentGearDrop').val().toString().trim();
+  var oGear = $('#inputGear').val().trim();
 
-  if (aGear != '' || wGear != '' || eGear != '') {
+  if (aGear != '' || wGear != '' || eGear != '' || oGear != '') {
 
     if (aGear != '') {
       gearString += aGear;
@@ -2552,12 +2558,21 @@ function printGearString(){
         gearString += eGear;
       }
     }
+
+    if (oGear != '') {
+      if (gearString != ''){
+        gearString += ', ' + oGear;
+      } else {
+        gearString += oGear;
+      }
+    }
+
     //formating
-    gearString = gearString.replace(/Level .?. - /g,'');
-    gearString = gearString.toLowerCase();
-    gearString = gearString.replace(/([\w ]+)\s-\s([\w -]+)/g, "$2 $1");
-    gearString = gearString.replace(/,/g, ', ');
-    gearString = gearString.replace(/ iii/g," III").replace(/ ii/g," II").replace(/ i/g," I").replace(/ iv/g,"IV").replace(/ v/g," V").replace(/ viii/g," VIII").replace(/ vii/g," VII").replace(/ vi/g," VI");
+    gearString = gearString.replace(/Level .?. - /g,'');//remove level string
+    gearString = gearString.toLowerCase();//all to lowercase
+    gearString = gearString.replace(/([\w ]+)\s-\s([\w -]+)/g, "$2 $1");//if item has type appendix, eg tactical. move to the front of the string
+    gearString = gearString.replace(/,/g, ', ');//space out commas
+    gearString = gearString.replace(/ iii/g," III").replace(/ ii/g," II").replace(/ i/g," I").replace(/ iv/g,"IV").replace(/ v/g," V").replace(/ viii/g," VIII").replace(/ vii/g," VII").replace(/ vi/g," VI"); //only roman numerals are uppercase
 
     $descriptionArea.append("<p><b>Gear:</b> " + gearString + "</p>");
 
@@ -3528,7 +3543,30 @@ $('.wizard-card').bootstrapWizard({
 
                 var $descriptionArea = $(".gearLevelDescription").first();
                 $descriptionArea.empty();
-                $descriptionArea.append('<p><b>Recommended gear level ' + crString + '</b><br>(showing level ' + crMin + ' - ' + crMax + ' items)</p>');
+
+                //print recommended gear
+                if (classDrop != ''){
+
+                  if (classDrop == 'Solarian') {
+                    var solarionDrop = $('#stepFourOptionDrop').val().trim();
+                    var classGear = classData[classDrop].Gear[solarionDrop];
+                  } else if (classDrop == 'Soldier') {
+                    var soldierDrop = $('#stepFourOptionDrop').val().trim() + "Style";
+                    var classGear = classData[classDrop][soldierDrop].Gear;
+                  } else {
+                    var classGear = classData[classDrop].Gear;
+                  }
+
+                  var crTakeOne = Number(crString) - 1;
+                  if (crTakeOne < 1){crTakeOne = 1;}
+                  var crPlusOne = Number(crString) + 1;
+                  if (crPlusOne > 20){crPlusOne = 20;}
+                  classGear = classGear.replace('CR-1',crTakeOne.toString()).replace('CR+1',crPlusOne.toString()).replace('CR',crString)
+                  $descriptionArea.append('<p><b>Recommended ' + classDrop +' gear: ' + classGear + '</b><br>(showing level ' + crMin + ' - ' + crMax + ' items)</p>');
+                } else {
+                  $descriptionArea.append('<p><b>Recommended gear level ' + crString + '</b><br>(showing level ' + crMin + ' - ' + crMax + ' items)</p>');
+                }
+
 
                 //generate armor
                 var armorGroups = ["Light Armor","Heavy Armor"]
@@ -3566,7 +3604,7 @@ $('.wizard-card').bootstrapWizard({
                     weaponList = weaponList.concat(['ENDLABEL']);
                   }
                 }
-                generateMultiDropdown("weaponGearDropdown","Weapons","weaponGearDrop","Optional weapons",0,weaponList,100);
+                generateMultiDropdown("weaponGearDropdown","Weapons","weaponGearDrop","Optional weapons","Search weapons",weaponList,100);
 
                 //generate equipment list
                 var equipmentGroups = ["Food And Drink","Hybrid Items","Magic Items","Personal Items","Technological Items","Healing Serum","Medical Gear","Armor Upgrades","Solarion Weapon Crystals"]

@@ -28,6 +28,8 @@ solar manifestations
 gear do armor upgrade properly
 generate attacks from chosen weapons
 
+add cybernetic to gear
+
 
 
 Nice To Have
