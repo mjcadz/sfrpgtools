@@ -27,6 +27,10 @@ solar manifestations
 
 gear do armor upgrade properly
 generate attacks from chosen weapons
+add option for ammo in gear
+add grenades to weapon gen
+make sure generated weapons
+check critical formating. full word?
 
 add cybernetic to gear
 

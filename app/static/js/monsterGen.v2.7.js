@@ -710,7 +710,7 @@ function buildStatBlock() {
       //for each frequency
       for (var i = 0; i < statBlock.Spellcasting.length; i++) {
         spellBlock = statBlock.Spellcasting[i];
-        console.log(spellBlock)
+
         //add new line for each frequency
         spellString += '<div>' + spellBlock[0] + ' - ';
         //for each spell
@@ -931,8 +931,14 @@ function buildStatBlock() {
         var name = $('#attackName'+index).val().trim().toLowerCase();
         var bonus = $('#bonus'+index).val().trim();
         var damage = $('#damage'+index).val().trim();
-        var attackType = $('#AT'+index+'Drop').val().trim();
-        var damageType = $('#DT'+index+'Drop').val().trim();
+        if ($('[data-id="AT'+index+'Drop"]').length){
+          var attackType = $('#AT'+index+'Drop').val().trim();
+          var damageType = $('#DT'+index+'Drop').val().trim();
+          damageType = window[attackType.toLowerCase() + indexParts[0] + 'Types'][damageType];
+        } else {
+          var damageType = $('#damagetype'+index).val().trim();
+        }
+
         var critical = $('#critical'+index).val().trim();
         var end = ' or<br>';
 
@@ -950,9 +956,7 @@ function buildStatBlock() {
           bonus = '+' + (Number(bonus.replace('+','')) + statBlock.attackMod).toString();
         }
 
-        damageType = window[attackType.toLowerCase() + indexParts[0] + 'Types'][damageType];
-
-        if (critical != '') {
+        if (critical != '' && critical != '-') {
           critical = '; critical ' + critical.toLowerCase();
         }
 
@@ -1654,6 +1658,174 @@ function generateAttackEntry(style) {
   $('#DT'+indexString+'Drop').selectpicker('val', damageType[0]);
   $('#DT'+indexString+'Drop').selectpicker('refresh');
 
+}
+
+function generateGearAttackEntries() {
+
+  //validate high stat choice
+  if ($('[data-id="attackDrop"]').text().includes("Choose")) {
+      $('[data-id="attackDrop"]').addClass('wizard-shadow');
+      return;
+  }
+
+  var $outputArea = $(".attackContainer").first();
+
+  var crString = $('[data-id="CRDrop"]').text().trim();
+  var cr = Number(crString.replace("CR ","").replace("1/2","0").replace("1/3","0"));
+  var array = $('#arrayDrop').val().trim();
+  var special = $('#specialDrop').val().toString().trim();
+  var gearWeapons = $('#weaponGearDrop').val().toString().trim();
+
+  gearWeapons = gearWeapons.replace(/Level .?. - /g,'');//remove level string
+
+  //get array of weapons
+  if (gearWeapons.includes(',')){
+    gearWeapons = gearWeapons.split(',');
+  } else {
+    if (gearWeapons == '') {
+      return;
+    } else {
+      gearWeapons = [gearWeapons];
+    }
+  }
+
+  for (var i = 0; i < gearWeapons.length; i++)  {
+
+    var attackStats = window[array.toLowerCase()+'AttackStats'][crString.replace("CR ","")];
+    var highStat = $('#attackDrop').val().trim();
+    var attackTitle = gearWeapons[i];
+
+    var weaponGroups = ["Basic Melee Weapons","Advanced Melee Weapons","Small Arms","Longarms","Heavy Weapons","Sniper Weapons","Grenades"]
+
+    for (var j = 0; j < weaponGroups.length; j++)  {
+      //find the weapon in the data
+      if (equipmentData[weaponGroups[j]].hasOwnProperty(attackTitle)) {
+
+        var attackDamage = equipmentData[weaponGroups[j]][attackTitle].damage + "+" + cr.toString();
+        var attackCritical = equipmentData[weaponGroups[j]][attackTitle].critical.toLowerCase().capitalise();
+        var attackDamageType = equipmentData[weaponGroups[j]][attackTitle].damagetype.toUpperCase().replace('SO','So');
+        var attackType = "placeholder"
+
+        if (weaponGroups[j].includes("Melee")) {
+          var style = "Melee";
+          attackDamage += "+Str"
+        } else {
+          var style = "Ranged";
+        }
+
+        break;
+      }
+    }
+
+    attackTitle = attackTitle.toLowerCase();
+    attackTitle = attackTitle.replace(/([\w ]+)\s-\s([\w -]+)/g, "$2 $1");
+
+
+    if (style == "Melee"){
+      if (highStat == "Melee"){
+        var attackBonus = attackStats[0];
+      } else if (highStat == "Ranged") {
+        var attackBonus = attackStats[1];
+      }
+    }
+    else if (style == "Ranged"){
+      if (highStat == "Ranged"){
+        var attackBonus = attackStats[0];
+      } else if (highStat == "Melee") {
+        var attackBonus = attackStats[1];
+      }
+    }
+
+    var brute = false; // :(
+    var bruteClass = '';
+    var bruteLabel = '';
+    //apply brute if chosen
+    if (special.includes("Brute")){
+      brute = true; // :)
+      //check if already applied
+      $("[class^='attackDiv']").each(function(){
+        if ($(this).attr('class').includes('brute')){
+          brute = false; // :(
+        }
+      });
+    }
+
+    if (brute) {
+      attackBonus = attackStats[1];
+      var crlist = Object.keys(combatantMainStats);
+      var crindex = crlist.indexOf(crString.replace("CR ",""));
+      crindex += 2;
+      if(crindex > 26){
+        crindex = 26;
+      }
+      var newCr = crlist[crindex];
+      attackStats = window[array.toLowerCase()+'AttackStats'][newCr];
+      if (style == "Melee"){
+        var attackDamage = attackStats[4];
+      }
+      if (style == "Ranged"){
+        var attackDamage = attackStats[3];
+      }
+      bruteClass = ' brute';
+      bruteLabel = ' - brute attack';
+    }
+
+    attackIndexCounter += 1;
+    var indexString = style + "-" + attackIndexCounter.toString();
+
+    var attackBody = "<div class=\"attackDiv" + indexString + bruteClass + "\">"
+    attackBody +=
+        "<h5>"+style+bruteLabel+"</h5>" +
+        "<div class=\"row\">" +
+            "<div class=\"col-lg-6\">" +
+                "<div class=\"form-group\">" +
+                    "<label for=\"attackName"+indexString+"\">Attack name</label>" +
+                     "<input type=\"text\" class=\"form-control\" id=\"attackName"+indexString+"\" value=\""+attackTitle+"\">" +
+                "</div>" +
+            "</div>" +
+            "<div class=\"col-lg-6\">" +
+                "<div class=\"row\">" +
+                    "<div class=\"col-xs-4\" style=\"padding-right: 0\">" +
+                        "<div class=\"form-group\">" +
+                            "<label for=\"bonus"+indexString+"\">Bonus</label>" +
+                            "<input type=\"text\" class=\"form-control\" id=\"bonus"+indexString+"\" value=\""+attackBonus+"\">" +
+                        "</div>" +
+                    "</div>" +
+                    "<div class=\"col-xs-8\">" +
+                        "<div class=\"form-group\">" +
+                            "<label for=\"damage"+indexString+"\">Damage</label>" +
+                            "<input type=\"text\" class=\"form-control\" id=\"damage"+indexString+"\" value=\""+attackDamage+"\">" +
+                        "</div>" +
+                    "</div>" +
+                "</div>" +
+            "</div>" +
+            "<div class=\"col-lg-4\">" +
+            "</div>" +
+            "<div class=\"col-lg-4\">" +
+                "<div class=\"form-group\">" +
+                    "<label for=\"damagetype"+indexString+"\">Damage type</label>" +
+                    "<input type=\"text\" class=\"form-control\" id=\"damagetype"+indexString+"\" value=\""+attackDamageType+"\" disabled>" +
+                    "<div id=\"damagetype"+indexString+"\"></div>" +
+                "</div>" +
+            "</div>" +
+            "<div class=\"col-lg-4\">" +
+                "<div class=\"form-group\">" +
+                    "<label for=\"critical"+indexString+"\">Critical</label>" +
+                    "<input type=\"text\" class=\"form-control\" id=\"critical"+indexString+"\" value=\""+attackCritical+"\" disabled>" +
+                "</div>" +
+            "</div>" +
+        "</div>"
+
+    attackBody += "<br>"
+    attackBody += "<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-default btn-sm pull-right\" onclick = \"removeEntry(this.id)\">Remove</button>"
+    attackBody += "<br><hr>"
+    attackBody += "</div>"
+
+    $outputArea.append(attackBody);
+
+    $('#damagetype'+indexString).css("cursor", "default");
+    $('#critical'+indexString).css("cursor", "default");
+  }
 }
 
 function removeEntry(index) {
@@ -2616,9 +2788,7 @@ function showSpellDropdowns(caster,className){
           }
 
           spellList = removeElement(spellList,chosenSpell);
-          console.log(spellNum)
           spellNum = spellNum - 1;
-          console.log(spellNum)
 
           var $descriptionArea = $(".stepEight" + i + "Description").first();
           $descriptionArea.empty();
@@ -3540,6 +3710,8 @@ $('.wizard-card').bootstrapWizard({
                 crMin = Number(crString) - 3;
                 if (crMin < 1){crMin = 1;}
                 crMax = Number(crString) + 1
+                if (crMin > 20){crMin = 20;}
+                if (crMax > 20){crMax = 20;}
 
                 var $descriptionArea = $(".gearLevelDescription").first();
                 $descriptionArea.empty();
@@ -3640,9 +3812,6 @@ $('.wizard-card').bootstrapWizard({
 
 
             if (validated) {
-
-              var crString = $('[data-id="CRDrop"]').text().trim();
-              $(".attackCR").html('<h5>'+crString+'</h5>')
 
             } else {
                 return false;
