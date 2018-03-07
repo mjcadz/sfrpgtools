@@ -1517,7 +1517,7 @@ function generateMultiDropdown(parentID,label,dropID,title,searchTitle,array,max
 }
 
 //creates bootstrap-select dropdowns from arrays
-function generateAttackEntry(style) {
+function generateAttackEntry(style,weaponName) {
 
   //validate high stat choice
   if ($('[data-id="attackDrop"]').text().includes("Choose")) {
@@ -1605,7 +1605,7 @@ function generateAttackEntry(style) {
           "<div class=\"col-lg-6\">" +
               "<div class=\"form-group\">" +
                   "<label for=\"attackName"+indexString+"\">Attack name</label>" +
-                   "<input type=\"text\" class=\"form-control\" id=\"attackName"+indexString+"\" placeholder=\""+attackPlaceholder+"\"  oninput=\"removeHighlight(this.id)\">" +
+                   "<input type=\"text\" class=\"form-control\" id=\"attackName"+indexString+"\" placeholder=\""+attackPlaceholder+"\" value=\""+weaponName+"\" oninput=\"removeHighlight(this.id)\">" +
               "</div>" +
           "</div>" +
           "<div class=\"col-lg-6\">" +
@@ -2592,6 +2592,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       var crString = $('[data-id="CRDrop"]').text().trim();
       var array = $('#arrayDrop').val().trim();
       var attackStats = window[array.toLowerCase()+'AttackStats'][crString.replace("CR ","")];
+      var classDrop = $('#classDrop').val().trim();
 
       if (selected == 'Ranged') {
         var rangedBonus = attackStats[0];
@@ -2604,6 +2605,18 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       //all that startswith selectors
       $("[id^='bonusRanged']").val(rangedBonus);
       $("[id^='bonusMelee']").val(meleeBonus);
+
+      //setup solarian weapon
+
+      if ($('#stepNineAttackSave').text() != crString+":"+classDrop){
+        if (classDrop == 'Solarian') {
+          var solarDrop = $('#stepFourOptionDrop').val().trim();
+          if (solarDrop == "Solar weapon") {
+            generateAttackEntry("Melee","Solar weapon")
+          }
+        }
+      }
+      $('#stepNineAttackSave').text(crString+":"+classDrop);
 
 
     } else if (id.startsWith('AT')){
@@ -3733,7 +3746,7 @@ $('.wizard-card').bootstrapWizard({
                   if (crTakeOne < 1){crTakeOne = 1;}
                   var crPlusOne = Number(crString) + 1;
                   if (crPlusOne > 20){crPlusOne = 20;}
-                  classGear = classGear.replace('CR-1',crTakeOne.toString()).replace('CR+1',crPlusOne.toString()).replace('CR',crString)
+                  classGear = classGear.replace(/CR-1/g,crTakeOne.toString()).replace(/CR+1/g,crPlusOne.toString()).replace(/CR/g,crString)
                   $descriptionArea.append('<p><b>Recommended ' + classDrop +' gear: ' + classGear + '</b><br>(showing level ' + crMin + ' - ' + crMax + ' items)</p>');
                 } else {
                   $descriptionArea.append('<p><b>Recommended gear level ' + crString + '</b><br>(showing level ' + crMin + ' - ' + crMax + ' items)</p>');

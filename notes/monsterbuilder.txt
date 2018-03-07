@@ -30,7 +30,7 @@ generate attacks from chosen weapons
 add option for ammo in gear
 add grenades to weapon gen
 make sure generated weapons
-check critical formating. full word?
+check critical hit formating. full word (critical)?
 
 add cybernetic to gear
 

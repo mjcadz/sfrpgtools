@@ -235,6 +235,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="step9">
+                            <span id="stepNineAttackSave" hidden>None</span>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h4 class="info-text">Attacks</h4>
@@ -242,14 +243,15 @@
                                 <div class="col-sm-4">
                                     <hr>
                                     <div id="MainAttackDropdown"></div>
+                                    <hr>
                                     <button type="button" onclick='generateGearAttackEntries()' class="btn btn-default btn-block btn-wrap">Generate attacks from gear</button>
                                     <p></p>
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <button type="button" onclick='generateAttackEntry("Melee")' class="btn btn-default btn-block btn-wrap">Add melee attack</button>
+                                            <button type="button" onclick='generateAttackEntry("Melee","")' class="btn btn-default btn-block btn-wrap">Add melee attack</button>
                                         </div>
                                         <div class="col-xs-6">
-                                          <button type="button" onclick='generateAttackEntry("Ranged")' class="btn btn-default btn-block btn-wrap">Add ranged attack</button>
+                                          <button type="button" onclick='generateAttackEntry("Ranged","")' class="btn btn-default btn-block btn-wrap">Add ranged attack</button>
                                         </div>
                                     </div>
                                 </div>
