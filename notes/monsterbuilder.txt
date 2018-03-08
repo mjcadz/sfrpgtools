@@ -24,6 +24,7 @@ class special abilities
 verify class choices have been made
 handle master skills for mystic
 solar manifestations
+solarian weapon crystals added to solar weapon
 
 gear do armor upgrade properly
 generate attacks from chosen weapons

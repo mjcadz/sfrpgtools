@@ -1613,7 +1613,36 @@ classData = {
         "GoodSkills": [
           "mysticism"
         ],
-        "SpecialRules": "Choose one solar manifestation, either solar armor or solar weapon. For a solarian creature with solar armor, its EAC and KAC each increase by 1 and it receives the energy resistance listed in the table of solarian class features. For a solarian creature with a solar weapon, that weapon deals the standard melee damage for the NPC’s CR from Table 2"
+        "SpecialRules": "Choose one solar manifestation, either solar armor or solar weapon. For a solarian creature with solar armor, its EAC and KAC each increase by 1 and it receives the energy resistance listed in the table of solarian class features. For a solarian creature with a solar weapon, that weapon deals the standard melee damage for the NPC’s CR from Table 2",
+        "Resistance": {
+          "1/3": "",
+          "1/2": "",
+          "1": "",
+          "2": "",
+          "3": "",
+          "4": "",
+          "5": "5",
+          "6": "5",
+          "7": "5",
+          "8": "5",
+          "9": "5",
+          "10": "10",
+          "11": "10",
+          "12": "10",
+          "13": "10",
+          "14": "10",
+          "15": "15",
+          "16": "15",
+          "17": "15",
+          "18": "15",
+          "19": "15",
+          "20": "20",
+          "21": "20",
+          "22": "20",
+          "23": "20",
+          "24": "20",
+          "25": "20"
+        }
     },
     "Soldier": {
         "AbilitiesByCr": {

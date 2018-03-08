@@ -112,7 +112,30 @@ function buildStatBlock() {
 
     //step 4 -class
 
+    //get base stats
     statBlock = getClassStats(statBlock);
+
+    //more specific stats
+    var classDrop = $('#classDrop').val().trim();
+
+    //SOLARIAN SPECIAL RULES
+    if (classDrop == 'Solarian') {
+      var solarDrop = $('#stepFourOptionDrop').val().trim();
+      if (solarDrop == "Solar armor") {
+        statBlock.eac = statBlock.eac + 1;
+        statBlock.kac = statBlock.kac + 1;
+
+        var resist = classData.Solarian.Resistance[CRDrop]
+        if (resist != '') {
+          if (statBlock.hasOwnProperty('Resistance')){
+            statBlock.Resistance = statBlock.Resistance.concat(['cold or fire ' + resist + ' (solar armor)']);
+          }
+          else {
+            statBlock.Resistance = ['cold or fire ' + resist + ' (solar armor)'];
+          }
+        }
+      }
+    }
 
     //step 5 - graft
     var graft = $('#graftDrop').val().trim();
