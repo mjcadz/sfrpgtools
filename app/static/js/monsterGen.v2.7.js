@@ -135,6 +135,39 @@ function buildStatBlock() {
           }
         }
       }
+      var cr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var solarianFeatures = getClassAbilities('Solarian',cr);
+      var featurelist = solarianFeatures.features;
+      if (solarianFeatures.hasOwnProperty('revelations')){
+        //do revelations
+        var revs = $('#stepFourOptionDropTwo').val().trim();
+
+        if (revs.includes(',')){
+          var revelations = revs.split(',')
+        } else {
+          var revelations = [revs];
+        }
+
+        var stellarRevelations = "stellar revelations (";
+        stellarRevelations += revelations.join(', ') + ')';
+        /*
+        var revLevels = ["2nd","6th","10th","14th","16th","Zenith"]
+
+        for (var i = 0; i < revelations.length; i++)  {
+          for (var j = 0; j < revLevels.length; j++)  {
+            //find the revelation in the data
+            if (allClassFeatures.Solarian["Stellar Revelations"][revLevels[j]].hasOwnProperty(revelations[i])) {
+
+              stellarRevelations += revelations[i];
+
+              break;
+            }
+          }
+        }
+        */
+      }
+
+
     }
 
     //step 5 - graft

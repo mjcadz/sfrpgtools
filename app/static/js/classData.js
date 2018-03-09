@@ -844,7 +844,15 @@ allClassFeatures = {
 				},
 				"Stellar Rush": {
 				  "SOURCEPAGE": "p.104",
-				  "description": "As a standard action, you can wreathe yourself in stellar fire and make a charge without the penalties (see page 248). When you are attuned or fully attuned, you can substitute a bull rush for the melee attack at the end of the charge. Whether or not you succeed at the bull rush, the target takes 2d6 fire damage (Reflex half). This damage increases by 1d6 at 6th level and every 2 levels thereafter. "
+				  "description": "As a standard action, you can wreathe yourself in stellar fire and make a charge without the penalties (see page 248). When you are attuned or fully attuned, you can substitute a bull rush for the melee attack at the end of the charge. Whether or not you succeed at the bull rush, the target takes 2d6 fire damage (Reflex half). This damage increases by 1d6 at 6th level and every 2 levels thereafter.",
+					"entry": {
+						"layout": "stellar rush [DAMAGEd6 F, DC]",
+						"DAMAGE":{
+							"base":2,
+							"CR":[6,8,10,12,14,16,18,20,22,24],
+							"VAL":[1,2,3,4,5,6,7,8,9,10]
+						},
+					}
 				},
 				"Gravity Boost": {
 				  "SOURCEPAGE": "p.104",
@@ -856,11 +864,22 @@ allClassFeatures = {
 				},
 				"Dark Matter": {
 				  "SOURCEPAGE": "p.104",
-				  "description": "As a move action, you can draw on the properties of dark matter to increase your density, allowing you to resist physical damage. You gain damage reduction 1/-. This increases to DR 2/- at 6th level and increases by 1 again every 3 solarian levels thereafter. This benefit lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, your DR from dark matter is equal to half your solarian level."
+				  "description": "As a move action, you can draw on the properties of dark matter to increase your density, allowing you to resist physical damage. You gain damage reduction 1/-. This increases to DR 2/- at 6th level and increases by 1 again every 3 solarian levels thereafter. This benefit lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, your DR from dark matter is equal to half your solarian level.",
+					"entry": {
+						"layout": "dark matter [DR RESISTANCE/-]",
+						"RESISTANCE":{
+							"base":1,
+							"CR":[6,9,12,15,18,21,24],
+							"VAL":[2,3,4,5,6,7,8]
+						},
+					}
 				},
 				"Flare": {
 				  "SOURCEPAGE": "p.104",
-				  "description": "As a move action, you can shed light in a 30-foot radius for 1 minute. You choose dim, normal, or bright light each time you activate this revelation. As a standard action, you can create a flash of brilliant light, forcing one creature within 30 feet to succeed at a Reflex save or be blinded for 1 round. Once you've targeted a creature with flare, you can't target it with this revelation again for 10 minutes. Blind or sightless creatures are not affected by this use of this revelation. When you create a flash of light as a standard action and you are attuned or fully attuned, you can instead choose to make all enemies within range dazzled for 1 round (no save)."
+				  "description": "As a move action, you can shed light in a 30-foot radius for 1 minute. You choose dim, normal, or bright light each time you activate this revelation. As a standard action, you can create a flash of brilliant light, forcing one creature within 30 feet to succeed at a Reflex save or be blinded for 1 round. Once you've targeted a creature with flare, you can't target it with this revelation again for 10 minutes. Blind or sightless creatures are not affected by this use of this revelation. When you create a flash of light as a standard action and you are attuned or fully attuned, you can instead choose to make all enemies within range dazzled for 1 round (no save).",
+					"entry": {
+						"layout": "flare [DC]",
+					}
 				},
 				"Plasma Sheath": {
 				  "SOURCEPAGE": "p.104",
@@ -878,7 +897,10 @@ allClassFeatures = {
 				},
 				"Crush": {
 				  "SOURCEPAGE": "p.105",
-				  "description": "As a standard action, you can increase the effects of gravity on the internal organs or workings of a target within 30 feet, causing it to have difficulty maintaining its normal functionality. The target must succeed at a Fortitude save or become staggered for 1 round. This revelation also affects  constructs. You can maintain this effect as a move action each round, but the target can attempt a new saving throw each round to end the effect. Once a creature succeeds at this save or the effect ends, you can't target that creature with crush again for 24 hours. When you are attuned or fully attuned, you can spend 1 Resolve Point to also stun the target for 1 round. Maintaining crush on subsequent rounds extends the staggered effect, but not the stunned effect."
+				  "description": "As a standard action, you can increase the effects of gravity on the internal organs or workings of a target within 30 feet, causing it to have difficulty maintaining its normal functionality. The target must succeed at a Fortitude save or become staggered for 1 round. This revelation also affects  constructs. You can maintain this effect as a move action each round, but the target can attempt a new saving throw each round to end the effect. Once a creature succeeds at this save or the effect ends, you can't target that creature with crush again for 24 hours. When you are attuned or fully attuned, you can spend 1 Resolve Point to also stun the target for 1 round. Maintaining crush on subsequent rounds extends the staggered effect, but not the stunned effect.",
+					"entry": {
+						"layout": "crush [DC]",
+					}
 				},
 				"Astrologic Sense": {
 				  "SOURCEPAGE": "p.105",
@@ -898,7 +920,20 @@ allClassFeatures = {
 				},
 				"Corona": {
 				  "SOURCEPAGE": "p.105",
-				  "description": "As a standard action, you can surround your body with an envelope of fiery plasma. You gain cold resistance 10, and any adjacent creature that hits you with a natural weapon or a melee weapon takes 2d6 fire damage. The corona lasts for 1 round or until you leave photon mode. At 12th level, the damage increases to 3d6 and the cold resistance increases to 15. At 18th level, the damage increases to 4d6 and the cold resistance increases to 20. When you are attuned or fully attuned, any creature that starts its turn adjacent to you while your corona is in effect takes fire damage equal to half your solarian level."
+				  "description": "As a standard action, you can surround your body with an envelope of fiery plasma. You gain cold resistance 10, and any adjacent creature that hits you with a natural weapon or a melee weapon takes 2d6 fire damage. The corona lasts for 1 round or until you leave photon mode. At 12th level, the damage increases to 3d6 and the cold resistance increases to 15. At 18th level, the damage increases to 4d6 and the cold resistance increases to 20. When you are attuned or fully attuned, any creature that starts its turn adjacent to you while your corona is in effect takes fire damage equal to half your solarian level.",
+					"entry": {
+						"layout": "corona [DAMAGEd6 F, cold resistance RESIST]",
+						"DAMAGE":{
+							"base":2,
+							"CR":[12,18],
+							"VAL":[3,4]
+						},
+						"RESIST":{
+							"base":10,
+							"CR":[12,18],
+							"VAL":[15,20]
+						}
+					}
 				},
 				"Gravity Surge": {
 				  "SOURCEPAGE": "p.105",
@@ -906,7 +941,15 @@ allClassFeatures = {
 				},
 				"Blazing Orbit": {
 				  "SOURCEPAGE": "p.105",
-				  "description": "As a move action, you can move up to your speed, gaining concealment against any attack made against you during the move, and you can leave a trail of flames in every square you pass through. The flames last for 1 round and deal 2d6 fire damage to anyone who moves into them. You can't move through another creature's space during this movement. If you use blazing orbit again, any flames you previously created with it go out. The damage from the flames increases by 1d6 at 8th level and every 2 levels thereafter. When you are attuned or fully attuned, any creature damaged by the flames also gains the burning condition (1d6 fire damage; see page 273)."
+				  "description": "As a move action, you can move up to your speed, gaining concealment against any attack made against you during the move, and you can leave a trail of flames in every square you pass through. The flames last for 1 round and deal 2d6 fire damage to anyone who moves into them. You can't move through another creature's space during this movement. If you use blazing orbit again, any flames you previously created with it go out. The damage from the flames increases by 1d6 at 8th level and every 2 levels thereafter. When you are attuned or fully attuned, any creature damaged by the flames also gains the burning condition (1d6 fire damage; see page 273).",
+					"entry": {
+						"layout": "blazing orbit [DAMAGEd6 F]",
+						"DAMAGE":{
+							"base":2,
+							"CR":[8,10,12,14,16,18,20,22,24],
+							"VAL":[3,4,5,6,7,8,9,10,11]
+						}
+					}
 				}
 			},
 			"10th":{
@@ -922,7 +965,14 @@ allClassFeatures = {
 			"14th":{
 				"Sunbolt": {
 				  "SOURCEPAGE": "p.106",
-				  "description": "As a standard action, you can fire a bolt of concentrated solar energy at one target within long range (400 feet + 40 feet per solarian level you have) as a ranged attack targeting the foe's EAC. If you hit, you deal 9d6 fire damage. If you have a solarian crystal (see Solarian Weapon Crystals on page 170) that changes the type of damage dealt by a solar weapon, you can use it to change the type of damage you deal with your sunbolt. Once you have used this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, you gain a +2 bonus to your ranged attack roll to use this revelation."
+				  "description": "As a standard action, you can fire a bolt of concentrated solar energy at one target within long range (400 feet + 40 feet per solarian level you have) as a ranged attack targeting the foe's EAC. If you hit, you deal 9d6 fire damage. If you have a solarian crystal (see Solarian Weapon Crystals on page 170) that changes the type of damage dealt by a solar weapon, you can use it to change the type of damage you deal with your sunbolt. Once you have used this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, you gain a +2 bonus to your ranged attack roll to use this revelation.",
+					"entry": {
+						"layout": "sunbolt [RANGE ft.]",
+						"RANGE":{
+							"base":400,
+							"PERCR":[40]
+						}
+					}
 				},
 				"Gravity Shield": {
 				  "SOURCEPAGE": "p.106",
@@ -932,17 +982,24 @@ allClassFeatures = {
 			"16th":{
 				"Ultimate Photon": {
 				  "SOURCEPAGE": "p.107",
-				  "description": "Your ability to manipulate powers of light and energy expand greatly. The radius of any photon revelation (but not zenith revelation) you have with a radius expands by 10 feet. Any photon revelation (but not zenith revelation) that lasts for 1 round or until you leave photon mode now lasts for 1d4 rounds if you are not in photon mode. You also increase the power of any of the following photon revelations you have. Astrologic Sense"
+				  "description": "Your ability to manipulate powers of light and energy expand greatly. The radius of any photon revelation (but not zenith revelation) you have with a radius expands by 10 feet. Any photon revelation (but not zenith revelation) that lasts for 1 round or until you leave photon mode now lasts for 1d4 rounds if you are not in photon mode. You also increase the power of any of the following photon revelations you have. Astrologic Sense: You can see twice as far into the future as normal. Glow of Life: You can use this revelation as a swift action, rather than a move action. Hypnotic Glow: The charm's duration doubles. Stellar Rush: You gain a +2 bonus to your EAC until the beginning of your next turn."
 				},
 				"Ultimate Graviton": {
 				  "SOURCEPAGE": "p.106",
-				  "description": "As your ability to manipulate powers of gravity expands, the range of any graviton revelation (but not zenith revelation) you have with a range doubles. Any graviton revelation (but not zenith revelation) you have that targets a single creature can now simultaneously target two creatures, who must be within 20 feet of each other. You also increase the power of any of the following gravity revelations you have. Defy Gravity"
+				  "description": "As your ability to manipulate powers of gravity expands, the range of any graviton revelation (but not zenith revelation) you have with a range doubles. Any graviton revelation (but not zenith revelation) you have that targets a single creature can now simultaneously target two creatures, who must be within 20 feet of each other. You also increase the power of any of the following gravity revelations you have. Defy Gravity: Your fly speedi ncreasesb y 20 feet.Gravity Anchor: As a move action, you can gain both types of gravity anchor simultaneously. GravityB oostY: ourb onusa ppliest o all Acrobatics checks, and you take no damage from any fall. Reflection: If you successfully redirect an attack as a reaction, you can continue to reflect additional attacks until the beginning of your next turn. You have a cumulat ive -2 penalty to your redirect attack roll on each reflect ionattempt after the first. If any reflected attack misses. you can't make fur ther redirect attempts unt il you use this revelation again."
 				}
 			},
 			"Zenith":{
 				"Wormholes": {
 				  "SOURCEPAGE": "p.107",
-				  "description": "When you're fully graviton-attuned, you can create two linked wormholes as a standard action. One wormhole must be adjacent to you, and the other appears anywhere in line of sight within medium range (100 feet + 10 feet per solarian level). Each wormhole is 5 feet across and appears at an intersection between two squares. You and any Large or smaller creatures you mentally designate (you can designate \"all creatures"
+				  "description": "When you're fully graviton-attuned, you can create two linked wormholes as a standard action. One wormhole must be adjacent to you, and the other appears anywhere in line of sight within medium range (100 feet + 10 feet per solarian level). Each wormhole is 5 feet across and appears at an intersection between two squares. You and any Large or smaller creatures you mentally designate (you can designate all creatures, all lashuntas, or similar categories) can travel between the wormholes. This is considered extradimensional travel. Entering a wormhole instantly transports a creature to a square adjacent to the other wormhole's intersection, where the creature can continue its movement. The wormholes remain for 1 round for every 2 solarian levels you have. At 17th level, you can create three wormholes using t his ability, and upon entering the wormhole, a creature can decide which of the other two wormholes to exit.",
+					"entry": {
+						"layout": "wormholes [RANGE ft.]",
+						"RANGE":{
+							"base":100,
+							"PERCR":[10]
+						}
+					}
 				},
 				"Solar Acceleration": {
 				  "SOURCEPAGE": "p.107",
@@ -950,11 +1007,22 @@ allClassFeatures = {
 				},
 				"Starquake": {
 				  "SOURCEPAGE": "p.107",
-				  "description": "When you're fully graviton-attuned, you can create a violent ripple of movement to knock down your foes. As a move action, you can move up to your speed along the ground without provoking attacks of opportunity. Each creature you are adjacent to at any point during that movement takes 1d8 bludgeoning damage and must succeed at a Reflex save or be knocked prone. The affected creatures don't need to be standing on solid ground to fall prone, and any that were in the air (but still adjacent to you) fall to the ground on a failed save. The damage increases by 1d8 for every 3 solarian levels you have beyond 7th. At 17th level, you can move up to twice your speed along the ground with this revelation."
+				  "description": "When you're fully graviton-attuned, you can create a violent ripple of movement to knock down your foes. As a move action, you can move up to your speed along the ground without provoking attacks of opportunity. Each creature you are adjacent to at any point during that movement takes 1d8 bludgeoning damage and must succeed at a Reflex save or be knocked prone. The affected creatures don't need to be standing on solid ground to fall prone, and any that were in the air (but still adjacent to you) fall to the ground on a failed save. The damage increases by 1d8 for every 3 solarian levels you have beyond 7th. At 17th level, you can move up to twice your speed along the ground with this revelation.",
+					"entry": {
+						"layout": "starquake [DAMAGEd8 B, DC]",
+						"RANGE":{
+							"base":1,
+							"CR":[10,13,16,19,22,25],
+							"VAL":[1,2,3,4,5,6]
+						}
+					}
 				},
 				"Time Dilation": {
 				  "SOURCEPAGE": "p.107",
-				  "description": "When you're fully graviton-attuned, you can make time pass more slowly for your enemies. As a standard action, you can project a gravitational wave in a 30-foot cone. You choose which creatures in the cone are affected and which ones aren't. Each target must succeed at a Fortitude save or by affected by slow (see page 377) for a number of rounds equal to your solarian level. At 17th level, even targets that succeed at their saving throws are affected by slow for 1 round."
+				  "description": "When you're fully graviton-attuned, you can make time pass more slowly for your enemies. As a standard action, you can project a gravitational wave in a 30-foot cone. You choose which creatures in the cone are affected and which ones aren't. Each target must succeed at a Fortitude save or by affected by slow (see page 377) for a number of rounds equal to your solarian level. At 17th level, even targets that succeed at their saving throws are affected by slow for 1 round.",
+					"entry": {
+						"layout": "time dilation [DC]",
+					}
 				},
 				"Miniature Star": {
 				  "SOURCEPAGE": "p.107",
@@ -969,11 +1037,36 @@ allClassFeatures = {
 		"Class features": {
 			"Black Hole": {
 			  "SOURCEPAGE": "p.103",
-			  "description": "When you're fully graviton-attuned, as a standard action, you can pull any number of creatures within 20 feet of you closer. You choose which creatures are affected and which ones aren't. Each target must succeed at a Fortitude save or be pulled 10 feet toward you. The range of this revelation and the distance pulled increase by 5 feet at 5th level and every 4 levels thereafter. Solid objects do not block this ability, but any creature that runs into a solid object ceases moving closer to you. Creatures moved by this ability do not provoke attacks of opportunity from this movement. After you use this revelation, you immediately become unattuned. Black hole functions as a zenith revelation for the purposes of abilities that reference them."
+			  "description": "When you're fully graviton-attuned, as a standard action, you can pull any number of creatures within 20 feet of you closer. You choose which creatures are affected and which ones aren't. Each target must succeed at a Fortitude save or be pulled 10 feet toward you. The range of this revelation and the distance pulled increase by 5 feet at 5th level and every 4 levels thereafter. Solid objects do not block this ability, but any creature that runs into a solid object ceases moving closer to you. Creatures moved by this ability do not provoke attacks of opportunity from this movement. After you use this revelation, you immediately become unattuned. Black hole functions as a zenith revelation for the purposes of abilities that reference them.",
+				"entry": {
+					"layout": "black hole [RANGE ft., pull PULL ft., DC]",
+					"RANGE":{
+						"base":20,
+						"CR":[5,9,13,17,21,25],
+						"VAL":[5,10,15,20,25,30]
+					},
+					"PULL":{
+						"base":10,
+						"CR":[5,9,13,17,21,25],
+						"VAL":[5,10,15,20,25,30]
+					}
+				}
 			},
 			"Supernova": {
 			  "SOURCEPAGE": "p.103",
-			  "description": "When you're fully photon-attuned, as a standard action, you can deal 1d6 fire damage plus 1d6 additional fire damage per solarian level to all creatures within 10 feet of you. A creature that succeeds at a Reflex save takes half damage. At 9th level, you can increase the radius to 15 feet, and at 17th level, you can increase the radius to 20 feet. After you use this revelation, you immediately become unattuned. Supernova functions as a zenith revelation for the purposes of abilities that reference them. "
+			  "description": "When you're fully photon-attuned, as a standard action, you can deal 1d6 fire damage plus 1d6 additional fire damage per solarian level to all creatures within 10 feet of you. A creature that succeeds at a Reflex save takes half damage. At 9th level, you can increase the radius to 15 feet, and at 17th level, you can increase the radius to 20 feet. After you use this revelation, you immediately become unattuned. Supernova functions as a zenith revelation for the purposes of abilities that reference them. ",
+				"entry": {
+					"layout": "supernova [RANGE-ft. radius, DAMAGEd6 F, DC]",
+					"DAMAGE":{
+						"base":1,
+						"PERCR":1
+					},
+					"RANGE":{
+						"base":10,
+						"CR":[9,17],
+						"VAL":[15,20]
+					}
+				}
 			},
 			"Skill Adept": {
 				"SOURCEPAGE": "p.101",
@@ -999,7 +1092,8 @@ allClassFeatures = {
 			},
 			"Flashing Strikes": {
 				"SOURCEPAGE": "p.103",
-				"description": "Your mastery of melee combat allows you to make multiple attacks more accurately. When making a full attack entirely with melee weapons, you take a -3 penalty to each attack roll instead of the normal -4 penalty."
+				"description": "Your mastery of melee combat allows you to make multiple attacks more accurately. When making a full attack entirely with melee weapons, you take a -3 penalty to each attack roll instead of the normal -4 penalty.",
+				"type": "offensive"
 			},
 			"Weapon Specialization": {
 				"SOURCEPAGE": "p.103",
@@ -1011,7 +1105,8 @@ allClassFeatures = {
 			},
 			"Solarian's Onslaught": {
 				"SOURCEPAGE": "p.103",
-				"description": "When making a full attack, you can make up to three attacks instead of two attacks. You take a -6 penalty to these attacks instead of a -4 penalty. If you have the flashing strikes class feature, you instead take a -5 penalty to these attacks as long as they are all melee attacks."
+				"description": "When making a full attack, you can make up to three attacks instead of two attacks. You take a -6 penalty to these attacks instead of a -4 penalty. If you have the flashing strikes class feature, you instead take a -5 penalty to these attacks as long as they are all melee attacks.",
+				"type": "offensive"
 			},
 			"Stellar Paragon": {
 				"SOURCEPAGE": "p.103",

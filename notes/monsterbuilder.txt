@@ -20,7 +20,7 @@ during combat
 Morale
 
 class gear + other gear
-class special abilities
+class special abilities, make sure from cr abilities
 verify class choices have been made
 handle master skills for mystic
 solar manifestations
