@@ -135,38 +135,120 @@ function buildStatBlock() {
           }
         }
       }
-      var cr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
-      var solarianFeatures = getClassAbilities('Solarian',cr);
+
+      var solarCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var solarianFeatures = getClassAbilities('Solarian',solarCr);
       var featurelist = solarianFeatures.features;
+
+      featurelist = removeElement(featurelist,'solar manifestation');
+      featurelist = removeElement(featurelist,'stellar alignment');
+      featurelist = removeElement(featurelist,'black hole');
+      featurelist = removeElement(featurelist,'supernova');
+
+      //add default revelations
+      var revelations = ['Black Hole','Supernova'];
+
       if (solarianFeatures.hasOwnProperty('revelations')){
         //do revelations
-        var revs = $('#stepFourOptionDropTwo').val().trim();
-
+        var revs = $('#stepFourOptionDropTwo').val().toString().trim();
         if (revs.includes(',')){
-          var revelations = revs.split(',')
+          revelations = revelations.concat(revs.split(','))
         } else {
-          var revelations = [revs];
+          revelations = revelations.concat([revs])
         }
-
-        var stellarRevelations = "stellar revelations (";
-        stellarRevelations += revelations.join(', ') + ')';
-        /*
-        var revLevels = ["2nd","6th","10th","14th","16th","Zenith"]
-
-        for (var i = 0; i < revelations.length; i++)  {
-          for (var j = 0; j < revLevels.length; j++)  {
-            //find the revelation in the data
-            if (allClassFeatures.Solarian["Stellar Revelations"][revLevels[j]].hasOwnProperty(revelations[i])) {
-
-              stellarRevelations += revelations[i];
-
-              break;
-            }
-          }
-        }
-        */
+        revelations.sort();
       }
 
+      var otherRevs = [];
+      var defenseRevs = [];
+      var offenseRevs = [];
+
+      //find revelation in data
+      classObject = allClassFeatures['Solarian']["Stellar Revelations"];
+      var revLevels = Object.keys(classObject)
+      //for every revelation
+      for (var i = 0; i < revelations.length; i++)  {
+
+        //search through every title until found
+        for (var j = 0; j < revLevels.length; j++)  {
+          //find the revelation in the data
+          if (allClassFeatures['Solarian']["Stellar Revelations"][revLevels[j]].hasOwnProperty(revelations[i]) || ['Black Hole','Supernova'].includes(revelations[i])) {
+
+            if (['Black Hole','Supernova'].includes(revelations[i])){
+              var currentRev = allClassFeatures['Solarian']["Class features"][(revelations[i])];
+            } else {
+              var currentRev = allClassFeatures['Solarian']["Stellar Revelations"][revLevels[j]][(revelations[i])];
+            }
+
+            if (currentRev.hasOwnProperty('entry')) {
+              var entries = Object.keys(currentRev.entry);
+
+              var currentRevString = currentRev.entry.layout;
+              currentRevString = currentRevString.replace('DC' , 'DC ' + statBlock.abilityDCBase.toString());
+
+              for (var k = 0; k < entries.length; k++)  {
+                if (entries[k] != 'layout') {
+
+                  if (currentRev.entry[entries[k]].hasOwnProperty('PERCR')){
+                    //per cr entries
+                    var valNum = currentRev.entry[entries[k]]['base'] + (currentRev.entry[entries[k]]['PERCR'] * solarCr);
+                  } else {
+
+                    table = currentRev.entry[entries[k]]['CR']
+                    var choice = 'none'
+                    for (l = 0; l < table.length; l++) {
+                      if (solarCr >= table[l]) {
+                        choice = l;
+                      }
+                    }
+                    if (choice == 'none') {
+                      var valNum = currentRev.entry[entries[k]]['base'];
+                    } else {
+                      var valNum = currentRev.entry[entries[k]]['base'] + currentRev.entry[entries[k]]['VAL'][choice];
+                    }
+
+                  }
+
+                  currentRevString = currentRevString.replace(entries[k],valNum.toString())
+
+                }
+              }
+            } else {
+              var currentRevString = revelations[i].toLowerCase()
+            }
+
+            if (currentRev.type == 'offense'){
+              offenseRevs = offenseRevs.concat([currentRevString]);
+            } else if (currentRev.type == 'defense'){
+              defenseRevs = defenseRevs.concat([currentRevString]);
+            } else if (currentRev.type == 'other'){
+              otherRevs = otherRevs.concat([currentRevString]);
+            } else {
+              console.log('ERROR ERROR')
+            }
+
+            break;
+          }
+        }
+      }
+
+      statBlock.ClassOtherAbilities = ['solar manifestation (' + solarDrop.replace('Solar ','') + ')','stellar alignment'];
+      if (featurelist.includes('stellar apotheosis')) {
+        featurelist = removeElement(featurelist,'stellar apotheosis');
+        statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['stellar apotheosis'])
+      }
+
+      //add to ability lists
+      statBlock.ClassOffensiveAbilities = featurelist;
+      if (offenseRevs.length > 0) {
+        statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(['stellar revelations (' + offenseRevs.join(', ') + ')'])
+      }
+      if (defenseRevs.length > 0) {
+        statBlock.ClassDefensiveAbilities = ['stellar revelations (' + defenseRevs.join(', ') + ')']
+      }
+      if (otherRevs.length > 0) {
+        statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['stellar revelations (' + otherRevs.join(', ') + ')'])
+      }
 
     }
 
@@ -937,6 +1019,10 @@ function buildStatBlock() {
       }
       otherAbilities.sort();
     }
+    //other abilities from class
+    if (statBlock.hasOwnProperty('ClassOtherAbilities')){
+      otherAbilities = otherAbilities.concat(statBlock.ClassOtherAbilities)
+    }
 
 
     //strings for abilities
@@ -944,7 +1030,7 @@ function buildStatBlock() {
     var defensiveAbilitiesString = '';
     var otherAbilitiesString = '';
 
-    if (offensiveAbilities.length > 0 || statBlock.hasOwnProperty('OffensiveAbilities')) {
+    if (offensiveAbilities.length > 0 || statBlock.hasOwnProperty('OffensiveAbilities') || statBlock.hasOwnProperty('ClassOffensiveAbilities')) {
       var offence = [];
       if (offensiveAbilities.length > 0){
         offence = offence.concat(offensiveAbilities);
@@ -952,11 +1038,22 @@ function buildStatBlock() {
       if (statBlock.hasOwnProperty('OffensiveAbilities')){
         offence = offence.concat(statBlock.OffensiveAbilities);
       }
+      if (statBlock.hasOwnProperty('ClassOffensiveAbilities')){
+        offence = offence.concat(statBlock.ClassOffensiveAbilities);
+      }
       offence.sort()
-      var offensiveAbilitiesString = '<div><b>Offensive abilities </b>' + offence.join(', ') + '</div>';
+      offensiveAbilitiesString = '<div><b>Offensive abilities </b>' + offence.join(', ') + '</div>';
     }
-    if (defensiveAbilities.length > 0) {
-      var defensiveAbilitiesString = '<b>Defensive abilities </b>' + defensiveAbilities.join(', ');
+    if (defensiveAbilities.length > 0 || statBlock.hasOwnProperty('ClassDefensiveAbilities')) {
+      var defence = [];
+      if (defensiveAbilities.length > 0){
+        defence = defence.concat(defensiveAbilities);
+      }
+      if (statBlock.hasOwnProperty('ClassDefensiveAbilities')){
+        defence = defence.concat(statBlock.ClassDefensiveAbilities);
+      }
+      defence.sort()
+      defensiveAbilitiesString = '<b>Defensive abilities </b>' + defence.join(', ');
     }
     if (otherAbilities.length > 0) {
       //sort the array
@@ -966,7 +1063,7 @@ function buildStatBlock() {
       }
       sorted.sort();
       otherAbilities = sorted;
-      var otherAbilitiesString = '<div><b>Other abilities </b>' + otherAbilities.join(', ') + '</div>';
+      otherAbilitiesString = '<div><b>Other abilities </b>' + otherAbilities.join(', ') + '</div>';
     }
 
 
@@ -1010,6 +1107,10 @@ function buildStatBlock() {
         //handle attack mod
         if (statBlock.hasOwnProperty('attackMod')){
           bonus = '+' + (Number(bonus.replace('+','')) + statBlock.attackMod).toString();
+        }
+
+        if (critical == '-') {
+          critical = '';
         }
 
         if (critical != '' && critical != '-') {

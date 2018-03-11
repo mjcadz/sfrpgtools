@@ -1512,25 +1512,25 @@ classData = {
         "AbilitiesByCr": {
             "1": {
               "description":"Solar manifestation, stellar alignment, black hole, and supernova.",
-              "features":["Solar manifestation","stellar alignment","black hole","supernova"]
+              "features":["solar manifestation","stellar alignment","black hole","supernova"]
             },
             "2": {
               "description":"Solar manifestation, stellar alignment, black hole, supernova, and one 2nd-level stellar revelation.",
-              "features":["Solar manifestation","stellar alignment","black hole","supernova"],
+              "features":["solar manifestation","stellar alignment","black hole","supernova"],
               "revelations": {
                 "2nd":1
               }
             },
             "4": {
               "description":"Solar manifestation, stellar alignment, black hole, supernova, and two 2nd-level stellar revelations.",
-              "features":["Solar manifestation","stellar alignment","black hole","supernova"],
+              "features":["solar manifestation","stellar alignment","black hole","supernova"],
               "revelations": {
                 "2nd":2
               }
             },
             "6": {
               "description":"Solar manifestation, stellar alignment, black hole, supernova, one 6th-level stellar revelation, and one 2nd-level stellar revelation.",
-              "features":["Solar manifestation","stellar alignment","black hole","supernova"],
+              "features":["solar manifestation","stellar alignment","black hole","supernova"],
               "revelations": {
                 "2nd":1,
                 "6th":1
@@ -1538,7 +1538,7 @@ classData = {
             },
             "7": {
               "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, one 6th-level stellar revelation, and one 2nd-level stellar revelation.",
-              "features":["Solar manifestation","stellar alignment","black hole","supernova","flashing strikes"],
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes"],
               "revelations": {
                 "2nd":1,
                 "6th":1
@@ -1546,14 +1546,14 @@ classData = {
             },
             "8": {
               "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, and two 6th-level stellar revelations.",
-              "features":["Solar manifestation","stellar alignment","black hole","supernova","flashing strikes"],
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes"],
               "revelations": {
                 "6th":2
               }
             },
             "9": {
               "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, two 6th-level stellar revelations, and one zenith revelation.",
-              "features":["Solar manifestation","stellar alignment","black hole","supernova","flashing strikes"],
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes"],
               "revelations": {
                 "6th":2,
                 "Zenith":1
@@ -1561,7 +1561,7 @@ classData = {
             },
             "10": {
               "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, one 10th-level stellar revelation, one 6th-level stellar revelation, and one zenith revelation.",
-              "features":["Solar manifestation","stellar alignment","black hole","supernova","flashing strikes"],
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes"],
               "revelations": {
                 "6th":1,
                 "10th":1,
@@ -1570,7 +1570,7 @@ classData = {
             },
             "13": {
               "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, two 10thlevel stellar revelations, and one zenith revelation.",
-              "features":["Solar manifestation","stellar alignment","black hole","supernova","flashing strikes","solarian’s onslaught"],
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes","solarian’s onslaught"],
               "revelations": {
                 "10th":2,
                 "Zenith":1
@@ -1578,7 +1578,7 @@ classData = {
             },
             "14": {
               "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, one 14thlevel stellar revelation, one 10th-level stellar revelation, and one zenith revelation.",
-              "features":["Solar manifestation","stellar alignment","black hole","supernova","flashing strikes","solarian’s onslaught"],
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes","solarian’s onslaught"],
               "revelations": {
                 "10th":1,
                 "14th":1,
@@ -1587,7 +1587,7 @@ classData = {
             },
             "17": {
               "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, two 14thlevel stellar revelations, and two zenith revelations.",
-              "features":["Solar manifestation","stellar alignment","black hole","supernova","flashing strikes","solarian’s onslaught"],
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes","solarian’s onslaught"],
               "revelations": {
                 "14th":2,
                 "Zenith":2
@@ -1595,7 +1595,7 @@ classData = {
             },
             "20": {
               "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, stellar apotheosis, two 14th-level stellar revelations, and two zenith revelations.",
-              "features":["Solar manifestation","stellar alignment","black hole","supernova","flashing strikes","solarian’s onslaught","stellar apotheosis"],
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes","solarian’s onslaught","stellar apotheosis"],
               "revelations": {
                 "14th":2,
                 "Zenith":2

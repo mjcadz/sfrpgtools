@@ -25,6 +25,9 @@ verify class choices have been made
 handle master skills for mystic
 solar manifestations
 solarian weapon crystals added to solar weapon
+solarian gear list shows 1+1
+
+bump version numbers
 
 gear do armor upgrade properly
 generate attacks from chosen weapons

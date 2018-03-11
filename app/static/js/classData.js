@@ -840,7 +840,11 @@ allClassFeatures = {
 			"2nd":{
 				"Radiation": {
 				  "SOURCEPAGE": "p.104",
-				  "description": "As a standard action, you can emit an aura of low-level radiation. Creatures within 5 feet of you must succeed at a Fortitude save or be sickened. A sickened creature recovers as soon as it moves out of your aura, and a creature that succeeds at its saving throw is immune to your radiation for 24 hours. This is a poison effect (see page 415). The radiation lasts for 1 round or until you leave photon mode. When you are attuned or fully attuned, the size of your aura increases to 10 feet."
+				  "description": "As a standard action, you can emit an aura of low-level radiation. Creatures within 5 feet of you must succeed at a Fortitude save or be sickened. A sickened creature recovers as soon as it moves out of your aura, and a creature that succeeds at its saving throw is immune to your radiation for 24 hours. This is a poison effect (see page 415). The radiation lasts for 1 round or until you leave photon mode. When you are attuned or fully attuned, the size of your aura increases to 10 feet.",
+					"entry": {
+						"layout": "radiation [DC]"
+					},
+					"type": "offense"
 				},
 				"Stellar Rush": {
 				  "SOURCEPAGE": "p.104",
@@ -852,15 +856,18 @@ allClassFeatures = {
 							"CR":[6,8,10,12,14,16,18,20,22,24],
 							"VAL":[1,2,3,4,5,6,7,8,9,10]
 						},
-					}
+					},
+					"type": "offense"
 				},
 				"Gravity Boost": {
 				  "SOURCEPAGE": "p.104",
-				  "description": "You can increase or reduce the gravitational attraction between yourself and the terrain around you. You can add a bonus equal to one-third your solarian level (minimum +1) to Athletics checks to climb, jump, or swim as part of the action you take to attempt the skill check. In addition, as a reaction when you are falling, you can reduce the falling damage you take by half. At 6th level, you can move along vertical surfaces and even upside down along ceilings for 1 round. This functions as spider climb, but it leaves your hands free and you can also run. You must end your movement on a surface that can support you normally. If you end your movement while you are standing on a vertical surface or ceiling, you fall unless you succeed at an Athletics check to climb to remain in position. When you are attuned or fully attuned, the bonus you gain from this revelation to checks to climb, jump, or swim doubles."
+				  "description": "You can increase or reduce the gravitational attraction between yourself and the terrain around you. You can add a bonus equal to one-third your solarian level (minimum +1) to Athletics checks to climb, jump, or swim as part of the action you take to attempt the skill check. In addition, as a reaction when you are falling, you can reduce the falling damage you take by half. At 6th level, you can move along vertical surfaces and even upside down along ceilings for 1 round. This functions as spider climb, but it leaves your hands free and you can also run. You must end your movement on a surface that can support you normally. If you end your movement while you are standing on a vertical surface or ceiling, you fall unless you succeed at an Athletics check to climb to remain in position. When you are attuned or fully attuned, the bonus you gain from this revelation to checks to climb, jump, or swim doubles.",
+					"type": "other"
 				},
 				"Gravity Hold": {
 				  "SOURCEPAGE": "p.104",
-				  "description": "This revelation allows you to move objects at a distance as per psychokinetic hand (see page 370). When you are attuned or fully attuned, you can use the psychokinetic hand ability of your gravity hold to immobilize, lift, or move a Medium or smaller creature. The creature can attempt a Fortitude save to negate the effect. While under this effect, the target creature cannot move, but can take any other normal actions. This ability follows all of the restrictions of the spell other than the weight limit, but you can't lift a creature higher than 5 feet off the ground. When you spend a standard action concentrating to maintain the gravity hold, the target can attempt a new save to end the effect. Once a creature successfully saves against this ability, it becomes immune to further uses of this revelation for 24 hours."
+				  "description": "This revelation allows you to move objects at a distance as per psychokinetic hand (see page 370). When you are attuned or fully attuned, you can use the psychokinetic hand ability of your gravity hold to immobilize, lift, or move a Medium or smaller creature. The creature can attempt a Fortitude save to negate the effect. While under this effect, the target creature cannot move, but can take any other normal actions. This ability follows all of the restrictions of the spell other than the weight limit, but you can't lift a creature higher than 5 feet off the ground. When you spend a standard action concentrating to maintain the gravity hold, the target can attempt a new save to end the effect. Once a creature successfully saves against this ability, it becomes immune to further uses of this revelation for 24 hours.",
+					"type": "offense"
 				},
 				"Dark Matter": {
 				  "SOURCEPAGE": "p.104",
@@ -872,51 +879,61 @@ allClassFeatures = {
 							"CR":[6,9,12,15,18,21,24],
 							"VAL":[2,3,4,5,6,7,8]
 						},
-					}
+					},
+					"type": "defense"
 				},
 				"Flare": {
 				  "SOURCEPAGE": "p.104",
 				  "description": "As a move action, you can shed light in a 30-foot radius for 1 minute. You choose dim, normal, or bright light each time you activate this revelation. As a standard action, you can create a flash of brilliant light, forcing one creature within 30 feet to succeed at a Reflex save or be blinded for 1 round. Once you've targeted a creature with flare, you can't target it with this revelation again for 10 minutes. Blind or sightless creatures are not affected by this use of this revelation. When you create a flash of light as a standard action and you are attuned or fully attuned, you can instead choose to make all enemies within range dazzled for 1 round (no save).",
 					"entry": {
 						"layout": "flare [DC]",
-					}
+					},
+					"type": "offense"
 				},
 				"Plasma Sheath": {
 				  "SOURCEPAGE": "p.104",
-				  "description": "As a move action, you can cause all of your melee attacks to deal fire damage instead of their normal damage type. (The attacks are still made against the target's EAC or KAC as normal for the weapon.) This benefit lasts for 1 round or until you leave photon mode. When you are attuned or fully attuned, your attacks with plasma sheath deal additional fire damage equal to half your level."
+				  "description": "As a move action, you can cause all of your melee attacks to deal fire damage instead of their normal damage type. (The attacks are still made against the target's EAC or KAC as normal for the weapon.) This benefit lasts for 1 round or until you leave photon mode. When you are attuned or fully attuned, your attacks with plasma sheath deal additional fire damage equal to half your level.",
+					"type": "offense"
 				},
 				"Gravity Anchor": {
 				  "SOURCEPAGE": "p.104",
-				  "description": "As a move action, you can form a gravitational bond between yourself and either the surface you're standing on or the objects you are holding. This grants you a +4 bonus to your AC against bull rush, reposition, and trip combat maneuvers if you choose the surface underfoot, or against disarm combat maneuvers if you choose objects. The bonus lasts for 1 round or until you leave graviton mode. You can have only one gravity anchor active at a time. When you are attuned or fully attuned, you can activate this revelation as a reaction when targeted by a bull rush, disarm, reposition, or trip combat maneuver, in which case it defends against only that attack."
+				  "description": "As a move action, you can form a gravitational bond between yourself and either the surface you're standing on or the objects you are holding. This grants you a +4 bonus to your AC against bull rush, reposition, and trip combat maneuvers if you choose the surface underfoot, or against disarm combat maneuvers if you choose objects. The bonus lasts for 1 round or until you leave graviton mode. You can have only one gravity anchor active at a time. When you are attuned or fully attuned, you can activate this revelation as a reaction when targeted by a bull rush, disarm, reposition, or trip combat maneuver, in which case it defends against only that attack.",
+					"type": "defense"
 				}
 			},
 			"6th":{
 				"Glow of Life": {
 				  "SOURCEPAGE": "p.105",
-				  "description": "As a move action, you can spend 1 Resolve Point to recover a number of Hit Points equal to twice your solarian level. Once you use this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, increase the amount you heal with this revelation to three times your solarian level."
+				  "description": "As a move action, you can spend 1 Resolve Point to recover a number of Hit Points equal to twice your solarian level. Once you use this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, increase the amount you heal with this revelation to three times your solarian level.",
+					"type": "defense"
 				},
 				"Crush": {
 				  "SOURCEPAGE": "p.105",
 				  "description": "As a standard action, you can increase the effects of gravity on the internal organs or workings of a target within 30 feet, causing it to have difficulty maintaining its normal functionality. The target must succeed at a Fortitude save or become staggered for 1 round. This revelation also affects  constructs. You can maintain this effect as a move action each round, but the target can attempt a new saving throw each round to end the effect. Once a creature succeeds at this save or the effect ends, you can't target that creature with crush again for 24 hours. When you are attuned or fully attuned, you can spend 1 Resolve Point to also stun the target for 1 round. Maintaining crush on subsequent rounds extends the staggered effect, but not the stunned effect.",
 					"entry": {
 						"layout": "crush [DC]",
-					}
+					},
+					"type": "offense"
 				},
 				"Astrologic Sense": {
 				  "SOURCEPAGE": "p.105",
-				  "description": "You can sense the movement of all objects influencing you to gain insight into upcoming events. Once per day as a full action, you can try to determine whether a particular action of yours will bring good or bad results for you in the immediate future. This functions as augury (see page 340) with your effective caster level equal to your solarian level. You can spend 1 Resolve Point to use this revelation again on the same day, but you still can't use it more than once per hour. When you are attuned or fully attuned, you can see 1 hour into the future (instead of half an hour as is normal for augury) when you use this revelation."
+				  "description": "You can sense the movement of all objects influencing you to gain insight into upcoming events. Once per day as a full action, you can try to determine whether a particular action of yours will bring good or bad results for you in the immediate future. This functions as augury (see page 340) with your effective caster level equal to your solarian level. You can spend 1 Resolve Point to use this revelation again on the same day, but you still can't use it more than once per hour. When you are attuned or fully attuned, you can see 1 hour into the future (instead of half an hour as is normal for augury) when you use this revelation.",
+					"type": "other"
 				},
 				"Hypnotic Glow": {
 				  "SOURCEPAGE": "p.105",
-				  "description": "As a standard action, you can convince one living creature that you are to be trusted. This functions as charm person (see page 342), but with a duration of 1 round per solarian level you have. When the effect ends, if you are out of line of sight and the target is not engaged in an activity it wouldn't have begun without being charmed, the target does not realize it was charmed or has acted unusually unless someone else points it out. You can't use this revelation again while you currently have a creature charmed via this ability, and once you've attempted to charm a creature, whether or not the attempt was successful, you can't charm the same creature again for 24 hours. Your influence over the creature ends once the duration has expired, and at that time the target likely ceases doing anything you've requested of it. At 9th level, hypnotic glow functions as charm monster (see page 342). When you are attuned or fully attuned and you successfully charm a creature using this ability, you can also command it to approach, flee, or halt on its next turn, as per the command spell (no save; see page 343)."
+				  "description": "As a standard action, you can convince one living creature that you are to be trusted. This functions as charm person (see page 342), but with a duration of 1 round per solarian level you have. When the effect ends, if you are out of line of sight and the target is not engaged in an activity it wouldn't have begun without being charmed, the target does not realize it was charmed or has acted unusually unless someone else points it out. You can't use this revelation again while you currently have a creature charmed via this ability, and once you've attempted to charm a creature, whether or not the attempt was successful, you can't charm the same creature again for 24 hours. Your influence over the creature ends once the duration has expired, and at that time the target likely ceases doing anything you've requested of it. At 9th level, hypnotic glow functions as charm monster (see page 342). When you are attuned or fully attuned and you successfully charm a creature using this ability, you can also command it to approach, flee, or halt on its next turn, as per the command spell (no save; see page 343).",
+					"type": "other"
 				},
 				"Defy Gravity": {
 				  "SOURCEPAGE": "p.105",
-				  "description": "As a move action, you can fly up to your speed. You must end this movement on solid ground or you fall. At 12th level or higher, you don't have to land if you immediately follow your flight with another move action to use defy gravity. On your last move action of the turn, you still have to land or fall. When you are attuned or fully attuned, your fly speed from this revelation increases by 10 feet."
+				  "description": "As a move action, you can fly up to your speed. You must end this movement on solid ground or you fall. At 12th level or higher, you don't have to land if you immediately follow your flight with another move action to use defy gravity. On your last move action of the turn, you still have to land or fall. When you are attuned or fully attuned, your fly speed from this revelation increases by 10 feet.",
+					"type": "other"
 				},
 				"Reflection": {
 				  "SOURCEPAGE": "p.106",
-				  "description": "You can reflect ranged attacks back at your enemies. If you took the total defense action on your last turn, or if you were fighting defensively and spend 1 Resolve Point, as a reaction you can redirect a ranged attack that misses you. Select a new target within 30 feet and make a ranged attack roll with a -4 penalty. If your attack hits, the new target is damaged as if it had been the intended target of the original ranged attack. When you are attuned or fully attuned, you don't take a -4 penalty to your redirected attack roll."
+				  "description": "You can reflect ranged attacks back at your enemies. If you took the total defense action on your last turn, or if you were fighting defensively and spend 1 Resolve Point, as a reaction you can redirect a ranged attack that misses you. Select a new target within 30 feet and make a ranged attack roll with a -4 penalty. If your attack hits, the new target is damaged as if it had been the intended target of the original ranged attack. When you are attuned or fully attuned, you don't take a -4 penalty to your redirected attack roll.",
+					"type": "defense"
 				},
 				"Corona": {
 				  "SOURCEPAGE": "p.105",
@@ -933,11 +950,13 @@ allClassFeatures = {
 							"CR":[12,18],
 							"VAL":[15,20]
 						}
-					}
+					},
+					"type": "offense"
 				},
 				"Gravity Surge": {
 				  "SOURCEPAGE": "p.105",
-				  "description": "As a full action, you can perform a disarm or trip combat maneuver against a target within 30 feet. Use your Charisma modifier on your attack roll instead of your Strength modifier, and you gain a +4 bonus to this attack roll that doesn't stack with the bonus from the Improved Combat Maneuver feat. When you are attuned or fully attuned, if you disarm a target with gravity surge and have a hand free, the dropped item flies toward you and you can snatch it from the air. If you trip a target with gravity surge, you can pull the target up to 10 feet closer to you."
+				  "description": "As a full action, you can perform a disarm or trip combat maneuver against a target within 30 feet. Use your Charisma modifier on your attack roll instead of your Strength modifier, and you gain a +4 bonus to this attack roll that doesn't stack with the bonus from the Improved Combat Maneuver feat. When you are attuned or fully attuned, if you disarm a target with gravity surge and have a hand free, the dropped item flies toward you and you can snatch it from the air. If you trip a target with gravity surge, you can pull the target up to 10 feet closer to you.",
+					"type": "offense"
 				},
 				"Blazing Orbit": {
 				  "SOURCEPAGE": "p.105",
@@ -949,17 +968,20 @@ allClassFeatures = {
 							"CR":[8,10,12,14,16,18,20,22,24],
 							"VAL":[3,4,5,6,7,8,9,10,11]
 						}
-					}
+					},
+					"type": "offense"
 				}
 			},
 			"10th":{
 				"Stealth Warp": {
 				  "SOURCEPAGE": "p.106",
-				  "description": "You can bend light, sound, and even vibrations around your body, making you harder to notice. As a move action, you can grant yourself a +4 bonus to Stealth checks. This lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, you can use this revelation to reduce your sensory output so much that you can attempt a Stealth check even when you're directly observed and lack cover or a distraction. You are not invisible, simply difficult to see clearly, and if a creature was observing you prior to your Stealth check, it remains aware of your location until you successfully reach cover or  concealment. Your stealth warp ends if you make an attack or cause another creature to attempt a saving throw, or at the beginning of your next turn unless you immediately take another move action to use this revelation."
+				  "description": "You can bend light, sound, and even vibrations around your body, making you harder to notice. As a move action, you can grant yourself a +4 bonus to Stealth checks. This lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, you can use this revelation to reduce your sensory output so much that you can attempt a Stealth check even when you're directly observed and lack cover or a distraction. You are not invisible, simply difficult to see clearly, and if a creature was observing you prior to your Stealth check, it remains aware of your location until you successfully reach cover or  concealment. Your stealth warp ends if you make an attack or cause another creature to attempt a saving throw, or at the beginning of your next turn unless you immediately take another move action to use this revelation.",
+					"type": "defense"
 				},
 				"Soul Furnace": {
 				  "SOURCEPAGE": "p.106",
-				  "description": "You can stoke the internal energy of your entire physiology, allowing you to boost your life processes. As a move action, you can spend 1 Resolve Point. If you are suffering from an affliction (a curse, disease, drug or poison), you can immediately attempt an additional saving throw at the affliction's normal save DC. If you succeed at this saving throw, the affliction ends (regardless of how many successful saving throws it normally takes to end the affliction). Once you have used this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, you can also use this revelation to end any one of the following conditions you have"
+				  "description": "You can stoke the internal energy of your entire physiology, allowing you to boost your life processes. As a move action, you can spend 1 Resolve Point. If you are suffering from an affliction (a curse, disease, drug or poison), you can immediately attempt an additional saving throw at the affliction's normal save DC. If you succeed at this saving throw, the affliction ends (regardless of how many successful saving throws it normally takes to end the affliction). Once you have used this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, you can also use this revelation to end any one of the following conditions you have",
+					"type": "defense"
 				}
 			},
 			"14th":{
@@ -967,26 +989,30 @@ allClassFeatures = {
 				  "SOURCEPAGE": "p.106",
 				  "description": "As a standard action, you can fire a bolt of concentrated solar energy at one target within long range (400 feet + 40 feet per solarian level you have) as a ranged attack targeting the foe's EAC. If you hit, you deal 9d6 fire damage. If you have a solarian crystal (see Solarian Weapon Crystals on page 170) that changes the type of damage dealt by a solar weapon, you can use it to change the type of damage you deal with your sunbolt. Once you have used this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, you gain a +2 bonus to your ranged attack roll to use this revelation.",
 					"entry": {
-						"layout": "sunbolt [RANGE ft.]",
+						"layout": "sunbolt [9d6 F, RANGE ft.]",
 						"RANGE":{
 							"base":400,
-							"PERCR":[40]
+							"PERCR":40
 						}
-					}
+					},
+					"type": "offense"
 				},
 				"Gravity Shield": {
 				  "SOURCEPAGE": "p.106",
-				  "description": "As a move action, you can create a minor shield of compressed gravity waves, granting you a +1 circumstance bonus to your AC. The shield lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, as a move action, you can create a disk of massive gravitational energies that is capable of deflecting incoming attacks. Choose one edge of your space. The shield extends along three continuous edges in a straight line centered on the chosen edge. The shield provides cover against attacks coming from its far side, but not against attacks originating from the side you're on. If you move, you can reposition your shield as part of your move action, moving it to a different edge of your space. You must use one of your hands to direct and maintain an active gravity shield. You cannot use this version of the gravity shield at the same time you use this revelation to gain a circumstance bonus to your AC. This gravity shield also lasts 1 round or until you leave graviton mode."
+				  "description": "As a move action, you can create a minor shield of compressed gravity waves, granting you a +1 circumstance bonus to your AC. The shield lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, as a move action, you can create a disk of massive gravitational energies that is capable of deflecting incoming attacks. Choose one edge of your space. The shield extends along three continuous edges in a straight line centered on the chosen edge. The shield provides cover against attacks coming from its far side, but not against attacks originating from the side you're on. If you move, you can reposition your shield as part of your move action, moving it to a different edge of your space. You must use one of your hands to direct and maintain an active gravity shield. You cannot use this version of the gravity shield at the same time you use this revelation to gain a circumstance bonus to your AC. This gravity shield also lasts 1 round or until you leave graviton mode.",
+					"type": "defense"
 				}
 			},
 			"16th":{
 				"Ultimate Photon": {
 				  "SOURCEPAGE": "p.107",
-				  "description": "Your ability to manipulate powers of light and energy expand greatly. The radius of any photon revelation (but not zenith revelation) you have with a radius expands by 10 feet. Any photon revelation (but not zenith revelation) that lasts for 1 round or until you leave photon mode now lasts for 1d4 rounds if you are not in photon mode. You also increase the power of any of the following photon revelations you have. Astrologic Sense: You can see twice as far into the future as normal. Glow of Life: You can use this revelation as a swift action, rather than a move action. Hypnotic Glow: The charm's duration doubles. Stellar Rush: You gain a +2 bonus to your EAC until the beginning of your next turn."
+				  "description": "Your ability to manipulate powers of light and energy expand greatly. The radius of any photon revelation (but not zenith revelation) you have with a radius expands by 10 feet. Any photon revelation (but not zenith revelation) that lasts for 1 round or until you leave photon mode now lasts for 1d4 rounds if you are not in photon mode. You also increase the power of any of the following photon revelations you have. Astrologic Sense: You can see twice as far into the future as normal. Glow of Life: You can use this revelation as a swift action, rather than a move action. Hypnotic Glow: The charm's duration doubles. Stellar Rush: You gain a +2 bonus to your EAC until the beginning of your next turn.",
+					"type": "other"
 				},
 				"Ultimate Graviton": {
 				  "SOURCEPAGE": "p.106",
-				  "description": "As your ability to manipulate powers of gravity expands, the range of any graviton revelation (but not zenith revelation) you have with a range doubles. Any graviton revelation (but not zenith revelation) you have that targets a single creature can now simultaneously target two creatures, who must be within 20 feet of each other. You also increase the power of any of the following gravity revelations you have. Defy Gravity: Your fly speedi ncreasesb y 20 feet.Gravity Anchor: As a move action, you can gain both types of gravity anchor simultaneously. GravityB oostY: ourb onusa ppliest o all Acrobatics checks, and you take no damage from any fall. Reflection: If you successfully redirect an attack as a reaction, you can continue to reflect additional attacks until the beginning of your next turn. You have a cumulat ive -2 penalty to your redirect attack roll on each reflect ionattempt after the first. If any reflected attack misses. you can't make fur ther redirect attempts unt il you use this revelation again."
+				  "description": "As your ability to manipulate powers of gravity expands, the range of any graviton revelation (but not zenith revelation) you have with a range doubles. Any graviton revelation (but not zenith revelation) you have that targets a single creature can now simultaneously target two creatures, who must be within 20 feet of each other. You also increase the power of any of the following gravity revelations you have. Defy Gravity: Your fly speedi ncreasesb y 20 feet.Gravity Anchor: As a move action, you can gain both types of gravity anchor simultaneously. GravityB oostY: ourb onusa ppliest o all Acrobatics checks, and you take no damage from any fall. Reflection: If you successfully redirect an attack as a reaction, you can continue to reflect additional attacks until the beginning of your next turn. You have a cumulat ive -2 penalty to your redirect attack roll on each reflect ionattempt after the first. If any reflected attack misses. you can't make fur ther redirect attempts unt il you use this revelation again.",
+					"type": "other"
 				}
 			},
 			"Zenith":{
@@ -997,40 +1023,46 @@ allClassFeatures = {
 						"layout": "wormholes [RANGE ft.]",
 						"RANGE":{
 							"base":100,
-							"PERCR":[10]
+							"PERCR":10
 						}
-					}
+					},
+					"type": "other"
 				},
 				"Solar Acceleration": {
 				  "SOURCEPAGE": "p.107",
-				  "description": "When you're fully photon-attuned, you can make a full attack as a standard action. In addition, you and up to six allies within 30 feet are affected by haste (see page 358) for 1 minute after you use this revelation. At 17th level, the extra speed from the haste effect increases to 60 feet (to a maximum of three times the creature's normal speed)."
+				  "description": "When you're fully photon-attuned, you can make a full attack as a standard action. In addition, you and up to six allies within 30 feet are affected by haste (see page 358) for 1 minute after you use this revelation. At 17th level, the extra speed from the haste effect increases to 60 feet (to a maximum of three times the creature's normal speed).",
+					"type": "offense"
 				},
 				"Starquake": {
 				  "SOURCEPAGE": "p.107",
 				  "description": "When you're fully graviton-attuned, you can create a violent ripple of movement to knock down your foes. As a move action, you can move up to your speed along the ground without provoking attacks of opportunity. Each creature you are adjacent to at any point during that movement takes 1d8 bludgeoning damage and must succeed at a Reflex save or be knocked prone. The affected creatures don't need to be standing on solid ground to fall prone, and any that were in the air (but still adjacent to you) fall to the ground on a failed save. The damage increases by 1d8 for every 3 solarian levels you have beyond 7th. At 17th level, you can move up to twice your speed along the ground with this revelation.",
 					"entry": {
 						"layout": "starquake [DAMAGEd8 B, DC]",
-						"RANGE":{
+						"DAMAGE":{
 							"base":1,
 							"CR":[10,13,16,19,22,25],
 							"VAL":[1,2,3,4,5,6]
 						}
-					}
+					},
+					"type": "offense"
 				},
 				"Time Dilation": {
 				  "SOURCEPAGE": "p.107",
 				  "description": "When you're fully graviton-attuned, you can make time pass more slowly for your enemies. As a standard action, you can project a gravitational wave in a 30-foot cone. You choose which creatures in the cone are affected and which ones aren't. Each target must succeed at a Fortitude save or by affected by slow (see page 377) for a number of rounds equal to your solarian level. At 17th level, even targets that succeed at their saving throws are affected by slow for 1 round.",
 					"entry": {
 						"layout": "time dilation [DC]",
-					}
+					},
+					"type": "offense"
 				},
 				"Miniature Star": {
 				  "SOURCEPAGE": "p.107",
-				  "description": "When you're fully photon-attuned, you can create a simulacrum of a star as a standard action. The star is a 10-foot-radius sphere that fills your square (or one square of your space, if you're larger than Medium) and all squares within 5 feet of that space. Any creature that starts its turn in the same space as the star takes 1d6 fire damage for every 2 solarian levels you have, and any creature that starts its turn outside the star but within 5 feet of it takes half that damage. At 17th level, you can create your star simulacrum as a 15-foot-radius sphere that affects your square and all squares within 10 feet of that space (a total of 21 squares). Creatures can move through the star, but it exerts a gravitational pull, and any creature inside it or within 5 feet of it must spend twice as much movement for each square of movement that takes it away from the center of the star. The star remains for 1d4+1 rounds, and stays in place even if you later move. You are immune to all effects of your own miniature star."
+				  "description": "When you're fully photon-attuned, you can create a simulacrum of a star as a standard action. The star is a 10-foot-radius sphere that fills your square (or one square of your space, if you're larger than Medium) and all squares within 5 feet of that space. Any creature that starts its turn in the same space as the star takes 1d6 fire damage for every 2 solarian levels you have, and any creature that starts its turn outside the star but within 5 feet of it takes half that damage. At 17th level, you can create your star simulacrum as a 15-foot-radius sphere that affects your square and all squares within 10 feet of that space (a total of 21 squares). Creatures can move through the star, but it exerts a gravitational pull, and any creature inside it or within 5 feet of it must spend twice as much movement for each square of movement that takes it away from the center of the star. The star remains for 1d4+1 rounds, and stays in place even if you later move. You are immune to all effects of your own miniature star.",
+					"type": "offense"
 				},
 				"Ray of Light": {
 				  "SOURCEPAGE": "p.107",
-				  "description": "When you're fully photon-attuned, as a move action, you can transform yourself into a ray of light and move at light speed to any space you can see within long range. Any barrier that would block, reflect, or scatter light prevents you from moving through it. No creature can use a reaction to interfere with your movement or make attacks of opportunity against you unless it's capable of reacting faster than the speed of  light. At 17th level, you can touch one willing or unconscious creature to convert it to light and bring it with you as part of the same action."
+				  "description": "When you're fully photon-attuned, as a move action, you can transform yourself into a ray of light and move at light speed to any space you can see within long range. Any barrier that would block, reflect, or scatter light prevents you from moving through it. No creature can use a reaction to interfere with your movement or make attacks of opportunity against you unless it's capable of reacting faster than the speed of  light. At 17th level, you can touch one willing or unconscious creature to convert it to light and bring it with you as part of the same action.",
+					"type": "other"
 				}
 			},
 		},
@@ -1050,7 +1082,8 @@ allClassFeatures = {
 						"CR":[5,9,13,17,21,25],
 						"VAL":[5,10,15,20,25,30]
 					}
-				}
+				},
+				"type": "offense"
 			},
 			"Supernova": {
 			  "SOURCEPAGE": "p.103",
@@ -1066,7 +1099,8 @@ allClassFeatures = {
 						"CR":[9,17],
 						"VAL":[15,20]
 					}
-				}
+				},
+				"type": "offense"
 			},
 			"Skill Adept": {
 				"SOURCEPAGE": "p.101",
