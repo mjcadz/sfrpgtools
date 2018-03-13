@@ -28,6 +28,9 @@ solarian weapon crystals added to solar weapon
 solarian gear list shows 1+1
 
 bump version numbers
+soldier do adjustments in abilities
+soldier regular features
+soldier gear boosts
 
 gear do armor upgrade properly
 generate attacks from chosen weapons

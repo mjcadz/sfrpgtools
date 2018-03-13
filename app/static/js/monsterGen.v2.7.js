@@ -232,7 +232,7 @@ function buildStatBlock() {
         }
       }
 
-      statBlock.ClassOtherAbilities = ['solar manifestation (' + solarDrop.replace('Solar ','') + ')','stellar alignment'];
+      statBlock.ClassOtherAbilities = ['solar manifestation (' + solarDrop.toLowerCase() + ')','stellar alignment'];
       if (featurelist.includes('stellar apotheosis')) {
         featurelist = removeElement(featurelist,'stellar apotheosis');
         statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['stellar apotheosis'])
@@ -251,6 +251,41 @@ function buildStatBlock() {
       }
 
     }
+
+    //SOLDIER SPECIAL RULES AND PRINT ABILITIES
+    if (classDrop == 'Soldier') {
+
+      var classFeatures = [];
+
+      var soldierCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var soldierFeatures = getClassAbilities('Soldier',soldierCr);
+
+      var style = $('#stepFourOptionDropTwo').val().trim();
+      var styleList = soldierFeatures["Fighting style"]["first"];
+
+      statBlock.ClassOffensiveAbilities = getClassAbilityNames('Soldier',soldierCr,statBlock.abilityDCBase,styleList,style);
+
+      var secondStyle = '';
+      var styleListTwo = [];
+
+      if ($('[data-id="stepFourOptionDropThree"]').length){
+        var styleTwo = $('#stepFourOptionDropThree').val().trim()
+        secondStyle = ', ' + styleTwo;
+        styleListTwo = soldierFeatures["Fighting style"]["second"];
+
+        statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(getClassAbilityNames('Soldier',soldierCr,statBlock.abilityDCBase,styleListTwo,styleTwo));
+      }
+
+      style = 'fighting styles (' + style.toLowerCase() + secondStyle.toLowerCase() + ')';
+
+      statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat([style]);
+      statBlock.ClassOffensiveAbilities.sort();
+    }
+
+
+
+
+
 
     //step 5 - graft
     var graft = $('#graftDrop').val().trim();
@@ -1277,6 +1312,9 @@ function buildStatBlock() {
 
     //speedString
     var speedInput = $('#inputSpeed').val().trim();
+    if (statBlock.hasOwnProperty('addSpeed')){
+      speedInput = (Number(speedInput) + statBlock.addSpeed).toString();
+    }
     var speedString = '<div><b>Speed</b> '+speedInput+' ft.';
     if (statBlock.hasOwnProperty('Speed')){
       var speeds = statBlock.Speed;
@@ -1497,6 +1535,55 @@ function getClassStats(statObject){
   return statObject;
 }
 
+function getClassAbilityNames(Class,ClassCR,ClassDC,abilityList,abilityName){
+
+  var classAbilityNames = [];
+
+  for (var i = 0; i < abilityList.length; i++) {
+    if (Class == 'Soldier'){
+      console.log(abilityName)
+      console.log(allClassFeatures.Soldier["Fighting style"])
+      var ability = allClassFeatures.Soldier["Fighting style"][abilityName][abilityList[i]]
+    }
+
+    var abilityString = '';
+
+    if (ability.hasOwnProperty('entry')) {
+      abilityString = ability.entry.layout;
+
+      abilityString = abilityString.replace('DC' , 'DC ' + ClassDC.toString());
+      abilityString = abilityString.replace('CR' , ClassCR.toString());
+
+      var entries = Object.keys(ability.entry);
+
+      for (var k = 0; k < entries.length; k++)  {
+        if (entries[k] != 'layout') {
+
+          table = ability.entry[entries[k]]['CR']
+          var choice = 'none'
+          for (l = 0; l < table.length; l++) {
+            if (soldierCr >= table[l]) {
+              choice = l;
+            }
+          }
+          if (choice == 'none') {
+            var valNum = ability.entry[entries[k]]['base'];
+          } else {
+            var valNum = ability.entry[entries[k]]['base'] + ability.entry[entries[k]]['VAL'][choice];
+          }
+
+          abilityString = abilityString.replace(entries[k],valNum.toString())
+
+        }
+      }
+    }
+    if (abilityString != '') {
+      classAbilityNames = classAbilityNames.concat([abilityString]);
+    }
+  }
+  return classAbilityNames;
+}
+
 //class data contains a table of CR dependent abilities - gets the abilities with the appropriate CR vlue
 function getClassAbilities(selectedClass,cr){
 
@@ -1511,6 +1598,7 @@ function getClassAbilities(selectedClass,cr){
   for (key in classData[selectedClass].AbilitiesByCr){
     keyNums.push(Number(key));
   }
+  console.log(keyNums)
   //sort ascending order - number value
   keyNums.sort(function(a, b){return a-b});
   //find abilities equal to or less than CR
@@ -1520,6 +1608,7 @@ function getClassAbilities(selectedClass,cr){
       crBottom = keyNums[i];
     }
   }
+  console.log(classData[selectedClass])
   return classData[selectedClass].AbilitiesByCr[crBottom.toString()];
 }
 

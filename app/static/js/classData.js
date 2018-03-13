@@ -674,163 +674,307 @@ allClassFeatures = {
 		"Fighting style": {
 			"Blitz": {
 				"description": "The blitz fighting style is all about using speed and aggression to get into the thick of melee. You increase your speed and responsiveness, gain abilities that make you better at melee combat than your enemies, and keep on fighting even when surrounded by foes.",
-				"9th - Keep Fighting": {
+				"9th": {
+					"name": "Keep Fighting",
 					"SOURCEPAGE": "p.114",
-					"description": "As a move action, you can spend 1 Resolve Point to regain Stamina Points equal to 2d6 + your soldier level. You can't use this ability again until after you regain Stamina Points from a 10-minute rest. The number of Stamina Points you regain increases by 1d6 at 10th level, 15th level, and 20th level."
+					"description": "As a move action, you can spend 1 Resolve Point to regain Stamina Points equal to 2d6 + your soldier level. You can't use this ability again until after you regain Stamina Points from a 10-minute rest. The number of Stamina Points you regain increases by 1d6 at 10th level, 15th level, and 20th level.",
+					"entry": {
+						"layout": "keep fighting (DAMAGEd6 + CR)",
+						"DAMAGE":{
+							"base":2,
+							"CR":[10,15,20],
+							"VAL":[1,2,3]
+						}
+					}
 				},
-				"13th - Perfect Opportunity": {
+				"13th": {
+					"name": "Perfect Opportunity",
 					"SOURCEPAGE": "p.114",
-					"description": "When you hit a creature with an attack of opportunity, that creature can't move out of the squares you threaten until the start of its next turn. In addition, when an enemy takes a guarded step (see page 247) out of a square you threaten, you can make an attack of opportunity against it with a -2 penalty to the attack roll. If the target provoked an attack of opportunity by moving, hitting with your attack of opportunity ends the target's movement immediately, preventing it from carrying out the rest of its movement."
+					"description": "When you hit a creature with an attack of opportunity, that creature can't move out of the squares you threaten until the start of its next turn. In addition, when an enemy takes a guarded step (see page 247) out of a square you threaten, you can make an attack of opportunity against it with a -2 penalty to the attack roll. If the target provoked an attack of opportunity by moving, hitting with your attack of opportunity ends the target's movement immediately, preventing it from carrying out the rest of its movement.",
+					"entry": {
+						"layout": "perfect opportunity",
+					}
 				},
-				"1st - Rapid Response": {
+				"1st": {
+					"name": "Rapid Response",
 					"SOURCEPAGE": "p.114",
-					"description": "You gain a +4 bonus to initiative checks and increase your land speed by 10 feet."
+					"description": "You gain a +4 bonus to initiative checks and increase your land speed by 10 feet.",
+					"adjustments":{
+						"initiative":4,
+						"addSpeed":10
+					}
+
 				},
-				"17th - Against the Odds": {
+				"17th": {
+					"name": "Against the Odds",
 					"SOURCEPAGE": "p.114",
-					"description": "You gain a bonus to melee damage rolls equal to double the number of enemies within 10 feet of you. Enemies who don't constitute a significant threat (those with a CR equal to your level - 4 or less, or as determined by the GM) don't count when calculating this bonus."
+					"description": "You gain a bonus to melee damage rolls equal to double the number of enemies within 10 feet of you. Enemies who don't constitute a significant threat (those with a CR equal to your level - 4 or less, or as determined by the GM) don't count when calculating this bonus.",
+					"entry": {
+						"layout": "against the odds"
+					}
 				},
-				"5th - Charge Attack": {
+				"5th": {
+					"name": "Charge Attack",
 					"SOURCEPAGE": "p.114",
-					"description": "As a standard action, you can make a charge without the charge penalties (see page 248), and you can substitute a bull rush for the melee attack at the end of the charge. When you gain the soldier's onslaught class feature, you can make two attacks instead of one at the end of your charge, both with a -4 penalty."
+					"description": "As a standard action, you can make a charge without the charge penalties (see page 248), and you can substitute a bull rush for the melee attack at the end of the charge. When you gain the soldier's onslaught class feature, you can make two attacks instead of one at the end of your charge, both with a -4 penalty.",
+					"entry": {
+						"layout": "charge attack"
+					}
 				}
 			},
 			"Arcane Assailant": {
 				"description": "The arcane assailant fighting style supplements its combat effectiveness with magic powers, drawing on traditions of warrior-wizards dating back to well before the Gap. This allows you to use magic runes to augment your weapons and call on legendary powers, giving you access to arcane options even when you don't have a magic weapon in your possession.",
-				"13th - Secret of the Archmagi": {
+				"13th": {
+					"name": "Secret of the Archmagi",
 					"SOURCEPAGE": "p.113",
-					"description": "You can imbue two weapons with the rune of the eldritch knight. If you attempt to imbue a third weapon, the weapon infused first loses its rune and all benefits. In addition to the normal benefits, the runes grant the weapons one or more of the following weapon fusions (see page 191) of your choice"
+					"description": "You can imbue two weapons with the rune of the eldritch knight. If you attempt to imbue a third weapon, the weapon infused first loses its rune and all benefits. In addition to the normal benefits, the runes grant the weapons one or more of the following weapon fusions (see page 191) of your choice",
+					"entry": {
+						"layout": "secret of the archmagi"
+					}
 				},
-				"1st - Rune of the Eldritch Knight": {
+				"1st": {
+					"name": "Rune of the Eldritch Knight",
 					"SOURCEPAGE": "p.112",
-					"description": "You can imbue a weapon with a magic sigil, the rune of the eldritch knight, allowing the weapon to act as a magic weapon for the purposes of bypassing DR and affecting incorporeal creatures. This takes 10 minutes, and you can imbue only a single weapon at a time. If you imbue a new weapon with the rune of the eldritch knight, any previously imbued weapon loses this benefit. When calculating the Hit Points and hardness of a weapon imbued with the rune of the eldritch knight, treat its item level as 5 higher."
+					"description": "You can imbue a weapon with a magic sigil, the rune of the eldritch knight, allowing the weapon to act as a magic weapon for the purposes of bypassing DR and affecting incorporeal creatures. This takes 10 minutes, and you can imbue only a single weapon at a time. If you imbue a new weapon with the rune of the eldritch knight, any previously imbued weapon loses this benefit. When calculating the Hit Points and hardness of a weapon imbued with the rune of the eldritch knight, treat its item level as 5 higher.",
+					"entry": {
+						"layout": "rune of the eldritch knight"
+					}
 				},
-				"9th - Power of Legend": {
+				"9th": {
+					"name": "Power of Legend",
 					"SOURCEPAGE": "p.113",
-					"description": "You can call on the link between you and the legendary heroes who wielded powerful magic weapons eons ago to overcome adversity. As a move action when wielding a magic weapon or a weapon imbued with the rune of the eldritch knight, you can spend 1 Resolve Point to end one of the following conditions affecting you"
+					"description": "You can call on the link between you and the legendary heroes who wielded powerful magic weapons eons ago to overcome adversity. As a move action when wielding a magic weapon or a weapon imbued with the rune of the eldritch knight, you can spend 1 Resolve Point to end one of the following conditions affecting you",
+					"entry": {
+						"layout": "power of legend"
+					}
 				},
-				"5th - Secret of the Magi": {
+				"5th": {
+					"name": "Secret of the Magi",
 					"SOURCEPAGE": "p.112",
-					"description": "When you imbue a weapon with the rune of the eldritch knight, in addition to its normal benefits, the rune grants the weapon one of the following weapon fusions of your choice"
+					"description": "When you imbue a weapon with the rune of the eldritch knight, in addition to its normal benefits, the rune grants the weapon one of the following weapon fusions of your choice",
+					"entry": {
+						"layout": "secret of the magi"
+					}
 				},
-				"17th - Arcane Attack": {
+				"17th": {
+					"name": "Arcane Attack",
 					"SOURCEPAGE": "p.113",
-					"description": "As a standard action, you can spend 1 Resolve Point to use a weapon imbued with the rune of the eldritch knight to make an attack that strikes true. This attack ignores all cover and concealment, including total concealment (though you must at least be aware of a creature's presence to target it with this attack). If the attack is a ranged attack, the target must be within the first range increment. The attack only affects your selected target, even if it normally affects an area or multiple targets. You still must make a normal attack roll, and if your attack misses, it has no effect."
+					"description": "As a standard action, you can spend 1 Resolve Point to use a weapon imbued with the rune of the eldritch knight to make an attack that strikes true. This attack ignores all cover and concealment, including total concealment (though you must at least be aware of a creature's presence to target it with this attack). If the attack is a ranged attack, the target must be within the first range increment. The attack only affects your selected target, even if it normally affects an area or multiple targets. You still must make a normal attack roll, and if your attack misses, it has no effect.",
+					"entry": {
+						"layout": "arcane attack"
+					}
 				}
 			},
 			"Sharpshoot": {
 				"description": "The sharpshoot fighting style enables you to excel at making accurate attacks, usually with ranged weapons at a long distance. You can ignore cover and other impediments to your shots, and your attacks are improved by your intense focus.",
-				"1st - Sniper's Aim": {
+				"1st": {
+					"name": "Sniper's Aim",
 					"SOURCEPAGE": "p.115",
-					"description": "When you make a ranged attack against a target with cover, reduce the AC bonus from cover by 2. You can't use sniper's aim against an enemy with total cover."
+					"description": "When you make a ranged attack against a target with cover, reduce the AC bonus from cover by 2. You can't use sniper's aim against an enemy with total cover.",
+					"entry": {
+						"layout": "sniper's aim"
+					}
 				},
-				"13th - Focused Damage": {
+				"13th": {
+					"name": "Focused Damage",
 					"SOURCEPAGE": "p.115",
-					"description": "When you use focus fire, each attack against the first target deals 2d6 additional damage. Additional creatures you attack after killing or knocking out your first target don't take this extra damage."
+					"description": "When you use focus fire, each attack against the first target deals 2d6 additional damage. Additional creatures you attack after killing or knocking out your first target don't take this extra damage.",
+					"entry": {
+						"layout": "focused damage (2d6)"
+					}
 				},
-				"17th - Prepared Shot": {
+				"17th": {
+					"name": "Prepared Shot",
 					"SOURCEPAGE": "p.115",
-					"description": "As a standard action, you can study a target before you attack. The target must be within line of sight of you and either flat-footed or unaware of your presence. On the first attack you make against that target on your next turn, you gain a +2 bonus to your attack roll. If your attack hits, the target is staggered for 1 round; if you score a critical hit, the target is instead stunned for 1 round. Once you make a prepared shot, you can't use this ability again against the same target for 24 hours. You can't make an attack on the same round you study the target, even if an ability would let you attack without spending a standard or full action."
+					"description": "As a standard action, you can study a target before you attack. The target must be within line of sight of you and either flat-footed or unaware of your presence. On the first attack you make against that target on your next turn, you gain a +2 bonus to your attack roll. If your attack hits, the target is staggered for 1 round; if you score a critical hit, the target is instead stunned for 1 round. Once you make a prepared shot, you can't use this ability again against the same target for 24 hours. You can't make an attack on the same round you study the target, even if an ability would let you attack without spending a standard or full action.",
+					"entry": {
+						"layout": "prepared shot"
+					}
 				},
-				"5th - Focus Fire": {
+				"5th": {
+					"name": "Focus Fire",
 					"SOURCEPAGE": "p.115",
-					"description": "When you make a full attack with a ranged weapon, you can make both attacks with a -3 penalty instead of a -4 penalty as long as they both target the same creature. If your first attack kills or knocks out the target, you can instead make the second attack against a different creature at a -4 penalty. Once you have the soldier's onslaught class feature (see page 112), you can use this ability with it, making three attacks against the same creature at a -5 penalty; if your first or second attack kills or knocks out your target, you can make your remaining attacks against a different creature at a -6 penalty."
+					"description": "When you make a full attack with a ranged weapon, you can make both attacks with a -3 penalty instead of a -4 penalty as long as they both target the same creature. If your first attack kills or knocks out the target, you can instead make the second attack against a different creature at a -4 penalty. Once you have the soldier's onslaught class feature (see page 112), you can use this ability with it, making three attacks against the same creature at a -5 penalty; if your first or second attack kills or knocks out your target, you can make your remaining attacks against a different creature at a -6 penalty.",
+					"entry": {
+						"layout": "focus fire"
+					}
 				},
-				"9th - Intense Focus": {
+				"9th": {
+					"name": "Intense Focus",
 					"SOURCEPAGE": "p.115",
-					"description": "When you make a ranged attack against a target with cover or concealment, you can spend 1 Resolve Point to negate its AC bonus from cover and reduce its concealment by one category (from total concealment to concealment or from concealment to no concealment). This benefit applies to all ranged attacks you make against that target this round. You can't use intense focus more than once per round, nor can you use it against an enemy with total cover."
+					"description": "When you make a ranged attack against a target with cover or concealment, you can spend 1 Resolve Point to negate its AC bonus from cover and reduce its concealment by one category (from total concealment to concealment or from concealment to no concealment). This benefit applies to all ranged attacks you make against that target this round. You can't use intense focus more than once per round, nor can you use it against an enemy with total cover.",
+					"entry": {
+						"layout": "intense focus"
+					}
 				}
 			},
 			"Hit-and-Run": {
 				"description": "The hit-and-run fighting style focuses on tactical movement as you move in and out of combat. You use ranged weapons but fight close up, and you can even mix ranged and melee attacks. Your abilities allow you to move even when you make full attacks and to avoid getting locked down by your enemies.",
-				"9th - Duck and Weave": {
+				"9th": {
+					"name": "Duck and Weave",
 					"SOURCEPAGE": "p.115",
-					"description": "When you move or make a ranged attack, you can spend 1  Resolve Point to avoid provoking attacks of opportunity from that movement or ranged attack."
+					"description": "When you move or make a ranged attack, you can spend 1  Resolve Point to avoid provoking attacks of opportunity from that movement or ranged attack.",
+					"entry": {
+						"layout": "duck and weave"
+					}
 				},
-				"1st - Opening Volley": {
+				"1st": {
+					"name": "Opening Volley",
 					"SOURCEPAGE": "p.115",
-					"description": "You gain Opening Volley as a bonus feat. If you already have this feat, choose a bonus combat feat instead. At 9th level, you can use Opening Volley on both your first and second turns in combat."
+					"description": "You gain Opening Volley as a bonus feat. If you already have this feat, choose a bonus combat feat instead. At 9th level, you can use Opening Volley on both your first and second turns in combat.",
+					"entry": {
+						"layout": "opening volley"
+					}
 				},
-				"13th - Elusive Target": {
+				"13th": {
+					"name": "Elusive Target",
 					"SOURCEPAGE": "p.115",
-					"description": "On any turn in which you move, you gain a +1 insight bonus to your AC until the start of your next turn."
+					"description": "On any turn in which you move, you gain a +1 insight bonus to your AC until the start of your next turn.",
+					"entry": {
+						"layout": "elusive target"
+					}
 				},
-				"5th - Nimble Fusillade": {
+				"5th": {
+					"name": "Nimble Fusillade",
 					"SOURCEPAGE": "p.115",
-					"description": "When you make a full attack, you can also either take a guarded step or move up to half your speed. This movement can come before, between, or after your attacks, but it can't be split up."
+					"description": "When you make a full attack, you can also either take a guarded step or move up to half your speed. This movement can come before, between, or after your attacks, but it can't be split up.",
+					"entry": {
+						"layout": "nimble fusillade"
+					}
 				},
-				"17th - Harrying Shot": {
+				"17th": {
+					"name": "Harrying Shot",
 					"SOURCEPAGE": "p.115",
-					"description": "As a full action, you can make one attack and give the benefit of harrying fire (see page 247) against any creature you hit with that attack. If you use a blast weapon or automatic weapon, the benefit applies against all targets hit. You can also take your nimble fusillade movement before or after this attack."
+					"description": "As a full action, you can make one attack and give the benefit of harrying fire (see page 247) against any creature you hit with that attack. If you use a blast weapon or automatic weapon, the benefit applies against all targets hit. You can also take your nimble fusillade movement before or after this attack.",
+					"entry": {
+						"layout": "harrying shot"
+					}
 				}
 			},
 			"Bombard": {
 				"description": "The bombard fighting style emphasizes attacking multiple targets, often using grenades, and leverages substantial physical strength to control large weapons with significant recoil. At higher levels, you can use launchers, missiles, and other heavy weapons.",
-				"5th - Heavy Fire": {
+				"5th": {
+					"name": "Heavy Fire",
 					"SOURCEPAGE": "p.114",
-					"description": "You can use your physical power to steady your weapon and make your attacks more dangerous. As a full action, you can make a single ranged attack that deals additional damage equal to your Strength bonus to all targets. You can use this ability in conjunction with the automatic, explode, or unwieldy special property (see pages 180-182)."
+					"description": "You can use your physical power to steady your weapon and make your attacks more dangerous. As a full action, you can make a single ranged attack that deals additional damage equal to your Strength bonus to all targets. You can use this ability in conjunction with the automatic, explode, or unwieldy special property (see pages 180-182).",
+					"entry": {
+						"layout": "heavy fire"
+					}
 				},
-				"13th - Explosives Acumen": {
+				"13th": {
+					"name": "Explosives Acumen",
 					"SOURCEPAGE": "p.114",
-					"description": "You increase the DC to avoid attacks you make using weapons with the explode special property by 1. You reduce the amount of any damage you take from any weapon with the explode special property by an amount equal to your Strength bonus."
+					"description": "You increase the DC to avoid attacks you make using weapons with the explode special property by 1. You reduce the amount of any damage you take from any weapon with the explode special property by an amount equal to your Strength bonus.",
+					"entry": {
+						"layout": "explosives acumen"
+					}
 				},
-				"1st - Grenade Expert": {
+				"1st": {
+					"name": "Grenade Expert",
 					"SOURCEPAGE": "p.114",
-					"description": "You increase the range increment of your thrown grenades by 5 x your Strength bonus. In addition, you're able to salvage enough materials to create a grenade without paying for it. Creating a grenade takes 10 minutes. You can create any grenade whose item level is less than or equal to your soldier level, but this grenade is unstable and only you can use it effectively. If anyone else tries to use the grenade, it is a dud. You can have only one grenade created by this ability at one time (if you create a new grenade using this ability, the old grenade no longer works)."
+					"description": "You increase the range increment of your thrown grenades by 5 x your Strength bonus. In addition, you're able to salvage enough materials to create a grenade without paying for it. Creating a grenade takes 10 minutes. You can create any grenade whose item level is less than or equal to your soldier level, but this grenade is unstable and only you can use it effectively. If anyone else tries to use the grenade, it is a dud. You can have only one grenade created by this ability at one time (if you create a new grenade using this ability, the old grenade no longer works).",
+					"entry": {
+						"layout": "grenade expert"
+					}
 				},
-				"9th - Debilitating Attack": {
+				"9th": {
+					"name": "Debilitating Attack",
 					"SOURCEPAGE": "p.114",
-					"description": "When you hit an enemy with a ranged attack or an attack with a weapon with the blast or explode special property, you can spend 1 Resolve Point to inflict a debilitating effect on that enemy for a number of rounds equal to your Strength bonus. You can choose to make the target deafened, flatfooted, or off-target (see pages 275-277), or to reduce its speeds by half (to a minimum of 10 feet). The target can negate this effect with a successful Fortitude save (DC = 10 + half your soldier level + your Strength modifier)."
+					"description": "When you hit an enemy with a ranged attack or an attack with a weapon with the blast or explode special property, you can spend 1 Resolve Point to inflict a debilitating effect on that enemy for a number of rounds equal to your Strength bonus. You can choose to make the target deafened, flatfooted, or off-target (see pages 275-277), or to reduce its speeds by half (to a minimum of 10 feet). The target can negate this effect with a successful Fortitude save (DC = 10 + half your soldier level + your Strength modifier).",
+					"entry": {
+						"layout": "debilitating attack"
+					}
 				},
-				"17th - Impactful Attack": {
+				"17th": {
+					"name": "Impactful Attack",
 					"SOURCEPAGE": "p.114",
-					"description": "As a full action, you can make a ranged attack that knocks enemies back. Targets you hit are knocked back 5 feet from you. If you use a weapon with the explode special property, all targets that fail their saving throws are instead knocked back 5 feet from the center of the explosion. An enemy that you critically hit or that rolls a natural 1 on its saving throw is also knocked prone. You can't make an impactful attack with an automatic weapon, but you can use this ability with a weapon that has the blast special property"
+					"description": "As a full action, you can make a ranged attack that knocks enemies back. Targets you hit are knocked back 5 feet from you. If you use a weapon with the explode special property, all targets that fail their saving throws are instead knocked back 5 feet from the center of the explosion. An enemy that you critically hit or that rolls a natural 1 on its saving throw is also knocked prone. You can't make an impactful attack with an automatic weapon, but you can use this ability with a weapon that has the blast special property",
+					"entry": {
+						"layout": "impactful attack"
+					}
 				}
 			},
 			"Guard": {
 				"description": "The guard fighting style focuses on defense. You become adept at wearing armor, protecting against attacks, and enduring damage and other setbacks from attacks that get through your defenses.",
-				"13th - Kinetic Resistance": {
+				"13th": {
+					"name": "Kinetic Resistance",
 					"SOURCEPAGE": "p.115",
-					"description": "You gain DR 3/-. At 17th level, this DR increases to 5/-."
+					"description": "You gain DR 3/-. At 17th level, this DR increases to 5/-.",
+					"adjustments":{
+						"DRapplied":"DR 3/-"
+					}
 				},
-				"1st - Armor Training": {
+				"1st": {
+					"name": "Armor Training",
 					"SOURCEPAGE": "p.114",
 					"description": "You reduce the armor check penalty of armor you wear by 1 (to a minimum of 0) and increase the maximum Dexterity bonus allowed by your armor by 1."
 				},
-				"5th - Guard's Protection": {
+				"5th": {
+					"name": "Guard's Protection",
 					"SOURCEPAGE": "p.114",
-					"description": "When an ally adjacent to you is damaged by an attack, you can use your reaction to intercede. You take half the damage, and your ally takes the other half. This has no effect on spells, and any conditions delivered by the attack apply to both of you. In addition, you are now proficient with powered armor."
+					"description": "When an ally adjacent to you is damaged by an attack, you can use your reaction to intercede. You take half the damage, and your ally takes the other half. This has no effect on spells, and any conditions delivered by the attack apply to both of you. In addition, you are now proficient with powered armor.",
+					"entry": {
+						"layout": "guards protection"
+					}
 				},
-				"9th - Rapid Recovery": {
+				"9th": {
+					"name": "Rapid Recovery",
 					"SOURCEPAGE": "p.115",
-					"description": "You can spend Resolve Points to ignore detrimental conditions. As a move action, you can spend 1 Resolve Point to suppress one of the following conditions for 10 minutes"
+					"description": "You can spend Resolve Points to ignore detrimental conditions. As a move action, you can spend 1 Resolve Point to suppress one of the following conditions for 10 minutes",
+					"entry": {
+						"layout": "rapid recovery"
+					}
 				},
-				"17th - Impenetrable Defense": {
+				"17th": {
+					"name": "Impenetrable Defense",
 					"SOURCEPAGE": "p.115",
-					"description": "As a standard action, you can set up a strong defense for yourself and an adjacent ally. Until the start of your next turn, you gain three benefits"
+					"description": "As a standard action, you can set up a strong defense for yourself and an adjacent ally. Until the start of your next turn, you gain three benefits",
+					"entry": {
+						"layout": "impenetrable defense"
+					}
 				}
 			},
 			"Armor Storm": {
 				"description": "The armor storm fighting style focuses on using armor as a weapon by maximizing the damage of armor-based weapons while withstanding enemy fire. You learn to increase the effectiveness of attacks made with your armor and to add equipment normally beyond your armor's capacity.",
-				"17th - On the Bounce": {
+				"17th": {
+					"name": "On the Bounce",
 					"SOURCEPAGE": "p.113",
-					"description": "You learn to control your armor with such ease, you are actually more maneuverable in it than out of it. While wearing heavy armor or powered armor, you can move up to your speed when you make a full attack. You can move before or after all your attacks, but not both. If you have the Shot on the Run feat, you can divide your movement to move both before and after making a full attack as long as all the attacks are ranged attacks. If you have the Spring Attack feat, you can divide your movement to move both before and after making a full attack as long as all the attacks are melee attacks. If you have both feats, your attacks can be any combination of melee and ranged attacks."
+					"description": "You learn to control your armor with such ease, you are actually more maneuverable in it than out of it. While wearing heavy armor or powered armor, you can move up to your speed when you make a full attack. You can move before or after all your attacks, but not both. If you have the Shot on the Run feat, you can divide your movement to move both before and after making a full attack as long as all the attacks are ranged attacks. If you have the Spring Attack feat, you can divide your movement to move both before and after making a full attack as long as all the attacks are melee attacks. If you have both feats, your attacks can be any combination of melee and ranged attacks.",
+					"entry": {
+						"layout": "on the bounce"
+					}
 				},
-				"9th - Smash Through": {
+				"9th": {
+					"name": "Smash Through",
 					"SOURCEPAGE": "p.113",
-					"description": "While you are wearing heavy armor or powered armor, you gain a +4 bonus to attack rolls to perform a bull rush combat maneuver (see page 246). If you successfully push the target back 10 feet or more, you can also damage the target with an unarmed attack (and can use your hammer fist ability when doing so)."
+					"description": "While you are wearing heavy armor or powered armor, you gain a +4 bonus to attack rolls to perform a bull rush combat maneuver (see page 246). If you successfully push the target back 10 feet or more, you can also damage the target with an unarmed attack (and can use your hammer fist ability when doing so).",
+					"entry": {
+						"layout": "smash through"
+					}
 				},
-				"1st - Hammer Fist": {
+				"1st": {
+					"name": "Hammer Fist",
 					"SOURCEPAGE": "p.113",
-					"description": "You treat any unarmed attack you make while wearing heavy or powered armor as being made with a battleglove (see page 187) with an item level equal to or lower than your soldier level, and you calculate damage for these attacks as if you had the melee striker gear boost (see page 112). If you have the melee striker gear boost, you gain a +2 bonus to damage rolls with your unarmed attacks when using this ability. These unarmed attacks don't benefit from other abilities that apply specifically to unarmed attacks (such as the Improved Unarmed Strike feat)."
+					"description": "You treat any unarmed attack you make while wearing heavy or powered armor as being made with a battleglove (see page 187) with an item level equal to or lower than your soldier level, and you calculate damage for these attacks as if you had the melee striker gear boost (see page 112). If you have the melee striker gear boost, you gain a +2 bonus to damage rolls with your unarmed attacks when using this ability. These unarmed attacks don't benefit from other abilities that apply specifically to unarmed attacks (such as the Improved Unarmed Strike feat).",
+					"entry": {
+						"layout": "hammer fist"
+					}
 				},
-				"13th - Mobile Army": {
+				"13th": {
+					"name": "Mobile Army",
 					"SOURCEPAGE": "p.113",
-					"description": "You become a master of all weapons associated with your armor. You deal 1d6 additional damage with any attack from a weapon that is part of your armor, including unarmed attacks using the hammer fist ability and weapons that have been attached to your armor as an armor upgrade. The additional damage is of the same type as the weapon's normal type. Also, while wearing heavy or powered armor, you gain a +2 bonus to your KAC against combat maneuvers."
+					"description": "You become a master of all weapons associated with your armor. You deal 1d6 additional damage with any attack from a weapon that is part of your armor, including unarmed attacks using the hammer fist ability and weapons that have been attached to your armor as an armor upgrade. The additional damage is of the same type as the weapon's normal type. Also, while wearing heavy or powered armor, you gain a +2 bonus to your KAC against combat maneuvers.",
+					"entry": {
+						"layout": "mobile army (1d6)"
+					}
 				},
-				"5th - Enhanced Tank": {
+				"5th": {
+					"name": "Enhanced Tank",
 					"SOURCEPAGE": "p.113",
-					"description": "You gain the Powered Armored Proficiency feat and access to improved armor. This might be the result of your own engineering abilities, having earned the trust of contacts that can get you experimental equipment, or a powerful patron giving you gear not available to the general public to help you achieve mutual goals. You can add one more upgrade to your armor than its normal maximum number of upgrade slots. If you add this bonus upgrade to heavy armor, you can select an upgrade normally limited to powered armor. An upgrade placed in this bonus slot costs half the normal credit amount."
+					"description": "You gain the Powered Armored Proficiency feat and access to improved armor. This might be the result of your own engineering abilities, having earned the trust of contacts that can get you experimental equipment, or a powerful patron giving you gear not available to the general public to help you achieve mutual goals. You can add one more upgrade to your armor than its normal maximum number of upgrade slots. If you add this bonus upgrade to heavy armor, you can select an upgrade normally limited to powered armor. An upgrade placed in this bonus slot costs half the normal credit amount.",
+					"entry": {
+						"layout": "enhanced tank"
+					}
 				}
 			}
 		}
@@ -862,7 +1006,7 @@ allClassFeatures = {
 				"Gravity Boost": {
 				  "SOURCEPAGE": "p.104",
 				  "description": "You can increase or reduce the gravitational attraction between yourself and the terrain around you. You can add a bonus equal to one-third your solarian level (minimum +1) to Athletics checks to climb, jump, or swim as part of the action you take to attempt the skill check. In addition, as a reaction when you are falling, you can reduce the falling damage you take by half. At 6th level, you can move along vertical surfaces and even upside down along ceilings for 1 round. This functions as spider climb, but it leaves your hands free and you can also run. You must end your movement on a surface that can support you normally. If you end your movement while you are standing on a vertical surface or ceiling, you fall unless you succeed at an Athletics check to climb to remain in position. When you are attuned or fully attuned, the bonus you gain from this revelation to checks to climb, jump, or swim doubles.",
-					"type": "other"
+					"type": "offense"
 				},
 				"Gravity Hold": {
 				  "SOURCEPAGE": "p.104",
@@ -880,7 +1024,7 @@ allClassFeatures = {
 							"VAL":[2,3,4,5,6,7,8]
 						},
 					},
-					"type": "defense"
+					"type": "offense"
 				},
 				"Flare": {
 				  "SOURCEPAGE": "p.104",
@@ -898,14 +1042,14 @@ allClassFeatures = {
 				"Gravity Anchor": {
 				  "SOURCEPAGE": "p.104",
 				  "description": "As a move action, you can form a gravitational bond between yourself and either the surface you're standing on or the objects you are holding. This grants you a +4 bonus to your AC against bull rush, reposition, and trip combat maneuvers if you choose the surface underfoot, or against disarm combat maneuvers if you choose objects. The bonus lasts for 1 round or until you leave graviton mode. You can have only one gravity anchor active at a time. When you are attuned or fully attuned, you can activate this revelation as a reaction when targeted by a bull rush, disarm, reposition, or trip combat maneuver, in which case it defends against only that attack.",
-					"type": "defense"
+					"type": "offense"
 				}
 			},
 			"6th":{
 				"Glow of Life": {
 				  "SOURCEPAGE": "p.105",
 				  "description": "As a move action, you can spend 1 Resolve Point to recover a number of Hit Points equal to twice your solarian level. Once you use this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, increase the amount you heal with this revelation to three times your solarian level.",
-					"type": "defense"
+					"type": "offense"
 				},
 				"Crush": {
 				  "SOURCEPAGE": "p.105",
@@ -918,22 +1062,22 @@ allClassFeatures = {
 				"Astrologic Sense": {
 				  "SOURCEPAGE": "p.105",
 				  "description": "You can sense the movement of all objects influencing you to gain insight into upcoming events. Once per day as a full action, you can try to determine whether a particular action of yours will bring good or bad results for you in the immediate future. This functions as augury (see page 340) with your effective caster level equal to your solarian level. You can spend 1 Resolve Point to use this revelation again on the same day, but you still can't use it more than once per hour. When you are attuned or fully attuned, you can see 1 hour into the future (instead of half an hour as is normal for augury) when you use this revelation.",
-					"type": "other"
+					"type": "offense"
 				},
 				"Hypnotic Glow": {
 				  "SOURCEPAGE": "p.105",
 				  "description": "As a standard action, you can convince one living creature that you are to be trusted. This functions as charm person (see page 342), but with a duration of 1 round per solarian level you have. When the effect ends, if you are out of line of sight and the target is not engaged in an activity it wouldn't have begun without being charmed, the target does not realize it was charmed or has acted unusually unless someone else points it out. You can't use this revelation again while you currently have a creature charmed via this ability, and once you've attempted to charm a creature, whether or not the attempt was successful, you can't charm the same creature again for 24 hours. Your influence over the creature ends once the duration has expired, and at that time the target likely ceases doing anything you've requested of it. At 9th level, hypnotic glow functions as charm monster (see page 342). When you are attuned or fully attuned and you successfully charm a creature using this ability, you can also command it to approach, flee, or halt on its next turn, as per the command spell (no save; see page 343).",
-					"type": "other"
+					"type": "offense"
 				},
 				"Defy Gravity": {
 				  "SOURCEPAGE": "p.105",
 				  "description": "As a move action, you can fly up to your speed. You must end this movement on solid ground or you fall. At 12th level or higher, you don't have to land if you immediately follow your flight with another move action to use defy gravity. On your last move action of the turn, you still have to land or fall. When you are attuned or fully attuned, your fly speed from this revelation increases by 10 feet.",
-					"type": "other"
+					"type": "offense"
 				},
 				"Reflection": {
 				  "SOURCEPAGE": "p.106",
 				  "description": "You can reflect ranged attacks back at your enemies. If you took the total defense action on your last turn, or if you were fighting defensively and spend 1 Resolve Point, as a reaction you can redirect a ranged attack that misses you. Select a new target within 30 feet and make a ranged attack roll with a -4 penalty. If your attack hits, the new target is damaged as if it had been the intended target of the original ranged attack. When you are attuned or fully attuned, you don't take a -4 penalty to your redirected attack roll.",
-					"type": "defense"
+					"type": "offense"
 				},
 				"Corona": {
 				  "SOURCEPAGE": "p.105",
@@ -976,12 +1120,12 @@ allClassFeatures = {
 				"Stealth Warp": {
 				  "SOURCEPAGE": "p.106",
 				  "description": "You can bend light, sound, and even vibrations around your body, making you harder to notice. As a move action, you can grant yourself a +4 bonus to Stealth checks. This lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, you can use this revelation to reduce your sensory output so much that you can attempt a Stealth check even when you're directly observed and lack cover or a distraction. You are not invisible, simply difficult to see clearly, and if a creature was observing you prior to your Stealth check, it remains aware of your location until you successfully reach cover or  concealment. Your stealth warp ends if you make an attack or cause another creature to attempt a saving throw, or at the beginning of your next turn unless you immediately take another move action to use this revelation.",
-					"type": "defense"
+					"type": "offense"
 				},
 				"Soul Furnace": {
 				  "SOURCEPAGE": "p.106",
 				  "description": "You can stoke the internal energy of your entire physiology, allowing you to boost your life processes. As a move action, you can spend 1 Resolve Point. If you are suffering from an affliction (a curse, disease, drug or poison), you can immediately attempt an additional saving throw at the affliction's normal save DC. If you succeed at this saving throw, the affliction ends (regardless of how many successful saving throws it normally takes to end the affliction). Once you have used this revelation, you can't use it again until the next time you regain Stamina Points after a 10-minute rest. When you are attuned or fully attuned, you can also use this revelation to end any one of the following conditions you have",
-					"type": "defense"
+					"type": "offense"
 				}
 			},
 			"14th":{
@@ -1000,19 +1144,19 @@ allClassFeatures = {
 				"Gravity Shield": {
 				  "SOURCEPAGE": "p.106",
 				  "description": "As a move action, you can create a minor shield of compressed gravity waves, granting you a +1 circumstance bonus to your AC. The shield lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, as a move action, you can create a disk of massive gravitational energies that is capable of deflecting incoming attacks. Choose one edge of your space. The shield extends along three continuous edges in a straight line centered on the chosen edge. The shield provides cover against attacks coming from its far side, but not against attacks originating from the side you're on. If you move, you can reposition your shield as part of your move action, moving it to a different edge of your space. You must use one of your hands to direct and maintain an active gravity shield. You cannot use this version of the gravity shield at the same time you use this revelation to gain a circumstance bonus to your AC. This gravity shield also lasts 1 round or until you leave graviton mode.",
-					"type": "defense"
+					"type": "offense"
 				}
 			},
 			"16th":{
 				"Ultimate Photon": {
 				  "SOURCEPAGE": "p.107",
 				  "description": "Your ability to manipulate powers of light and energy expand greatly. The radius of any photon revelation (but not zenith revelation) you have with a radius expands by 10 feet. Any photon revelation (but not zenith revelation) that lasts for 1 round or until you leave photon mode now lasts for 1d4 rounds if you are not in photon mode. You also increase the power of any of the following photon revelations you have. Astrologic Sense: You can see twice as far into the future as normal. Glow of Life: You can use this revelation as a swift action, rather than a move action. Hypnotic Glow: The charm's duration doubles. Stellar Rush: You gain a +2 bonus to your EAC until the beginning of your next turn.",
-					"type": "other"
+					"type": "offense"
 				},
 				"Ultimate Graviton": {
 				  "SOURCEPAGE": "p.106",
 				  "description": "As your ability to manipulate powers of gravity expands, the range of any graviton revelation (but not zenith revelation) you have with a range doubles. Any graviton revelation (but not zenith revelation) you have that targets a single creature can now simultaneously target two creatures, who must be within 20 feet of each other. You also increase the power of any of the following gravity revelations you have. Defy Gravity: Your fly speedi ncreasesb y 20 feet.Gravity Anchor: As a move action, you can gain both types of gravity anchor simultaneously. GravityB oostY: ourb onusa ppliest o all Acrobatics checks, and you take no damage from any fall. Reflection: If you successfully redirect an attack as a reaction, you can continue to reflect additional attacks until the beginning of your next turn. You have a cumulat ive -2 penalty to your redirect attack roll on each reflect ionattempt after the first. If any reflected attack misses. you can't make fur ther redirect attempts unt il you use this revelation again.",
-					"type": "other"
+					"type": "offense"
 				}
 			},
 			"Zenith":{
@@ -1026,7 +1170,7 @@ allClassFeatures = {
 							"PERCR":10
 						}
 					},
-					"type": "other"
+					"type": "offense"
 				},
 				"Solar Acceleration": {
 				  "SOURCEPAGE": "p.107",
@@ -1050,7 +1194,11 @@ allClassFeatures = {
 				  "SOURCEPAGE": "p.107",
 				  "description": "When you're fully graviton-attuned, you can make time pass more slowly for your enemies. As a standard action, you can project a gravitational wave in a 30-foot cone. You choose which creatures in the cone are affected and which ones aren't. Each target must succeed at a Fortitude save or by affected by slow (see page 377) for a number of rounds equal to your solarian level. At 17th level, even targets that succeed at their saving throws are affected by slow for 1 round.",
 					"entry": {
-						"layout": "time dilation [DC]",
+						"layout": "time dilation [DC, ROUNDS rounds]",
+						"RANGE":{
+							"base":0,
+							"PERCR":1
+						}
 					},
 					"type": "offense"
 				},
@@ -1062,7 +1210,7 @@ allClassFeatures = {
 				"Ray of Light": {
 				  "SOURCEPAGE": "p.107",
 				  "description": "When you're fully photon-attuned, as a move action, you can transform yourself into a ray of light and move at light speed to any space you can see within long range. Any barrier that would block, reflect, or scatter light prevents you from moving through it. No creature can use a reaction to interfere with your movement or make attacks of opportunity against you unless it's capable of reacting faster than the speed of  light. At 17th level, you can touch one willing or unconscious creature to convert it to light and bring it with you as part of the same action.",
-					"type": "other"
+					"type": "offense"
 				}
 			},
 		},
