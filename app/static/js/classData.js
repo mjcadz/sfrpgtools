@@ -580,57 +580,96 @@ allClassFeatures = {
 			"Heavy Onslaught": {
 				"SOURCEPAGE": "p.112",
 				"description": "Your attacks with heavy weapons bypass part of the target's damage reduction. If your heavy weapon does not already overcome the target's damage  reduction, treat the target's damage reduction as though it were 5 lower. At 15th level, treat the target's damage reduction as 10 lower.",
-				"minLevel": "11"
+				"minLevel": 11,
+				"entry": {
+					"layout": "heavy onslaught",
+				}
 			},
 			"Powerful Explosive": {
 				"SOURCEPAGE": "p.112",
 				"description": "When you attack with a weapon with the explode special property and a radius of 10 feet or greater, you can increase the radius of the explosion by 5 feet.",
-				"minLevel": "7"
+				"minLevel": 7,
+				"entry": {
+					"layout": "powerful explosive",
+				}
 			},
 			"Electric Arc": {
 				"SOURCEPAGE": "p.112",
 				"description": "When you hit a target with a weapon in the shock category, electricity arcs out from your original target to deal electricity damage to a secondary subject within 10 feet of the original target. This damage is equal to the weapon's level. The secondary subject must be the creature nearest to the original target (your choice if multiple creatures are equidistant). This gear boost does not function for weapons that have the explode or blast special property. If you use this gear boost with a weapon with the arc critical hit effect (see page 182), your secondary subject for electric arc must be the same as your secondary subject for the arc critical effect.",
-				"minLevel": "7"
+				"minLevel": 7,
+				"entry": {
+					"layout": "electric arc",
+				}
 			},
 			"Plasma Immolation": {
 				"SOURCEPAGE": "p.112",
 				"description": "You are expert at setting things on fire with plasma. If your attack roll with a weapon in the plasma category is a 19 (the d20 shows a 19), and the attack hits your target, the target gains the burning condition. The condition deals 1d4 fire damage if the weapon has an item level of 1st-6th, 1d8 if its item level is 7th-14th, and 2d8 if its item level is 15th or higher.",
-				"minLevel": "7"
+				"minLevel": 7,
+				"entry": {
+					"layout": "plasma immolation",
+				}
 			},
 			"Melee Striker": {
 				"SOURCEPAGE": "p.112",
-				"description": "Add an additional bonus equal to half your Strength bonus to damage rolls with melee weapons."
+				"description": "Add an additional bonus equal to half your Strength bonus to damage rolls with melee weapons.",
+				"adjustments":{
+					"damageMod":"1/2STR"
+				},
+				"minLevel": 1
 			},
 			"Flash Freeze": {
 				"SOURCEPAGE": "p.112",
 				"description": "When you hit a creature with a weapon in the cryo category, that creature's speeds are reduced by 10 feet for 1 round, to a minimum of 10 feet.",
-				"minLevel": "7"
+				"minLevel": 7,
+				"entry": {
+					"layout": "flash freeze",
+				}
 			},
 			"Armored Advantage": {
 				"SOURCEPAGE": "p.111",
-				"description": "When you are wearing armor, you gain a +1 insight bonus to your Kinetic Armor Class."
+				"description": "When you are wearing armor, you gain a +1 insight bonus to your Kinetic Armor Class.",
+				"adjustments":{
+					"kac":1
+				},
+				"minLevel": 1
 			},
 			"Laser Accuracy": {
 				"SOURCEPAGE": "p.112",
-				"description": "You gain a +1 insight bonus to attack rolls with weapons in the laser category."
+				"description": "You gain a +1 insight bonus to attack rolls with weapons in the laser category.",
+				"minLevel": 1
 			},
 			"Sonic Resonance": {
 				"SOURCEPAGE": "p.112",
 				"description": "When you hit a creature within 30 feet of you using a weapon in the sonic category, the sonic energy continues to resonate within that creature, giving it the flat-footed condition for 1  round. If you hit multiple creatures at the same time (such as with an automatic, blast, or explode weapon), only the creature nearest to you or to the center of the explosion (your choice if multiple creatures are equidistant) is affected.",
-				"minLevel": "7"
+				"minLevel": 7,
+				"entry": {
+					"layout": "sonic resonance",
+				}
 			},
 			"Anchoring Arcana": {
 				"SOURCEPAGE": "p.111",
 				"description": "As a full action, you can make a single attack with a magic weapon against a single foe. If the attack is a ranged attack, the target must be within the first range increment. Even if the attack normally affects an area or multiple targets, it affects only your selected target. If your attack hits, you can spend 1 Resolve Point to force the target to attempt a Will saving throw (DC = 10 + half your soldier level + your key ability score modifier). If the target fails its save, it can't voluntarily move from its current space for 1d4 rounds. This has no effect on involuntary movement, but it does prevent the creature from teleporting or moving to another plane. Once you've struck a foe with this attack, whether it succeeds at or fails its saving throw, it is immune to this ability for 24 hours.",
-				"minLevel": "7"
+				"minLevel": 7,
+				"entry": {
+					"layout": "anchoring arcana",
+				}
 			},
 			"Brutal Blast": {
 				"SOURCEPAGE": "p.111",
-				"description": "You gain a +2 insight bonus to damage rolls with weapons that have the blast special property (such as a scattergun). This extra damage applies only to creatures within 10 feet of you; creatures farther away take the normal amount of damage. This bonus increases by 1 for every 4 soldier levels you have."
+				"description": "You gain a +2 insight bonus to damage rolls with weapons that have the blast special property (such as a scattergun). This extra damage applies only to creatures within 10 feet of you; creatures farther away take the normal amount of damage. This bonus increases by 1 for every 4 soldier levels you have.",
+				"minLevel": 1,
+				"entry": {
+					"layout": "brutal blast",
+				}
+
 			},
 			"Bullet Barrage": {
 				"SOURCEPAGE": "p.111",
-				"description": "You gain a +1 insight bonus to damage rolls for weapons in the projectile category. This bonus increases by 1 for every 4 soldier levels you have."
+				"description": "You gain a +1 insight bonus to damage rolls for weapons in the projectile category. This bonus increases by 1 for every 4 soldier levels you have.",
+				"minLevel": 1,
+				"entry": {
+					"layout": "bullet barrage",
+				}
 			}
 		},
 		"Class features": {
@@ -700,7 +739,7 @@ allClassFeatures = {
 					"SOURCEPAGE": "p.114",
 					"description": "You gain a +4 bonus to initiative checks and increase your land speed by 10 feet.",
 					"adjustments":{
-						"initiative":4,
+						"initiativeMod":4,
 						"addSpeed":10
 					}
 
@@ -901,7 +940,7 @@ allClassFeatures = {
 					"SOURCEPAGE": "p.115",
 					"description": "You gain DR 3/-. At 17th level, this DR increases to 5/-.",
 					"adjustments":{
-						"DRapplied":"DR 3/-"
+						"DRapplied":"3/-"
 					}
 				},
 				"1st": {

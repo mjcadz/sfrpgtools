@@ -1,5 +1,6 @@
 //globals
 var attackIndexCounter = 0;
+var statBlock = {};
 
 //This funcion reads the state of all the dropdowns in the wizard, uses that info to retrieve the appropriate data from the data objects, then builds and displays the stat block
 function buildStatBlock() {
@@ -7,8 +8,8 @@ function buildStatBlock() {
   //try gathering data
   try {
 
-    //new stat block object
-    var statBlock = {};
+    //reset stat block object
+    statBlock = {};
 
     //Step 1
 
@@ -263,7 +264,7 @@ function buildStatBlock() {
       var style = $('#stepFourOptionDropTwo').val().trim();
       var styleList = soldierFeatures["Fighting style"]["first"];
 
-      statBlock.ClassOffensiveAbilities = getClassAbilityNames('Soldier',soldierCr,statBlock.abilityDCBase,styleList,style);
+      statBlock.ClassOffensiveAbilities = resolveClassAbilities('FightingStyle',soldierCr,statBlock.abilityDCBase,styleList,style);
 
       var secondStyle = '';
       var styleListTwo = [];
@@ -273,12 +274,34 @@ function buildStatBlock() {
         secondStyle = ', ' + styleTwo;
         styleListTwo = soldierFeatures["Fighting style"]["second"];
 
-        statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(getClassAbilityNames('Soldier',soldierCr,statBlock.abilityDCBase,styleListTwo,styleTwo));
+        statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(resolveClassAbilities('FightingStyle',soldierCr,statBlock.abilityDCBase,styleListTwo,styleTwo));
       }
 
       style = 'fighting styles (' + style.toLowerCase() + secondStyle.toLowerCase() + ')';
 
       statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat([style]);
+      //Gear boosts
+
+      if ($('[data-id="stepFourOptionDropFour"]').length){
+        var boosts = $('#stepFourOptionDropFour').val().toString().trim()
+        if (boosts.includes(',')){
+          var boostList = boosts.split(',')
+        } else {
+          var boostList = [boosts];
+        }
+        statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(resolveClassAbilities('GearBoost',soldierCr,statBlock.abilityDCBase,boostList,''));
+
+      }
+
+      if (soldierFeatures.hasOwnProperty("features")) {
+        var features = soldierFeatures.features;
+        for (var i = 0; i < features.length; i++)  {
+          features[i] = features[i].toLowerCase();
+        }
+
+        statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(features);
+      }
+
       statBlock.ClassOffensiveAbilities.sort();
     }
 
@@ -599,9 +622,13 @@ function buildStatBlock() {
 
     //add any initiative mods. ie from operative
     if (statBlock.hasOwnProperty("initiativeMod")){
-      //increase initiative
-      if (statBlock.initiativeMod == "+CR/4"){
-        statBlock.initiative =  '+' + (Number(statBlock.initiative.replace('+','')) + Math.floor(Number(statBlock.Cr) / 4)).toString()
+      //increase initiative if needed
+      if (statBlock.hasOwnProperty('initiativeMod')){
+        if (statBlock.initiativeMod == "+CR/4"){
+          statBlock.initiative = '+' + (Number(statBlock.initiative.replace('+','')) + Math.floor(Number(statBlock.Cr) / 4)).toString();
+        } else {
+          statBlock.initiative = '+' + (Number(statBlock.initiative.replace('+','')) + statBlock.initiativeMod).toString();
+        }
       }
     }
 
@@ -1136,6 +1163,12 @@ function buildStatBlock() {
           var str = Number(statBlock.str.replace('+',''));
           var damageBonus = Number(damageSplit[1])
           damageBonus = damageBonus + str;
+          //add any strength Modifiers
+          if (statBlock.hasOwnProperty('damageMod')){
+            if (statBlock.damageMod == '1/2STR') {
+              damageBonus = damageBonus + (Math.round(str/2));
+            }
+          }
           damage = damageSplit[0] + '+' + damageBonus.toString();
         }
 
@@ -1535,15 +1568,15 @@ function getClassStats(statObject){
   return statObject;
 }
 
-function getClassAbilityNames(Class,ClassCR,ClassDC,abilityList,abilityName){
+function resolveClassAbilities(Data,ClassCR,ClassDC,abilityList,abilityName){
 
   var classAbilityNames = [];
 
   for (var i = 0; i < abilityList.length; i++) {
-    if (Class == 'Soldier'){
-      console.log(abilityName)
-      console.log(allClassFeatures.Soldier["Fighting style"])
-      var ability = allClassFeatures.Soldier["Fighting style"][abilityName][abilityList[i]]
+    if (Data == 'FightingStyle'){
+      var ability = allClassFeatures.Soldier["Fighting style"][abilityName][abilityList[i]];
+    } else if (Data == 'GearBoost'){
+      var ability = allClassFeatures.Soldier["Gear Boost"][abilityList[i]];
     }
 
     var abilityString = '';
@@ -1562,7 +1595,7 @@ function getClassAbilityNames(Class,ClassCR,ClassDC,abilityList,abilityName){
           table = ability.entry[entries[k]]['CR']
           var choice = 'none'
           for (l = 0; l < table.length; l++) {
-            if (soldierCr >= table[l]) {
+            if (ClassCR >= table[l]) {
               choice = l;
             }
           }
@@ -1577,6 +1610,22 @@ function getClassAbilityNames(Class,ClassCR,ClassDC,abilityList,abilityName){
         }
       }
     }
+    if (ability.hasOwnProperty('adjustments')) {
+      var entries = Object.keys(ability.adjustments);
+
+      for (var k = 0; k < entries.length; k++)  {
+        if (statBlock.hasOwnProperty(entries[k])){
+          statBlock[entries[k]] = statBlock[entries[k]] + ability.adjustments[entries[k]];
+        } else {
+          statBlock[entries[k]] = ability.adjustments[entries[k]];
+        }
+      }
+
+    }
+
+
+
+
     if (abilityString != '') {
       classAbilityNames = classAbilityNames.concat([abilityString]);
     }
@@ -3192,7 +3241,14 @@ function stepFourDescription(selected,selectedArray) {
       //choose gear boosts
       if (classFeatures.hasOwnProperty("Gear boost")) {
         var boosts = Object.keys(allClassFeatures["Soldier"]["Gear Boost"]).sort();
-        generateMultiDropdown("stepFourOptionalDropdownFour","Gear boosts","stepFourOptionDropFour","Choose gear boosts","Search boosts",boosts,classFeatures["Gear boost"]);
+        var boostList = []
+        for (var i = 0; i < boosts.length; i++) {
+          if (allClassFeatures["Soldier"]["Gear Boost"][boosts[i]]["minLevel"] <= cr ) {
+            boostList = boostList.concat([boosts[i]])
+          }
+        }
+
+        generateMultiDropdown("stepFourOptionalDropdownFour","Gear boosts","stepFourOptionDropFour","Choose gear boosts",0,boostList,classFeatures["Gear boost"]);
       } else {
         $("#stepFourOptionalDropdownFour").first().empty();
       }
@@ -3976,7 +4032,7 @@ $('.wizard-card').bootstrapWizard({
                 $descriptionArea.empty();
 
                 //print recommended gear
-                if (classDrop != ''){
+                if (classDrop != '' && classDrop != 'None'){
 
                   if (classDrop == 'Solarian') {
                     var solarionDrop = $('#stepFourOptionDrop').val().trim();

@@ -25,12 +25,16 @@ verify class choices have been made
 handle master skills for mystic
 solar manifestations
 solarian weapon crystals added to solar weapon
-solarian gear list shows 1+1
+solarian gear list shows 1+
+recommended class gear level shows numbers over 20
 
 bump version numbers
 soldier do adjustments in abilities
 soldier regular features
 soldier gear boosts
+
+gear show explode and blast attacks. resolve gear boost
+laser accuracy gear boost
 
 gear do armor upgrade properly
 generate attacks from chosen weapons
