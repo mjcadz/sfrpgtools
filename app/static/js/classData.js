@@ -14,31 +14,38 @@ allClassFeatures = {
 				"description": "You realize that not all connections are symmetrical, and seek to be the dominant force in any situation. You aren't necessarily evil; perhaps you consider yourself a benevolent philosophermonarch who takes control for the good of your charges. You might also be a cult leader, a criminal mastermind, or a hypnotist.",
 				"Associated Deities": " Abadar, Besmara, Damoritosh, Lao Shu Po, Zon-Kuthon",
 				"Connection Powers": {
-					"Forceful Commands": {
+					"15th": {
+						"name": "Forceful Commands",
 						"SOURCEPAGE": "p.88",
 						"description": "When you use a mind-affecting charm or compulsion spell or spell-like ability against a target benefiting from an active spell that protects against your attack, you automatically become aware of the presence of such defenses, and can spend 1 Resolve Point as part of casting the spell to attempt a caster level check to dispel the highest-level such spell, as if you had cast dispel magic."
 					},
-					"Greater Forced Amity": {
+					"9th": {
+						"name": "Greater Forced Amity",
 						"SOURCEPAGE": "p.88",
 						"description": "Your forced amity ability functions as charm monster."
 					},
-					"Inexplicable Commands": {
+					"1st": {
+						"name": "Inexplicable Commands",
 						"SOURCEPAGE": "p.88",
 						"description": "When one of your mind-affecting charm or compulsion spells or spell-like abilities ends, the target loses all memory that it was magically controlled or influenced. That creature still remembers the actions it took, but may be confused by them."
 					},
-					"Echoes of Obedience": {
+					"6th": {
+						"name": "Echoes of Obedience",
 						"SOURCEPAGE": "p.88",
 						"description": "Even creatures that resist your dominance can't shake the lingering echoes of your mind. When a creature succeeds at a saving throw against one of your mind-affecting charm or compulsion spells or spell-like abilities and negates the effect, it takes a -1 penalty to AC, attack rolls, and skill checks until the beginning of your next turn. This is a mind-affecting effect."
 					},
-					"Absolute Control": {
+					"18th": {
+						"name": "Absolute Control",
 						"SOURCEPAGE": "p.88",
 						"description": "When you issue a command to a dominated creature that would force it to act against its nature, you can spend 1 Resolve Point to deny it a new saving throw against your domination. The dominated creature still won't carry out an obviously self-destructive order."
 					},
-					"Jealous Overlord": {
+					"12th": {
+						"name": "Jealous Overlord",
 						"SOURCEPAGE": "p.88",
 						"description": "When an ally linked by your telepathic bond class feature is subject to mind-affecting effect that issues commands, as a reaction you can issue a countermand allowing the linked ally to act normally. When you do, attempt an opposed Charisma check against the originator of the mind-affecting effect; if you succeed, your ally can act normally."
 					},
-					"Forced Amity": {
+					"3rd": {
+						"name": "Forced Amity",
 						"SOURCEPAGE": "p.88",
 						"description": "You can spend 1 Resolve Point as a standard action to shunt positive emotions and thoughts through your connection, forcing a humanoid creature to become friendly to you for a time. This functions as charm person."
 					}
@@ -57,31 +64,38 @@ allClassFeatures = {
 				"description": "You channel the energy inherent in the ecosystems around you, taking inspiration from the endless cycles of the natural world. You might be a corporate biotech researcher, a hermitic shaman of the Green Faith, or one of the legendary Xenowardens.",
 				"Associated Deities": " Green Faith (philosophy), Oras",
 				"Connection Powers": {
-					"Reactive Resistance": {
+					"9th": {
+						"name": "Reactive Resistance",
 						"SOURCEPAGE": "p.89",
 						"description": "The first time each day you would take energy damage, you immediately gain resistance 10 to that energy type for the remainder of the day. (If you are damaged by more than one energy type simultaneously, choose which type you resist.)"
 					},
-					"Plant Transport": {
+					"15th": {
+						"name": "Plant Transport",
 						"SOURCEPAGE": "p.89",
 						"description": "Once per day as a full action, you can enter any living plant equal to your size or larger and exit from another plant of the same kind in the same solar system, regardless of the distance separating the two. The destination plant does not need to be familiar to you. If you are uncertain of the location of a particular kind of destination plant, you merely designate direction and distance and this ability moves you as close as possible to the desired location. If a particular destination plant is desired but the plant is not living, this ability fails and you are ejected from the entry plant. You cannot travel through plant creatures. You can bring along objects as long as their bulk doesn't exceed your Strength score. You can also bring up to five willing Medium or smaller creatures (each carrying no more bulk than their Strength scores) with you, provided they are linked to you with joined hands."
 					},
-					"Grasping Vines": {
+					"3rd": {
+						"name": "Grasping Vines",
 						"SOURCEPAGE": "p.89",
 						"description": "You can spend 1 Resolve Point as a standard action to cause an area within 100 feet to sprout writhing vines in a 20-footradius spread. The target surface must be solid but does not need to be capable of sustaining plants normally. The vines have a reach of 5 feet and attempt to wrap around creatures in the area of effect or those that enter the area; such a creature must succeed at a Reflex save or gain the entangled condition. Creatures that successfully save can move as normal, but those that remain in the area must attempt a new save at the end of your turn each round. Creatures moving into the area must attempt a save immediately; failure ends their movement and they become entangled. An entangled creature can break free as a move action with a successful Acrobatics check or DC 15 Strength check. The vines last for a number of rounds equal to your mystic level, and the entire area is difficult terrain while the effect lasts. At 11th level, the vines can reach 10 feet and sprout thorns that deal 1d6 piercing damage each round to creatures in the area."
 					},
-					"Share Resistance": {
+					"12th": {
+						"name": "Share Resistance",
 						"SOURCEPAGE": "p.89",
 						"description": "As a standard action, you can spend 1 Resolve Point to grant allies linked by your telepathic bond class feature resistance 5 to the same energy type that you can resist through your reactive resistance class feature for 1 minute. You can't use this ability if your reactive resistance class feature has not yet been activated for the day."
 					},
-					"Guided Rebirth": {
+					"18th": {
+						"name": "Guided Rebirth",
 						"SOURCEPAGE": "p.89",
 						"description": "As long as you have at least 1 Resolve Point remaining, you can spend all your remaining Resolve Points as a full action to surround yourself with an organic cocoon. While enclosed in the cocoon, you are considered helpless. Eight hours later, you emerge having changed your type to animal, humanoid (of any subtype), or your original type, gaining superficial physical characteristics as appropriate. This change does not alter your ability scores, Hit Points, Stamina Points, saving throws, skill points, class skills, or proficiencies. Each time you make this transformation, you are cleansed of all poisons and diseases, are restored to full Hit Points and Stamina Points, and heal all ability damage. You must select a type other than your current type every time you make the transformation. You can use this ability once per day. Once you use this ability, you can't regain Resolve Points until you rest for 8 hours, even if you have another means to do so."
 					},
-					"Speak with Animals": {
+					"1st": {
+						"name": "Speak with Animals",
 						"SOURCEPAGE": "p.89",
 						"description": "You can communicate with any creature of the animal type, though this doesn't make it friendly. If an animal is friendly toward you, it may do you favors. This ability allows you to use Intimidate to bully animals, and you can use any other language-dependent effect against animals."
 					},
-					"Animal Adaptation": {
+					"6th": {
+						"name": "Animal Adaptation",
 						"SOURCEPAGE": "p.89",
 						"description": "As a standard action, you can modify your body. Choose one of the following to gain the noted benefit"
 					}
@@ -100,31 +114,38 @@ allClassFeatures = {
 				"description": "You use your raw will and understanding of the mind's structure to crush and demoralize your enemies. You might be a special ops assassin, a psychic interrogator, or a righteous military crusader breaking the enemy's spirit on the battlefield.",
 				"Associated Deities": "Besmara, Damoritosh, The Devourer, Iomedae, Urgathoa, Zon-Kuthon",
 				"Connection Powers": {
-					"Sow Doubt": {
+					"6th": {
+						"name": "Sow Doubt",
 						"SOURCEPAGE": "p.87",
 						"description": "As a standard action, you can spend 1 Resolve Point to create uncertainty in the mind of a foe within 30 feet. You choose whether the target becomes flat-footed, becomes off-target, takes a -2 penalty to saving throws, or takes a -2 penalty to skill checks. The effect lasts for a number of rounds equal to half your mystic level, unless the target succeeds at a Will save to reduce the duration to just 1 round. A creature can be affected only by one sow doubt effect. If you use this ability on the same creature again, the new effect replaces the old effect. This is a mind-affecting effect."
 					},
-					"Share Pain": {
+					"1st": {
+						"name": "Share Pain",
 						"SOURCEPAGE": "p.87",
 						"description": "Whenever a foe deals damage to you, you can spend 1 Resolve Point as a reaction to shift some of the pain back onto that foe. Unless the foe succeeds at a Will save, reduce the damage you take from the attack by your mystic level (to a maximum of the attack's damage), and the foe takes an equal amount of damage. This is a mind-affecting pain effect."
 					},
-					"Mindbreaking Link": {
+					"12th": {
+						"name": "Mindbreaking Link",
 						"SOURCEPAGE": "p.87",
 						"description": "Whenever you or an ally linked by your telepathic bond class feature scores a critical hit against a foe, you can spend 1 Resolve Point as a reaction to confuse that foe. The foe must succeed at a Will save or become confused for 1 round. Whether or not it succeeds at this save, the target is affected by your sow doubt ability for 1 round. This is a mind-affecting effect."
 					},
-					"Explode Head": {
+					"18th": {
+						"name": "Explode Head",
 						"SOURCEPAGE": "p.87",
 						"description": "You can spend 1 Resolve Point as a standard action to psychically assault the brain of a foe within 60 feet, causing incredible pressure to build in its head. If the target has 20 Hit Points or fewer, its head explodes, instantly killing the target and spreading debris in a 10-foot radius. Each creature in the area must succeed at a Reflex saving throw or take 2d6 slashing damage from the flying debris. A target with more than 20 Hit Points takes 1d6 damage per mystic level you have (maximum 20d6), but can attempt a Fortitude save to take only half damage. If this damage would reduce the target to 0 HP, the target's head explodes as described above. This ability works only on a creature that has a head and would die from the loss of a head."
 					},
-					"Backlash": {
+					"3rd": {
+						"name": "Backlash",
 						"SOURCEPAGE": "p.87",
 						"description": "Whenever a foe succeeds at a Will save against one of your spells and completely negates the effect, that foe takes 1 nonlethal damage for each mystic level you have. This is a mind-affecting pain effect."
 					},
-					"Mental Anguish": {
+					"9th": {
+						"name": "Mental Anguish",
 						"SOURCEPAGE": "p.87",
 						"description": "As a standard action, you can tweak the pain centers in the brain of a foe within 60 feet, causing it to suffer intense agony. The target must succeed at a Will save or be nauseated for 1 round. Regardless of the save, the creature becomes immune to this ability for 24 hours. This is a mindaffecting pain effect."
 					},
-					"Mindkiller": {
+					"15th": {
+						"name": "Mindkiller",
 						"SOURCEPAGE": "p.87",
 						"description": "As a standard action, you can mold the subconscious fear of a foe within 60 feet into a psychic image of the most disturbing creature imaginable to the target. Only the target can see the mindkiller, and if the target succeeds at a Will save to recognize the image as unreal, the mindkiller has no effect. If the target fails this Will save, the mindkiller touches the target, which must then succeed at a Fortitude save or die from fear. On a successful Fortitude save, the target instead takes 3d6 damage. Once a creature succeeds at either save against this ability, it becomes immune to this ability for 24 hours. This is a mind-affecting fear effect."
 					}
