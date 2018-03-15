@@ -9,6 +9,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
+              <select class="selectpicker show-tick" id="SourcePicker" multiple data-style="btn-default" data-width="100%" data-size="10" data-title="Sources" data-selected-text-format="static">
+                <option selected title="Sources">Alien Archive</option>
+              </select>
+                <hr>
                 <select class="selectpicker show-tick" id="APLPicker" data-style="btn-default" data-width="100%" data-size="10">
                   <option selected>APL 1</option>
                   <option>APL 2</option>
@@ -48,10 +52,30 @@
                 </div>
                 <hr>
                 <div id="advanced" class="collapse">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <select class="selectpicker show-tick" id="CombatTypePicker" data-style="btn-default" data-width="100%" data-size="10">
+                    <option selected>Any combat type</option>
+                    <option>Combatant</option>
+                    <option>Expert</option>
+                    <option>Spellcaster</option>
+                  </select>
+                  <select class="selectpicker show-tick" id="AlignmentPicker" data-style="btn-default" data-width="100%" data-size="10">
+                    <option selected>Any alignment</option>
+                  </select>
+                  <select class="selectpicker show-tick" id="SizePicker" data-style="btn-default" data-width="100%" data-size="10">
+                    <option selected>Any size</option>
+                  </select>
+                  <select class="selectpicker show-tick" id="CreatureTypePicker" data-style="btn-default" data-width="100%" data-size="10">
+                    <option selected>Any creature type</option>
+                  </select>
+                  <select class="selectpicker show-tick" id="EnvironmentPicker" data-style="btn-default" data-width="100%" data-size="10">
+                    <option selected>Any environment</option>
+                  </select>
+                  <button id="pickerButton" type="button" onclick="showMonsterPicker()" class="btn btn-default btn-block">Show monster picker</button>
                   <hr>
+                  <div id="monsterPicker" class="collapse">
+                    <p>Placeholder</p>
+                    <hr>
+                  </div>
                 </div>
 
                 <button type="button" onclick="generateEncounter()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
