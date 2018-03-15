@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Starfinder Encounter Generator{% endblock %}
+{% block description %}Random encounter generator for your combat needs{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <h1>Encounter Generator</h1>
+    <p class="lead">Generates encounters for the Starfinder RPG.</p>
+    <p></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <select class="selectpicker show-tick" id="APLPicker" data-style="btn-default" data-width="100%" data-size="10">
+                  <option selected>APL 1</option>
+                  <option>APL 2</option>
+                  <option>APL 3</option>
+                  <option>APL 4</option>
+                  <option>APL 5</option>
+                  <option>APL 6</option>
+                  <option>APL 7</option>
+                  <option>APL 8</option>
+                  <option>APL 9</option>
+                  <option>APL 10</option>
+                  <option>APL 11</option>
+                  <option>APL 12</option>
+                  <option>APL 13</option>
+                  <option>APL 14</option>
+                  <option>APL 15</option>
+                  <option>APL 16</option>
+                  <option>APL 17</option>
+                  <option>APL 18</option>
+                  <option>APL 19</option>
+                  <option>APL 20</option>
+                </select>
+                <select class="selectpicker show-tick" id="DifficultyPicker" data-style="btn-default" data-width="100%" data-size="10">
+                  <option selected>Easy</option>
+                  <option>Average</option>
+                  <option>Challenging</option>
+                  <option>Hard</option>
+                  <option>Epic</option>
+                </select>
+                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                  <label class="btn btn-default active">
+                    <input type="radio" name="options" id="option1" onchange="hideAdvanced()"/>Basic
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="options" id="option2" onchange="showAdvanced()"/>Advanced
+                  </label>
+                </div>
+                <hr>
+                <div id="advanced" class="collapse">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <hr>
+                </div>
+
+                <button type="button" onclick="generateEncounter()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
+                <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
+                <P></P>
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+
+    <div class="output area">
+
+    </div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/encounterGen.v2.0.js') }}"></script>
+{% endblock %}

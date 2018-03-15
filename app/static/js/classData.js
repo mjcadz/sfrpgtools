@@ -164,31 +164,38 @@ allClassFeatures = {
 				"description": "Your connection channels the energy of the cosmos, its celestial bodies, and the dark voids between them. You might be a brilliant astronomer, a daredevil starpilot, a Drift explorer, a prophetic astrologer, or a would-be transhuman godling.",
 				"Associated Deities": " Desna, The Devourer, Ibra, Nyarlathotep, Sarenrae, Triune",
 				"Connection Powers": {
-					"Starlight Form": {
+					"3rd": {
+						"name": "Starlight Form",
 						"SOURCEPAGE": "p.88",
 						"description": "You can transform yourself into blazing starlight as a standard action. Your body sheds normal light in a 30-foot radius, and you gain the benefits of concealment (20%% miss chance). At 7th level, a creature that ends its turn adjacent to your starlight form must succeed at a Fortitude save or be blinded for 1 round. You can maintain your starlight form for a number of minutes per day equal to your mystic level; this duration does not need to be continuous, but it must be used in 1-minute increments. You can forgo the ability's concealment and blinding aspects to instead simply shed light, though this still counts against the ability's duration for the day."
 					},
-					"Interplanetary Teleport": {
+					"18th": {
+						"name": "Interplanetary Teleport",
 						"SOURCEPAGE": "p.89",
 						"description": "At 18th level, once per day, you can spend 1 Resolve Point as a full action to use interplanetary teleport as a spell-like ability. If you have been to a location in another star system before, you can spend 2 Resolve Points to use interplanetary teleport to travel there, even though it exceeds the spell's normal range."
 					},
-					"Starry Bond": {
+					"12th": {
+						"name": "Starry Bond",
 						"SOURCEPAGE": "p.88",
 						"description": "You can share the good fortune of your stargazer class feature with your allies. Whenever an ally linked by your telepathic bond class feature fails an ability check, attack roll, saving throw, or skill check, you can spend 1 Resolve Point as a reaction to enable your ally to reroll the failed check (see page 243). This ability otherwise functions as the stargazer class feature."
 					},
-					"Starflight": {
+					"9th": {
+						"name": "Starflight",
 						"SOURCEPAGE": "p.88",
 						"description": "While in starlight form, you gain the ability to fly as per the flight spell (spell level 3rd or lower)."
 					},
-					"Walk the Void": {
+					"1st": {
+						"name": "Walk the Void",
 						"SOURCEPAGE": "p.88",
 						"description": "You are immune to the harmful environmental effects of outer space and vacuum. You also gain a fly speed of 20 feet while in space. In addition, whenever you can see the stars, you can determine your precise location. Finally, add Piloting to your list of class skills."
 					},
-					"Meteor Shower": {
+					"15th": {
+						"name": "Meteor Shower",
 						"SOURCEPAGE": "p.88",
 						"description": "You can spend 1 Resolve Point as a full action to call down a rain of meteorites in a 10-foot-radius vertical cylinder, 40 feet high, at a range of up to 250 feet. The meteorites deal 12d6 damage to every creature in the area (Reflex half). Half the damage is bludgeoning damage; the other half is fire damage. If you are outdoors and can see stars, the meteorites instead deal 12d10 damage. "
 					},
-					"Stargazer": {
+					"6th": {
+						"name": "Stargazer",
 						"SOURCEPAGE": "p.88",
 						"description": "You can study the stars to gain a bit of good luck. Twice per day, if you are outdoors and can see the stars, you can reroll a failed ability check, attack roll, saving throw, or skill check (see page 243)."
 					}
@@ -207,31 +214,38 @@ allClassFeatures = {
 				"description": "Your connection channels the life force of all things-as well as its counterpart, death. You're an expert healer, but not necessarily a selfless one. You might be a traveling doctor, a haunted medium, a military medic, or a tyrannical necromancer.",
 				"Associated Deities": " Desna, Hylax, Iomedae, Pharasma, Sarenrae, Talavet, Urgathoa, Weydan",
 				"Connection Powers": {
-					"Lifelink": {
+					"3rd": {
+						"name": "Lifelink",
 						"SOURCEPAGE": "p.86",
 						"description": "At the start of each turn, you can choose an ally within 30 feet who has taken Hit Point damage and transfer her wounds to yourself, dealing an amount of damage up to your mystic level to your Hit Points (bypassing any Stamina Points you may have) and healing the ally's Hit Points an equal amount. This doesn't require any action on your part. You can't prevent or reduce the damage you take from lifelink."
 					},
-					"Healer's Bond": {
+					"6th": {
+						"name": "Healer's Bond",
 						"SOURCEPAGE": "p.86",
 						"description": "As a standard action, you can form a bond with up to three allies, allowing you to constantly sense their condition as per the status spell. This bond lasts until dispelled or until you create a new healer's bond, which immediately ends the previous one. At 11th level, when you gain the telepathic bond class feature, you also gain the effects of status on all creatures linked by your telepathic bond."
 					},
-					"Steal Life": {
+					"9th": {
+						"name": "Steal Life",
 						"SOURCEPAGE": "p.86",
 						"description": "As a standard action, you can spend 1 Resolve Point to steal part of a creature's life force and transfer it to yourself or others. You must touch the target (requiring a successful melee attack against its EAC), which deals 1d6 damage for every 2 mystic levels you have (maximum 10d6). Choose an ally within 30 feet; that ally recovers an amount of Hit Points equal to the damage dealt (to a maximum of the foe's remaining Hit Points). Alternatively, you can heal yourself instead, but you restore only a number of Hit Points equal to half the damage dealt. If this heals the recipient (you or your ally) up to maximum Hit Points, any excess persists for 1 hour as temporary Hit Points. If your attack misses, you don't lose the Resolve Point."
 					},
-					"Channel Life": {
+					"15th": {
+						"name": "Channel Life",
 						"SOURCEPAGE": "p.87",
 						"description": "If you use healing channel on a creature that has died within 1 round, you can bring it back to life as per a 5thlevel mystic cure spell."
 					},
-					"Deny Death": {
+					"18th": {
+						"name": "Deny Death",
 						"SOURCEPAGE": "p.87",
 						"description": "You are immune to death effects and negative levels. If you would normally die from damage, as long as you have at least 1 Resolve Point remaining, you can immediately spend all of your remaining Resolve Points to instead stay alive. If your Hit Points would have been reduced to 0, you now have 1 Hit Point instead. Once you use this ability, you can't regain Resolve Points again until you rest for 8 hours, even if you have another means to do so."
 					},
-					"Healing Channel": {
+					"1st": {
+						"name": "Healing Channel",
 						"SOURCEPAGE": "p.86",
 						"description": "You can heal yourself and your allies. You can spend 1 Resolve Point to channel this energy. Healing yourself with channeled energy is a move action, healing an ally you touch is a standard action, and healing all allies within 30 feet is a full action. This energy restores 2d8 Hit Points and increases by 2d8 at 3rd level and every 3 levels thereafter."
 					},
-					"Channel Bond": {
+					"12th": {
+						"name": "Channel Bond",
 						"SOURCEPAGE": "p.87",
 						"description": "When you use healing channel as a standard action, you can heal an ally linked by your telepathic bond class feature as if you were touching that ally, as long as the ally is within 120 feet. When you use healing channel as a full action, it heals all allies linked by your telepathic bond class feature within 120 feet (as well as all other allies within 30 feet)."
 					}
@@ -250,31 +264,38 @@ allClassFeatures = {
 				"description": "Your connection helps you sense emotions and notice details others can't. You might be a diplomat, an investigator, a mindreading bodyguard, a ship's psychologist, or a psychic con artist.",
 				"Associated Deities": " Abadar, Hylax, Iomedae, Sarenrae, Talavet, Triune (Casandalee)",
 				"Connection Powers": {
-					"Empathy": {
+					"1st": {
+						"name": "Empathy",
 						"SOURCEPAGE": "p.86",
 						"description": "As a full action, you can attempt a Sense Motive check to read the emotions of a particular creature (DC = 20 or 10 + its Bluff modifier, whichever is higher). If you succeed, you learn its general disposition and attitude toward creatures within 30 feet of it, and you gain a +2 circumstance bonus to Bluff, Diplomacy, Intimidate, and Sense Motive checks against that creature for 1 hour. Whether you succeed or fail, after opening your mind to read emotions, you take a -2 penalty to saving throws against mind-affecting effects for 1 minute."
 					},
-					"Greater Emotionsense": {
+					"12th": {
+						"name": "Greater Emotionsense",
 						"SOURCEPAGE": "p.86",
 						"description": "Your emotionsense is far more discerning, as if you had blindsight (emotion); see page 262."
 					},
-					"Greater Mindlink": {
+					"3rd": {
+						"name": "Greater Mindlink",
 						"SOURCEPAGE": "p.86",
 						"description": "You can use your mindlink ability on the same creature as many times per day as you wish, and the communication can be both ways, though the maximum of 10 minutes of communication per round still applies."
 					},
-					"Discern Lies": {
+					"9th": {
+						"name": "Discern Lies",
 						"SOURCEPAGE": "p.86",
 						"description": "You can use discern lies as a spell-like ability a number of times per day equal to your mystic level, each time targeting a single creature. This effect lasts 1 round. Once a creature successfully saves against this ability, it becomes immune to further uses of this ability for 24 hours."
 					},
-					"Empathic Mastery": {
+					"18th": {
+						"name": "Empathic Mastery",
 						"SOURCEPAGE": "p.86",
 						"description": "You can spend 1 Resolve Point to use psychic surgery as a spell-like ability. If you are incapacitated by an effect that psychic surgery could remove and have at least 1 Resolve Point remaining, you can spend 1 Resolve Point to use this ability on yourself, even without being able to take any actions."
 					},
-					"Retrocognition": {
+					"15th": {
+						"name": "Retrocognition",
 						"SOURCEPAGE": "p.86",
 						"description": "You can use retrocognition as a spell-like ability at will. When doing so, you take a -2 penalty to saving throws against mind-affecting effects for as long as you concentrate on retrocognition and an equal amount of time afterward. You can spend 1 Resolve Point to negate this penalty."
 					},
-					"Emotionsense": {
+					"6th": {
+						"name": "Emotionsense",
 						"SOURCEPAGE": "p.86",
 						"description": "You can detect and locate creatures within 60 feet that have emotions, as if you had blindsense (emotion); see page 262. A creature can keep its emotions calm to avoid detection by this ability by succeeding at a Bluff check with a DC equal to 10 + your Sense Motive modifier, but a creature under the influence of an emotion effect cannot try to avoid detection. Creatures under the effects of nondetection or similar effects automatically avoid detection by this ability. Unless otherwise stated, constructs and creatures with Intelligence scores of 2 or lower don't have emotions and can't be sensed this way."
 					}
@@ -293,31 +314,38 @@ allClassFeatures = {
 				"description": "You're linked to the collective knowledge of every sentient species that ever lived that's held in the Akashic Record, an Astral library of perfect psychic records of every moment in history. You might be an ancient lorekeeper, an inquisitive student of the occult, an intuitive consulting detective, or a secret-hoarding spy.",
 				"Associated Deities": "Eloritu, Nyarlathotep, Pharasma, Talavet, Triune, Weydan, Yaraesa",
 				"Connection Powers": {
-					"Peer into the Future": {
+					"6th": {
+						"name": "Peer into the Future",
 						"SOURCEPAGE": "p.85",
 						"description": "Once per day, you can spend 10 minutes in uninterrupted meditation to receive visions of possible futures. At any point over the next 24 hours, you can declare that you are using the benefit of this ability before rolling one initiative check, saving throw, or skill check. You gain a +4 insight bonus to that check. At 11th level, you can use this ability twice per day, though you can't use it again until after you've used your first bonus."
 					},
-					"Memory Palace": {
+					"15th": {
+						"name": "Memory Palace",
 						"SOURCEPAGE": "p.85",
 						"description": "You assemble an extradimensional library to house mental constructs representing your accumulated knowledge. This memory palace has a single shimmering entrance. You can access your memory palace once per day; when you do, the entrance appears within close range. If any creatures or objects that were not part of the memory palace when it was created remain inside it, the entrance remains where it first appeared. Only those you designate can enter the memory palace, and the entrance closes and becomes invisible behind you when you enter. Anyone inside can open the entrance and exit the memory palace at will. The only way to enter and exit the memory palace is via the entrance; even plane shift and similar magic do not access it. You can create any floor plan you desire for your memory palace, up to a number of 10-foot cubes equal to your mystic level. Inside, the atmosphere is clean, fresh, and warm; outside conditions don't affect the memory palace, nor do conditions inside it pass beyond. There is no furniture other than bookcases, computers, and a few desks and sofas. A number of unseen servants (as per the spell of the same name) equal to half your mystic level serve as librarians. The library keeps the same layout each time you access it, though you can alter its appearance each time you gain a level or by spending 15 minutes concentrating-you don't need to be inside it to alter it. When you gain this ability, choose one skill that can be used with the recall knowledge task. Consulting your memory palace gives anyone who studies within-including you-a +4 enhancement bonus to skill checks to recall knowledge of that type, and creatures inside the memory palace can attempt checks of that type untrained. At 16th level, and at each level thereafter, choose another skill that can be used with the recall knowledge task to which your memory palace's skill bonus applies."
 					},
-					"Mind Probe": {
+					"9th": {
+						"name": "Mind Probe",
 						"SOURCEPAGE": "p.85",
 						"description": "You can use mind probe as a spell-like ability a number of times per day equal to your mystic level, lasting for 1 round. A creature that successfully saves against your mind probe is immune to further uses of this ability for 24 hours."
 					},
-					"Telepathic Memories": {
+					"12th": {
+						"name": "Telepathic Memories",
 						"SOURCEPAGE": "p.85",
 						"description": "You can share memories at will with allies linked by your telepathic bond class feature. As a full action, you or a linked ally can send a memory of up to 1 minute to as many others in the bond as they choose. Sending a relevant memory counts as a successful aid another attempt for a skill check, even if you wouldn't otherwise be able to use aid another (to a limit of one such memory per skill check)."
 					},
-					"Access Akashic Record": {
+					"3rd": {
+						"name": "Access Akashic Record",
 						"SOURCEPAGE": "p.85",
 						"description": "You can access the Akashic Record to augment your skills. You can spend 1 Resolve Point to attempt a skill check as if you had ranks in that skill equal to your mystic level."
 					},
-					"Akashic Knowledge": {
+					"1st": {
+						"name": "Akashic Knowledge",
 						"SOURCEPAGE": "p.85",
 						"description": "You gain the channel skill ability at 1st level (instead of 2nd level). Each day when you recover your spell slots, you can tap into the Akashic Record, enabling you to choose one Profession skill and add that to your list of associated skills for the channel skill class feature."
 					},
-					"Glean Spell": {
+					"18th": {
+						"name": "Glean Spell",
 						"SOURCEPAGE": "p.85",
 						"description": "Once per day, you can delve into the Akashic Record to cast a spell from either the mystic or technomancer spell list as if it were on your list of spells known. The spell consumes a spell slot 1 level higher than the level of the spell."
 					}

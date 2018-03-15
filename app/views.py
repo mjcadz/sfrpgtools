@@ -57,3 +57,9 @@ def changelog():
     resp = make_response(render_template('changelog.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
+
+@app.route('/encounter-generator')
+def encounterGenerator():
+    resp = make_response(render_template('encounter-generator.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp
