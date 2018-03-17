@@ -1,4 +1,4 @@
-var equipmentData = {
+var monsterData = {
   "Aeon Guard":{
     "cr": "3",
     "combatType": "combatant",

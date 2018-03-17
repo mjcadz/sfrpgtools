@@ -6,13 +6,14 @@
     <h1>Encounter Generator</h1>
     <p class="lead">Generates encounters for the Starfinder RPG.</p>
     <p></p>
+
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-              <select class="selectpicker show-tick" id="SourcePicker" multiple data-style="btn-default" data-width="100%" data-size="10" data-title="Sources" data-selected-text-format="static">
-                <option selected title="Sources">Alien Archive</option>
-              </select>
-                <hr>
+                <select class="selectpicker show-tick" id="SourcePicker" multiple data-style="btn-default" data-width="100%" data-size="10" data-title="Sources" data-selected-text-format="static">
+                  <option selected title="Sources">Alien Archive</option>
+                </select>
+                <hr style="margin-top: 8px;">
                 <select class="selectpicker show-tick" id="APLPicker" data-style="btn-default" data-width="100%" data-size="10">
                   <option selected>APL 1</option>
                   <option>APL 2</option>
@@ -50,40 +51,90 @@
                     <input type="radio" name="options" id="option2" onchange="showAdvanced()"/>Advanced
                   </label>
                 </div>
-                <hr>
-                <div id="advanced" class="collapse">
-                  <select class="selectpicker show-tick" id="CombatTypePicker" data-style="btn-default" data-width="100%" data-size="10">
-                    <option selected>Any combat type</option>
-                    <option>Combatant</option>
-                    <option>Expert</option>
-                    <option>Spellcaster</option>
-                  </select>
-                  <select class="selectpicker show-tick" id="AlignmentPicker" data-style="btn-default" data-width="100%" data-size="10">
-                    <option selected>Any alignment</option>
-                  </select>
-                  <select class="selectpicker show-tick" id="SizePicker" data-style="btn-default" data-width="100%" data-size="10">
-                    <option selected>Any size</option>
-                  </select>
-                  <select class="selectpicker show-tick" id="CreatureTypePicker" data-style="btn-default" data-width="100%" data-size="10">
-                    <option selected>Any creature type</option>
-                  </select>
-                  <select class="selectpicker show-tick" id="EnvironmentPicker" data-style="btn-default" data-width="100%" data-size="10">
-                    <option selected>Any environment</option>
-                  </select>
-                  <button id="pickerButton" type="button" onclick="showMonsterPicker()" class="btn btn-default btn-block">Show monster picker</button>
-                  <hr>
-                  <div id="monsterPicker" class="collapse">
-                    <p>Placeholder</p>
-                    <hr>
-                  </div>
-                </div>
+                <p></p>
 
-                <button type="button" onclick="generateEncounter()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
-                <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
-                <P></P>
             </div>
-            <div class="col-md-8"></div>
+            <div class="col-md-4">
+              <div id="advanced" class="collapse">
+                <select class="selectpicker show-tick" multiple id="CombatTypePicker" data-none-selected-text="Any combat style" data-style="btn-default" data-width="100%" data-size="10">
+                  <option>Combatant</option>
+                  <option>Expert</option>
+                  <option>Spellcaster</option>
+                </select>
+                <select class="selectpicker show-tick" id="AlignmentPicker" data-style="btn-default" data-width="100%" data-size="10">
+                  <option selected>Any alignment</option>
+                </select>
+                <select class="selectpicker show-tick" multiple id="SizePicker" data-none-selected-text="Any size" data-style="btn-default" data-width="100%" data-size="10">
+                  <option>Fine</option>
+                  <option>Diminutive</option>
+                  <option>Tiny</option>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                  <option>Huge</option>
+                  <option>Gargantuan</option>
+                  <option>Colossal</option>
+                </select>
+                <select class="selectpicker show-tick" multiple id="CreatureTypePicker" data-none-selected-text="Any creature type" data-style="btn-default" data-width="100%" data-size="10">
+                  <option>Aberration</option>
+                  <option>Animal</option>
+                  <option>Construct</option>
+                  <option>Dragon</option>
+                  <option>Fey</option>
+                  <option>Humanoid</option>
+                  <option>Magical Beast</option>
+                  <option>Monstrous Humanoid</option>
+                  <option>Ooze</option>
+                  <option>Outsider</option>
+                  <option>Plant</option>
+                  <option>Undead</option>
+                  <option>Vermin</option>
+                </select>
+                <select class="selectpicker show-tick" id="EnvironmentPicker" data-style="btn-default" data-width="100%" data-size="10">
+                  <option selected>Any environment</option>
+                </select>
+                <button id="pickerButton" type="button" onclick="showMonsterPicker()" class="btn btn-default btn-block">Show monster picker</button>
+
+
+              </div>
+
+            </div>
+            <div class="col-md-4"></div>
         </div>
+        <hr>
+        <div id="monsterPicker" class="collapse">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="success">
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+              </tr>
+              <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+              </tr>
+              <tr class="success">
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+        </div>
+
+        <button type="button" onclick="generateEncounter()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
+        <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
+        <P></P>
     </div>
 
     <div class="output area">
@@ -93,5 +144,6 @@
 {% endblock %}
 {% block includes %}
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterData.v2.0.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/encounterGen.v2.0.js') }}"></script>
 {% endblock %}

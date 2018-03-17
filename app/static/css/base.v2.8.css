@@ -454,3 +454,11 @@ line-height: 1.4;
 .carousel-caption{
     padding-bottom: 15px;
 }
+
+.fa-lock {
+  color: #666666;
+}
+
+.fa-unlock {
+  color: #d9d9d9;
+}
