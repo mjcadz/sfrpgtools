@@ -24,20 +24,20 @@ var difficulty = {
 
 function generateEncounter() {
 
-  var selectedAPL = getAPL();
+  var selectedAPL = calculateAPL();
   var selectedDiff = $('#DifficultyPicker').val().trim();
   var diffNum = difficulty[selectedDiff];
   var encounterCR = selectedAPL + diffNum;
-  var xpBudget = xp[encounterCR.toString()]
+  var xpBudget = xp[encounterCR.toString()];
 
   var mode = $('#ModeRadio').find(".btn.active").find("input").attr('name').trim();
 
   //var filter = { size: ["large"], organization:["pair"]};
   var filter = buildFilter();
 
-  var crFilter = ["1/8","1/6","1/4","1/3","1/2"]
+  var crFilter = ["1/8","1/6","1/4","1/3","1/2"];
   for (i = 1; i <= encounterCR; i++) {
-    crFilter.push(i.toString())
+    crFilter.push(i.toString());
   }
   filter["cr"] = crFilter
 
@@ -54,7 +54,7 @@ function generateEncounter() {
   }
 
 
-  displayResults(displayMonsters,selectedAPL,selectedDiff);
+  displayResults(displayMonsters);
 
   /* get listed environments, debug only
   var env = [];
@@ -71,12 +71,12 @@ function generateEncounter() {
 
 }
 
-function getAPL() {
+function calculateAPL() {
 
   var players = [];
   var playersTotal = 0;
   var levels = [];
-  var aplnum = 0;
+  var levelSum = 0;
 
   $("[id^='PlayerPicker']").each(function(){
       var currentPlayers = Number($(this).val().trim())
@@ -88,15 +88,14 @@ function getAPL() {
   });
 
   for (i = 0; i < players.length; i++) {
-    aplnum += players[i] * levels[i];
+    levelSum += players[i] * levels[i];
   }
+  var apl = Math.round(levelSum/playersTotal)
 
-  var apl = Math.round(aplnum/playersTotal)
-
-  if (playersTotal < 4){
+  if (playersTotal < 4 && apl > 1){
     apl -= 1;
   }
-  if (playersTotal > 5){
+  if (playersTotal > 5 && apl < 20){
     apl += 1;
   }
   return apl;
@@ -197,7 +196,7 @@ function filterObject(obj,filterBy){
   return filteredObject;
 }
 
-function displayResults(obj,apl,difficulty) {
+function displayResults(obj) {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
@@ -255,12 +254,18 @@ function hideMonsterPicker() {
 }
 
 function addLevel() {
+  //append dropdown html
   levelIndexCounter += 1
   $(".playerCol").append('<select class="selectpicker show-tick removablePlayer" id="PlayerPicker' + levelIndexCounter.toString() + '" data-style="btn-default" data-width="100%" data-size="10"><option>1</option><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select>' );
   $(".levelCol").append('<select class="selectpicker show-tick removableLevel" id="LevelPicker' + levelIndexCounter.toString() + '" data-style="btn-default" data-width="100%" data-size="10"><option><selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option></select>' );
-
+  //initialise dropdowns
   $('#PlayerPicker' + levelIndexCounter.toString()).selectpicker();
   $('#LevelPicker' + levelIndexCounter.toString()).selectpicker();
+  //update APL on changes
+  $('#PlayerPicker' + levelIndexCounter.toString()).on('changed.bs.select', updateAPLDisplay);
+  $('#LevelPicker' + levelIndexCounter.toString()).on('changed.bs.select', updateAPLDisplay);
+
+  updateAPLDisplay();
 }
 
 function removeLevel(){
@@ -270,10 +275,22 @@ function removeLevel(){
   }
   $('.bootstrap-select.removablePlayer').last().remove();
   $('.bootstrap-select.removableLevel').last().remove();
+
+  updateAPLDisplay();
+}
+
+function updateAPLDisplay() {
+    var apl = calculateAPL()
+    var displayText = 'APL ' + apl.toString();
+
+    $('#aplDisplay').text(displayText);
 }
 
 //runs when page is loaded
 $( document ).ready(function() {
   //initialise pickers
   $('.selectpicker').selectpicker();
+
+  $('#PlayerPicker0').on('changed.bs.select', updateAPLDisplay);
+  $('#LevelPicker0').on('changed.bs.select', updateAPLDisplay);
 });
