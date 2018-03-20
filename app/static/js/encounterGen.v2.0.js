@@ -22,6 +22,19 @@ var difficulty = {
   "Epic": 3,
 };
 
+var crEquivalencies = {
+  "1" : 0,
+  "2" : -2,
+  "3" : -3,
+  "4" : -4,
+  "6" : -5,
+  "8" : -6,
+  "12" : -7,
+  "16" : -8,
+  "24" : -9,
+  "32" : -10
+}
+
 function generateEncounter() {
 
   var selectedAPL = calculateAPL();
@@ -35,26 +48,36 @@ function generateEncounter() {
   //var filter = { size: ["large"], organization:["pair"]};
   var filter = buildFilter();
 
-  var crFilter = ["1/8", "1/6", "1/4", "1/3", "1/2"];
-  for (i = 1; i <= encounterCR; i++) {
-    crFilter.push(i.toString());
-  }
-  filter["cr"] = crFilter
+  //var crFilter = ["1/8", "1/6", "1/4", "1/3", "1/2"];
+  //for (i = 1; i <= encounterCR; i++) {
+  //  crFilter.push(i.toString());
+  //}
+  //filter["cr"] = crFilter
+
+  var nums = ["1", "2"]
+  var orgs = ["solitary","pair"];
+  var numMonsters = nums.selectRandom();
+  var organization = orgs[nums.indexOf(numMonsters)]
+
+  filter["cr"] = [encounterCR + crEquivalencies[numMonsters]];
+  console.log(filter["cr"])
 
   var filteredMonsters = filterObject(monsterData, filter)
   var displayMonsters = {}
 
-  while (xpBudget > 0) {
-
+  //check organisation
+  do {
     var key = randomKey(filteredMonsters)
-
-    displayMonsters[key] = filteredMonsters[key];
-    xpBudget = xpBudget - xp[displayMonsters[key].cr]
-
   }
+  while (!filteredMonsters[key].organization.includes(organization));
 
+  displayMonsters[key] = filteredMonsters[key];
 
-  displayResults(displayMonsters);
+  //while (xpBudget > 0) {
+  //  xpBudget = xpBudget - xp[displayMonsters[key].cr]
+  //}
+  console.log(displayMonsters)
+  displayResults(displayMonsters,numMonsters);
 
   /* get listed environments, debug only
   var env = [];
@@ -196,16 +219,21 @@ function filterObject(obj, filterBy) {
   return filteredObject;
 }
 
-function displayResults(obj) {
+function displayResults(obj,num) {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
-  var tableHTML = '<table class="table table-striped"><thead><tr><th>Lock</th><th>Creature</th><th>CR</th><th>Type</th><th>Sourcepage</th></tr></thead><tbody>';
+  var tableHTML = '<table class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Type</th><th>Sourcepage</th></tr></thead><tbody>';
   for (creature in obj) {
+
+    var creaturePrint = creature;
+    if (num == 2) {
+      creaturePrint += ' Pair'
+    }
 
     var index = 'index' + tableIndexCounter.toString();
     lockToggle = '<i style="padding-left: 5px;" id="' + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
-    tableHTML += '<tr><td>' + lockToggle + '</td><td>' + creature + '</td><td>' + obj[creature].cr + '</td><td>' + obj[creature].type + '</td><td>' + obj[creature].source + ' p.' + obj[creature].page + '</td></tr>';
+    tableHTML += '<tr><td>' + lockToggle + '</td><td>' + num + '</td><td>' + creaturePrint + '</td><td>' + obj[creature].cr + '</td><td>' + obj[creature].type + '</td><td>' + obj[creature].source + ' p.' + obj[creature].page + '</td></tr>';
     tableIndexCounter += 1;
   }
   tableHTML += '</tbody></table>';
@@ -281,9 +309,9 @@ function removeLevel() {
 
 function updateAPLDisplay() {
   var apl = calculateAPL()
-  var displayText = 'APL ' + apl.toString();
+  var displayText = 'APL <b style="font-size: 16px;">' + apl.toString() + '</b>';
 
-  $('#aplDisplay').text(displayText);
+  $('#aplDisplay').html(displayText);
 }
 
 //runs when page is loaded
