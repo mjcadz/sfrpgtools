@@ -3,23 +3,23 @@ var tableIndexCounter = 0;
 var levelIndexCounter = 0;
 
 var alignments = {
-  "LG":["Lawful","Good"],
-  "LN":["Lawful","Neutral"],
-  "LE":["Lawful","Evil"],
-  "NG":["Neutral","Good"],
-  "N":"Neutral",
-  "NE":["Neutral","Evil"],
-  "CG":["Chaotic","Good"],
-  "CN":["Chaotic","Neutral"],
-  "CE":["Chaotic","Evil"]
+  "LG": ["Lawful", "Good"],
+  "LN": ["Lawful", "Neutral"],
+  "LE": ["Lawful", "Evil"],
+  "NG": ["Neutral", "Good"],
+  "N": "Neutral",
+  "NE": ["Neutral", "Evil"],
+  "CG": ["Chaotic", "Good"],
+  "CN": ["Chaotic", "Neutral"],
+  "CE": ["Chaotic", "Evil"]
 };
 
 var difficulty = {
-  "Easy":-1,
-  "Average":0,
-  "Challenging":1,
-  "Hard":2,
-  "Epic":3,
+  "Easy": -1,
+  "Average": 0,
+  "Challenging": 1,
+  "Hard": 2,
+  "Epic": 3,
 };
 
 function generateEncounter() {
@@ -35,13 +35,13 @@ function generateEncounter() {
   //var filter = { size: ["large"], organization:["pair"]};
   var filter = buildFilter();
 
-  var crFilter = ["1/8","1/6","1/4","1/3","1/2"];
+  var crFilter = ["1/8", "1/6", "1/4", "1/3", "1/2"];
   for (i = 1; i <= encounterCR; i++) {
     crFilter.push(i.toString());
   }
   filter["cr"] = crFilter
 
-  var filteredMonsters = filterObject(monsterData,filter)
+  var filteredMonsters = filterObject(monsterData, filter)
   var displayMonsters = {}
 
   while (xpBudget > 0) {
@@ -78,31 +78,31 @@ function calculateAPL() {
   var levels = [];
   var levelSum = 0;
 
-  $("[id^='PlayerPicker']").each(function(){
-      var currentPlayers = Number($(this).val().trim())
-      players.push(currentPlayers);
-      playersTotal += currentPlayers
+  $("[id^='PlayerPicker']").each(function() {
+    var currentPlayers = Number($(this).val().trim())
+    players.push(currentPlayers);
+    playersTotal += currentPlayers
   });
-  $("[id^='LevelPicker']").each(function(){
-      levels.push(Number($(this).val().trim()))
+  $("[id^='LevelPicker']").each(function() {
+    levels.push(Number($(this).val().trim()))
   });
 
   for (i = 0; i < players.length; i++) {
     levelSum += players[i] * levels[i];
   }
-  var apl = Math.round(levelSum/playersTotal)
+  var apl = Math.round(levelSum / playersTotal)
 
-  if (playersTotal < 4 && apl > 1){
+  if (playersTotal < 4 && apl > 1) {
     apl -= 1;
   }
-  if (playersTotal > 5 && apl < 20){
+  if (playersTotal > 5 && apl < 20) {
     apl += 1;
   }
   return apl;
 
 }
 
-function buildFilter(){
+function buildFilter() {
 
   var filter = {};
 
@@ -112,13 +112,13 @@ function buildFilter(){
   var environment = $('#EnvironmentPicker').val().toString().toLowerCase().trim();
 
   var alignment = $('#AlignmentPicker').val().toString().toLowerCase().trim();
-  alignment = alignment.replace('lawful good','LG').replace('lawful neutral','LN').replace('lawful evil','LE');
-  alignment = alignment.replace('neutral good','NG').replace('neutral','N').replace('neutral evil','NE');
-  alignment = alignment.replace('chaotic good','CG').replace('chaotic neutral','CN').replace('chaotic evil','CE');
+  alignment = alignment.replace('lawful good', 'LG').replace('lawful neutral', 'LN').replace('lawful evil', 'LE');
+  alignment = alignment.replace('neutral good', 'NG').replace('neutral', 'N').replace('neutral evil', 'NE');
+  alignment = alignment.replace('chaotic good', 'CG').replace('chaotic neutral', 'CN').replace('chaotic evil', 'CE');
 
 
   if (combatType != '') {
-    if (combatType.includes(',')){
+    if (combatType.includes(',')) {
       filter['combatType'] = combatType.split(',');
     } else {
       filter['combatType'] = [combatType];
@@ -126,7 +126,7 @@ function buildFilter(){
   }
 
   if (size != '') {
-    if (size.includes(',')){
+    if (size.includes(',')) {
       filter['size'] = size.split(',');
     } else {
       filter['size'] = [size];
@@ -134,7 +134,7 @@ function buildFilter(){
   }
 
   if (type != '') {
-    if (type.includes(',')){
+    if (type.includes(',')) {
       filter['type'] = type.split(',');
     } else {
       filter['type'] = [type];
@@ -142,7 +142,7 @@ function buildFilter(){
   }
 
   if (alignment != '') {
-    if (alignment.includes(',')){
+    if (alignment.includes(',')) {
       filter['alignment'] = alignment.split(',');
     } else {
       filter['alignment'] = [alignment];
@@ -150,7 +150,7 @@ function buildFilter(){
   }
 
   if (environment != '') {
-    if (environment.includes(',')){
+    if (environment.includes(',')) {
       filter['environment'] = environment.split(',');
     } else {
       filter['environment'] = [environment];
@@ -161,7 +161,7 @@ function buildFilter(){
   return filter;
 }
 
-function filterObject(obj,filterBy){
+function filterObject(obj, filterBy) {
 
   var keys = Object.keys(filterBy)
   var filteredObject = obj;
@@ -173,18 +173,18 @@ function filterObject(obj,filterBy){
     for (j = 0; j < value.length; j++) {
       for (property in object) {
         //check if object value is string
-        if (typeof object[property][keys[i]] === 'string'){
+        if (typeof object[property][keys[i]] === 'string') {
           if (object[property][keys[i]] == value[j]) {
-            if (!filteredObject.hasOwnProperty(property)){
-              filteredObject[property] = monsterData[property]
+            if (!filteredObject.hasOwnProperty(property)) {
+              filteredObject[property] = object[property]
             }
           }
         }
         //check if object value is array
-        else if (object[property][keys[i]].constructor === Array){
+        else if (object[property][keys[i]].constructor === Array) {
           if (object[property][keys[i]].includes(value[j])) {
-            if (!filteredObject.hasOwnProperty(property)){
-              filteredObject[property] = monsterData[property]
+            if (!filteredObject.hasOwnProperty(property)) {
+              filteredObject[property] = object[property]
             }
           }
         }
@@ -204,7 +204,7 @@ function displayResults(obj) {
   for (creature in obj) {
 
     var index = 'index' + tableIndexCounter.toString();
-    lockToggle = '<i style="padding-left: 5px;" id="'+index+'" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
+    lockToggle = '<i style="padding-left: 5px;" id="' + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
     tableHTML += '<tr><td>' + lockToggle + '</td><td>' + creature + '</td><td>' + obj[creature].cr + '</td><td>' + obj[creature].type + '</td><td>' + obj[creature].source + ' p.' + obj[creature].page + '</td></tr>';
     tableIndexCounter += 1;
   }
@@ -214,15 +214,15 @@ function displayResults(obj) {
   $outputArea.append(tableHTML);
 }
 
-function toggleLockIcon(index){
+function toggleLockIcon(index) {
   $('#' + index).toggleClass('fa-unlock fa-lock');
 }
 
 //returns random property from an object
-function randomKey (obj) {
-    var keys = Object.keys(obj);
-    return keys[ keys.length * Math.random() << 0];
-    //return = obj[key];
+function randomKey(obj) {
+  var keys = Object.keys(obj);
+  return keys[keys.length * Math.random() << 0];
+  //return = obj[key];
 }
 
 function clearOutput() {
@@ -256,8 +256,8 @@ function hideMonsterPicker() {
 function addLevel() {
   //append dropdown html
   levelIndexCounter += 1
-  $(".playerCol").append('<select class="selectpicker show-tick removablePlayer" id="PlayerPicker' + levelIndexCounter.toString() + '" data-style="btn-default" data-width="100%" data-size="10"><option>1</option><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select>' );
-  $(".levelCol").append('<select class="selectpicker show-tick removableLevel" id="LevelPicker' + levelIndexCounter.toString() + '" data-style="btn-default" data-width="100%" data-size="10"><option><selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option></select>' );
+  $(".playerCol").append('<select class="selectpicker show-tick removablePlayer" id="PlayerPicker' + levelIndexCounter.toString() + '" data-style="btn-default" data-width="100%" data-size="10"><option>1</option><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select>');
+  $(".levelCol").append('<select class="selectpicker show-tick removableLevel" id="LevelPicker' + levelIndexCounter.toString() + '" data-style="btn-default" data-width="100%" data-size="10"><option><selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option></select>');
   //initialise dropdowns
   $('#PlayerPicker' + levelIndexCounter.toString()).selectpicker();
   $('#LevelPicker' + levelIndexCounter.toString()).selectpicker();
@@ -268,7 +268,7 @@ function addLevel() {
   updateAPLDisplay();
 }
 
-function removeLevel(){
+function removeLevel() {
   levelIndexCounter -= 1
   if (levelIndexCounter < 0) {
     levelIndexCounter = 0;
@@ -280,14 +280,14 @@ function removeLevel(){
 }
 
 function updateAPLDisplay() {
-    var apl = calculateAPL()
-    var displayText = 'APL ' + apl.toString();
+  var apl = calculateAPL()
+  var displayText = 'APL ' + apl.toString();
 
-    $('#aplDisplay').text(displayText);
+  $('#aplDisplay').text(displayText);
 }
 
 //runs when page is loaded
-$( document ).ready(function() {
+$(document).ready(function() {
   //initialise pickers
   $('.selectpicker').selectpicker();
 
