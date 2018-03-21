@@ -252,7 +252,7 @@ function displayResults(obj,num) {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
-  var tableHTML = '<table class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Type</th><th>Sourcepage</th></tr></thead><tbody>';
+  var tableHTML = '<table class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Type</th><th>Type</th></tr></thead><tbody>';
   for (creature in obj) {
 
     var creaturePrint = creature;
@@ -261,14 +261,41 @@ function displayResults(obj,num) {
     }
 
     var index = 'index' + tableIndexCounter.toString();
-    lockToggle = '<i style="padding-left: 5px;" id="' + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
-    tableHTML += '<tr><td>' + lockToggle + '</td><td>' + num + '</td><td>' + creaturePrint + '</td><td>' + obj[creature].cr + '</td><td>' + obj[creature].type + '</td><td>' + obj[creature].source + ' p.' + obj[creature].page + '</td></tr>';
+    lockToggle = '<i style="padding-left: 5px; cursor: pointer" id="' + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
+    tableHTML += '<tr><td>' + lockToggle + '</td><td>' + num + '</td><td>' + creaturePrint + '</td><td>' + obj[creature].cr + '</td><td>' + obj[creature].type + '</td><td>' + obj[monster].source + ' p.' + obj[monster].page + '</td></tr>';
     tableIndexCounter += 1;
   }
   tableHTML += '</tbody></table>';
 
   //$outputArea.append('<h4>APL: ' + apl.toString() + '&nbsp;&nbsp;Difficulty: ' + difficulty.toString() + '</h4>');
   $outputArea.append(tableHTML);
+}
+
+function displayMonsterPicker() {
+  var filter = buildFilter();
+
+  var $outputArea = $("#pickerZone").first();
+  $outputArea.empty();
+
+  if (jQuery.isEmptyObject(filter)) {
+    $outputArea.append('<p class="text-center">Select Filters</p>');
+  } else {
+    var filteredMonsters = filterObject(monsterData, filter);
+    if (jQuery.isEmptyObject(filteredMonsters)) {
+      $outputArea.append('<p class="text-center">No creatures found</p>');
+      return
+    }
+
+    var tableHTML = '<div style="max-height: 300px; overflow: auto;"><table class="table table-striped"><thead><tr><th>Lock</th><th>Creature</th><th>CR</th><th>Type</th><th>Sourcepage</th></tr></thead><tbody>';
+    for (monster in filteredMonsters) {
+
+      addition = '<i style="padding-left: 5px; cursor: pointer; id="' + monster + '" onclick = "addMonster(this.id)" class="fas fa-lg fa-plus"></i>';
+      tableHTML += '<tr><td>' + addition + '</td><td>' + monster + '</td><td>' + filteredMonsters[monster].cr + '</td><td>' + filteredMonsters[monster].type + '</td><td>' + filteredMonsters[monster].source + ' p.' + filteredMonsters[monster].page + '</td></tr>';
+      tableIndexCounter += 1;
+    }
+    tableHTML += '</tbody></table></div>';
+    $outputArea.append(tableHTML);
+  }
 }
 
 function toggleLockIcon(index) {
@@ -350,4 +377,12 @@ $(document).ready(function() {
 
   $('#PlayerPicker0').on('changed.bs.select', updateAPLDisplay);
   $('#LevelPicker0').on('changed.bs.select', updateAPLDisplay);
+
+  $('#CombatTypePicker').on('changed.bs.select', displayMonsterPicker);
+  $('#AlignmentPicker').on('changed.bs.select', displayMonsterPicker);
+  $('#SizePicker').on('changed.bs.select', displayMonsterPicker);
+  $('#CreatureTypePicker').on('changed.bs.select', displayMonsterPicker);
+  $('#EnvironmentPicker').on('changed.bs.select', displayMonsterPicker);
+
+
 });

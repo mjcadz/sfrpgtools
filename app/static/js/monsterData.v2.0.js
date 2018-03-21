@@ -1574,7 +1574,7 @@ var monsterData = {
     "source": "DS2",
     "page": "60"
   },
-  "Yaruk":
+  "Yaruk":{
     "cr": "8",
     "combatType": "combatant",
     "description": "-",
