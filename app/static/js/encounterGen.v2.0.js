@@ -35,6 +35,14 @@ var crEquivalencies = {
   "32" : -10
 }
 
+smallCRs = {
+  "1/2" : 2,
+  "1/3" : 3,
+  "1/4" : 4,
+  "1/6" : 6,
+  "1/8" : 8
+}
+
 function generateEncounter() {
 
   var selectedAPL = calculateAPL();
@@ -53,6 +61,8 @@ function generateEncounter() {
   //  crFilter.push(i.toString());
   //}
   //filter["cr"] = crFilter
+
+  ["1","2","3","4","6","8","12","16","24","32"]
 
   var nums = ["1", "2"]
   var orgs = ["solitary","pair"];
@@ -217,6 +227,25 @@ function filterObject(obj, filterBy) {
   }
   console.log(filteredObject)
   return filteredObject;
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
 
 function displayResults(obj,num) {
