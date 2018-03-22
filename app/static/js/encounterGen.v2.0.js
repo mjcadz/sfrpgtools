@@ -60,11 +60,85 @@ function generateEncounter() {
   //for (i = 1; i <= encounterCR; i++) {
   //  crFilter.push(i.toString());
   //}
-  //filter["cr"] = crFilter
 
-  ["1","2","3","4","6","8","12","16","24","32"]
+  encounterCR = 11;
+
+
+  var monsterNums = ["1","2","3","4","6","8","12","16","24","32"]
 
   var nums = ["1", "2"]
+  nums.push(monsterNums.selectRandom())
+  nums.push(monsterNums.selectRandom())
+  nums = shuffle(nums);
+
+  //console.log(nums.length)
+
+  var setBreak = false;
+  var finalNum;
+  var finalCreature;
+
+  //loop through monster numbers looking for matches
+  for (z = 0; z < nums.length; z++) {
+    //add CR to filters and shuffle filtered monster keys
+  //if (true) {.
+    console.log(z)
+    console.log('&&&&&&&&&&&&&&&&&&')
+    filter["cr"] = [encounterCR + crEquivalencies[nums[z]]];
+    var filteredMonsters = filterObject(monsterData, filter);
+    var monsterKeys = Object.keys(filteredMonsters)
+    monsterKeys = shuffle(monsterKeys);
+    console.log(monsterKeys)
+    //break;
+    //loop through monsters looking for organisation match
+    for (j = 0; j < monsterKeys.length; j++) {
+      var orgs = filteredMonsters[monsterKeys[j]].organization
+
+      if (orgs != "any") {//TODO handle 'any'
+        console.log(nums[z]);
+        var numOrgs = []
+        for (k = 0; k < orgs.length; k++) {
+
+          if (orgs[k] == "solitary") {
+            numOrgs.push("1")
+          } else if (orgs[k] == "pair") {
+            numOrgs.push("2")
+          } else {
+            if (!orgs[k].includes('+') && orgs[k].includes('-')){ //TODO binomial TODO multicreature dips
+              //console.log(orgs[k]);
+              var result = orgs[k].match(/[0-9]+-[0-9]+/g);
+              //console.log(result);
+              result = result[0].split('-')
+              for (k = Number(result[0]); k < Number(result[1]) + 1; k++) {
+                if (monsterNums.includes(k.toString())) {
+                  numOrgs.push(k.toString())
+                }
+              }
+            }
+          }
+
+        }
+        console.log(numOrgs)
+      }
+      if (numOrgs.includes(nums[z])) {
+        console.log(nums[z] + ' ' + monsterKeys[j]+'s!!!!!!!!!');
+        finalNum = nums[z];
+        finalCreature = monsterKeys[j];
+        setBreak = true;
+        break
+
+      }
+    }
+    if (setBreak == true) {
+      console.log('butt')
+      break;
+    }
+
+  }
+  var displayMonsters = {}
+  displayMonsters[finalCreature] = monsterData[finalCreature]
+  displayResults(displayMonsters,finalNum);
+
+  /*
   var orgs = ["solitary","pair"];
   var numMonsters = nums.selectRandom();
   var organization = orgs[nums.indexOf(numMonsters)]
@@ -256,13 +330,10 @@ function displayResults(obj,num) {
   for (creature in obj) {
 
     var creaturePrint = creature;
-    if (num == 2) {
-      creaturePrint += ' Pair'
-    }
 
     var index = 'index' + tableIndexCounter.toString();
     lockToggle = '<i style="padding-left: 5px; cursor: pointer" id="' + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
-    tableHTML += '<tr><td>' + lockToggle + '</td><td>' + num + '</td><td>' + creaturePrint + '</td><td>' + obj[creature].cr + '</td><td>' + obj[creature].type + '</td><td>' + obj[monster].source + ' p.' + obj[monster].page + '</td></tr>';
+    tableHTML += '<tr><td>' + lockToggle + '</td><td>' + num + '</td><td>' + creaturePrint + '</td><td>' + obj[creature].cr + '</td><td>' + obj[creature].type + '</td><td>' + obj[creature].source + ' p.' + obj[creature].page + '</td></tr>';
     tableIndexCounter += 1;
   }
   tableHTML += '</tbody></table>';
@@ -318,11 +389,14 @@ function clearOutput() {
 //collapse functions
 function showAdvanced() {
   $('#advanced').collapse('show')
+  console.log(2)
 }
 
 function hideAdvanced() {
   $('#advanced').collapse('hide')
   hideMonsterPicker()
+  console.log(2)
+
 }
 
 function showMonsterPicker() {

@@ -100,7 +100,7 @@ var monsterData = {
     "environment": "plains",
     "climate": ["temperate","warm"],
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "14"
   },
@@ -265,7 +265,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "32"
   },
@@ -310,7 +310,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "38"
   },
@@ -385,7 +385,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "46"
   },
@@ -400,7 +400,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "46"
   },
@@ -415,7 +415,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "46"
   },
@@ -430,7 +430,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "46"
   },
@@ -445,7 +445,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "46"
   },
@@ -460,7 +460,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "46"
   },
@@ -475,7 +475,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "47"
   },
@@ -640,7 +640,7 @@ var monsterData = {
     "environment": "sky",
     "climate": "any",
     "planet": "Bretheda",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "58"
   },
@@ -655,7 +655,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "60"
   },
@@ -700,7 +700,7 @@ var monsterData = {
     "environment": ["deserts","hills","mountains"],
     "climate": "any",
     "planet": "Akiton",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "64"
   },
@@ -715,7 +715,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "66"
   },
@@ -775,7 +775,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "Daimalko",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "72"
   },
@@ -850,7 +850,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "Eox",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "80"
   },
@@ -910,7 +910,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "Absalom Station",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "86"
   },
@@ -1225,7 +1225,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "112"
   },
@@ -1240,7 +1240,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "AA",
     "page": "112"
   },
@@ -1420,7 +1420,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "the Drift",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "DS1",
     "page": "57"
   },
@@ -1435,7 +1435,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "the Drift",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "DS1",
     "page": "58"
   },
@@ -1465,7 +1465,7 @@ var monsterData = {
     "environment": "forests",
     "climate": ["temperate","warm"],
     "planet": "Castrovel",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "DS1",
     "page": "60"
   },
@@ -1555,7 +1555,7 @@ var monsterData = {
     "environment": "sky",
     "climate": "any",
     "planet": "Castrovel",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "DS2",
     "page": "59"
   },
@@ -1630,7 +1630,7 @@ var monsterData = {
     "environment": "ruins",
     "climate": "any",
     "planet": "Eox",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "DS3",
     "page": "55"
   },
@@ -1660,7 +1660,7 @@ var monsterData = {
     "environment": ["hils","mountains"],
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "DS3",
     "page": "57"
   },
@@ -1765,7 +1765,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "DS4",
     "page": "59"
   },
@@ -1795,7 +1795,7 @@ var monsterData = {
     "environment": "lands",
     "climate": ["temperate","warm"],
     "planet": "-",
-    "organization": "solitary",
+    "organization": ["solitary"],
     "source": "DS4",
     "page": "61"
   },
