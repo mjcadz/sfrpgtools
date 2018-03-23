@@ -2,6 +2,39 @@
 var tableIndexCounter = 0;
 var levelIndexCounter = 0;
 
+var xp = {
+  "1/8": 50,
+  "1/6": 65,
+  "1/4": 100,
+  "1/3": 135,
+  "1/2": 200,
+  "1": 400,
+  "2": 600,
+  "3": 800,
+  "4": 1200,
+  "5": 1600,
+  "6": 2400,
+  "7": 3200,
+  "8": 4800,
+  "9": 6400,
+  "10": 9600,
+  "11": 12800,
+  "12": 19200,
+  "13": 25600,
+  "14": 38400,
+  "15": 51200,
+  "16": 76800,
+  "17": 102400,
+  "18": 153600,
+  "19": 204800,
+  "20": 307200,
+  "21": 409600,
+  "22": 614400,
+  "23": 819200,
+  "24": 1228800,
+  "25": 1638400
+};
+
 var alignments = {
   "LG": ["Lawful", "Good"],
   "LN": ["Lawful", "Neutral"],
@@ -61,16 +94,26 @@ function generateEncounter() {
   //  crFilter.push(i.toString());
   //}
 
-  encounterCR = 11;
 
 
   var monsterNums = ["1","2","3","4","6","8","12","16","24","32"]
+  var limitedNums = []
+
+  limitedCR = encounterCR - 1
+  if (limitedCR > 10) {limitedCR = 10}
+
+  for (z = 2; z < limitedCR; z++) {
+    limitedNums[z-2] = monsterNums[z];
+  }
+
 
   var nums = ["1", "2"]
-  nums.push(monsterNums.selectRandom())
-  nums.push(monsterNums.selectRandom())
+  nums.push(limitedNums.selectRandom())
+  nums.push(limitedNums.selectRandom())
   nums = shuffle(nums);
 
+  console.log(limitedNums)
+  console.log(nums)
   //console.log(nums.length)
 
   var setBreak = false;
@@ -93,7 +136,9 @@ function generateEncounter() {
     for (j = 0; j < monsterKeys.length; j++) {
       var orgs = filteredMonsters[monsterKeys[j]].organization
 
-      if (orgs != "any") {//TODO handle 'any'
+      if (orgs == "any") {
+        var numOrgs = [nums[z]] ;
+      } else {
         console.log(nums[z]);
         var numOrgs = []
         for (k = 0; k < orgs.length; k++) {
@@ -117,7 +162,7 @@ function generateEncounter() {
           }
 
         }
-        console.log(numOrgs)
+        console.log('3' + numOrgs)
       }
       if (numOrgs.includes(nums[z])) {
         console.log(nums[z] + ' ' + monsterKeys[j]+'s!!!!!!!!!');

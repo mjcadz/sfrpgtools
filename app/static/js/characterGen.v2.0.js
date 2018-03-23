@@ -48,7 +48,7 @@ var PersonalityList = ['Accusative', 'Active', 'Adventurous', 'Affable', 'Aggres
     'Introverted', 'Irreligious', 'Irresponsible', 'Irreverent', 'Irritable',
     'Jealous', 'Jocular', 'Joking', 'Jolly', 'Joyous', 'Judgmental', 'Jumpy',
     'Kind', 'Know-it-all', 'Languid', 'Lazy', 'Lethargic', 'Lewd', 'Lying',
-    'Likable', 'Lippy', 'Listless', 'Loquacious', 'Loving', 'Loyal', 'Lust',
+    'Likable', 'Lippy', 'Listless', 'Loquacious', 'Loving', 'Loyal', 'Lustful',
     'Madcap', 'Magnanimous', 'Malicious', 'Maudlin', 'Mean', 'Meddlesome',
     'Melancholy', 'Melodramatic', 'Merciless', 'Merry', 'Meticulous',
     'Mischievous', 'Miscreant', 'Miserable', 'Modest', 'Moody', 'Moralistic',
