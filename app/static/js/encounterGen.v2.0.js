@@ -86,6 +86,8 @@ function generateEncounter() {
 
   var mode = $('#ModeRadio').find(".btn.active").find("input").attr('name').trim();
 
+
+
   creatureData = randomCreatureFromCR(encounterCR);
 
   displayMonsters = {};
@@ -94,7 +96,7 @@ function generateEncounter() {
     displayMonsters[creatureData[0]] = monsterData[creatureData[0]];
   }
 
-  displayResults(displayMonsters,creatureData[1]);
+  displayResults(displayMonsters,creatureData[1],creatureData[2]);
 
   /*
   var orgs = ["solitary","pair"];
@@ -165,6 +167,7 @@ function randomCreatureFromCR(challengeRating) {
   var setBreak = false;
   var finalNum = '';
   var finalCreature = '';
+  var finalGroup = '';
   var finalArray = [];
 
   //loop through monster numbers looking for matches
@@ -231,24 +234,30 @@ function randomCreatureFromCR(challengeRating) {
       var orgs = filteredMonsters[monsterKeys[j]].organization
 
       if (orgs == "any") {
-        var numOrgs = [nums[z]] ;
+        var numOrgs = [nums[z]];
+        var groupWords = [''];
       } else {
 
-        var numOrgs = []
+        var numOrgs = [];
+        var groupWords = [];
         for (k = 0; k < orgs.length; k++) {
 
           if (orgs[k] == "solitary") {
             numOrgs.push("1")
+            groupWords.push("solitary")
           } else if (orgs[k] == "pair") {
             numOrgs.push("2")
+            groupWords.push("pair")
           } else {
             //larger organisations
             if (!orgs[k].includes('+') && orgs[k].includes('-')){ //TODO binomial TODO multicreature dips
               var result = orgs[k].match(/[0-9]+-[0-9]+/g);
+              var groupName = orgs[k].replace('(' + result + ')','')
               result = result[0].split('-')
               for (k = Number(result[0]); k < Number(result[1]) + 1; k++) {
                 if (monsterNums.includes(k.toString())) {
-                  numOrgs.push(k.toString())
+                  numOrgs.push(k.toString());
+                  groupWords.push(groupName)
                 }
               }
             }
@@ -256,12 +265,14 @@ function randomCreatureFromCR(challengeRating) {
         }
       }
       //console.log(monsterKeys[j])
-      //console.log(numOrgs)
+      console.log(numOrgs)
+      console.log(groupWords)
       //console.log(nums[z])
       if (numOrgs.includes(nums[z])) {
         //console.log(nums[z] + ' ' + monsterKeys[j])
         finalNum = nums[z];
         finalCreature = monsterKeys[j];
+        finalGroup = groupWords[numOrgs.indexOf(nums[z])]
         setBreak = true;
         break
       }
@@ -276,6 +287,9 @@ function randomCreatureFromCR(challengeRating) {
   }
   if (finalNum != '') {
     finalArray.push(finalNum)
+  }
+  if (finalGroup != '') {
+    finalArray.push(finalGroup)
   }
   return finalArray
 }
@@ -429,7 +443,7 @@ function shuffle(array) {
   return array;
 }
 
-function displayResults(obj,num) {
+function displayResults(obj,num,group) {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
@@ -440,14 +454,15 @@ function displayResults(obj,num) {
     return
   }
 
-  var tableHTML = '<table class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Type</th><th>Type</th></tr></thead><tbody>';
+  var tableHTML = '<table class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Alignment</th><th>Size</th><th>Type</th><th>Source</th></tr></thead><tbody>';
   for (creature in obj) {
-
+    var creatureGroup = ' (' + group + ')';
+    creatureGroup = creatureGroup.replace(' (solitary)','').replace(' (pair)','');
     var creaturePrint = creature;
 
     var index = 'index' + tableIndexCounter.toString();
     lockToggle = '<i style="padding-left: 5px; cursor: pointer" id="' + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
-    tableHTML += '<tr><td>' + lockToggle + '</td><td>' + num + '</td><td>' + creaturePrint + '</td><td>' + obj[creature].cr + '</td><td>' + obj[creature].type + '</td><td>' + obj[creature].source + ' p.' + obj[creature].page + '</td></tr>';
+    tableHTML += '<tr><td>' + lockToggle + '</td><td>' + num + '</td><td>' + creaturePrint + '</td><td>' + obj[creature].cr + '</td><td>' + obj[creature].alignment + '</td><td>' + obj[creature].size + '</td><td>' + obj[creature].type + '</td><td>' + obj[creature].source + ' p.' + obj[creature].page + '</td></tr>';
     tableIndexCounter += 1;
   }
   tableHTML += '</tbody></table>';
