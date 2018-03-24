@@ -70,7 +70,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "Aballon",
-    "organization": ["solitary","flock(2-6)"],
+    "organization": ["solitary","flock(2-8)"],
     "source": "AA",
     "page": "11"
   },
@@ -370,7 +370,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": ["solitary","pair","nest(3-12)","colony(13+)"],
+    "organization": ["solitary","pair","nest(3-12)","colony(16-32)"],
     "source": "AA",
     "page": "44"
   },
@@ -385,7 +385,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": ["solitary"],
+    "organization": ["solitary","group(3-6)"],
     "source": "AA",
     "page": "46"
   },
@@ -400,7 +400,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": ["solitary"],
+    "organization": ["solitary","group(3-6)"],
     "source": "AA",
     "page": "46"
   },
@@ -415,7 +415,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": ["solitary"],
+    "organization": ["solitary","pair"],
     "source": "AA",
     "page": "46"
   },
@@ -430,7 +430,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": ["solitary"],
+    "organization": ["solitary","pair"],
     "source": "AA",
     "page": "46"
   },
@@ -565,7 +565,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": ["gang(4-12)","tribe(13+) + noncombatants(13+) + Space Goblin Honchohead(1) + alien pets(5-6)"],
+    "organization": ["gang(3-12)","tribe(12-32)","tribe(13+) + noncombatants(13+) + Space Goblin Honchohead(1) + alien pets(5-6)"],
     "source": "AA",
     "page": "54"
   },
@@ -580,7 +580,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": ["tribe(1) + Space Goblin Zaperator(13+) noncombatants(13+) + alien pets(5-6)"],
+    "organization": ["solitary","gang(2-12)","tribe(1) + Space Goblin Zaperator(13+) noncombatants(13+) + alien pets(5-6)"],
     "source": "AA",
     "page": "54"
   },
@@ -790,7 +790,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "Marata",
-    "organization": ["solitary","hunt(2-4)","warband(4-12) + Maraquoi Shaman(1)"],
+    "organization": ["solitary","hunt(2-4)","warband(6-12)","warband(6-12) + Maraquoi Shaman(1)"],
     "source": "AA",
     "page": "74"
   },
@@ -1150,7 +1150,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "Vesk-3",
-    "organization": ["solitary","nest(5-24)"],
+    "organization": ["solitary","nest(3-24)"],
     "source": "AA",
     "page": "106"
   },
@@ -1225,7 +1225,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": ["solitary"],
+    "organization": ["solitary","group(3-4)"],
     "source": "AA",
     "page": "112"
   },
@@ -1255,7 +1255,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": ["solitary","pair","squad(3-8)","legion(9+)"],
+    "organization": ["solitary","pair","squad(3-8)","legion(12-32)"],
     "source": "AA",
     "page": "114"
   },
@@ -1270,7 +1270,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": ["solitary","pair","pack(3-12)","horde(13+)"],
+    "organization": ["solitary","pair","pack(3-12)","horde(16-32)"],
     "source": "AA",
     "page": "114"
   },
@@ -1285,7 +1285,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "-",
-    "organization": ["solitary","pair","phalanx(3-12)","army(13+)"],
+    "organization": ["solitary","pair","phalanx(3-12)","army(16-32)"],
     "source": "AA",
     "page": "114"
   },
@@ -1300,7 +1300,7 @@ var monsterData = {
     "environment": ["hills","mountains"],
     "climate": "warm",
     "planet": "Dykon",
-    "organization": ["solitary","binomial(2)","coefficient(3-5)","polynomial(6+)"],
+    "organization": ["solitary","binomial(2)","coefficient(3-5)","polynomial(6-32)"],
     "source": "AA",
     "page": "116"
   },
@@ -1600,7 +1600,7 @@ var monsterData = {
     "environment": "any",
     "climate": "any",
     "planet": "Eox",
-    "organization": ["solitary","pair"],
+    "organization": ["solitary","pair","group(3-8)"],
     "source": "DS3",
     "page": "53"
   },

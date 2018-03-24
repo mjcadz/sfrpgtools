@@ -86,102 +86,15 @@ function generateEncounter() {
 
   var mode = $('#ModeRadio').find(".btn.active").find("input").attr('name').trim();
 
-  //var filter = { size: ["large"], organization:["pair"]};
-  var filter = buildFilter();
+  creatureData = randomCreatureFromCR(encounterCR);
 
-  //var crFilter = ["1/8", "1/6", "1/4", "1/3", "1/2"];
-  //for (i = 1; i <= encounterCR; i++) {
-  //  crFilter.push(i.toString());
-  //}
-
-
-
-  var monsterNums = ["1","2","3","4","6","8","12","16","24","32"]
-  var limitedNums = []
-
-  limitedCR = encounterCR - 1
-  if (limitedCR > 10) {limitedCR = 10}
-
-  for (z = 2; z < limitedCR; z++) {
-    limitedNums[z-2] = monsterNums[z];
+  displayMonsters = {};
+  console.log(creatureData)
+  if (creatureData.length != 0) {
+    displayMonsters[creatureData[0]] = monsterData[creatureData[0]];
   }
 
-
-  var nums = ["1", "2"]
-  nums.push(limitedNums.selectRandom())
-  nums.push(limitedNums.selectRandom())
-  nums = shuffle(nums);
-
-  console.log(limitedNums)
-  console.log(nums)
-  //console.log(nums.length)
-
-  var setBreak = false;
-  var finalNum;
-  var finalCreature;
-
-  //loop through monster numbers looking for matches
-  for (z = 0; z < nums.length; z++) {
-    //add CR to filters and shuffle filtered monster keys
-  //if (true) {.
-    console.log(z)
-    console.log('&&&&&&&&&&&&&&&&&&')
-    filter["cr"] = [encounterCR + crEquivalencies[nums[z]]];
-    var filteredMonsters = filterObject(monsterData, filter);
-    var monsterKeys = Object.keys(filteredMonsters)
-    monsterKeys = shuffle(monsterKeys);
-    console.log(monsterKeys)
-    //break;
-    //loop through monsters looking for organisation match
-    for (j = 0; j < monsterKeys.length; j++) {
-      var orgs = filteredMonsters[monsterKeys[j]].organization
-
-      if (orgs == "any") {
-        var numOrgs = [nums[z]] ;
-      } else {
-        console.log(nums[z]);
-        var numOrgs = []
-        for (k = 0; k < orgs.length; k++) {
-
-          if (orgs[k] == "solitary") {
-            numOrgs.push("1")
-          } else if (orgs[k] == "pair") {
-            numOrgs.push("2")
-          } else {
-            if (!orgs[k].includes('+') && orgs[k].includes('-')){ //TODO binomial TODO multicreature dips
-              //console.log(orgs[k]);
-              var result = orgs[k].match(/[0-9]+-[0-9]+/g);
-              //console.log(result);
-              result = result[0].split('-')
-              for (k = Number(result[0]); k < Number(result[1]) + 1; k++) {
-                if (monsterNums.includes(k.toString())) {
-                  numOrgs.push(k.toString())
-                }
-              }
-            }
-          }
-
-        }
-        console.log('3' + numOrgs)
-      }
-      if (numOrgs.includes(nums[z])) {
-        console.log(nums[z] + ' ' + monsterKeys[j]+'s!!!!!!!!!');
-        finalNum = nums[z];
-        finalCreature = monsterKeys[j];
-        setBreak = true;
-        break
-
-      }
-    }
-    if (setBreak == true) {
-      console.log('butt')
-      break;
-    }
-
-  }
-  var displayMonsters = {}
-  displayMonsters[finalCreature] = monsterData[finalCreature]
-  displayResults(displayMonsters,finalNum);
+  displayResults(displayMonsters,creatureData[1]);
 
   /*
   var orgs = ["solitary","pair"];
@@ -221,6 +134,150 @@ function generateEncounter() {
   console.log(env)
   */
 
+}
+
+function randomCreatureFromCR(challengeRating) {
+  //TODO handle CRs smaller than 1
+  var filter = buildFilter();
+
+  var monsterNums = ["1","2","3","4","6","8","12","16","24","32"]
+  var limitedNums = []
+
+  limitedCR = challengeRating - 1
+  if (limitedCR > 10) {limitedCR = 10}
+
+  for (z = 2; z < limitedCR; z++) {
+    limitedNums[z-2] = monsterNums[z];
+  }
+
+  console.log(limitedNums)
+
+
+  var nums = ["1", "2"]
+  if (limitedNums.length != 0){
+    nums.push(limitedNums.selectRandom())
+    nums.push(limitedNums.selectRandom())
+  }
+  nums = shuffle(nums);
+
+
+
+  var setBreak = false;
+  var finalNum = '';
+  var finalCreature = '';
+  var finalArray = [];
+
+  //loop through monster numbers looking for matches
+  for (z = 0; z < nums.length; z++) {
+    //add CR to filters and shuffle filtered monster keys
+
+    //handle smaller
+    if (challengeRating == 6) {
+      rating1 = ["1/2","1/3"].selectRandom();
+      rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
+      filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
+
+      if (filter["cr"][0] == "1/2") {nums[z] = "12";}
+      if (filter["cr"][0] == "1/3") {nums[z] = "16";}
+    } else if (challengeRating == 5) {
+      rating1 = ["1/2","1/3"].selectRandom();
+      rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
+      filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
+
+      if (filter["cr"][0] == "1/2") {nums[z] = "8";}
+      if (filter["cr"][0] == "1/3") {nums[z] = "12";}
+    } else if (challengeRating == 4) {
+      rating1 = ["1/2","1/3"].selectRandom();
+      rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
+      filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
+
+      if (filter["cr"][0] == "1/2") {nums[z] = "6";}
+      if (filter["cr"][0] == "1/3") {nums[z] = "8";}
+    } else if (challengeRating == 3) {
+      rating1 = ["1/2","1/3"].selectRandom();
+      rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
+      filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
+
+      if (filter["cr"][0] == "1/2") {nums[z] = "4";}
+      if (filter["cr"][0] == "1/3") {nums[z] = "6";}
+    } else if (challengeRating == 2) {
+      rating1 = ["1/2","1/3"].selectRandom();
+      rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
+      filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
+
+      if (filter["cr"][0] == "1/2") {nums[z] = "3";}
+      if (filter["cr"][0] == "1/3") {nums[z] = "4";}
+    } else if (challengeRating == 1) {
+      rating1 = ["1/2","1/3"].selectRandom();
+      rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
+      filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
+
+      if (filter["cr"][0] == "1/2") {nums[z] = "2";}
+      if (filter["cr"][0] == "1/3") {nums[z] = "3";}
+    } else {
+      filter["cr"] = [(challengeRating + crEquivalencies[nums[z]]).toString()];
+    }
+    console.log(filter["cr"])
+    console.log(nums[z])
+
+
+    var filteredMonsters = filterObject(monsterData, filter);
+    var monsterKeys = Object.keys(filteredMonsters)
+    monsterKeys = shuffle(monsterKeys);
+    console.log(monsterKeys)
+
+    //loop through monsters looking for organisation match
+    for (j = 0; j < monsterKeys.length; j++) {
+      var orgs = filteredMonsters[monsterKeys[j]].organization
+
+      if (orgs == "any") {
+        var numOrgs = [nums[z]] ;
+      } else {
+
+        var numOrgs = []
+        for (k = 0; k < orgs.length; k++) {
+
+          if (orgs[k] == "solitary") {
+            numOrgs.push("1")
+          } else if (orgs[k] == "pair") {
+            numOrgs.push("2")
+          } else {
+            //larger organisations
+            if (!orgs[k].includes('+') && orgs[k].includes('-')){ //TODO binomial TODO multicreature dips
+              var result = orgs[k].match(/[0-9]+-[0-9]+/g);
+              result = result[0].split('-')
+              for (k = Number(result[0]); k < Number(result[1]) + 1; k++) {
+                if (monsterNums.includes(k.toString())) {
+                  numOrgs.push(k.toString())
+                }
+              }
+            }
+          }
+        }
+      }
+      //console.log(monsterKeys[j])
+      //console.log(numOrgs)
+      //console.log(nums[z])
+      if (numOrgs.includes(nums[z])) {
+        //console.log(nums[z] + ' ' + monsterKeys[j])
+        finalNum = nums[z];
+        finalCreature = monsterKeys[j];
+        setBreak = true;
+        break
+      }
+    }
+    if (setBreak == true) {
+      break;
+    }
+
+  }
+  if (finalCreature != '') {
+    finalArray.push(finalCreature)
+  }
+  if (finalNum != '') {
+    finalArray.push(finalNum)
+  }
+  return finalArray
 }
 
 function calculateAPL() {
@@ -321,7 +378,12 @@ function filterObject(obj, filterBy) {
 
   for (i = 0; i < keys.length; i++) {
     filteredObject = {};
-    var value = filterBy[keys[i]]
+    if (typeof filterBy[keys[i]] === 'string') {
+      var value = [filterBy[keys[i]]]
+    } else {
+      var value = filterBy[keys[i]]
+    }
+
     for (j = 0; j < value.length; j++) {
       for (property in object) {
         //check if object value is string
@@ -344,7 +406,7 @@ function filterObject(obj, filterBy) {
     }
     object = filteredObject;
   }
-  console.log(filteredObject)
+  //console.log(filteredObject)
   return filteredObject;
 }
 
@@ -370,6 +432,13 @@ function shuffle(array) {
 function displayResults(obj,num) {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
+
+  //console.log(obj)
+
+  if (jQuery.isEmptyObject(obj)) {
+    $outputArea.append('<p class="text-center">No suitable creatures found</p>');
+    return
+  }
 
   var tableHTML = '<table class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Type</th><th>Type</th></tr></thead><tbody>';
   for (creature in obj) {
@@ -401,10 +470,13 @@ function displayMonsterPicker() {
       $outputArea.append('<p class="text-center">No creatures found</p>');
       return
     }
+    monsterKeys = Object.keys(filteredMonsters);
+    monsterKeys.sort()
 
     var tableHTML = '<div style="max-height: 300px; overflow: auto;"><table class="table table-striped"><thead><tr><th>Lock</th><th>Creature</th><th>CR</th><th>Type</th><th>Sourcepage</th></tr></thead><tbody>';
-    for (monster in filteredMonsters) {
+    for (i = 0; i < monsterKeys.length; i++) {
 
+      monster = monsterKeys [i];
       addition = '<i style="padding-left: 5px; cursor: pointer; id="' + monster + '" onclick = "addMonster(this.id)" class="fas fa-lg fa-plus"></i>';
       tableHTML += '<tr><td>' + addition + '</td><td>' + monster + '</td><td>' + filteredMonsters[monster].cr + '</td><td>' + filteredMonsters[monster].type + '</td><td>' + filteredMonsters[monster].source + ' p.' + filteredMonsters[monster].page + '</td></tr>';
       tableIndexCounter += 1;
@@ -434,13 +506,11 @@ function clearOutput() {
 //collapse functions
 function showAdvanced() {
   $('#advanced').collapse('show')
-  console.log(2)
 }
 
 function hideAdvanced() {
   $('#advanced').collapse('hide')
   hideMonsterPicker()
-  console.log(2)
 
 }
 
