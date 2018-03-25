@@ -4,7 +4,7 @@
 {% block body %}
 <div class="jumbotron">
     <h1>Encounter Generator</h1>
-    <p class="lead">Generates encounters for the Starfinder RPG.</p>
+    <p class="lead">Generates encounters for the Starfinder RPG.<br>Works well with current sources but will perform even better in future as more official sources are released.</p>
     <p></p>
 
     <div class="container">
@@ -60,7 +60,6 @@
                   </div>
                 </div>
                 <div>
-                  <label id="aplDisplay" style="display: inline;">APL <b style="font-size: 16px;">1</b></label>
                   <div class="btn-group addRemove pull-right">
                     <button type="button" id="addButton" class="btn btn-default btn-sm" onclick="addLevel()"><i class="fas fa-plus"></i></button>
                     <button type="button" id="removeButton" class="btn btn-default btn-sm" onclick="removeLevel()"><i class="fas fa-minus"></i></button>
@@ -132,16 +131,30 @@
                   <option>Vermin</option>
                 </select>
                 <select class="selectpicker show-tick" multiple id="EnvironmentPicker" data-none-selected-text="Any environment" data-style="btn-default" data-width="100%" data-size="10">
-                  <option>Desert</option>
+                  <option>Air</option>
+                  <option>Aquatic</option>
+                  <option>Deserts</option>
+                  <option>Forests</option>
+                  <option>Hills</option>
+                  <option>Lands</option>
+                  <option>Mountains</option>
+                  <option>Oceans</option>
                   <option>Plains</option>
+                  <option>Ruins</option>
                   <option>Sky</option>
                   <option>Swamp</option>
                   <option>Urban</option>
+                  <option>Underground</option>
+                  <option data-divider="true"></option>
+                  <option>Gas-giant</option>
+                  <option>High-gravity</option>
+                  <option>Low-gravity</option>
+                  <option>Starship</option>
                   <option>Vacuum</option>
                   <option data-divider="true"></option>
                   <option>Good-aligned planes</option>
                 </select>
-                <div class="row">
+                <!--<div class="row">
                   <div class="playerCol col-xs-6">
                     <label>CR Min</label>
                     <select class="selectpicker show-tick" id="CRMinPicker" data-style="btn-default" data-width="100%" data-size="5">
@@ -192,7 +205,7 @@
                       <option selected>20</option>
                     </select>
                   </div>
-                </div>
+                </div>-->
                 <button id="pickerButton" type="button" onclick="showMonsterPicker()" class="btn btn-default btn-block">Show monster picker</button>
 
 
@@ -212,6 +225,21 @@
         <button type="button" onclick="generateEncounter()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
         <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
         <P></P>
+        <div id="advanced2" class="collapse">
+          <div class="row">
+              <div class="col-lg-2">
+                <p id="aplDisplay" style="margin-bottom: 0px;">APL: <b>1</b></p>
+              </div>
+              <div class="col-lg-3">
+                  <p id="crDisplay" style="margin-bottom: 0px;">Encounter CR: <b>1</b></p>
+              </div>
+              <div class="col-lg-4">
+                  <p id="xpDisplay" style="margin-bottom: 0px;">XP Budget: <b>0/400</b></p>
+              </div>
+              <div class="col-lg-3"></div>
+          </div>
+          <hr>
+        </div>
     </div>
 
     <div class="output area">

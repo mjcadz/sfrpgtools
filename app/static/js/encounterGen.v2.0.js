@@ -82,21 +82,45 @@ function generateEncounter() {
   var selectedDiff = $('#DifficultyPicker').val().trim();
   var diffNum = difficulty[selectedDiff];
   var encounterCR = selectedAPL + diffNum;
-  var xpBudget = xp[encounterCR.toString()];
 
-  var mode = $('#ModeRadio').find(".btn.active").find("input").attr('name').trim();
+  if (encounterCR > 4) {
+    var monsterCount = ["1","1","2","3","4"].selectRandom()
+    var newCR = encounterCR + crEquivalencies[monsterCount];
+    var splitCR = [];
+    for(var i = 0; i < Number(monsterCount); i++) {
+        splitCR.push(newCR);
+    }
+  } else if (encounterCR > 3) {
+    var monsterCount = ["1","1","2","3"].selectRandom()
+    var newCR = encounterCR + crEquivalencies[monsterCount];
+    var splitCR = [];
+    for(var i = 0; i < Number(monsterCount); i++) {
+        splitCR.push(newCR);
+    }
+  } else if (encounterCR > 2) {
+    var monsterCount = ["1","2"].selectRandom()
+    var newCR = encounterCR + crEquivalencies[monsterCount];
+    var splitCR = [];
+    for(var i = 0; i < Number(monsterCount); i++) {
+        splitCR.push(newCR);
+    }
+  } else {
+    var splitCR = [encounterCR];
+  }
+  console.log(splitCR)
 
+  var displayMonsters = {};
 
+  for(var i = 0; i < splitCR.length; i++) {
+    var creatureData = randomCreatureFromCR(splitCR[i]);
+    if (creatureData.length != 0) {
+      displayMonsters[creatureData[0]] = monsterData[creatureData[0]];
+      displayMonsters[creatureData[0]]['number'] = creatureData[1];
+    }
 
-  creatureData = randomCreatureFromCR(encounterCR);
-
-  displayMonsters = {};
-  console.log(creatureData)
-  if (creatureData.length != 0) {
-    displayMonsters[creatureData[0]] = monsterData[creatureData[0]];
   }
 
-  displayResults(displayMonsters,creatureData[1],creatureData[2]);
+  displayResults(displayMonsters);
 
   /*
   var orgs = ["solitary","pair"];
@@ -123,7 +147,7 @@ function generateEncounter() {
   console.log(displayMonsters)
   displayResults(displayMonsters,numMonsters);
 
-  /* get listed environments, debug only
+  //get listed environments, debug only
   var env = [];
   for (property in monsterData) {
     var enviro = monsterData[property].environment;
@@ -133,8 +157,8 @@ function generateEncounter() {
 
   }
   env.sort()
-  console.log(env)
-  */
+  console.log(env)*/
+
 
 }
 
@@ -148,11 +172,11 @@ function randomCreatureFromCR(challengeRating) {
   limitedCR = challengeRating - 1
   if (limitedCR > 10) {limitedCR = 10}
 
-  for (z = 2; z < limitedCR; z++) {
+  for (var z = 2; z < limitedCR; z++) {
     limitedNums[z-2] = monsterNums[z];
   }
 
-  console.log(limitedNums)
+  //console.log(limitedNums)
 
 
   var nums = ["1", "2"]
@@ -171,66 +195,85 @@ function randomCreatureFromCR(challengeRating) {
   var finalArray = [];
 
   //loop through monster numbers looking for matches
-  for (z = 0; z < nums.length; z++) {
+  for (var z = 0; z < nums.length; z++) {
     //add CR to filters and shuffle filtered monster keys
 
-    //handle smaller
-    if (challengeRating == 6) {
-      rating1 = ["1/2","1/3"].selectRandom();
-      rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
-      filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
+    if (Object.keys(filter).length == 1) {
+      //handle smaller
+      if (challengeRating == 6) {
+        rating1 = ["1/2","1/3"].selectRandom();
+        rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
+        filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
 
-      if (filter["cr"][0] == "1/2") {nums[z] = "12";}
-      if (filter["cr"][0] == "1/3") {nums[z] = "16";}
-    } else if (challengeRating == 5) {
-      rating1 = ["1/2","1/3"].selectRandom();
-      rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
-      filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
+        if (filter["cr"][0] == "1/2") {nums[z] = "12";}
+        if (filter["cr"][0] == "1/3") {nums[z] = "16";}
+      } else if (challengeRating == 5) {
+        rating1 = ["1/2","1/3"].selectRandom();
+        rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
+        filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
 
-      if (filter["cr"][0] == "1/2") {nums[z] = "8";}
-      if (filter["cr"][0] == "1/3") {nums[z] = "12";}
-    } else if (challengeRating == 4) {
-      rating1 = ["1/2","1/3"].selectRandom();
-      rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
-      filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
+        if (filter["cr"][0] == "1/2") {nums[z] = "8";}
+        if (filter["cr"][0] == "1/3") {nums[z] = "12";}
+      } else if (challengeRating == 4) {
+        rating1 = ["1/2","1/3"].selectRandom();
+        rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
+        filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
 
-      if (filter["cr"][0] == "1/2") {nums[z] = "6";}
-      if (filter["cr"][0] == "1/3") {nums[z] = "8";}
-    } else if (challengeRating == 3) {
-      rating1 = ["1/2","1/3"].selectRandom();
-      rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
-      filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
+        if (filter["cr"][0] == "1/2") {nums[z] = "6";}
+        if (filter["cr"][0] == "1/3") {nums[z] = "8";}
+      } else if (challengeRating == 3) {
+        rating1 = ["1/2","1/3"].selectRandom();
+        rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
+        filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
 
-      if (filter["cr"][0] == "1/2") {nums[z] = "4";}
-      if (filter["cr"][0] == "1/3") {nums[z] = "6";}
-    } else if (challengeRating == 2) {
-      rating1 = ["1/2","1/3"].selectRandom();
-      rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
-      filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
+        if (filter["cr"][0] == "1/2") {nums[z] = "4";}
+        if (filter["cr"][0] == "1/3") {nums[z] = "6";}
+      } else if (challengeRating == 2) {
+        rating1 = ["1/2","1/3"].selectRandom();
+        rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
+        filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
 
-      if (filter["cr"][0] == "1/2") {nums[z] = "3";}
-      if (filter["cr"][0] == "1/3") {nums[z] = "4";}
-    } else if (challengeRating == 1) {
-      rating1 = ["1/2","1/3"].selectRandom();
-      rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
-      filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
+        if (filter["cr"][0] == "1/2") {nums[z] = "3";}
+        if (filter["cr"][0] == "1/3") {nums[z] = "4";}
+      } else if (challengeRating == 1) {
+        rating1 = ["1/2","1/3"].selectRandom();
+        rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
+        filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
 
-      if (filter["cr"][0] == "1/2") {nums[z] = "2";}
-      if (filter["cr"][0] == "1/3") {nums[z] = "3";}
+        if (filter["cr"][0] == "1/2") {nums[z] = "2";}
+        if (filter["cr"][0] == "1/3") {nums[z] = "3";}
+      } else {
+
+        filter["cr"] = [(challengeRating + crEquivalencies[nums[z]]).toString()];
+      }
+      if (challengeRating == 0) {
+          filter["cr"] = ["1/2"];
+          nums[z] = "1";
+      }
     } else {
       filter["cr"] = [(challengeRating + crEquivalencies[nums[z]]).toString()];
+
+      if (challengeRating == 0) {
+          filter["cr"] = ["1/2"];
+          nums[z] = "1";
+      }
     }
-    console.log(filter["cr"])
-    console.log(nums[z])
+
+
+
+    //console.log(challengeRating)
+    //console.log(nums[z])
+    //console.log(crEquivalencies[nums[z]])
+    //console.log(filter["cr"])
 
 
     var filteredMonsters = filterObject(monsterData, filter);
     var monsterKeys = Object.keys(filteredMonsters)
     monsterKeys = shuffle(monsterKeys);
-    console.log(monsterKeys)
+    //console.log(monsterKeys)
 
     //loop through monsters looking for organisation match
-    for (j = 0; j < monsterKeys.length; j++) {
+    for (var j = 0; j < monsterKeys.length; j++) {
       var orgs = filteredMonsters[monsterKeys[j]].organization
 
       if (orgs == "any") {
@@ -240,7 +283,7 @@ function randomCreatureFromCR(challengeRating) {
 
         var numOrgs = [];
         var groupWords = [];
-        for (k = 0; k < orgs.length; k++) {
+        for (var k = 0; k < orgs.length; k++) {
 
           if (orgs[k] == "solitary") {
             numOrgs.push("1")
@@ -254,7 +297,7 @@ function randomCreatureFromCR(challengeRating) {
               var result = orgs[k].match(/[0-9]+-[0-9]+/g);
               var groupName = orgs[k].replace('(' + result + ')','')
               result = result[0].split('-')
-              for (k = Number(result[0]); k < Number(result[1]) + 1; k++) {
+              for (var k = Number(result[0]); k < Number(result[1]) + 1; k++) {
                 if (monsterNums.includes(k.toString())) {
                   numOrgs.push(k.toString());
                   groupWords.push(groupName)
@@ -265,8 +308,8 @@ function randomCreatureFromCR(challengeRating) {
         }
       }
       //console.log(monsterKeys[j])
-      console.log(numOrgs)
-      console.log(groupWords)
+      //console.log(numOrgs)
+      //console.log(groupWords)
       //console.log(nums[z])
       if (numOrgs.includes(nums[z])) {
         //console.log(nums[z] + ' ' + monsterKeys[j])
@@ -310,7 +353,7 @@ function calculateAPL() {
     levels.push(Number($(this).val().trim()))
   });
 
-  for (i = 0; i < players.length; i++) {
+  for (var i = 0; i < players.length; i++) {
     levelSum += players[i] * levels[i];
   }
   var apl = Math.round(levelSum / playersTotal)
@@ -329,54 +372,71 @@ function buildFilter() {
 
   var filter = {};
 
-  var combatType = $('#CombatTypePicker').val().toString().toLowerCase().trim();
-  var size = $('#SizePicker').val().toString().toLowerCase().trim();
-  var type = $('#CreatureTypePicker').val().toString().toLowerCase().trim();
-  var environment = $('#EnvironmentPicker').val().toString().toLowerCase().trim();
+  var source = $('#SourcePicker').val().toString().trim();
+  source = source.replace('Alien Archive','AA').replace('Dead Suns 1-4','DS1,DS2,DS3,DS4')
 
-  var alignment = $('#AlignmentPicker').val().toString().toLowerCase().trim();
-  alignment = alignment.replace('lawful good', 'LG').replace('lawful neutral', 'LN').replace('lawful evil', 'LE');
-  alignment = alignment.replace('neutral good', 'NG').replace('neutral', 'N').replace('neutral evil', 'NE');
-  alignment = alignment.replace('chaotic good', 'CG').replace('chaotic neutral', 'CN').replace('chaotic evil', 'CE');
-
-
-  if (combatType != '') {
-    if (combatType.includes(',')) {
-      filter['combatType'] = combatType.split(',');
+  if (source != '') {
+    if (source.includes(',')) {
+      filter['source'] = source.split(',');
     } else {
-      filter['combatType'] = [combatType];
+      filter['source'] = [source];
     }
+  } else {
+    filter['source'] = ['None'];
   }
 
-  if (size != '') {
-    if (size.includes(',')) {
-      filter['size'] = size.split(',');
-    } else {
-      filter['size'] = [size];
-    }
-  }
+  var mode = $('#ModeRadio').find(".btn.active").find("input").attr('name').trim();
 
-  if (type != '') {
-    if (type.includes(',')) {
-      filter['type'] = type.split(',');
-    } else {
-      filter['type'] = [type];
-    }
-  }
+  if (mode == 'advanced') {
 
-  if (alignment != '') {
-    if (alignment.includes(',')) {
-      filter['alignment'] = alignment.split(',');
-    } else {
-      filter['alignment'] = [alignment];
-    }
-  }
+    var combatType = $('#CombatTypePicker').val().toString().toLowerCase().trim();
+    var size = $('#SizePicker').val().toString().toLowerCase().trim();
+    var type = $('#CreatureTypePicker').val().toString().toLowerCase().trim();
+    var environment = $('#EnvironmentPicker').val().toString().toLowerCase().trim();
 
-  if (environment != '') {
-    if (environment.includes(',')) {
-      filter['environment'] = environment.split(',');
-    } else {
-      filter['environment'] = [environment];
+    var alignment = $('#AlignmentPicker').val().toString().toLowerCase().trim();
+    alignment = alignment.replace('lawful good', 'LG').replace('lawful neutral', 'LN').replace('lawful evil', 'LE');
+    alignment = alignment.replace('neutral good', 'NG').replace('neutral', 'N').replace('neutral evil', 'NE');
+    alignment = alignment.replace('chaotic good', 'CG').replace('chaotic neutral', 'CN').replace('chaotic evil', 'CE');
+
+    if (combatType != '') {
+      if (combatType.includes(',')) {
+        filter['combatType'] = combatType.split(',');
+      } else {
+        filter['combatType'] = [combatType];
+      }
+    }
+
+    if (size != '') {
+      if (size.includes(',')) {
+        filter['size'] = size.split(',');
+      } else {
+        filter['size'] = [size];
+      }
+    }
+
+    if (type != '') {
+      if (type.includes(',')) {
+        filter['type'] = type.split(',');
+      } else {
+        filter['type'] = [type];
+      }
+    }
+
+    if (alignment != '') {
+      if (alignment.includes(',')) {
+        filter['alignment'] = alignment.split(',');
+      } else {
+        filter['alignment'] = [alignment];
+      }
+    }
+
+    if (environment != '') {
+      if (environment.includes(',')) {
+        filter['environment'] = environment.split(',');
+      } else {
+        filter['environment'] = [environment];
+      }
     }
   }
 
@@ -390,7 +450,7 @@ function filterObject(obj, filterBy) {
   var filteredObject = obj;
   var object = obj;
 
-  for (i = 0; i < keys.length; i++) {
+  for (var i = 0; i < keys.length; i++) {
     filteredObject = {};
     if (typeof filterBy[keys[i]] === 'string') {
       var value = [filterBy[keys[i]]]
@@ -398,7 +458,7 @@ function filterObject(obj, filterBy) {
       var value = filterBy[keys[i]]
     }
 
-    for (j = 0; j < value.length; j++) {
+    for (var j = 0; j < value.length; j++) {
       for (property in object) {
         //check if object value is string
         if (typeof object[property][keys[i]] === 'string') {
@@ -443,7 +503,7 @@ function shuffle(array) {
   return array;
 }
 
-function displayResults(obj,num,group) {
+function displayResults(obj) {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
@@ -454,21 +514,22 @@ function displayResults(obj,num,group) {
     return
   }
 
-  var tableHTML = '<table class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Alignment</th><th>Size</th><th>Type</th><th>Source</th></tr></thead><tbody>';
+  var tableHTML = '<div class="container table-responsive"><table id="outputTable" class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Alignment</th><th>Size</th><th>Type</th><th>Source</th></tr></thead><tbody>';
   for (creature in obj) {
-    var creatureGroup = ' (' + group + ')';
-    creatureGroup = creatureGroup.replace(' (solitary)','').replace(' (pair)','');
+    //var creatureGroup = ' (' + group + ')';
+    //creatureGroup = creatureGroup.replace(' (solitary)','').replace(' (pair)','');
     var creaturePrint = creature;
 
     var index = 'index' + tableIndexCounter.toString();
     lockToggle = '<i style="padding-left: 5px; cursor: pointer" id="' + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
-    tableHTML += '<tr><td>' + lockToggle + '</td><td>' + num + '</td><td>' + creaturePrint + '</td><td>' + obj[creature].cr + '</td><td>' + obj[creature].alignment + '</td><td>' + obj[creature].size + '</td><td>' + obj[creature].type + '</td><td>' + obj[creature].source + ' p.' + obj[creature].page + '</td></tr>';
+    tableHTML += '<tr><td>' + lockToggle + '</td><td id="NUM' + index + '">' + obj[creature].number + '</td><td>' + creaturePrint + '</td><td id="CR' + index + '">' + obj[creature].cr + '</td><td>' + obj[creature].alignment + '</td><td>' + obj[creature].size + '</td><td>' + obj[creature].type + '</td><td>' + obj[creature].source + ' p.' + obj[creature].page + '</td></tr>';
     tableIndexCounter += 1;
   }
-  tableHTML += '</tbody></table>';
+  tableHTML += '</tbody></table></div>';
 
   //$outputArea.append('<h4>APL: ' + apl.toString() + '&nbsp;&nbsp;Difficulty: ' + difficulty.toString() + '</h4>');
   $outputArea.append(tableHTML);
+  updateAPLDisplay()
 }
 
 function displayMonsterPicker() {
@@ -477,7 +538,7 @@ function displayMonsterPicker() {
   var $outputArea = $("#pickerZone").first();
   $outputArea.empty();
 
-  if (jQuery.isEmptyObject(filter)) {
+  if (Object.keys(filter).length == 1) {
     $outputArea.append('<p class="text-center">Select Filters</p>');
   } else {
     var filteredMonsters = filterObject(monsterData, filter);
@@ -488,7 +549,7 @@ function displayMonsterPicker() {
     monsterKeys = Object.keys(filteredMonsters);
     monsterKeys.sort()
 
-    var tableHTML = '<div style="max-height: 300px; overflow: auto;"><table class="table table-striped"><thead><tr><th>Lock</th><th>Creature</th><th>CR</th><th>Type</th><th>Sourcepage</th></tr></thead><tbody>';
+    var tableHTML = '<div class="container table-responsive" style="max-height: 300px; overflow: auto;"><table class="table table-striped"><thead><tr><th>Add</th><th>Creature</th><th>CR</th><th>Type</th><th>Sourcepage</th></tr></thead><tbody>';
     for (i = 0; i < monsterKeys.length; i++) {
 
       monster = monsterKeys [i];
@@ -516,15 +577,18 @@ function clearOutput() {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
   tableIndexCounter = 0;
+  updateAPLDisplay()
 }
 
 //collapse functions
 function showAdvanced() {
   $('#advanced').collapse('show')
+  $('#advanced2').collapse('show')
 }
 
 function hideAdvanced() {
   $('#advanced').collapse('hide')
+  $('#advanced2').collapse('hide')
   hideMonsterPicker()
 
 }
@@ -567,11 +631,41 @@ function removeLevel() {
   updateAPLDisplay();
 }
 
+function addXP() {
+  if( $('#outputTable').length ) {
+    var CRarray = [];
+    var NUMarray = [];
+    var xpSum = 0;
+
+    $("[id^='CRindex']").each(function() {
+      CRarray.push($(this).text().trim())
+    });
+    $("[id^='NUMindex']").each(function() {
+      NUMarray.push(Number($(this).text().trim()))
+    });
+    console.log(CRarray)
+    console.log(NUMarray)
+    for (var i = 0; i < CRarray.length; i++) {
+      xpSum += xp[CRarray[i]] * NUMarray[i]
+    }
+    return xpSum;
+  } else {
+    return 0;
+  }
+}
+
 function updateAPLDisplay() {
   var apl = calculateAPL()
-  var displayText = 'APL <b style="font-size: 16px;">' + apl.toString() + '</b>';
+  var selectedDiff = $('#DifficultyPicker').val().trim();
+  var diffNum = difficulty[selectedDiff];
+  var encounterCR = apl + diffNum;
+  if (encounterCR == 0) {encounterCR = "1/2"}
+  var xpBudget = xp[encounterCR.toString()];
+  var xpUsed = addXP();
 
-  $('#aplDisplay').html(displayText);
+  $('#aplDisplay').html('APL: <b>' + apl.toString() + '</b>');
+  $('#crDisplay').html('Encounter CR: <b>' + encounterCR.toString() + '</b>');
+  $('#xpDisplay').html('XP Budget: <b>' + xpUsed + '/' + xpBudget + '</b>');
 }
 
 //runs when page is loaded
@@ -581,6 +675,7 @@ $(document).ready(function() {
 
   $('#PlayerPicker0').on('changed.bs.select', updateAPLDisplay);
   $('#LevelPicker0').on('changed.bs.select', updateAPLDisplay);
+  $('#DifficultyPicker').on('changed.bs.select', updateAPLDisplay);
 
   $('#CombatTypePicker').on('changed.bs.select', displayMonsterPicker);
   $('#AlignmentPicker').on('changed.bs.select', displayMonsterPicker);
