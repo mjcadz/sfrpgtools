@@ -140,7 +140,7 @@ function generateEncounter() {
 
   }
 
-  displayResults();
+  displayTable();
 
   /*
   var orgs = ["solitary","pair"];
@@ -548,7 +548,7 @@ function shuffle(array) {
   return array;
 }
 
-function displayResults() {
+function displayTable() {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
@@ -611,28 +611,36 @@ function displayMonsterPicker() {
 function plusMonster(id) {
   var monster = id.split('index')[0];
   var index = id.replace(monster,'')
-  console.log(monster)
+  console.log(id)
   if (tableObject.hasOwnProperty(monster)) {
 
     var currentNum = Number($('#NUM'+index).text().trim());
-    console.log(currentNum)
-    console.log('#NUM'+index)
     currentNum += 1;
+    console.log(currentNum)
     $('#NUM'+index).text(currentNum.toString())
+  } else {
+    tableObject[monster] = monsterData[monster];
+    tableObject[monster]['number'] = 1;
+    displayTable();
   }
+  updateAPLDisplay();
 }
 
 function minusMonster(id) {
   var monster = id.split('index')[0];
   var index = id.replace(monster,'')
-  console.log(monster)
   if (tableObject.hasOwnProperty(monster)) {
 
     var currentNum = Number($('#NUM'+index).text().trim());
-    console.log(currentNum)
-    console.log('#NUM'+index)
     currentNum -= 1;
-    $('#NUM'+index).text(currentNum.toString())
+    if (currentNum > 0) {
+      $('#NUM'+index).text(currentNum.toString())
+    } else {
+      delete tableObject[monster];
+      displayTable();
+    }
+    updateAPLDisplay();
+
   }
 }
 
