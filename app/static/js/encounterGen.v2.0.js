@@ -1,6 +1,7 @@
 //globals
 var tableIndexCounter = 0;
 var levelIndexCounter = 0;
+var tableObject = {}
 
 var xp = {
   "1/8": 50,
@@ -68,6 +69,19 @@ var crEquivalencies = {
   "32" : -10
 }
 
+var crCalc = {
+  "1" : 0,
+  "2" : +2,
+  "3" : +3,
+  "4" : +4,
+  "6" : +5,
+  "8" : +6,
+  "12" : +7,
+  "16" : +8,
+  "24" : +9,
+  "32" : +10
+}
+
 smallCRs = {
   "1/2" : 2,
   "1/3" : 3,
@@ -77,6 +91,8 @@ smallCRs = {
 }
 
 function generateEncounter() {
+
+  tableObject = {}
 
   var selectedAPL = calculateAPL();
   var selectedDiff = $('#DifficultyPicker').val().trim();
@@ -107,20 +123,24 @@ function generateEncounter() {
   } else {
     var splitCR = [encounterCR];
   }
+
   console.log(splitCR)
 
   var displayMonsters = {};
+  var previouslySelected = [];
 
-  for(var i = 0; i < splitCR.length; i++) {
-    var creatureData = randomCreatureFromCR(splitCR[i]);
+  for(var m = 0; m < splitCR.length; m++) {
+    var creatureData = randomCreatureFromCR(splitCR[m],previouslySelected);
     if (creatureData.length != 0) {
-      displayMonsters[creatureData[0]] = monsterData[creatureData[0]];
-      displayMonsters[creatureData[0]]['number'] = creatureData[1];
+      //console.log(creatureData)
+      previouslySelected.push(creatureData[0]);
+      tableObject[creatureData[0]] = monsterData[creatureData[0]];
+      tableObject[creatureData[0]]['number'] = creatureData[1];
     }
 
   }
 
-  displayResults(displayMonsters);
+  displayResults();
 
   /*
   var orgs = ["solitary","pair"];
@@ -162,7 +182,7 @@ function generateEncounter() {
 
 }
 
-function randomCreatureFromCR(challengeRating) {
+function randomCreatureFromCR(challengeRating,previouslySelected) {
   //TODO handle CRs smaller than 1
   var filter = buildFilter();
 
@@ -185,6 +205,9 @@ function randomCreatureFromCR(challengeRating) {
     nums.push(limitedNums.selectRandom())
   }
   nums = shuffle(nums);
+  //make sure atleast a solitary creature is picked
+
+  nums.push("1")
 
 
 
@@ -198,7 +221,7 @@ function randomCreatureFromCR(challengeRating) {
   for (var z = 0; z < nums.length; z++) {
     //add CR to filters and shuffle filtered monster keys
 
-    if (Object.keys(filter).length == 1) {
+    if (Object.keys(filter).length == 1 && z != nums.length - 1) {
       //handle smaller
       if (challengeRating == 6) {
         rating1 = ["1/2","1/3"].selectRandom();
@@ -269,7 +292,14 @@ function randomCreatureFromCR(challengeRating) {
 
     var filteredMonsters = filterObject(monsterData, filter);
     var monsterKeys = Object.keys(filteredMonsters)
+    //remove already present monsters
+    console.log(monsterKeys)
+    console.log(previouslySelected)
+    monsterKeys = removeElements(monsterKeys,previouslySelected);
+    console.log(monsterKeys)
     monsterKeys = shuffle(monsterKeys);
+
+
     //console.log(monsterKeys)
 
     //loop through monsters looking for organisation match
@@ -334,6 +364,7 @@ function randomCreatureFromCR(challengeRating) {
   if (finalGroup != '') {
     finalArray.push(finalGroup)
   }
+  console.log(finalArray)
   return finalArray
 }
 
@@ -365,6 +396,20 @@ function calculateAPL() {
     apl += 1;
   }
   return apl;
+
+}
+
+function removeElements(array,elements) {
+  var removeArray = array;
+  for (var j = 0; j < elements.length; j++) {
+
+    var index = removeArray.indexOf(elements[j]);
+    if (index > -1) {
+      removeArray.splice(index, 1);
+    }
+  }
+  return removeArray;
+
 
 }
 
@@ -503,26 +548,27 @@ function shuffle(array) {
   return array;
 }
 
-function displayResults(obj) {
+function displayResults() {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
   //console.log(obj)
 
-  if (jQuery.isEmptyObject(obj)) {
+  if (jQuery.isEmptyObject(tableObject)) {
     $outputArea.append('<p class="text-center">No suitable creatures found</p>');
     return
   }
 
-  var tableHTML = '<div class="container table-responsive"><table id="outputTable" class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Alignment</th><th>Size</th><th>Type</th><th>Source</th></tr></thead><tbody>';
-  for (creature in obj) {
+  var tableHTML = '<div class="container table-responsive"><table id="outputTable" class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Alignment</th><th>Size</th><th>Type</th><th>Source</th><th></th></tr></thead><tbody>';
+  for (creature in tableObject) {
     //var creatureGroup = ' (' + group + ')';
     //creatureGroup = creatureGroup.replace(' (solitary)','').replace(' (pair)','');
     var creaturePrint = creature;
 
     var index = 'index' + tableIndexCounter.toString();
+    plusMinus = '<i style="padding-right: 10px; cursor: pointer;" id="' + creature + index + '" onclick = "plusMonster(this.id)" class="fas fa-lg fa-plus"></i><i style="cursor: pointer;" id="' + creature + index + '" onclick = "minusMonster(this.id)" class="fas fa-lg fa-minus"></i>';
     lockToggle = '<i style="padding-left: 5px; cursor: pointer" id="' + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
-    tableHTML += '<tr><td>' + lockToggle + '</td><td id="NUM' + index + '">' + obj[creature].number + '</td><td>' + creaturePrint + '</td><td id="CR' + index + '">' + obj[creature].cr + '</td><td>' + obj[creature].alignment + '</td><td>' + obj[creature].size + '</td><td>' + obj[creature].type + '</td><td>' + obj[creature].source + ' p.' + obj[creature].page + '</td></tr>';
+    tableHTML += '<tr><td>' + lockToggle + '</td><td id="NUM' + index + '">' + tableObject[creature].number + '</td><td>' + creaturePrint + '</td><td id="CR' + index + '">' + tableObject[creature].cr + '</td><td>' + tableObject[creature].alignment + '</td><td>' + tableObject[creature].size + '</td><td>' + tableObject[creature].type + '</td><td>' + tableObject[creature].source + ' p.' + tableObject[creature].page + '</td><td>' + plusMinus + '</td></tr>';
     tableIndexCounter += 1;
   }
   tableHTML += '</tbody></table></div>';
@@ -551,14 +597,42 @@ function displayMonsterPicker() {
 
     var tableHTML = '<div class="container table-responsive" style="max-height: 300px; overflow: auto;"><table class="table table-striped"><thead><tr><th>Add</th><th>Creature</th><th>CR</th><th>Type</th><th>Sourcepage</th></tr></thead><tbody>';
     for (i = 0; i < monsterKeys.length; i++) {
-
+      var index = 'index' + tableIndexCounter.toString();
       monster = monsterKeys [i];
-      addition = '<i style="padding-left: 5px; cursor: pointer; id="' + monster + '" onclick = "addMonster(this.id)" class="fas fa-lg fa-plus"></i>';
+      addition = '<i style="padding-left: 5px; cursor: pointer;" id="' + monster + index + '" onclick = "plusMonster(this.id)" class="fas fa-lg fa-plus"></i>';
       tableHTML += '<tr><td>' + addition + '</td><td>' + monster + '</td><td>' + filteredMonsters[monster].cr + '</td><td>' + filteredMonsters[monster].type + '</td><td>' + filteredMonsters[monster].source + ' p.' + filteredMonsters[monster].page + '</td></tr>';
       tableIndexCounter += 1;
     }
     tableHTML += '</tbody></table></div>';
     $outputArea.append(tableHTML);
+  }
+}
+
+function plusMonster(id) {
+  var monster = id.split('index')[0];
+  var index = id.replace(monster,'')
+  console.log(monster)
+  if (tableObject.hasOwnProperty(monster)) {
+
+    var currentNum = Number($('#NUM'+index).text().trim());
+    console.log(currentNum)
+    console.log('#NUM'+index)
+    currentNum += 1;
+    $('#NUM'+index).text(currentNum.toString())
+  }
+}
+
+function minusMonster(id) {
+  var monster = id.split('index')[0];
+  var index = id.replace(monster,'')
+  console.log(monster)
+  if (tableObject.hasOwnProperty(monster)) {
+
+    var currentNum = Number($('#NUM'+index).text().trim());
+    console.log(currentNum)
+    console.log('#NUM'+index)
+    currentNum -= 1;
+    $('#NUM'+index).text(currentNum.toString())
   }
 }
 
@@ -643,15 +717,23 @@ function addXP() {
     $("[id^='NUMindex']").each(function() {
       NUMarray.push(Number($(this).text().trim()))
     });
-    console.log(CRarray)
-    console.log(NUMarray)
     for (var i = 0; i < CRarray.length; i++) {
       xpSum += xp[CRarray[i]] * NUMarray[i]
+      //xpSum.push(xp[(CRarray[i] + crCalc[NUMarray[i]]).toString()])
     }
+    //console.log(xpSum);
+
     return xpSum;
+
   } else {
     return 0;
   }
+}
+
+//add all in array
+function add(a, b) {
+    return a + b;
+    //return xpSum.reduce(add, 0);
 }
 
 function updateAPLDisplay() {
