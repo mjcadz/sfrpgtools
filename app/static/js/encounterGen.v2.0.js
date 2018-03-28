@@ -92,7 +92,7 @@ smallCRs = {
 
 function generateEncounter() {
 
-  tableObject = {}
+  clearDisplayTable()
 
   var selectedAPL = calculateAPL();
   var selectedDiff = $('#DifficultyPicker').val().trim();
@@ -100,14 +100,14 @@ function generateEncounter() {
   var encounterCR = selectedAPL + diffNum;
 
   if (encounterCR > 4) {
-    var monsterCount = ["1","1","2","3","4"].selectRandom()
+    var monsterCount = ["1","1","2","4"].selectRandom()
     var newCR = encounterCR + crEquivalencies[monsterCount];
     var splitCR = [];
     for(var i = 0; i < Number(monsterCount); i++) {
         splitCR.push(newCR);
     }
   } else if (encounterCR > 3) {
-    var monsterCount = ["1","1","2","3"].selectRandom()
+    var monsterCount = ["1","2"].selectRandom()
     var newCR = encounterCR + crEquivalencies[monsterCount];
     var splitCR = [];
     for(var i = 0; i < Number(monsterCount); i++) {
@@ -136,11 +136,13 @@ function generateEncounter() {
       previouslySelected.push(creatureData[0]);
       tableObject[creatureData[0]] = monsterData[creatureData[0]];
       tableObject[creatureData[0]]['number'] = creatureData[1];
+      tableObject[creatureData[0]]['lockState'] = false;
     }
-
+    //TODO check if creature there before adding
   }
 
   displayTable();
+  updateAPLDisplay()
 
   /*
   var orgs = ["solitary","pair"];
@@ -182,11 +184,23 @@ function generateEncounter() {
 
 }
 
+function clearDisplayTable() {
+  $(".fa-unlock").each(function() {
+    var index = $(this).attr('id').trim().split('index')
+    var id = 'index' + index[1];
+    var monster = index[0].replace('LOCK','');
+    delete tableObject[monster];
+
+  });
+  displayTable();
+  updateAPLDisplay();
+}
+
 function randomCreatureFromCR(challengeRating,previouslySelected) {
   //TODO handle CRs smaller than 1
   var filter = buildFilter();
 
-  var monsterNums = ["1","2","3","4","6","8","12","16","24","32"]
+  var monsterNums = ["1","2","4","8","12","16","24","32"]
   var limitedNums = []
 
   limitedCR = challengeRating - 1
@@ -418,7 +432,7 @@ function buildFilter() {
   var filter = {};
 
   var source = $('#SourcePicker').val().toString().trim();
-  source = source.replace('Alien Archive','AA').replace('Dead Suns 1-4','DS1,DS2,DS3,DS4')
+  source = source.replace('Alien Archive','AA,CRB').replace('Dead Suns 1-4','DS1,DS2,DS3,DS4').replace('Pact Worlds','PW')
 
   if (source != '') {
     if (source.includes(',')) {
@@ -552,30 +566,45 @@ function displayTable() {
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
-  //console.log(obj)
-
   if (jQuery.isEmptyObject(tableObject)) {
     $outputArea.append('<p class="text-center">No suitable creatures found</p>');
     return
   }
 
-  var tableHTML = '<div class="container table-responsive"><table id="outputTable" class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Alignment</th><th>Size</th><th>Type</th><th>Source</th><th></th></tr></thead><tbody>';
+  var mode = $('#ModeRadio').find(".btn.active").find("input").attr('name').trim();
+  if (mode == 'advanced') {
+    var plusMinusTitle = '<th></th>';
+  } else {
+    var plusMinusTitle = '';
+  }
+
+  var tableHTML = '<div class="container table-responsive"><table id="outputTable" class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Alignment</th><th>Size</th><th>Type</th><th>Source</th>' + plusMinusTitle + '</tr></thead><tbody>';
   for (creature in tableObject) {
     //var creatureGroup = ' (' + group + ')';
     //creatureGroup = creatureGroup.replace(' (solitary)','').replace(' (pair)','');
     var creaturePrint = creature;
 
     var index = 'index' + tableIndexCounter.toString();
-    plusMinus = '<i style="padding-right: 10px; cursor: pointer;" id="' + creature + index + '" onclick = "plusMonster(this.id)" class="fas fa-lg fa-plus"></i><i style="cursor: pointer;" id="' + creature + index + '" onclick = "minusMonster(this.id)" class="fas fa-lg fa-minus"></i>';
-    lockToggle = '<i style="padding-left: 5px; cursor: pointer" id="' + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
-    tableHTML += '<tr><td>' + lockToggle + '</td><td id="NUM' + index + '">' + tableObject[creature].number + '</td><td>' + creaturePrint + '</td><td id="CR' + index + '">' + tableObject[creature].cr + '</td><td>' + tableObject[creature].alignment + '</td><td>' + tableObject[creature].size + '</td><td>' + tableObject[creature].type + '</td><td>' + tableObject[creature].source + ' p.' + tableObject[creature].page + '</td><td>' + plusMinus + '</td></tr>';
+
+    if (mode == 'advanced') {
+      var plusMinus = '<i style="padding-right: 10px; cursor: pointer;" id="PLUS' + creature + index + '" onclick = "plusMonster(this.id)" class="fas fa-lg fa-plus"></i><i style="cursor: pointer;" id="MINUS' + creature + index + '" onclick = "minusMonster(this.id)" class="fas fa-lg fa-minus"></i>';
+    } else {
+      var plusMinus = ''
+    }
+
+    if (tableObject[creature]['lockState']) {
+      lockToggle = '<i style="padding-left: 5px; cursor: pointer" id="LOCK' + creature + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-lock"></i>';
+    } else {
+      lockToggle = '<i style="padding-left: 5px; cursor: pointer" id="LOCK' + creature + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
+    }
+
+    tableHTML += '<tr id="ROW' + index + '"><td>' + lockToggle + '</td><td id="NUM' + index + '">' + tableObject[creature].number + '</td><td id="MON' + creature + index + '">' + creaturePrint + '</td><td id="CR' + index + '">' + tableObject[creature].cr + '</td><td>' + tableObject[creature].alignment + '</td><td>' + tableObject[creature].size + '</td><td>' + tableObject[creature].type + '</td><td>' + tableObject[creature].source + ' p.' + tableObject[creature].page + '</td><td>' + plusMinus + '</td></tr>';
     tableIndexCounter += 1;
   }
   tableHTML += '</tbody></table></div>';
 
   //$outputArea.append('<h4>APL: ' + apl.toString() + '&nbsp;&nbsp;Difficulty: ' + difficulty.toString() + '</h4>');
   $outputArea.append(tableHTML);
-  updateAPLDisplay()
 }
 
 function displayMonsterPicker() {
@@ -583,69 +612,101 @@ function displayMonsterPicker() {
 
   var $outputArea = $("#pickerZone").first();
   $outputArea.empty();
+  var searchTerm = $('#inputSearch').val().trim();
 
-  if (Object.keys(filter).length == 1) {
-    $outputArea.append('<p class="text-center">Select Filters</p>');
+
+
+  if (Object.keys(filter).length == 1 && searchTerm == '') {
+    $outputArea.append('<p class="text-center">Search or select filters</p>');
   } else {
+
     var filteredMonsters = filterObject(monsterData, filter);
     if (jQuery.isEmptyObject(filteredMonsters)) {
       $outputArea.append('<p class="text-center">No creatures found</p>');
       return
     }
+
     monsterKeys = Object.keys(filteredMonsters);
+
+    if (searchTerm != '') {
+      monsterKeys = searchArray(monsterKeys,searchTerm)
+    }
+
+    if (monsterKeys.length == 0) {
+      $outputArea.append('<p class="text-center">No creatures found</p>');
+      return
+    }
+
     monsterKeys.sort()
 
     var tableHTML = '<div class="container table-responsive" style="max-height: 300px; overflow: auto;"><table class="table table-striped"><thead><tr><th>Add</th><th>Creature</th><th>CR</th><th>Type</th><th>Sourcepage</th></tr></thead><tbody>';
     for (i = 0; i < monsterKeys.length; i++) {
-      var index = 'index' + tableIndexCounter.toString();
+
       monster = monsterKeys [i];
-      addition = '<i style="padding-left: 5px; cursor: pointer;" id="' + monster + index + '" onclick = "plusMonster(this.id)" class="fas fa-lg fa-plus"></i>';
+      addition = '<i style="padding-left: 5px; cursor: pointer;" id="' + monster + '" onclick = "plusMonster(this.id)" class="fas fa-lg fa-plus"></i>';
       tableHTML += '<tr><td>' + addition + '</td><td>' + monster + '</td><td>' + filteredMonsters[monster].cr + '</td><td>' + filteredMonsters[monster].type + '</td><td>' + filteredMonsters[monster].source + ' p.' + filteredMonsters[monster].page + '</td></tr>';
-      tableIndexCounter += 1;
+
     }
     tableHTML += '</tbody></table></div>';
     $outputArea.append(tableHTML);
   }
 }
 
-function plusMonster(id) {
-  var monster = id.split('index')[0];
-  var index = id.replace(monster,'')
-  console.log(id)
-  if (tableObject.hasOwnProperty(monster)) {
 
-    var currentNum = Number($('#NUM'+index).text().trim());
-    currentNum += 1;
-    console.log(currentNum)
-    $('#NUM'+index).text(currentNum.toString())
+
+function plusMonster(id) {
+  var monster = id.split('index')[0].replace('PLUS','');
+
+  if (tableObject.hasOwnProperty(monster)) {
+    //increase monster count
+    var index = $("[id^='MON" + monster + "']").attr('id').trim().replace(monster,'').replace('MON','');
+    //check lock state
+    if( !$("[id='LOCK" + monster + index + "'].fa-lock").length ) {
+      var currentNum = Number($('#NUM'+index).text().trim());
+      currentNum += 1;
+      $('#NUM'+index).text(currentNum.toString())
+      updateAPLDisplay();
+    }
   } else {
+    //add new monster
     tableObject[monster] = monsterData[monster];
     tableObject[monster]['number'] = 1;
     displayTable();
+    updateAPLDisplay();
   }
-  updateAPLDisplay();
 }
 
 function minusMonster(id) {
-  var monster = id.split('index')[0];
-  var index = id.replace(monster,'')
-  if (tableObject.hasOwnProperty(monster)) {
+  var monster = id.split('index')[0].replace('MINUS','');
+  var index = id.replace(monster,'').replace('MINUS','');
+  //check lock state
+  if( !$("[id='LOCK" + monster + index + "'].fa-lock").length ) {
+    //decrease monster count
+    if (tableObject.hasOwnProperty(monster)) {
+      var currentNum = Number($('#NUM'+index).text().trim());
+      currentNum -= 1;
+      if (currentNum > 0) {
+        $('#NUM'+index).text(currentNum.toString())
+      } else {
+        delete tableObject[monster];
+        displayTable();
+      }
+      updateAPLDisplay();
 
-    var currentNum = Number($('#NUM'+index).text().trim());
-    currentNum -= 1;
-    if (currentNum > 0) {
-      $('#NUM'+index).text(currentNum.toString())
-    } else {
-      delete tableObject[monster];
-      displayTable();
     }
-    updateAPLDisplay();
-
   }
 }
 
 function toggleLockIcon(index) {
-  $('#' + index).toggleClass('fa-unlock fa-lock');
+  $("[id='" + index + "']").toggleClass('fa-unlock fa-lock');
+  var monster = index.split('index')[0].replace('LOCK','');
+  console.log(monster)
+  if( $("[id='" + index + "'].fa-lock").length ) {
+    tableObject[monster]['lockState'] = true;
+  } else {
+    tableObject[monster]['lockState'] = false;
+  }
+
 }
 
 //returns random property from an object
@@ -666,12 +727,19 @@ function clearOutput() {
 function showAdvanced() {
   $('#advanced').collapse('show')
   $('#advanced2').collapse('show')
+  setTimeout(function(){
+    displayTable()
+  }, 50);
+
 }
 
 function hideAdvanced() {
   $('#advanced').collapse('hide')
   $('#advanced2').collapse('hide')
   hideMonsterPicker()
+  setTimeout(function(){
+    displayTable()
+  }, 50);
 
 }
 
@@ -755,8 +823,34 @@ function updateAPLDisplay() {
 
   $('#aplDisplay').html('APL: <b>' + apl.toString() + '</b>');
   $('#crDisplay').html('Encounter CR: <b>' + encounterCR.toString() + '</b>');
-  $('#xpDisplay').html('XP Budget: <b>' + xpUsed + '/' + xpBudget + '</b>');
+  $('#xpDisplay').html('XP Budget: <b id="xpBold">' + xpUsed + '/' + xpBudget + '</b>');
+
+  if (xpUsed > xpBudget) {
+    $('#xpBold').addClass('highlight-shadow');
+  } else {
+    $('#xpBold').removeClass('highlight-shadow');
+  }
 }
+
+function dismissAlert() {
+  $('.alert-this').hide()
+  sessionStorage.showAlert = 'key2';
+}
+
+function searchArray(array,searchTerm) {
+  foundIn = [];
+  for (i = 0; i < array.length; i++) {
+    if (array[i].toLowerCase().includes(searchTerm.toLowerCase())) {
+      foundIn.push(array[i]);
+    }
+  }
+  return foundIn
+}
+
+//callback for search
+$('#inputSearch').on('input',function(e){
+    displayMonsterPicker()
+});
 
 //runs when page is loaded
 $(document).ready(function() {
@@ -773,5 +867,7 @@ $(document).ready(function() {
   $('#CreatureTypePicker').on('changed.bs.select', displayMonsterPicker);
   $('#EnvironmentPicker').on('changed.bs.select', displayMonsterPicker);
 
-
+  if (sessionStorage.showAlert != 'key2') {
+    $('.alert-this').show();
+  }
 });

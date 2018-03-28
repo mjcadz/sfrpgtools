@@ -462,3 +462,9 @@ line-height: 1.4;
 .fa-unlock {
   color: #d9d9d9;
 }
+
+.highlight-shadow {
+  /*text-decoration-line: underline;
+  text-decoration-color: #FF1493;*/
+  border-bottom: 2px solid #FF1493;
+}

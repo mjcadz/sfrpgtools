@@ -4,15 +4,19 @@
 {% block body %}
 <div class="jumbotron">
     <h1>Encounter Generator</h1>
-    <p class="lead">Generates encounters for the Starfinder RPG.<br>Works well with current sources but will perform even better in future as more official sources are released.</p>
+    <p class="lead">Generates encounters for the Starfinder RPG.</p>
     <p></p>
-
+    <div class="alert-this" style="display: none;">
+      <button type="button" class="close" aria-label="Close" onclick="dismissAlert()"><span aria-hidden="true">&times;</span></button>
+      <p><strong>Heads up!</strong> Using search without any filters selected will search the whole database, try searching for goblin. otherwise searches and filters will stack, showing only results that meet all criteria.<br><br>The tool works well with current sources but will perform even better in future as more official sources are released.<br></p>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <select class="selectpicker show-tick" id="SourcePicker" multiple data-style="btn-default" data-width="100%" data-size="10" data-title="Sources" data-selected-text-format="static">
                   <option selected title="Sources">Alien Archive</option>
                   <option selected title="Sources">Dead Suns 1-4</option>
+                  <option selected title="Sources">Pact Worlds</option>
                 </select>
                 <hr style="margin-top: 8px;">
                 <div class="row">
@@ -154,6 +158,9 @@
                   <option data-divider="true"></option>
                   <option>Good-aligned planes</option>
                 </select>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputSearch" placeholder="Search">
+                </div>
                 <!--<div class="row">
                   <div class="playerCol col-xs-6">
                     <label>CR Min</label>
@@ -223,7 +230,7 @@
         </div>
 
         <button type="button" onclick="generateEncounter()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
-        <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
+        <button type="button" onclick="clearDisplayTable()" class="btn btn-default btn-notblack">Clear</button>
         <P></P>
         <div id="advanced2" class="collapse">
           <div class="row">

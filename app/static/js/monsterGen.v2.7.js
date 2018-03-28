@@ -304,6 +304,26 @@ function buildStatBlock() {
 
       statBlock.ClassOffensiveAbilities.sort();
     }
+    //MYSTIC SPECIAL RULES AND PRINT ABILITIES
+    if (classDrop == 'Mystic') {
+
+    }
+    //TECHNOMANCER SPECIAL RULES AND PRINT ABILITIES
+    if (classDrop == 'Technomancer') {
+
+    }
+    //OPERATIVE SPECIAL RULES AND PRINT ABILITIES
+    if (classDrop == 'Operative') {
+
+    }
+    //MECHANIC SPECIAL RULES AND PRINT ABILITIES
+    if (classDrop == 'Mechanic') {
+
+    }
+    //ENVOY SPECIAL RULES AND PRINT ABILITIES
+    if (classDrop == 'Envoy') {
+
+    }
 
 
 
