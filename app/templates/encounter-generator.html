@@ -158,8 +158,25 @@
                   <option data-divider="true"></option>
                   <option>Good-aligned planes</option>
                 </select>
+                <select class="selectpicker show-tick" multiple id="PlanetPicker" data-none-selected-text="Any planet" data-style="btn-default" data-width="100%" data-size="10">
+                  <optgroup label="Pact Worlds">
+                    <option>Aballon</option>
+                    <option>Castrovel</option>
+                    <option>Absalom Station</option>
+                    <option>Akiton</option>
+                    <option>Verces</option>
+                    <option>Idari</option>
+                    <option>Diaspora</option>
+                    <option>Eox</option>
+                    <option>Triaxus</option>
+                    <option>Liavara</option>
+                    <option>Bretheda</option>
+                    <option>Apostae</option>
+                    <option>Aucturn</option>
+                  </optgroup>
+                </select>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="inputSearch" placeholder="Search">
+                    <input type="text" class="form-control" id="inputSearch" placeholder="Search creatures">
                 </div>
                 <!--<div class="row">
                   <div class="playerCol col-xs-6">
@@ -213,7 +230,7 @@
                     </select>
                   </div>
                 </div>-->
-                <button id="pickerButton" type="button" onclick="showMonsterPicker()" class="btn btn-default btn-block">Show monster picker</button>
+                <button id="pickerButton" type="button" onclick="showMonsterPicker()" class="btn btn-default btn-block">Show creature picker</button>
 
 
               </div>
@@ -224,7 +241,7 @@
         <hr>
         <div id="monsterPicker" class="collapse">
           <div id="pickerZone">
-            <p class="text-center">Select Filters</p>
+            <p class="text-center">Search or select filters</p>
           </div>
           <hr>
         </div>

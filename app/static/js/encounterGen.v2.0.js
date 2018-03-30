@@ -4,6 +4,7 @@ var levelIndexCounter = 0;
 var tableObject = {}
 
 var xp = {
+  "0": 0,
   "1/8": 50,
   "1/6": 65,
   "1/4": 100,
@@ -36,16 +37,38 @@ var xp = {
   "25": 1638400
 };
 
-var alignments = {
-  "LG": ["Lawful", "Good"],
-  "LN": ["Lawful", "Neutral"],
-  "LE": ["Lawful", "Evil"],
-  "NG": ["Neutral", "Good"],
-  "N": "Neutral",
-  "NE": ["Neutral", "Evil"],
-  "CG": ["Chaotic", "Good"],
-  "CN": ["Chaotic", "Neutral"],
-  "CE": ["Chaotic", "Evil"]
+var groupsPerCR = {
+  "0": [1],//same as 1/2
+  "1/8": 0,
+  "1/6": 0,
+  "1/4": 0,
+  "1/3": [1],
+  "1/2": [1],
+  "1": [1,[2,"1/2"],[3,"1/3"]],
+  "2": [1,[3,"1/2"]],
+  "3": [1,2,[4,"1/2"],[6,"1/3"]],
+  "4": [1,2,3,[6,"1/2"],[9,"1/3"]],
+  "5": [1,2,4,[8,"1/2"],[12,"1/3"]],
+  "6": [1,2,3,4,[12,"1/2"],[18,"1/3"]],
+  "7": [1,2,4,8,[16,"1/2"],[24,"1/3"]],
+  "8": [1,2,3,4,8,[24,"1/2"]],
+  "9": [1,2,4,8,16,[32,"1/2"]],
+  "10": [1,2,3,4,8,16],
+  "11": [1,2,4,8,16,32],
+  "12": [1,2,3,4,8,16,32],
+  "13": [1,2,4,8,16,32],
+  "14": [1,2,3,4,8,16,32],
+  "15": [1,2,4,8,16,32],
+  "16": [1,2,3,4,8,16,32],
+  "17": [1,2,4,8,16,32],
+  "18": [1,2,3,4,8,16,32],
+  "19": [1,2,4,8,16,32],
+  "20": [1,2,3,4,8,16,32],
+  "21": [1,2,4,8,16,32],
+  "22": [1,2,3,4,8,16,32],
+  "23": [1,2,4,8,16,32],
+  "24": [1,2,3,4,8,16,32],
+  "25": [1,2,4,8,16,32]
 };
 
 var difficulty = {
@@ -59,35 +82,14 @@ var difficulty = {
 var crEquivalencies = {
   "1" : 0,
   "2" : -2,
-  "3" : -3,
+  "3" : -3,//only works for even CRs
   "4" : -4,
-  "6" : -5,
+  "6" : -5,//dosn't give correct XP budget
   "8" : -6,
-  "12" : -7,
+  "12" : -7,//dosn't give correct XP budget
   "16" : -8,
-  "24" : -9,
+  "24" : -9,//dosn't give correct XP budget
   "32" : -10
-}
-
-var crCalc = {
-  "1" : 0,
-  "2" : +2,
-  "3" : +3,
-  "4" : +4,
-  "6" : +5,
-  "8" : +6,
-  "12" : +7,
-  "16" : +8,
-  "24" : +9,
-  "32" : +10
-}
-
-smallCRs = {
-  "1/2" : 2,
-  "1/3" : 3,
-  "1/4" : 4,
-  "1/6" : 6,
-  "1/8" : 8
 }
 
 function generateEncounter() {
@@ -99,80 +101,61 @@ function generateEncounter() {
   var diffNum = difficulty[selectedDiff];
   var encounterCR = selectedAPL + diffNum;
 
-  if (encounterCR > 4) {
-    var monsterCount = ["1","1","2","4"].selectRandom()
-    var newCR = encounterCR + crEquivalencies[monsterCount];
-    var splitCR = [];
-    for(var i = 0; i < Number(monsterCount); i++) {
-        splitCR.push(newCR);
-    }
-  } else if (encounterCR > 3) {
-    var monsterCount = ["1","2"].selectRandom()
-    var newCR = encounterCR + crEquivalencies[monsterCount];
-    var splitCR = [];
-    for(var i = 0; i < Number(monsterCount); i++) {
-        splitCR.push(newCR);
-    }
-  } else if (encounterCR > 2) {
-    var monsterCount = ["1","2"].selectRandom()
-    var newCR = encounterCR + crEquivalencies[monsterCount];
-    var splitCR = [];
-    for(var i = 0; i < Number(monsterCount); i++) {
-        splitCR.push(newCR);
-    }
-  } else {
-    var splitCR = [encounterCR];
+  //include lock values in CR calculations
+  var xpBudget = xp[encounterCR.toString()];
+  var xpUsed = addXP();
+  var xpLeft = xpBudget - xpUsed;
+
+  var x = xpLeft;
+  var valueArray = Object.values(xp);
+  var closest = valueArray.sort( (a, b) => Math.abs(x - a) - Math.abs(x - b) )[0];
+
+  var tooEasy = false;
+  var adjustedCR = Number(getKeyByValue(xp,closest));
+  if (encounterCR == 0) {
+    tooEasy = true;
   }
 
-  console.log(splitCR)
+  if (adjustedCR != 0 || tooEasy) {
 
-  var displayMonsters = {};
-  var previouslySelected = [];
-
-  for(var m = 0; m < splitCR.length; m++) {
-    var creatureData = randomCreatureFromCR(splitCR[m],previouslySelected);
-    if (creatureData.length != 0) {
-      //console.log(creatureData)
-      previouslySelected.push(creatureData[0]);
-      tableObject[creatureData[0]] = monsterData[creatureData[0]];
-      tableObject[creatureData[0]]['number'] = creatureData[1];
-      tableObject[creatureData[0]]['lockState'] = false;
+    var possibleCounts = ["1","1"];
+    if (adjustedCR > 2) { possibleCounts.push("2"); }
+    if (adjustedCR > 4) { possibleCounts.push("4"); }
+    var monsterCount = possibleCounts.selectRandom()
+    var newCR = adjustedCR + crEquivalencies[monsterCount];
+    var splitCR = [];
+    for(var i = 0; i < Number(monsterCount); i++) {
+        splitCR.push(newCR);
     }
-    //TODO check if creature there before adding
+
+    var displayMonsters = {};
+    var previouslySelected = [];
+
+    //get locked creatures
+    for (creature in tableObject) {
+      previouslySelected.push(creature);
+    }
+
+    for(var m = 0; m < splitCR.length; m++) {
+      var creatureData = randomCreatureFromCR(splitCR[m],previouslySelected);
+      if (creatureData.length != 0) {
+        previouslySelected.push(creatureData[0]);
+        tableObject[creatureData[0]] = monsterData[creatureData[0]];
+        tableObject[creatureData[0]]['number'] = creatureData[1];
+        tableObject[creatureData[0]]['groupName'] = creatureData[3];
+        tableObject[creatureData[0]]['lockState'] = false;
+      }
+    }
   }
 
   displayTable();
   updateAPLDisplay()
 
   /*
-  var orgs = ["solitary","pair"];
-  var numMonsters = nums.selectRandom();
-  var organization = orgs[nums.indexOf(numMonsters)]
-
-  filter["cr"] = [encounterCR + crEquivalencies[numMonsters]];
-  console.log(filter["cr"])
-
-  var filteredMonsters = filterObject(monsterData, filter)
-  var displayMonsters = {}
-
-  //check organisation
-  do {
-    var key = randomKey(filteredMonsters)
-  }
-  while (!filteredMonsters[key].organization.includes(organization));
-
-  displayMonsters[key] = filteredMonsters[key];
-
-  //while (xpBudget > 0) {
-  //  xpBudget = xpBudget - xp[displayMonsters[key].cr]
-  //}
-  console.log(displayMonsters)
-  displayResults(displayMonsters,numMonsters);
-
   //get listed environments, debug only
   var env = [];
   for (property in monsterData) {
-    var enviro = monsterData[property].environment;
+    var enviro = monsterData[property].planet;
     if (!env.includes(enviro)){
       env.push(enviro)
     }
@@ -180,7 +163,6 @@ function generateEncounter() {
   }
   env.sort()
   console.log(env)*/
-
 
 }
 
@@ -197,33 +179,19 @@ function clearDisplayTable() {
 }
 
 function randomCreatureFromCR(challengeRating,previouslySelected) {
-  //TODO handle CRs smaller than 1
+
   var filter = buildFilter();
 
-  var monsterNums = ["1","2","4","8","12","16","24","32"]
-  var limitedNums = []
+  var limitedNums = groupsPerCR[challengeRating.toString()];
+  limitedNums = removeElements(limitedNums,[1,2]);
 
-  limitedCR = challengeRating - 1
-  if (limitedCR > 10) {limitedCR = 10}
-
-  for (var z = 2; z < limitedCR; z++) {
-    limitedNums[z-2] = monsterNums[z];
-  }
-
-  //console.log(limitedNums)
-
-
-  var nums = ["1", "2"]
+  var nums = [1]
+  if (challengeRating > 2) { nums.push(2); }
   if (limitedNums.length != 0){
     nums.push(limitedNums.selectRandom())
     nums.push(limitedNums.selectRandom())
   }
   nums = shuffle(nums);
-  //make sure atleast a solitary creature is picked
-
-  nums.push("1")
-
-
 
   var setBreak = false;
   var finalNum = '';
@@ -234,87 +202,24 @@ function randomCreatureFromCR(challengeRating,previouslySelected) {
   //loop through monster numbers looking for matches
   for (var z = 0; z < nums.length; z++) {
     //add CR to filters and shuffle filtered monster keys
-
-    if (Object.keys(filter).length == 1 && z != nums.length - 1) {
-      //handle smaller
-      if (challengeRating == 6) {
-        rating1 = ["1/2","1/3"].selectRandom();
-        rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
-        filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
-
-        if (filter["cr"][0] == "1/2") {nums[z] = "12";}
-        if (filter["cr"][0] == "1/3") {nums[z] = "16";}
-      } else if (challengeRating == 5) {
-        rating1 = ["1/2","1/3"].selectRandom();
-        rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
-        filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
-
-        if (filter["cr"][0] == "1/2") {nums[z] = "8";}
-        if (filter["cr"][0] == "1/3") {nums[z] = "12";}
-      } else if (challengeRating == 4) {
-        rating1 = ["1/2","1/3"].selectRandom();
-        rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
-        filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
-
-        if (filter["cr"][0] == "1/2") {nums[z] = "6";}
-        if (filter["cr"][0] == "1/3") {nums[z] = "8";}
-      } else if (challengeRating == 3) {
-        rating1 = ["1/2","1/3"].selectRandom();
-        rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
-        filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
-
-        if (filter["cr"][0] == "1/2") {nums[z] = "4";}
-        if (filter["cr"][0] == "1/3") {nums[z] = "6";}
-      } else if (challengeRating == 2) {
-        rating1 = ["1/2","1/3"].selectRandom();
-        rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
-        filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
-
-        if (filter["cr"][0] == "1/2") {nums[z] = "3";}
-        if (filter["cr"][0] == "1/3") {nums[z] = "4";}
-      } else if (challengeRating == 1) {
-        rating1 = ["1/2","1/3"].selectRandom();
-        rating2 = (challengeRating + crEquivalencies[nums[z]]).toString();
-        filter["cr"] = [[rating1,rating2,rating2].selectRandom()]
-
-        if (filter["cr"][0] == "1/2") {nums[z] = "2";}
-        if (filter["cr"][0] == "1/3") {nums[z] = "3";}
-      } else {
-
-        filter["cr"] = [(challengeRating + crEquivalencies[nums[z]]).toString()];
-      }
-      if (challengeRating == 0) {
-          filter["cr"] = ["1/2"];
-          nums[z] = "1";
-      }
+    if (challengeRating == 0) {
+        filter["cr"] = ["1/2"];
+        nums[z] = "1";
     } else {
-      filter["cr"] = [(challengeRating + crEquivalencies[nums[z]]).toString()];
-
-      if (challengeRating == 0) {
-          filter["cr"] = ["1/2"];
-          nums[z] = "1";
+      if (nums[z].constructor === Array) {
+        filter["cr"] = [nums[z][1]];
+        nums[z] = (nums[z][0]).toString();
+      } else {
+        filter["cr"] = [(Number(challengeRating) + crEquivalencies[nums[z]]).toString()];
+        nums[z] = nums[z].toString()
       }
     }
 
-
-
-    //console.log(challengeRating)
-    //console.log(nums[z])
-    //console.log(crEquivalencies[nums[z]])
-    //console.log(filter["cr"])
-
-
     var filteredMonsters = filterObject(monsterData, filter);
     var monsterKeys = Object.keys(filteredMonsters)
-    //remove already present monsters
-    console.log(monsterKeys)
-    console.log(previouslySelected)
     monsterKeys = removeElements(monsterKeys,previouslySelected);
-    console.log(monsterKeys)
     monsterKeys = shuffle(monsterKeys);
-
-
-    //console.log(monsterKeys)
+    var validNums = Object.keys(crEquivalencies);
 
     //loop through monsters looking for organisation match
     for (var j = 0; j < monsterKeys.length; j++) {
@@ -342,7 +247,7 @@ function randomCreatureFromCR(challengeRating,previouslySelected) {
               var groupName = orgs[k].replace('(' + result + ')','')
               result = result[0].split('-')
               for (var k = Number(result[0]); k < Number(result[1]) + 1; k++) {
-                if (monsterNums.includes(k.toString())) {
+                if (validNums.includes(k.toString())) {
                   numOrgs.push(k.toString());
                   groupWords.push(groupName)
                 }
@@ -351,12 +256,7 @@ function randomCreatureFromCR(challengeRating,previouslySelected) {
           }
         }
       }
-      //console.log(monsterKeys[j])
-      //console.log(numOrgs)
-      //console.log(groupWords)
-      //console.log(nums[z])
       if (numOrgs.includes(nums[z])) {
-        //console.log(nums[z] + ' ' + monsterKeys[j])
         finalNum = nums[z];
         finalCreature = monsterKeys[j];
         finalGroup = groupWords[numOrgs.indexOf(nums[z])]
@@ -373,12 +273,11 @@ function randomCreatureFromCR(challengeRating,previouslySelected) {
     finalArray.push(finalCreature)
   }
   if (finalNum != '') {
-    finalArray.push(finalNum)
+    finalArray.push(Number(finalNum))
   }
   if (finalGroup != '') {
     finalArray.push(finalGroup)
   }
-  console.log(finalArray)
   return finalArray
 }
 
@@ -423,8 +322,6 @@ function removeElements(array,elements) {
     }
   }
   return removeArray;
-
-
 }
 
 function buildFilter() {
@@ -452,6 +349,7 @@ function buildFilter() {
     var size = $('#SizePicker').val().toString().toLowerCase().trim();
     var type = $('#CreatureTypePicker').val().toString().toLowerCase().trim();
     var environment = $('#EnvironmentPicker').val().toString().toLowerCase().trim();
+    var planet = $('#PlanetPicker').val().toString().trim();
 
     var alignment = $('#AlignmentPicker').val().toString().toLowerCase().trim();
     alignment = alignment.replace('lawful good', 'LG').replace('lawful neutral', 'LN').replace('lawful evil', 'LE');
@@ -497,9 +395,15 @@ function buildFilter() {
         filter['environment'] = [environment];
       }
     }
-  }
 
-  //console.log(filter)
+    if (planet != '') {
+      if (planet.includes(',')) {
+        filter['planet'] = planet.split(',');
+      } else {
+        filter['planet'] = [planet];
+      }
+    }
+  }
   return filter;
 }
 
@@ -539,7 +443,6 @@ function filterObject(obj, filterBy) {
     }
     object = filteredObject;
   }
-  //console.log(filteredObject)
   return filteredObject;
 }
 
@@ -580,10 +483,7 @@ function displayTable() {
 
   var tableHTML = '<div class="container table-responsive"><table id="outputTable" class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Alignment</th><th>Size</th><th>Type</th><th>Source</th>' + plusMinusTitle + '</tr></thead><tbody>';
   for (creature in tableObject) {
-    //var creatureGroup = ' (' + group + ')';
-    //creatureGroup = creatureGroup.replace(' (solitary)','').replace(' (pair)','');
     var creaturePrint = creature;
-
     var index = 'index' + tableIndexCounter.toString();
 
     if (mode == 'advanced') {
@@ -603,7 +503,6 @@ function displayTable() {
   }
   tableHTML += '</tbody></table></div>';
 
-  //$outputArea.append('<h4>APL: ' + apl.toString() + '&nbsp;&nbsp;Difficulty: ' + difficulty.toString() + '</h4>');
   $outputArea.append(tableHTML);
 }
 
@@ -613,8 +512,6 @@ function displayMonsterPicker() {
   var $outputArea = $("#pickerZone").first();
   $outputArea.empty();
   var searchTerm = $('#inputSearch').val().trim();
-
-
 
   if (Object.keys(filter).length == 1 && searchTerm == '') {
     $outputArea.append('<p class="text-center">Search or select filters</p>');
@@ -652,7 +549,14 @@ function displayMonsterPicker() {
   }
 }
 
-
+function getKeyByValue(object,value) {
+    for( var prop in object ) {
+        if( object.hasOwnProperty( prop ) ) {
+             if( object[ prop ] === value )
+                 return prop;
+        }
+    }
+}
 
 function plusMonster(id) {
   var monster = id.split('index')[0].replace('PLUS','');
@@ -662,9 +566,10 @@ function plusMonster(id) {
     var index = $("[id^='MON" + monster + "']").attr('id').trim().replace(monster,'').replace('MON','');
     //check lock state
     if( !$("[id='LOCK" + monster + index + "'].fa-lock").length ) {
-      var currentNum = Number($('#NUM'+index).text().trim());
+      var currentNum = tableObject[monster]['number'];
       currentNum += 1;
-      $('#NUM'+index).text(currentNum.toString())
+      tableObject[monster]['number'] = currentNum;
+      displayTable();
       updateAPLDisplay();
     }
   } else {
@@ -683,14 +588,14 @@ function minusMonster(id) {
   if( !$("[id='LOCK" + monster + index + "'].fa-lock").length ) {
     //decrease monster count
     if (tableObject.hasOwnProperty(monster)) {
-      var currentNum = Number($('#NUM'+index).text().trim());
+      var currentNum = tableObject[monster]['number'];
       currentNum -= 1;
       if (currentNum > 0) {
-        $('#NUM'+index).text(currentNum.toString())
+        tableObject[monster]['number'] = currentNum;
       } else {
         delete tableObject[monster];
-        displayTable();
       }
+      displayTable();
       updateAPLDisplay();
 
     }
@@ -700,20 +605,12 @@ function minusMonster(id) {
 function toggleLockIcon(index) {
   $("[id='" + index + "']").toggleClass('fa-unlock fa-lock');
   var monster = index.split('index')[0].replace('LOCK','');
-  console.log(monster)
   if( $("[id='" + index + "'].fa-lock").length ) {
     tableObject[monster]['lockState'] = true;
   } else {
     tableObject[monster]['lockState'] = false;
   }
 
-}
-
-//returns random property from an object
-function randomKey(obj) {
-  var keys = Object.keys(obj);
-  return keys[keys.length * Math.random() << 0];
-  //return = obj[key];
 }
 
 function clearOutput() {
@@ -727,7 +624,7 @@ function clearOutput() {
 function showAdvanced() {
   $('#advanced').collapse('show')
   $('#advanced2').collapse('show')
-  setTimeout(function(){
+  setTimeout(function(){//wait for DOM shit
     displayTable()
   }, 50);
 
@@ -737,20 +634,20 @@ function hideAdvanced() {
   $('#advanced').collapse('hide')
   $('#advanced2').collapse('hide')
   hideMonsterPicker()
-  setTimeout(function(){
+  setTimeout(function(){//wait for DOM shit
     displayTable()
   }, 50);
 
 }
 
 function showMonsterPicker() {
-  $('#pickerButton').text('Hide monster picker');
+  $('#pickerButton').text('Hide creature picker');
   $('#monsterPicker').collapse('show');
   $('#pickerButton').attr('onclick', 'hideMonsterPicker()')
 }
 
 function hideMonsterPicker() {
-  $('#pickerButton').text('Show monster picker');
+  $('#pickerButton').text('Show creature picker');
   $('#monsterPicker').collapse('hide');
   $('#pickerButton').attr('onclick', 'showMonsterPicker()');
 }
@@ -782,34 +679,15 @@ function removeLevel() {
 }
 
 function addXP() {
-  if( $('#outputTable').length ) {
-    var CRarray = [];
-    var NUMarray = [];
-    var xpSum = 0;
-
-    $("[id^='CRindex']").each(function() {
-      CRarray.push($(this).text().trim())
-    });
-    $("[id^='NUMindex']").each(function() {
-      NUMarray.push(Number($(this).text().trim()))
-    });
-    for (var i = 0; i < CRarray.length; i++) {
-      xpSum += xp[CRarray[i]] * NUMarray[i]
-      //xpSum.push(xp[(CRarray[i] + crCalc[NUMarray[i]]).toString()])
-    }
-    //console.log(xpSum);
-
-    return xpSum;
-
-  } else {
+  if (jQuery.isEmptyObject(tableObject)) {
     return 0;
+  } else {
+    xpSum = 0;
+    for (creature in tableObject) {
+      xpSum += tableObject[creature]['number'] * xp[tableObject[creature]['cr']];
+    }
+    return xpSum;
   }
-}
-
-//add all in array
-function add(a, b) {
-    return a + b;
-    //return xpSum.reduce(add, 0);
 }
 
 function updateAPLDisplay() {
@@ -866,6 +744,7 @@ $(document).ready(function() {
   $('#SizePicker').on('changed.bs.select', displayMonsterPicker);
   $('#CreatureTypePicker').on('changed.bs.select', displayMonsterPicker);
   $('#EnvironmentPicker').on('changed.bs.select', displayMonsterPicker);
+  $('#PlanetPicker').on('changed.bs.select', displayMonsterPicker);
 
   if (sessionStorage.showAlert != 'key2') {
     $('.alert-this').show();

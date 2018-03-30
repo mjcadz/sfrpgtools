@@ -88,6 +88,12 @@ function rand(min, max) {
     return Math.random() * (max - min) + min;
 };
 
+//returns random property from an object
+function randomKey(obj) {
+  var keys = Object.keys(obj);
+  return keys[keys.length * Math.random() << 0];
+}
+
 //remove button focus after click
 $(".btn").mouseup(function(){
     $(this).blur();
