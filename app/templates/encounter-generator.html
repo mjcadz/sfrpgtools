@@ -6,10 +6,6 @@
     <h1>Encounter Generator</h1>
     <p class="lead">Generates encounters for the Starfinder RPG.</p>
     <p></p>
-    <div class="alert-this" style="display: none;">
-      <button type="button" class="close" aria-label="Close" onclick="dismissAlert()"><span aria-hidden="true">&times;</span></button>
-      <p><strong>Heads up!</strong> Using search without any filters selected will search the whole database, try searching for goblin. otherwise searches and filters will stack, showing only results that meet all criteria.<br><br>The tool works well with current sources but will perform even better in future as more official sources are released.<br></p>
-    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -92,6 +88,7 @@
             </div>
             <div class="col-md-4">
               <div id="advanced" class="collapse">
+
                 <select class="selectpicker show-tick" multiple id="CombatTypePicker" data-none-selected-text="Any combat style" data-style="btn-default" data-width="100%" data-size="10">
                   <option>Combatant</option>
                   <option>Expert</option>
@@ -248,6 +245,7 @@
 
         <button type="button" onclick="generateEncounter()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
         <button type="button" onclick="clearDisplayTable()" class="btn btn-default btn-notblack">Clear</button>
+        <i style="padding-left: 10px;vertical-align: middle; cursor: pointer;" data-target="#infoModal" data-toggle="modal" class="fas fa-info-circle fa-lg"></i>
         <P></P>
         <div id="advanced2" class="collapse">
           <div class="row">
@@ -269,6 +267,39 @@
     <div class="output area">
 
     </div>
+</div>
+<!-- Modal -->
+<div id="infoModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Encounter generator</h4>
+      </div>
+      <div class="modal-body">
+        <div>This tool will perform even better in future as more official sources are released.</div>
+        <div><strong>Basic mode</strong></div>
+        <ul>
+          <li>Generates a random encounter approriate for the selected difficulty and party.</li>
+          <li>Locked creatures will not be discarded for further generations.</li>
+        </ul>
+        <div><strong>Advanced mode</strong></div>
+        <ul>
+          <li>Filters apply to both the generation and to the creature picker.</li>
+          <li>Filters stack, only creatures that meet all of the criteia will be shown.</li>
+          <li>Searching without any other filters will search the entire creature database, try searching for 'goblin'.</li>
+          <li>The Plus and Minus buttons in the tables will increase and decrease the number of that creature.</li>
+          <li>The XP Budget can be used to keep track of your encounter when adding/removing creatures.</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
 </div>
 {% endblock %}
 {% block includes %}
