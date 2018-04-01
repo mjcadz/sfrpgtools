@@ -1,8 +1,9 @@
 //globals
 var tableIndexCounter = 0;
 var levelIndexCounter = 0;
-var tableObject = {}
+var tableObject = {} // this is the list of displayed creatures
 
+//xp per CR
 var xp = {
   "0": 0,
   "1/8": 50,
@@ -37,6 +38,7 @@ var xp = {
   "25": 1638400
 };
 
+//cr equivalenvies that actually work per CR
 var groupsPerCR = {
   "0": [1],//same as 1/2
   "1/8": 0,
@@ -84,40 +86,46 @@ var crEquivalencies = {
   "2" : -2,
   "3" : -3,//only works for even CRs
   "4" : -4,
-  "6" : -5,//dosn't give correct XP budget
+  "6" : -5,//dosn't give correct XP budget, dont use
   "8" : -6,
-  "12" : -7,//dosn't give correct XP budget
+  "12" : -7,//dosn't give correct XP budget, dont use
   "16" : -8,
-  "24" : -9,//dosn't give correct XP budget
+  "24" : -9,//dosn't give correct XP budget, dont use
   "32" : -10
 }
 
+//generates the creatures for an encounter of the chosen difficulty and average party level
 function generateEncounter() {
 
   clearDisplayTable()
 
+  //calculate CR using APL and difficulty
   var selectedAPL = calculateAPL();
   var selectedDiff = $('#DifficultyPicker').val().trim();
   var diffNum = difficulty[selectedDiff];
   var encounterCR = selectedAPL + diffNum;
 
-  //include lock values in CR calculations
+  //take into account locked values in CR calculations
   var xpBudget = xp[encounterCR.toString()];
   var xpUsed = addXP();
   var xpLeft = xpBudget - xpUsed;
 
+  //get the closest cr to the remaining xpBudget
   var x = xpLeft;
   var valueArray = Object.values(xp);
   var closest = valueArray.sort( (a, b) => Math.abs(x - a) - Math.abs(x - b) )[0];
-
-  var tooEasy = false;
   var adjustedCR = Number(getKeyByValue(xp,closest));
+
+  //if cr == "1/2"
+  var tooEasy = false;
   if (encounterCR == 0) {
     tooEasy = true;
   }
 
+  //get more creatures if table object not already full from locked creatures
   if (adjustedCR != 0 || tooEasy) {
 
+    //choose number of monsters and calculate CR equivalencies
     var possibleCounts = ["1","1"];
     if (adjustedCR > 2) { possibleCounts.push("2"); }
     if (adjustedCR > 4) { possibleCounts.push("4"); }
@@ -129,18 +137,19 @@ function generateEncounter() {
     }
 
     var displayMonsters = {};
-    var previouslySelected = [];
+    var previouslySelectedMonsters = [];
 
     //get locked creatures
     for (creature in tableObject) {
-      previouslySelected.push(creature);
+      previouslySelectedMonsters.push(creature);
     }
 
     for(var m = 0; m < splitCR.length; m++) {
-      var creatureData = randomCreatureFromCR(splitCR[m],previouslySelected);
+      var creatureData = randomCreatureFromCR(splitCR[m],previouslySelectedMonsters);
       if (creatureData.length != 0) {
-        previouslySelected.push(creatureData[0]);
+        previouslySelectedMonsters.push(creatureData[0]);
         tableObject[creatureData[0]] = monsterData[creatureData[0]];
+        //add additional data to table creatures
         tableObject[creatureData[0]]['number'] = creatureData[1];
         tableObject[creatureData[0]]['groupName'] = creatureData[3];
         tableObject[creatureData[0]]['lockState'] = false;
@@ -155,7 +164,7 @@ function generateEncounter() {
   //get listed environments, debug only
   var env = [];
   for (property in monsterData) {
-    var enviro = monsterData[property].planet;
+    var enviro = monsterData[property].environment;
     if (!env.includes(enviro)){
       env.push(enviro)
     }
@@ -166,6 +175,7 @@ function generateEncounter() {
 
 }
 
+//clears the table object. leaves locked creatures
 function clearDisplayTable() {
   $(".fa-unlock").each(function() {
     var index = $(this).attr('id').trim().split('index')
@@ -178,7 +188,8 @@ function clearDisplayTable() {
   updateAPLDisplay();
 }
 
-function randomCreatureFromCR(challengeRating,previouslySelected) {
+//grabs a random creature for chosen challenge rating, makes sure the creatures possible oranisations matches the generated number of creatures before selecting
+function randomCreatureFromCR(challengeRating,previouslySelectedMonsters) {
 
   var filter = buildFilter();
 
@@ -217,7 +228,7 @@ function randomCreatureFromCR(challengeRating,previouslySelected) {
 
     var filteredMonsters = filterObject(monsterData, filter);
     var monsterKeys = Object.keys(filteredMonsters)
-    monsterKeys = removeElements(monsterKeys,previouslySelected);
+    monsterKeys = removeElements(monsterKeys,previouslySelectedMonsters);
     monsterKeys = shuffle(monsterKeys);
     var validNums = Object.keys(crEquivalencies);
 
@@ -281,6 +292,7 @@ function randomCreatureFromCR(challengeRating,previouslySelected) {
   return finalArray
 }
 
+//calculates apl from selected players and levels
 function calculateAPL() {
 
   var players = [];
@@ -312,6 +324,7 @@ function calculateAPL() {
 
 }
 
+//remove elements from an array if present
 function removeElements(array,elements) {
   var removeArray = array;
   for (var j = 0; j < elements.length; j++) {
@@ -324,10 +337,12 @@ function removeElements(array,elements) {
   return removeArray;
 }
 
+//builds a filter to be used by 'filterObject()' from the chosen sources and filters in the dropdowns
 function buildFilter() {
 
   var filter = {};
 
+  //sources are used in both modes
   var source = $('#SourcePicker').val().toString().trim();
   source = source.replace('Alien Archive','AA,CRB').replace('Dead Suns 1-4','DS1,DS2,DS3,DS4').replace('Pact Worlds','PW')
 
@@ -343,6 +358,7 @@ function buildFilter() {
 
   var mode = $('#ModeRadio').find(".btn.active").find("input").attr('name').trim();
 
+  //other filters only used in advanced mode
   if (mode == 'advanced') {
 
     var combatType = $('#CombatTypePicker').val().toString().toLowerCase().trim();
@@ -407,6 +423,7 @@ function buildFilter() {
   return filter;
 }
 
+//takes an object and filters based on entries provided by 'buildFilter()' returns an object with only values matching the filter.
 function filterObject(obj, filterBy) {
 
   var keys = Object.keys(filterBy)
@@ -446,6 +463,7 @@ function filterObject(obj, filterBy) {
   return filteredObject;
 }
 
+//returns a shuffled array
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -465,12 +483,15 @@ function shuffle(array) {
   return array;
 }
 
+//displays the creatures in the table object in a table format
 function displayTable() {
+  //clear output
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
 
+  //if empty
   if (jQuery.isEmptyObject(tableObject)) {
-    $outputArea.append('<p class="text-center">No suitable creatures found</p>');
+    $outputArea.append('<p class="text-center">No creatures found</p>');
     return
   }
 
@@ -480,32 +501,38 @@ function displayTable() {
   } else {
     var plusMinusTitle = '';
   }
-
+  //table container/headings
   var tableHTML = '<div class="container table-responsive"><table id="outputTable" class="table table-striped"><thead><tr><th>Lock</th><th>#</th><th>Creature</th><th>CR</th><th>Alignment</th><th>Size</th><th>Type</th><th>Source</th>' + plusMinusTitle + '</tr></thead><tbody>';
+  //table entries
   for (creature in tableObject) {
     var creaturePrint = creature;
     var index = 'index' + tableIndexCounter.toString();
 
+    //plus minus buttons if in advanced mode
     if (mode == 'advanced') {
       var plusMinus = '<i style="padding-right: 10px; cursor: pointer;" id="PLUS' + creature + index + '" onclick = "plusMonster(this.id)" class="fas fa-lg fa-plus"></i><i style="cursor: pointer;" id="MINUS' + creature + index + '" onclick = "minusMonster(this.id)" class="fas fa-lg fa-minus"></i>';
     } else {
       var plusMinus = ''
     }
 
+    //show lock state
     if (tableObject[creature]['lockState']) {
       lockToggle = '<i style="padding-left: 5px; cursor: pointer" id="LOCK' + creature + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-lock"></i>';
     } else {
       lockToggle = '<i style="padding-left: 5px; cursor: pointer" id="LOCK' + creature + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
     }
 
+    //creature info
     tableHTML += '<tr id="ROW' + index + '"><td>' + lockToggle + '</td><td id="NUM' + index + '">' + tableObject[creature].number + '</td><td id="MON' + creature + index + '">' + creaturePrint + '</td><td id="CR' + index + '">' + tableObject[creature].cr + '</td><td>' + tableObject[creature].alignment + '</td><td>' + tableObject[creature].size + '</td><td>' + tableObject[creature].type + '</td><td>' + tableObject[creature].source + ' p.' + tableObject[creature].page + '</td><td>' + plusMinus + '</td></tr>';
     tableIndexCounter += 1;
   }
+  //cap table container
   tableHTML += '</tbody></table></div>';
-
+  //display
   $outputArea.append(tableHTML);
 }
 
+//shows filtered/searched monsters on another table where they can be added to the display table
 function displayMonsterPicker() {
   var filter = buildFilter();
 
@@ -515,7 +542,10 @@ function displayMonsterPicker() {
 
   if (Object.keys(filter).length == 1 && searchTerm == '') {
     $outputArea.append('<p class="text-center">Search or select filters</p>');
+    $('#inputSearch').attr("placeholder", "Search all creatures");
   } else {
+
+    $('#inputSearch').attr("placeholder", "Search filtered creatures");
 
     var filteredMonsters = filterObject(monsterData, filter);
     if (jQuery.isEmptyObject(filteredMonsters)) {
@@ -549,6 +579,7 @@ function displayMonsterPicker() {
   }
 }
 
+//returns key for given object value
 function getKeyByValue(object,value) {
     for( var prop in object ) {
         if( object.hasOwnProperty( prop ) ) {
@@ -558,6 +589,7 @@ function getKeyByValue(object,value) {
     }
 }
 
+//ads a monster to the table. increments number if already added
 function plusMonster(id) {
   var monster = id.split('index')[0].replace('PLUS','');
 
@@ -581,6 +613,7 @@ function plusMonster(id) {
   }
 }
 
+//decrements number of creature, removes from table if below 1
 function minusMonster(id) {
   var monster = id.split('index')[0].replace('MINUS','');
   var index = id.replace(monster,'').replace('MINUS','');
@@ -602,6 +635,7 @@ function minusMonster(id) {
   }
 }
 
+//toggles to lock state of a monster
 function toggleLockIcon(index) {
   $("[id='" + index + "']").toggleClass('fa-unlock fa-lock');
   var monster = index.split('index')[0].replace('LOCK','');
@@ -613,10 +647,11 @@ function toggleLockIcon(index) {
 
 }
 
+//hard clear output and table
 function clearOutput() {
-  var $outputArea = $(".output.area").first();
-  $outputArea.empty();
   tableIndexCounter = 0;
+  tableObject = {};
+  displayTable();
   updateAPLDisplay()
 }
 
@@ -652,6 +687,7 @@ function hideMonsterPicker() {
   $('#pickerButton').attr('onclick', 'showMonsterPicker()');
 }
 
+//adds a player/level to the page. affects APL
 function addLevel() {
   //append dropdown html
   levelIndexCounter += 1
@@ -667,6 +703,7 @@ function addLevel() {
   updateAPLDisplay();
 }
 
+//takes a player/level from the page. affects APL
 function removeLevel() {
   levelIndexCounter -= 1
   if (levelIndexCounter < 0) {
@@ -678,6 +715,7 @@ function removeLevel() {
   updateAPLDisplay();
 }
 
+//sums xp of creatures in the table object
 function addXP() {
   if (jQuery.isEmptyObject(tableObject)) {
     return 0;
@@ -690,6 +728,7 @@ function addXP() {
   }
 }
 
+//updates the advanced display of APL, encounter CR, and XP budget
 function updateAPLDisplay() {
   var apl = calculateAPL()
   var selectedDiff = $('#DifficultyPicker').val().trim();
@@ -723,6 +762,24 @@ function searchArray(array,searchTerm) {
     }
   }
   return foundIn
+}
+
+function resetFilters() {
+  $('#CombatTypePicker').selectpicker('deselectAll');
+  $('#CombatTypePicker').selectpicker("refresh");
+  $('#AlignmentPicker').selectpicker('deselectAll');
+  $('#AlignmentPicker').selectpicker("refresh");
+  $('#SizePicker').selectpicker('deselectAll');
+  $('#SizePicker').selectpicker("refresh");
+  $('#CreatureTypePicker').selectpicker('deselectAll');
+  $('#CreatureTypePicker').selectpicker("refresh");
+  $('#EnvironmentPicker').selectpicker('deselectAll');
+  $('#EnvironmentPicker').selectpicker("refresh");
+  $('#PlanetPicker').selectpicker('deselectAll');
+  $('#PlanetPicker').selectpicker("refresh");
+  $('#inputSearch').attr("placeholder", "Search all creatures");
+  $('#inputSearch').val('');
+
 }
 
 //callback for search

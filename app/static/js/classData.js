@@ -22,32 +22,51 @@ allClassFeatures = {
 					"9th": {
 						"name": "Greater Forced Amity",
 						"SOURCEPAGE": "p.88",
-						"description": "Your forced amity ability functions as charm monster."
+						"description": "Your forced amity ability functions as charm monster.",
+						"entry": {
+							"layout": "greater forced amity",
+						}
 					},
 					"1st": {
 						"name": "Inexplicable Commands",
 						"SOURCEPAGE": "p.88",
-						"description": "When one of your mind-affecting charm or compulsion spells or spell-like abilities ends, the target loses all memory that it was magically controlled or influenced. That creature still remembers the actions it took, but may be confused by them."
+						"description": "When one of your mind-affecting charm or compulsion spells or spell-like abilities ends, the target loses all memory that it was magically controlled or influenced. That creature still remembers the actions it took, but may be confused by them.",
+						"entry": {
+							"layout": "inexplicable commands",
+						}
 					},
 					"6th": {
 						"name": "Echoes of Obedience",
 						"SOURCEPAGE": "p.88",
-						"description": "Even creatures that resist your dominance can't shake the lingering echoes of your mind. When a creature succeeds at a saving throw against one of your mind-affecting charm or compulsion spells or spell-like abilities and negates the effect, it takes a -1 penalty to AC, attack rolls, and skill checks until the beginning of your next turn. This is a mind-affecting effect."
+						"description": "Even creatures that resist your dominance can't shake the lingering echoes of your mind. When a creature succeeds at a saving throw against one of your mind-affecting charm or compulsion spells or spell-like abilities and negates the effect, it takes a -1 penalty to AC, attack rolls, and skill checks until the beginning of your next turn. This is a mind-affecting effect.",
+						"entry": {
+							"layout": "echoes of obedience",
+						}
+
 					},
 					"18th": {
 						"name": "Absolute Control",
 						"SOURCEPAGE": "p.88",
-						"description": "When you issue a command to a dominated creature that would force it to act against its nature, you can spend 1 Resolve Point to deny it a new saving throw against your domination. The dominated creature still won't carry out an obviously self-destructive order."
+						"description": "When you issue a command to a dominated creature that would force it to act against its nature, you can spend 1 Resolve Point to deny it a new saving throw against your domination. The dominated creature still won't carry out an obviously self-destructive order.",
+						"entry": {
+							"layout": "absolute control",
+						}
 					},
 					"12th": {
 						"name": "Jealous Overlord",
 						"SOURCEPAGE": "p.88",
-						"description": "When an ally linked by your telepathic bond class feature is subject to mind-affecting effect that issues commands, as a reaction you can issue a countermand allowing the linked ally to act normally. When you do, attempt an opposed Charisma check against the originator of the mind-affecting effect; if you succeed, your ally can act normally."
+						"description": "When an ally linked by your telepathic bond class feature is subject to mind-affecting effect that issues commands, as a reaction you can issue a countermand allowing the linked ally to act normally. When you do, attempt an opposed Charisma check against the originator of the mind-affecting effect; if you succeed, your ally can act normally.",
+						"entry": {
+							"layout": "jealous overlord",
+						}
 					},
 					"3rd": {
 						"name": "Forced Amity",
 						"SOURCEPAGE": "p.88",
-						"description": "You can spend 1 Resolve Point as a standard action to shunt positive emotions and thoughts through your connection, forcing a humanoid creature to become friendly to you for a time. This functions as charm person."
+						"description": "You can spend 1 Resolve Point as a standard action to shunt positive emotions and thoughts through your connection, forcing a humanoid creature to become friendly to you for a time. This functions as charm person.",
+						"entry": {
+							"layout": "forced amity",
+						}
 					}
 				}
 			},
@@ -67,37 +86,63 @@ allClassFeatures = {
 					"9th": {
 						"name": "Reactive Resistance",
 						"SOURCEPAGE": "p.89",
-						"description": "The first time each day you would take energy damage, you immediately gain resistance 10 to that energy type for the remainder of the day. (If you are damaged by more than one energy type simultaneously, choose which type you resist.)"
+						"description": "The first time each day you would take energy damage, you immediately gain resistance 10 to that energy type for the remainder of the day. (If you are damaged by more than one energy type simultaneously, choose which type you resist.)",
+						"entry": {
+							"layout": "reactive resistance",
+						}
 					},
 					"15th": {
 						"name": "Plant Transport",
 						"SOURCEPAGE": "p.89",
-						"description": "Once per day as a full action, you can enter any living plant equal to your size or larger and exit from another plant of the same kind in the same solar system, regardless of the distance separating the two. The destination plant does not need to be familiar to you. If you are uncertain of the location of a particular kind of destination plant, you merely designate direction and distance and this ability moves you as close as possible to the desired location. If a particular destination plant is desired but the plant is not living, this ability fails and you are ejected from the entry plant. You cannot travel through plant creatures. You can bring along objects as long as their bulk doesn't exceed your Strength score. You can also bring up to five willing Medium or smaller creatures (each carrying no more bulk than their Strength scores) with you, provided they are linked to you with joined hands."
+						"description": "Once per day as a full action, you can enter any living plant equal to your size or larger and exit from another plant of the same kind in the same solar system, regardless of the distance separating the two. The destination plant does not need to be familiar to you. If you are uncertain of the location of a particular kind of destination plant, you merely designate direction and distance and this ability moves you as close as possible to the desired location. If a particular destination plant is desired but the plant is not living, this ability fails and you are ejected from the entry plant. You cannot travel through plant creatures. You can bring along objects as long as their bulk doesn't exceed your Strength score. You can also bring up to five willing Medium or smaller creatures (each carrying no more bulk than their Strength scores) with you, provided they are linked to you with joined hands.",
+						"entry": {
+							"layout": "plant transport",
+						}
 					},
 					"3rd": {
 						"name": "Grasping Vines",
 						"SOURCEPAGE": "p.89",
-						"description": "You can spend 1 Resolve Point as a standard action to cause an area within 100 feet to sprout writhing vines in a 20-footradius spread. The target surface must be solid but does not need to be capable of sustaining plants normally. The vines have a reach of 5 feet and attempt to wrap around creatures in the area of effect or those that enter the area; such a creature must succeed at a Reflex save or gain the entangled condition. Creatures that successfully save can move as normal, but those that remain in the area must attempt a new save at the end of your turn each round. Creatures moving into the area must attempt a save immediately; failure ends their movement and they become entangled. An entangled creature can break free as a move action with a successful Acrobatics check or DC 15 Strength check. The vines last for a number of rounds equal to your mystic level, and the entire area is difficult terrain while the effect lasts. At 11th level, the vines can reach 10 feet and sprout thorns that deal 1d6 piercing damage each round to creatures in the area."
+						"description": "You can spend 1 Resolve Point as a standard action to cause an area within 100 feet to sprout writhing vines in a 20-footradius spread. The target surface must be solid but does not need to be capable of sustaining plants normally. The vines have a reach of 5 feet and attempt to wrap around creatures in the area of effect or those that enter the area; such a creature must succeed at a Reflex save or gain the entangled condition. Creatures that successfully save can move as normal, but those that remain in the area must attempt a new save at the end of your turn each round. Creatures moving into the area must attempt a save immediately; failure ends their movement and they become entangled. An entangled creature can break free as a move action with a successful Acrobatics check or DC 15 Strength check. The vines last for a number of rounds equal to your mystic level, and the entire area is difficult terrain while the effect lasts. At 11th level, the vines can reach 10 feet and sprout thorns that deal 1d6 piercing damage each round to creatures in the area.",
+						"entry": {
+							"layout": "grasping vines [100 ft., RANGE-ft. radius]",
+							"RANGE":{
+								"base":20,
+								"CR":[11],
+								"VAL":[30]
+							},
+						},
 					},
 					"12th": {
 						"name": "Share Resistance",
 						"SOURCEPAGE": "p.89",
-						"description": "As a standard action, you can spend 1 Resolve Point to grant allies linked by your telepathic bond class feature resistance 5 to the same energy type that you can resist through your reactive resistance class feature for 1 minute. You can't use this ability if your reactive resistance class feature has not yet been activated for the day."
+						"description": "As a standard action, you can spend 1 Resolve Point to grant allies linked by your telepathic bond class feature resistance 5 to the same energy type that you can resist through your reactive resistance class feature for 1 minute. You can't use this ability if your reactive resistance class feature has not yet been activated for the day.",
+						"entry": {
+							"layout": "share resistance",
+						}
 					},
 					"18th": {
 						"name": "Guided Rebirth",
 						"SOURCEPAGE": "p.89",
-						"description": "As long as you have at least 1 Resolve Point remaining, you can spend all your remaining Resolve Points as a full action to surround yourself with an organic cocoon. While enclosed in the cocoon, you are considered helpless. Eight hours later, you emerge having changed your type to animal, humanoid (of any subtype), or your original type, gaining superficial physical characteristics as appropriate. This change does not alter your ability scores, Hit Points, Stamina Points, saving throws, skill points, class skills, or proficiencies. Each time you make this transformation, you are cleansed of all poisons and diseases, are restored to full Hit Points and Stamina Points, and heal all ability damage. You must select a type other than your current type every time you make the transformation. You can use this ability once per day. Once you use this ability, you can't regain Resolve Points until you rest for 8 hours, even if you have another means to do so."
+						"description": "As long as you have at least 1 Resolve Point remaining, you can spend all your remaining Resolve Points as a full action to surround yourself with an organic cocoon. While enclosed in the cocoon, you are considered helpless. Eight hours later, you emerge having changed your type to animal, humanoid (of any subtype), or your original type, gaining superficial physical characteristics as appropriate. This change does not alter your ability scores, Hit Points, Stamina Points, saving throws, skill points, class skills, or proficiencies. Each time you make this transformation, you are cleansed of all poisons and diseases, are restored to full Hit Points and Stamina Points, and heal all ability damage. You must select a type other than your current type every time you make the transformation. You can use this ability once per day. Once you use this ability, you can't regain Resolve Points until you rest for 8 hours, even if you have another means to do so.",
+						"entry": {
+							"layout": "guided rebirth",
+						}
 					},
 					"1st": {
 						"name": "Speak with Animals",
 						"SOURCEPAGE": "p.89",
-						"description": "You can communicate with any creature of the animal type, though this doesn't make it friendly. If an animal is friendly toward you, it may do you favors. This ability allows you to use Intimidate to bully animals, and you can use any other language-dependent effect against animals."
+						"description": "You can communicate with any creature of the animal type, though this doesn't make it friendly. If an animal is friendly toward you, it may do you favors. This ability allows you to use Intimidate to bully animals, and you can use any other language-dependent effect against animals.",
+						"entry": {
+							"layout": "speak with animals",
+						}
 					},
 					"6th": {
 						"name": "Animal Adaptation",
 						"SOURCEPAGE": "p.89",
-						"description": "As a standard action, you can modify your body. Choose one of the following to gain the noted benefit"
+						"description": "As a standard action, you can modify your body. Choose one of the following to gain the noted benefit",
+						"entry": {
+							"layout": "animal adaption",
+						}
 					}
 				}
 			},
@@ -117,37 +162,66 @@ allClassFeatures = {
 					"6th": {
 						"name": "Sow Doubt",
 						"SOURCEPAGE": "p.87",
-						"description": "As a standard action, you can spend 1 Resolve Point to create uncertainty in the mind of a foe within 30 feet. You choose whether the target becomes flat-footed, becomes off-target, takes a -2 penalty to saving throws, or takes a -2 penalty to skill checks. The effect lasts for a number of rounds equal to half your mystic level, unless the target succeeds at a Will save to reduce the duration to just 1 round. A creature can be affected only by one sow doubt effect. If you use this ability on the same creature again, the new effect replaces the old effect. This is a mind-affecting effect."
+						"description": "As a standard action, you can spend 1 Resolve Point to create uncertainty in the mind of a foe within 30 feet. You choose whether the target becomes flat-footed, becomes off-target, takes a -2 penalty to saving throws, or takes a -2 penalty to skill checks. The effect lasts for a number of rounds equal to half your mystic level, unless the target succeeds at a Will save to reduce the duration to just 1 round. A creature can be affected only by one sow doubt effect. If you use this ability on the same creature again, the new effect replaces the old effect. This is a mind-affecting effect.",
+						"entry": {
+							"layout": "sow doubt [30ft.]",
+						}
 					},
 					"1st": {
 						"name": "Share Pain",
 						"SOURCEPAGE": "p.87",
-						"description": "Whenever a foe deals damage to you, you can spend 1 Resolve Point as a reaction to shift some of the pain back onto that foe. Unless the foe succeeds at a Will save, reduce the damage you take from the attack by your mystic level (to a maximum of the attack's damage), and the foe takes an equal amount of damage. This is a mind-affecting pain effect."
+						"description": "Whenever a foe deals damage to you, you can spend 1 Resolve Point as a reaction to shift some of the pain back onto that foe. Unless the foe succeeds at a Will save, reduce the damage you take from the attack by your mystic level (to a maximum of the attack's damage), and the foe takes an equal amount of damage. This is a mind-affecting pain effect.",
+						"entry": {
+							"layout": "share pain [DC]",
+						}
 					},
 					"12th": {
 						"name": "Mindbreaking Link",
 						"SOURCEPAGE": "p.87",
-						"description": "Whenever you or an ally linked by your telepathic bond class feature scores a critical hit against a foe, you can spend 1 Resolve Point as a reaction to confuse that foe. The foe must succeed at a Will save or become confused for 1 round. Whether or not it succeeds at this save, the target is affected by your sow doubt ability for 1 round. This is a mind-affecting effect."
+						"description": "Whenever you or an ally linked by your telepathic bond class feature scores a critical hit against a foe, you can spend 1 Resolve Point as a reaction to confuse that foe. The foe must succeed at a Will save or become confused for 1 round. Whether or not it succeeds at this save, the target is affected by your sow doubt ability for 1 round. This is a mind-affecting effect.",
+						"entry": {
+							"layout": "mindbreaking link [DC]",
+						}
 					},
 					"18th": {
 						"name": "Explode Head",
 						"SOURCEPAGE": "p.87",
-						"description": "You can spend 1 Resolve Point as a standard action to psychically assault the brain of a foe within 60 feet, causing incredible pressure to build in its head. If the target has 20 Hit Points or fewer, its head explodes, instantly killing the target and spreading debris in a 10-foot radius. Each creature in the area must succeed at a Reflex saving throw or take 2d6 slashing damage from the flying debris. A target with more than 20 Hit Points takes 1d6 damage per mystic level you have (maximum 20d6), but can attempt a Fortitude save to take only half damage. If this damage would reduce the target to 0 HP, the target's head explodes as described above. This ability works only on a creature that has a head and would die from the loss of a head."
+						"description": "You can spend 1 Resolve Point as a standard action to psychically assault the brain of a foe within 60 feet, causing incredible pressure to build in its head. If the target has 20 Hit Points or fewer, its head explodes, instantly killing the target and spreading debris in a 10-foot radius. Each creature in the area must succeed at a Reflex saving throw or take 2d6 slashing damage from the flying debris. A target with more than 20 Hit Points takes 1d6 damage per mystic level you have (maximum 20d6), but can attempt a Fortitude save to take only half damage. If this damage would reduce the target to 0 HP, the target's head explodes as described above. This ability works only on a creature that has a head and would die from the loss of a head.",
+						"entry": {
+							"layout": "explode head [DAMAGEd6, 60ft.]",
+							"DAMAGE":{
+								"base":0,
+								"PERCR":1
+							}
+						}
 					},
 					"3rd": {
 						"name": "Backlash",
 						"SOURCEPAGE": "p.87",
-						"description": "Whenever a foe succeeds at a Will save against one of your spells and completely negates the effect, that foe takes 1 nonlethal damage for each mystic level you have. This is a mind-affecting pain effect."
+						"description": "Whenever a foe succeeds at a Will save against one of your spells and completely negates the effect, that foe takes 1 nonlethal damage for each mystic level you have. This is a mind-affecting pain effect.",
+						"entry": {
+							"layout": "backlash [DAMAGE damage, DC]",
+							"DAMAGE":{
+								"base":0,
+								"PERCR":1
+							}
+						}
 					},
 					"9th": {
 						"name": "Mental Anguish",
 						"SOURCEPAGE": "p.87",
-						"description": "As a standard action, you can tweak the pain centers in the brain of a foe within 60 feet, causing it to suffer intense agony. The target must succeed at a Will save or be nauseated for 1 round. Regardless of the save, the creature becomes immune to this ability for 24 hours. This is a mindaffecting pain effect."
+						"description": "As a standard action, you can tweak the pain centers in the brain of a foe within 60 feet, causing it to suffer intense agony. The target must succeed at a Will save or be nauseated for 1 round. Regardless of the save, the creature becomes immune to this ability for 24 hours. This is a mindaffecting pain effect.",
+						"entry": {
+							"layout": "mental anguish [60ft. DC]",
+						}
 					},
 					"15th": {
 						"name": "Mindkiller",
 						"SOURCEPAGE": "p.87",
-						"description": "As a standard action, you can mold the subconscious fear of a foe within 60 feet into a psychic image of the most disturbing creature imaginable to the target. Only the target can see the mindkiller, and if the target succeeds at a Will save to recognize the image as unreal, the mindkiller has no effect. If the target fails this Will save, the mindkiller touches the target, which must then succeed at a Fortitude save or die from fear. On a successful Fortitude save, the target instead takes 3d6 damage. Once a creature succeeds at either save against this ability, it becomes immune to this ability for 24 hours. This is a mind-affecting fear effect."
+						"description": "As a standard action, you can mold the subconscious fear of a foe within 60 feet into a psychic image of the most disturbing creature imaginable to the target. Only the target can see the mindkiller, and if the target succeeds at a Will save to recognize the image as unreal, the mindkiller has no effect. If the target fails this Will save, the mindkiller touches the target, which must then succeed at a Fortitude save or die from fear. On a successful Fortitude save, the target instead takes 3d6 damage. Once a creature succeeds at either save against this ability, it becomes immune to this ability for 24 hours. This is a mind-affecting fear effect.",
+						"entry": {
+							"layout": "mindkiller [DC]",
+						}
 					}
 				}
 			},
@@ -167,37 +241,58 @@ allClassFeatures = {
 					"3rd": {
 						"name": "Starlight Form",
 						"SOURCEPAGE": "p.88",
-						"description": "You can transform yourself into blazing starlight as a standard action. Your body sheds normal light in a 30-foot radius, and you gain the benefits of concealment (20%% miss chance). At 7th level, a creature that ends its turn adjacent to your starlight form must succeed at a Fortitude save or be blinded for 1 round. You can maintain your starlight form for a number of minutes per day equal to your mystic level; this duration does not need to be continuous, but it must be used in 1-minute increments. You can forgo the ability's concealment and blinding aspects to instead simply shed light, though this still counts against the ability's duration for the day."
+						"description": "You can transform yourself into blazing starlight as a standard action. Your body sheds normal light in a 30-foot radius, and you gain the benefits of concealment (20%% miss chance). At 7th level, a creature that ends its turn adjacent to your starlight form must succeed at a Fortitude save or be blinded for 1 round. You can maintain your starlight form for a number of minutes per day equal to your mystic level; this duration does not need to be continuous, but it must be used in 1-minute increments. You can forgo the ability's concealment and blinding aspects to instead simply shed light, though this still counts against the ability's duration for the day.",
+						"entry": {
+							"layout": "starlight form [30-foot radius]",
+						}
 					},
 					"18th": {
 						"name": "Interplanetary Teleport",
 						"SOURCEPAGE": "p.89",
-						"description": "At 18th level, once per day, you can spend 1 Resolve Point as a full action to use interplanetary teleport as a spell-like ability. If you have been to a location in another star system before, you can spend 2 Resolve Points to use interplanetary teleport to travel there, even though it exceeds the spell's normal range."
+						"description": "At 18th level, once per day, you can spend 1 Resolve Point as a full action to use interplanetary teleport as a spell-like ability. If you have been to a location in another star system before, you can spend 2 Resolve Points to use interplanetary teleport to travel there, even though it exceeds the spell's normal range.",
+						"entry": {
+							"layout": "interplanetary teleport",
+						}
 					},
 					"12th": {
 						"name": "Starry Bond",
 						"SOURCEPAGE": "p.88",
-						"description": "You can share the good fortune of your stargazer class feature with your allies. Whenever an ally linked by your telepathic bond class feature fails an ability check, attack roll, saving throw, or skill check, you can spend 1 Resolve Point as a reaction to enable your ally to reroll the failed check (see page 243). This ability otherwise functions as the stargazer class feature."
+						"description": "You can share the good fortune of your stargazer class feature with your allies. Whenever an ally linked by your telepathic bond class feature fails an ability check, attack roll, saving throw, or skill check, you can spend 1 Resolve Point as a reaction to enable your ally to reroll the failed check (see page 243). This ability otherwise functions as the stargazer class feature.",
+						"entry": {
+							"layout": "starry bond",
+						}
 					},
 					"9th": {
 						"name": "Starflight",
 						"SOURCEPAGE": "p.88",
-						"description": "While in starlight form, you gain the ability to fly as per the flight spell (spell level 3rd or lower)."
+						"description": "While in starlight form, you gain the ability to fly as per the flight spell (spell level 3rd or lower).",
+						"entry": {
+							"layout": "starflight",
+						}
 					},
 					"1st": {
 						"name": "Walk the Void",
 						"SOURCEPAGE": "p.88",
-						"description": "You are immune to the harmful environmental effects of outer space and vacuum. You also gain a fly speed of 20 feet while in space. In addition, whenever you can see the stars, you can determine your precise location. Finally, add Piloting to your list of class skills."
+						"description": "You are immune to the harmful environmental effects of outer space and vacuum. You also gain a fly speed of 20 feet while in space. In addition, whenever you can see the stars, you can determine your precise location. Finally, add Piloting to your list of class skills.",
+						"entry": {
+							"layout": "walk the void",
+						}
 					},
 					"15th": {
 						"name": "Meteor Shower",
 						"SOURCEPAGE": "p.88",
-						"description": "You can spend 1 Resolve Point as a full action to call down a rain of meteorites in a 10-foot-radius vertical cylinder, 40 feet high, at a range of up to 250 feet. The meteorites deal 12d6 damage to every creature in the area (Reflex half). Half the damage is bludgeoning damage; the other half is fire damage. If you are outdoors and can see stars, the meteorites instead deal 12d10 damage. "
+						"description": "You can spend 1 Resolve Point as a full action to call down a rain of meteorites in a 10-foot-radius vertical cylinder, 40 feet high, at a range of up to 250 feet. The meteorites deal 12d6 damage to every creature in the area (Reflex half). Half the damage is bludgeoning damage; the other half is fire damage. If you are outdoors and can see stars, the meteorites instead deal 12d10 damage. ",
+						"entry": {
+							"layout": "meteor shower [250 ft., 12d6, DC]",
+						}
 					},
 					"6th": {
 						"name": "Stargazer",
 						"SOURCEPAGE": "p.88",
-						"description": "You can study the stars to gain a bit of good luck. Twice per day, if you are outdoors and can see the stars, you can reroll a failed ability check, attack roll, saving throw, or skill check (see page 243)."
+						"description": "You can study the stars to gain a bit of good luck. Twice per day, if you are outdoors and can see the stars, you can reroll a failed ability check, attack roll, saving throw, or skill check (see page 243).",
+						"entry": {
+							"layout": "stargazer",
+						}
 					}
 				}
 			},
@@ -217,37 +312,62 @@ allClassFeatures = {
 					"3rd": {
 						"name": "Lifelink",
 						"SOURCEPAGE": "p.86",
-						"description": "At the start of each turn, you can choose an ally within 30 feet who has taken Hit Point damage and transfer her wounds to yourself, dealing an amount of damage up to your mystic level to your Hit Points (bypassing any Stamina Points you may have) and healing the ally's Hit Points an equal amount. This doesn't require any action on your part. You can't prevent or reduce the damage you take from lifelink."
+						"description": "At the start of each turn, you can choose an ally within 30 feet who has taken Hit Point damage and transfer her wounds to yourself, dealing an amount of damage up to your mystic level to your Hit Points (bypassing any Stamina Points you may have) and healing the ally's Hit Points an equal amount. This doesn't require any action on your part. You can't prevent or reduce the damage you take from lifelink.",
+						"entry": {
+							"layout": "lifelink [30ft, HPL HP]",
+							"HPL":{
+								"base":0,
+								"PERCR":1
+							}
+						}
 					},
 					"6th": {
 						"name": "Healer's Bond",
 						"SOURCEPAGE": "p.86",
-						"description": "As a standard action, you can form a bond with up to three allies, allowing you to constantly sense their condition as per the status spell. This bond lasts until dispelled or until you create a new healer's bond, which immediately ends the previous one. At 11th level, when you gain the telepathic bond class feature, you also gain the effects of status on all creatures linked by your telepathic bond."
+						"description": "As a standard action, you can form a bond with up to three allies, allowing you to constantly sense their condition as per the status spell. This bond lasts until dispelled or until you create a new healer's bond, which immediately ends the previous one. At 11th level, when you gain the telepathic bond class feature, you also gain the effects of status on all creatures linked by your telepathic bond.",
+						"entry": {
+							"layout": "healer's bond",
+						}
 					},
 					"9th": {
 						"name": "Steal Life",
 						"SOURCEPAGE": "p.86",
-						"description": "As a standard action, you can spend 1 Resolve Point to steal part of a creature's life force and transfer it to yourself or others. You must touch the target (requiring a successful melee attack against its EAC), which deals 1d6 damage for every 2 mystic levels you have (maximum 10d6). Choose an ally within 30 feet; that ally recovers an amount of Hit Points equal to the damage dealt (to a maximum of the foe's remaining Hit Points). Alternatively, you can heal yourself instead, but you restore only a number of Hit Points equal to half the damage dealt. If this heals the recipient (you or your ally) up to maximum Hit Points, any excess persists for 1 hour as temporary Hit Points. If your attack misses, you don't lose the Resolve Point."
+						"description": "As a standard action, you can spend 1 Resolve Point to steal part of a creature's life force and transfer it to yourself or others. You must touch the target (requiring a successful melee attack against its EAC), which deals 1d6 damage for every 2 mystic levels you have (maximum 10d6). Choose an ally within 30 feet; that ally recovers an amount of Hit Points equal to the damage dealt (to a maximum of the foe's remaining Hit Points). Alternatively, you can heal yourself instead, but you restore only a number of Hit Points equal to half the damage dealt. If this heals the recipient (you or your ally) up to maximum Hit Points, any excess persists for 1 hour as temporary Hit Points. If your attack misses, you don't lose the Resolve Point.",
+						"entry": {
+							"layout": "steal life",
+						}
 					},
 					"15th": {
 						"name": "Channel Life",
 						"SOURCEPAGE": "p.87",
-						"description": "If you use healing channel on a creature that has died within 1 round, you can bring it back to life as per a 5thlevel mystic cure spell."
+						"description": "If you use healing channel on a creature that has died within 1 round, you can bring it back to life as per a 5thlevel mystic cure spell.",
+						"entry": {
+							"layout": "channel life",
+						}
 					},
 					"18th": {
 						"name": "Deny Death",
 						"SOURCEPAGE": "p.87",
-						"description": "You are immune to death effects and negative levels. If you would normally die from damage, as long as you have at least 1 Resolve Point remaining, you can immediately spend all of your remaining Resolve Points to instead stay alive. If your Hit Points would have been reduced to 0, you now have 1 Hit Point instead. Once you use this ability, you can't regain Resolve Points again until you rest for 8 hours, even if you have another means to do so."
+						"description": "You are immune to death effects and negative levels. If you would normally die from damage, as long as you have at least 1 Resolve Point remaining, you can immediately spend all of your remaining Resolve Points to instead stay alive. If your Hit Points would have been reduced to 0, you now have 1 Hit Point instead. Once you use this ability, you can't regain Resolve Points again until you rest for 8 hours, even if you have another means to do so.",
+						"entry": {
+							"layout": "deny death",
+						}
 					},
 					"1st": {
 						"name": "Healing Channel",
 						"SOURCEPAGE": "p.86",
-						"description": "You can heal yourself and your allies. You can spend 1 Resolve Point to channel this energy. Healing yourself with channeled energy is a move action, healing an ally you touch is a standard action, and healing all allies within 30 feet is a full action. This energy restores 2d8 Hit Points and increases by 2d8 at 3rd level and every 3 levels thereafter."
+						"description": "You can heal yourself and your allies. You can spend 1 Resolve Point to channel this energy. Healing yourself with channeled energy is a move action, healing an ally you touch is a standard action, and healing all allies within 30 feet is a full action. This energy restores 2d8 Hit Points and increases by 2d8 at 3rd level and every 3 levels thereafter.",
+						"entry": {
+							"layout": "healing channel",
+						}
 					},
 					"12th": {
 						"name": "Channel Bond",
 						"SOURCEPAGE": "p.87",
-						"description": "When you use healing channel as a standard action, you can heal an ally linked by your telepathic bond class feature as if you were touching that ally, as long as the ally is within 120 feet. When you use healing channel as a full action, it heals all allies linked by your telepathic bond class feature within 120 feet (as well as all other allies within 30 feet)."
+						"description": "When you use healing channel as a standard action, you can heal an ally linked by your telepathic bond class feature as if you were touching that ally, as long as the ally is within 120 feet. When you use healing channel as a full action, it heals all allies linked by your telepathic bond class feature within 120 feet (as well as all other allies within 30 feet).",
+						"entry": {
+							"layout": "channel bond",
+						}
 					}
 				}
 			},
@@ -267,37 +387,58 @@ allClassFeatures = {
 					"1st": {
 						"name": "Empathy",
 						"SOURCEPAGE": "p.86",
-						"description": "As a full action, you can attempt a Sense Motive check to read the emotions of a particular creature (DC = 20 or 10 + its Bluff modifier, whichever is higher). If you succeed, you learn its general disposition and attitude toward creatures within 30 feet of it, and you gain a +2 circumstance bonus to Bluff, Diplomacy, Intimidate, and Sense Motive checks against that creature for 1 hour. Whether you succeed or fail, after opening your mind to read emotions, you take a -2 penalty to saving throws against mind-affecting effects for 1 minute."
+						"description": "As a full action, you can attempt a Sense Motive check to read the emotions of a particular creature (DC = 20 or 10 + its Bluff modifier, whichever is higher). If you succeed, you learn its general disposition and attitude toward creatures within 30 feet of it, and you gain a +2 circumstance bonus to Bluff, Diplomacy, Intimidate, and Sense Motive checks against that creature for 1 hour. Whether you succeed or fail, after opening your mind to read emotions, you take a -2 penalty to saving throws against mind-affecting effects for 1 minute.",
+						"entry": {
+							"layout": "empathy",
+						}
 					},
 					"12th": {
 						"name": "Greater Emotionsense",
 						"SOURCEPAGE": "p.86",
-						"description": "Your emotionsense is far more discerning, as if you had blindsight (emotion); see page 262."
+						"description": "Your emotionsense is far more discerning, as if you had blindsight (emotion); see page 262.",
+						"entry": {
+							"layout": "greater emotionsense",
+						}
 					},
 					"3rd": {
 						"name": "Greater Mindlink",
 						"SOURCEPAGE": "p.86",
-						"description": "You can use your mindlink ability on the same creature as many times per day as you wish, and the communication can be both ways, though the maximum of 10 minutes of communication per round still applies."
+						"description": "You can use your mindlink ability on the same creature as many times per day as you wish, and the communication can be both ways, though the maximum of 10 minutes of communication per round still applies.",
+						"entry": {
+							"layout": "greater mindlink",
+						}
 					},
 					"9th": {
 						"name": "Discern Lies",
 						"SOURCEPAGE": "p.86",
-						"description": "You can use discern lies as a spell-like ability a number of times per day equal to your mystic level, each time targeting a single creature. This effect lasts 1 round. Once a creature successfully saves against this ability, it becomes immune to further uses of this ability for 24 hours."
+						"description": "You can use discern lies as a spell-like ability a number of times per day equal to your mystic level, each time targeting a single creature. This effect lasts 1 round. Once a creature successfully saves against this ability, it becomes immune to further uses of this ability for 24 hours.",
+						"entry": {
+							"layout": "discern lies [DC]",
+						}
 					},
 					"18th": {
 						"name": "Empathic Mastery",
 						"SOURCEPAGE": "p.86",
-						"description": "You can spend 1 Resolve Point to use psychic surgery as a spell-like ability. If you are incapacitated by an effect that psychic surgery could remove and have at least 1 Resolve Point remaining, you can spend 1 Resolve Point to use this ability on yourself, even without being able to take any actions."
+						"description": "You can spend 1 Resolve Point to use psychic surgery as a spell-like ability. If you are incapacitated by an effect that psychic surgery could remove and have at least 1 Resolve Point remaining, you can spend 1 Resolve Point to use this ability on yourself, even without being able to take any actions.",
+						"entry": {
+							"layout": "empathic mastery",
+						}
 					},
 					"15th": {
 						"name": "Retrocognition",
 						"SOURCEPAGE": "p.86",
-						"description": "You can use retrocognition as a spell-like ability at will. When doing so, you take a -2 penalty to saving throws against mind-affecting effects for as long as you concentrate on retrocognition and an equal amount of time afterward. You can spend 1 Resolve Point to negate this penalty."
+						"description": "You can use retrocognition as a spell-like ability at will. When doing so, you take a -2 penalty to saving throws against mind-affecting effects for as long as you concentrate on retrocognition and an equal amount of time afterward. You can spend 1 Resolve Point to negate this penalty.",
+						"entry": {
+							"layout": "retrocognition",
+						}
 					},
 					"6th": {
 						"name": "Emotionsense",
 						"SOURCEPAGE": "p.86",
-						"description": "You can detect and locate creatures within 60 feet that have emotions, as if you had blindsense (emotion); see page 262. A creature can keep its emotions calm to avoid detection by this ability by succeeding at a Bluff check with a DC equal to 10 + your Sense Motive modifier, but a creature under the influence of an emotion effect cannot try to avoid detection. Creatures under the effects of nondetection or similar effects automatically avoid detection by this ability. Unless otherwise stated, constructs and creatures with Intelligence scores of 2 or lower don't have emotions and can't be sensed this way."
+						"description": "You can detect and locate creatures within 60 feet that have emotions, as if you had blindsense (emotion); see page 262. A creature can keep its emotions calm to avoid detection by this ability by succeeding at a Bluff check with a DC equal to 10 + your Sense Motive modifier, but a creature under the influence of an emotion effect cannot try to avoid detection. Creatures under the effects of nondetection or similar effects automatically avoid detection by this ability. Unless otherwise stated, constructs and creatures with Intelligence scores of 2 or lower don't have emotions and can't be sensed this way.",
+						"entry": {
+							"layout": "emotionsense",
+						}
 					}
 				}
 			},
@@ -317,37 +458,58 @@ allClassFeatures = {
 					"6th": {
 						"name": "Peer into the Future",
 						"SOURCEPAGE": "p.85",
-						"description": "Once per day, you can spend 10 minutes in uninterrupted meditation to receive visions of possible futures. At any point over the next 24 hours, you can declare that you are using the benefit of this ability before rolling one initiative check, saving throw, or skill check. You gain a +4 insight bonus to that check. At 11th level, you can use this ability twice per day, though you can't use it again until after you've used your first bonus."
+						"description": "Once per day, you can spend 10 minutes in uninterrupted meditation to receive visions of possible futures. At any point over the next 24 hours, you can declare that you are using the benefit of this ability before rolling one initiative check, saving throw, or skill check. You gain a +4 insight bonus to that check. At 11th level, you can use this ability twice per day, though you can't use it again until after you've used your first bonus.",
+						"entry": {
+							"layout": "peer into the future",
+						}
 					},
 					"15th": {
 						"name": "Memory Palace",
 						"SOURCEPAGE": "p.85",
-						"description": "You assemble an extradimensional library to house mental constructs representing your accumulated knowledge. This memory palace has a single shimmering entrance. You can access your memory palace once per day; when you do, the entrance appears within close range. If any creatures or objects that were not part of the memory palace when it was created remain inside it, the entrance remains where it first appeared. Only those you designate can enter the memory palace, and the entrance closes and becomes invisible behind you when you enter. Anyone inside can open the entrance and exit the memory palace at will. The only way to enter and exit the memory palace is via the entrance; even plane shift and similar magic do not access it. You can create any floor plan you desire for your memory palace, up to a number of 10-foot cubes equal to your mystic level. Inside, the atmosphere is clean, fresh, and warm; outside conditions don't affect the memory palace, nor do conditions inside it pass beyond. There is no furniture other than bookcases, computers, and a few desks and sofas. A number of unseen servants (as per the spell of the same name) equal to half your mystic level serve as librarians. The library keeps the same layout each time you access it, though you can alter its appearance each time you gain a level or by spending 15 minutes concentrating-you don't need to be inside it to alter it. When you gain this ability, choose one skill that can be used with the recall knowledge task. Consulting your memory palace gives anyone who studies within-including you-a +4 enhancement bonus to skill checks to recall knowledge of that type, and creatures inside the memory palace can attempt checks of that type untrained. At 16th level, and at each level thereafter, choose another skill that can be used with the recall knowledge task to which your memory palace's skill bonus applies."
+						"description": "You assemble an extradimensional library to house mental constructs representing your accumulated knowledge. This memory palace has a single shimmering entrance. You can access your memory palace once per day; when you do, the entrance appears within close range. If any creatures or objects that were not part of the memory palace when it was created remain inside it, the entrance remains where it first appeared. Only those you designate can enter the memory palace, and the entrance closes and becomes invisible behind you when you enter. Anyone inside can open the entrance and exit the memory palace at will. The only way to enter and exit the memory palace is via the entrance; even plane shift and similar magic do not access it. You can create any floor plan you desire for your memory palace, up to a number of 10-foot cubes equal to your mystic level. Inside, the atmosphere is clean, fresh, and warm; outside conditions don't affect the memory palace, nor do conditions inside it pass beyond. There is no furniture other than bookcases, computers, and a few desks and sofas. A number of unseen servants (as per the spell of the same name) equal to half your mystic level serve as librarians. The library keeps the same layout each time you access it, though you can alter its appearance each time you gain a level or by spending 15 minutes concentrating-you don't need to be inside it to alter it. When you gain this ability, choose one skill that can be used with the recall knowledge task. Consulting your memory palace gives anyone who studies within-including you-a +4 enhancement bonus to skill checks to recall knowledge of that type, and creatures inside the memory palace can attempt checks of that type untrained. At 16th level, and at each level thereafter, choose another skill that can be used with the recall knowledge task to which your memory palace's skill bonus applies.",
+						"entry": {
+							"layout": "memory palace",
+						}
 					},
 					"9th": {
 						"name": "Mind Probe",
 						"SOURCEPAGE": "p.85",
-						"description": "You can use mind probe as a spell-like ability a number of times per day equal to your mystic level, lasting for 1 round. A creature that successfully saves against your mind probe is immune to further uses of this ability for 24 hours."
+						"description": "You can use mind probe as a spell-like ability a number of times per day equal to your mystic level, lasting for 1 round. A creature that successfully saves against your mind probe is immune to further uses of this ability for 24 hours.",
+						"entry": {
+							"layout": "mind probe [DC]",
+						}
 					},
 					"12th": {
 						"name": "Telepathic Memories",
 						"SOURCEPAGE": "p.85",
-						"description": "You can share memories at will with allies linked by your telepathic bond class feature. As a full action, you or a linked ally can send a memory of up to 1 minute to as many others in the bond as they choose. Sending a relevant memory counts as a successful aid another attempt for a skill check, even if you wouldn't otherwise be able to use aid another (to a limit of one such memory per skill check)."
+						"description": "You can share memories at will with allies linked by your telepathic bond class feature. As a full action, you or a linked ally can send a memory of up to 1 minute to as many others in the bond as they choose. Sending a relevant memory counts as a successful aid another attempt for a skill check, even if you wouldn't otherwise be able to use aid another (to a limit of one such memory per skill check).",
+						"entry": {
+							"layout": "telepathic memories",
+						}
 					},
 					"3rd": {
 						"name": "Access Akashic Record",
 						"SOURCEPAGE": "p.85",
-						"description": "You can access the Akashic Record to augment your skills. You can spend 1 Resolve Point to attempt a skill check as if you had ranks in that skill equal to your mystic level."
+						"description": "You can access the Akashic Record to augment your skills. You can spend 1 Resolve Point to attempt a skill check as if you had ranks in that skill equal to your mystic level.",
+						"entry": {
+							"layout": "access akashic record",
+						}
 					},
 					"1st": {
 						"name": "Akashic Knowledge",
 						"SOURCEPAGE": "p.85",
-						"description": "You gain the channel skill ability at 1st level (instead of 2nd level). Each day when you recover your spell slots, you can tap into the Akashic Record, enabling you to choose one Profession skill and add that to your list of associated skills for the channel skill class feature."
+						"description": "You gain the channel skill ability at 1st level (instead of 2nd level). Each day when you recover your spell slots, you can tap into the Akashic Record, enabling you to choose one Profession skill and add that to your list of associated skills for the channel skill class feature.",
+						"entry": {
+							"layout": "akashic knowledge",
+						}
 					},
 					"18th": {
 						"name": "Glean Spell",
 						"SOURCEPAGE": "p.85",
-						"description": "Once per day, you can delve into the Akashic Record to cast a spell from either the mystic or technomancer spell list as if it were on your list of spells known. The spell consumes a spell slot 1 level higher than the level of the spell."
+						"description": "Once per day, you can delve into the Akashic Record to cast a spell from either the mystic or technomancer spell list as if it were on your list of spells known. The spell consumes a spell slot 1 level higher than the level of the spell.",
+						"entry": {
+							"layout": "glean spell",
+						}
 					}
 				}
 			}
@@ -355,7 +517,10 @@ allClassFeatures = {
 		"Class features": {
 			"Transcendence": {
 				"SOURCEPAGE": "p.84",
-				"description": "You are close to becoming one with your connection. You can cast each of your connection spells once per day without consuming a spell slot. In addition, you learn how to temporarily transcend your physical form. Once per day, you can spend 1 Resolve Point to project your consciousness outside of your physical body in the form of an intangible psychic image of yourself. This counts as a 6th-level illusion effect and lasts for a number of rounds equal to your mystic level. While your consciousness is projected, your physical body is considered blind, deaf, and helpless, but you can return to your body as a swift action. You control your psychic image as though it was your own body, and your senses perceive only what the image can see and hear. You move with a fly speed of 60 feet and perfect maneuverability. You can pass through solid objects as though you were incorporeal, but you can't go farther into a solid object than your space (5 feet for a Medium creature). You can't directly affect physical objects. Your projected consciousness is immune to most attacks or effects, whether or not they affect incorporeal creatures, but mindaffecting effects have their full effect on you. You can cast any mystic spell or spell-like ability with a range of touch or greater from your projected consciousness. The spells affect other targets normally. You can't cast any spells on your projected consciousness except for illusion spells. You need not maintain line of effect to your projected consciousness, but if you cross into another plane, even momentarily (including via Drift travel), your mind immediately returns to your physical body."
+				"description": "You are close to becoming one with your connection. You can cast each of your connection spells once per day without consuming a spell slot. In addition, you learn how to temporarily transcend your physical form. Once per day, you can spend 1 Resolve Point to project your consciousness outside of your physical body in the form of an intangible psychic image of yourself. This counts as a 6th-level illusion effect and lasts for a number of rounds equal to your mystic level. While your consciousness is projected, your physical body is considered blind, deaf, and helpless, but you can return to your body as a swift action. You control your psychic image as though it was your own body, and your senses perceive only what the image can see and hear. You move with a fly speed of 60 feet and perfect maneuverability. You can pass through solid objects as though you were incorporeal, but you can't go farther into a solid object than your space (5 feet for a Medium creature). You can't directly affect physical objects. Your projected consciousness is immune to most attacks or effects, whether or not they affect incorporeal creatures, but mindaffecting effects have their full effect on you. You can cast any mystic spell or spell-like ability with a range of touch or greater from your projected consciousness. The spells affect other targets normally. You can't cast any spells on your projected consciousness except for illusion spells. You need not maintain line of effect to your projected consciousness, but if you cross into another plane, even momentarily (including via Drift travel), your mind immediately returns to your physical body.",
+				"entry": {
+					"layout": "transcendence",
+				}
 			},
 			"Channel Skill": {
 				"SOURCEPAGE": "p.84",
@@ -363,7 +528,10 @@ allClassFeatures = {
 			},
 			"Enlightenment": {
 				"SOURCEPAGE": "p.84",
-				"description": "You achieve enlightenment, becoming a living incarnation of your connection. You no longer age, nor do you die of old age. Once per day as a move action, you can enter a state of total communion with your connection that lasts for 1 minute. During this time, you gain a +4 insight bonus to attack rolls, saving throws, and skill checks, and you gain 20 temporary Resolve Points that you can use only on connection powers. Any unspent temporary Resolve Points disappear at the end of this minute. In addition, once per week, you can cast miracle as a spell-like ability"
+				"description": "You achieve enlightenment, becoming a living incarnation of your connection. You no longer age, nor do you die of old age. Once per day as a move action, you can enter a state of total communion with your connection that lasts for 1 minute. During this time, you gain a +4 insight bonus to attack rolls, saving throws, and skill checks, and you gain 20 temporary Resolve Points that you can use only on connection powers. Any unspent temporary Resolve Points disappear at the end of this minute. In addition, once per week, you can cast miracle as a spell-like ability",
+				"entry": {
+					"layout": "enlightenment",
+				}
 			},
 			"Weapon Specialization": {
 				"SOURCEPAGE": "p.84",
@@ -371,11 +539,17 @@ allClassFeatures = {
 			},
 			"Telepathic Bond": {
 				"SOURCEPAGE": "p.84",
-				"description": "As a standard action, you can form a telepathic link with up to six other willing creatures, allowing you to communicate telepathically at great distances. This functions as telepathic bond, except the duration is permanent. You can have only one telepathic bond active in this way at any given time; creating a new telepathic bond immediately ends the previous one."
+				"description": "As a standard action, you can form a telepathic link with up to six other willing creatures, allowing you to communicate telepathically at great distances. This functions as telepathic bond, except the duration is permanent. You can have only one telepathic bond active in this way at any given time; creating a new telepathic bond immediately ends the previous one.",
+				"entry": {
+					"layout": "telepathic bond",
+				}
 			},
 			"Mindlink": {
 				"SOURCEPAGE": "p.84",
-				"description": "You can form a mental link with creatures you touch, communicating information rapidly through it. You can use mindlink at will as a spell-like ability, though only once per day on any given individual."
+				"description": "You can form a mental link with creatures you touch, communicating information rapidly through it. You can use mindlink at will as a spell-like ability, though only once per day on any given individual.",
+				"entry": {
+					"layout": "mindlink",
+				}
 			},
 			"Connection": {
 				"SOURCEPAGE": "p.83",
@@ -387,7 +561,14 @@ allClassFeatures = {
 			},
 			"Healing Touch": {
 				"SOURCEPAGE": "p.84",
-				"description": "Once per day, you can spend 10 minutes to magically heal an ally up to 5 Hit Points per mystic level."
+				"description": "Once per day, you can spend 10 minutes to magically heal an ally up to 5 Hit Points per mystic level.",
+				"entry": {
+					"layout": "healing touch [HPLHP]",
+					"HPL":{
+						"base":0,
+						"PERCR":5
+					}
+				}
 			},
 			"Connection Power": {
 				"SOURCEPAGE": "p.83",
@@ -1896,12 +2077,27 @@ allClassFeatures = {
 				"SOURCEPAGE": "p.120",
 				"description": "You recover Resolve Points when you use powerful magic. Each time you cast a 6th-level spell, you regain 1 Resolve Point, up to your normal maximum. This applies only to spells you cast using your normal 6th-level spell slots, not to those you cast using magic items or other methods such as fuse spells."
 			},
-			"Cache Capacitor Slot 1": {},
-			"Cache Capacitor Slot 2": {},
-			"Cache Capacitor Slot 3": {},
+			"Cache Capacitor 1": {
+				"entry": {
+					"layout": "cache capacitor 1",
+				}
+			},
+			"Cache Capacitor 2": {
+				"entry": {
+					"layout": "cache capacitor 2",
+				}
+			},
+			"Cache Capacitor 3": {
+				"entry": {
+					"layout": "cache capacitor 1",
+				}
+			},
 			"Spell Cache": {
 				"SOURCEPAGE": "p.119",
-				"description": "As the culmination of your early study of the fundamental forces of the galaxy, you have created a spell cache that allows you to store and access spells. Your spell cache could be a device such as a handheld computer or technological implant; an item such as a ring or staff; or a symbol such as a brand, tattoo, or other permanent modification to your body. While you don't need your spell cache to cast your spells, once per day, you can activate your spell cache to cast any one spell you know and are capable of casting, even if you've expended all your spell slots for that spell's level. If your spell cache is damaged, it is restored to full Hit Points the next time you prepare spells. If the spell cache is lost or destroyed, you can replace it after 1 week with a special ritual that takes 8 hours to complete."
+				"description": "As the culmination of your early study of the fundamental forces of the galaxy, you have created a spell cache that allows you to store and access spells. Your spell cache could be a device such as a handheld computer or technological implant; an item such as a ring or staff; or a symbol such as a brand, tattoo, or other permanent modification to your body. While you don't need your spell cache to cast your spells, once per day, you can activate your spell cache to cast any one spell you know and are capable of casting, even if you've expended all your spell slots for that spell's level. If your spell cache is damaged, it is restored to full Hit Points the next time you prepare spells. If the spell cache is lost or destroyed, you can replace it after 1 week with a special ritual that takes 8 hours to complete.",
+				"entry": {
+					"layout": "spell cache",
+				}
 			},
 			"Cache Capacitor": {
 				"SOURCEPAGE": "p.120",
@@ -1912,135 +2108,228 @@ allClassFeatures = {
 			"2nd":{
 				"Quick Scan": {
 				  "SOURCEPAGE": "p.121",
-				  "description": "As a standard action, you can get a general sense of what information is stored on drives or other digital storage media. You must pass your hand in the air near the data source, but don't have to touch it or connect to it. The information you get is very general, such as \"financial records"
+				  "description": "As a standard action, you can get a general sense of what information is stored on drives or other digital storage media. You must pass your hand in the air near the data source, but don't have to touch it or connect to it. The information you get is very general, such as financial records",
+					"entry": {
+						"layout": "quick scan",
+					}
 				},
 				"Fabricate Tech": {
 				  "SOURCEPAGE": "p.121",
-				  "description": "As a full action, you can expend an unused spell slot to temporarily construct a piece of technological gear from raw magic. You can create any single technological item with a level equal to or less than the level of the expended spell slot x 3, to a maximum of your caster level. The item appears in your hands or in an adjacent square. You can use fuse spells with this magic hack. The size of the item cannot exceed 10 bulk or Medium size, and the quality of the item is average. Treat this as a spell of the same level as the expended spell slot. For example, at 4th level, you could expend a 1st-level spell slot to fabricate an item of up to 3rd level, or you could expend a 2nd-level spell slot to fabricate an item of up to 4th level. The item persists for a number of minutes equal to your technomancer level. At the end of this duration, the item disappears. You can't create armor, weapons, magic items, or items with limited uses or charges (such as batteries, drugs, or fuel) with this hack."
+				  "description": "As a full action, you can expend an unused spell slot to temporarily construct a piece of technological gear from raw magic. You can create any single technological item with a level equal to or less than the level of the expended spell slot x 3, to a maximum of your caster level. The item appears in your hands or in an adjacent square. You can use fuse spells with this magic hack. The size of the item cannot exceed 10 bulk or Medium size, and the quality of the item is average. Treat this as a spell of the same level as the expended spell slot. For example, at 4th level, you could expend a 1st-level spell slot to fabricate an item of up to 3rd level, or you could expend a 2nd-level spell slot to fabricate an item of up to 4th level. The item persists for a number of minutes equal to your technomancer level. At the end of this duration, the item disappears. You can't create armor, weapons, magic items, or items with limited uses or charges (such as batteries, drugs, or fuel) with this hack.",
+					"entry": {
+						"layout": "fabricate tech",
+					}
 				},
 				"Robot Influence": {
 				  "SOURCEPAGE": "p.121",
-				  "description": "You can affect constructs, robots, and other creatures that have the technological subtype with your mind-affecting spells, even if they're mindless or normally immune to such effects. However, they receive a +2 bonus to their Will saves against your mind-affecting spells."
+				  "description": "You can affect constructs, robots, and other creatures that have the technological subtype with your mind-affecting spells, even if they're mindless or normally immune to such effects. However, they receive a +2 bonus to their Will saves against your mind-affecting spells.",
+					"entry": {
+						"layout": "robot influence",
+					}
 				},
 				"Energize Spell": {
 				  "SOURCEPAGE": "p.121",
-				  "description": "Once per day as a move action, you can use a battery or a weapon's power cell to power your spellcasting, enabling you to cast one spell you know without using a spell slot. This expends 20 charges per spell level from the battery or power cell and requires you to touch the battery, power cell, or weapon. You must cast the spell before the start of your next turn, or the charges are wasted with no effect."
+				  "description": "Once per day as a move action, you can use a battery or a weapon's power cell to power your spellcasting, enabling you to cast one spell you know without using a spell slot. This expends 20 charges per spell level from the battery or power cell and requires you to touch the battery, power cell, or weapon. You must cast the spell before the start of your next turn, or the charges are wasted with no effect.",
+					"entry": {
+						"layout": "energize spell",
+					}
 				},
 				"Spell Countermeasures": {
 				  "SOURCEPAGE": "p.121",
-				  "description": "You gain a +2 bonus to saving throws against spells and other magical effects."
+				  "description": "You gain a +2 bonus to saving throws against spells and other magical effects.",
+					"entry": {
+						"layout": "spell countermeasures",
+					}
 				},
 				"Harmful Spells": {
 				  "SOURCEPAGE": "p.121",
-				  "description": "When you cast an instantaneous spell that deals damage, you can increase the spell's damage by half your technomancer level. This increased damage applies to all creatures damaged by an area spell, but for spells that target multiple creatures with multiple rays or other attacks (such as magic missile), the increased damage applies only to a single ray or missile. This increased damage doesn't apply to ongoing damage from the spell (such as bleed or burn). This magic hack doesn't increase ability damage or other spell effects, only damage to Stamina Points or Hit Points."
+				  "description": "When you cast an instantaneous spell that deals damage, you can increase the spell's damage by half your technomancer level. This increased damage applies to all creatures damaged by an area spell, but for spells that target multiple creatures with multiple rays or other attacks (such as magic missile), the increased damage applies only to a single ray or missile. This increased damage doesn't apply to ongoing damage from the spell (such as bleed or burn). This magic hack doesn't increase ability damage or other spell effects, only damage to Stamina Points or Hit Points.",
+					"entry": {
+						"layout": "harmful spells",
+					}
 				},
 				"Empowered Weapon": {
 				  "SOURCEPAGE": "p.121",
-				  "description": "As a move action, you can expend an unused spell slot to reconfigure and enhance a weapon you're wielding. Until the start of your next turn, your attacks with the enhanced weapon gain a bonus to attack rolls equal to the level of the spell slot you expended. In addition, your attacks with that weapon deal 1d6 additional damage per level of the expended spell slot. This damage is of the same type the weapon normally deals."
+				  "description": "As a move action, you can expend an unused spell slot to reconfigure and enhance a weapon you're wielding. Until the start of your next turn, your attacks with the enhanced weapon gain a bonus to attack rolls equal to the level of the spell slot you expended. In addition, your attacks with that weapon deal 1d6 additional damage per level of the expended spell slot. This damage is of the same type the weapon normally deals.",
+					"entry": {
+						"layout": "empowered weapon",
+					}
 				},
 				"Selective Targeting": {
 				  "SOURCEPAGE": "p.121",
-				  "description": "When you cast an instantaneous spell with an area effect, you can shape the spell so it doesn't affect one of your allies. Choose one 5-foot square within the spell's area to be unaffected by the spell. At 5th level, you can spend 1 Resolve Point to exclude any number of squares with this ability."
+				  "description": "When you cast an instantaneous spell with an area effect, you can shape the spell so it doesn't affect one of your allies. Choose one 5-foot square within the spell's area to be unaffected by the spell. At 5th level, you can spend 1 Resolve Point to exclude any number of squares with this ability.",
+					"entry": {
+						"layout": "selective targeting",
+					}
 				},
 				"Countertech": {
 				  "SOURCEPAGE": "p.120",
-				  "description": "As a reaction when you take damage from an attack by a technological weapon or source within medium range that specifically targets you, you can expend an unused spell slot to disrupt the attack. With a spell slot of 1st to 5th level, you can counter an attack from a technological weapon whose item level is equal to or less than the level of the expended spell slot x 3, to a maximum of your caster level. 6th-level spell slots can counter any weapon with a level equal to or less than your caster level. For example, at 2nd level, you could expend a 1st-level spell slot to counter an attack from a 1st- or 2nd-level weapon. To successfully counter the attack, you must roll a countertech check (1d20 + your caster level) with a DC equal to 11 + the weapon's level. If the countertech check succeeds, the attack deals half damage. If the countertech check fails, the attack deals normal damage. This magic hack only affects attacks that target you directly; you cannot use countertech against attacks that target an area or that target another person."
+				  "description": "As a reaction when you take damage from an attack by a technological weapon or source within medium range that specifically targets you, you can expend an unused spell slot to disrupt the attack. With a spell slot of 1st to 5th level, you can counter an attack from a technological weapon whose item level is equal to or less than the level of the expended spell slot x 3, to a maximum of your caster level. 6th-level spell slots can counter any weapon with a level equal to or less than your caster level. For example, at 2nd level, you could expend a 1st-level spell slot to counter an attack from a 1st- or 2nd-level weapon. To successfully counter the attack, you must roll a countertech check (1d20 + your caster level) with a DC equal to 11 + the weapon's level. If the countertech check succeeds, the attack deals half damage. If the countertech check fails, the attack deals normal damage. This magic hack only affects attacks that target you directly; you cannot use countertech against attacks that target an area or that target another person.",
+					"entry": {
+						"layout": "countertech",
+					}
 				},
 				"Technomantic Proficiency": {
 				  "SOURCEPAGE": "p.121",
-				  "description": "As a standard action, you can spend 1 Resolve Point to temporarily learn how to use a weapon in combat. Choose a single weapon; you gain proficiency with it (and any identical weapon) for a number of minutes equal to your class level. Each round you use the weapon reduces this magic hack's duration by 1 minute. For example, at 4th level, you could gain proficiency with corona laser rifles for 4 minutes. If you fire such a weapon for 2 rounds, you remain proficient with it for 2 more minutes."
+				  "description": "As a standard action, you can spend 1 Resolve Point to temporarily learn how to use a weapon in combat. Choose a single weapon; you gain proficiency with it (and any identical weapon) for a number of minutes equal to your class level. Each round you use the weapon reduces this magic hack's duration by 1 minute. For example, at 4th level, you could gain proficiency with corona laser rifles for 4 minutes. If you fire such a weapon for 2 rounds, you remain proficient with it for 2 more minutes.",
+					"entry": {
+						"layout": "technomantic proficiency",
+					}
 				}
 			},
 			"5th":{
 				"Magic Negation": {
 				  "SOURCEPAGE": "p.122",
-				  "description": "As a standard action, you can spend 1 RP to temporarily suppress magic, as if using dispel magic. Choose either an ongoing spell or a magic item within 30 feet of you. The magical effects of the spell or magic item are suppressed for 1d4 rounds, and then they return. If the spell's level is higher than you can cast or the item's caster level is greater than yours, you can't suppress it. If you target a spell affecting a creature, the creature can attempt a Will save to stop you from suppressing the spell."
+				  "description": "As a standard action, you can spend 1 RP to temporarily suppress magic, as if using dispel magic. Choose either an ongoing spell or a magic item within 30 feet of you. The magical effects of the spell or magic item are suppressed for 1d4 rounds, and then they return. If the spell's level is higher than you can cast or the item's caster level is greater than yours, you can't suppress it. If you target a spell affecting a creature, the creature can attempt a Will save to stop you from suppressing the spell.",
+					"entry": {
+						"layout": "magic negation [DC]",
+					}
 				},
 				"Extended Spell": {
 				  "SOURCEPAGE": "p.122",
-				  "description": "When you cast a spell, you can spend 1 Resolve Point to double its duration. This has no effect on spells with a duration of concentration, instantaneous, 1 round or less, or permanent, nor can it increase a spell's duration to more than 24 hours."
+				  "description": "When you cast a spell, you can spend 1 Resolve Point to double its duration. This has no effect on spells with a duration of concentration, instantaneous, 1 round or less, or permanent, nor can it increase a spell's duration to more than 24 hours.",
+					"entry": {
+						"layout": "extended spell",
+					}
 				},
 				"Charging Jolt": {
 				  "SOURCEPAGE": "p.121",
-				  "description": "As a move action, you can expend an unused spell slot to refill charges in a weapon's power cell. This requires you to touch the weapon or its power cell. The power cell regains 10 charges per spell level, up to its capacity. You can also use this ability to jump-start or short out an electronic device, allowing you to attempt an Engineering check to disable a device with a bonus equal to double the level of the spell you expended."
+				  "description": "As a move action, you can expend an unused spell slot to refill charges in a weapon's power cell. This requires you to touch the weapon or its power cell. The power cell regains 10 charges per spell level, up to its capacity. You can also use this ability to jump-start or short out an electronic device, allowing you to attempt an Engineering check to disable a device with a bonus equal to double the level of the spell you expended.",
+					"entry": {
+						"layout": "charging jolt",
+					}
 				},
 				"Spell Grenade": {
 				  "SOURCEPAGE": "p.122",
-				  "description": "You can spend 1 Resolve Point to store a spell with a range of touch in a grenade, allowing you to affect a target within the grenade's blast radius with the spell. Casting a spell with spell grenade uses the spell's standard casting time, and throwing the spell grenade is a standard action. You must throw the grenade before the end of your next turn, or the spell is wasted. You are considered proficient with the grenade for this attack. Choose a single target within the grenade's blast radius; that target is affected by the spell as if you had successfully touched it. The grenade goes off as normal, with all of its usual effects within its blast radius. If you miss the targeted intersection with the grenade, you must choose a target within the grenade's new blast radius. If there are no suitable targets within the grenade's blast radius, the spell is wasted. Spells whose ranges are not touch don't benefit from this magic hack."
+				  "description": "You can spend 1 Resolve Point to store a spell with a range of touch in a grenade, allowing you to affect a target within the grenade's blast radius with the spell. Casting a spell with spell grenade uses the spell's standard casting time, and throwing the spell grenade is a standard action. You must throw the grenade before the end of your next turn, or the spell is wasted. You are considered proficient with the grenade for this attack. Choose a single target within the grenade's blast radius; that target is affected by the spell as if you had successfully touched it. The grenade goes off as normal, with all of its usual effects within its blast radius. If you miss the targeted intersection with the grenade, you must choose a target within the grenade's new blast radius. If there are no suitable targets within the grenade's blast radius, the spell is wasted. Spells whose ranges are not touch don't benefit from this magic hack.",
+					"entry": {
+						"layout": "spell grenade",
+					}
 				},
 				"Fabricate Arms": {
 				  "SOURCEPAGE": "p.122",
-				  "description": "As a full action, you can expend an unused spell slot to temporarily construct a technological weapon or suit of armor out of raw magic. You can create one suit of armor or weapon with a level equal to or less than the level of the expended spell slot x 3, to a maximum of your caster level. The item appears in your hands, on your person, or in an adjacent square. You can use fuse spells with this magic hack. A weapon can't be larger than two-handed, and the size of the item can't exceed 10 bulk. The quality of the item is average for its type. Treat this as a spell of the same level as the expended spell slot. For example, at 10th level, you could expend a 3rd-level spell slot to fabricate a weapon of 9th level or lower, or expend a 4thlevel spell slot to fabricate a suit of armor of 10th level or lower. The armor or weapon persists for a number of rounds equal to your technomancer level. At the end of this duration, the item disappears. You are proficient with (but not specialized in) any weapons you create with this ability. You can't create magic items, weapons made from a special material, or weapons that are expended with use (such as arrows, grenades, or missiles) with this magic hack."
+				  "description": "As a full action, you can expend an unused spell slot to temporarily construct a technological weapon or suit of armor out of raw magic. You can create one suit of armor or weapon with a level equal to or less than the level of the expended spell slot x 3, to a maximum of your caster level. The item appears in your hands, on your person, or in an adjacent square. You can use fuse spells with this magic hack. A weapon can't be larger than two-handed, and the size of the item can't exceed 10 bulk. The quality of the item is average for its type. Treat this as a spell of the same level as the expended spell slot. For example, at 10th level, you could expend a 3rd-level spell slot to fabricate a weapon of 9th level or lower, or expend a 4thlevel spell slot to fabricate a suit of armor of 10th level or lower. The armor or weapon persists for a number of rounds equal to your technomancer level. At the end of this duration, the item disappears. You are proficient with (but not specialized in) any weapons you create with this ability. You can't create magic items, weapons made from a special material, or weapons that are expended with use (such as arrows, grenades, or missiles) with this magic hack.",
+					"entry": {
+						"layout": "fabricate arms",
+					}
 				},
 				"Debug Spell": {
 				  "SOURCEPAGE": "p.122",
-				  "description": "Any piece of code has bugs, but you can turn the bugs in your spellcode into features. After rolling damage for an instantaneous spell that deals Hit Point damage, you can spend 1 Resolve Point to reroll one die with a result of 1 (see page 243). At 11th level, you can reroll up to two dice with a result of 1, and at 17th level, you can reroll up to three dice with a result of 1. For example, if you were 17th level and cast disintegrate, you could spend 1 Resolve Point to reroll up to three dice that rolled 1s, after rolling and seeing how many 1s you rolled."
+				  "description": "Any piece of code has bugs, but you can turn the bugs in your spellcode into features. After rolling damage for an instantaneous spell that deals Hit Point damage, you can spend 1 Resolve Point to reroll one die with a result of 1 (see page 243). At 11th level, you can reroll up to two dice with a result of 1, and at 17th level, you can reroll up to three dice with a result of 1. For example, if you were 17th level and cast disintegrate, you could spend 1 Resolve Point to reroll up to three dice that rolled 1s, after rolling and seeing how many 1s you rolled.",
+					"entry": {
+						"layout": "debug spell",
+					}
 				},
 				"Distant Spell": {
 				  "SOURCEPAGE": "p.122",
-				  "description": "When you cast a spell with a range of close, medium, or long, you can spend 1 Resolve Point to double its range. Spells whose ranges are not defined by distance, as well as spells whose ranges are not close, medium, or long, do not benefit from this magic hack. If the spell affects an area, doubling its range doesn't alter the size of its area."
+				  "description": "When you cast a spell with a range of close, medium, or long, you can spend 1 Resolve Point to double its range. Spells whose ranges are not defined by distance, as well as spells whose ranges are not close, medium, or long, do not benefit from this magic hack. If the spell affects an area, doubling its range doesn't alter the size of its area.",
+					"entry": {
+						"layout": "distant spell",
+					}
 				}
 			},
 			"8th":{
 				"Diviner's Tap": {
 				  "SOURCEPAGE": "p.122",
-				  "description": "You can hack a computer to set up magical surveillance. This takes 10 minutes and requires a successful Computers check against the device's DC. If you fail, you can't try again on the same device. On a success, your tap lasts for a number of days equal to your caster level. You can program your tap either to give you general information about user activity on the device or to receive a mental alarm when a user accesses or transmits data about a specific topic (getting an idea of the information found). For instance, a user might hold a video call to talk about your exploits. If you chose to receive general information, you might know that a video call took place but not the call's topic. If you chose to have the tap receive an alarm when the topic is you, you'd get the gist of the conversation (but not a complete transcript). Setting up a new diviner's tap ends the duration of any previous one still in effect."
+				  "description": "You can hack a computer to set up magical surveillance. This takes 10 minutes and requires a successful Computers check against the device's DC. If you fail, you can't try again on the same device. On a success, your tap lasts for a number of days equal to your caster level. You can program your tap either to give you general information about user activity on the device or to receive a mental alarm when a user accesses or transmits data about a specific topic (getting an idea of the information found). For instance, a user might hold a video call to talk about your exploits. If you chose to receive general information, you might know that a video call took place but not the call's topic. If you chose to have the tap receive an alarm when the topic is you, you'd get the gist of the conversation (but not a complete transcript). Setting up a new diviner's tap ends the duration of any previous one still in effect.",
+					"entry": {
+						"layout": "diviner's tap",
+					}
 				},
 				"Flash Teleport": {
 				  "SOURCEPAGE": "p.122",
-				  "description": "As a move action, you can spend 1 Resolve Point to teleport up to 30 feet. You must have line of sight to your destination. This movement doesn't provoke attacks of opportunity."
+				  "description": "As a move action, you can spend 1 Resolve Point to teleport up to 30 feet. You must have line of sight to your destination. This movement doesn't provoke attacks of opportunity.",
+					"entry": {
+						"layout": "flash teleport",
+					}
 				},
 				"Tech Countermeasures": {
 				  "SOURCEPAGE": "p.123",
-				  "description": "As a move action, you can spend 1 Resolve Point to make it more difficult for enemies to target you with technological weapons for 1 round. Until the start of your next turn, as a reaction just before an enemy attacks you with a technological weapon, you can force that enemy to roll the attack twice and take the lower result; if the weapon allows a Reflex save instead of requiring an attack roll, you instead gain the benefit of evasion (as the operative's class feature; see page 93) against the attack. This magic hack has no effect on spells that target you or on weapons or attacks that are not technological in nature."
+				  "description": "As a move action, you can spend 1 Resolve Point to make it more difficult for enemies to target you with technological weapons for 1 round. Until the start of your next turn, as a reaction just before an enemy attacks you with a technological weapon, you can force that enemy to roll the attack twice and take the lower result; if the weapon allows a Reflex save instead of requiring an attack roll, you instead gain the benefit of evasion (as the operative's class feature; see page 93) against the attack. This magic hack has no effect on spells that target you or on weapons or attacks that are not technological in nature.",
+					"entry": {
+						"layout": "tech countermeasures",
+					}
 				},
 				"Widened Spell": {
 				  "SOURCEPAGE": "p.123",
-				  "description": "When you cast a spell with a burst, emanation, or spread, you can spend 2 Resolve Points to double its radius. For instance, a spell with a 30-foot burst would have a 60-foot burst instead. Spells that don't have an area of one of these three types are not affected by this magic hack."
+				  "description": "When you cast a spell with a burst, emanation, or spread, you can spend 2 Resolve Points to double its radius. For instance, a spell with a 30-foot burst would have a 60-foot burst instead. Spells that don't have an area of one of these three types are not affected by this magic hack.",
+					"entry": {
+						"layout": "widened spell",
+					}
 				},
 				"Spellshot": {
 				  "SOURCEPAGE": "p.122",
-				  "description": "You can cast an area spell with a casting time of 1 standard action or less through a ranged weapon, allowing you to use the weapon's range rather than the spell's range. You must target a single creature with your attack, and the spell's area is centered on that creature, or originates at the creature's location for a cone or line effect (oriented in whichever direction you choose), even if the spell would normally be centered on or originate from a point. You can fire the weapon as part of the standard action to cast the spell. You must fire the weapon during the round that the casting is completed, or the spell is wasted. If the attack misses, the spell is wasted. Spells with an emanation effect that would be centered on you don't benefit from this magic hack."
+				  "description": "You can cast an area spell with a casting time of 1 standard action or less through a ranged weapon, allowing you to use the weapon's range rather than the spell's range. You must target a single creature with your attack, and the spell's area is centered on that creature, or originates at the creature's location for a cone or line effect (oriented in whichever direction you choose), even if the spell would normally be centered on or originate from a point. You can fire the weapon as part of the standard action to cast the spell. You must fire the weapon during the round that the casting is completed, or the spell is wasted. If the attack misses, the spell is wasted. Spells with an emanation effect that would be centered on you don't benefit from this magic hack.",
+					"entry": {
+						"layout": "spellshot",
+					}
 				},
 				"Mental Mark": {
 				  "SOURCEPAGE": "p.122",
-				  "description": "When an enemy fails a Will save against one of your technomancer spells, it takes a -2 penalty to saving throws and AC for 1 round. When an enemy succeeds at a Will save against one of your technomancer spells, it takes a -1 penalty to saving throws against your spells for 1 round. A creature can take only one penalty from a mental mark at a time."
+				  "description": "When an enemy fails a Will save against one of your technomancer spells, it takes a -2 penalty to saving throws and AC for 1 round. When an enemy succeeds at a Will save against one of your technomancer spells, it takes a -1 penalty to saving throws against your spells for 1 round. A creature can take only one penalty from a mental mark at a time.",
+					"entry": {
+						"layout": "mental mark",
+					}
 				}
 			},
 			"11th":{
 				"Eternal Spell": {
 				  "SOURCEPAGE": "p.123",
-				  "description": "Choose one 1st-level spell you know from the list of technomancer spells in the Starfinder Core Rulebook. You can cast it at will, as though it were a 0-level spell. It still counts as one of your 1st-level spells known, not one of your 0-level spells known. You can choose a 1st-level spell from a source other than the Core Rulebook with the GM's permission."
+				  "description": "Choose one 1st-level spell you know from the list of technomancer spells in the Starfinder Core Rulebook. You can cast it at will, as though it were a 0-level spell. It still counts as one of your 1st-level spells known, not one of your 0-level spells known. You can choose a 1st-level spell from a source other than the Core Rulebook with the GM's permission.",
+					"entry": {
+						"layout": "eternal spell",
+					}
 				},
 				"Countertech Sentinel": {
 				  "SOURCEPAGE": "p.123",
-				  "description": "You can spend 1 Resolve Point to use your countertech magic hack to counter a direct attack against an ally within 15 feet. You can't use countertech sentinel against attacks that target an area. You must have the countertech magic hack to choose this magic hack."
+				  "description": "You can spend 1 Resolve Point to use your countertech magic hack to counter a direct attack against an ally within 15 feet. You can't use countertech sentinel against attacks that target an area. You must have the countertech magic hack to choose this magic hack.",
+					"entry": {
+						"layout": "countertech sentinel",
+					}
 				},
 				"Seeking Shot": {
 				  "SOURCEPAGE": "p.123",
-				  "description": "As a standard action, you can spend 1 Resolve Point to fire a single shot from a ranged weapon at a target known to you within range. The shot travels to the target, even around corners. Only an unavoidable obstacle or the limit of the weapon's range prevents the shot from reaching the target. This ability negates cover and concealment modifiers, but otherwise the attack is rolled normally."
+				  "description": "As a standard action, you can spend 1 Resolve Point to fire a single shot from a ranged weapon at a target known to you within range. The shot travels to the target, even around corners. Only an unavoidable obstacle or the limit of the weapon's range prevents the shot from reaching the target. This ability negates cover and concealment modifiers, but otherwise the attack is rolled normally.",
+					"entry": {
+						"layout": "seeking shot",
+					}
 				},
 				"Reboot Mind": {
 				  "SOURCEPAGE": "p.123",
-				  "description": "You can free someone from magical mental control or conditions. As a standard action, you can spend 1 Resolve Point and touch a willing creature. This restarts the subject's brain, ending all mind-affecting effects affecting it, as well as all conditions that could be removed by greater remove condition that were imparted on the creature by mindaffecting effects, but the subject becomes stunned until the end of its next turn. Once you reboot a mind, you can't use this ability again for 24 hours. You can attempt to reboot the mind of an ally who is unwilling due to the influence of a mind-affecting effect. In this case, the ally can attempt a new saving throw against the effect at the same DC. If she succeeds, the ally can allow her mind to be rebooted, but if she fails, you waste the expended Resolve Point and action. You can use this ability to reboot your own mind. If you're unable to take actions, you can reboot your mind without spending actions, but it must be the first thing you do on your turn, and you are stunned until the end of your next turn."
+				  "description": "You can free someone from magical mental control or conditions. As a standard action, you can spend 1 Resolve Point and touch a willing creature. This restarts the subject's brain, ending all mind-affecting effects affecting it, as well as all conditions that could be removed by greater remove condition that were imparted on the creature by mindaffecting effects, but the subject becomes stunned until the end of its next turn. Once you reboot a mind, you can't use this ability again for 24 hours. You can attempt to reboot the mind of an ally who is unwilling due to the influence of a mind-affecting effect. In this case, the ally can attempt a new saving throw against the effect at the same DC. If she succeeds, the ally can allow her mind to be rebooted, but if she fails, you waste the expended Resolve Point and action. You can use this ability to reboot your own mind. If you're unable to take actions, you can reboot your mind without spending actions, but it must be the first thing you do on your turn, and you are stunned until the end of your next turn.",
+					"entry": {
+						"layout": "reboot mind",
+					}
 				}
 			},
 			"14th":{
 				"Phase Shot": {
 				  "SOURCEPAGE": "p.123",
-				  "description": "As a standard action, you can spend 1 Resolve Point to fire a single shot from a ranged weapon at a target known to you within range. The shot travels straight to the target, passing through any nonmagical barrier in its way, ignoring hardness and Hit Points (any magical barrier, such as a wall of force, stops the shot). This ability negates cover and concealment modifiers, but otherwise the attack is rolled normally."
+				  "description": "As a standard action, you can spend 1 Resolve Point to fire a single shot from a ranged weapon at a target known to you within range. The shot travels straight to the target, passing through any nonmagical barrier in its way, ignoring hardness and Hit Points (any magical barrier, such as a wall of force, stops the shot). This ability negates cover and concealment modifiers, but otherwise the attack is rolled normally.",
+					"entry": {
+						"layout": "phase shot",
+					}
 				},
 				"Spell Library": {
 				  "SOURCEPAGE": "p.123",
-				  "description": "You gain one extra spell known for each level of spell you can cast. You must choose the new spells when you gain this magic hack. If you gain access to a higher level of spell after choosing this hack, you gain one extra spell known for that spell level."
+				  "description": "You gain one extra spell known for each level of spell you can cast. You must choose the new spells when you gain this magic hack. If you gain access to a higher level of spell after choosing this hack, you gain one extra spell known for that spell level.",
+					"entry": {
+						"layout": "spell library",
+					}
 				},
 				"Rain of Fire": {
 				  "SOURCEPAGE": "p.123",
-				  "description": "Once per day as a full action, you can spend 2 Resolve Points to shoot a ranged weapon at multiple targets within range; the maximum number of targets is equal to half your technomancer level or the number of shots in your weapon, whichever is lower. Each attack uses your highest attack bonus, and each enemy can be targeted only by a single shot."
+				  "description": "Once per day as a full action, you can spend 2 Resolve Points to shoot a ranged weapon at multiple targets within range; the maximum number of targets is equal to half your technomancer level or the number of shots in your weapon, whichever is lower. Each attack uses your highest attack bonus, and each enemy can be targeted only by a single shot.",
+					"entry": {
+						"layout": "rain of fire",
+					}
 				},
 				"Quickened Spell": {
 				  "SOURCEPAGE": "p.123",
-				  "description": "You can cast a spell as a move action. You can spend 2 Resolve Points to cast a quickened 0-level spell or 4 Resolve Points to cast a quickened 1st-level spell. You can quicken only spells with a casting time of 1 full action or shorter. At 16th level, you can spend 6 Resolve Points to cast a quickened 2nd-level spell."
+				  "description": "You can cast a spell as a move action. You can spend 2 Resolve Points to cast a quickened 0-level spell or 4 Resolve Points to cast a quickened 1st-level spell. You can quicken only spells with a casting time of 1 full action or shorter. At 16th level, you can spend 6 Resolve Points to cast a quickened 2nd-level spell.",
+					"entry": {
+						"layout": "quickened spell",
+					}
 				}
 			}
 		}
@@ -2049,11 +2338,17 @@ allClassFeatures = {
 		"Class features": {
 			"Supreme Operative": {
 				"SOURCEPAGE": "p.94",
-				"description": "Whenever you attempt a skill check with your specialization's associated skills, you can roll twice and take the higher result. Once per day as a move action, you can temporarily trade out one of your operative exploits for another operative exploit requiring the same level or lower. This trade lasts 24 hours. If the exploit you trade away is a prerequisite for any of your other abilities, you lose all abilities that require it as a prerequisite for the duration."
+				"description": "Whenever you attempt a skill check with your specialization's associated skills, you can roll twice and take the higher result. Once per day as a move action, you can temporarily trade out one of your operative exploits for another operative exploit requiring the same level or lower. This trade lasts 24 hours. If the exploit you trade away is a prerequisite for any of your other abilities, you lose all abilities that require it as a prerequisite for the duration.",
+				"entry": {
+					"layout": "supreme operative"
+				}
 			},
 			"Uncanny Agility": {
 				"SOURCEPAGE": "p.94",
-				"description": "You are immune to the flat-footed condition, and your opponent doesn't gain any bonuses to attack rolls against you from flanking you or attacking you when you're prone. Furthermore, covering fire and harrying fire don't provide any advantage against you."
+				"description": "You are immune to the flat-footed condition, and your opponent doesn't gain any bonuses to attack rolls against you from flanking you or attacking you when you're prone. Furthermore, covering fire and harrying fire don't provide any advantage against you.",
+				"entry": {
+					"layout": "uncanny agility"
+				}
 			},
 			"Specialization": {
 				"SOURCEPAGE": "p.93",
@@ -2061,7 +2356,10 @@ allClassFeatures = {
 			},
 			"Evasion": {
 				"SOURCEPAGE": "p.93",
-				"description": "If you succeed at a Reflex save against an effect that normally has a partial effect on a successful save, you instead suffer no effect. You gain this benefit only when unencumbered and wearing light armor or no armor, and you lose the benefit when you are helpless or otherwise unable to move."
+				"description": "If you succeed at a Reflex save against an effect that normally has a partial effect on a successful save, you instead suffer no effect. You gain this benefit only when unencumbered and wearing light armor or no armor, and you lose the benefit when you are helpless or otherwise unable to move.",
+				"entry": {
+					"layout": "evasion"
+				}
 			},
 			"Specialization Power": {
 				"SOURCEPAGE": "p.93",
@@ -2069,7 +2367,10 @@ allClassFeatures = {
 			},
 			"Triple Attack": {
 				"SOURCEPAGE": "p.94",
-				"description": "When making a full attack using only melee weapons with the operative special property or small arms, you can make up to three attacks instead of two."
+				"description": "When making a full attack using only melee weapons with the operative special property or small arms, you can make up to three attacks instead of two.",
+				"entry": {
+					"layout": "triple attack"
+				}
 			},
 			"Operative Exploit": {
 				"SOURCEPAGE": "p.93",
@@ -2085,15 +2386,38 @@ allClassFeatures = {
 			},
 			"Quad Attack": {
 				"SOURCEPAGE": "p.94",
-				"description": "When making a full attack using only melee weapons with the operative special property or small arms, you can make up to four attacks instead of two."
+				"description": "When making a full attack using only melee weapons with the operative special property or small arms, you can make up to four attacks instead of two.",
+				"entry": {
+					"layout": "quad attack"
+				}
 			},
 			"Debilitating Trick": {
 				"SOURCEPAGE": "p.94",
-				"description": "When you hit an enemy with a trick attack, you can make the creature flat-footed or off-target until the beginning of your next turn. You might learn exploits that grant you additional options for your debilitating trick, but you can select only one option each time you hit with a trick attack."
+				"description": "When you hit an enemy with a trick attack, you can make the creature flat-footed or off-target until the beginning of your next turn. You might learn exploits that grant you additional options for your debilitating trick, but you can select only one option each time you hit with a trick attack.",
+				"entry": {
+					"layout": "debilitating trick"
+				},
 			},
-			"Quick Movement": {
+			"Quick Movement 10": {
 				"SOURCEPAGE": "p.93",
-				"description": "As long as you are unencumbered and wearing light armor or no armor, your land speed increases by 10 feet. At 9th level, your land speed instead increases by 20 feet, and at 15th level, your land speed instead increases by 30 feet."
+				"description": "As long as you are unencumbered and wearing light armor or no armor, your land speed increases by 10 feet. At 9th level, your land speed instead increases by 20 feet, and at 15th level, your land speed instead increases by 30 feet.",
+				"adjustments":{
+					"addSpeed":10
+				}
+			},
+			"Quick Movement 20": {
+				"SOURCEPAGE": "p.93",
+				"description": "As long as you are unencumbered and wearing light armor or no armor, your land speed increases by 10 feet. At 9th level, your land speed instead increases by 20 feet, and at 15th level, your land speed instead increases by 30 feet.",
+				"adjustments":{
+					"addSpeed":20
+				}
+			},
+			"Quick Movement 30": {
+				"SOURCEPAGE": "p.93",
+				"description": "As long as you are unencumbered and wearing light armor or no armor, your land speed increases by 10 feet. At 9th level, your land speed instead increases by 20 feet, and at 15th level, your land speed instead increases by 30 feet.",
+				"adjustments":{
+					"addSpeed":30
+				}
 			},
 			"Specialization Exploit": {
 				"SOURCEPAGE": "p.93",
@@ -2101,11 +2425,27 @@ allClassFeatures = {
 			},
 			"Double Debilitation": {
 				"SOURCEPAGE": "p.94",
-				"description": "When you hit an enemy with a trick attack, you can apply two of the effects from your debilitating trick."
+				"description": "When you hit an enemy with a trick attack, you can apply two of the effects from your debilitating trick.",
+				"entry": {
+					"layout": "double debilitation"
+				}
 			},
 			"Trick Attack": {
 				"SOURCEPAGE": "p.93",
-				"description": "You can trick or startle a foe and then attack when she drops her guard. As a full action, you can move up to your speed. Whether or not you moved, you can then make an attack with a melee weapon with the operative special property or with any small arm. Just before making your attack, attempt a Bluff, Intimidate, or Stealth check (or a check associated with your specialization; see page 94) with a DC equal to 20 + your target's CR. If you succeed at the check, you deal 1d4 additional damage and the target is flat-footed. This damage increases to 1d8 at 3rd level, to 3d8 at 5th level, and by an additional 1d8 every 2 levels thereafter. You can't use this ability with a weapon that has the unwieldy special property or that requires a full action to make a single attack. [Trick Attack Damage&colon; %1d%2]|TrickAttackDice|TrickAttackDamage"
+				"description": "You can trick or startle a foe and then attack when she drops her guard. As a full action, you can move up to your speed. Whether or not you moved, you can then make an attack with a melee weapon with the operative special property or with any small arm. Just before making your attack, attempt a Bluff, Intimidate, or Stealth check (or a check associated with your specialization; see page 94) with a DC equal to 20 + your target's CR. If you succeed at the check, you deal 1d4 additional damage and the target is flat-footed. This damage increases to 1d8 at 3rd level, to 3d8 at 5th level, and by an additional 1d8 every 2 levels thereafter. You can't use this ability with a weapon that has the unwieldy special property or that requires a full action to make a single attack. [Trick Attack Damage&colon; %1d%2]|TrickAttackDice|TrickAttackDamage",
+				"entry": {
+					"layout": "trick attack +DAMAGEdDICE",
+					"DAMAGE":{
+						"base":0,
+						"CR":[1,5,7,9,11,13,15,17,19],
+						"VAL":[1,3,4,5,6,7,8,9,10]
+					},
+					"DICE":{
+						"base":0,
+						"CR":[1,3],
+						"VAL":[4,8]
+					}
+				}
 			},
 			"Operative's Edge": {
 				"SOURCEPAGE": "p.93",
@@ -2116,21 +2456,19 @@ allClassFeatures = {
 			"Detective": {
 				"SOURCEPAGE": "p.94",
 				"Specialization Power":{
-					"Detective's Insight": {
-						"description": "At 11th level, your incredible insights help you move investigations forward where mundane inquiries fail. Once per day, you can spend 1 Resolve Point and take 10 minutes pondering a mystery or quandary to gain an enigmatic insight as if you had cast divination (though the result is often presented as a cryptic clue)."
-					}
+					"name": "Detective's Insight",
+					"description": "At 11th level, your incredible insights help you move investigations forward where mundane inquiries fail. Once per day, you can spend 1 Resolve Point and take 10 minutes pondering a mystery or quandary to gain an enigmatic insight as if you had cast divination (though the result is often presented as a cryptic clue)."
 				},
-				"Specialization Exploit": "Glimpse the truth",
+				"Specialization Exploit": "Glimpse the Truth",
 				"description": "Your ability to read people and make deductions helps you ferret out the truth in any situation.",
 				"Associated Skills": "Culture and Sense Motive. You can attempt a Sense Motive check with a +4 bonus to make a trick attack by reading your foe."
 			},
 			"Ghost": {
 				"SOURCEPAGE": "p.94",
-				"Specialization Exploit": "Cloaking field",
+				"Specialization Exploit": "Cloaking Field",
 				"Specialization Power":{
-					"Phase Shift Escape": {
-						"description": "At 11th level, you can move through solid matter by taking your body's matter out of phase for just a moment. As a full action, you can spend 1 Resolve Point to phase through up to 5 feet of solid matter. If you attempt to phase through something that is too thick, you spend the Resolve Point and take the action but the attempt fails. You cannot phase through force effects such as force fields or the barrier created by wall of force. After using phase shift escape, you can't use it again until after you've taken a full 8-hour rest."
-					}
+					"name": "Phase Shift Escape",
+					"description": "At 11th level, you can move through solid matter by taking your body's matter out of phase for just a moment. As a full action, you can spend 1 Resolve Point to phase through up to 5 feet of solid matter. If you attempt to phase through something that is too thick, you spend the Resolve Point and take the action but the attempt fails. You cannot phase through force effects such as force fields or the barrier created by wall of force. After using phase shift escape, you can't use it again until after you've taken a full 8-hour rest."
 				},
 				"description": "You can move from place to place without being noticed.",
 				"Associated Skills": "Acrobatics and Stealth. When you use Stealth to make a trick attack, you gain a +4 bonus to the skill check."
@@ -2138,55 +2476,50 @@ allClassFeatures = {
 			"Explorer": {
 				"SOURCEPAGE": "p.94",
 				"Specialization Power":{
-					"Into the Unknown": {
-						"description": "At 11th level, you gain a +4 bonus to Culture and Survival checks. While you're outside both the Pact Worlds and your home star system (if different), you gain a +2 bonus to initiative checks. At the GM's discretion, in games centered around a different star system than the Pact Worlds, replace the Pact Worlds with that star system."
-					}
+					"name": "Into the Unknown",
+					"description": "At 11th level, you gain a +4 bonus to Culture and Survival checks. While you're outside both the Pact Worlds and your home star system (if different), you gain a +2 bonus to initiative checks. At the GM's discretion, in games centered around a different star system than the Pact Worlds, replace the Pact Worlds with that star system."
 				},
-				"Specialization Exploit": "Ever vigilant",
+				"Specialization Exploit": "Ever Vigilant",
 				"description": "You're an expert in scouting out dangerous locations using your knowledge and survival skills.",
 				"Associated Skills": "Culture and Survival. You can attempt a Survival check with a +4 bonus to make a trick attack by using your surroundings to your advantage."
 			},
 			"Spy": {
 				"SOURCEPAGE": "p.95",
 				"Specialization Power":{
-					"Fool Detection": {
-						"description": "At 11th level, whenever you succeed at a saving throw against a spell, technological device, or ability that would provide information about you (such as detect thoughts), instead of negating the effect, you can provide false information that matches your cover identity. If such an effect has no saving throw, you can attempt a Bluff check opposed by the Sense Motive check of the caster or user, and provide similar false information on a success."
-					}
+					"name": "Fool Detection",
+					"description": "At 11th level, whenever you succeed at a saving throw against a spell, technological device, or ability that would provide information about you (such as detect thoughts), instead of negating the effect, you can provide false information that matches your cover identity. If such an effect has no saving throw, you can attempt a Bluff check opposed by the Sense Motive check of the caster or user, and provide similar false information on a success."
 				},
-				"Specialization Exploit": "Master of disguise",
+				"Specialization Exploit": "Master of Disguise",
 				"description": "You can steal or adopt new identities as easily as most people change clothes, allowing you to infiltrate nearly any circle.",
 				"Associated Skills": "Bluff and Disguise. When you use Bluff to make a trick attack, you gain a +4 bonus to the skill check."
 			},
 			"Thief": {
 				"SOURCEPAGE": "p.95",
 				"Specialization Power":{
-					"Contingency Plan": {
-						"description": "At 11th level, you've performed enough heists to realize that things never go exactly as you had planned. When something unexpected happens during a heist or infiltration, you can spend 2 Resolve Points and specify a contingency plan that you had set up in advance for this eventuality, either having the right prop (such as an ID or a computer file, but not a particularly valuable item), having the right information, or having hired a confederate to perform a single task at the right time. You then attempt a skill check. The appropriate skill and the DC are at the GM's discretion, with a higher DC for a more elaborate or unlikely contingency (see Skill DCs on page 392 for more information on setting skill DCs). If you succeed, you have the item or knowledge, or the confederate performs the task as specified. If you fail, either you don't have what you need or your plan fails."
-					}
+					"name": "Contingency Plan",
+					"description": "At 11th level, you've performed enough heists to realize that things never go exactly as you had planned. When something unexpected happens during a heist or infiltration, you can spend 2 Resolve Points and specify a contingency plan that you had set up in advance for this eventuality, either having the right prop (such as an ID or a computer file, but not a particularly valuable item), having the right information, or having hired a confederate to perform a single task at the right time. You then attempt a skill check. The appropriate skill and the DC are at the GM's discretion, with a higher DC for a more elaborate or unlikely contingency (see Skill DCs on page 392 for more information on setting skill DCs). If you succeed, you have the item or knowledge, or the confederate performs the task as specified. If you fail, either you don't have what you need or your plan fails."
 				},
-				"Specialization Exploit": "Holographic distraction",
+				"Specialization Exploit": "Holographic Distraction",
 				"description": "You specialize in acquisition, from quick swipes to complex heists.",
 				"Associated Skills": "Perception and Sleight of Hand. You can use Sleight of Hand to make a trick attack by concealing your weapons and motions."
 			},
 			"Daredevil": {
 				"SOURCEPAGE": "p.94",
 				"Specialization Power":{
-					"Terrain Attack": {
-						"description": "At 11th level, when you and a foe are both balancing, climbing, flying, or swimming, you automatically succeed at any Bluff check required to make a trick attack against that foe."
-					}
+					"name": "Terrain Attack",
+					"description": "At 11th level, when you and a foe are both balancing, climbing, flying, or swimming, you automatically succeed at any Bluff check required to make a trick attack against that foe."
 				},
-				"Specialization Exploit": "Versatile movement",
+				"Specialization Exploit": "Versatile Movement",
 				"description": "You specialize in missions requiring courage and athleticism.",
 				"Associated Skills": "Acrobatics and Athletics. You can attempt an Acrobatics check to make a trick attack."
 			},
 			"Hacker": {
 				"SOURCEPAGE": "p.94",
 				"Specialization Power":{
-					"Control Hack": {
-						"description": "At 11th level, when you exceed the DC of a Computers or Engineering check to disable a device or computer system by 5 or more, you can instead take control of the device or system. For every 5 by which you exceed the DC, you can typically make the device or system perform one task, at the GM's discretion. Once the device or system has done what you commanded, you choose whether the device deactivates or returns to normal."
-					}
+					"name": "Control Hack",
+					"description": "At 11th level, when you exceed the DC of a Computers or Engineering check to disable a device or computer system by 5 or more, you can instead take control of the device or system. For every 5 by which you exceed the DC, you can typically make the device or system perform one task, at the GM's discretion. Once the device or system has done what you commanded, you choose whether the device deactivates or returns to normal."
 				},
-				"Specialization Exploit": "Elusive hacker",
+				"Specialization Exploit": "Elusive Hacker",
 				"description": "Whether it's a computer system or a mechanical device, you can hack it.",
 				"Associated Skills": "Computers and Engineering. You can attempt a Computers check with a +4 bonus to make a trick attack by creating a computerized distraction (you can't use this option if stripped of all computerized gear in an area with no computers)."
 			}
@@ -2195,11 +2528,17 @@ allClassFeatures = {
 			"2nd":{
 				"Jack of All Trades": {
 				  "SOURCEPAGE": "p.95",
-				  "description": "You've learned how to handle any situation. You can use all skills untrained, and you double your operative's edge bonus when using a skill in which you have no ranks."
+				  "description": "You've learned how to handle any situation. You can use all skills untrained, and you double your operative's edge bonus when using a skill in which you have no ranks.",
+					"entry": {
+						"layout": "jack of all trades",
+					}
 				},
 				"Uncanny Pilot": {
 				  "SOURCEPAGE": "p.95",
-				  "description": "When you attack while you're driving a vehicle, you halve the vehicle's penalty to your attack roll (to a minimum of no penalty if the vehicle normally imposes a -1 penalty). When you're in a chase, you gain a +2 bonus to skill checks you attempt when taking the evade or trick pilot actions."
+				  "description": "When you attack while you're driving a vehicle, you halve the vehicle's penalty to your attack roll (to a minimum of no penalty if the vehicle normally imposes a -1 penalty). When you're in a chase, you gain a +2 bonus to skill checks you attempt when taking the evade or trick pilot actions.",
+					"entry": {
+						"layout": "uncanny pilot",
+					}
 				},
 				"Nightvision": {
 				  "SOURCEPAGE": "p.95",
@@ -2211,41 +2550,68 @@ allClassFeatures = {
 				},
 				"Holographic Clone": {
 				  "SOURCEPAGE": "p.95",
-				  "description": "You can create holographic duplicates or psychic projections of yourself that conceal your true location. Once per day as a standard action, you can create 1d4 images of yourself that last for 1 minute per operative level. This ability otherwise functions as mirror image. You can use this exploit an additional time per day at 6th level, and again at 10th level."
+				  "description": "You can create holographic duplicates or psychic projections of yourself that conceal your true location. Once per day as a standard action, you can create 1d4 images of yourself that last for 1 minute per operative level. This ability otherwise functions as mirror image. You can use this exploit an additional time per day at 6th level, and again at 10th level.",
+					"entry": {
+						"layout": "holographic clone",
+					}
 				},
 				"Alien Archive": {
 				  "SOURCEPAGE": "p.95",
-				  "description": "Your vast experience makes identifying new creatures easier for you. Double your operative's edge bonus to your skill checks when identifying a creature and its abilities. If you successfully identify a creature, you gain a +2 enhancement bonus to your skill check when you make a trick attack against that creature."
+				  "description": "Your vast experience makes identifying new creatures easier for you. Double your operative's edge bonus to your skill checks when identifying a creature and its abilities. If you successfully identify a creature, you gain a +2 enhancement bonus to your skill check when you make a trick attack against that creature.",
+					"entry": {
+						"layout": "alien archive",
+					}
 				},
 				"Inoculation": {
 				  "SOURCEPAGE": "p.95",
-				  "description": "You've trained to resist various chemical and biological weapons, toxins, and pathogens you come across in the course of your missions. You add your operative's edge bonus to Fortitude saves against poison and disease."
+				  "description": "You've trained to resist various chemical and biological weapons, toxins, and pathogens you come across in the course of your missions. You add your operative's edge bonus to Fortitude saves against poison and disease.",
+					"entry": {
+						"layout": "inoculation",
+					}
 				},
 				"Uncanny Mobility": {
 				  "SOURCEPAGE": "p.95",
-				  "description": "When you make a trick attack, if you choose the target of your attack before you move, your movement doesn't provoke attacks of opportunity from that target. When you use your standard action to move, you can choose one creature; you don't provoke attacks of opportunity from that creature for this movement."
+				  "description": "When you make a trick attack, if you choose the target of your attack before you move, your movement doesn't provoke attacks of opportunity from that target. When you use your standard action to move, you can choose one creature; you don't provoke attacks of opportunity from that creature for this movement.",
+					"entry": {
+						"layout": "uncanny mobility",
+					}
 				},
 				"Field Treatment": {
 				  "SOURCEPAGE": "p.95",
-				  "description": "You can take 1 minute to tend your wounds and spend 1 Resolve Point to recover a number of Hit Points equal to three times your operative level."
+				  "description": "You can take 1 minute to tend your wounds and spend 1 Resolve Point to recover a number of Hit Points equal to three times your operative level.",
+					"entry": {
+						"layout": "field treatment"
+					}
 				},
 				"Quick Disguise": {
 				  "SOURCEPAGE": "p.95",
-				  "description": "Once per day as a standard action, you can quickly change your appearance. This functions as disguise self and lasts for 1 minute per operative level. You can use this exploit an additional time per day at 6th level, and again at 10th level."
+				  "description": "Once per day as a standard action, you can quickly change your appearance. This functions as disguise self and lasts for 1 minute per operative level. You can use this exploit an additional time per day at 6th level, and again at 10th level.",
+					"entry": {
+						"layout": "quick disguise",
+					}
 				}
 			},
 			"6th":{
 				"Hampering Shot": {
 				  "SOURCEPAGE": "p.96",
-				  "description": "For your debilitating trick, you can reduce your target's speeds by half and prevent it from using the guarded step action until the beginning of your next turn."
+				  "description": "For your debilitating trick, you can reduce your target's speeds by half and prevent it from using the guarded step action until the beginning of your next turn.",
+					"entry": {
+						"layout": "hampering shot",
+					}
 				},
 				"Staggering Shot": {
 				  "SOURCEPAGE": "p.96",
-				  "description": "For your debilitating trick, you can attempt to stagger your target. The target must succeed at a Fortitude save or be staggered until the beginning of your next turn. Once you've used this ability to attempt to stagger a creature, that creature is immune to your staggering shot for 24 hours."
+				  "description": "For your debilitating trick, you can attempt to stagger your target. The target must succeed at a Fortitude save or be staggered until the beginning of your next turn. Once you've used this ability to attempt to stagger a creature, that creature is immune to your staggering shot for 24 hours.",
+					"entry": {
+						"layout": "staggering shot",
+					}
 				},
 				"Stalwart": {
 				  "SOURCEPAGE": "p.96",
-				  "description": "If you succeed at a Fortitude save against an effect that normally requires multiples successful saves to cure (such as a disease or poison), that effect immediately ends and is cured with a single successful save."
+				  "description": "If you succeed at a Fortitude save against an effect that normally requires multiples successful saves to cure (such as a disease or poison), that effect immediately ends and is cured with a single successful save.",
+					"entry": {
+						"layout": "stalwart",
+					}
 				},
 				"Enhanced Senses": {
 				  "description": "You can sense your surroundings without needing to see them. You gain blindsense with a range of 60 feet. You must have darkvision and low-light vision, or the nightvision exploit, to learn this exploit.",
@@ -2253,31 +2619,52 @@ allClassFeatures = {
 				},
 				"Uncanny Shooter": {
 				  "SOURCEPAGE": "p.96",
-				  "description": "Your ranged attacks with small arms do not provoke attacks of opportunity."
+				  "description": "Your ranged attacks with small arms do not provoke attacks of opportunity.",
+					"entry": {
+						"layout": "uncanny shooter",
+					}
 				},
 				"Mentalist's Bane": {
 				  "SOURCEPAGE": "p.96",
-				  "description": "If you fail your Will saving throw against a mind-affecting effect with a duration of 1 round or more, you can attempt another saving throw against the effect 1 round later at the same DC. You get only one extra chance to save per effect. If you succeed at a saving throw against a charm or compulsion effect, you can prevent the effect's originator from knowing you succeeded. You gain basic knowledge of what the mental effect would have made you do or feel, and you can attempt a Bluff check to pretend you are under that effect. If the mental effect would provide a link between you and the originator (like the dominate person spell), you can choose to allow the link without the control."
+				  "description": "If you fail your Will saving throw against a mind-affecting effect with a duration of 1 round or more, you can attempt another saving throw against the effect 1 round later at the same DC. You get only one extra chance to save per effect. If you succeed at a saving throw against a charm or compulsion effect, you can prevent the effect's originator from knowing you succeeded. You gain basic knowledge of what the mental effect would have made you do or feel, and you can attempt a Bluff check to pretend you are under that effect. If the mental effect would provide a link between you and the originator (like the dominate person spell), you can choose to allow the link without the control.",
+					"entry": {
+						"layout": "mentalist's bane",
+					}
 				},
 				"Interfering Shot": {
 				  "SOURCEPAGE": "p.96",
-				  "description": "For your debilitating trick, you can prevent your target from using reactions (see page 244) until the end of your next turn."
+				  "description": "For your debilitating trick, you can prevent your target from using reactions (see page 244) until the end of your next turn.",
+					"entry": {
+						"layout": "interfering shot",
+					}
 				},
 				"Sure-Footed": {
 				  "SOURCEPAGE": "p.96",
-				  "description": "You move at your full speed when moving over difficult terrain, and without penalty when using Acrobatics or Stealth at your full speed."
+				  "description": "You move at your full speed when moving over difficult terrain, and without penalty when using Acrobatics or Stealth at your full speed.",
+					"entry": {
+						"layout": "sure-footed",
+					}
 				},
 				"Speed Hacker": {
 				  "SOURCEPAGE": "p.96",
-				  "description": "You can disable mechanical devices with Engineering and computer systems with Computers in half the usual time. In the rare cases when disabling a system or device would normally be a full action, you can do it as a standard action, and if it would normally be a standard action, you can do it as a move action."
+				  "description": "You can disable mechanical devices with Engineering and computer systems with Computers in half the usual time. In the rare cases when disabling a system or device would normally be a full action, you can do it as a standard action, and if it would normally be a standard action, you can do it as a move action.",
+					"entry": {
+						"layout": "speed hacker",
+					}
 				},
 				"Debilitating Sniper": {
 				  "SOURCEPAGE": "p.96",
-				  "description": "You can use trick attack with sniper weapons. You do not add trick attack damage to your attack, but the target is still flatfooted, and you can use debilitating tricks."
+				  "description": "You can use trick attack with sniper weapons. You do not add trick attack damage to your attack, but the target is still flatfooted, and you can use debilitating tricks.",
+					"entry": {
+						"layout": "debilitating sniper",
+					}
 				},
 				"Bleeding Shot": {
 				  "SOURCEPAGE": "p.96",
-				  "description": "For your debilitating trick, you can afflict your target with an amount of bleed damage equal to your operative level."
+				  "description": "For your debilitating trick, you can afflict your target with an amount of bleed damage equal to your operative level.",
+					"entry": {
+						"layout": "bleeding shot",
+					}
 				},
 				"Improved Quick Movement": {
 				  "SOURCEPAGE": "p.96",
@@ -2285,49 +2672,82 @@ allClassFeatures = {
 				},
 				"Certainty": {
 					"SOURCEPAGE": "p.96",
-					"description": "You can spend 1 Resolve Point as a reaction to reroll one of your specialization's associated skill checks (see page 243)."
+					"description": "You can spend 1 Resolve Point as a reaction to reroll one of your specialization's associated skill checks (see page 243).",
+					"entry": {
+						"layout": "certainty",
+					}
 				}
 			},
 			"10th":{
 				"Stunning Shot": {
 				  "SOURCEPAGE": "p.97",
-				  "description": "For your debilitating trick, you can try to stun your target. The target must succeed at a Fortitude save or be stunned until the start of your next turn. Once you've used this ability to try to stun a creature, it's immune to your stunning shot for 24 hours. You must have the staggering shot exploit to learn this exploit."
+				  "description": "For your debilitating trick, you can try to stun your target. The target must succeed at a Fortitude save or be stunned until the start of your next turn. Once you've used this ability to try to stun a creature, it's immune to your stunning shot for 24 hours. You must have the staggering shot exploit to learn this exploit.",
+					"entry": {
+						"layout": "stunning shot",
+					}
 				},
 				"Cloaking Field": {
 				  "SOURCEPAGE": "p.96",
-				  "description": "You can bend light around yourself and muffle any minor sounds you make, allowing you to nearly vanish when not moving. Even when you move, you appear only as an outline with blurry features. This cloaking field doesn't make you invisible, but it does make it easier to sneak around. Activating the cloaking field is a move action. While the cloaking field is active, you can use Stealth to hide, even while being directly observed and with no place to hide. Attacking doesn't end the cloaking field, but it does end that particular attempt to hide. If you remain perfectly still for at least 1 round, you gain a +10 bonus to Stealth checks (which doesn't stack with invisibility) until you move. Your cloaking field lasts for up to 10 rounds before it becomes inactive. While inactive, the cloaking field recharges automatically at the rate of 1 round of cloaking per minute."
+				  "description": "You can bend light around yourself and muffle any minor sounds you make, allowing you to nearly vanish when not moving. Even when you move, you appear only as an outline with blurry features. This cloaking field doesn't make you invisible, but it does make it easier to sneak around. Activating the cloaking field is a move action. While the cloaking field is active, you can use Stealth to hide, even while being directly observed and with no place to hide. Attacking doesn't end the cloaking field, but it does end that particular attempt to hide. If you remain perfectly still for at least 1 round, you gain a +10 bonus to Stealth checks (which doesn't stack with invisibility) until you move. Your cloaking field lasts for up to 10 rounds before it becomes inactive. While inactive, the cloaking field recharges automatically at the rate of 1 round of cloaking per minute.",
+					"entry": {
+						"layout": "cloaking field",
+					}
 				},
 				"Holographic Distraction": {
 				  "SOURCEPAGE": "p.97",
-				  "description": "As a standard action, you can spend 1 Resolve Point to create a single holographic duplicate or psychic projection of yourself that moves away from you for 1 round per operative level. The double climbs walls, jumps across pits, or simply passes through obstacles, moving at twice your speed in one direction indicated by you when the ability is activated. Its course cannot be changed. Those who interact with the double can attempt a Will save to recognize that it is not real. You must have the holographic clone exploit to learn this exploit."
+				  "description": "As a standard action, you can spend 1 Resolve Point to create a single holographic duplicate or psychic projection of yourself that moves away from you for 1 round per operative level. The double climbs walls, jumps across pits, or simply passes through obstacles, moving at twice your speed in one direction indicated by you when the ability is activated. Its course cannot be changed. Those who interact with the double can attempt a Will save to recognize that it is not real. You must have the holographic clone exploit to learn this exploit.",
+					"entry": {
+						"layout": "holographic distraction",
+					}
 				},
 				"Deactivating Shot": {
 				  "SOURCEPAGE": "p.96",
-				  "description": " For your debilitating trick, you can attempt to temporarily suppress one magic item or deactivate one weapon, piece of equipment, or armor upgrade worn or carried by the target. Roll 1d20 + your operative level; the DC is equal to 10 + the item level. If you succeed, you deactivate the device (or suppress the item's magical properties) until the beginning of your next turn. The device's owner can spend a move action and attempt an Engineering check (for technological devices) or a Mysticism check (for magic items) against your operative exploit DC to try to reactivate the device. You can instead use this debilitating trick to temporarily deactivate a construct that has either the magical subtype (such as a golem) or the technological subtype (such as a robot). You don't need to attempt a check, but the creature can attempt a Fortitude save to negate the debilitating effect. If it fails, it's stunned until the beginning of your next turn. Once you've used this ability to attempt to deactivate a construct, that creature is immune to your deactivating shot for 24 hours."
+				  "description": " For your debilitating trick, you can attempt to temporarily suppress one magic item or deactivate one weapon, piece of equipment, or armor upgrade worn or carried by the target. Roll 1d20 + your operative level; the DC is equal to 10 + the item level. If you succeed, you deactivate the device (or suppress the item's magical properties) until the beginning of your next turn. The device's owner can spend a move action and attempt an Engineering check (for technological devices) or a Mysticism check (for magic items) against your operative exploit DC to try to reactivate the device. You can instead use this debilitating trick to temporarily deactivate a construct that has either the magical subtype (such as a golem) or the technological subtype (such as a robot). You don't need to attempt a check, but the creature can attempt a Fortitude save to negate the debilitating effect. If it fails, it's stunned until the beginning of your next turn. Once you've used this ability to attempt to deactivate a construct, that creature is immune to your deactivating shot for 24 hours.",
+					"entry": {
+						"layout": "deactivating shot",
+					}
 				},
 				"Ever Vigilant": {
 				  "SOURCEPAGE": "p.97",
-				  "description": "You've been on enough solo missions to know that you can't let your guard down, even while sleeping. You take no penalties to Perception checks for being asleep, though you still can't succeed at purely visual Perception checks while asleep. You can always act on the surprise round, though if you choose to do so when you would otherwise be surprised, you use your initiative result or the initiative result of the first creature that would have surprised you - 1, whichever is lower."
+				  "description": "You've been on enough solo missions to know that you can't let your guard down, even while sleeping. You take no penalties to Perception checks for being asleep, though you still can't succeed at purely visual Perception checks while asleep. You can always act on the surprise round, though if you choose to do so when you would otherwise be surprised, you use your initiative result or the initiative result of the first creature that would have surprised you - 1, whichever is lower.",
+					"entry": {
+						"layout": "ever vigilant",
+					}
 				},
 				"Master of Disguise": {
 				  "SOURCEPAGE": "p.97",
-				  "description": "You can take on the appearances of other creatures and even specific individuals. This functions as the quick disguise exploit, but the duration increases to 10 minutes per operative level. Alternatively, for 1 minute per operative level, you can take on the appearance of a specific individual that you have seen before. If you have heard the individual talk and can speak her language, you can also modulate your speech to match hers. This disguise is so convincing that creatures familiar with the individual must succeed at a Will saving throw before they can attempt a Perception check to pierce the disguise. You must have the quick disguise exploit to learn this exploit."
+				  "description": "You can take on the appearances of other creatures and even specific individuals. This functions as the quick disguise exploit, but the duration increases to 10 minutes per operative level. Alternatively, for 1 minute per operative level, you can take on the appearance of a specific individual that you have seen before. If you have heard the individual talk and can speak her language, you can also modulate your speech to match hers. This disguise is so convincing that creatures familiar with the individual must succeed at a Will saving throw before they can attempt a Perception check to pierce the disguise. You must have the quick disguise exploit to learn this exploit.",
+					"entry": {
+						"layout": "master of disguise",
+					}
 				},
 				"Glimpse the Truth": {
 				  "SOURCEPAGE": "p.97",
-				  "description": "By picking up on subtle clues and hidden traces in your immediate surroundings, you can see things as they really are. As a full action, you can spend 1 Resolve Point to gain the effects of true seeing for 1 round with a range of 60 feet."
+				  "description": "By picking up on subtle clues and hidden traces in your immediate surroundings, you can see things as they really are. As a full action, you can spend 1 Resolve Point to gain the effects of true seeing for 1 round with a range of 60 feet.",
+					"entry": {
+						"layout": "glimpse the truth",
+					}
 				},
 				"Elusive Hacker": {
 				  "SOURCEPAGE": "p.97",
-				  "description": "Your hacking skills make your code incredibly difficult for countermeasures to pin down. Whenever you would trigger a system's countermeasure while hacking the system, there is a 50%% chance that you manage to elude the countermeasure and it doesn't trigger. You still haven't disarmed the countermeasure, and it might trigger in the future."
+				  "description": "Your hacking skills make your code incredibly difficult for countermeasures to pin down. Whenever you would trigger a system's countermeasure while hacking the system, there is a 50%% chance that you manage to elude the countermeasure and it doesn't trigger. You still haven't disarmed the countermeasure, and it might trigger in the future.",
+					"entry": {
+						"layout": "elusive hacker",
+					}
 				},
 				"Improved Evasion": {
 				  "SOURCEPAGE": "p.97",
-				  "description": "When you fail a Reflex save against an effect that has a partial effect on a successful save, you take the partial effect instead of the full effect. You must have evasion to learn this exploit."
+				  "description": "When you fail a Reflex save against an effect that has a partial effect on a successful save, you take the partial effect instead of the full effect. You must have evasion to learn this exploit.",
+					"entry": {
+						"layout": "improved evasion",
+					}
 				},
 				"Improved Uncanny Mobility": {
 				  "SOURCEPAGE": "p.97",
-				  "description": "When you use the trick attack action or take a standard action to move up to your speed, your movement doesn't provoke attacks of opportunity. You still provoke attacks of opportunity normally when making ranged attacks or casting spells. You must have the uncanny mobility exploit to learn this exploit."
+				  "description": "When you use the trick attack action or take a standard action to move up to your speed, your movement doesn't provoke attacks of opportunity. You still provoke attacks of opportunity normally when making ranged attacks or casting spells. You must have the uncanny mobility exploit to learn this exploit.",
+					"entry": {
+						"layout": "improved uncanny mobility",
+					}
 				},
 				"Versatile Movement": {
 				  "SOURCEPAGE": "p.97",
@@ -2337,19 +2757,31 @@ allClassFeatures = {
 			"14th":{
 				"Knockout Shot": {
 				  "SOURCEPAGE": "p.97",
-				  "description": "For your debilitating trick, you can attempt to knock the target out in one blow. The target must succeed at a Fortitude save or fall unconscious for 1 minute. Once you've used this ability to attempt to knock a creature out, that creature is immune to your knockout shot for 24 hours. You must have the staggering shot and stunning shot exploits to learn this exploit."
+				  "description": "For your debilitating trick, you can attempt to knock the target out in one blow. The target must succeed at a Fortitude save or fall unconscious for 1 minute. Once you've used this ability to attempt to knock a creature out, that creature is immune to your knockout shot for 24 hours. You must have the staggering shot and stunning shot exploits to learn this exploit.",
+					"entry": {
+						"layout": "knockout shot",
+					}
 				},
 				"Efficient Cloaking Field": {
 				  "SOURCEPAGE": "p.97",
-				  "description": "Your cloaking field lasts for up to 100 rounds (10 minutes), and it recharges at the rate of 2 rounds of cloaking per minute while inactive. You can spend 1 Resolve Point as a move action to recharge 20 rounds immediately, and you can do this even while the cloaking field is active. You must have the cloaking field exploit to learn this exploit."
+				  "description": "Your cloaking field lasts for up to 100 rounds (10 minutes), and it recharges at the rate of 2 rounds of cloaking per minute while inactive. You can spend 1 Resolve Point as a move action to recharge 20 rounds immediately, and you can do this even while the cloaking field is active. You must have the cloaking field exploit to learn this exploit.",
+					"entry": {
+						"layout": "efficient cloaking field",
+					}
 				},
 				"Multiattack Mastery": {
 				  "SOURCEPAGE": "p.97",
-				  "description": "When you use triple attack or quad attack to attack the same target with all of your attacks, after your full attack is complete, if at least two of your attacks hit, you can apply a debilitating trick to the target."
+				  "description": "When you use triple attack or quad attack to attack the same target with all of your attacks, after your full attack is complete, if at least two of your attacks hit, you can apply a debilitating trick to the target.",
+					"entry": {
+						"layout": "multiattack mastery",
+					}
 				},
 				"Uncanny Senses": {
 				  "SOURCEPAGE": "p.97",
-				  "description": "Your enhanced senses grow even more discerning. Your blindsense becomes blindsight with a range of 60 feet. If you have darkvision, its range increases by 30 feet. You must have the enhanced senses exploit to learn this exploit."
+				  "description": "Your enhanced senses grow even more discerning. Your blindsense becomes blindsight with a range of 60 feet. If you have darkvision, its range increases by 30 feet. You must have the enhanced senses exploit to learn this exploit.",
+					"entry": {
+						"layout": "uncanny senses",
+					}
 				}
 			}
 		}

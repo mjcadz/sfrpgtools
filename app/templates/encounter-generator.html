@@ -6,6 +6,10 @@
     <h1>Encounter Generator</h1>
     <p class="lead">Generates encounters for the Starfinder RPG.</p>
     <p></p>
+    <div class="alert-this" style="display: none;">
+      <button type="button" class="close" aria-label="Close" onclick="dismissAlert()"><span aria-hidden="true">&times;</span></button>
+      <p><strong>Heads up!</strong> This tool works well enough with current official sources, but will perform even better in the future as more sources are released.<br></p>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -88,7 +92,8 @@
             </div>
             <div class="col-md-4">
               <div id="advanced" class="collapse">
-
+                <button id="resetFilterButton" type="button" onclick="resetFilters()" class="btn btn-default btn-block">Reset filters</button>
+                <p></p>
                 <select class="selectpicker show-tick" multiple id="CombatTypePicker" data-none-selected-text="Any combat style" data-style="btn-default" data-width="100%" data-size="10">
                   <option>Combatant</option>
                   <option>Expert</option>
@@ -172,9 +177,6 @@
                     <option>Aucturn</option>
                   </optgroup>
                 </select>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="inputSearch" placeholder="Search creatures">
-                </div>
                 <!--<div class="row">
                   <div class="playerCol col-xs-6">
                     <label>CR Min</label>
@@ -227,22 +229,28 @@
                     </select>
                   </div>
                 </div>-->
-                <button id="pickerButton" type="button" onclick="showMonsterPicker()" class="btn btn-default btn-block">Show creature picker</button>
-
-
+                <button id="pickerButton" type="button" style="margin-bottom: 0px;" onclick="showMonsterPicker()" class="btn btn-default btn-block">Show creature picker</button>
               </div>
-
             </div>
             <div class="col-md-4"></div>
         </div>
-        <hr>
         <div id="monsterPicker" class="collapse">
+          <p></p>
+          <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                <div class="form-group" style="margin-bottom: 0px;">
+                    <input type="text" class="form-control" style="margin-bottom: 0px;" id="inputSearch" placeholder="Search all creatures">
+                </div>
+              </div>
+              <div class="col-md-4"></div>
+          </div>
+          <hr>
           <div id="pickerZone">
             <p class="text-center">Search or select filters</p>
           </div>
-          <hr>
         </div>
-
+        <hr>
         <button type="button" onclick="generateEncounter()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
         <button type="button" onclick="clearDisplayTable()" class="btn btn-default btn-notblack">Clear</button>
         <i style="padding-left: 10px;vertical-align: middle; cursor: pointer;" data-target="#infoModal" data-toggle="modal" class="fas fa-info-circle fa-lg"></i>
@@ -279,19 +287,24 @@
         <h4 class="modal-title">Encounter generator</h4>
       </div>
       <div class="modal-body">
-        <div>This tool will perform even better in future as more official sources are released.</div>
         <div><strong>Basic mode</strong></div>
         <ul>
-          <li>Generates a random encounter approriate for the selected difficulty and party.</li>
-          <li>Locked creatures will not be discarded for further generations.</li>
+          <li>Generates a random encounter approriate for the selected difficulty and party level.</li>
+          <li>Multiple levels can be added using the plus/minus buttons.</li>
+          <li>Locked creatures will not be discarded in further generations.</li>
         </ul>
         <div><strong>Advanced mode</strong></div>
         <ul>
-          <li>Filters apply to both the generation and to the creature picker.</li>
-          <li>Filters stack, only creatures that meet all of the criteia will be shown.</li>
+          <li>Searching only apllies to the creature picker.</li>
           <li>Searching without any other filters will search the entire creature database, try searching for 'goblin'.</li>
+          <li>Filters apply to both the generation and to the creature picker.</li>
+          <li>Filters stack, only creatures that meet all of the criteria will be shown.</li>
           <li>The Plus and Minus buttons in the tables will increase and decrease the number of that creature.</li>
           <li>The XP Budget can be used to keep track of your encounter when adding/removing creatures.</li>
+        </ul>
+        <div><strong>TODO</strong></div>
+        <ul>
+          <li>Integrate creatures with templates for any CR.</li>
         </ul>
       </div>
       <div class="modal-footer">

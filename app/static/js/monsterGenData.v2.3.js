@@ -1248,7 +1248,7 @@ classData = {
             },
             "2": {
               "description":"1st-level connection power, mindlink, and one special ability.",
-              "features":["mindlink"],
+              "features":["Mindlink"],
               "connection":[
                 "1st"
               ],
@@ -1256,7 +1256,7 @@ classData = {
             },
             "3": {
               "description":"1st- and 3rd-level connection powers and mindlink.",
-              "features":["mindlink"],
+              "features":["Mindlink"],
               "connection":[
                 "1st",
                 "3rd"
@@ -1264,7 +1264,7 @@ classData = {
             },
             "6": {
               "description":"1st-, 3rd-, and 6th-level connection powers and mindlink.",
-              "features":["mindlink"],
+              "features":["Mindlink"],
               "connection":[
                 "1st",
                 "3rd",
@@ -1273,7 +1273,7 @@ classData = {
             },
             "9": {
               "description":"1st-, 3rd-, 6th-, and 9th-level connection powers and mindlink.",
-              "features":["mindlink"],
+              "features":["Mindlink"],
               "connection":[
                 "1st",
                 "3rd",
@@ -1283,7 +1283,7 @@ classData = {
             },
             "11": {
               "description":"1st-, 3rd-, 6th-, and 9th-level connection powers; mindlink; and telepathic bond.",
-              "features":["mindlink","telepathic bond"],
+              "features":["Mindlink","Telepathic Bond"],
               "connection":[
                 "1st",
                 "3rd",
@@ -1293,7 +1293,7 @@ classData = {
             },
             "12": {
               "description":"1st-, 3rd-, 6th-, 9th-, and 12th-level connection powers; mindlink; and telepathic bond.",
-              "features":["mindlink","telepathic bond"],
+              "features":["Mindlink","Telepathic Bond"],
               "connection":[
                 "1st",
                 "3rd",
@@ -1304,7 +1304,7 @@ classData = {
             },
             "15": {
               "description":"1st-, 3rd-, 6th-, 9th-, 12th-, and 15th-level connection powers; mindlink; and telepathic bond.",
-              "features":["mindlink","telepathic bond"],
+              "features":["Mindlink","Telepathic Bond"],
               "connection":[
                 "1st",
                 "3rd",
@@ -1316,7 +1316,7 @@ classData = {
             },
             "18": {
               "description":"All connection powers, mindlink, and telepathic bond.",
-              "features":["mindlink","telepathic bond"],
+              "features":["Mindlink","Telepathic Bond"],
               "connection":[
                 "1st",
                 "3rd",
@@ -1329,7 +1329,7 @@ classData = {
             },
             "19": {
               "description":"All connection powers, mindlink, telepathic bond, and transcendence.",
-              "features":["mindlink","telepathic bond","trancendence"],
+              "features":["Mindlink","Telepathic Bond","Transcendence"],
               "connection":[
                 "1st",
                 "3rd",
@@ -1342,7 +1342,7 @@ classData = {
             },
             "20": {
               "description":"All connection powers, mindlink, telepathic bond, transcendence, and enlightenment.",
-              "features":["mindlink","telepathic bond","trancendence","enlightenment"],
+              "features":["Mindlink","Telepathic Bond","Transcendence","Enlightenment"],
               "connection":[
                 "1st",
                 "3rd",
@@ -1374,12 +1374,12 @@ classData = {
         "AbilitiesByCr": {
             "1": {
               "description":"Trick attack +1d4 and one special ability.",
-              "features":["Trick attack +1d4"],
+              "features":["Trick Attack"],
               "special":1
             },
             "2": {
               "description":"Trick attack +1d4, evasion, one 2nd-level operative exploit, and one special ability.",
-              "features":["Trick attack +1d4","evasion"],
+              "features":["Trick Attack","Evasion"],
               "exploit": {
                 "2nd":1
               },
@@ -1387,7 +1387,7 @@ classData = {
             },
             "3": {
               "description":"Trick attack +1d8, evasion, quick movement +10 ft., one 2nd-level operative exploit, and one special ability.",
-              "features":["Trick attack +1d8","evasion","quick movement +10 ft."],
+              "features":["Trick Attack","Evasion","Quick Movement 10"],
               "exploit": {
                 "2nd":1
               },
@@ -1395,98 +1395,98 @@ classData = {
             },
             "4": {
               "description":"Trick attack +1d8, evasion, quick movement +10 ft., debilitating trick, and two 2nd-level operative exploits.",
-              "features":["Trick attack +1d8","evasion","quick movement +10 ft.","debilitating trick"],
+              "features":["Trick Attack","Evasion","Quick Movement 10","Debilitating Trick"],
               "exploit": {
                 "2nd":2
               }
             },
             "5": {
               "description":"Trick attack +3d8, evasion, quick movement +10 ft., debilitating trick, specialization exploit, and two 2nd-level operative exploits.",
-              "features":["Trick attack +3d8","evasion","quick movement +10 ft.","debilitating trick","specialization exploit"],
+              "features":["Trick Attack","Evasion","Quick Movement 10","Debilitating Trick","Specialization Exploit"],
               "exploit": {
                 "2nd":2
               }
             },
             "6": {
               "description":"Trick attack +3d8, evasion, quick movement +10 ft., debilitating trick, specialization exploit, and one 6th-level operative exploit.",
-              "features":["Trick attack +3d8","evasion","quick movement +10 ft.","debilitating trick","specialization exploit"],
+              "features":["Trick Attack","Evasion","Quick Movement 10","Debilitating Trick","Specialization Exploit"],
               "exploit": {
                 "6th":1
               }
             },
             "7": {
               "description":"Trick attack +4d8, evasion, quick movement +10 ft., debilitating trick, uncanny agility, specialization exploit, and one 6th-level operative exploit.",
-              "features":["Trick attack +4d8","evasion","quick movement +10 ft.","debilitating trick","uncanny agility","specialization exploit"],
+              "features":["Trick Attack","Evasion","Quick Movement 10","Debilitating Trick","Uncanny Agility","Specialization Exploit"],
               "exploit": {
                 "6th":1
               }
             },
             "8": {
               "description":"Trick attack +4d8, evasion, quick movement +10 ft., debilitating trick, uncanny agility, triple attack, specialization exploit, and one 6th-level operative exploit.",
-              "features":["Trick attack +4d8","evasion","quick movement +10 ft.","debilitating trick","uncanny agility","triple attack","specialization exploit"],
+              "features":["Trick Attack","Evasion","Quick Movement 10","Debilitating Trick","Uncanny Agility","Triple Attack","Specialization Exploit"],
               "exploit": {
                 "6th":1
               }
             },
             "9": {
               "description":"Trick attack +5d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, triple attack, specialization exploit, and one 6th-level operative exploit.",
-              "features":["Trick attack +5d8","evasion","quick movement +20 ft.","debilitating trick","uncanny agility","triple attack","specialization exploit"],
+              "features":["Trick Attack","Evasion","Quick Movement 20","Debilitating Trick","Uncanny Agility","Triple Attack","Specialization Exploit"],
               "exploit": {
                 "6th":1
               }
             },
             "10": {
               "description":"Trick attack +5d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, triple attack, specialization exploit, and one 10th-level operative exploit.",
-              "features":["Trick attack +5d8","evasion","quick movement +20 ft.","debilitating trick","uncanny agility","triple attack","specialization exploit"],
+              "features":["Trick Attack","Evasion","Quick Movement 20","Debilitating Trick","Uncanny Agility","Triple Attack","Specialization Exploit"],
               "exploit": {
                 "10th":1
               }
             },
             "11": {
               "description":"Trick attack +6d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, triple attack, specialization power, specialization exploit, and one 10th-level operative exploit.",
-              "features":["Trick attack +6d8","evasion","quick movement +20 ft.","debilitating trick","uncanny agility","triple attack","specialization power","specialization exploit"],
+              "features":["Trick Attack","Evasion","Quick Movement 20","Debilitating Trick","Uncanny Agility","Triple Attack","Specialization Power","Specialization Exploit"],
               "exploit": {
                 "10th":1
               }
             },
             "13": {
               "description":"Trick attack +7d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, quad attack, specialization power, specialization exploit, and one 10th-level operative exploit.",
-              "features":["Trick attack +7d8","evasion","quick movement +20 ft.","debilitating trick","uncanny agility","quad attack","specialization power","specialization exploit"],
+              "features":["Trick Attack","Evasion","Quick Movement 20","Debilitating Trick","Uncanny Agility","Quad Attack","Specialization Power","Specialization Exploit"],
               "exploit": {
                 "10th":1
               }
             },
             "14": {
               "description":"Trick attack +7d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, quad attack, specialization power, specialization exploit, and one 14th-level operative exploit.",
-              "features":["Trick attack +7d8","evasion","quick movement +20 ft.","debilitating trick","uncanny agility","quad attack","specialization power","specialization exploit"],
+              "features":["Trick Attack","Evasion","Quick Movement 20","Debilitating Trick","Uncanny Agility","Quad Attack","Specialization Power","Specialization Exploit"],
               "exploit": {
                 "14th":1
               }
             },
             "15": {
               "description":"Trick attack +8d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, specialization power, specialization exploit, and one 14th-level operative exploit.",
-              "features":["Trick attack +8d8","evasion","quick movement +30 ft.","debilitating trick","uncanny agility","quad attack","specialization power","specialization exploit"],
+              "features":["Trick Attack","Evasion","Quick Movement 30","Debilitating Trick","Uncanny Agility","Quad Attack","Specialization Power","Specialization Exploit"],
               "exploit": {
                 "14th":1
               }
             },
             "17": {
               "description":"Trick attack +9d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, and one 14th-level operative exploit.",
-              "features":["Trick attack +9d8","evasion","quick movement +30 ft.","debilitating trick","uncanny agility","quad attack","double debilitation","specialization power","specialization exploit"],
+              "features":["Trick Attack","Evasion","Quick Movement 30","Debilitating Trick","Uncanny Agility","Quad Attack","Double Debilitation","Specialization Power","Specialization Exploit"],
               "exploit": {
                 "14th":1
               }
             },
             "19": {
               "description":"Trick attack +10d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, and two 14th-level operative exploits.",
-              "features":["Trick attack +10d8","evasion","quick movement +30 ft.","debilitating trick","uncanny agility","quad attack","double debilitation","specialization power","specialization exploit"],
+              "features":["Trick Attack","Evasion","Quick Movement 30","Debilitating Trick","Uncanny Agility","Quad Attack","Double Debilitation","Specialization Power","Specialization Exploit"],
               "exploit": {
                 "14th":2
               }
             },
             "20": {
               "description":"Trick attack +10d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, supreme operative, and two 14th-level operative exploits.",
-              "features":["Trick attack +10d8","evasion","quick movement +30 ft.","debilitating trick","uncanny agility","quad attack","double debilitation","specialization power","specialization exploit","supreme operative"],
+              "features":["Trick Attack","Evasion","Quick Movement 30","Debilitating Trick","Uncanny Agility","Quad Attack","Double Debilitation","Specialization Power","Specialization Exploit","Supreme Operative"],
               "exploit": {
                 "14th":2
               }
@@ -1742,12 +1742,12 @@ classData = {
         "AbilitiesByCr": {
             "1": {
               "description":"Spell cache and one special ability.",
-              "features":["Spell cache"],
+              "features":["Spell Cache"],
               "special":1
             },
             "2": {
               "description":"Spell cache, one 2nd-level magic hack, and one special ability.",
-              "features":["Spell cache"],
+              "features":["Spell Cache"],
               "Magic hack":{
                 "2nd":1
               },
@@ -1755,7 +1755,7 @@ classData = {
             },
             "5": {
               "description":"Spell cache, one 5th-level magic hack, and one 2nd-level magic hack.",
-              "features":["Spell cache"],
+              "features":["Spell Cache"],
               "Magic hack":{
                 "2nd":1,
                 "5th":1
@@ -1763,7 +1763,7 @@ classData = {
             },
             "6": {
               "description":"Spell cache, cache capacitor 1, one 5th-level magic hack, and one 2nd-level magic hack.",
-              "features":["Spell cache","cache capacitor 1"],
+              "features":["Spell Cache","Cache Capacitor 1"],
               "Magic hack":{
                 "2nd":1,
                 "5th":1
@@ -1771,7 +1771,7 @@ classData = {
             },
             "8": {
               "description":"Spell cache, cache capacitor 1, one 8th-level magic hack, and one 5th-level magic hack.",
-              "features":["Spell cache","cache capacitor 1"],
+              "features":["Spell Cache","Cache Capacitor 1"],
               "Magic hack":{
                 "5th":1,
                 "8th":1
@@ -1779,7 +1779,7 @@ classData = {
             },
             "11": {
               "description":"Spell cache, cache capacitor 1, one 11th-level magic hack, and one 8th-level magic hack.",
-              "features":["Spell cache","cache capacitor 1"],
+              "features":["Spell Cache","Cache Capacitor 1"],
               "Magic hack":{
                 "8th":1,
                 "11th":1
@@ -1787,7 +1787,7 @@ classData = {
             },
             "12": {
               "description":"Spell cache, cache capacitor 2, one 11th-level magic hack, and one 8th-level magic hack.",
-              "features":["Spell cache","cache capacitor 2"],
+              "features":["Spell Cache","Cache Capacitor 2"],
               "Magic hack":{
                 "8th":1,
                 "11th":1
@@ -1795,7 +1795,7 @@ classData = {
             },
             "14": {
               "description":"Spell cache, cache capacitor 2, one 14th-level magic hack, and one 11th-level magic hack.",
-              "features":["Spell cache","cache capacitor 2"],
+              "features":["Spell Cache","Cache Capacitor 2"],
               "Magic hack":{
                 "11th":1,
                 "14th":1
@@ -1803,14 +1803,14 @@ classData = {
             },
             "17": {
               "description":"Spell cache, cache capacitor 2, and two 14th-level magic hacks.",
-              "features":["Spell cache","cache capacitor 2"],
+              "features":["Spell Cache","Cache Capacitor 2"],
               "Magic hack":{
                 "14th":2
               }
             },
             "18": {
               "description":"Spell cache, cache capacitor 3, and two 14th-level magic hacks.",
-              "features":["Spell cache","cache capacitor 3"],
+              "features":["Spell Cache","Cache Capacitor 3"],
               "Magic hack":{
                 "14th":2
               }

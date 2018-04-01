@@ -307,13 +307,82 @@ function buildStatBlock() {
     //MYSTIC SPECIAL RULES AND PRINT ABILITIES
     if (classDrop == 'Mystic') {
 
+      var mysticCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var mysticFeatures = getClassAbilities('Mystic',mysticCr);
+
+      var connection = $('#stepFourOptionDrop').val().trim();
+      var connectionList = mysticFeatures["connection"];
+
+      statBlock.ClassOffensiveAbilities = resolveClassAbilities('Connections',mysticCr,statBlock.abilityDCBase,connectionList,connection);
+
+      var featureList = mysticFeatures["features"];
+      statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(resolveClassAbilities('MysticFeatures',mysticCr,statBlock.abilityDCBase,featureList,''));
+
+      statBlock.ClassOffensiveAbilities.sort();
     }
     //TECHNOMANCER SPECIAL RULES AND PRINT ABILITIES
     if (classDrop == 'Technomancer') {
+      var technoCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var technoFeatures = getClassAbilities('Technomancer',technoCr);
+
+      var spellHack = $('#stepFourOptionDrop').val().toString().trim();
+      if (spellHack != '') {
+        if (spellHack.includes(',')) {
+          var hackList = spellHack.split(',');
+        } else {
+          var hackList = [spellHack];
+        }
+      }
+
+      statBlock.ClassOffensiveAbilities = resolveClassAbilities('MagicHack',technoCr,statBlock.abilityDCBase,hackList,'');
+
+      var featureList = technoFeatures["features"];
+      statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(resolveClassAbilities('TechnomancerFeatures',technoCr,statBlock.abilityDCBase,featureList,''));
+
+      statBlock.ClassOffensiveAbilities.sort();
 
     }
     //OPERATIVE SPECIAL RULES AND PRINT ABILITIES
     if (classDrop == 'Operative') {
+
+      var operativeCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var operativeFeatures = getClassAbilities('Operative',operativeCr);
+
+      var special = $('#stepFourOptionDrop').val().trim();
+
+      var featureList = operativeFeatures["features"];
+
+      var exploits = []
+
+
+
+      if ($('[data-id="stepFourOptionDropTwo"]').length){
+        var exploitsString = $('#stepFourOptionDropTwo').val().toString().trim();
+        if (exploitsString != '') {
+          if (exploitsString.includes(',')) {
+            exploits = exploitsString.split(',');
+          } else {
+            exploits = [exploitsString];
+          }
+        }
+        if (featureList.includes("Specialization Exploit")){
+          exploits.push(allClassFeatures.Operative["Operative Specializations"][special]["Specialization Exploit"])
+        }
+        statBlock.ClassOffensiveAbilities = resolveClassAbilities('Exploits',operativeCr,statBlock.abilityDCBase,exploits,'');
+      } else {
+        statBlock.ClassOffensiveAbilities = [];
+      }
+
+
+
+
+      statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(resolveClassAbilities('OperativeFeatures',operativeCr,statBlock.abilityDCBase,featureList,''));
+
+      if (featureList.includes("Specialization Power")){
+        statBlock.ClassOffensiveAbilities.push(allClassFeatures.Operative["Operative Specializations"][special]["Specialization Power"]["name"].toLowerCase())
+      }
+
+      statBlock.ClassOffensiveAbilities.sort();
 
     }
     //MECHANIC SPECIAL RULES AND PRINT ABILITIES
@@ -1597,7 +1666,37 @@ function resolveClassAbilities(Data,ClassCR,ClassDC,abilityList,abilityName){
       var ability = allClassFeatures.Soldier["Fighting style"][abilityName][abilityList[i]];
     } else if (Data == 'GearBoost'){
       var ability = allClassFeatures.Soldier["Gear Boost"][abilityList[i]];
+    } else if (Data == 'Connections'){
+      var ability = allClassFeatures.Mystic["Connections"][abilityName]["Connection Powers"][abilityList[i]];
+    } else if (Data == 'MysticFeatures'){
+      var ability = allClassFeatures.Mystic["Class features"][abilityList[i]];
+    } else if (Data == 'MagicHack'){
+
+      for (level in allClassFeatures.Technomancer["Magic Hacks"]) {
+        if (allClassFeatures.Technomancer["Magic Hacks"][level].hasOwnProperty(abilityList[i])) {
+          var levelName = level;
+          break;
+        }
+      }
+      var ability = allClassFeatures.Technomancer["Magic Hacks"][levelName][abilityList[i]];
+    } else if (Data == 'TechnomancerFeatures'){
+      var ability = allClassFeatures.Technomancer["Class features"][abilityList[i]];
+    } else if (Data == 'Exploits'){
+
+      for (level in allClassFeatures.Operative["Operative Exploits"]) {
+        if (allClassFeatures.Operative["Operative Exploits"][level].hasOwnProperty(abilityList[i])) {
+          var levelName = level;
+          break;
+        }
+      }
+      var ability = allClassFeatures.Operative["Operative Exploits"][levelName][abilityList[i]];
+    } else if (Data == 'OperativeFeatures'){
+      var ability = allClassFeatures.Operative["Class features"][abilityList[i]];
     }
+    console.log(Data)
+    console.log(ability)
+    console.log(abilityList[i])
+
 
     var abilityString = '';
 
@@ -1611,18 +1710,24 @@ function resolveClassAbilities(Data,ClassCR,ClassDC,abilityList,abilityName){
 
       for (var k = 0; k < entries.length; k++)  {
         if (entries[k] != 'layout') {
+          //
 
-          table = ability.entry[entries[k]]['CR']
-          var choice = 'none'
-          for (l = 0; l < table.length; l++) {
-            if (ClassCR >= table[l]) {
-              choice = l;
-            }
-          }
-          if (choice == 'none') {
-            var valNum = ability.entry[entries[k]]['base'];
+          if (ability.entry[entries[k]].hasOwnProperty('PERCR')){
+            //per cr entries
+            var valNum = ability.entry[entries[k]]['base'] + (ability.entry[entries[k]]['PERCR'] * ClassCR);
           } else {
-            var valNum = ability.entry[entries[k]]['base'] + ability.entry[entries[k]]['VAL'][choice];
+            table = ability.entry[entries[k]]['CR']
+            var choice = 'none'
+            for (l = 0; l < table.length; l++) {
+              if (ClassCR >= table[l]) {
+                choice = l;
+              }
+            }
+            if (choice == 'none') {
+              var valNum = ability.entry[entries[k]]['base'];
+            } else {
+              var valNum = ability.entry[entries[k]]['base'] + ability.entry[entries[k]]['VAL'][choice];
+            }
           }
 
           abilityString = abilityString.replace(entries[k],valNum.toString())
@@ -1667,7 +1772,7 @@ function getClassAbilities(selectedClass,cr){
   for (key in classData[selectedClass].AbilitiesByCr){
     keyNums.push(Number(key));
   }
-  console.log(keyNums)
+
   //sort ascending order - number value
   keyNums.sort(function(a, b){return a-b});
   //find abilities equal to or less than CR
@@ -1677,7 +1782,7 @@ function getClassAbilities(selectedClass,cr){
       crBottom = keyNums[i];
     }
   }
-  console.log(classData[selectedClass])
+
   return classData[selectedClass].AbilitiesByCr[crBottom.toString()];
 }
 
