@@ -3911,10 +3911,13 @@ $('.wizard-card').bootstrapWizard({
                 $("#saveBoostDropdown").first().empty();
 
                 if (classDrop != '' && classDrop != 'None') {
+                  //console.log(classDrop)
                   var classCr = Number(crString.replace("CR ","").replace("1/2","1").replace("1/3","1"));
                   var classfeatures = getClassAbilities(classDrop,classCr);
                   if (classfeatures.hasOwnProperty("special")) {
+
                     var maxOptions = classfeatures.special;
+                    //console.log(maxOptions)
                     if (classfeatures.hasOwnProperty("skillful")) {
                       maxOptions = maxOptions + 1;
                     }
