@@ -540,7 +540,7 @@ function generateCharacter() {
   printPanel(Age,Align,Race,Class,Theme,Profession,Who,Personality,From);
 
   //log event in analytics
-  ga('send', 'event', 'Generation', 'concept', Race + ' ' + Class);
+  ga('send', 'event', 'Generation', 'concept', Race + ':' + Class);
 }
 
 //runs when page is loaded

@@ -104,6 +104,7 @@ function generateEncounter() {
   var selectedDiff = $('#DifficultyPicker').val().trim();
   var diffNum = difficulty[selectedDiff];
   var encounterCR = selectedAPL + diffNum;
+  var mode = $('#ModeRadio').find(".btn.active").find("input").attr('name').trim();
 
   //take into account locked values in CR calculations
   var xpBudget = xp[encounterCR.toString()];
@@ -159,6 +160,9 @@ function generateEncounter() {
 
   displayTable();
   updateAPLDisplay()
+  //log event in analytics
+  var encounterString = selectedAPL+":"+selectedDiff+":"+mode;
+  ga('send', 'event', 'Generation', 'encounter', encounterString);
 
   /*
   //get listed environments, debug only
