@@ -1044,21 +1044,67 @@ classSpellcaster = ["Mystic","Technomancer"];
 classData = {
     "Envoy": {
         "AbilitiesByCr": {
-            "1": "One 1st-level envoy improvisation and one special ability.",
-            "2": "Two 1st-level envoy improvisations and one special ability.",
-            "4": "One 4th-level envoy improvisation, one 1st-level envoy improvisation, and one special ability.",
-            "6": "One 6th-level envoy improvisation, one 4th-level envoy improvisation, one 1st-level envoy improvisation, and one special ability.",
-            "8": "One 8th-level envoy improvisation, one 6th-level envoy improvisation, one 4th-level envoy improvisation, and one special ability.",
-            "9": "One 8th-level envoy improvisation, one 6th-level envoy improvisation, one 4th-level envoy improvisation, skillful special ability, and one special ability.",
-            "10": "Two 8th-level envoy improvisations, one 6th-level envoy improvisation, one 4th-level envoy improvisation, skillful special ability, and one special ability.",
-            "12": "Three 8th-level envoy improvisations, one 6th-level envoy improvisation, skillful special ability, and one special ability.",
-            "16": "Four 8th-level envoy improvisations, skillful special ability, and one special ability.",
-            "20": "True expertise, four 8th-level envoy improvisations, skillful special ability, and one special ability."
+            "1": {
+                "description":"One 1st-level envoy improvisation and one special ability.",
+                "improvisations":{"1st":1},
+                "special":1
+            },
+            "2": {
+                "description":"Two 1st-level envoy improvisations and one special ability.",
+                "improvisations":{"1st":2},
+                "special":1
+            },
+            "4": {
+                "description":"One 4th-level envoy improvisation, one 1st-level envoy improvisation, and one special ability.",
+                "improvisations":{"1st":1,"4th":1},
+                "special":1
+            },
+            "6": {
+                "description":"One 6th-level envoy improvisation, one 4th-level envoy improvisation, one 1st-level envoy improvisation, and one special ability.",
+                "improvisations":{"1st":1,"4th":1,"6th":1},
+                "special":1
+            },
+            "8": {
+                "description":"One 8th-level envoy improvisation, one 6th-level envoy improvisation, one 4th-level envoy improvisation, and one special ability.",
+                "improvisations":{"1st":1,"4th":1,"6th":1,"8th":1},
+                "special":1
+            },
+            "9": {
+                "description":"One 8th-level envoy improvisation, one 6th-level envoy improvisation, one 4th-level envoy improvisation, skillful special ability, and one special ability.",
+                "improvisations":{"4th":1,"6th":1,"8th":1},
+                "skillful":1,
+                "special":1
+            },
+            "10": {
+                "description":"Two 8th-level envoy improvisations, one 6th-level envoy improvisation, one 4th-level envoy improvisation, skillful special ability, and one special ability.",
+                "improvisations":{"4th":1,"6th":1,"8th":2},
+                "skillful":1,
+                "special":1
+            },
+            "12": {
+                "description":"Three 8th-level envoy improvisations, one 6th-level envoy improvisation, skillful special ability, and one special ability.",
+                "improvisations":{"6th":1,"8th":3},
+                "skillful":1,
+                "special":1
+            },
+            "16": {
+                "description":"Four 8th-level envoy improvisations, skillful special ability, and one special ability.",
+                "improvisations":{"8th":4},
+                "skillful":1,
+                "special":1
+            },
+            "20": {
+                "description":"True expertise, four 8th-level envoy improvisations, skillful special ability, and one special ability.",
+                "improvisations":{"8th":4},
+                "skillful":1,
+                "special":1,
+                "features":["true expertise"],
+            }
         },
         "AbilityScoreModifiers": ["Cha","Int","Dex"],
         "Adjustments": {"reflex":2},
         "Description": "Charismatic envoys assist their allies through inspiration and tactical orders.",
-        "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
+        "Gear": "Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR-1).",
         "RequiredArray": "Expert",
         "MasterSkills": [
           "sense Motive"
@@ -1067,128 +1113,626 @@ classData = {
     },
     "Mechanic": {
         "AbilitiesByCr": {
-            "1": "Artificial intelligence (see Special Rules above), custom rig, one special ability.",
-            "2": "Artificial intelligence, custom rig, one 2ndlevel mechanic trick, and one special ability.",
-            "3": "Artificial intelligence, custom rig, overload, and one 2ndlevel mechanic trick.",
-            "4": "Artificial intelligence, custom rig, overload, and two 2ndlevel mechanic tricks.",
-            "5": "Artificial intelligence, custom rig, overload, remote hack, and two 2nd-level mechanic tricks.",
-            "7": "Artificial intelligence, overload, remote hack, expert rig, miracle worker 1/day, and two 2nd-level mechanic tricks.",
-            "8": "Artificial intelligence, overload, remote hack, expert rig, miracle worker 1/day, one 8th-level mechanic trick, and one 2nd-level mechanic trick.",
-            "9": "Artificial intelligence, overload, remote hack, expert rig, miracle worker 1/day, override, one 8th-level mechanic trick, and one 2nd-level mechanic trick.",
-            "11": "Artificial intelligence, overload, remote hack, expert rig, miracle worker 2/day, override, and two 8th-level mechanic tricks.",
-            "13": "Artificial intelligence, overload, remote hack, miracle worker 2/day, override, advanced rig, and two 8th-level mechanic tricks.",
-            "14": "Artificial intelligence, overload, remote hack, miracle worker 2/day, override, advanced rig, one 14th-level mechanic trick, and one 8th-level mechanic trick.",
-            "16": "Artificial intelligence, overload, remote hack, miracle worker 3/day, override, advanced rig, and two 14th-level mechanic tricks.",
-            "18": "Artificial intelligence, overload, remote hack, miracle worker 3/day, override, advanced rig, and three 14th-level mechanic tricks.",
-            "19": "Artificial intelligence, overload, remote hack, miracle worker 3/day, override, ghost in the machine, superior rig, and three 14th-level mechanic tricks.",
-            "20": "Artificial intelligence, overload, remote hack, miracle worker 3/day, override, ghost in the machine, superior rig, and four 14th-level mechanic tricks."
+            "1": {
+              "description":"Artificial intelligence, custom rig, one special ability.",
+              "features":["Artificial intelligence","Custom Rig"],
+              "exocortex":["Target Tracking"],
+              "special":1
+            },
+            "2": {
+              "description":"Artificial intelligence, custom rig, one 2nd-level mechanic trick, and one special ability.",
+              "features":["Artificial intelligence","Custom Rig"],
+              "trick":{"2nd":1},
+              "exocortex":["Target Tracking"],
+              "special":1
+            },
+            "3": {
+              "description":"Artificial intelligence, custom rig, overload, and one 2nd-level mechanic trick.",
+              "features":["Artificial intelligence","Custom Rig","Overload"],
+              "exocortex":["Target Tracking"],
+              "trick":{"2nd":1}
+            },
+            "4": {
+              "description":"Artificial intelligence, custom rig, overload, and two 2nd-level mechanic tricks.",
+              "features":["Artificial intelligence","Custom Rig","Overload"],
+              "exocortex":["Target Tracking"],
+              "trick":{"2nd":2}
+            },
+            "5": {
+              "description":"Artificial intelligence, custom rig, overload, remote hack, and two 2nd-level mechanic tricks.",
+              "features":["Artificial intelligence","Custom Rig","Overload","Remote Hack"],
+              "exocortex":["Target Tracking","Wireless Hack"],
+              "trick":{"2nd":2}
+            },
+            "7": {
+              "description":"Artificial intelligence, overload, remote hack, expert rig, miracle worker 1/day, and two 2nd-level mechanic tricks.",
+              "features":["Artificial intelligence","Overload","Remote Hack","Expert Rig","Miracle Worker 1/day"],
+              "exocortex":["Target Tracking","Wireless Hack"],
+              "trick":{"2nd":2}
+            },
+            "8": {
+              "description":"Artificial intelligence, overload, remote hack, expert rig, miracle worker 1/day, one 8th-level mechanic trick, and one 2nd-level mechanic trick.",
+              "features":["Artificial intelligence","Overload","Remote Hack","Expert Rig","Miracle Worker 1/day"],
+              "exocortex":["Target Tracking","Wireless Hack"],
+              "trick":{
+                "8th":1,
+                "2nd":1
+              }
+            },
+            "9": {
+              "description":"Artificial intelligence, overload, remote hack, expert rig, miracle worker 1/day, override, one 8th-level mechanic trick, and one 2nd-level mechanic trick.",
+              "features":["Artificial intelligence","Overload","Remote Hack","Expert Rig","Miracle Worker 1/day","Override"],
+              "exocortex":["Target Tracking","Wireless Hack"],
+              "trick":{
+                "8th":1,
+                "2nd":1
+              }
+            },
+            "11": {
+              "description":"Artificial intelligence, overload, remote hack, expert rig, miracle worker 2/day, override, and two 8th-level mechanic tricks.",
+              "features":["Artificial intelligence","Overload","Remote Hack","Expert Rig","Miracle Worker 2/day","Override"],
+              "exocortex":["Twin Tracking","Wireless Hack"],
+              "trick":{
+                "8th":2
+              }
+            },
+            "13": {
+              "description":"Artificial intelligence, overload, remote hack, miracle worker 2/day, override, advanced rig, and two 8th-level mechanic tricks.",
+              "features":["Artificial intelligence","Overload","Remote Hack","Miracle Worker 2/day","Override","Advanced Rig"],
+              "exocortex":["Twin Tracking","Wireless Hack"],
+              "trick":{
+                "8th":2
+              }
+            },
+            "14": {
+              "description":"Artificial intelligence, overload, remote hack, miracle worker 2/day, override, advanced rig, one 14th-level mechanic trick, and one 8th-level mechanic trick.",
+              "features":["Artificial intelligence","Overload","Remote Hack","Miracle Worker 2/day","Override","Advanced Rig"],
+              "exocortex":["Twin Tracking","Wireless Hack"],
+              "trick":{
+                "8th":1,
+                "14th":1
+              }
+            },
+            "16": {
+              "description":"Artificial intelligence, overload, remote hack, miracle worker 3/day, override, advanced rig, and two 14th-level mechanic tricks.",
+              "features":["Artificial intelligence","Overload","Remote Hack","Miracle Worker 3/day","Override","Advanced Rig"],
+              "exocortex":["Twin Tracking","Wireless Hack","Multitasking"],
+              "trick":{
+                "14th":2
+              }
+            },
+            "18": {
+              "description":"Artificial intelligence, overload, remote hack, miracle worker 3/day, override, advanced rig, and three 14th-level mechanic tricks.",
+              "features":["Artificial intelligence","Overload","Remote Hack","Miracle Worker 3/day","Override","Advanced Rig"],
+              "exocortex":["Twin Tracking","Wireless Hack","Multitasking"],
+              "trick":{
+                "14th":3
+              }
+            },
+            "19": {
+              "description":"Artificial intelligence, overload, remote hack, miracle worker 3/day, override, ghost in the machine, superior rig, and three 14th-level mechanic tricks.",
+              "features":["Artificial intelligence","Overload","Remote Hack","Miracle Worker 3/day","Override","Ghost In The Machine","Superior Rig"],
+              "exocortex":["Twin Tracking","Wireless Hack","Multitasking"],
+              "trick":{
+                "14th":3
+              }
+            },
+            "20": {
+              "description":"Artificial intelligence, overload, remote hack, miracle worker 3/day, override, ghost in the machine, superior rig, and four 14th-level mechanic tricks.",
+              "features":["Artificial intelligence","Overload","Remote Hack","Miracle Worker 3/day","Override","Ghost In The Machine","Superior Rig"],
+              "exocortex":["Quad Tracking","Wireless Hack","Multitasking"],
+              "trick":{
+                "14th":4
+              }
+            }
         },
         "AbilityScoreModifiers": ["Int","Dex","Con"],
         "Adjustments": {"fortitude":2,"reflex":2,"will":-2},
         "Description": "Experts at dealing with machines, mechanics either use exocortexes to enhance their combat abilities or are accompanied by robotic drones that they can control remotely.",
-        "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
+        "Gear": "Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR-1).",
         "RequiredArray": "Expert",
         "MasterSkills": [
           "computers",
           "engineering"
         ],
-        "SpecialRules": " All mechanic creatures get the artificial intelligence class feature, which requires a choice between a drone and an exocortex. For a mechanic creature with a drone, build the drone as a separate technological construct of the mechanic’s CR - 2 or use an existing technological construct with the mechanic’s CR - 2. The drone does not get a full suite of actions on its own; each round, the mechanic creature and the drone can each take a move action, a swift action, and a reaction, but only one of them can take a standard action or combine its move and standard actions into a full action. The drone doesn’t have its own CR, it doesn’t contribute to the CR of the encounter, and PCs receive no XP for defeating a drone. For a mechanic creature with an exocortex, add target tracking at CR 1 (see below), wireless hack at CR 5, twin tracking at CR 10, multitasking at CR 15, and quad tracking at CR 20. Target Tracking (Ex)"
+        "SpecialRules": " All mechanic creatures get the artificial intelligence class feature, which requires a choice between a drone and an exocortex. For a mechanic creature with a drone, build the drone as a separate technological construct of the mechanic’s CR - 2 or use an existing technological construct with the mechanic’s CR - 2. The drone does not get a full suite of actions on its own; each round, the mechanic creature and the drone can each take a move action, a swift action, and a reaction, but only one of them can take a standard action or combine its move and standard actions into a full action. The drone doesn’t have its own CR, it doesn’t contribute to the CR of the encounter, and PCs receive no XP for defeating a drone. For a mechanic creature with an exocortex, add target tracking at CR 1 (see below), wireless hack at CR 5, twin tracking at CR 10, multitasking at CR 15, and quad tracking at CR 20."
     },
     "Mystic": {
         "AbilitiesByCr": {
-            "1": "1st-level connection power and one special ability.",
-            "2": "1st-level connection power, mindlink, and one special ability.",
-            "3": "1st- and 3rd-level connection powers and mindlink.",
-            "6": "1st-, 3rd-, and 6th-level connection powers and mindlink.",
-            "9": "1st-, 3rd-, 6th-, and 9th-level connection powers and mindlink.",
-            "11": "1st-, 3rd-, 6th-, and 9th-level connection powers; mindlink; and telepathic bond.",
-            "12": "1st-, 3rd-, 6th-, 9th-, and 12th-level connection powers; mindlink; and telepathic bond.",
-            "15": "1st-, 3rd-, 6th-, 9th-, 12th-, and 15th-level connection powers; mindlink; and telepathic bond.",
-            "18": "All connection powers, mindlink, and telepathic bond.",
-            "19": "All connection powers, mindlink, telepathic bond, and transcendence.",
-            "20": "All connection powers, mindlink, telepathic bond, transcendence, and enlightenment."
+            "1": {
+              "description":"1st-level connection power and one special ability.",
+                "connection":[
+                  "1st"
+                ],
+                "special":1
+            },
+            "2": {
+              "description":"1st-level connection power, mindlink, and one special ability.",
+              "features":["Mindlink"],
+              "connection":[
+                "1st"
+              ],
+              "special":1
+            },
+            "3": {
+              "description":"1st- and 3rd-level connection powers and mindlink.",
+              "features":["Mindlink"],
+              "connection":[
+                "1st",
+                "3rd"
+              ]
+            },
+            "6": {
+              "description":"1st-, 3rd-, and 6th-level connection powers and mindlink.",
+              "features":["Mindlink"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th"
+              ]
+            },
+            "9": {
+              "description":"1st-, 3rd-, 6th-, and 9th-level connection powers and mindlink.",
+              "features":["Mindlink"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th"
+              ]
+            },
+            "11": {
+              "description":"1st-, 3rd-, 6th-, and 9th-level connection powers; mindlink; and telepathic bond.",
+              "features":["Mindlink","Telepathic Bond"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th"
+              ]
+            },
+            "12": {
+              "description":"1st-, 3rd-, 6th-, 9th-, and 12th-level connection powers; mindlink; and telepathic bond.",
+              "features":["Mindlink","Telepathic Bond"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th",
+                "12th"
+              ]
+            },
+            "15": {
+              "description":"1st-, 3rd-, 6th-, 9th-, 12th-, and 15th-level connection powers; mindlink; and telepathic bond.",
+              "features":["Mindlink","Telepathic Bond"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th",
+                "12th",
+                "15th"
+              ]
+            },
+            "18": {
+              "description":"All connection powers, mindlink, and telepathic bond.",
+              "features":["Mindlink","Telepathic Bond"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th",
+                "12th",
+                "15th",
+                "18th"
+              ]
+            },
+            "19": {
+              "description":"All connection powers, mindlink, telepathic bond, and transcendence.",
+              "features":["Mindlink","Telepathic Bond","Transcendence"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th",
+                "12th",
+                "15th",
+                "18th"
+              ]
+            },
+            "20": {
+              "description":"All connection powers, mindlink, telepathic bond, transcendence, and enlightenment.",
+              "features":["Mindlink","Telepathic Bond","Transcendence","Enlightenment"],
+              "connection":[
+                "1st",
+                "3rd",
+                "6th",
+                "9th",
+                "12th",
+                "15th",
+                "18th"
+              ]
+            }
         },
         "AbilityScoreModifiers": ["Wis","Con","Cha"],
         "Adjustments": {"None":0},
         "Description": "Calling on connections to supernatural forces, mystics can manifest magic in a number of different ways.",
-        "Gear": " Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
+        "Gear": "Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR-1).",
         "RequiredArray": "Spellcaster",
-        "MasterSkills": [
-          "mysticism"
-        ],
+        "MasterSkills": {
+          "Overlord":["diplomacy","intimidate","mysticism"],
+          "Xenodruid":["life science","survival","mysticism"],
+          "Mindbreaker":["bluff","intimidate","mysticism"],
+          "Star Shaman":["perception","piloting","mysticism"],
+          "Healer":["medicine","mysticism"],
+          "Empath":["perception","sense motive","mysticism"],
+          "Akashic":["culture","mysticism"]
+        },
         "SpecialRules": " Choose one mystic connection. The mystic creature’s connection powers must come from that connection. Any connection powers that aren’t relevant to the creature (or that can simply be incorporated into the creature’s statistics) don’t need to appear in its stat block. Spells must come from the mystic spell list. Start with connection spells of the corresponding levels and then fill in the remaining slots.Good or master skills chosen from the connection’s associated skills."
     },
     "Operative": {
         "AbilitiesByCr": {
-            "1": "Trick attack +1d4 and one special ability.",
-            "2": "Trick attack +1d4, evasion, one 2nd-level operative exploit, and one special ability.",
-            "3": "Trick attack +1d8, evasion, quick movement +10 ft., one 2nd-level operative exploit, and one special ability.",
-            "4": "Trick attack +1d8, evasion, quick movement +10 ft., debilitating trick, and two 2nd-level operative exploits.",
-            "5": "Trick attack +3d8, evasion, quick movement +10 ft., debilitating trick, specialization exploit, and two 2nd-level operative exploits.",
-            "6": "Trick attack +3d8, evasion, quick movement +10 ft., debilitating trick, specialization exploit, and one 6th-level operative exploit.",
-            "7": "Trick attack +4d8, evasion, quick movement +10 ft., debilitating trick, uncanny agility, specialization exploit, and one 6th-level operative exploit.",
-            "8": "Trick attack +4d8, evasion, quick movement +10 ft., debilitating trick, uncanny agility, triple attack, specialization exploit, and one 6th-level operative exploit.",
-            "9": "Trick attack +5d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, triple attack, specialization exploit, and one 6th-level operative exploit.",
-            "10": "Trick attack +5d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, triple attack, specialization exploit, and one 10th-level operative exploit.",
-            "11": "Trick attack +6d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, triple attack, specialization power, specialization exploit, and one 10th-level operative exploit.",
-            "13": "Trick attack +7d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, quad attack, specialization power, specialization exploit, and one 10th-level operative exploit.",
-            "14": "Trick attack +7d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, quad attack, specialization power, specialization exploit, and one 14th-level operative exploit.",
-            "15": "Trick attack +8d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, specialization power, specialization exploit, and one 14th-level operative exploit.",
-            "17": "Trick attack +9d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, and one 14th-level operative exploit.",
-            "19": "Trick attack +10d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, and two 14th-level operative exploits.",
-            "20": "Trick attack +10d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, supreme operative, and two 14th-level operative exploits."
+            "1": {
+              "description":"Trick attack +1d4 and one special ability.",
+              "features":["Trick Attack"],
+              "special":1
+            },
+            "2": {
+              "description":"Trick attack +1d4, evasion, one 2nd-level operative exploit, and one special ability.",
+              "features":["Trick Attack","Evasion"],
+              "exploit": {
+                "2nd":1
+              },
+              "special":1
+            },
+            "3": {
+              "description":"Trick attack +1d8, evasion, quick movement +10 ft., one 2nd-level operative exploit, and one special ability.",
+              "features":["Trick Attack","Evasion","Quick Movement 10"],
+              "exploit": {
+                "2nd":1
+              },
+              "special":1
+            },
+            "4": {
+              "description":"Trick attack +1d8, evasion, quick movement +10 ft., debilitating trick, and two 2nd-level operative exploits.",
+              "features":["Trick Attack","Evasion","Quick Movement 10","Debilitating Trick"],
+              "exploit": {
+                "2nd":2
+              }
+            },
+            "5": {
+              "description":"Trick attack +3d8, evasion, quick movement +10 ft., debilitating trick, specialization exploit, and two 2nd-level operative exploits.",
+              "features":["Trick Attack","Evasion","Quick Movement 10","Debilitating Trick","Specialization Exploit"],
+              "exploit": {
+                "2nd":2
+              }
+            },
+            "6": {
+              "description":"Trick attack +3d8, evasion, quick movement +10 ft., debilitating trick, specialization exploit, and one 6th-level operative exploit.",
+              "features":["Trick Attack","Evasion","Quick Movement 10","Debilitating Trick","Specialization Exploit"],
+              "exploit": {
+                "6th":1
+              }
+            },
+            "7": {
+              "description":"Trick attack +4d8, evasion, quick movement +10 ft., debilitating trick, uncanny agility, specialization exploit, and one 6th-level operative exploit.",
+              "features":["Trick Attack","Evasion","Quick Movement 10","Debilitating Trick","Uncanny Agility","Specialization Exploit"],
+              "exploit": {
+                "6th":1
+              }
+            },
+            "8": {
+              "description":"Trick attack +4d8, evasion, quick movement +10 ft., debilitating trick, uncanny agility, triple attack, specialization exploit, and one 6th-level operative exploit.",
+              "features":["Trick Attack","Evasion","Quick Movement 10","Debilitating Trick","Uncanny Agility","Triple Attack","Specialization Exploit"],
+              "exploit": {
+                "6th":1
+              }
+            },
+            "9": {
+              "description":"Trick attack +5d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, triple attack, specialization exploit, and one 6th-level operative exploit.",
+              "features":["Trick Attack","Evasion","Quick Movement 20","Debilitating Trick","Uncanny Agility","Triple Attack","Specialization Exploit"],
+              "exploit": {
+                "6th":1
+              }
+            },
+            "10": {
+              "description":"Trick attack +5d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, triple attack, specialization exploit, and one 10th-level operative exploit.",
+              "features":["Trick Attack","Evasion","Quick Movement 20","Debilitating Trick","Uncanny Agility","Triple Attack","Specialization Exploit"],
+              "exploit": {
+                "10th":1
+              }
+            },
+            "11": {
+              "description":"Trick attack +6d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, triple attack, specialization power, specialization exploit, and one 10th-level operative exploit.",
+              "features":["Trick Attack","Evasion","Quick Movement 20","Debilitating Trick","Uncanny Agility","Triple Attack","Specialization Power","Specialization Exploit"],
+              "exploit": {
+                "10th":1
+              }
+            },
+            "13": {
+              "description":"Trick attack +7d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, quad attack, specialization power, specialization exploit, and one 10th-level operative exploit.",
+              "features":["Trick Attack","Evasion","Quick Movement 20","Debilitating Trick","Uncanny Agility","Quad Attack","Specialization Power","Specialization Exploit"],
+              "exploit": {
+                "10th":1
+              }
+            },
+            "14": {
+              "description":"Trick attack +7d8, evasion, quick movement +20 ft., debilitating trick, uncanny agility, quad attack, specialization power, specialization exploit, and one 14th-level operative exploit.",
+              "features":["Trick Attack","Evasion","Quick Movement 20","Debilitating Trick","Uncanny Agility","Quad Attack","Specialization Power","Specialization Exploit"],
+              "exploit": {
+                "14th":1
+              }
+            },
+            "15": {
+              "description":"Trick attack +8d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, specialization power, specialization exploit, and one 14th-level operative exploit.",
+              "features":["Trick Attack","Evasion","Quick Movement 30","Debilitating Trick","Uncanny Agility","Quad Attack","Specialization Power","Specialization Exploit"],
+              "exploit": {
+                "14th":1
+              }
+            },
+            "17": {
+              "description":"Trick attack +9d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, and one 14th-level operative exploit.",
+              "features":["Trick Attack","Evasion","Quick Movement 30","Debilitating Trick","Uncanny Agility","Quad Attack","Double Debilitation","Specialization Power","Specialization Exploit"],
+              "exploit": {
+                "14th":1
+              }
+            },
+            "19": {
+              "description":"Trick attack +10d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, and two 14th-level operative exploits.",
+              "features":["Trick Attack","Evasion","Quick Movement 30","Debilitating Trick","Uncanny Agility","Quad Attack","Double Debilitation","Specialization Power","Specialization Exploit"],
+              "exploit": {
+                "14th":2
+              }
+            },
+            "20": {
+              "description":"Trick attack +10d8, evasion, quick movement +30 ft., debilitating trick, uncanny agility, quad attack, double debilitation, specialization power, specialization exploit, supreme operative, and two 14th-level operative exploits.",
+              "features":["Trick Attack","Evasion","Quick Movement 30","Debilitating Trick","Uncanny Agility","Quad Attack","Double Debilitation","Specialization Power","Specialization Exploit","Supreme Operative"],
+              "exploit": {
+                "14th":2
+              }
+            }
         },
         "AbilityScoreModifiers": ["Dex","Int","Wis"],
         "Adjustments": {"initiativeMod":"+CR/4","reflex":3,"skillCheckMod":1},
+        "MasterSkills": {
+          "Daredevil":["acrobatics","athletics"],
+          "Detective":["culture","sense motive"],
+          "Explorer":["culture","survival"],
+          "Ghost":["acrobatics","stealth"],
+          "Hacker":["computers","engineering"],
+          "Spy":["bluff","disguise"],
+          "Thief":["perception","sleight of hand"]
+        },
         "Description": "Cunning and swift, operatives are especially skilled and can cause foes to drop their guards, paving the way for devastating attacks.",
-        "Gear": "Light armor (item level = CR), small arm (item level = CR), sniper rifle (item level = CR), and basic melee weapon with operative special quality (item level = CR - 1).",
+        "Gear": "Light armor (item level = CR), small arm (item level = CR), sniper rifle (item level = CR), and basic melee weapon with operative special quality (item level = CR-1).",
         "RequiredArray": "Expert",
-        "SpecialRules": " Choose one operative specialization. The operative creature’s specialization exploit and specialization power must come from that specialization. Any exploits that aren’t relevant to the creature (or that can simply be incorporated into the creature’s statistics) don’t need to appear in the creature’s stat block. Master skills from operative specialization."
+        "SpecialRules": "Choose one operative specialization. The operative creature’s specialization exploit and specialization power must come from that specialization. Any exploits that aren’t relevant to the creature (or that can simply be incorporated into the creature’s statistics) don’t need to appear in the creature’s stat block. Master skills from operative specialization."
     },
     "Solarian": {
         "AbilitiesByCr": {
-            "1": "Solar manifestation, stellar alignment, black hole, and supernova.",
-            "2": "Solar manifestation, stellar alignment, black hole, supernova, and one 2nd-level stellar revelation.",
-            "4": "Solar manifestation, stellar alignment, black hole, supernova, and two 2nd-level stellar revelations.",
-            "6": "Solar manifestation, stellar alignment, black hole, supernova, one 6th-level stellar revelation, and one 2nd-level stellar revelation.",
-            "7": "Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, one 6th-level stellar revelation, and one 2nd-level stellar revelation.",
-            "8": "Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, and two 6th-level stellar revelations.",
-            "9": "Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, two 6th-level stellar revelations, and one zenith revelation.",
-            "10": "Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, one 10th-level stellar revelation, one 6th-level stellar revelation, and one zenith revelation.",
-            "13": "Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, two 10thlevel stellar revelations, and one zenith revelation.",
-            "14": "Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, one 14thlevel stellar revelation, one 10th-level stellar revelation, and one zenith revelation.",
-            "17": "Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, two 14thlevel stellar revelations, and two zenith revelations.",
-            "20": "Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, stellar apotheosis, two 14th-level stellar revelations, and two zenith revelations."
+            "1": {
+              "description":"Solar manifestation, stellar alignment, black hole, and supernova.",
+              "features":["solar manifestation","stellar alignment","black hole","supernova"]
+            },
+            "2": {
+              "description":"Solar manifestation, stellar alignment, black hole, supernova, and one 2nd-level stellar revelation.",
+              "features":["solar manifestation","stellar alignment","black hole","supernova"],
+              "revelations": {
+                "2nd":1
+              }
+            },
+            "4": {
+              "description":"Solar manifestation, stellar alignment, black hole, supernova, and two 2nd-level stellar revelations.",
+              "features":["solar manifestation","stellar alignment","black hole","supernova"],
+              "revelations": {
+                "2nd":2
+              }
+            },
+            "6": {
+              "description":"Solar manifestation, stellar alignment, black hole, supernova, one 6th-level stellar revelation, and one 2nd-level stellar revelation.",
+              "features":["solar manifestation","stellar alignment","black hole","supernova"],
+              "revelations": {
+                "2nd":1,
+                "6th":1
+              }
+            },
+            "7": {
+              "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, one 6th-level stellar revelation, and one 2nd-level stellar revelation.",
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes"],
+              "revelations": {
+                "2nd":1,
+                "6th":1
+              }
+            },
+            "8": {
+              "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, and two 6th-level stellar revelations.",
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes"],
+              "revelations": {
+                "6th":2
+              }
+            },
+            "9": {
+              "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, two 6th-level stellar revelations, and one zenith revelation.",
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes"],
+              "revelations": {
+                "6th":2,
+                "Zenith":1
+              }
+            },
+            "10": {
+              "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, one 10th-level stellar revelation, one 6th-level stellar revelation, and one zenith revelation.",
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes"],
+              "revelations": {
+                "6th":1,
+                "10th":1,
+                "Zenith":1
+              }
+            },
+            "13": {
+              "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, two 10thlevel stellar revelations, and one zenith revelation.",
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes","solarian’s onslaught"],
+              "revelations": {
+                "10th":2,
+                "Zenith":1
+              }
+            },
+            "14": {
+              "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, one 14thlevel stellar revelation, one 10th-level stellar revelation, and one zenith revelation.",
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes","solarian’s onslaught"],
+              "revelations": {
+                "10th":1,
+                "14th":1,
+                "Zenith":1
+              }
+            },
+            "17": {
+              "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, two 14thlevel stellar revelations, and two zenith revelations.",
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes","solarian’s onslaught"],
+              "revelations": {
+                "14th":2,
+                "Zenith":2
+              }
+            },
+            "20": {
+              "description":"Solar manifestation, stellar alignment, black hole, supernova, flashing strikes, solarian’s onslaught, stellar apotheosis, two 14th-level stellar revelations, and two zenith revelations.",
+              "features":["solar manifestation","stellar alignment","black hole","supernova","flashing strikes","solarian’s onslaught","stellar apotheosis"],
+              "revelations": {
+                "14th":2,
+                "Zenith":2
+              }
+            }
         },
         "AbilityScoreModifiers": ["Str","Dex","Cha"],
         "Adjustments": {"reflex":-2,"will":2},
         "Description": "Drawing power from the eternal cycles of stars, solarians fight with the power of photons and gravitons.",
-        "Gear": "A solarian’s gear selection depends on whether you choose solar armor or solar weapon for its solar manifestation. Solar Armor: Light armor (item level = CR), small arm (item level = CR), and advanced melee weapon (item level = CR + 1). Solar Weapon: Light armor (item level = CR), small arm (item level = CR), and solarian crystal (item level = CR).",
+        "Gear": {
+          "Solar armor": "Light armor (item level = CR), small arm (item level = CR), and advanced melee weapon (item level =CR+1)",
+          "Solar weapon": "Light armor (item level = CR), small arm (item level = CR), and solarian crystal (item level = CR).",
+        },
         "RequiredArray": "Combatant",
         "GoodSkills": [
           "mysticism"
         ],
-        "SpecialRules": "Choose one solar manifestation, either solar armor or solar weapon. For a solarian creature with solar armor, its EAC and KAC each increase by 1 and it receives the energy resistance listed in the table of solarian class features. For a solarian creature with a solar weapon, that weapon deals the standard melee damage for the NPC’s CR from Table 2"
+        "SpecialRules": "Choose one solar manifestation, either solar armor or solar weapon. For a solarian creature with solar armor, its EAC and KAC each increase by 1 and it receives the energy resistance listed in the table of solarian class features. For a solarian creature with a solar weapon, that weapon deals the standard melee damage for the NPC’s CR from Table 2",
+        "Resistance": {
+          "1/3": "",
+          "1/2": "",
+          "1": "",
+          "2": "",
+          "3": "",
+          "4": "",
+          "5": "5",
+          "6": "5",
+          "7": "5",
+          "8": "5",
+          "9": "5",
+          "10": "10",
+          "11": "10",
+          "12": "10",
+          "13": "10",
+          "14": "10",
+          "15": "15",
+          "16": "15",
+          "17": "15",
+          "18": "15",
+          "19": "15",
+          "20": "20",
+          "21": "20",
+          "22": "20",
+          "23": "20",
+          "24": "20",
+          "25": "20"
+        }
     },
     "Soldier": {
         "AbilitiesByCr": {
-            "1": "1st-level style technique (from selected fighting style) and one special ability.",
-            "2": "1st-level style technique (from selected fighting style), one gear boost, and one special ability.",
-            "5": "1st- and 5th-level style techniques (from selected fighting style), one gear boost, and one special ability.",
-            "7": "1st- and 5th-level style techniques (from selected fighting style), two gear boosts, and one special ability.",
-            "9": "1st-, 5th-, and 9th-level style techniques (from selected fighting style); secondary fighting style; 1st-level secondary style technique (from secondary fighting style); two gear boosts; and one special ability.",
-            "11": "1st-, 5th-, and 9th-level style techniques (from selected fighting style); secondary fighting style; 1st-level secondary style technique (from secondary fighting style); soldier’s onslaught; two gear boosts; and one special ability.",
-            "13": "1st-, 5th-, 9th-, and 13th-level style techniques (from selected fighting style); secondary fighting style; 1st- and 5th-level secondary style techniques (from secondary fighting style); soldier’s onslaught; and three special abilities.",
-            "17": "1st-, 5th-, 9th-, 13th-, and 17th-level style techniques (from selected fighting style); second style; 1st-, 5th-, and 9th-level secondary style techniques (from secondary fighting style); soldier’s onslaught; two gear boosts; and one special ability.",
-            "20": "1st-, 5th-, 9th-, 13th-, and 17th-level style techniques (from selected fighting style); second style; 1st-, 5th-, and 9th-level secondary style techniques (from secondary fighting style); soldier’s onslaught; kill shot; two gear boosts; and one special ability."
+            "1": {
+              "description":"1st-level style technique (from primary fighting style) and one special ability.",
+              "Fighting style":{
+                "first":["1st"]
+              },
+              "special":1
+            },
+            "2": {
+              "description":"1st-level style technique (from primary fighting style), one gear boost, and one special ability.",
+              "Fighting style":{
+                "first":["1st"]
+              },
+              "Gear boost":1,
+              "special":1
+            },
+            "5": {
+              "description":"1st- and 5th-level style techniques (from primary fighting style), one gear boost, and one special ability.",
+              "Fighting style":{
+                "first":["1st","5th"]
+              },
+              "Gear boost":1,
+              "special":1
+            },
+            "7": {
+              "description":"1st- and 5th-level style techniques (from primary fighting style), two gear boosts, and one special ability.",
+              "Fighting style":{
+                "first":["1st","5th"]
+              },
+              "Gear boost":2,
+              "special":1
+            },
+            "9": {
+              "description":"1st-, 5th-, and 9th-level style techniques (from primary fighting style); 1st-level secondary style technique (from secondary fighting style); two gear boosts; and one special ability.",
+              "Fighting style":{
+                "first":["1st","5th","9th"],
+                "second":["1st"]
+              },
+              "Gear boost":2,
+              "special":1
+            },
+            "11": {
+              "description":"1st-, 5th-, and 9th-level style techniques (from primary fighting style); 1st-level secondary style technique (from secondary fighting style); soldier’s onslaught; two gear boosts; and one special ability.",
+              "Fighting style":{
+                "first":["1st","5th","9th"],
+                "second":["1st"]
+              },
+              "features":["Soldier's Onslaught"],
+              "Gear boost":2,
+              "special":1
+            },
+            "13": {
+              "description":"1st-, 5th-, 9th-, and 13th-level style techniques (from primary fighting style); 1st- and 5th-level secondary style techniques (from secondary fighting style); soldier’s onslaught; and three special abilities.",
+              "Fighting style":{
+                "first":["1st","5th","9th","13th"],
+                "second":["1st","5th"]
+              },
+              "features":["Soldier's Onslaught"],
+              "special":3
+            },
+            "17": {
+              "description":"1st-, 5th-, 9th-, 13th-, and 17th-level style techniques (from primary fighting style); 1st-, 5th-, and 9th-level secondary style techniques (from secondary fighting style); soldier’s onslaught; two gear boosts; and one special ability.",
+              "Fighting style":{
+                "first":["1st","5th","9th","13th","17th"],
+                "second":["1st","5th","9th"]
+              },
+              "features":["Soldier's Onslaught"],
+              "Gear boost":2,
+              "special":1
+            },
+            "20": {
+              "description":"1st-, 5th-, 9th-, 13th-, and 17th-level style techniques (from primary fighting style); 1st-, 5th-, and 9th-level secondary style techniques (from secondary fighting style); soldier’s onslaught; kill shot; two gear boosts; and one special ability.",
+              "Fighting style":{
+                "first":["1st","5th","9th","13th","17th"],
+                "second":["1st","5th","9th"]
+              },
+              "features":["Soldier's Onslaught","Kill Shot"],
+              "Gear boost":2,
+              "special":1
+            }
         },
         "MeleeStyle":{
           "AbilityScoreModifiers":["Str","Dex","Con"],
-          "Gear":"Heavy armor (item level = CR), advanced melee weapon (item level = CR + 1), longarm (item level = CR), and two grenades (item level = CR)."
+          "Gear":"Heavy armor (item level = CR), advanced melee weapon (item level = CR+1), longarm (item level = CR), and two grenades (item level = CR)."
         },
         "RangedStyle":{
           "AbilityScoreModifiers":["Dex","Str","Con"],
-          "Gear":"Heavy armor (item level = CR), advanced melee weapon (item level = CR), longarm (item level = CR + 1) or heavy weapon (item level = CR), and two grenades (item level = CR)."
+          "Gear":"Heavy armor (item level = CR), advanced melee weapon (item level = CR), longarm (item level = CR+1) or heavy weapon (item level = CR), and two grenades (item level = CR)."
         },
         "Adjustments": {"reflex":-2,"will":2},
         "Description": "Equipped with powerful weapons and armor, soldiers are trained to serve in the front line of battle and to both dish out and withstand massive force.",
@@ -1196,21 +1740,86 @@ classData = {
     },
     "Technomancer": {
         "AbilitiesByCr": {
-            "1": "Spell cache and one special ability.",
-            "2": "Spell cache, one 2nd-level magic hack, and one special ability.",
-            "5": "Spell cache, one 5th-level magic hack, and one 2nd-level magic hack.",
-            "6": "Spell cache, cache capacitor 1, one 5th-level magic hack, and one 2nd-level magic hack.",
-            "8": "Spell cache, cache capacitor 1, one 8th-level magic hack, and one 5th-level magic hack.",
-            "11": "Spell cache, cache capacitor 1, one 11th-level magic hack, and one 8th-level magic hack.",
-            "12": "Spell cache, cache capacitor 2, one 11th-level magic hack, and one 8th-level magic hack.",
-            "14": "Spell cache, cache capacitor 2, one 14th-level magic hack, and one 11th-level magic hack.",
-            "17": "Spell cache, cache capacitor 2, and two 14th-level magic hacks.",
-            "18": "Spell cache, cache capacitor 3, and two 14th-level magic hacks."
+            "1": {
+              "description":"Spell cache and one special ability.",
+              "features":["Spell Cache"],
+              "special":1
+            },
+            "2": {
+              "description":"Spell cache, one 2nd-level magic hack, and one special ability.",
+              "features":["Spell Cache"],
+              "Magic hack":{
+                "2nd":1
+              },
+              "special":1
+            },
+            "5": {
+              "description":"Spell cache, one 5th-level magic hack, and one 2nd-level magic hack.",
+              "features":["Spell Cache"],
+              "Magic hack":{
+                "2nd":1,
+                "5th":1
+              }
+            },
+            "6": {
+              "description":"Spell cache, cache capacitor 1, one 5th-level magic hack, and one 2nd-level magic hack.",
+              "features":["Spell Cache","Cache Capacitor 1"],
+              "Magic hack":{
+                "2nd":1,
+                "5th":1
+              }
+            },
+            "8": {
+              "description":"Spell cache, cache capacitor 1, one 8th-level magic hack, and one 5th-level magic hack.",
+              "features":["Spell Cache","Cache Capacitor 1"],
+              "Magic hack":{
+                "5th":1,
+                "8th":1
+              }
+            },
+            "11": {
+              "description":"Spell cache, cache capacitor 1, one 11th-level magic hack, and one 8th-level magic hack.",
+              "features":["Spell Cache","Cache Capacitor 1"],
+              "Magic hack":{
+                "8th":1,
+                "11th":1
+              }
+            },
+            "12": {
+              "description":"Spell cache, cache capacitor 2, one 11th-level magic hack, and one 8th-level magic hack.",
+              "features":["Spell Cache","Cache Capacitor 2"],
+              "Magic hack":{
+                "8th":1,
+                "11th":1
+              }
+            },
+            "14": {
+              "description":"Spell cache, cache capacitor 2, one 14th-level magic hack, and one 11th-level magic hack.",
+              "features":["Spell Cache","Cache Capacitor 2"],
+              "Magic hack":{
+                "11th":1,
+                "14th":1
+              }
+            },
+            "17": {
+              "description":"Spell cache, cache capacitor 2, and two 14th-level magic hacks.",
+              "features":["Spell Cache","Cache Capacitor 2"],
+              "Magic hack":{
+                "14th":2
+              }
+            },
+            "18": {
+              "description":"Spell cache, cache capacitor 3, and two 14th-level magic hacks.",
+              "features":["Spell Cache","Cache Capacitor 3"],
+              "Magic hack":{
+                "14th":2
+              }
+            }
         },
         "AbilityScoreModifiers": ["Int","Dex","Wis"],
         "Adjustments": {"None":0},
         "Description": "These spellcasters meld magic and technology.",
-        "Gear": "Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR - 1).",
+        "Gear": "Light armor (item level = CR), small arm (item level = CR), and basic melee weapon (item level = CR-1).",
         "RequiredArray": "Spellcaster",
         "MasterSkills": [
           "mysticism",

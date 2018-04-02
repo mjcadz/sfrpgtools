@@ -13,7 +13,7 @@ function share(id) {
     window.open('http://www.reddit.com/submit?url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title));
   }
   else if (id == "github"){
-    window.open('https://github.com/mjcadz/weapon-gen-app');
+    window.open('https://github.com/mjcadz/sfrpgtools');
   }
   ga('send', 'event', 'Share', id);
   return false;
@@ -58,6 +58,11 @@ Array.prototype.selectRandom = function() {
   return this[Math.floor(Math.random() * this.length)];
 }
 
+//prototype to capitalise only the first char in a string
+String.prototype.capitalise = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
 function randomWeightedChoice(list, weight) {
     var total_weight = weight.reduce(function (prev, cur, i, arr) {
         return prev + cur;
@@ -82,6 +87,12 @@ function randomWeightedChoice(list, weight) {
 function rand(min, max) {
     return Math.random() * (max - min) + min;
 };
+
+//returns random property from an object
+function randomKey(obj) {
+  var keys = Object.keys(obj);
+  return keys[keys.length * Math.random() << 0];
+}
 
 //remove button focus after click
 $(".btn").mouseup(function(){

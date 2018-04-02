@@ -1,9 +1,24 @@
+V2.4
+New Features:
+  - encounter generator
+  - character concept generator
+  - monster builder add buttons to save statblock as image and print statblock
+  - monster builder fully integrate class selection
+  - monster builder add gear selection
+  - monster builder generate attacks from weapons chosen in gear
+  - changelog now displayed on site
+  - added 'no credits' mode to loot gen
+  - alien archive equipment added to loot generator
+  - source selection added to loot generator
+Changes:
+  - monster statblock format fixes (class, RP, racial spell-like abilities)
+  - switch loot gen to easier to maintain data model
+
 V2.3
 New Features:
   - armor generator
   - character sheets
   - new svg logo
-  - digital delivery of charsheet handling with sendowl
   - ssl certs & force ssl
 Changes:
   - nerf low level battery sizes in weapon generator
@@ -30,9 +45,8 @@ New Features:
   - Homepage
   - Star System Generator v1.0
   - Loot Generator v1.0
-  - notify contact form
 Changes:
-  - Bootstrap version rolled back to 3.3.7
+  - Bootstrap version rolled back to 3.3.7 (previously 4 beta)
 
 V1.2
 New Features:
@@ -56,3 +70,7 @@ Changes:
   - add background, pixel stars
   - refactor crit dice
   - Kinetic weapons damage increased compared to Energy weapons (didn't notice this trend in initial generator)
+
+v1.0
+New Features:
+  - web release (www.sfrpgtools.com)

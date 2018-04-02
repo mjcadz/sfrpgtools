@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Changelog{% endblock %}
+{% block description %}{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <p class="lead">Changelog</p>
+    <p></p>
+    <pre id="log">
+    </pre>
+</div>
+{% endblock %}
+{% block includes %}
+<script>
+$(document).ready(function() {
+    //changelog.txt needs to be hosted from the server for this to work
+    $("#log").load("https://www.sfrpgtools.com/static/changelog.txt");
+});
+</script>
+{% endblock %}

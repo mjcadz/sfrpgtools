@@ -9,8 +9,21 @@ git remote set-url origin https://github.com/mjcadz/sfrpgtools.git
 https://github.com/silviomoreto/bootstrap-select
 bootstrap dropdown select
 
-don't forget to add even handler
 
+
+solarian weapon crystals added to solar weapon
+solarian gear list shows 1+
+recommended class gear level shows numbers over 20
+
+bump version numbers
+
+
+gear show explode and blast attacks.
+
+add option for ammo in gear
+add grenades to weapon gen
+
+add cybernetic to gear
 
 
 
@@ -43,3 +56,5 @@ check oozes only natural skills,
 if possible make print style sheet work with values on the same line
 
 text attribute in grafts
+
+add DCs to racial spell like abilities

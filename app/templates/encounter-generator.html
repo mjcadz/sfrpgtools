@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+{% block title %}Starfinder Encounter Generator{% endblock %}
+{% block description %}Random encounter generator for your combat needs{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <h1>Encounter Generator</h1>
+    <p class="lead">Generates encounters for the Starfinder RPG.</p>
+    <p></p>
+    <div class="alert-this" style="display: none;">
+      <button type="button" class="close" aria-label="Close" onclick="dismissAlert()"><span aria-hidden="true">&times;</span></button>
+      <p><strong>Heads up!</strong> This tool works well enough with current official sources, but will perform even better in the future as more sources are released.<br></p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <select class="selectpicker show-tick" id="SourcePicker" multiple data-style="btn-default" data-width="100%" data-size="10" data-title="Sources" data-selected-text-format="static">
+                  <option selected title="Sources">Alien Archive</option>
+                  <option selected title="Sources">Dead Suns 1-4</option>
+                  <option selected title="Sources">Pact Worlds</option>
+                </select>
+                <hr style="margin-top: 8px;">
+                <div class="row">
+                  <div class="playerCol col-xs-6">
+                    <label>Players</label>
+                    <select class="selectpicker show-tick" id="PlayerPicker0" data-style="btn-default" data-width="100%" data-size="10">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option selected>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                    </select>
+                  </div>
+                  <div class="levelCol col-xs-6">
+                    <label>Level</label>
+                    <select class="selectpicker show-tick" id="LevelPicker0" data-style="btn-default" data-width="100%" data-size="10">
+                      <option selected>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                      <option>13</option>
+                      <option>14</option>
+                      <option>15</option>
+                      <option>16</option>
+                      <option>17</option>
+                      <option>18</option>
+                      <option>19</option>
+                      <option>20</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <div class="btn-group addRemove pull-right">
+                    <button type="button" id="addButton" class="btn btn-default btn-sm" onclick="addLevel()"><i class="fas fa-plus"></i></button>
+                    <button type="button" id="removeButton" class="btn btn-default btn-sm" onclick="removeLevel()"><i class="fas fa-minus"></i></button>
+                  </div>
+
+                </div>
+                <p></p>
+                <label>Difficulty</label>
+                <select class="selectpicker show-tick" id="DifficultyPicker" data-style="btn-default" data-width="100%" data-size="10">
+                  <option>Easy</option>
+                  <option selected>Average</option>
+                  <option>Challenging</option>
+                  <option>Hard</option>
+                  <option>Epic</option>
+                </select>
+                <div class="btn-group btn-group-justified" id="ModeRadio" data-toggle="buttons">
+                  <label class="btn btn-default active" onclick="hideAdvanced()">
+                    <input type="radio" name="basic" id="option1">Basic</input>
+                  </label>
+                  <label class="btn btn-default" onclick="showAdvanced()">
+                    <input type="radio" name="advanced" id="option2">Advanced</input>
+                  </label>
+                </div>
+                <p></p>
+
+            </div>
+            <div class="col-md-4">
+              <div id="advanced" class="collapse">
+                <button id="resetFilterButton" type="button" onclick="resetFilters()" class="btn btn-default btn-block">Reset filters</button>
+                <p></p>
+                <select class="selectpicker show-tick" multiple id="CombatTypePicker" data-none-selected-text="Any combat style" data-style="btn-default" data-width="100%" data-size="10">
+                  <option>Combatant</option>
+                  <option>Expert</option>
+                  <option>Spellcaster</option>
+                </select>
+                <select class="selectpicker show-tick" multiple id="AlignmentPicker" data-none-selected-text="Any alignment" data-style="btn-default" data-width="100%" data-size="10">
+                  <option title="LG">Lawful good</option>
+                  <option title="LN">Lawful neutral</option>
+                  <option title="LE">Lawful evil</option>
+                  <option title="NG">Neutral good</option>
+                  <option title="N">Neutral</option>
+                  <option title="NE">Neutral evil</option>
+                  <option title="CG">Chaotic good</option>
+                  <option title="CN">Chaotic Neutral</option>
+                  <option title="CE">Chaotic evil</option>
+                </select>
+                <select class="selectpicker show-tick" multiple id="SizePicker" data-none-selected-text="Any size" data-style="btn-default" data-width="100%" data-size="10">
+                  <option>Fine</option>
+                  <option>Diminutive</option>
+                  <option>Tiny</option>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                  <option>Huge</option>
+                  <option>Gargantuan</option>
+                  <option>Colossal</option>
+                </select>
+                <select class="selectpicker show-tick" multiple id="CreatureTypePicker" data-none-selected-text="Any creature type" data-style="btn-default" data-width="100%" data-size="10">
+                  <option>Aberration</option>
+                  <option>Animal</option>
+                  <option>Construct</option>
+                  <option>Dragon</option>
+                  <option>Fey</option>
+                  <option>Humanoid</option>
+                  <option>Magical Beast</option>
+                  <option>Monstrous Humanoid</option>
+                  <option>Ooze</option>
+                  <option>Outsider</option>
+                  <option>Plant</option>
+                  <option>Undead</option>
+                  <option>Vermin</option>
+                </select>
+                <select class="selectpicker show-tick" multiple id="EnvironmentPicker" data-none-selected-text="Any environment" data-style="btn-default" data-width="100%" data-size="10">
+                  <option>Air</option>
+                  <option>Aquatic</option>
+                  <option>Deserts</option>
+                  <option>Forests</option>
+                  <option>Hills</option>
+                  <option>Lands</option>
+                  <option>Mountains</option>
+                  <option>Oceans</option>
+                  <option>Plains</option>
+                  <option>Ruins</option>
+                  <option>Sky</option>
+                  <option>Swamp</option>
+                  <option>Urban</option>
+                  <option>Underground</option>
+                  <option data-divider="true"></option>
+                  <option>Gas-giant</option>
+                  <option>High-gravity</option>
+                  <option>Low-gravity</option>
+                  <option>Starship</option>
+                  <option>Vacuum</option>
+                  <option data-divider="true"></option>
+                  <option>Good-aligned planes</option>
+                </select>
+                <select class="selectpicker show-tick" multiple id="PlanetPicker" data-none-selected-text="Any planet" data-style="btn-default" data-width="100%" data-size="10">
+                  <optgroup label="Pact Worlds">
+                    <option>Aballon</option>
+                    <option>Castrovel</option>
+                    <option>Absalom Station</option>
+                    <option>Akiton</option>
+                    <option>Verces</option>
+                    <option>Idari</option>
+                    <option>Diaspora</option>
+                    <option>Eox</option>
+                    <option>Triaxus</option>
+                    <option>Liavara</option>
+                    <option>Bretheda</option>
+                    <option>Apostae</option>
+                    <option>Aucturn</option>
+                  </optgroup>
+                </select>
+                <!--<div class="row">
+                  <div class="playerCol col-xs-6">
+                    <label>CR Min</label>
+                    <select class="selectpicker show-tick" id="CRMinPicker" data-style="btn-default" data-width="100%" data-size="5">
+                      <option selected>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                      <option>13</option>
+                      <option>14</option>
+                      <option>15</option>
+                      <option>16</option>
+                      <option>17</option>
+                      <option>18</option>
+                      <option>19</option>
+                      <option>20</option>
+                    </select>
+                  </div>
+                  <div class="levelCol col-xs-6">
+                    <label>CR Max</label>
+                    <select class="selectpicker show-tick" id="CRMaxPicker" data-style="btn-default" data-width="100%" data-size="5">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                      <option>13</option>
+                      <option>14</option>
+                      <option>15</option>
+                      <option>16</option>
+                      <option>17</option>
+                      <option>18</option>
+                      <option>19</option>
+                      <option selected>20</option>
+                    </select>
+                  </div>
+                </div>-->
+                <button id="pickerButton" type="button" style="margin-bottom: 0px;" onclick="showMonsterPicker()" class="btn btn-default btn-block">Show creature picker</button>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div id="monsterPicker" class="collapse">
+          <p></p>
+          <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                <div class="form-group" style="margin-bottom: 0px;">
+                    <input type="text" class="form-control" style="margin-bottom: 0px;" id="inputSearch" placeholder="Search all creatures">
+                </div>
+              </div>
+              <div class="col-md-4"></div>
+          </div>
+          <hr>
+          <div id="pickerZone">
+            <p class="text-center">Search or select filters</p>
+          </div>
+        </div>
+        <hr>
+        <button type="button" onclick="generateEncounter()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
+        <button type="button" onclick="clearDisplayTable()" class="btn btn-default btn-notblack">Clear</button>
+        <i style="padding-left: 10px;vertical-align: middle; cursor: pointer;" data-target="#infoModal" data-toggle="modal" class="fas fa-info-circle fa-lg"></i>
+        <P></P>
+        <div id="advanced2" class="collapse">
+          <div class="row">
+              <div class="col-lg-2">
+                <p id="aplDisplay" style="margin-bottom: 0px;">APL: <b>1</b></p>
+              </div>
+              <div class="col-lg-3">
+                  <p id="crDisplay" style="margin-bottom: 0px;">Encounter CR: <b>1</b></p>
+              </div>
+              <div class="col-lg-4">
+                  <p id="xpDisplay" style="margin-bottom: 0px;">XP Budget: <b>0/400</b></p>
+              </div>
+              <div class="col-lg-3"></div>
+          </div>
+          <hr>
+        </div>
+    </div>
+
+    <div class="output area">
+
+    </div>
+</div>
+<!-- Modal -->
+<div id="infoModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Encounter generator</h4>
+      </div>
+      <div class="modal-body">
+        <div><strong>Basic mode</strong></div>
+        <ul>
+          <li>Generates a random encounter approriate for the selected difficulty and party level.</li>
+          <li>Multiple levels can be added using the plus/minus buttons.</li>
+          <li>Locked creatures will not be discarded in further generations.</li>
+        </ul>
+        <div><strong>Advanced mode</strong></div>
+        <ul>
+          <li>Searching only apllies to the creature picker.</li>
+          <li>Searching without any other filters will search the entire creature database, try searching for 'goblin'.</li>
+          <li>Filters apply to both the generation and to the creature picker.</li>
+          <li>Filters stack, only creatures that meet all of the criteria will be shown.</li>
+          <li>The Plus and Minus buttons in the tables will increase and decrease the number of that creature.</li>
+          <li>The XP Budget can be used to keep track of your encounter when adding/removing creatures.</li>
+        </ul>
+        <div><strong>TODO</strong></div>
+        <ul>
+          <li>Integrate creatures with templates for any CR.</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/monsterData.v2.0.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/encounterGen.v2.0.js') }}"></script>
+{% endblock %}

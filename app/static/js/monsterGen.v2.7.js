@@ -1,5 +1,6 @@
 //globals
 var attackIndexCounter = 0;
+var statBlock = {};
 
 //This funcion reads the state of all the dropdowns in the wizard, uses that info to retrieve the appropriate data from the data objects, then builds and displays the stat block
 function buildStatBlock() {
@@ -7,8 +8,8 @@ function buildStatBlock() {
   //try gathering data
   try {
 
-    //new stat block object
-    var statBlock = {};
+    //reset stat block object
+    statBlock = {};
 
     //Step 1
 
@@ -112,7 +113,346 @@ function buildStatBlock() {
 
     //step 4 -class
 
+    //get base stats
     statBlock = getClassStats(statBlock);
+
+    //more specific stats
+    var classDrop = $('#classDrop').val().trim();
+
+    //SOLARIAN SPECIAL RULES
+    if (classDrop == 'Solarian') {
+      var solarDrop = $('#stepFourOptionDrop').val().trim();
+      if (solarDrop == "Solar armor") {
+        statBlock.eac = statBlock.eac + 1;
+        statBlock.kac = statBlock.kac + 1;
+
+        var resist = classData.Solarian.Resistance[CRDrop]
+        if (resist != '') {
+          if (statBlock.hasOwnProperty('Resistance')){
+            statBlock.Resistance = statBlock.Resistance.concat(['cold or fire ' + resist + ' (solar armor)']);
+          }
+          else {
+            statBlock.Resistance = ['cold or fire ' + resist + ' (solar armor)'];
+          }
+        }
+      }
+
+      var solarCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var solarianFeatures = getClassAbilities('Solarian',solarCr);
+      var featurelist = solarianFeatures.features;
+
+      featurelist = removeElement(featurelist,'solar manifestation');
+      featurelist = removeElement(featurelist,'stellar alignment');
+      featurelist = removeElement(featurelist,'black hole');
+      featurelist = removeElement(featurelist,'supernova');
+
+      //add default revelations
+      var revelations = ['Black Hole','Supernova'];
+
+      if (solarianFeatures.hasOwnProperty('revelations')){
+        //do revelations
+        var revs = $('#stepFourOptionDropTwo').val().toString().trim();
+        if (revs.includes(',')){
+          revelations = revelations.concat(revs.split(','))
+        } else {
+          revelations = revelations.concat([revs])
+        }
+        revelations.sort();
+      }
+
+      var otherRevs = [];
+      var defenseRevs = [];
+      var offenseRevs = [];
+
+      //find revelation in data
+      classObject = allClassFeatures['Solarian']["Stellar Revelations"];
+      var revLevels = Object.keys(classObject)
+      //for every revelation
+      for (var i = 0; i < revelations.length; i++)  {
+
+        //search through every title until found
+        for (var j = 0; j < revLevels.length; j++)  {
+          //find the revelation in the data
+          if (allClassFeatures['Solarian']["Stellar Revelations"][revLevels[j]].hasOwnProperty(revelations[i]) || ['Black Hole','Supernova'].includes(revelations[i])) {
+
+            if (['Black Hole','Supernova'].includes(revelations[i])){
+              var currentRev = allClassFeatures['Solarian']["Class features"][(revelations[i])];
+            } else {
+              var currentRev = allClassFeatures['Solarian']["Stellar Revelations"][revLevels[j]][(revelations[i])];
+            }
+
+            if (currentRev.hasOwnProperty('entry')) {
+              var entries = Object.keys(currentRev.entry);
+
+              var currentRevString = currentRev.entry.layout;
+              currentRevString = currentRevString.replace('DC' , 'DC ' + statBlock.abilityDCBase.toString());
+
+              for (var k = 0; k < entries.length; k++)  {
+                if (entries[k] != 'layout') {
+
+                  if (currentRev.entry[entries[k]].hasOwnProperty('PERCR')){
+                    //per cr entries
+                    var valNum = currentRev.entry[entries[k]]['base'] + (currentRev.entry[entries[k]]['PERCR'] * solarCr);
+                  } else {
+
+                    table = currentRev.entry[entries[k]]['CR']
+                    var choice = 'none'
+                    for (l = 0; l < table.length; l++) {
+                      if (solarCr >= table[l]) {
+                        choice = l;
+                      }
+                    }
+                    if (choice == 'none') {
+                      var valNum = currentRev.entry[entries[k]]['base'];
+                    } else {
+                      var valNum = currentRev.entry[entries[k]]['base'] + currentRev.entry[entries[k]]['VAL'][choice];
+                    }
+
+                  }
+
+                  currentRevString = currentRevString.replace(entries[k],valNum.toString())
+
+                }
+              }
+            } else {
+              var currentRevString = revelations[i].toLowerCase()
+            }
+
+            if (currentRev.type == 'offense'){
+              offenseRevs = offenseRevs.concat([currentRevString]);
+            } else if (currentRev.type == 'defense'){
+              defenseRevs = defenseRevs.concat([currentRevString]);
+            } else if (currentRev.type == 'other'){
+              otherRevs = otherRevs.concat([currentRevString]);
+            } else {
+              console.log('ERROR ERROR')
+            }
+
+            break;
+          }
+        }
+      }
+
+      statBlock.ClassOtherAbilities = ['solar manifestation (' + solarDrop.toLowerCase() + ')','stellar alignment'];
+      if (featurelist.includes('stellar apotheosis')) {
+        featurelist = removeElement(featurelist,'stellar apotheosis');
+        statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['stellar apotheosis'])
+      }
+
+      //add to ability lists
+      statBlock.ClassOffensiveAbilities = featurelist;
+      if (offenseRevs.length > 0) {
+        statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(['stellar revelations (' + offenseRevs.join(', ') + ')'])
+      }
+      if (defenseRevs.length > 0) {
+        statBlock.ClassDefensiveAbilities = ['stellar revelations (' + defenseRevs.join(', ') + ')']
+      }
+      if (otherRevs.length > 0) {
+        statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['stellar revelations (' + otherRevs.join(', ') + ')'])
+      }
+
+    }
+
+    //SOLDIER SPECIAL RULES AND PRINT ABILITIES
+    if (classDrop == 'Soldier') {
+
+      var classFeatures = [];
+
+      var soldierCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var soldierFeatures = getClassAbilities('Soldier',soldierCr);
+
+      var style = $('#stepFourOptionDropTwo').val().trim();
+      var styleList = soldierFeatures["Fighting style"]["first"];
+
+      statBlock.ClassOffensiveAbilities = resolveClassAbilities('FightingStyle',soldierCr,statBlock.abilityDCBase,styleList,style);
+
+      var secondStyle = '';
+      var styleListTwo = [];
+
+      if ($('[data-id="stepFourOptionDropThree"]').length){
+        var styleTwo = $('#stepFourOptionDropThree').val().trim()
+        secondStyle = ', ' + styleTwo;
+        styleListTwo = soldierFeatures["Fighting style"]["second"];
+
+        statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(resolveClassAbilities('FightingStyle',soldierCr,statBlock.abilityDCBase,styleListTwo,styleTwo));
+      }
+
+      style = 'fighting styles (' + style.toLowerCase() + secondStyle.toLowerCase() + ')';
+
+      statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat([style]);
+      //Gear boosts
+
+      if ($('[data-id="stepFourOptionDropFour"]').length){
+        var boosts = $('#stepFourOptionDropFour').val().toString().trim()
+        if (boosts.includes(',')){
+          var boostList = boosts.split(',')
+        } else {
+          var boostList = [boosts];
+        }
+        statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(resolveClassAbilities('GearBoost',soldierCr,statBlock.abilityDCBase,boostList,''));
+
+      }
+
+      if (soldierFeatures.hasOwnProperty("features")) {
+        var features = soldierFeatures.features;
+        for (var i = 0; i < features.length; i++)  {
+          features[i] = features[i].toLowerCase();
+        }
+
+        statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(features);
+      }
+
+      statBlock.ClassOffensiveAbilities.sort();
+    }
+    //MYSTIC SPECIAL RULES AND PRINT ABILITIES
+    if (classDrop == 'Mystic') {
+
+      var mysticCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var mysticFeatures = getClassAbilities('Mystic',mysticCr);
+
+      var connection = $('#stepFourOptionDrop').val().trim();
+      var connectionList = mysticFeatures["connection"];
+
+      statBlock.ClassOtherAbilities = resolveClassAbilities('Connections',mysticCr,statBlock.abilityDCBase,connectionList,connection);
+
+      var featureList = mysticFeatures["features"];
+      statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(resolveClassAbilities('MysticFeatures',mysticCr,statBlock.abilityDCBase,featureList,''));
+
+      statBlock.ClassOtherAbilities.sort();
+    }
+    //TECHNOMANCER SPECIAL RULES AND PRINT ABILITIES
+    if (classDrop == 'Technomancer') {
+      var technoCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var technoFeatures = getClassAbilities('Technomancer',technoCr);
+
+      statBlock.ClassOffensiveAbilities = []
+
+      if ($('[data-id="stepFourOptionDrop"]').length){
+        var spellHack = $('#stepFourOptionDrop').val().toString().trim();
+        if (spellHack != '') {
+          if (spellHack.includes(',')) {
+            var hackList = spellHack.split(',');
+          } else {
+            var hackList = [spellHack];
+          }
+          resolvedHacks = resolveClassAbilities('MagicHack',technoCr,statBlock.abilityDCBase,hackList,'');
+          statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(['magic hacks (' + resolvedHacks.join(', ') + ')']);
+        }
+      }
+
+
+      var featureList = technoFeatures["features"];
+      statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(resolveClassAbilities('TechnomancerFeatures',technoCr,statBlock.abilityDCBase,featureList,''));
+
+      statBlock.ClassOffensiveAbilities.sort();
+
+    }
+    //OPERATIVE SPECIAL RULES AND PRINT ABILITIES
+    if (classDrop == 'Operative') {
+
+      var operativeCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var operativeFeatures = getClassAbilities('Operative',operativeCr);
+
+      var special = $('#stepFourOptionDrop').val().trim();
+
+      var featureList = operativeFeatures["features"];
+      statBlock.ClassOtherAbilities = [];
+
+      statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['specialization (' + special.toLowerCase() + ')']);
+
+      var exploits = []
+
+      if ($('[data-id="stepFourOptionDropTwo"]').length){
+        var exploitsString = $('#stepFourOptionDropTwo').val().toString().trim();
+        if (exploitsString != '') {
+          if (exploitsString.includes(',')) {
+            exploits = exploitsString.split(',');
+          } else {
+            exploits = [exploitsString];
+          }
+        }
+        if (featureList.includes("Specialization Exploit")){
+          exploits.push(allClassFeatures.Operative["Operative Specializations"][special]["Specialization Exploit"])
+        }
+        resolvedExploits = resolveClassAbilities('Exploits',operativeCr,statBlock.abilityDCBase,exploits,'');
+        statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['operative exploits (' + resolvedExploits.join(', ') + ')']);
+
+      }
+      statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(resolveClassAbilities('OperativeFeatures',operativeCr,statBlock.abilityDCBase,featureList,''));
+
+      if (featureList.includes("Specialization Power")){
+        statBlock.ClassOtherAbilities.push(allClassFeatures.Operative["Operative Specializations"][special]["Specialization Power"]["name"].toLowerCase())
+      }
+
+      statBlock.ClassOtherAbilities.sort();
+
+    }
+    //MECHANIC SPECIAL RULES AND PRINT ABILITIES
+    if (classDrop == 'Mechanic') {
+
+      var mechaCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var mechaFeatures = getClassAbilities('Mechanic',mechaCr);
+
+      var ai = $('#artificialDrop').val().trim().toLowerCase();
+
+      statBlock.ClassOtherAbilities = [];
+
+      if ($('[data-id="stepFourOptionDropTwo"]').length){
+        var tricks = $('#stepFourOptionDropTwo').val().toString().trim();
+        if (tricks != '') {
+          if (tricks.includes(',')) {
+            var trickList = tricks.split(',');
+          } else {
+            var trickList = [tricks];
+          }
+          resolvedTricks = resolveClassAbilities('Tricks',mechaCr,statBlock.abilityDCBase,trickList,'');
+          statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['mechanic tricks (' + resolvedTricks.join(', ') + ')']);
+        }
+      }
+
+
+      var featureList = mechaFeatures["features"];
+
+      featureList = removeElement(featureList,"Artificial intelligence");
+      statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(["artificial intelligence (" + ai + ")"]);
+      statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(resolveClassAbilities('MechanicFeatures',mechaCr,statBlock.abilityDCBase,featureList,''));
+
+      if (ai == 'exocortex') {
+        var exocortexFeatures = mechaFeatures["exocortex"];
+        statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(resolveClassAbilities('Exocortex',mechaCr,statBlock.abilityDCBase,exocortexFeatures,''));
+      }
+
+      statBlock.ClassOtherAbilities.sort();
+
+    }
+    //ENVOY SPECIAL RULES AND PRINT ABILITIES
+    if (classDrop == 'Envoy') {
+
+      var envoyCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var envoyFeatures = getClassAbilities('Envoy',envoyCr);
+
+      statBlock.ClassOtherAbilities = []
+
+      if ($('[data-id="stepFourOptionDropTwo"]').length){
+        var envoyImprov = $('#stepFourOptionDropTwo').val().toString().trim();
+        if (envoyImprov != '') {
+          if (envoyImprov.includes(',')) {
+            var improvisations = envoyImprov.split(',');
+          } else {
+            var improvisations = [envoyImprov];
+          }
+          resolvedImprovisations = resolveClassAbilities('Improvisations',envoyCr,statBlock.abilityDCBase,improvisations,'');
+          statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['envoy improvisations (' + resolvedImprovisations.join(', ') + ')']);
+        }
+      }
+      if (envoyFeatures.hasOwnProperty("features")) {
+        statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(envoyFeatures.features);
+      }
+
+      statBlock.ClassOtherAbilities.sort();
+
+    }
+
 
     //step 5 - graft
     var graft = $('#graftDrop').val().trim();
@@ -288,18 +628,25 @@ function buildStatBlock() {
       statBlock.FreeAbilities = subArray
     }
 
+    //Step 7 - gear
 
-    //step 7 - attacks
+    var gearTabDescription = $(".stepEightGearDescription").first().text().replace('Gear: ','');
+    if (gearTabDescription != '') {
+      statBlock.gear = gearTabDescription;
+    }
+
+
+    //step 8 - attacks
     statBlock.attackFocus = $("#attackDrop").val().trim();
 
-    //step 8 - skills and Modifiers
+    //step 9 - skills and Modifiers
 
     //overwrite master+ good skills with selected + graft skills
     statBlock.MainAbilityScores = $(".stepSevenAbilityDescription").first().text().replace('Main ability scores: (','').replace(')','').split(',')
     statBlock.MasterSkills = $(".stepSevenMasterDescription").first().text().replace('Master skills: ','').replace(/\*/g,'').split(',');
     statBlock.GoodSkills = $(".stepSevenGoodDescription").first().text().replace('Good skills: ','').replace(/\*/g,'').split(',');
 
-    //step 9 - spells
+    //step 10 - spells
 
     //TODO checks only step 3 grafts not step 5
     //get any spelllike abilities from grafts
@@ -325,6 +672,8 @@ function buildStatBlock() {
       if (spellSlot.length > 2){
         var spells = spellSlot.split(': ');
         var frequency = spells[0];
+        //remove connection tag from mytic spell lists
+        spells[1] = spells[1].replace(' (from connection)','')
         //make sure values are arrays even if only 1 value
         if (spells[1].includes(',')){
           var subArray = spells[1].split(', ');
@@ -339,12 +688,13 @@ function buildStatBlock() {
       statBlock.Spellcasting = spellArray;
     }
 
-    //step 10 - final checks
+    //step 11 - final checks
 
     statBlock.creatureSize = $('#sizeDrop').val().trim();
 
   } catch(err) {
-    document.getElementById("errorMessage").innerHTML = "statblock data gathering error: " + err.message + '<br><br>' + err.stack;
+    var status = getErrorStatus();
+    document.getElementById("errorMessage").innerHTML = "statblock building error: " + err.message + '<br><br>' + err.stack + status;
     $('.alert-this-red').show();
     return false;
   }
@@ -416,9 +766,13 @@ function buildStatBlock() {
 
     //add any initiative mods. ie from operative
     if (statBlock.hasOwnProperty("initiativeMod")){
-      //increase initiative
-      if (statBlock.initiativeMod == "+CR/4"){
-        statBlock.initiative =  '+' + (Number(statBlock.initiative.replace('+','')) + Math.floor(Number(statBlock.Cr) / 4)).toString()
+      //increase initiative if needed
+      if (statBlock.hasOwnProperty('initiativeMod')){
+        if (statBlock.initiativeMod == "+CR/4"){
+          statBlock.initiative = '+' + (Number(statBlock.initiative.replace('+','')) + Math.floor(Number(statBlock.Cr) / 4)).toString();
+        } else {
+          statBlock.initiative = '+' + (Number(statBlock.initiative.replace('+','')) + statBlock.initiativeMod).toString();
+        }
       }
     }
 
@@ -562,7 +916,8 @@ function buildStatBlock() {
       }
     }
   } catch(err) {
-    document.getElementById("errorMessage").innerHTML = "statblock adjustment error: " + err.message + '<br><br>' + err.stack;
+    var status = getErrorStatus();
+    document.getElementById("errorMessage").innerHTML = "statblock building error: " + err.message + '<br><br>' + err.stack + status;
     $('.alert-this-red').show();
     return false;
   }
@@ -583,22 +938,54 @@ function buildStatBlock() {
       nameString = nameInput;
     }
 
-    //build creature type String
+    //build class type String
+    var classTypeString = '';
+
+    var genderString = $('#inputGender').val().trim();
+
     var subTypeString = '';
     if (statBlock.hasOwnProperty('SubType')){
-      subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
+      subTypeString = statBlock.SubType.toLowerCase();
     }
 
     var className = $('#classDrop').val().trim();
     if ( className != '' && className != 'None'){
-      var classSString = ' ' + className.toLowerCase()
+      var classSString = className.toLowerCase()
     } else {
-      classSString = ' ';
+      var classSString = '';
+    }
+
+    if (genderString != ''){
+      classTypeString = genderString;
+    }
+    if (subTypeString != ''){
+      if (classTypeString != ''){
+        classTypeString += ' ';
+      }
+      classTypeString += subTypeString;
+    }
+    if (classSString != ''){
+      if (classTypeString != ''){
+        classTypeString += ' ';
+      }
+      classTypeString += classSString;
+    }
+    //don't include subtype by itself
+    if (classTypeString == subTypeString){
+      classTypeString = '';
+    }
+    if (classTypeString != ''){
+      classTypeString = '<div>'+ classTypeString.capitalise() + '</div>';
+    }
+
+    //build creature type String
+    if (statBlock.hasOwnProperty('SubType')){
+      subTypeString = ' (' + statBlock.SubType.toLowerCase() + ')';
     }
 
     var alignString = alignments[$('#align1Drop').val().trim() + $('#align2Drop').val().trim()];
 
-    var typeString = '<div>'+ alignString +' ' + statBlock.creatureSize + ' ' + statBlock.CreatureType.toLowerCase() + subTypeString + classSString + '</div>';
+    var typeString = '<div>'+ alignString +' ' + statBlock.creatureSize + ' ' + statBlock.CreatureType.toLowerCase() + subTypeString + '</div>';
 
     //build skills string
     listOfSkills = Object.keys(skillNames);
@@ -618,16 +1005,19 @@ function buildStatBlock() {
     //build spell casting string
     var spellString = '';
 
+    // calc caster level
+    var clVal = ordinalNumber(Number(statBlock.Cr));
+
     //racial spell-like abilitiesArray
     if (statBlock.hasOwnProperty('spellLikeFromGrafts')){
       var spells = statBlock.spellLikeFromGrafts;
-      spellString += '<div><b>Racial spell-like abilities</b> ';
+      spellString += '<div><b>' + statBlock.SubType + ' Spell-Like Abilities</b> (CL ' + clVal +')';
       for (key in spells) {
         var Key = key;
         if (Key == "atWill"){
           Key = "at will";
         }
-        spellString += '; (' + Key + "): " + spells[key].join(', ');
+        spellString += '<br>' + Key + " - <i>" + spells[key].join(', ') + "</i>";
       }
       spellString += '</div>';
       spellString = spellString.replace('; ','')
@@ -659,16 +1049,17 @@ function buildStatBlock() {
 
       var rangeAttackVal = (statBlock.attackFocus == 'Ranged') ? statBlock.highAttackBonus:statBlock.lowAttackBonus;
       //Caster Level
-      var clVal = ordinalNumber(Number(statBlock.Cr));
-      spellString += '<div><b>'+typeTitle+'</b> (CL ' + clVal +'; ranged '+rangeAttackVal+')</div>';
+
+      spellString += '<div><b>'+typeTitle+'</b> (CL ' + clVal +'; ranged '+rangeAttackVal+')';
       //for each frequency
       for (var i = 0; i < statBlock.Spellcasting.length; i++) {
         spellBlock = statBlock.Spellcasting[i];
+
         //add new line for each frequency
         spellString += '<div>' + spellBlock[0] + ' - ';
         //for each spell
         for (var j = 1; j < spellBlock.length; j++) {
-          spell = spellBlock[j];
+          spell = '<i>' + spellBlock[j].toLowerCase() + '</i>';
           dc = '';
           //check if the spell needs a DC save and add in if necessary
           if (spellsData[spellBlock[j]].hasOwnProperty("SAVEINFO")){
@@ -683,11 +1074,12 @@ function buildStatBlock() {
             spellString += ', ';
           }
           spellString += spell;
+
         }
         // finalise the spell string
-
         spellString += '</div>';
       }
+      spellString += '</div>';
     }
 
     var specialString = '';
@@ -833,6 +1225,10 @@ function buildStatBlock() {
       }
       otherAbilities.sort();
     }
+    //other abilities from class
+    if (statBlock.hasOwnProperty('ClassOtherAbilities')){
+      otherAbilities = otherAbilities.concat(statBlock.ClassOtherAbilities)
+    }
 
 
     //strings for abilities
@@ -840,7 +1236,7 @@ function buildStatBlock() {
     var defensiveAbilitiesString = '';
     var otherAbilitiesString = '';
 
-    if (offensiveAbilities.length > 0 || statBlock.hasOwnProperty('OffensiveAbilities')) {
+    if (offensiveAbilities.length > 0 || statBlock.hasOwnProperty('OffensiveAbilities') || statBlock.hasOwnProperty('ClassOffensiveAbilities')) {
       var offence = [];
       if (offensiveAbilities.length > 0){
         offence = offence.concat(offensiveAbilities);
@@ -848,11 +1244,22 @@ function buildStatBlock() {
       if (statBlock.hasOwnProperty('OffensiveAbilities')){
         offence = offence.concat(statBlock.OffensiveAbilities);
       }
+      if (statBlock.hasOwnProperty('ClassOffensiveAbilities')){
+        offence = offence.concat(statBlock.ClassOffensiveAbilities);
+      }
       offence.sort()
-      var offensiveAbilitiesString = '<div><b>Offensive abilities </b>' + offence.join(', ') + '</div>';
+      offensiveAbilitiesString = '<div><b>Offensive abilities </b>' + offence.join(', ') + '</div>';
     }
-    if (defensiveAbilities.length > 0) {
-      var defensiveAbilitiesString = '<b>Defensive abilities </b>' + defensiveAbilities.join(', ');
+    if (defensiveAbilities.length > 0 || statBlock.hasOwnProperty('ClassDefensiveAbilities')) {
+      var defence = [];
+      if (defensiveAbilities.length > 0){
+        defence = defence.concat(defensiveAbilities);
+      }
+      if (statBlock.hasOwnProperty('ClassDefensiveAbilities')){
+        defence = defence.concat(statBlock.ClassDefensiveAbilities);
+      }
+      defence.sort()
+      defensiveAbilitiesString = '<b>Defensive abilities </b>' + defence.join(', ');
     }
     if (otherAbilities.length > 0) {
       //sort the array
@@ -862,7 +1269,7 @@ function buildStatBlock() {
       }
       sorted.sort();
       otherAbilities = sorted;
-      var otherAbilitiesString = '<div><b>Other abilities </b>' + otherAbilities.join(', ') + '</div>';
+      otherAbilitiesString = '<div><b>Other abilities </b>' + otherAbilities.join(', ') + '</div>';
     }
 
 
@@ -883,8 +1290,14 @@ function buildStatBlock() {
         var name = $('#attackName'+index).val().trim().toLowerCase();
         var bonus = $('#bonus'+index).val().trim();
         var damage = $('#damage'+index).val().trim();
-        var attackType = $('#AT'+index+'Drop').val().trim();
-        var damageType = $('#DT'+index+'Drop').val().trim();
+        if ($('[data-id="AT'+index+'Drop"]').length){
+          var attackType = $('#AT'+index+'Drop').val().trim();
+          var damageType = $('#DT'+index+'Drop').val().trim();
+          damageType = window[attackType.toLowerCase() + indexParts[0] + 'Types'][damageType];
+        } else {
+          var damageType = $('#damagetype'+index).val().trim();
+        }
+
         var critical = $('#critical'+index).val().trim();
         var end = ' or<br>';
 
@@ -894,6 +1307,12 @@ function buildStatBlock() {
           var str = Number(statBlock.str.replace('+',''));
           var damageBonus = Number(damageSplit[1])
           damageBonus = damageBonus + str;
+          //add any strength Modifiers
+          if (statBlock.hasOwnProperty('damageMod')){
+            if (statBlock.damageMod == '1/2STR') {
+              damageBonus = damageBonus + (Math.round(str/2));
+            }
+          }
           damage = damageSplit[0] + '+' + damageBonus.toString();
         }
 
@@ -902,9 +1321,11 @@ function buildStatBlock() {
           bonus = '+' + (Number(bonus.replace('+','')) + statBlock.attackMod).toString();
         }
 
-        damageType = window[attackType.toLowerCase() + indexParts[0] + 'Types'][damageType];
+        if (critical == '-') {
+          critical = '';
+        }
 
-        if (critical != '') {
+        if (critical != '' && critical != '-') {
           critical = '; critical ' + critical.toLowerCase();
         }
 
@@ -955,18 +1376,14 @@ function buildStatBlock() {
 
     //Extra user fillable entries
     var EcologyString = '';
-    var GearString = '';
     var TacticsString = '';
     var extraEntries = $('#OSDrop').val().toString().trim();
 
     if (extraEntries.includes("Ecology")){
-      EcologyString = '<div><b>ECOLOGY</b></div><hr><div>ecology details here e.g. Environment, Organisation</div><br>';
-    }
-    if (extraEntries.includes("Gear")){
-      GearString = '<div><b>Gear</b> list gear here e.g. Armor, Ammunition</div>';
+      EcologyString = '<div><b>ECOLOGY</b></div><hr><div>ecology details here e.g. Environment, Organisation, Home Planet</div><br>';
     }
     if (extraEntries.includes("Tactics")){
-      TacticsString = '<div><b>TACTICS</b></div><hr><div>tactics details here e.g. During combat, Morale</div><br>';
+      TacticsString = '<div><b>TACTICS</b></div><hr><div>tactics details here e.g. Before Combat, During combat, Morale</div><br>';
     }
 
     //perception string
@@ -1072,6 +1489,9 @@ function buildStatBlock() {
 
     //speedString
     var speedInput = $('#inputSpeed').val().trim();
+    if (statBlock.hasOwnProperty('addSpeed')){
+      speedInput = (Number(speedInput) + statBlock.addSpeed).toString();
+    }
     var speedString = '<div><b>Speed</b> '+speedInput+' ft.';
     if (statBlock.hasOwnProperty('Speed')){
       var speeds = statBlock.Speed;
@@ -1080,19 +1500,12 @@ function buildStatBlock() {
     }
     speedString += "</div>";
 
-    classString = '';
+    rpBlock='';
     if (statBlock.hasOwnProperty('Class')) {
-      classString += '<div><b>' + statBlock.Class.toUpperCase() + ' ABILITIES</b></div>';
-      classString += '<hr>';
-      classString += '<div><b>Resolve points</b> ' + statBlock.ClassResolvePoints + '</div>';
-      classString += '<div><b>Class abilities</b> '.replace('Class',statBlock.Class) + statBlock.ClassAbilities + '</div>';
-      if (statBlock.hasOwnProperty('ClassSpecialRules')) {
-        classString += '<div><b>Class special rules</b> '.replace('Class',statBlock.Class) + statBlock.ClassSpecialRules + '</div>';
-      }
-      classString += '<div><b>Class gear</b> '.replace('Class',statBlock.Class) + statBlock.ClassGear + '</div>';
-      classString += '<br>';
-
+      rpBlock = ' <b>RP</b> ' + statBlock.ClassResolvePoints;
     }
+    //defense title string, this far down because its waiting for RP
+    var defenceTitle = leftAndRight('<b>DEFENSE</b>','<b>HP</b> ' + statBlock.hitPoints + rpBlock);
 
     //Aura string
     auraString = '';
@@ -1106,6 +1519,11 @@ function buildStatBlock() {
       textString = '<div><b>Text</b> ' + statBlock.Text + '<br></div>'
     }
 
+    //Gear string
+    gearString = '';
+    if (statBlock.hasOwnProperty('gear')){
+      gearString = '<div><b>Gear</b> ' + statBlock.gear + '<br></div>'
+    }
 
   //
   //Stat Block
@@ -1117,13 +1535,14 @@ function buildStatBlock() {
     textBlock += leftAndRight('<b>' + nameString + '</b>','<b>CR '+statBlock.Cr+'</b>');
     textBlock += '<hr>';
     textBlock += "<div><b>XP "+statBlock.Xp+"</b></div>";
+    textBlock += classTypeString;
     textBlock += typeString;
     textBlock += "<div><b>Init</b> "+statBlock.initiative+sensesString+'; <b>Perception</b> +'+perceptionValue+"</div>";
     textBlock += auraString;
     textBlock += "<br>";
 
     //Defence
-    textBlock += leftAndRight('<b>DEFENSE</b>','<b>HP</b> '+statBlock.hitPoints);
+    textBlock += defenceTitle;
     textBlock += "<hr>";
     textBlock += "<div><b>EAC</b> "+statBlock.eac + "; <b>KAC</b> "+statBlock.kac+"</div>";
     textBlock += saveString;
@@ -1151,22 +1570,20 @@ function buildStatBlock() {
     textBlock += '<div><b>Skills </b>'+skillString+'</div>';
     textBlock += languageString;
     textBlock += otherAbilitiesString;
-    textBlock += GearString;
+    textBlock += gearString;
     textBlock += "<br>";
 
     //ecology
     textBlock += EcologyString;
 
     //warning
-    if (classString != '' || specialString != '' || textString != '') {
+    if (specialString != '' || textString != '') {
       textBlock += '<br>';
       textBlock += '<div><b>Heads up!</b> if there are any required stat block changes below this warning, they will need to be added manually.</div>';
       textBlock += '<br>';
     }
     //extra text
     textBlock += textString;
-    //class abilities
-    textBlock += classString;
     //special Abilities
     textBlock += specialString;
 
@@ -1179,29 +1596,28 @@ function buildStatBlock() {
     ga('send', 'event', 'Generation', 'monster', statBlock.Cr+":"+statBlock.Base+":"+statBlock.CreatureType);
 
   } catch(err) {
-    document.getElementById("errorMessage").innerHTML = "statblock building error: " + err.message + '<br><br>' + err.stack;
+    var status = getErrorStatus();
+    document.getElementById("errorMessage").innerHTML = "statblock building error: " + err.message + '<br><br>' + err.stack + status;
     $('.alert-this-red').show();
     return false;
   }
 
-  /* debugging ouput
-  var $outputArea = $(".output.area").first();
-  $outputArea.empty();
-  var print = '';
-  for (stat in statBlock){
-    if (typeof statBlock[stat] === 'object' && !Array.isArray(statBlock[stat])) {
-      for (entry in statBlock[stat]) {
-        print += "stat:" + entry +": " +statBlock[stat][entry] + ' <br>'
-      }
-    } else {
-      print += stat +": " +statBlock[stat] + ' <br>'
-    }
-  }
-  $outputArea.append("<p>"+print+"</div>"); */
-
   return true;
 
 }
+
+//gathers current status for error printed
+function getErrorStatus() {
+  var CRDrop = $('[data-id="CRDrop"]').text().trim().replace("CR ","");
+  var arrayDrop = $('[data-id="arrayDrop"]').text().trim();
+  var creatureTypeDrop = $('[data-id="creatureTypeDrop"]').text().trim();
+  var subTypeDrop = $('#creatureSubTypeDrop').val().trim()
+  var classDrop = $('#classDrop').val().trim();
+  var graft = $('#graftDrop').val().trim();
+
+  return "<br><br>cr:" + CRDrop + "<br>array:" + arrayDrop + "<br>creatureType:" + creatureTypeDrop + "<br>subType:" + subTypeDrop + "<br>class:" + classDrop +  "<br>graft:" + graft;
+}
+
 
 //returns a string div with right aligned and left alignedtext on the same line
 function leftAndRight(left,right){
@@ -1245,7 +1661,7 @@ function getClassStats(statObject){
     statObject.ClassResolvePoints = Math.round(cr/5) + 3;
 
     //read and apply class data
-    statObject.ClassAbilities = getClassAbilities(classDrop,cr);
+    statObject.ClassAbilities = getClassAbilities(classDrop,cr).description;
 
     if (classObject.hasOwnProperty("SpecialRules")){
       statObject.ClassSpecialRules = classObject.SpecialRules;
@@ -1284,15 +1700,145 @@ function getClassStats(statObject){
   return statObject;
 }
 
+function resolveClassAbilities(Data,ClassCR,ClassDC,abilityList,abilityName){
+
+  var classAbilityNames = [];
+
+  for (var i = 0; i < abilityList.length; i++) {
+    //find data
+    if (Data == 'FightingStyle'){
+      var ability = allClassFeatures.Soldier["Fighting style"][abilityName][abilityList[i]];
+    } else if (Data == 'GearBoost'){
+      var ability = allClassFeatures.Soldier["Gear Boost"][abilityList[i]];
+    } else if (Data == 'Connections'){
+      var ability = allClassFeatures.Mystic["Connections"][abilityName]["Connection Powers"][abilityList[i]];
+    } else if (Data == 'MysticFeatures'){
+      var ability = allClassFeatures.Mystic["Class features"][abilityList[i]];
+    } else if (Data == 'MagicHack'){
+
+      for (level in allClassFeatures.Technomancer["Magic Hacks"]) {
+        if (allClassFeatures.Technomancer["Magic Hacks"][level].hasOwnProperty(abilityList[i])) {
+          var levelName = level;
+          break;
+        }
+      }
+      var ability = allClassFeatures.Technomancer["Magic Hacks"][levelName][abilityList[i]];
+    } else if (Data == 'TechnomancerFeatures'){
+      var ability = allClassFeatures.Technomancer["Class features"][abilityList[i]];
+    } else if (Data == 'Exploits'){
+
+      for (level in allClassFeatures.Operative["Operative Exploits"]) {
+        if (allClassFeatures.Operative["Operative Exploits"][level].hasOwnProperty(abilityList[i])) {
+          var levelName = level;
+          break;
+        }
+      }
+      var ability = allClassFeatures.Operative["Operative Exploits"][levelName][abilityList[i]];
+    } else if (Data == 'OperativeFeatures'){
+      var ability = allClassFeatures.Operative["Class features"][abilityList[i]];
+    } else if (Data == 'Tricks'){
+
+      for (level in allClassFeatures.Mechanic["Mechanic Tricks"]) {
+        if (allClassFeatures.Mechanic["Mechanic Tricks"][level].hasOwnProperty(abilityList[i])) {
+          var levelName = level;
+          break;
+        }
+      }
+      var ability = allClassFeatures.Mechanic["Mechanic Tricks"][levelName][abilityList[i]];
+    } else if (Data == 'MechanicFeatures'){
+      var ability = allClassFeatures.Mechanic["Class features"][abilityList[i]];
+    } else if (Data == 'Exocortex'){
+      var ability = allClassFeatures.Mechanic["Exocortex"][abilityList[i]];
+    } else if (Data == 'Improvisations'){
+
+      for (level in allClassFeatures.Envoy["Envoy Improvisations"]) {
+        if (allClassFeatures.Envoy["Envoy Improvisations"][level].hasOwnProperty(abilityList[i])) {
+          var levelName = level;
+          break;
+        }
+      }
+      var ability = allClassFeatures.Envoy["Envoy Improvisations"][levelName][abilityList[i]];
+    }
+    //console.log(Data)
+    //console.log(ability)
+    //console.log(abilityList[i])
+
+
+    var abilityString = '';
+
+    if (ability.hasOwnProperty('entry')) {
+      abilityString = ability.entry.layout;
+
+      abilityString = abilityString.replace('DC' , 'DC ' + ClassDC.toString());
+      abilityString = abilityString.replace('CR' , ClassCR.toString());
+
+      var entries = Object.keys(ability.entry);
+
+      for (var k = 0; k < entries.length; k++)  {
+        if (entries[k] != 'layout') {
+          //
+
+          if (ability.entry[entries[k]].hasOwnProperty('PERCR')){
+            //per cr entries
+            var valNum = ability.entry[entries[k]]['base'] + (ability.entry[entries[k]]['PERCR'] * ClassCR);
+          } else {
+            table = ability.entry[entries[k]]['CR']
+            var choice = 'none'
+            for (l = 0; l < table.length; l++) {
+              if (ClassCR >= table[l]) {
+                choice = l;
+              }
+            }
+            if (choice == 'none') {
+              var valNum = ability.entry[entries[k]]['base'];
+            } else {
+              var valNum = ability.entry[entries[k]]['base'] + ability.entry[entries[k]]['VAL'][choice];
+            }
+          }
+
+          abilityString = abilityString.replace(entries[k],valNum.toString())
+
+        }
+      }
+    }
+    if (ability.hasOwnProperty('adjustments')) {
+      var entries = Object.keys(ability.adjustments);
+
+      for (var k = 0; k < entries.length; k++)  {
+        if (statBlock.hasOwnProperty(entries[k])){
+          statBlock[entries[k]] = statBlock[entries[k]] + ability.adjustments[entries[k]];
+        } else {
+          statBlock[entries[k]] = ability.adjustments[entries[k]];
+        }
+      }
+
+    }
+
+
+
+
+    if (abilityString != '') {
+      classAbilityNames = classAbilityNames.concat([abilityString]);
+    }
+  }
+  return classAbilityNames;
+}
+
 //class data contains a table of CR dependent abilities - gets the abilities with the appropriate CR vlue
 function getClassAbilities(selectedClass,cr){
 
   var keyNums = [];
   var crBottom = 0;
+
+  if (cr < 1) {
+    cr = 1;
+  }
+
   //get array of CR values
   for (key in classData[selectedClass].AbilitiesByCr){
     keyNums.push(Number(key));
   }
+
   //sort ascending order - number value
   keyNums.sort(function(a, b){return a-b});
   //find abilities equal to or less than CR
@@ -1302,6 +1848,7 @@ function getClassAbilities(selectedClass,cr){
       crBottom = keyNums[i];
     }
   }
+
   return classData[selectedClass].AbilitiesByCr[crBottom.toString()];
 }
 
@@ -1414,18 +1961,31 @@ function generateMultiDropdown(parentID,label,dropID,title,searchTitle,array,max
   } else {
     searTitl = 'data-live-search="true" data-live-search-placeholder="'+searchTitle+'" ';
   }
+  //check if overall max options
+  if (maxOptions === 0){
+    dataMax = ''
+  } else {
+    dataMax = 'data-max-options="'+maxOptions+'" ';
+  }
+
   //add select options
   var dropHtml = "";
   if (label != "") {
     dropHtml += '<label>' + label + '</label>'
   }
-  dropHtml += '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10" multiple ' + searTitl + 'data-max-options="'+maxOptions+'" data-selected-text-format="count">'
+  dropHtml += '<select class="selectpicker" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10" multiple ' + searTitl + dataMax + 'data-selected-text-format="count">'
   //build list, apply BREAKS or LABELS if words present in array
   for (i = 0; i < array.length; i++) {
+
     if (array[i] == 'BREAK'){
       dropHtml += '<option data-divider="true"></option>';
     } else if (array[i].includes('LABEL=')) {
-      dropHtml += '<optgroup label="' + array[i].replace('LABEL=','') + '">';
+      if (array[i].includes('MAX=')){
+        var split = array[i].split('MAX=')
+        dropHtml += '<optgroup label="' + split[0].replace('LABEL=','') + '" data-max-options="' + split[1] + '">';
+      } else {
+        dropHtml += '<optgroup label="' + array[i].replace('LABEL=','') + '">';
+      }
     } else if (array[i].includes('ENDLABEL')) {
       dropHtml += '</optgroup>';
     }
@@ -1443,7 +2003,7 @@ function generateMultiDropdown(parentID,label,dropID,title,searchTitle,array,max
 }
 
 //creates bootstrap-select dropdowns from arrays
-function generateAttackEntry(style) {
+function generateAttackEntry(style,weaponName) {
 
   //validate high stat choice
   if ($('[data-id="attackDrop"]').text().includes("Choose")) {
@@ -1531,7 +2091,7 @@ function generateAttackEntry(style) {
           "<div class=\"col-lg-6\">" +
               "<div class=\"form-group\">" +
                   "<label for=\"attackName"+indexString+"\">Attack name</label>" +
-                   "<input type=\"text\" class=\"form-control\" id=\"attackName"+indexString+"\" placeholder=\""+attackPlaceholder+"\"  oninput=\"removeHighlight(this.id)\">" +
+                   "<input type=\"text\" class=\"form-control\" id=\"attackName"+indexString+"\" placeholder=\""+attackPlaceholder+"\" value=\""+weaponName+"\" oninput=\"removeHighlight(this.id)\">" +
               "</div>" +
           "</div>" +
           "<div class=\"col-lg-6\">" +
@@ -1584,6 +2144,174 @@ function generateAttackEntry(style) {
   $('#DT'+indexString+'Drop').selectpicker('val', damageType[0]);
   $('#DT'+indexString+'Drop').selectpicker('refresh');
 
+}
+
+function generateGearAttackEntries() {
+
+  //validate high stat choice
+  if ($('[data-id="attackDrop"]').text().includes("Choose")) {
+      $('[data-id="attackDrop"]').addClass('wizard-shadow');
+      return;
+  }
+
+  var $outputArea = $(".attackContainer").first();
+
+  var crString = $('[data-id="CRDrop"]').text().trim();
+  var cr = Number(crString.replace("CR ","").replace("1/2","0").replace("1/3","0"));
+  var array = $('#arrayDrop').val().trim();
+  var special = $('#specialDrop').val().toString().trim();
+  var gearWeapons = $('#weaponGearDrop').val().toString().trim();
+
+  gearWeapons = gearWeapons.replace(/Level .?. - /g,'');//remove level string
+
+  //get array of weapons
+  if (gearWeapons.includes(',')){
+    gearWeapons = gearWeapons.split(',');
+  } else {
+    if (gearWeapons == '') {
+      return;
+    } else {
+      gearWeapons = [gearWeapons];
+    }
+  }
+
+  for (var i = 0; i < gearWeapons.length; i++)  {
+
+    var attackStats = window[array.toLowerCase()+'AttackStats'][crString.replace("CR ","")];
+    var highStat = $('#attackDrop').val().trim();
+    var attackTitle = gearWeapons[i];
+
+    var weaponGroups = ["Basic Melee Weapons","Advanced Melee Weapons","Small Arms","Longarms","Heavy Weapons","Sniper Weapons","Grenades"]
+
+    for (var j = 0; j < weaponGroups.length; j++)  {
+      //find the weapon in the data
+      if (equipmentData[weaponGroups[j]].hasOwnProperty(attackTitle)) {
+
+        var attackDamage = equipmentData[weaponGroups[j]][attackTitle].damage + "+" + cr.toString();
+        var attackCritical = equipmentData[weaponGroups[j]][attackTitle].critical.toLowerCase().capitalise();
+        var attackDamageType = equipmentData[weaponGroups[j]][attackTitle].damagetype.toUpperCase().replace('SO','So');
+        var attackType = "placeholder"
+
+        if (weaponGroups[j].includes("Melee")) {
+          var style = "Melee";
+          attackDamage += "+Str"
+        } else {
+          var style = "Ranged";
+        }
+
+        break;
+      }
+    }
+
+    attackTitle = attackTitle.toLowerCase();
+    attackTitle = attackTitle.replace(/([\w ]+)\s-\s([\w -]+)/g, "$2 $1");
+
+
+    if (style == "Melee"){
+      if (highStat == "Melee"){
+        var attackBonus = attackStats[0];
+      } else if (highStat == "Ranged") {
+        var attackBonus = attackStats[1];
+      }
+    }
+    else if (style == "Ranged"){
+      if (highStat == "Ranged"){
+        var attackBonus = attackStats[0];
+      } else if (highStat == "Melee") {
+        var attackBonus = attackStats[1];
+      }
+    }
+
+    var brute = false; // :(
+    var bruteClass = '';
+    var bruteLabel = '';
+    //apply brute if chosen
+    if (special.includes("Brute")){
+      brute = true; // :)
+      //check if already applied
+      $("[class^='attackDiv']").each(function(){
+        if ($(this).attr('class').includes('brute')){
+          brute = false; // :(
+        }
+      });
+    }
+
+    if (brute) {
+      attackBonus = attackStats[1];
+      var crlist = Object.keys(combatantMainStats);
+      var crindex = crlist.indexOf(crString.replace("CR ",""));
+      crindex += 2;
+      if(crindex > 26){
+        crindex = 26;
+      }
+      var newCr = crlist[crindex];
+      attackStats = window[array.toLowerCase()+'AttackStats'][newCr];
+      if (style == "Melee"){
+        var attackDamage = attackStats[4];
+      }
+      if (style == "Ranged"){
+        var attackDamage = attackStats[3];
+      }
+      bruteClass = ' brute';
+      bruteLabel = ' - brute attack';
+    }
+
+    attackIndexCounter += 1;
+    var indexString = style + "-" + attackIndexCounter.toString();
+
+    var attackBody = "<div class=\"attackDiv" + indexString + bruteClass + "\">"
+    attackBody +=
+        "<h5>"+style+bruteLabel+"</h5>" +
+        "<div class=\"row\">" +
+            "<div class=\"col-lg-6\">" +
+                "<div class=\"form-group\">" +
+                    "<label for=\"attackName"+indexString+"\">Attack name</label>" +
+                     "<input type=\"text\" class=\"form-control\" id=\"attackName"+indexString+"\" value=\""+attackTitle+"\">" +
+                "</div>" +
+            "</div>" +
+            "<div class=\"col-lg-6\">" +
+                "<div class=\"row\">" +
+                    "<div class=\"col-xs-4\" style=\"padding-right: 0\">" +
+                        "<div class=\"form-group\">" +
+                            "<label for=\"bonus"+indexString+"\">Bonus</label>" +
+                            "<input type=\"text\" class=\"form-control\" id=\"bonus"+indexString+"\" value=\""+attackBonus+"\">" +
+                        "</div>" +
+                    "</div>" +
+                    "<div class=\"col-xs-8\">" +
+                        "<div class=\"form-group\">" +
+                            "<label for=\"damage"+indexString+"\">Damage</label>" +
+                            "<input type=\"text\" class=\"form-control\" id=\"damage"+indexString+"\" value=\""+attackDamage+"\">" +
+                        "</div>" +
+                    "</div>" +
+                "</div>" +
+            "</div>" +
+            "<div class=\"col-lg-4\">" +
+            "</div>" +
+            "<div class=\"col-lg-4\">" +
+                "<div class=\"form-group\">" +
+                    "<label for=\"damagetype"+indexString+"\">Damage type</label>" +
+                    "<input type=\"text\" class=\"form-control\" id=\"damagetype"+indexString+"\" value=\""+attackDamageType+"\" disabled>" +
+                    "<div id=\"damagetype"+indexString+"\"></div>" +
+                "</div>" +
+            "</div>" +
+            "<div class=\"col-lg-4\">" +
+                "<div class=\"form-group\">" +
+                    "<label for=\"critical"+indexString+"\">Critical</label>" +
+                    "<input type=\"text\" class=\"form-control\" id=\"critical"+indexString+"\" value=\""+attackCritical+"\" disabled>" +
+                "</div>" +
+            "</div>" +
+        "</div>"
+
+    attackBody += "<br>"
+    attackBody += "<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-default btn-sm pull-right\" onclick = \"removeEntry(this.id)\">Remove</button>"
+    attackBody += "<br><hr>"
+    attackBody += "</div>"
+
+    $outputArea.append(attackBody);
+
+    $('#damagetype'+indexString).css("cursor", "default");
+    $('#critical'+indexString).css("cursor", "default");
+  }
 }
 
 function removeEntry(index) {
@@ -1716,9 +2444,21 @@ function getGraftSkills(type){
   //check step 4 class graft
   var classDrop = $('#classDrop').val().trim();
   if (classDrop != '' && classDrop != 'None') {
-    if (classData[classDrop].hasOwnProperty(skillString)){
-      skillList = skillList.concat(classData[classDrop][skillString]);
+
+    //operative and mystic skills depend on class choices
+    if (classDrop == "Mystic" || classDrop == "Operative") {
+      if (classData[classDrop].hasOwnProperty(skillString)){
+        var connectionDrop = $('#stepFourOptionDrop').val().trim();
+        skillList = skillList.concat(classData[classDrop][skillString][connectionDrop]);
+      }
+    } else {
+      if (classData[classDrop].hasOwnProperty(skillString)){
+        skillList = skillList.concat(classData[classDrop][skillString]);
+      }
     }
+
+
+
   }
   //check step 5 graft
   var graft = $('#graftDrop').val().trim();
@@ -1833,10 +2573,15 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
           }
 
         } else {
-          $('#stepFourSave').text(selected+":"+"None"+":"+"chosen");
+          $('#stepFourSave').text(selected+":"+"None"+":"+"None"+":"+"chosen");
           var $descriptionArea = $(".stepFourDescription").first();
           $descriptionArea.empty();
+          var $descriptionArea = $(".classFeaturesDescription").first();
+          $descriptionArea.empty();
           $("#stepFourOptionalDropdown").first().empty();
+          $("#stepFourOptionalDropdownTwo").first().empty();
+          $("#stepFourOptionalDropdownThree").first().empty();
+          $("#stepFourOptionalDropdownFour").first().empty();
         }
     } else if (id=='graftDrop') {
 
@@ -2198,8 +2943,34 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       saved = $('#stepEightSave').text().split(',');
       var $descriptionArea = $(".stepEight1Description").first();
       $descriptionArea.empty();
+
+      var currentLevel = ordinalNumber(Number(saved[2]));
+      var classDrop = $('#classDrop').val().trim();
       if (selected != ''){
-        $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[2]))+" ("+saved[1]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
+        //list mystic connection spells or list spells as normal
+        if (classDrop == 'Mystic' && currentLevel != "0") {
+          var connectionDrop = $('#stepFourOptionDrop').val().trim();
+          //check if mystic has all level spells
+          if (allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"].hasOwnProperty("All")){
+            var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"]["All"][0] + " (Level " + saved[2] + ")";
+          } else {
+            var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+          }
+
+          $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[2]))+" ("+saved[1]+"):</b> "+ chosenSpell + " (from connection), " +selected.replace(/,/g,', ')+"</p>");
+        } else {
+          $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[2]))+" ("+saved[1]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
+        }
+      } else if (selected == '' && classDrop == 'Mystic') {
+        //mystic default to connection spells
+        var connectionDrop = $('#stepFourOptionDrop').val().trim();
+        //check if mystic has all level spells
+        if (allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"].hasOwnProperty("All")){
+          var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"]["All"][0] + " (Level " + saved[2] + ")";
+        } else {
+          var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+        }
+        $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[2]))+" ("+saved[1]+"):</b> "+ chosenSpell + " (from connection)"+"</p>");
       }
 
     } else if (id=='spells2Drop') {
@@ -2208,8 +2979,22 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       saved = $('#stepEightSave').text().split(',');
       var $descriptionArea = $(".stepEight2Description").first();
       $descriptionArea.empty();
+      var currentLevel = ordinalNumber(Number(saved[4]));
+      var classDrop = $('#classDrop').val().trim();
       if (selected != ''){
-        $descriptionArea.append(("<p><b>"+ordinalNumber(Number(saved[4]))+" ("+saved[3]+"):</b> "+selected.replace(/,/g,', ')+"</p>"));
+        //list mystic connection spells or list spells as normal
+        if (classDrop == 'Mystic' && currentLevel != "0") {
+          var connectionDrop = $('#stepFourOptionDrop').val().trim();
+          var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+          $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[4]))+" ("+saved[3]+"):</b> "+ chosenSpell + " (from connection), " +selected.replace(/,/g,', ')+"</p>");
+        } else {
+          $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[4]))+" ("+saved[3]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
+        }
+      } else if (selected == '' && classDrop == 'Mystic') {
+        //mystic default to connection spells
+        var connectionDrop = $('#stepFourOptionDrop').val().trim();
+        var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+        $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[4]))+" ("+saved[3]+"):</b> "+ chosenSpell + " (from connection)"+"</p>");
       }
 
     } else if (id=='spells3Drop') {
@@ -2218,8 +3003,22 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       saved = $('#stepEightSave').text().split(',');
       var $descriptionArea = $(".stepEight3Description").first();
       $descriptionArea.empty();
+      var currentLevel = ordinalNumber(Number(saved[6]));
+      var classDrop = $('#classDrop').val().trim();
       if (selected != ''){
-        $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[6]))+" ("+saved[5]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
+        //list mystic connection spells or list spells as normal
+        if (classDrop == 'Mystic' && currentLevel != "0") {
+          var connectionDrop = $('#stepFourOptionDrop').val().trim();
+          var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+          $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[6]))+" ("+saved[5]+"):</b> "+ chosenSpell + " (from connection), " +selected.replace(/,/g,', ')+"</p>");
+        } else {
+          $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[6]))+" ("+saved[5]+"):</b> "+selected.replace(/,/g,', ')+"</p>");
+        }
+      } else if (selected == '' && classDrop == 'Mystic') {
+        //mystic default to connection spells
+        var connectionDrop = $('#stepFourOptionDrop').val().trim();
+        var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+        $descriptionArea.append("<p><b>"+ordinalNumber(Number(saved[6]))+" ("+saved[5]+"):</b> "+ chosenSpell + " (from connection)"+"</p>");
       }
 
     } else if (id == 'casterDrop'){
@@ -2279,6 +3078,7 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       var crString = $('[data-id="CRDrop"]').text().trim();
       var array = $('#arrayDrop').val().trim();
       var attackStats = window[array.toLowerCase()+'AttackStats'][crString.replace("CR ","")];
+      var classDrop = $('#classDrop').val().trim();
 
       if (selected == 'Ranged') {
         var rangedBonus = attackStats[0];
@@ -2291,6 +3091,18 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       //all that startswith selectors
       $("[id^='bonusRanged']").val(rangedBonus);
       $("[id^='bonusMelee']").val(meleeBonus);
+
+      //setup solarian weapon
+
+      if ($('#stepNineAttackSave').text() != crString+":"+classDrop){
+        if (classDrop == 'Solarian') {
+          var solarDrop = $('#stepFourOptionDrop').val().trim();
+          if (solarDrop == "Solar weapon") {
+            generateAttackEntry("Melee","Solar weapon")
+          }
+        }
+      }
+      $('#stepNineAttackSave').text(crString+":"+classDrop);
 
 
     } else if (id.startsWith('AT')){
@@ -2346,9 +3158,96 @@ function dropClickHandler(e, clickedIndex, newValue, oldValue) {
       $('#DT'+indexString+'Drop').selectpicker('refresh');
 
 
+    } else if (id == 'artificialDrop'){
+      //hande the mechanic class drone/exocortex choices
+
+      var crString = $('[data-id="CRDrop"]').text().trim();
+      var cr = Number(crString.replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
+      var classFeatures = getClassAbilities("Mechanic",cr);
+      var $descriptionOneArea = $(".classFeaturesDescription").first();
+      $descriptionOneArea.empty();
+
+      var droneCr = cr - 2;
+      if (droneCr < 1){
+        droneCr = 1;
+      }
+
+      if (selected == "Drone") {
+        $descriptionOneArea.append("<p><b>" + crString + " " + "Mechanic Abilities: </b>" + classFeatures.description + "<br><br>For a mechanic creature with a drone, build the drone as a separate technological construct of CR " + droneCr.toString() + " or use an existing technological construct with a CR " + droneCr.toString() + ". The drone does not get a full suite of actions on its own; each round, the mechanic creature and the drone can each take a move action, a swift action, and a reaction, but only one of them can take a standard action or combine its move and standard actions into a full action. The drone doesn’t have its own CR, it doesn’t contribute to the CR of the encounter, and PCs receive no XP for defeating a drone." + "</p>");
+      } else if (selected == "Exocortex") {
+        $descriptionOneArea.append("<p><b>" + crString + " " + "Mechanic Abilities: </b>" + classFeatures.exocortex.join(", ").capitalise() + ", " + classFeatures.description.toLowerCase() + "</p>");
+      }
+
+    } else if (id == 'armorGearDrop'){
+      printGearString()
+    } else if (id == 'weaponGearDrop'){
+      printGearString()
+    } else if (id == 'equipmentGearDrop'){
+      printGearString()
     }
     //remove any highlight that has been applied for form validation
     $('[data-id="'+$(e.currentTarget).attr('id')+'"]').removeClass('wizard-shadow');
+}
+
+//callback for gear input typing
+$('#inputGear').on('input',function(e){
+    printGearString()
+});
+
+function printGearString(){
+
+  //prints which gear is selected
+
+  var $descriptionArea = $(".stepEightGearDescription").first();
+  $descriptionArea.empty();
+
+  gearString = '';
+  var aGear = $('#armorGearDrop').val().toString().trim();
+  if (aGear == 'None') { aGear = ''; }
+  var wGear = $('#weaponGearDrop').val().toString().trim();
+  var eGear = $('#equipmentGearDrop').val().toString().trim();
+  var oGear = $('#inputGear').val().trim();
+
+  if (aGear != '' || wGear != '' || eGear != '' || oGear != '') {
+
+    if (aGear != '') {
+      gearString += aGear;
+    }
+
+    if (wGear != '') {
+      if (gearString != ''){
+        gearString += ', ' + wGear;
+      } else {
+        gearString += wGear;
+      }
+    }
+
+    if (eGear != '') {
+      if (gearString != ''){
+        gearString += ', ' + eGear;
+      } else {
+        gearString += eGear;
+      }
+    }
+
+    if (oGear != '') {
+      if (gearString != ''){
+        gearString += ', ' + oGear;
+      } else {
+        gearString += oGear;
+      }
+    }
+
+    //formating
+    gearString = gearString.replace(/Level .?. - /g,'');//remove level string
+    gearString = gearString.toLowerCase();//all to lowercase
+    gearString = gearString.replace(/([\w ]+)\s-\s([\w -]+)/g, "$2 $1");//if item has type appendix, eg tactical. move to the front of the string
+    gearString = gearString.replace(/,/g, ', ');//space out commas
+    gearString = gearString.replace(/ iii/g," III").replace(/ ii/g," II").replace(/ i/g," I").replace(/ iv/g,"IV").replace(/ v/g," V").replace(/ viii/g," VIII").replace(/ vii/g," VII").replace(/ vi/g," VI"); //only roman numerals are uppercase
+
+    $descriptionArea.append("<p><b>Gear:</b> " + gearString + "</p>");
+
+  }
 }
 
 //populates the dropdowns on step eight, either spell-like, secondary magic, or full caster abilities
@@ -2361,20 +3260,48 @@ function showSpellDropdowns(caster,className){
     var i = 0;
     var spellObject = spellCounts[crString][caster]; //return cr and type specific spell categories and numbers
     var save = "dummy";
+    var highestLevel = "None";
 
     //do all casting categories eg 1/day
-    for (castCat in spellObject){
+    for (castingCategory in spellObject){
       i += 1;
-      var spellNum = spellObject[castCat][0];
-      var spellLevel = spellObject[castCat][1].toString();
+      var spellNum = spellObject[castingCategory][0];
+      var spellLevel = spellObject[castingCategory][1].toString();
       var spellList = getSpellsByLevel(spellLevel,className);
+
+      //mystic connections have required spells per level
+      if (className == 'Mystic') {
+        var connectionDrop = $('#stepFourOptionDrop').val().trim();
+        var currentLevel = ordinalNumber(Number(spellLevel));
+        if (currentLevel != "0"){
+
+          //check if mystic connection has an all level spell choice
+          if (i == 1) {
+            if (allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"].hasOwnProperty("All")){
+              var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"]["All"][0] + " (Level " + spellLevel + ")";
+            } else {
+              var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+            }
+          } else {
+            var chosenSpell = allClassFeatures["Mystic"]["Connections"][connectionDrop]["Spells"][currentLevel][0];
+          }
+
+          spellList = removeElement(spellList,chosenSpell);
+          spellNum = spellNum - 1;
+
+          var $descriptionArea = $(".stepEight" + i + "Description").first();
+          $descriptionArea.empty();
+          $descriptionArea.append("<p><b>"+currentLevel+" ("+castingCategory+"):</b> "+ chosenSpell + " (from connection)"+"</p>");
+
+        }
+      }
 
       var $descriptionAbility = $(".stepEight"+i).first();
       $descriptionAbility.empty();
-      $descriptionAbility.append("<p><b>"+castCat+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
+      $descriptionAbility.append("<p><b>"+castingCategory+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
 
       generateMultiDropdown("spells"+i+"Dropdown","","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
-      save += ","+castCat+","+spellLevel;
+      save += ","+castingCategory+","+spellLevel;
     }
   } else {
 
@@ -2382,32 +3309,32 @@ function showSpellDropdowns(caster,className){
     var spellObject = spellCounts[crString]['spell-like'];
     var save = "dummy";
 
-    for (castCat in spellObject){
+    for (castingCategory in spellObject){
       i += 1;
-      var spellNum = spellObject[castCat][0];
+      var spellNum = spellObject[castingCategory][0];
       if (caster == 'once-per-freq') {
         spellNum = 1;
       }
-      var spellLevel = spellObject[castCat][1].toString();
+      var spellLevel = spellObject[castingCategory][1].toString();
       var spellList = getSpellsByLevel(spellLevel,className);
       if (caster == 'once-per-day'){
-        if (castCat == "1/day"){
+        if (castingCategory == "1/day"){
           i = 1;
           var $descriptionAbility = $(".stepEight"+i).first();
           $descriptionAbility.empty();
-          $descriptionAbility.append("<p><b>"+castCat+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
+          $descriptionAbility.append("<p><b>"+castingCategory+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
 
           generateMultiDropdown("spells"+i+"Dropdown","","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
-          save += ","+castCat;
+          save += ","+castingCategory;
 
         }
       } else {
         var $descriptionAbility = $(".stepEight"+i).first();
         $descriptionAbility.empty();
-        $descriptionAbility.append("<p><b>"+castCat+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
+        $descriptionAbility.append("<p><b>"+castingCategory+":</b> Select up to "+spellNum+", "+ordinalNumber(Number(spellLevel))+" level spells.</p>");
 
         generateMultiDropdown("spells"+i+"Dropdown","","spells"+i+"Drop","Select level "+spellLevel+" spells","Search spells",spellList,spellNum);
-        save += ","+castCat+","+spellLevel;
+        save += ","+castingCategory+","+spellLevel;
 
       }
     }
@@ -2477,18 +3404,179 @@ function stepFourDescription(selected,selectedArray) {
 
   $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
 
+  var crString = $('[data-id="CRDrop"]').text().trim();
+  var cr = Number(crString.replace("CR ","").replace("1/2","0.5").replace("1/3","0.3"));
+  var classFeatures = getClassAbilities(selected,cr);
+  var $descriptionOneArea = $(".classFeaturesDescription").first();
+  $descriptionOneArea.empty();
+
+  $descriptionOneArea.append("<p><b>" + crString + " " + selected + " Abilities: </b>" + classFeatures.description + "</p>");
 
   //set secondary dropdowns
-  if ($('#stepFourSave').text() != selected+":"+selectedArray+":"+"None"){
+  if ($('#stepFourSave').text() != selected+":"+selectedArray+":"+crString+":"+"None"){
     if (selected == "Soldier"){
+
+      //Soldier
+
+      styleKeys = Object.keys(allClassFeatures["Soldier"]["Fighting style"]).sort();
+
       generateDropdown("stepFourOptionalDropdown","Attack focus","stepFourOptionDrop","Choose attack focus",["Melee","Ranged"]);
+      //choose primary fighting style
+      generateDropdown("stepFourOptionalDropdownTwo","Primary fighting style","stepFourOptionDropTwo","Choose fighting style",styleKeys);
+      if (classFeatures["Fighting style"].hasOwnProperty("second")) {
+        //secondary style
+        generateDropdown("stepFourOptionalDropdownThree","Secondary fighting style","stepFourOptionDropThree","Choose fighting style",styleKeys);
+      } else {
+        $("#stepFourOptionalDropdownThree").first().empty();
+      }
+      //choose gear boosts
+      if (classFeatures.hasOwnProperty("Gear boost")) {
+        var boosts = Object.keys(allClassFeatures["Soldier"]["Gear Boost"]).sort();
+        var boostList = []
+        for (var i = 0; i < boosts.length; i++) {
+          if (allClassFeatures["Soldier"]["Gear Boost"][boosts[i]]["minLevel"] <= cr ) {
+            boostList = boostList.concat([boosts[i]])
+          }
+        }
+
+        generateMultiDropdown("stepFourOptionalDropdownFour","Gear boosts","stepFourOptionDropFour","Choose gear boosts",0,boostList,classFeatures["Gear boost"]);
+      } else {
+        $("#stepFourOptionalDropdownFour").first().empty();
+      }
+
     } else if (selected == "Envoy"){
+
+      //Envoy
+
+      //choose envoy improvisations
+      improvKeys = Object.keys(classFeatures.improvisations)
+      var improvisationArray = [];
+
+      for (var i = 0; i < improvKeys.length; i++) {
+          improvisationArray = improvisationArray.concat(['LABEL=' + improvKeys[i] +'-levelMAX=' + classFeatures.improvisations[improvKeys[i]]]);
+          improvisationArray = improvisationArray.concat(Object.keys(allClassFeatures["Envoy"]["Envoy Improvisations"][improvKeys[i]]).sort());
+          improvisationArray = improvisationArray.concat(['ENDLABEL']);
+      }
       generateDropdown("stepFourOptionalDropdown","Additional master skill","stepFourOptionDrop","Choose additional master skill",["Bluff", "Diplomacy" ,"Intimidate"]);
+      generateMultiDropdown("stepFourOptionalDropdownTwo","Envoy improvisations","stepFourOptionDropTwo","Choose improvisations","Search improvisations",improvisationArray,0);
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
+
+    } else if (selected == "Solarian") {
+
+      //Solarian
+
+      generateDropdown("stepFourOptionalDropdown","Solar manifestation","stepFourOptionDrop","Choose manifestation",["Solar armor","Solar weapon"]);
+
+      if (classFeatures.hasOwnProperty("revelations")) {
+        //choose solar evelations
+        revelKeys = Object.keys(classFeatures.revelations);
+        var revelationArray = [];
+
+        for (var i = 0; i < revelKeys.length; i++) {
+            revelationArray = revelationArray.concat(['LABEL=' + revelKeys[i] +'-levelMAX=' + classFeatures.revelations[revelKeys[i]]]);
+            revelationArray = revelationArray.concat(Object.keys(allClassFeatures["Solarian"]["Stellar Revelations"][revelKeys[i]]).sort());
+            revelationArray = revelationArray.concat(['ENDLABEL']);
+        }
+        generateMultiDropdown("stepFourOptionalDropdownTwo","Stellar revelations","stepFourOptionDropTwo","Choose revelations","Search revelations",revelationArray,0);
+      } else {
+        $("#stepTwoOptionalDropdownThree").first().empty();
+      }
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
+
+
+    } else if (selected == "Technomancer") {
+
+      //Technomancer
+
+      if (classFeatures.hasOwnProperty("Magic hack")) {
+        //choose magic hacks
+        hackKeys = Object.keys(classFeatures["Magic hack"]);
+        var hackArray = [];
+
+        for (var i = 0; i < hackKeys.length; i++) {
+            hackArray = hackArray.concat(['LABEL=' + hackKeys[i] +'-levelMAX=' + classFeatures["Magic hack"][hackKeys[i]]]);
+            hackArray = hackArray.concat(Object.keys(allClassFeatures["Technomancer"]["Magic Hacks"][hackKeys[i]]).sort());
+            hackArray = hackArray.concat(['ENDLABEL']);
+        }
+        generateMultiDropdown("stepFourOptionalDropdown","Magic hacks","stepFourOptionDrop","Choose hacks","Search hacks",hackArray,0);
+      } else {
+        $("#stepTwoOptionalDropdown").first().empty();
+      }
+      $("#stepFourOptionalDropdownTwo").first().empty();
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
+
+    } else if (selected == "Operative") {
+
+      //Operative
+
+      specialKeys = Object.keys(allClassFeatures["Operative"]["Operative Specializations"]).sort();
+      //choose specialisation
+      generateDropdown("stepFourOptionalDropdown","Operative specialization","stepFourOptionDrop","Choose specialization",specialKeys);
+
+      if (classFeatures.hasOwnProperty("exploit")) {
+        //choose exploits
+        exploitKeys = Object.keys(classFeatures["exploit"]);
+        var exploitArray = [];
+
+        for (var i = 0; i < exploitKeys.length; i++) {
+            exploitArray = exploitArray.concat(['LABEL=' + exploitKeys[i] +'-levelMAX=' + classFeatures["exploit"][exploitKeys[i]]]);
+            exploitArray = exploitArray.concat(Object.keys(allClassFeatures["Operative"]["Operative Exploits"][exploitKeys[i]]).sort());
+            exploitArray = exploitArray.concat(['ENDLABEL']);
+        }
+        generateMultiDropdown("stepFourOptionalDropdownTwo","Operative exploits","stepFourOptionDropTwo","Choose exploits","Search exploits",exploitArray,0);
+      } else {
+        $("#stepTwoOptionalDropdownTwo").first().empty();
+      }
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
+
+    } else if (selected == "Mechanic") {
+
+      //MECHANIC
+
+      //choose artificial inteligence
+      generateDropdown("stepFourOptionalDropdown","Artificial intelligence","artificialDrop","Choose intelligence",["Drone","Exocortex"]);
+
+      if (classFeatures.hasOwnProperty("trick")) {
+        //choose exploits
+        trickKeys = Object.keys(classFeatures["trick"]);
+        var trickArray = [];
+
+        for (var i = 0; i < trickKeys.length; i++) {
+            trickArray = trickArray.concat(['LABEL=' + trickKeys[i] +'-levelMAX=' + classFeatures["trick"][trickKeys[i]]]);
+            trickArray = trickArray.concat(Object.keys(allClassFeatures["Mechanic"]["Mechanic Tricks"][trickKeys[i]]).sort());
+            trickArray = trickArray.concat(['ENDLABEL']);
+        }
+        generateMultiDropdown("stepFourOptionalDropdownTwo","Mechanic tricks","stepFourOptionDropTwo","Choose tricks","Search tricks",trickArray,0);
+      } else {
+        $("#stepTwoOptionalDropdownTwo").first().empty();
+      }
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
+
+    } else if (selected == "Mystic") {
+
+      //Mystic
+
+      connectionKeys = Object.keys(allClassFeatures["Mystic"]["Connections"]).sort();
+      //choose connection
+      generateDropdown("stepFourOptionalDropdown","Mystic connection","stepFourOptionDrop","Choose connection",connectionKeys);
+
+      $("#stepFourOptionalDropdownTwo").first().empty();
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
+
     } else {
       $("#stepFourOptionalDropdown").first().empty();
+      $("#stepFourOptionalDropdownTwo").first().empty();
+      $("#stepFourOptionalDropdownThree").first().empty();
+      $("#stepFourOptionalDropdownFour").first().empty();
     }
   }
-  $('#stepFourSave').text(selected+":"+selectedArray+":"+"None");
+  $('#stepFourSave').text(selected+":"+selectedArray+":"+crString+":"+"None");
 
 }
 
@@ -2507,11 +3595,6 @@ function stepFiveDescription(selected) {
     $descriptionArea.append("<p>"+description.replace(searchMask,'<b>'+selectedMatch+'</b>')+"</p>");
   }
   $('#stepFiveSave').text(selected);
-}
-
-//prototype to capitalise only the first char in a string
-String.prototype.capitalise = function() {
-    return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 //removes the selected element from selected array
@@ -2743,7 +3826,7 @@ $('.wizard-card').bootstrapWizard({
               if (prev[0] != 'None' && prev[1] == arrayDrop) {
                 $('#classDrop').selectpicker('val', prev[0]);
                 stepFourDescription(prev[0],prev[1]);
-              } else if (prev[2] == 'chosen'){
+              } else if (prev[3] == 'chosen'){
                 $('#classDrop').selectpicker('val', "None");
                 $('#stepFourSave').text("None:None");
               } else if (prev[1] != arrayDrop) {
@@ -2760,9 +3843,35 @@ $('.wizard-card').bootstrapWizard({
 
             var validated = true;
 
+            //verify that class extra options have been selected
+
             if ($('[data-id="stepFourOptionDrop"]').length){
               if ($('[data-id="stepFourOptionDrop"]').text().includes("Choose")) {
                   $('[data-id="stepFourOptionDrop"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+            if ($('[data-id="stepFourOptionDropTwo"]').length){
+              if ($('[data-id="stepFourOptionDropTwo"]').text().includes("Choose")) {
+                  $('[data-id="stepFourOptionDropTwo"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+            if ($('[data-id="stepFourOptionDropThree"]').length){
+              if ($('[data-id="stepFourOptionDropThree"]').text().includes("Choose")) {
+                  $('[data-id="stepFourOptionDropThree"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+            if ($('[data-id="stepFourOptionDropFour"]').length){
+              if ($('[data-id="stepFourOptionDropFour"]').text().includes("Choose")) {
+                  $('[data-id="stepFourOptionDropFour"]').addClass('wizard-shadow');
+                  validated = false;
+              }
+            }
+            if ($('[data-id="artificialDrop"]').length){
+              if ($('[data-id="artificialDrop"]').text().includes("Choose")) {
+                  $('[data-id="artificialDrop"]').addClass('wizard-shadow');
                   validated = false;
               }
             }
@@ -2801,7 +3910,24 @@ $('.wizard-card').bootstrapWizard({
                 $("#vulnerabilityTextInput").first().empty();
                 $("#saveBoostDropdown").first().empty();
 
-                maxOptions = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][11];//get max options from array
+                if (classDrop != '' && classDrop != 'None') {
+                  //console.log(classDrop)
+                  var classCr = Number(crString.replace("CR ","").replace("1/2","1").replace("1/3","1"));
+                  var classfeatures = getClassAbilities(classDrop,classCr);
+                  if (classfeatures.hasOwnProperty("special")) {
+
+                    var maxOptions = classfeatures.special;
+                    //console.log(maxOptions)
+                    if (classfeatures.hasOwnProperty("skillful")) {
+                      maxOptions = maxOptions + 1;
+                    }
+                  } else {
+                    var maxOptions = 0;
+                  }
+                } else {
+                  var maxOptions = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][11];//get max options from array
+                }
+
 
                 //check for additional specials from grafts
                 var additionalSpecial = getAdditionalAbilities()
@@ -2844,7 +3970,24 @@ $('.wizard-card').bootstrapWizard({
                 generateMultiDropdown("specialAbilityDropdown","","specialDrop","Select special abilities","Search abilities",SpecialAbilities,maxOptions);
                 var $descriptionArea = $(".stepSixAbilities").first();
                 $descriptionArea.empty();
-                $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");
+                if (classDrop == 'Envoy' && maxOptions == 2) {
+                  $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities<br>one must be <b>skillfull</b> (Envoy ability)</p>");
+                } else {
+                  $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");
+                }
+
+
+                if (classDrop == 'Envoy' && maxOptions == 2) {
+                  console.log('Butts')
+                  $('#attackDrop').selectpicker('val', ['Skillful']);
+                  $('#attackDrop').selectpicker('refresh');
+                }
+
+                if (maxOptions == 0) {
+                  disableDropdown('specialDrop',true)
+                } else {
+                  disableDropdown('specialDrop',false)
+                }
 
               }
               $('#stepSixSave').text(crString + ":" + array + ":" + graft + ":" + classDrop + ":" + subtype);
@@ -2968,6 +4111,13 @@ $('.wizard-card').bootstrapWizard({
               var array = $('#arrayDrop').val().trim();
               var graft = $('#graftDrop').val().trim();
               var classDrop = $('#classDrop').val().trim();
+
+              //if mystic or operative be more specific
+              if (classDrop == "Mystic" || classDrop == "Operative") {
+                var connectionDrop = $('#stepFourOptionDrop').val().trim();
+                classDrop = classDrop + connectionDrop;
+              }
+
               var subtype = $('#creatureSubTypeDrop').val().trim();
 
               //check if envoy for extra master skill
@@ -3087,15 +4237,128 @@ $('.wizard-card').bootstrapWizard({
 
             if (validated) {
 
-              var crString = $('[data-id="CRDrop"]').text().trim();
-              $(".attackCR").html('<h5>'+crString+'</h5>')
+              //setup gear
+
+              var crString = $('[data-id="CRDrop"]').text().trim().replace('CR ','').replace("1/2","1").replace("1/3","1");
+              var classDrop = $('#classDrop').val().trim();
+
+              if ($('#stepEightGearSave').text() != crString + ":" + classDrop) {
+
+                var $descriptionArea = $(".stepEightGearDescription").first();
+                $descriptionArea.empty();
+
+                crMin = Number(crString) - 3;
+                if (crMin < 1){crMin = 1;}
+                crMax = Number(crString) + 1
+                if (crMin > 20){crMin = 20;}
+                if (crMax > 20){crMax = 20;}
+
+                var $descriptionArea = $(".gearLevelDescription").first();
+                $descriptionArea.empty();
+
+                //print recommended gear
+                if (classDrop != '' && classDrop != 'None'){
+
+                  if (classDrop == 'Solarian') {
+                    var solarionDrop = $('#stepFourOptionDrop').val().trim();
+                    var classGear = classData[classDrop].Gear[solarionDrop];
+                  } else if (classDrop == 'Soldier') {
+                    var soldierDrop = $('#stepFourOptionDrop').val().trim() + "Style";
+                    var classGear = classData[classDrop][soldierDrop].Gear;
+                  } else {
+                    var classGear = classData[classDrop].Gear;
+                  }
+
+                  var crTakeOne = Number(crString) - 1;
+                  if (crTakeOne < 1){crTakeOne = 1;}
+                  var crPlusOne = Number(crString) + 1;
+                  if (crPlusOne > 20){crPlusOne = 20;}
+                  classGear = classGear.replace(/CR-1/g,crTakeOne.toString()).replace(/CR+1/g,crPlusOne.toString()).replace(/CR/g,crString)
+                  $descriptionArea.append('<p><b>Recommended ' + classDrop +' gear: ' + classGear + '</b><br>(showing level ' + crMin + ' - ' + crMax + ' items)</p>');
+                } else {
+                  $descriptionArea.append('<p><b>Recommended gear level ' + crString + '</b><br>(showing level ' + crMin + ' - ' + crMax + ' items)</p>');
+                }
+
+
+                //generate armor
+                var armorGroups = ["Light Armor","Heavy Armor"]
+                var armorList = ['None'];
+
+                for (var i = 0; i < armorGroups.length; i++)  {
+                  var armor = [];
+                  for (itemName in equipmentData[armorGroups[i]]) {
+                    if (Number(equipmentData[armorGroups[i]][itemName].level) >= crMin && Number(equipmentData[armorGroups[i]][itemName].level) <= crMax){
+                      armor = armor.concat('Level ' + equipmentData[armorGroups[i]][itemName].level + ' - ' + itemName);
+                    }
+                  }
+                  if (armor.length > 0) {
+                    armorList = armorList.concat(['LABEL=' + armorGroups[i] ]);
+                    armorList = armorList.concat(armor.sort());
+                    armorList = armorList.concat(['ENDLABEL']);
+                  }
+                }
+                generateDropdown("armorGearDropdown","Armor","armorGearDrop","Optional armor",armorList);
+
+                //generate weapons list
+                var weaponGroups = ["Basic Melee Weapons","Advanced Melee Weapons","Small Arms","Longarms","Heavy Weapons","Sniper Weapons","Grenades"]
+                var weaponList = [];
+
+                for (var i = 0; i < weaponGroups.length; i++)  {
+                  var weapons = [];
+                  for (itemName in equipmentData[weaponGroups[i]]) {
+                    if (Number(equipmentData[weaponGroups[i]][itemName].level) >= crMin && Number(equipmentData[weaponGroups[i]][itemName].level) <= crMax){
+                      weapons = weapons.concat('Level ' + equipmentData[weaponGroups[i]][itemName].level + ' - ' + itemName);
+                    }
+                  }
+                  if (weapons.length > 0) {
+                    weaponList = weaponList.concat(['LABEL=' + weaponGroups[i] ]);
+                    weaponList = weaponList.concat(weapons.sort());
+                    weaponList = weaponList.concat(['ENDLABEL']);
+                  }
+                }
+                generateMultiDropdown("weaponGearDropdown","Weapons","weaponGearDrop","Optional weapons","Search weapons",weaponList,100);
+
+                //generate equipment list
+                var equipmentGroups = ["Food And Drink","Hybrid Items","Magic Items","Personal Items","Technological Items","Healing Serum","Medical Gear","Armor Upgrades","Solarion Weapon Crystals"]
+                var equipmentList = [];
+
+                for (var i = 0; i < equipmentGroups.length; i++)  {
+                  var equipment = [];
+                  for (itemName in equipmentData[equipmentGroups[i]]) {
+                    if (Number(equipmentData[equipmentGroups[i]][itemName].level) >= crMin && Number(equipmentData[equipmentGroups[i]][itemName].level) <= crMax){
+                      equipment = equipment.concat('Level ' + equipmentData[equipmentGroups[i]][itemName].level + ' - ' + itemName);
+                    }
+                  }
+                  if (equipment.length > 0) {
+                    equipmentList = equipmentList.concat(['LABEL=' + equipmentGroups[i] ]);
+                    equipmentList = equipmentList.concat(equipment.sort());
+                    equipmentList = equipmentList.concat(['ENDLABEL']);
+                  }
+                }
+                generateMultiDropdown("equipmentGearDropdown","Equipment","equipmentGearDrop","Optional equipment","Search equipment",equipmentList,100);
+
+                $('#stepEightGearSave').text(crString + ":" + classDrop);
+              }
+
 
             } else {
                 return false;
             }
         }
-        //Validation tab 8 - attacks
+        //Validation tab 8 - gear
         if (index == 8) {
+
+            var validated = true;
+
+
+            if (validated) {
+
+            } else {
+                return false;
+            }
+        }
+        //Validation tab 9 - attacks
+        if (index == 9) {
 
             var validated = true;
 
@@ -3148,7 +4411,15 @@ $('.wizard-card').bootstrapWizard({
                 graftSpells = {};
               }
 
-              if ($('#stepEightTwoSave').text() != array+":"+special+":"+crString+":"+subtype+":"+graft+":"+classDrop){
+              //if mystic be more specific
+              if (classDrop == "Mystic") {
+                var connectionDrop = $('#stepFourOptionDrop').val().trim();
+                var currentClass = classDrop + connectionDrop;
+              } else {
+                var currentClass = classDrop
+              }
+
+              if ($('#stepEightTwoSave').text() != array+":"+special+":"+crString+":"+subtype+":"+graft+":"+currentClass){
 
                 //clear page
                 $("#casterTypeDropdown").first().empty();
@@ -3167,7 +4438,10 @@ $('.wizard-card').bootstrapWizard({
                 if (!isObjectEmpty(graftSpells)){
                   var $description = $(".stepEight0Description").first();
                   $description.empty();
-                  graftString = "<p>"+"Racial spell-like abilities:"+"</p>";
+
+                  var Race = $('#creatureSubTypeDrop').val().trim()
+
+                  graftString = "<p>" + Race + " spell-like abilities:"+"</p>";
                   for (key in graftSpells) {
                     var Key = key;
                     if (Key == "atWill"){
@@ -3187,7 +4461,12 @@ $('.wizard-card').bootstrapWizard({
                   //spell caster base array
                   if (classDrop == 'Mystic' || classDrop == 'Technomancer'){
                     //spelcaster classes
-                    descSpell = "This creature has the " + classDrop + " class. Spell choices are only from the " + classDrop + " spell list.";
+                    if (classDrop == 'Mystic') {
+                      var connectionDrop = $('#stepFourOptionDrop').val().trim();
+                      descSpell = "This creature has the " + classDrop + " class (" + connectionDrop + " connection). Spell choices are only from the " + classDrop + " spell list.";
+                    } else {
+                      descSpell = "This creature has the " + classDrop + " class. Spell choices are only from the " + classDrop + " spell list.";
+                    }
                     showSpellDropdowns("caster",classDrop);
                   } else {
                     //spellcasters can choose between full caster or spell-like abilities
@@ -3216,8 +4495,8 @@ $('.wizard-card').bootstrapWizard({
             }
         }
 
-        //Validation tab 9
-        if (index == 9) {
+        //Validation tab 10 - Spells
+        if (index == 10) {
 
             var validated = true;
 
@@ -3258,7 +4537,7 @@ $('.wizard-card').bootstrapWizard({
               generateMultiDropdown("languageDropdown","Languages (if any)","languageDrop","Select languages",0,languages,100);
 
               //generate user fillable sections
-              generateMultiDropdown("optionalSectionsDropdown","Extra stat block entries (user fillable)","OSDrop","Select entries",0,["Ecology","Gear","Tactics"],100);
+              generateMultiDropdown("optionalSectionsDropdown","Extra stat block entries (user fillable)","OSDrop","Select entries",0,["Ecology","Tactics"],100);
 
               //geneate alignments
 
@@ -3335,8 +4614,8 @@ $('.wizard-card').bootstrapWizard({
                 return false;
             }
         }
-        //Validation tab 10
-        if (index == 10) {
+        //Validation tab 11
+        if (index == 11) {
 
           //final tab validation
           var validated = true;
@@ -3461,9 +4740,12 @@ $('.btn-graft').click(function(){
 });
 
 //show the summernote edit box wrapped around the statblock text
-function edit() {
+function editBlock() {
   $('.btn-save').show();
   $('.btn-edit').hide();
+  $('.btn-image').hide();
+  $('.btn-print').hide();
+  $('#overEdit').css({'margin-left': '0em', 'margin-right': '0em'});
   $('.summernoteEdit').summernote({
     focus: true,
     toolbar: [
@@ -3472,7 +4754,6 @@ function edit() {
       ['fontsize', ['fontsize']],
       ['insert', ['link','hr','picture']],
       ['misc', ['fullscreen','codeview',]],
-      ['miscc', ['print']]
     ],
     print: {
         'stylesheetUrl': 'static/css/print.css'
@@ -3481,11 +4762,29 @@ function edit() {
 };
 
 //remove the edit box and show straight html
-function save() {
+function saveBlock() {
   $('.btn-save').hide();
   $('.btn-edit').show();
+  $('.btn-image').show();
+  $('.btn-print').show();
+  $('#overEdit').css({'margin-left': '4.5em', 'margin-right': '1em'});
   var markup = $('.summernoteEdit').summernote('code');
   $('.summernoteEdit').summernote('destroy');
+};
+
+//generate image from statblock so user can save
+function blockToImage() {
+  html2canvas(document.querySelector("#capture")).then(canvas => {
+
+    canvas.toBlob(function(blob) {
+    	saveAs(blob, "statblock.png");
+    });
+  });
+};
+
+//print the statblock
+function printBlock() {
+    window.print();
 };
 
 function dismissAlert() {

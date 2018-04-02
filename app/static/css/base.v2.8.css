@@ -19,7 +19,7 @@ body {
     height: 65px;
   }
   .nav-height-calc {
-    height: calc(100vh - 350px);
+    height: calc(100vh - 460px);
   }
 }
 @media (max-width: 767px) {
@@ -30,7 +30,7 @@ body {
     height: 65px;
   }
   .nav-height-calc {
-    height: calc(100vh - 420px);
+    height: calc(100vh - 500px);
   }
 }
 
@@ -274,7 +274,7 @@ fieldset[disabled] .btn-grn.active {
 }
 
 .panel-bottom>h4{
-  color: #666666;}
+  color: #666666;
 }
 
 .progress-bar-grn {
@@ -418,6 +418,15 @@ line-height: 1.4;
 .summernoteEdit {
   margin-top: 15px;
   margin-bottom: 15px;
+  margin-left: -1.5em;
+}
+
+.summernoteEdit > div{
+    padding-left: 1.5em;
+    text-indent:-1.5em;
+}
+.summernoteEdit > hr {
+    margin-left: -2.5em;
 }
 
 /*carousel change colours to darker theme*/
@@ -444,4 +453,18 @@ line-height: 1.4;
 
 .carousel-caption{
     padding-bottom: 15px;
+}
+
+.fa-lock {
+  color: #666666;
+}
+
+.fa-unlock {
+  color: #d9d9d9;
+}
+
+.highlight-shadow {
+  /*text-decoration-line: underline;
+  text-decoration-color: #FF1493;*/
+  border-bottom: 2px solid #FF1493;
 }

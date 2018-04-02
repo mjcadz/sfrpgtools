@@ -46,8 +46,20 @@ def characterSheet():
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/thank-you')
-def thankYou():
-    resp = make_response(render_template('thank-you.html'))
+@app.route('/character-concept-generator')
+def characterGenerator():
+    resp = make_response(render_template('character-concept-generator.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp
+
+@app.route('/changelog')
+def changelog():
+    resp = make_response(render_template('changelog.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp
+
+@app.route('/encounter-generator')
+def encounterGenerator():
+    resp = make_response(render_template('encounter-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
