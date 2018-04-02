@@ -9,39 +9,19 @@ git remote set-url origin https://github.com/mjcadz/sfrpgtools.git
 https://github.com/silviomoreto/bootstrap-select
 bootstrap dropdown select
 
-CLASS INTEGRATIONS
-spells for spellcasters
-cache capacitor choices
-class special abilities
 
-Tactics
-before combat
-during combat
-Morale
 
-class gear + other gear
-class special abilities, make sure from cr abilities
-verify class choices have been made
-handle master skills for mystic
-solar manifestations
 solarian weapon crystals added to solar weapon
 solarian gear list shows 1+
 recommended class gear level shows numbers over 20
 
 bump version numbers
-soldier do adjustments in abilities
-soldier regular features
-soldier gear boosts
 
-gear show explode and blast attacks. resolve gear boost
-laser accuracy gear boost
 
-gear do armor upgrade properly
-generate attacks from chosen weapons
+gear show explode and blast attacks.
+
 add option for ammo in gear
 add grenades to weapon gen
-make sure generated weapons
-check critical hit formating. full word (critical)?
 
 add cybernetic to gear
 

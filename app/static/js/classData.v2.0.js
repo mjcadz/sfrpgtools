@@ -660,121 +660,205 @@ allClassFeatures = {
 			"1st":{
 				"Get 'Em": {
 				  "SOURCEPAGE": "p.62",
-				  "description": "As a move action, you can choose one enemy within 60 feet. Until the start of your next turn, you and your allies gain a +1 morale bonus to attack rolls made against that enemy. The bonus persists even if the enemy moves beyond 60 feet or out of line of sight or hearing. At 6th level, you can spend 1 Resolve Point to grant this bonus to attack rolls and damage rolls against all enemies who are within 60 feet."
+				  "description": "As a move action, you can choose one enemy within 60 feet. Until the start of your next turn, you and your allies gain a +1 morale bonus to attack rolls made against that enemy. The bonus persists even if the enemy moves beyond 60 feet or out of line of sight or hearing. At 6th level, you can spend 1 Resolve Point to grant this bonus to attack rolls and damage rolls against all enemies who are within 60 feet.",
+					"entry": {
+						"layout": "get'em",
+					}
 				},
 				"Universal Expression": {
 				  "SOURCEPAGE": "p.62",
-				  "description": "When using a language-dependent improvisation that affects an enemy, you can use the improvisation against that enemy even if the two of you do not share a language."
+				  "description": "When using a language-dependent improvisation that affects an enemy, you can use the improvisation against that enemy even if the two of you do not share a language.",
+					"entry": {
+						"layout": "universal expression",
+					}
 				},
 				"Dispiriting Taunt": {
 				  "SOURCEPAGE": "p.62",
-				  "description": "As a standard action, you can taunt an enemy within 60 feet. Attempt an Intimidate check with the same DC as a check to demoralize that enemy (though this isn't a check to demoralize, so you can't use abilities that would apply to a demoralization attempt, like the rattling presence expertise talent). If you fail, that enemy is off-target (see page 276) until the end of your next turn. If you succeed, that enemy is instead shaken (see page 277) until the end of your next turn. This is an emotion and fear effect. At 6th level, you can spend 1 Resolve Point to treat a failed Intimidate check for dispiriting taunt as if it were a success."
+				  "description": "As a standard action, you can taunt an enemy within 60 feet. Attempt an Intimidate check with the same DC as a check to demoralize that enemy (though this isn't a check to demoralize, so you can't use abilities that would apply to a demoralization attempt, like the rattling presence expertise talent). If you fail, that enemy is off-target (see page 276) until the end of your next turn. If you succeed, that enemy is instead shaken (see page 277) until the end of your next turn. This is an emotion and fear effect. At 6th level, you can spend 1 Resolve Point to treat a failed Intimidate check for dispiriting taunt as if it were a success.",
+					"entry": {
+						"layout": "dispiriting taunt",
+					}
 				},
 				"Look Alive": {
 				  "SOURCEPAGE": "p.62",
-				  "description": "When you spend a Resolve Point to regain Stamina Points after a 10-minute rest, all allies who stay within 60 feet of you throughout the rest gain a +2 morale bonus to Perception and initiative checks for the next hour or until the next 10-minute rest to recover Stamina Points, whichever comes first."
+				  "description": "When you spend a Resolve Point to regain Stamina Points after a 10-minute rest, all allies who stay within 60 feet of you throughout the rest gain a +2 morale bonus to Perception and initiative checks for the next hour or until the next 10-minute rest to recover Stamina Points, whichever comes first.",
+					"entry": {
+						"layout": "look alive",
+					}
 				},
 				"Expanded Attunement": {
 				  "SOURCEPAGE": "p.62",
-				  "description": "You can use beneficial mind-affecting envoy improvisations to aid allies who usually would not be able to gain benefits from mind-affecting effects, such as constructs, robots, and undead. If the improvisation grants a morale bonus, even allies who can't normally benefit from morale bonuses gain that bonus."
+				  "description": "You can use beneficial mind-affecting envoy improvisations to aid allies who usually would not be able to gain benefits from mind-affecting effects, such as constructs, robots, and undead. If the improvisation grants a morale bonus, even allies who can't normally benefit from morale bonuses gain that bonus.",
+					"entry": {
+						"layout": "expanded attunement",
+					}
 				},
 				"Clever Feint": {
 				  "SOURCEPAGE": "p.62",
-				  "description": "As a standard action, you can fake out an enemy within 60 feet, making that enemy open to your attacks. Attempt a Bluff check with the same DC as a check to feint against that enemy (though this isn't a standard check to feint, so Improved Feint and Greater Feint don't apply). Even if you fail, that enemy is flat-footed against your attacks (see page 276) until the end of your next turn. If you succeed, the enemy is also flat-footed against your allies' attacks until the end of your next turn. You can't use clever feint against a creature that lacks an Intelligence score. At 6th level, you can spend 1 Resolve Point to treat a failed Bluff check for clever feint as if it were a success."
+				  "description": "As a standard action, you can fake out an enemy within 60 feet, making that enemy open to your attacks. Attempt a Bluff check with the same DC as a check to feint against that enemy (though this isn't a standard check to feint, so Improved Feint and Greater Feint don't apply). Even if you fail, that enemy is flat-footed against your attacks (see page 276) until the end of your next turn. If you succeed, the enemy is also flat-footed against your allies' attacks until the end of your next turn. You can't use clever feint against a creature that lacks an Intelligence score. At 6th level, you can spend 1 Resolve Point to treat a failed Bluff check for clever feint as if it were a success.",
+					"entry": {
+						"layout": "clever feint",
+					}
 				},
 				"Watch Your Step": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "When an ally within 60 feet must succeed at a Reflex save to avoid a harmful effect, as a reaction before your ally attempts the saving throw, you can grant the ally a +2 bonus to that saving throw. At 6th level, you can spend 1 Resolve Point to have the ally roll twice on the saving throw and take the better result. Both of those rolls benefit from the +2 bonus provided by this ability. "
+				  "description": "When an ally within 60 feet must succeed at a Reflex save to avoid a harmful effect, as a reaction before your ally attempts the saving throw, you can grant the ally a +2 bonus to that saving throw. At 6th level, you can spend 1 Resolve Point to have the ally roll twice on the saving throw and take the better result. Both of those rolls benefit from the +2 bonus provided by this ability. ",
+					"entry": {
+						"layout": "watch your step",
+					}
 				},
 				"Don't Quit": {
 				  "SOURCEPAGE": "p.62",
-				  "description": "As a standard action, you can signal a single ally within 60 feet. That ally ignores one condition (see page 273) of your choice until the start of your next turn, chosen from the following list"
+				  "description": "As a standard action, you can signal a single ally within 60 feet. That ally ignores one condition (see page 273) of your choice until the start of your next turn, chosen from the following list",
+					"entry": {
+						"layout": "don't quit",
+					}
 				},
 				"Inspiring Boost": {
 				  "SOURCEPAGE": "p.62",
-				  "description": "As a standard action, you can signal an ally within 30 feet who has taken damage from any attack made by a significant enemy (see page 242) at any point after your last turn ended. That ally regains a number of Stamina Points (up to his maximum) equal to twice your envoy level + your Charisma modifier; at 15th level, this increases to three times your envoy level + your Charisma modifier. Once an ally has benefited from your inspiring boost, that ally can't gain the benefits of your inspiring boost again until he takes a 10-minute rest to recover Stamina Points. At 6th level, you can spend 1 Resolve Point to add your envoy level to the number of Stamina Points regained."
+				  "description": "As a standard action, you can signal an ally within 30 feet who has taken damage from any attack made by a significant enemy (see page 242) at any point after your last turn ended. That ally regains a number of Stamina Points (up to his maximum) equal to twice your envoy level + your Charisma modifier; at 15th level, this increases to three times your envoy level + your Charisma modifier. Once an ally has benefited from your inspiring boost, that ally can't gain the benefits of your inspiring boost again until he takes a 10-minute rest to recover Stamina Points. At 6th level, you can spend 1 Resolve Point to add your envoy level to the number of Stamina Points regained.",
+					"entry": {
+						"layout": "inspiring boost",
+					}
 				},
 				"Not in the Face": {
 				  "SOURCEPAGE": "p.62",
-				  "description": "As a move action, you can choose one enemy within 60 feet. That enemy must succeed at a Will save or take a -4 penalty to all attacks it makes against you until the end of your next turn. At 6th level, you can spend 1 Resolve Point to make the enemy take the penalty with no saving throw allowed."
+				  "description": "As a move action, you can choose one enemy within 60 feet. That enemy must succeed at a Will save or take a -4 penalty to all attacks it makes against you until the end of your next turn. At 6th level, you can spend 1 Resolve Point to make the enemy take the penalty with no saving throw allowed.",
+					"entry": {
+						"layout": "not in the face",
+					}
 				}
 			},
 			"4th":{
 				"Focus": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "As a standard action, you can encourage a single ally within 60 feet to focus on the danger at hand. If that ally is flat-footed or off-target, you end that condition. If circumstances would cause the ally to immediately become flat-footed or off-target again, you instead suppress that condition for 1 round."
+				  "description": "As a standard action, you can encourage a single ally within 60 feet to focus on the danger at hand. If that ally is flat-footed or off-target, you end that condition. If circumstances would cause the ally to immediately become flat-footed or off-target again, you instead suppress that condition for 1 round.",
+					"entry": {
+						"layout": "focus",
+					}
 				},
 				"Long-Range Improvisation": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "Double the range of your improvisations with ranges of at least 30 feet."
+				  "description": "Double the range of your improvisations with ranges of at least 30 feet.",
+					"entry": {
+						"layout": "long-range improvisation",
+					}
 				},
 				"Hurry": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "As a standard action, you can grant a single move action to an ally within 60 feet. The ally can use that move action during her next turn to take a guarded step, move up to her speed, or draw or sheathe a weapon. The ally can use her extra move action in between her other actions, and she can even use it before or after a full action. A character can use no more than one extra action from hurry in a single round."
+				  "description": "As a standard action, you can grant a single move action to an ally within 60 feet. The ally can use that move action during her next turn to take a guarded step, move up to her speed, or draw or sheathe a weapon. The ally can use her extra move action in between her other actions, and she can even use it before or after a full action. A character can use no more than one extra action from hurry in a single round.",
+					"entry": {
+						"layout": "hurry",
+					}
 				},
 				"Duck Under": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "You can duck under a foe's melee attack, causing it to overextend and move into a position more favorable to you. You must take the total defense action (see page 247) to use this ability. If, before the start of your next turn, a foe misses you with a melee attack, as a reaction you can attempt a reposition combat maneuver with a +8 bonus to your attack roll against that foe."
+				  "description": "You can duck under a foe's melee attack, causing it to overextend and move into a position more favorable to you. You must take the total defense action (see page 247) to use this ability. If, before the start of your next turn, a foe misses you with a melee attack, as a reaction you can attempt a reposition combat maneuver with a +8 bonus to your attack roll against that foe.",
+					"entry": {
+						"layout": "duck under",
+					}
 				},
 				"Quick Dispiriting Taunt": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "You can use dispiriting taunt as a move action instead of a standard action. You must have the dispiriting taunt envoy improvisation to choose this improvisation."
+				  "description": "You can use dispiriting taunt as a move action instead of a standard action. You must have the dispiriting taunt envoy improvisation to choose this improvisation.",
+					"entry": {
+						"layout": "quick dispiriting taunt",
+					}
 				},
 				"Clever Attack": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "You can make an attack that throws your enemy off-balance. As a standard action, you can make a single attack against a target within 60 feet and gain the benefits of clever feint (attempting a Bluff check against the target as normal). Apply the effects of clever feint before resolving your attack. You must have the clever feint envoy improvisation to choose this improvisation."
+				  "description": "You can make an attack that throws your enemy off-balance. As a standard action, you can make a single attack against a target within 60 feet and gain the benefits of clever feint (attempting a Bluff check against the target as normal). Apply the effects of clever feint before resolving your attack. You must have the clever feint envoy improvisation to choose this improvisation.",
+					"entry": {
+						"layout": "clever attack",
+					}
 				},
 				"Watch Out": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "As a reaction, when an enemy makes a ranged attack against an ally within 60 feet of you, you can warn that ally of the danger. You must spend your reaction when the enemy declares the attack but before it makes the attack roll. Your ally can spend a reaction to gain a +4 to AC against the triggering attack. Once the triggering attack is resolved, the ally falls prone. At 8th level, you can spend 1 Resolve Point to prevent your ally from falling prone after the attack."
+				  "description": "As a reaction, when an enemy makes a ranged attack against an ally within 60 feet of you, you can warn that ally of the danger. You must spend your reaction when the enemy declares the attack but before it makes the attack roll. Your ally can spend a reaction to gain a +4 to AC against the triggering attack. Once the triggering attack is resolved, the ally falls prone. At 8th level, you can spend 1 Resolve Point to prevent your ally from falling prone after the attack.",
+					"entry": {
+						"layout": "watch out",
+					}
 				},
 				"Quick Inspiring Boost": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "You can use inspiring boost as a move action instead of a standard action, though when you do so, the number of Stamina Points your ally recovers is reduced by your envoy level. You must have the inspiring boost envoy improvisation to choose this improvisation."
+				  "description": "You can use inspiring boost as a move action instead of a standard action, though when you do so, the number of Stamina Points your ally recovers is reduced by your envoy level. You must have the inspiring boost envoy improvisation to choose this improvisation.",
+					"entry": {
+						"layout": "quick inspiring boost",
+					}
 				}
 			},
 			"6th":{
 				"Improved Get 'Em": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "Your morale bonus from get 'em increases to +2. As a standard action, you can make a single attack against a target within 60 feet. You and your allies within 60 feet gain the benefits of get 'em against that target (applying these effects before making the attack roll). As with get 'em, you can spend 1 Resolve Point to grant the benefits against all enemies within 60 feet. You must have the get 'em envoy improvisation to choose this improvisation. "
+				  "description": "Your morale bonus from get 'em increases to +2. As a standard action, you can make a single attack against a target within 60 feet. You and your allies within 60 feet gain the benefits of get 'em against that target (applying these effects before making the attack roll). As with get 'em, you can spend 1 Resolve Point to grant the benefits against all enemies within 60 feet. You must have the get 'em envoy improvisation to choose this improvisation. ",
+					"entry": {
+						"layout": "improved get'em",
+					}
 				},
 				"Draw Fire": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "As a standard action, you can spend 1 Resolve Point to make all enemies within 100 feet take a -4 penalty to all ranged attacks they make that don't target you until the end of your next turn. This penalty remains even if you and an enemy move more than 100 feet away from each other, and enemies that weren't within 100 feet when you used draw fire don't take the penalty if they later come within range."
+				  "description": "As a standard action, you can spend 1 Resolve Point to make all enemies within 100 feet take a -4 penalty to all ranged attacks they make that don't target you until the end of your next turn. This penalty remains even if you and an enemy move more than 100 feet away from each other, and enemies that weren't within 100 feet when you used draw fire don't take the penalty if they later come within range.",
+					"entry": {
+						"layout": "draw fire",
+					}
 				},
 				"Heads Up": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "When you succeed at a Perception check, as a reaction, you can signal a single ally within 60 feet. That ally can act as if he had also succeeded at the Perception check with the same result."
+				  "description": "When you succeed at a Perception check, as a reaction, you can signal a single ally within 60 feet. That ally can act as if he had also succeeded at the Perception check with the same result.",
+					"entry": {
+						"layout": "heads up",
+					}
 				},
 				"Clever Improvisations": {
 				  "SOURCEPAGE": "p.63",
-				  "description": "The first time you would spend Resolve Points on one of your envoy improvisations, reduce the cost by 1 Resolve Point (minimum 0). This ability refreshes whenever you take a 10-minute rest to recover Stamina Points and after an 8-hour rest to recover Resolve Points, reducing the Resolve Point cost of your next envoy improvisation after the rest."
+				  "description": "The first time you would spend Resolve Points on one of your envoy improvisations, reduce the cost by 1 Resolve Point (minimum 0). This ability refreshes whenever you take a 10-minute rest to recover Stamina Points and after an 8-hour rest to recover Resolve Points, reducing the Resolve Point cost of your next envoy improvisation after the rest.",
+					"entry": {
+						"layout": "clever improvisations",
+					}
 				}
 			},
 			"8th":{
 				"Hidden Agenda": {
 				  "SOURCEPAGE": "p.64",
-				  "description": "You're an expert at veiling your true thoughts and goals. Whenever a creature attempts a Sense Motive check to detect a deception of yours, the creature must roll twice and take the worse of the two results. When you attempt a saving throw against an effect or ability that would read your thoughts or reveal your motives, you can roll twice and take the better of the two results."
+				  "description": "You're an expert at veiling your true thoughts and goals. Whenever a creature attempts a Sense Motive check to detect a deception of yours, the creature must roll twice and take the worse of the two results. When you attempt a saving throw against an effect or ability that would read your thoughts or reveal your motives, you can roll twice and take the better of the two results.",
+					"entry": {
+						"layout": "hidden agenda",
+					}
 				},
 				"Improved Hurry": {
 				  "SOURCEPAGE": "p.64",
-				  "description": "You can use the hurry envoy improvisation as a move action instead of a standard action. You must have the hurry envoy improvisation to choose this improvisation. At 12th level, you can use hurry as a standard action and spend 1 Resolve Point to grant a standard action instead of a move action."
+				  "description": "You can use the hurry envoy improvisation as a move action instead of a standard action. You must have the hurry envoy improvisation to choose this improvisation. At 12th level, you can use hurry as a standard action and spend 1 Resolve Point to grant a standard action instead of a move action.",
+					"entry": {
+						"layout": "improved hurry",
+					}
 				},
 				"Situational Awareness": {
 				  "SOURCEPAGE": "p.64",
-				  "description": "If you ready an action, once before the trigger you selected occurs, you can spend 1 Resolve Point to change both the trigger and the action you have ready. You must ready an action that takes the same kind of action as your originally readied action, or you must ready a lesser action. (For example, if you readied a standard action, you could switch to another standard action, a move action, or a swift action, and if you readied a move action, you could switch to another move action or a swift action.)"
+				  "description": "If you ready an action, once before the trigger you selected occurs, you can spend 1 Resolve Point to change both the trigger and the action you have ready. You must ready an action that takes the same kind of action as your originally readied action, or you must ready a lesser action. (For example, if you readied a standard action, you could switch to another standard action, a move action, or a swift action, and if you readied a move action, you could switch to another move action or a swift action.)",
+					"entry": {
+						"layout": "situational awareness",
+					}
 				},
 				"Desperate Defense": {
 				  "SOURCEPAGE": "p.64",
-				  "description": "As a move action, you can cause one ally adjacent to you to not be considered helpless (see page 276) for the purpose of actions that can be used only against helpless creatures (such as a coup de grace). This effect ends if the creature ceases to be adjacent to you or at the beginning of your next turn, whichever comes first."
+				  "description": "As a move action, you can cause one ally adjacent to you to not be considered helpless (see page 276) for the purpose of actions that can be used only against helpless creatures (such as a coup de grace). This effect ends if the creature ceases to be adjacent to you or at the beginning of your next turn, whichever comes first.",
+					"entry": {
+						"layout": "desperate defense",
+					}
 				},
 				"Expert Attack": {
 				  "SOURCEPAGE": "p.64",
-				  "description": "As a move action, you can spend 2 Resolve Points to add your bonus from expertise to your next attack roll before the end of your turn."
+				  "description": "As a move action, you can spend 2 Resolve Points to add your bonus from expertise to your next attack roll before the end of your turn.",
+					"entry": {
+						"layout": "expert attack",
+					}
 				},
 				"Sustained Determination": {
 				  "SOURCEPAGE": "p.64",
-				  "description": "As a move action, you can spend 2 Resolve Points to grant an ally within 60 feet 1 Resolve Point that he can spend to empower one of his abilities, even if he has spent all of his own Resolve Points. The ally must spend the Resolve Point before the start of your next turn; if he does not do so, he loses the Resolve Point and you still lose the Resolve Points you spent. You can't grant the same ally the benefits of this ability again until both you and your ally have recovered your Resolve Points after an 8-hour rest or its equivalent."
+				  "description": "As a move action, you can spend 2 Resolve Points to grant an ally within 60 feet 1 Resolve Point that he can spend to empower one of his abilities, even if he has spent all of his own Resolve Points. The ally must spend the Resolve Point before the start of your next turn; if he does not do so, he loses the Resolve Point and you still lose the Resolve Points you spent. You can't grant the same ally the benefits of this ability again until both you and your ally have recovered your Resolve Points after an 8-hour rest or its equivalent.",
+					"entry": {
+						"layout": "sustained determination",
+					}
 				}
 			}
 		},
@@ -1569,7 +1653,10 @@ allClassFeatures = {
 		"Exocortex": {
 			"Twin Tracking": {
 				"SOURCEPAGE": "p.79",
-				"description": "You can designate two targets for your exocortex to track, increasing your base attack bonus against each. You can designate both targets with a single move action, but you must be able to see them both at that time."
+				"description": "You can designate two targets for your exocortex to track, increasing your base attack bonus against each. You can designate both targets with a single move action, but you must be able to see them both at that time.",
+				"entry": {
+					"layout": "twin tracking",
+				}
 			},
 			"Memory Module": {
 				"SOURCEPAGE": "p.79",
@@ -1577,7 +1664,10 @@ allClassFeatures = {
 			},
 			"Quad Tracking": {
 				"SOURCEPAGE": "p.79",
-				"description": "Your exocortex can track four targets simultaneously, and hacking a nearby computer doesn't count against that limit."
+				"description": "Your exocortex can track four targets simultaneously, and hacking a nearby computer doesn't count against that limit.",
+				"entry": {
+					"layout": "quad tracking",
+				}
 			},
 			"Exocortex Mods": {
 				"SOURCEPAGE": "p.79",
@@ -1585,38 +1675,69 @@ allClassFeatures = {
 			},
 			"Wireless Hack": {
 				"SOURCEPAGE": "p.79",
-				"description": "Instead of combat tracking, your exocortex can access another computer system within 20 feet, allowing it to attempt a Computers check against that computer each round, using your skill bonus. This counts as a standard action for the purpose of the Computers skill. You must remain within 20 feet of the computer system for the entire time your exocortex is interacting with the computer. If the task requires multiple actions (or even rounds) to accomplish, you can spend your actions to work in concert with your exocortex, counting both your action and the exocortex's effective standard action toward the total time required. If you don't have the remote hack class feature, you must be adjacent to the computer to attempt your checks."
+				"description": "Instead of combat tracking, your exocortex can access another computer system within 20 feet, allowing it to attempt a Computers check against that computer each round, using your skill bonus. This counts as a standard action for the purpose of the Computers skill. You must remain within 20 feet of the computer system for the entire time your exocortex is interacting with the computer. If the task requires multiple actions (or even rounds) to accomplish, you can spend your actions to work in concert with your exocortex, counting both your action and the exocortex's effective standard action toward the total time required. If you don't have the remote hack class feature, you must be adjacent to the computer to attempt your checks.",
+				"entry": {
+					"layout": "wireless hack",
+				}
 			},
 			"Multitasking": {
 				"SOURCEPAGE": "p.79",
-				"description": "You can designate three targets for your exocortex to track (and designate them all as a single move action). In addition, the range of your exocortex's wireless hack increases to 40 feet. Your exocortex can also engage in combat tracking and hack a nearby computer at the same time, but the computer counts as one of the exocortex's designated targets (allowing you to track only two targets at the same time while wirelessly hacking the computer). Lastly, you can access your exocortex's memory module in combat, even while it is engaged in combat tracking."
+				"description": "You can designate three targets for your exocortex to track (and designate them all as a single move action). In addition, the range of your exocortex's wireless hack increases to 40 feet. Your exocortex can also engage in combat tracking and hack a nearby computer at the same time, but the computer counts as one of the exocortex's designated targets (allowing you to track only two targets at the same time while wirelessly hacking the computer). Lastly, you can access your exocortex's memory module in combat, even while it is engaged in combat tracking.",
+				"entry": {
+					"layout": "multitasking",
+				}
 			},
 			"Combat Tracking": {
 				"SOURCEPAGE": "p.79",
-				"description": "Your exocortex provides you with enhanced combat ability, granting you proficiency with heavy armor and longarms. At 3rd level, you gain weapon specialization in longarms just as if your class granted proficiency. As a move action during combat, you can designate a foe for your exocortex to track. As long as that target is in sight, the exocortex feeds you telemetry, vulnerabilities, and combat tactics, allowing you to make attacks against that target as if your base attack bonus from your mechanic levels were equal to your mechanic level. Designating another target causes you to immediately lose this bonus against the previous target."
+				"description": "Your exocortex provides you with enhanced combat ability, granting you proficiency with heavy armor and longarms. At 3rd level, you gain weapon specialization in longarms just as if your class granted proficiency. As a move action during combat, you can designate a foe for your exocortex to track. As long as that target is in sight, the exocortex feeds you telemetry, vulnerabilities, and combat tactics, allowing you to make attacks against that target as if your base attack bonus from your mechanic levels were equal to your mechanic level. Designating another target causes you to immediately lose this bonus against the previous target.",
+				"entry": {
+					"layout": "combat tracking",
+				}
+			},
+			"Target Tracking": {
+				"SOURCEPAGE": "p.79",
+				"description": "As a move action, this NPC can designate and track a single foe, gaining a +2 bonus to attack rolls against that target. Use this same bonus for twin tracking and quad tracking.",
+				"entry": {
+					"layout": "target tracking",
+				}
 			}
 		},
 		"Mechanic Tricks": {
 			"2nd":{
 				"Quick Repair": {
 				  "SOURCEPAGE": "p.72",
-				  "description": "When you attempt to repair an item, you can do so in half the time normally required (to a minimum of a full action)."
+				  "description": "When you attempt to repair an item, you can do so in half the time normally required (to a minimum of a full action).",
+					"entry": {
+						"layout": "quick repair"
+					}
 				},
 				"Distracting Hack": {
 				  "SOURCEPAGE": "p.71",
-				  "description": "You can hack a computer within 30 feet of a foe to distract that foe, such as with a sudden noise or an image. You must be able to access the computer (whether it is your own computer or you are within range to access one manually or via remote hack). This functions as a feint action except that it uses your Computers skill instead of Bluff, so you can apply the benefits of Improved Feint and Greater Feint if you have them."
+				  "description": "You can hack a computer within 30 feet of a foe to distract that foe, such as with a sudden noise or an image. You must be able to access the computer (whether it is your own computer or you are within range to access one manually or via remote hack). This functions as a feint action except that it uses your Computers skill instead of Bluff, so you can apply the benefits of Improved Feint and Greater Feint if you have them.",
+					"entry": {
+						"layout": "distracting hack"
+					}
 				},
 				"Overcharge": {
 				  "SOURCEPAGE": "p.72",
-				  "description": "As a standard action, you can use your custom rig to overcharge and attack with a ranged energy weapon or a melee weapon with the powered special property (see page  181) that you're holding. If you hit, you deal 1d6 additional damage of the same type the weapon normally deals. This attack uses three times as many charges from the battery or power cell as normal and can't be used if the weapon doesn't have enough charges. This trick has no effect on a weapon without a battery or power cell. You can instead use this ability as a move action on a touched powered weapon that is unattended or attended by an ally to grant the same effect to that weapon's next attack before the beginning of your next turn."
+				  "description": "As a standard action, you can use your custom rig to overcharge and attack with a ranged energy weapon or a melee weapon with the powered special property (see page  181) that you're holding. If you hit, you deal 1d6 additional damage of the same type the weapon normally deals. This attack uses three times as many charges from the battery or power cell as normal and can't be used if the weapon doesn't have enough charges. This trick has no effect on a weapon without a battery or power cell. You can instead use this ability as a move action on a touched powered weapon that is unattended or attended by an ally to grant the same effect to that weapon's next attack before the beginning of your next turn.",
+					"entry": {
+						"layout": "overcharge [1d6]"
+					}
 				},
 				"Portable Power": {
 				  "SOURCEPAGE": "p.72",
-				  "description": "You can use your custom rig to supply limited power for up to 1 minute to a computer or starship system that lacks power. If this system is part of a much larger network, this trick does not supply power to the entire network, just to a limited point of access (typically a terminal), which might greatly limit functionality. Once you have used portable power on a system, you cannot do so again on that system for 24 hours."
+				  "description": "You can use your custom rig to supply limited power for up to 1 minute to a computer or starship system that lacks power. If this system is part of a much larger network, this trick does not supply power to the entire network, just to a limited point of access (typically a terminal), which might greatly limit functionality. Once you have used portable power on a system, you cannot do so again on that system for 24 hours.",
+					"entry": {
+						"layout": "portable power"
+					}
 				},
 				"Overload Weapon": {
 				  "SOURCEPAGE": "p.72",
-				  "description": "As a full action or as a move action by spending 1 Resolve Point, you can cause a powered weapon (either a ranged energy weapon or a melee weapon with the powered special property) in your possession to explode. You can use the weapon as if it were a grenade of the weapon's item level or lower dealing the weapon's normal damage type, except the weapon has a range increment of only 10 feet unless it is a thrown weapon. If someone tries to attack with the weapon, it explodes as a grenade would instead, centered on the user, and the user doesn't receive a Reflex save to negate the grenade's effect (if any). Once you've primed a weapon to explode in this way, it's difficult to reverse the effect, requiring 8 hours of work and a successful Engineering check (DC = 15 + your Engineering bonus); failing the check by 5 or more detonates the weapon. Once detonated, the weapon is destroyed, just like a grenade."
+				  "description": "As a full action or as a move action by spending 1 Resolve Point, you can cause a powered weapon (either a ranged energy weapon or a melee weapon with the powered special property) in your possession to explode. You can use the weapon as if it were a grenade of the weapon's item level or lower dealing the weapon's normal damage type, except the weapon has a range increment of only 10 feet unless it is a thrown weapon. If someone tries to attack with the weapon, it explodes as a grenade would instead, centered on the user, and the user doesn't receive a Reflex save to negate the grenade's effect (if any). Once you've primed a weapon to explode in this way, it's difficult to reverse the effect, requiring 8 hours of work and a successful Engineering check (DC = 15 + your Engineering bonus); failing the check by 5 or more detonates the weapon. Once detonated, the weapon is destroyed, just like a grenade.",
+					"entry": {
+						"layout": "overload weapon"
+					}
 				},
 				"Nightvision Processor": {
 				  "SOURCEPAGE": "p.72",
@@ -1624,117 +1745,215 @@ allClassFeatures = {
 				},
 				"Overclocking": {
 				  "SOURCEPAGE": "p.72",
-				  "description": "You have augmented the performance of your AI for maximum response timing. You gain a +2 insight bonus to initiative checks, and either you (if you have an exocortex) or your drone (if you have a drone) gains a +2 insight bonus to Reflex saves."
+				  "description": "You have augmented the performance of your AI for maximum response timing. You gain a +2 insight bonus to initiative checks, and either you (if you have an exocortex) or your drone (if you have a drone) gains a +2 insight bonus to Reflex saves.",
+					"entry": {
+						"layout": "overclocking"
+					}
 				},
 				"Hack Directory": {
 				  "SOURCEPAGE": "p.71",
-				  "description": "Whenever you attempt to hack a system and fail the check, you immediately become aware of any countermeasures that were activated due to your failure. You can then select one of these countermeasures and attempt another Computers check (with the same DC as the original). If you succeed at this second check, you can prevent that countermeasure from activating, as if you had not attempted to access the system at all. Any other countermeasures have their normal effect."
+				  "description": "Whenever you attempt to hack a system and fail the check, you immediately become aware of any countermeasures that were activated due to your failure. You can then select one of these countermeasures and attempt another Computers check (with the same DC as the original). If you succeed at this second check, you can prevent that countermeasure from activating, as if you had not attempted to access the system at all. Any other countermeasures have their normal effect.",
+					"entry": {
+						"layout": "hack directory"
+					}
 				},
 				"Energy Shield": {
 				  "SOURCEPAGE": "p.71",
-				  "description": "As a standard action, you can use your custom rig to activate an energy shield around yourself. This shield provides you with a number of temporary Hit Points equal to your Intelligence modifier plus your mechanic level. The shield remains active for 1 minute per mechanic level or until all of its temporary Hit Points are depleted, whichever comes first. Once used, you cannot use this ability again until you spend 1 Resolve Point to regain Stamina Points after a 10-minute rest; your shield automatically shuts off during this period of rest."
+				  "description": "As a standard action, you can use your custom rig to activate an energy shield around yourself. This shield provides you with a number of temporary Hit Points equal to your Intelligence modifier plus your mechanic level. The shield remains active for 1 minute per mechanic level or until all of its temporary Hit Points are depleted, whichever comes first. Once used, you cannot use this ability again until you spend 1 Resolve Point to regain Stamina Points after a 10-minute rest; your shield automatically shuts off during this period of rest.",
+					"entry": {
+						"layout": "energy shield"
+					}
 				},
 				"Visual Data Processor": {
 				  "SOURCEPAGE": "p.72",
-				  "description": "You notice even the smallest shifts in movement, temperature, and vibration, gaining the insight bonus from your bypass class feature to Perception skill checks."
+				  "description": "You notice even the smallest shifts in movement, temperature, and vibration, gaining the insight bonus from your bypass class feature to Perception skill checks.",
+					"entry": {
+						"layout": "visual data processor"
+					}
 				},
 				"Neural Shunt": {
 				  "SOURCEPAGE": "p.72",
-				  "description": "Once per day, as a reaction when you fail a saving throw against a mind-affecting effect, you can shunt that effect into your exocortex instead. When you do so, you are not affected by the mind-affecting effect, but for the normal duration of that effect, you lose the Skill Focus feat granted by your exocortex's memory module and cannot use any of the exocortex's abilities in any way (including any proficiencies and mods it grants you). When a mind-affecting effect is shunted into the exocortex, spells such as dispel magic or break enchantment can be cast on you to end the effect as if you were affected by it. Once the duration of the mindaffecting effect has ended, your exocortex resumes its normal functions. You must have an exocortex to learn this trick."
+				  "description": "Once per day, as a reaction when you fail a saving throw against a mind-affecting effect, you can shunt that effect into your exocortex instead. When you do so, you are not affected by the mind-affecting effect, but for the normal duration of that effect, you lose the Skill Focus feat granted by your exocortex's memory module and cannot use any of the exocortex's abilities in any way (including any proficiencies and mods it grants you). When a mind-affecting effect is shunted into the exocortex, spells such as dispel magic or break enchantment can be cast on you to end the effect as if you were affected by it. Once the duration of the mindaffecting effect has ended, your exocortex resumes its normal functions. You must have an exocortex to learn this trick.",
+					"entry": {
+						"layout": "neural shunt"
+					}
 				},
 				"Quick Patch": {
 				  "SOURCEPAGE": "p.72",
-				  "description": "When you attempt to patch a system on a starship, you reduce the number of actions required to do so by one. This does not reduce the time needed to patch a glitching system, but you can patch two systems with one action."
+				  "description": "When you attempt to patch a system on a starship, you reduce the number of actions required to do so by one. This does not reduce the time needed to patch a glitching system, but you can patch two systems with one action.",
+					"entry": {
+						"layout": "quick patch"
+					}
 				},
 				"Repair Drone": {
 				  "SOURCEPAGE": "p.72",
-				  "description": "When you spend 10 minutes to repair your drone, you repair 25%% of its maximum Hit Points instead of 10%%. You must have a drone to learn this trick."
+				  "description": "When you spend 10 minutes to repair your drone, you repair 25% of its maximum Hit Points instead of 10%. You must have a drone to learn this trick.",
+					"entry": {
+						"layout": "repair drone"
+					}
 				}
 			},
 			"8th":{
 				"Boost Shield": {
 				  "SOURCEPAGE": "p.72",
-				  "description": "Your energy shield grants you a number of temporary Hit Points equal to your Intelligence modifier + double your mechanic level. In addition, if you have already used your shield, you can spend 1 Resolve Point to use it again without having to regain Stamina Points first. This replenishes your shield's temporary Hit Points to full. You must have the energy shield mechanic trick to learn this trick."
+				  "description": "Your energy shield grants you a number of temporary Hit Points equal to your Intelligence modifier + double your mechanic level. In addition, if you have already used your shield, you can spend 1 Resolve Point to use it again without having to regain Stamina Points first. This replenishes your shield's temporary Hit Points to full. You must have the energy shield mechanic trick to learn this trick.",
+					"entry": {
+						"layout": "boost shield"
+					}
 				},
 				"Scoutbot": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "You're always crafting rudimentary bots in your spare time, and can use them to scout. It takes you 10 minutes and 1 Resolve Point to create a scoutbot. A scoutbot is a Small technological construct, its EAC and KAC are equal to 10 + your mechanic level, and it has 1 Hit Point per mechanic level you have (and no Stamina Points). It has a land speed of 30 feet, and you can control its movements with your custom rig as a move action. It has a camera that streams visual and auditory data back to your rig. The scoutbot uses your saving throw bonuses if necessary. It is untrained in all skills and has a +0 bonus in all of them, though you can use your own Perception skill when examining the feed from its stream. Once created, the scoutbot lasts for 1 minute per mechanic level you have before falling apart unless otherwise destroyed."
+				  "description": "You're always crafting rudimentary bots in your spare time, and can use them to scout. It takes you 10 minutes and 1 Resolve Point to create a scoutbot. A scoutbot is a Small technological construct, its EAC and KAC are equal to 10 + your mechanic level, and it has 1 Hit Point per mechanic level you have (and no Stamina Points). It has a land speed of 30 feet, and you can control its movements with your custom rig as a move action. It has a camera that streams visual and auditory data back to your rig. The scoutbot uses your saving throw bonuses if necessary. It is untrained in all skills and has a +0 bonus in all of them, though you can use your own Perception skill when examining the feed from its stream. Once created, the scoutbot lasts for 1 minute per mechanic level you have before falling apart unless otherwise destroyed.",
+					"entry": {
+						"layout": "scoutbot"
+					}
 				},
 				"Hyperclocking": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "You further improve the response time of your AI. If you have a drone, your drone gains a +1 insight bonus to AC. In addition, if your drone is subjected to an attack that normally allows a Reflex save for half damage, it takes no damage if it succeeds at its saving throw. If you have an exocortex, you gain a +1 insight bonus to AC. In addition, whenever you fail a Reflex saving throw, you can spend 1 Resolve Point to reroll the saving throw (see page 243) and take the higher result. You must have the overclocking mechanic trick to learn this trick."
+				  "description": "You further improve the response time of your AI. If you have a drone, your drone gains a +1 insight bonus to AC. In addition, if your drone is subjected to an attack that normally allows a Reflex save for half damage, it takes no damage if it succeeds at its saving throw. If you have an exocortex, you gain a +1 insight bonus to AC. In addition, whenever you fail a Reflex saving throw, you can spend 1 Resolve Point to reroll the saving throw (see page 243) and take the higher result. You must have the overclocking mechanic trick to learn this trick.",
+					"entry": {
+						"layout": "hyperclocking"
+					}
 				},
 				"Resistant Energy": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "Even when your energy shield is inactive, the ambient energy protects you from a particular type of energy attack. Choose acid, cold, electricity, fire, or sonic. You gain resistance 5 against that energy type. You must have the energy shield mechanic trick to learn this trick."
+				  "description": "Even when your energy shield is inactive, the ambient energy protects you from a particular type of energy attack. Choose acid, cold, electricity, fire, or sonic. You gain resistance 5 against that energy type. You must have the energy shield mechanic trick to learn this trick.",
+					"entry": {
+						"layout": "resistant energy"
+					}
 				},
 				"Ghost Intrusion": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "Whenever you use the Computers skill to access a system and you fail to overcome its defenses by 4 or less, you do not trigger any countermeasures and there is no log of your attempt. If you fail by 5 or more, any countermeasures take effect against you as normal."
+				  "description": "Whenever you use the Computers skill to access a system and you fail to overcome its defenses by 4 or less, you do not trigger any countermeasures and there is no log of your attempt. If you fail by 5 or more, any countermeasures take effect against you as normal.",
+					"entry": {
+						"layout": "ghost intrusion"
+					}
 				},
 				"Holographic Projector": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "Your custom rig can project holographic images as a standard action as often as you like, as per 2nd-level holographic image except it can create speech and has a range of only 120 feet."
+				  "description": "Your custom rig can project holographic images as a standard action as often as you like, as per 2nd-level holographic image except it can create speech and has a range of only 120 feet.",
+					"entry": {
+						"layout": "holographic projector [120 ft.]"
+					}
 				},
 				"Engineer's Eye": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "When you are within 10 feet of a trapped or malfunctioning machine or computer, you receive a free Computers, Engineering, or Perception check (as decided by the GM) to notice the trap or defect, whether or not you are actively looking. In addition, due to your intimate knowledge of your ship, you receive one of these checks whenever you board your ship to notice if anything is wrong with the ship's systems."
+				  "description": "When you are within 10 feet of a trapped or malfunctioning machine or computer, you receive a free Computers, Engineering, or Perception check (as decided by the GM) to notice the trap or defect, whether or not you are actively looking. In addition, due to your intimate knowledge of your ship, you receive one of these checks whenever you board your ship to notice if anything is wrong with the ship's systems.",
+					"entry": {
+						"layout": "engineer's eye"
+					}
 				},
 				"Improved Overcharge": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "The additional damage of the overcharge mechanic trick increases to 2d6. You must have the overcharge mechanic trick to learn this trick."
+				  "description": "The additional damage of the overcharge mechanic trick increases to 2d6. You must have the overcharge mechanic trick to learn this trick.",
+					"entry": {
+						"layout": "improved overcharge"
+					}
 				},
 				"Drone Meld": {
 				  "SOURCEPAGE": "p.72",
-				  "description": "As a full action while in contact with your drone, you can reconfigure it into a mechanical drone suit (or a backpack-like apparatus, for the Tiny hover drone) that you can wear. While in this form, the drone can't take any actions or use any of its abilities, but you gain either the drone's flight system mods if you have a hover drone, reactive camouflage (and an invisibility field if your drone has it) if you have a stealth drone, or reductive plating if you have a combat drone. You can end the meld and return the drone to its normal form as a full action. Though it normally acts on your turn just after you, the drone can take no actions on that turn other than transforming back."
+				  "description": "As a full action while in contact with your drone, you can reconfigure it into a mechanical drone suit (or a backpack-like apparatus, for the Tiny hover drone) that you can wear. While in this form, the drone can't take any actions or use any of its abilities, but you gain either the drone's flight system mods if you have a hover drone, reactive camouflage (and an invisibility field if your drone has it) if you have a stealth drone, or reductive plating if you have a combat drone. You can end the meld and return the drone to its normal form as a full action. Though it normally acts on your turn just after you, the drone can take no actions on that turn other than transforming back.",
+					"entry": {
+						"layout": "drone meld"
+					}
 				},
 				"Invisibility Bypass Processor": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "Your visual data processor now allows you to see invisible creatures as per see invisibility. You must have the visual data processor mechanic trick to learn this trick."
+				  "description": "Your visual data processor now allows you to see invisible creatures as per see invisibility. You must have the visual data processor mechanic trick to learn this trick.",
+					"entry": {
+						"layout": "invisibility bypass processor"
+					}
 				},
 			},
 			"14th":{
 				"Improved Resistant Energy": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "Choose an additional energy type from resistant energy. You gain resistance 15 against both this and your original energy type. You must have the energy shield and resistant energy mechanic tricks to learn this trick."
+				  "description": "Choose an additional energy type from resistant energy. You gain resistance 15 against both this and your original energy type. You must have the energy shield and resistant energy mechanic tricks to learn this trick.",
+					"entry": {
+						"layout": "improved resistant energy"
+					}
 				},
 				"Superior Overcharge": {
 				  "SOURCEPAGE": "p.74",
-				  "description": "The additional damage of the overcharge mechanic trick increases to 4d6. You must have the overcharge and improved overcharge mechanic tricks to learn this trick. You can select this trick multiple times. Each time you do after the first, increase the damage by 1d6 (to a maximum of 7d6 if you select it all four times)."
+				  "description": "The additional damage of the overcharge mechanic trick increases to 4d6. You must have the overcharge and improved overcharge mechanic tricks to learn this trick. You can select this trick multiple times. Each time you do after the first, increase the damage by 1d6 (to a maximum of 7d6 if you select it all four times).",
+					"entry": {
+						"layout": "superior overcharge"
+					}
 				},
 				"Mod Tinkerer": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "You can spend 24 hours of uninterrupted work to exchange all your drone or exocortex mods at any time, even if you haven't gained a level. Any other drone features (such as its chassis or bonus feats) can still be exchanged only when you gain a level."
+				  "description": "You can spend 24 hours of uninterrupted work to exchange all your drone or exocortex mods at any time, even if you haven't gained a level. Any other drone features (such as its chassis or bonus feats) can still be exchanged only when you gain a level.",
+					"entry": {
+						"layout": "mod tinkerer"
+					}
 				},
 				"Invisibility-Hampering Projector": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "As a move action, you can use your custom rig's holographic projector to project a holographic image in a direct overlay over an invisible creature within 120 feet, and your custom rig's computer moves the image to follow the invisible creature, effectively negating the creature's invisibility as long as it remains within 120 feet of you. If it moves beyond that range, it breaks the effect until you use this ability again. You must have the holographic projector, invisibility bypass processor, and visual data processor mechanic tricks to learn this trick."
+				  "description": "As a move action, you can use your custom rig's holographic projector to project a holographic image in a direct overlay over an invisible creature within 120 feet, and your custom rig's computer moves the image to follow the invisible creature, effectively negating the creature's invisibility as long as it remains within 120 feet of you. If it moves beyond that range, it breaks the effect until you use this ability again. You must have the holographic projector, invisibility bypass processor, and visual data processor mechanic tricks to learn this trick.",
+					"entry": {
+						"layout": "invisibility-hampering projector"
+					}
 				},
 				"Saboteur": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "Whenever you use the Engineering skill to sabotage or disable a device, you can roll twice and take the better result. In addition, if you have the appropriate tools (including your custom rig), performing these tasks takes half the normal amount of time, to a minimum of 1 move action."
+				  "description": "Whenever you use the Engineering skill to sabotage or disable a device, you can roll twice and take the better result. In addition, if you have the appropriate tools (including your custom rig), performing these tasks takes half the normal amount of time, to a minimum of 1 move action.",
+					"entry": {
+						"layout": "saboteur"
+					}
 				},
 				"Ultraclocking": {
 				  "SOURCEPAGE": "p.74",
-				  "description": "If you have a drone, you can grant the effects of haste to your drone for 1 minute as a move action. If you have an exocortex, you can gain the effects of haste for 1 minute as a move action. Once you or your drone has used this ability, you cannot use it again until you spend 1 Resolve Point to regain Stamina Points from a 10-minute rest. You must have the overclocking and hyperclocking mechanic tricks to learn this trick."
+				  "description": "If you have a drone, you can grant the effects of haste to your drone for 1 minute as a move action. If you have an exocortex, you can gain the effects of haste for 1 minute as a move action. Once you or your drone has used this ability, you cannot use it again until you spend 1 Resolve Point to regain Stamina Points from a 10-minute rest. You must have the overclocking and hyperclocking mechanic tricks to learn this trick.",
+					"entry": {
+						"layout": "ultraclocking"
+					}
 				},
 				"Extra Mod": {
 				  "SOURCEPAGE": "p.73",
-				  "description": "If you have a drone, your drone gains an additional basic mod. If you have an exocortex, you gain an additional basic mod. It can't be a basic mod taken a second time as an advanced mod. You can rebuild this extra mod when you gain a mechanic level as with any other mod, but you can't rebuild this mod to convert it into the advanced version of the mod."
+				  "description": "If you have a drone, your drone gains an additional basic mod. If you have an exocortex, you gain an additional basic mod. It can't be a basic mod taken a second time as an advanced mod. You can rebuild this extra mod when you gain a mechanic level as with any other mod, but you can't rebuild this mod to convert it into the advanced version of the mod.",
+					"entry": {
+						"layout": "extra mod"
+					}
 				},
 			}
 		},
 		"Class features": {
 			"Ghost In The Machine": {
 				"SOURCEPAGE": "p.71",
-				"description": "When using your override class feature to affect an android, drone, robot, or creature with the technological subtype, a target that fails its saving throw by any amount is not dazed, and you can instead dictate its actions for the next round. These actions can't be obviously self-destructive. Once a creature has attempted a saving throw against this attack (regardless of the result), it is immune to this attack for 24 hours unless you spend 1 Resolve Point. You can continue to spend Resolve Points in this manner each round to make the creature susceptible to override again."
+				"description": "When using your override class feature to affect an android, drone, robot, or creature with the technological subtype, a target that fails its saving throw by any amount is not dazed, and you can instead dictate its actions for the next round. These actions can't be obviously self-destructive. Once a creature has attempted a saving throw against this attack (regardless of the result), it is immune to this attack for 24 hours unless you spend 1 Resolve Point. You can continue to spend Resolve Points in this manner each round to make the creature susceptible to override again.",
+				"entry": {
+					"layout": "ghost in the machine",
+				}
 			},
-			"Miracle Worker": {
+			"Miracle Worker 1/day": {
 				"SOURCEPAGE": "p.70",
 				"Armor": " You grant a +2 enhancement bonus to a suit of armor's EAC and KAC for 1 minute.",
 				"Weapon": " You grant a +2 enhancement bonus to a weapon's attack and damage rolls for 1 minute.",
 				"description": "As a move action, you can repair damage to a starship's systems or modify a suit of armor or weapon to function more efficiently. To use this ability, you must be able to handle the item affected without impediment. You can use this ability once per day at 7th level, plus one additional time per day for every 4 mechanic levels you have beyond 7th. The exact effect of this ability depends on the object or system you are modifying.",
-				"Damaged Ship": " You restore a number of Hull Points equal to the starship's base frame HP increment. If this raises the ship's HP over a multiple of its Critical Threshold, you can repair critical damage to one system per multiple, reducing its severity by one step. For example, if your starship's Critical Threshold is 8 and you restore 10 HP, reducing the damage to the hull from 17 HP to 7 HP, you could restore one system from wrecked to glitching. Using this ability during starship combat is your action for the turn, and you can do it only during the engineering phase. See page 292 for more on ship construction and page 320 for more on damage to ships."
+				"Damaged Ship": " You restore a number of Hull Points equal to the starship's base frame HP increment. If this raises the ship's HP over a multiple of its Critical Threshold, you can repair critical damage to one system per multiple, reducing its severity by one step. For example, if your starship's Critical Threshold is 8 and you restore 10 HP, reducing the damage to the hull from 17 HP to 7 HP, you could restore one system from wrecked to glitching. Using this ability during starship combat is your action for the turn, and you can do it only during the engineering phase. See page 292 for more on ship construction and page 320 for more on damage to ships.",
+				"entry": {
+					"layout": "miracle worker 1/day",
+				}
+			},
+			"Miracle Worker 2/day": {
+				"SOURCEPAGE": "p.70",
+				"Armor": " You grant a +2 enhancement bonus to a suit of armor's EAC and KAC for 1 minute.",
+				"Weapon": " You grant a +2 enhancement bonus to a weapon's attack and damage rolls for 1 minute.",
+				"description": "As a move action, you can repair damage to a starship's systems or modify a suit of armor or weapon to function more efficiently. To use this ability, you must be able to handle the item affected without impediment. You can use this ability once per day at 7th level, plus one additional time per day for every 4 mechanic levels you have beyond 7th. The exact effect of this ability depends on the object or system you are modifying.",
+				"Damaged Ship": " You restore a number of Hull Points equal to the starship's base frame HP increment. If this raises the ship's HP over a multiple of its Critical Threshold, you can repair critical damage to one system per multiple, reducing its severity by one step. For example, if your starship's Critical Threshold is 8 and you restore 10 HP, reducing the damage to the hull from 17 HP to 7 HP, you could restore one system from wrecked to glitching. Using this ability during starship combat is your action for the turn, and you can do it only during the engineering phase. See page 292 for more on ship construction and page 320 for more on damage to ships.",
+				"entry": {
+					"layout": "miracle worker 2/day",
+				}
+			},
+			"Miracle Worker 3/day": {
+				"SOURCEPAGE": "p.70",
+				"Armor": " You grant a +2 enhancement bonus to a suit of armor's EAC and KAC for 1 minute.",
+				"Weapon": " You grant a +2 enhancement bonus to a weapon's attack and damage rolls for 1 minute.",
+				"description": "As a move action, you can repair damage to a starship's systems or modify a suit of armor or weapon to function more efficiently. To use this ability, you must be able to handle the item affected without impediment. You can use this ability once per day at 7th level, plus one additional time per day for every 4 mechanic levels you have beyond 7th. The exact effect of this ability depends on the object or system you are modifying.",
+				"Damaged Ship": " You restore a number of Hull Points equal to the starship's base frame HP increment. If this raises the ship's HP over a multiple of its Critical Threshold, you can repair critical damage to one system per multiple, reducing its severity by one step. For example, if your starship's Critical Threshold is 8 and you restore 10 HP, reducing the damage to the hull from 17 HP to 7 HP, you could restore one system from wrecked to glitching. Using this ability during starship combat is your action for the turn, and you can do it only during the engineering phase. See page 292 for more on ship construction and page 320 for more on damage to ships.",
+				"entry": {
+					"layout": "miracle worker 3/day",
+				}
 			},
 			"Tech Master": {
 				"SOURCEPAGE": "p.71",
@@ -1742,23 +1961,38 @@ allClassFeatures = {
 			},
 			"Remote Hack": {
 				"SOURCEPAGE": "p.70",
-				"description": "You can use your custom rig to attempt Computers and Engineering skill checks at a range of 20 feet. At 7th level and every 2 levels thereafter, this range increases by 10 feet. A target of this ability (or a creature attending or observing your target) can attempt a Perception or Sense Motive check (DC = 10 + 1-1/2 x your mechanic level + your Intelligence modifier) to determine that you are the origin of this activity."
+				"description": "You can use your custom rig to attempt Computers and Engineering skill checks at a range of 20 feet. At 7th level and every 2 levels thereafter, this range increases by 10 feet. A target of this ability (or a creature attending or observing your target) can attempt a Perception or Sense Motive check (DC = 10 + 1-1/2 x your mechanic level + your Intelligence modifier) to determine that you are the origin of this activity.",
+				"entry": {
+					"layout": "remote hack",
+				}
 			},
 			"Superior Rig": {
 				"SOURCEPAGE": "p.71",
-				"description": "Your custom rig's computer functions now gain bonus lockout and wipe countermeasures. You can use your custom rig normally even when its lockout is active (you have special authorization no one else can access under any circumstances), and while any wiped data cannot be recovered by anyone else (as if the data module were destroyed), you can automatically recover it with 8 hours of work. These countermeasures have no additional cost and do not count against the maximum number of countermeasures your custom rig can have. Additionally, you can use your custom rig to communicate over an encrypted channel with your ship at a range encompassing a planet and its close orbit, allowing you to remotely pilot your starship from point to point on the same planet or to and from orbit (as well as use the encrypted communications functions of your expert and advanced rig at the same range). If you have a drone, you can issue commands to or directly control your drone over an encrypted channel at the same range."
+				"description": "Your custom rig's computer functions now gain bonus lockout and wipe countermeasures. You can use your custom rig normally even when its lockout is active (you have special authorization no one else can access under any circumstances), and while any wiped data cannot be recovered by anyone else (as if the data module were destroyed), you can automatically recover it with 8 hours of work. These countermeasures have no additional cost and do not count against the maximum number of countermeasures your custom rig can have. Additionally, you can use your custom rig to communicate over an encrypted channel with your ship at a range encompassing a planet and its close orbit, allowing you to remotely pilot your starship from point to point on the same planet or to and from orbit (as well as use the encrypted communications functions of your expert and advanced rig at the same range). If you have a drone, you can issue commands to or directly control your drone over an encrypted channel at the same range.",
+				"entry": {
+					"layout": "superior rig",
+				}
 			},
 			"Custom Rig": {
 				"SOURCEPAGE": "p.69",
-				"description": "You have created a customized toolkit you can use to hack systems and items. Your custom rig can be configured to take up an upgrade slot on your armor or can be installed as a cybernetic augmentation system in your brain (though it can be combined with a datajack for the same price as installing a datajack normally), your eyes, or an arm. For more information on augmentations, see Chapter 7"
+				"description": "You have created a customized toolkit you can use to hack systems and items. Your custom rig can be configured to take up an upgrade slot on your armor or can be installed as a cybernetic augmentation system in your brain (though it can be combined with a datajack for the same price as installing a datajack normally), your eyes, or an arm. For more information on augmentations, see Chapter 7",
+				"entry": {
+					"layout": "custom rig",
+				}
 			},
 			"Overload": {
 				"SOURCEPAGE": "p.70",
-				"description": "As a standard action, you can cause a short in an electronic device, including most ranged energy weapons, melee weapons with the powered special property, or a single armor upgrade. This makes the device nonfunctional for 1 round. Overload doesn't cause a locked door, safe, or other device to open, but it prevents anyone from opening it for 1 round. You must be adjacent to the device to use this ability. If you have a drone, you can instead use this ability on an electronic device adjacent to your drone. If you have an exocortex with the wireless hack ability, you can instead use this ability on any electronic device within range of your exocortex's wireless hack. If you use overload on an item or armor upgrade in someone's possession, the owner can attempt a Reflex saving throw to negate the effect (DC = 10 + half your mechanic level + your Intelligence modifier). Overload doesn't affect androids, cybernetics, drones, powered armor, robots, or creatures with the technological subtype (all of which have shielding against this sort of attack), or items larger than Medium. Once a device has been successfully overloaded, a residual static charge prevents that device from being overloaded again for 1 minute."
+				"description": "As a standard action, you can cause a short in an electronic device, including most ranged energy weapons, melee weapons with the powered special property, or a single armor upgrade. This makes the device nonfunctional for 1 round. Overload doesn't cause a locked door, safe, or other device to open, but it prevents anyone from opening it for 1 round. You must be adjacent to the device to use this ability. If you have a drone, you can instead use this ability on an electronic device adjacent to your drone. If you have an exocortex with the wireless hack ability, you can instead use this ability on any electronic device within range of your exocortex's wireless hack. If you use overload on an item or armor upgrade in someone's possession, the owner can attempt a Reflex saving throw to negate the effect (DC = 10 + half your mechanic level + your Intelligence modifier). Overload doesn't affect androids, cybernetics, drones, powered armor, robots, or creatures with the technological subtype (all of which have shielding against this sort of attack), or items larger than Medium. Once a device has been successfully overloaded, a residual static charge prevents that device from being overloaded again for 1 minute.",
+				"entry": {
+					"layout": "overload",
+				}
 			},
 			"Expert Rig": {
 				"SOURCEPAGE": "p.70",
-				"description": "Your custom rig has improved. Whenever you use your custom rig to successfully hack into a computer, you can also disable one countermeasure installed in the system (except firewalls). In addition, your custom rig can now be used as any engineering or hacking specialty kit of item level 6th or lower, and it has the features of a computer with a tier equal to half your level with the artificial personality, hardened, or security I upgrade module. It also has an audio/video recorder. You can add extra modules or countermeasures to your custom rig at the normal prices. See page 213 for more information on computers. You can also use your custom rig to communicate over an encrypted channel with your ship, allowing you to access your ship's downloaded data sets and transponder (see page 430) at a range of 5 miles. If you have a drone, you can issue commands to or directly control your drone at the same range."
+				"description": "Your custom rig has improved. Whenever you use your custom rig to successfully hack into a computer, you can also disable one countermeasure installed in the system (except firewalls). In addition, your custom rig can now be used as any engineering or hacking specialty kit of item level 6th or lower, and it has the features of a computer with a tier equal to half your level with the artificial personality, hardened, or security I upgrade module. It also has an audio/video recorder. You can add extra modules or countermeasures to your custom rig at the normal prices. See page 213 for more information on computers. You can also use your custom rig to communicate over an encrypted channel with your ship, allowing you to access your ship's downloaded data sets and transponder (see page 430) at a range of 5 miles. If you have a drone, you can issue commands to or directly control your drone at the same range.",
+				"entry": {
+					"layout": "expert rig",
+				}
 			},
 			"Weapon Specialization": {
 				"SOURCEPAGE": "p.70",
@@ -1766,15 +2000,24 @@ allClassFeatures = {
 			},
 			"Advanced Rig": {
 				"SOURCEPAGE": "p.70",
-				"description": "Your custom rig's computer functions gain a bonus firewall countermeasure (see page 217). This firewall has no additional cost, does not count against the maximum number of countermeasures your custom rig can have, and can block off a module or group of modules already protected by a firewall. In addition, you can use your custom rig to communicate over an encrypted channel with your ship, allowing you to access the ship's sensors, control its security systems, and prepare its engines for takeoff (as well as use the encrypted communications functions of your expert rig) at a range of 50 miles. If you have a drone, you can issue commands to or directly control your drone over an encrypted channel at the same range."
+				"description": "Your custom rig's computer functions gain a bonus firewall countermeasure (see page 217). This firewall has no additional cost, does not count against the maximum number of countermeasures your custom rig can have, and can block off a module or group of modules already protected by a firewall. In addition, you can use your custom rig to communicate over an encrypted channel with your ship, allowing you to access the ship's sensors, control its security systems, and prepare its engines for takeoff (as well as use the encrypted communications functions of your expert rig) at a range of 50 miles. If you have a drone, you can issue commands to or directly control your drone over an encrypted channel at the same range.",
+				"entry": {
+					"layout": "advanced rig",
+				}
 			},
 			"Bypass": {
 				"SOURCEPAGE": "p.69",
-				"description": "You are skilled at getting inside computer systems and electronic devices. At 1st level, you gain a +1 insight bonus to Computers and Engineering skill checks. At 5th level, every 4 levels thereafter, and at 20th level, this bonus increases by 1."
+				"description": "You are skilled at getting inside computer systems and electronic devices. At 1st level, you gain a +1 insight bonus to Computers and Engineering skill checks. At 5th level, every 4 levels thereafter, and at 20th level, this bonus increases by 1.",
+				"entry": {
+					"layout": "bypass",
+				}
 			},
 			"Override": {
 				"SOURCEPAGE": "p.70",
-				"description": "Your overload class feature now affects androids, drones, robots, and creatures with the technological subtype, which must succeed at a Will saving throw (DC = 10 + half your mechanic level + your Intelligence modifier) or be dazed for 1 round. If the target fails its saving throw by 10 or more, it is not dazed and you can dictate its actions for 1 round, though these actions can't be obviously self-destructive. Once a creature has attempted a saving throw against this attack (regardless of the result), it is immune to this attack for 24 hours."
+				"description": "Your overload class feature now affects androids, drones, robots, and creatures with the technological subtype, which must succeed at a Will saving throw (DC = 10 + half your mechanic level + your Intelligence modifier) or be dazed for 1 round. If the target fails its saving throw by 10 or more, it is not dazed and you can dictate its actions for 1 round, though these actions can't be obviously self-destructive. Once a creature has attempted a saving throw against this attack (regardless of the result), it is immune to this attack for 24 hours.",
+				"entry": {
+					"layout": "override",
+				}
 			},
 			"Mechanic Trick": {
 				"SOURCEPAGE": "p.70",

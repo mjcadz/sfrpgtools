@@ -313,28 +313,33 @@ function buildStatBlock() {
       var connection = $('#stepFourOptionDrop').val().trim();
       var connectionList = mysticFeatures["connection"];
 
-      statBlock.ClassOffensiveAbilities = resolveClassAbilities('Connections',mysticCr,statBlock.abilityDCBase,connectionList,connection);
+      statBlock.ClassOtherAbilities = resolveClassAbilities('Connections',mysticCr,statBlock.abilityDCBase,connectionList,connection);
 
       var featureList = mysticFeatures["features"];
-      statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(resolveClassAbilities('MysticFeatures',mysticCr,statBlock.abilityDCBase,featureList,''));
+      statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(resolveClassAbilities('MysticFeatures',mysticCr,statBlock.abilityDCBase,featureList,''));
 
-      statBlock.ClassOffensiveAbilities.sort();
+      statBlock.ClassOtherAbilities.sort();
     }
     //TECHNOMANCER SPECIAL RULES AND PRINT ABILITIES
     if (classDrop == 'Technomancer') {
       var technoCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
       var technoFeatures = getClassAbilities('Technomancer',technoCr);
 
-      var spellHack = $('#stepFourOptionDrop').val().toString().trim();
-      if (spellHack != '') {
-        if (spellHack.includes(',')) {
-          var hackList = spellHack.split(',');
-        } else {
-          var hackList = [spellHack];
+      statBlock.ClassOffensiveAbilities = []
+
+      if ($('[data-id="stepFourOptionDrop"]').length){
+        var spellHack = $('#stepFourOptionDrop').val().toString().trim();
+        if (spellHack != '') {
+          if (spellHack.includes(',')) {
+            var hackList = spellHack.split(',');
+          } else {
+            var hackList = [spellHack];
+          }
+          resolvedHacks = resolveClassAbilities('MagicHack',technoCr,statBlock.abilityDCBase,hackList,'');
+          statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(['magic hacks (' + resolvedHacks.join(', ') + ')']);
         }
       }
 
-      statBlock.ClassOffensiveAbilities = resolveClassAbilities('MagicHack',technoCr,statBlock.abilityDCBase,hackList,'');
 
       var featureList = technoFeatures["features"];
       statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(resolveClassAbilities('TechnomancerFeatures',technoCr,statBlock.abilityDCBase,featureList,''));
@@ -351,10 +356,11 @@ function buildStatBlock() {
       var special = $('#stepFourOptionDrop').val().trim();
 
       var featureList = operativeFeatures["features"];
+      statBlock.ClassOtherAbilities = [];
+
+      statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['specialization (' + special.toLowerCase() + ')']);
 
       var exploits = []
-
-
 
       if ($('[data-id="stepFourOptionDropTwo"]').length){
         var exploitsString = $('#stepFourOptionDropTwo').val().toString().trim();
@@ -368,35 +374,84 @@ function buildStatBlock() {
         if (featureList.includes("Specialization Exploit")){
           exploits.push(allClassFeatures.Operative["Operative Specializations"][special]["Specialization Exploit"])
         }
-        statBlock.ClassOffensiveAbilities = resolveClassAbilities('Exploits',operativeCr,statBlock.abilityDCBase,exploits,'');
-      } else {
-        statBlock.ClassOffensiveAbilities = [];
+        resolvedExploits = resolveClassAbilities('Exploits',operativeCr,statBlock.abilityDCBase,exploits,'');
+        statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['operative exploits (' + resolvedExploits.join(', ') + ')']);
+
       }
-
-
-
-
-      statBlock.ClassOffensiveAbilities = statBlock.ClassOffensiveAbilities.concat(resolveClassAbilities('OperativeFeatures',operativeCr,statBlock.abilityDCBase,featureList,''));
+      statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(resolveClassAbilities('OperativeFeatures',operativeCr,statBlock.abilityDCBase,featureList,''));
 
       if (featureList.includes("Specialization Power")){
-        statBlock.ClassOffensiveAbilities.push(allClassFeatures.Operative["Operative Specializations"][special]["Specialization Power"]["name"].toLowerCase())
+        statBlock.ClassOtherAbilities.push(allClassFeatures.Operative["Operative Specializations"][special]["Specialization Power"]["name"].toLowerCase())
       }
 
-      statBlock.ClassOffensiveAbilities.sort();
+      statBlock.ClassOtherAbilities.sort();
 
     }
     //MECHANIC SPECIAL RULES AND PRINT ABILITIES
     if (classDrop == 'Mechanic') {
 
+      var mechaCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var mechaFeatures = getClassAbilities('Mechanic',mechaCr);
+
+      var ai = $('#artificialDrop').val().trim().toLowerCase();
+
+      statBlock.ClassOtherAbilities = [];
+
+      if ($('[data-id="stepFourOptionDropTwo"]').length){
+        var tricks = $('#stepFourOptionDropTwo').val().toString().trim();
+        if (tricks != '') {
+          if (tricks.includes(',')) {
+            var trickList = tricks.split(',');
+          } else {
+            var trickList = [tricks];
+          }
+          resolvedTricks = resolveClassAbilities('Tricks',mechaCr,statBlock.abilityDCBase,trickList,'');
+          statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['mechanic tricks (' + resolvedTricks.join(', ') + ')']);
+        }
+      }
+
+
+      var featureList = mechaFeatures["features"];
+
+      featureList = removeElement(featureList,"Artificial intelligence");
+      statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(["artificial intelligence (" + ai + ")"]);
+      statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(resolveClassAbilities('MechanicFeatures',mechaCr,statBlock.abilityDCBase,featureList,''));
+
+      if (ai == 'exocortex') {
+        var exocortexFeatures = mechaFeatures["exocortex"];
+        statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(resolveClassAbilities('Exocortex',mechaCr,statBlock.abilityDCBase,exocortexFeatures,''));
+      }
+
+      statBlock.ClassOtherAbilities.sort();
+
     }
     //ENVOY SPECIAL RULES AND PRINT ABILITIES
     if (classDrop == 'Envoy') {
 
+      var envoyCr = Number(statBlock.Cr.replace('1/2','1').replace('1/3','1'));
+      var envoyFeatures = getClassAbilities('Envoy',envoyCr);
+
+      statBlock.ClassOtherAbilities = []
+
+      if ($('[data-id="stepFourOptionDropTwo"]').length){
+        var envoyImprov = $('#stepFourOptionDropTwo').val().toString().trim();
+        if (envoyImprov != '') {
+          if (envoyImprov.includes(',')) {
+            var improvisations = envoyImprov.split(',');
+          } else {
+            var improvisations = [envoyImprov];
+          }
+          resolvedImprovisations = resolveClassAbilities('Improvisations',envoyCr,statBlock.abilityDCBase,improvisations,'');
+          statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(['envoy improvisations (' + resolvedImprovisations.join(', ') + ')']);
+        }
+      }
+      if (envoyFeatures.hasOwnProperty("features")) {
+        statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(envoyFeatures.features);
+      }
+
+      statBlock.ClassOtherAbilities.sort();
+
     }
-
-
-
-
 
 
     //step 5 - graft
@@ -1325,10 +1380,10 @@ function buildStatBlock() {
     var extraEntries = $('#OSDrop').val().toString().trim();
 
     if (extraEntries.includes("Ecology")){
-      EcologyString = '<div><b>ECOLOGY</b></div><hr><div>ecology details here e.g. Environment, Organisation</div><br>';
+      EcologyString = '<div><b>ECOLOGY</b></div><hr><div>ecology details here e.g. Environment, Organisation, Home Planet</div><br>';
     }
     if (extraEntries.includes("Tactics")){
-      TacticsString = '<div><b>TACTICS</b></div><hr><div>tactics details here e.g. During combat, Morale</div><br>';
+      TacticsString = '<div><b>TACTICS</b></div><hr><div>tactics details here e.g. Before Combat, During combat, Morale</div><br>';
     }
 
     //perception string
@@ -1445,19 +1500,9 @@ function buildStatBlock() {
     }
     speedString += "</div>";
 
-    classString = '';
     rpBlock='';
     if (statBlock.hasOwnProperty('Class')) {
-      classString += '<div><b>' + statBlock.Class.toUpperCase() + ' ABILITIES</b></div>';
-      classString += '<hr>';
       rpBlock = ' <b>RP</b> ' + statBlock.ClassResolvePoints;
-      classString += '<div><b>Class abilities</b> '.replace('Class',statBlock.Class) + statBlock.ClassAbilities + '</div>';
-      if (statBlock.hasOwnProperty('ClassSpecialRules')) {
-        classString += '<div><b>Class special rules</b> '.replace('Class',statBlock.Class) + statBlock.ClassSpecialRules + '</div>';
-      }
-      classString += '<div><b>Class gear</b> '.replace('Class',statBlock.Class) + statBlock.ClassGear + '</div>';
-      classString += '<br>';
-
     }
     //defense title string, this far down because its waiting for RP
     var defenceTitle = leftAndRight('<b>DEFENSE</b>','<b>HP</b> ' + statBlock.hitPoints + rpBlock);
@@ -1532,15 +1577,13 @@ function buildStatBlock() {
     textBlock += EcologyString;
 
     //warning
-    if (classString != '' || specialString != '' || textString != '') {
+    if (specialString != '' || textString != '') {
       textBlock += '<br>';
       textBlock += '<div><b>Heads up!</b> if there are any required stat block changes below this warning, they will need to be added manually.</div>';
       textBlock += '<br>';
     }
     //extra text
     textBlock += textString;
-    //class abilities
-    textBlock += classString;
     //special Abilities
     textBlock += specialString;
 
@@ -1662,6 +1705,7 @@ function resolveClassAbilities(Data,ClassCR,ClassDC,abilityList,abilityName){
   var classAbilityNames = [];
 
   for (var i = 0; i < abilityList.length; i++) {
+    //find data
     if (Data == 'FightingStyle'){
       var ability = allClassFeatures.Soldier["Fighting style"][abilityName][abilityList[i]];
     } else if (Data == 'GearBoost'){
@@ -1692,10 +1736,32 @@ function resolveClassAbilities(Data,ClassCR,ClassDC,abilityList,abilityName){
       var ability = allClassFeatures.Operative["Operative Exploits"][levelName][abilityList[i]];
     } else if (Data == 'OperativeFeatures'){
       var ability = allClassFeatures.Operative["Class features"][abilityList[i]];
+    } else if (Data == 'Tricks'){
+
+      for (level in allClassFeatures.Mechanic["Mechanic Tricks"]) {
+        if (allClassFeatures.Mechanic["Mechanic Tricks"][level].hasOwnProperty(abilityList[i])) {
+          var levelName = level;
+          break;
+        }
+      }
+      var ability = allClassFeatures.Mechanic["Mechanic Tricks"][levelName][abilityList[i]];
+    } else if (Data == 'MechanicFeatures'){
+      var ability = allClassFeatures.Mechanic["Class features"][abilityList[i]];
+    } else if (Data == 'Exocortex'){
+      var ability = allClassFeatures.Mechanic["Exocortex"][abilityList[i]];
+    } else if (Data == 'Improvisations'){
+
+      for (level in allClassFeatures.Envoy["Envoy Improvisations"]) {
+        if (allClassFeatures.Envoy["Envoy Improvisations"][level].hasOwnProperty(abilityList[i])) {
+          var levelName = level;
+          break;
+        }
+      }
+      var ability = allClassFeatures.Envoy["Envoy Improvisations"][levelName][abilityList[i]];
     }
-    console.log(Data)
-    console.log(ability)
-    console.log(abilityList[i])
+    //console.log(Data)
+    //console.log(ability)
+    //console.log(abilityList[i])
 
 
     var abilityString = '';
@@ -3844,7 +3910,21 @@ $('.wizard-card').bootstrapWizard({
                 $("#vulnerabilityTextInput").first().empty();
                 $("#saveBoostDropdown").first().empty();
 
-                maxOptions = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][11];//get max options from array
+                if (classDrop != '' && classDrop != 'None') {
+                  var classCr = Number(crString.replace("CR ","").replace("1/2","1").replace("1/3","1"));
+                  var classfeatures = getClassAbilities(classDrop,classCr);
+                  if (classfeatures.hasOwnProperty("special")) {
+                    var maxOptions = classfeatures.special;
+                    if (classfeatures.hasOwnProperty("skillful")) {
+                      maxOptions = maxOptions + 1;
+                    }
+                  } else {
+                    var maxOptions = 0;
+                  }
+                } else {
+                  var maxOptions = window[array.toLowerCase()+'MainStats'][crString.replace("CR ","")][11];//get max options from array
+                }
+
 
                 //check for additional specials from grafts
                 var additionalSpecial = getAdditionalAbilities()
@@ -3887,7 +3967,24 @@ $('.wizard-card').bootstrapWizard({
                 generateMultiDropdown("specialAbilityDropdown","","specialDrop","Select special abilities","Search abilities",SpecialAbilities,maxOptions);
                 var $descriptionArea = $(".stepSixAbilities").first();
                 $descriptionArea.empty();
-                $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");
+                if (classDrop == 'Envoy' && maxOptions == 2) {
+                  $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities<br>one must be <b>skillfull</b> (Envoy ability)</p>");
+                } else {
+                  $descriptionArea.append("<p>Select up to <b>" + maxOptions.toString() + "</b> special abilities</p>");
+                }
+
+
+                if (classDrop == 'Envoy' && maxOptions == 2) {
+                  console.log('Butts')
+                  $('#attackDrop').selectpicker('val', ['Skillful']);
+                  $('#attackDrop').selectpicker('refresh');
+                }
+
+                if (maxOptions == 0) {
+                  disableDropdown('specialDrop',true)
+                } else {
+                  disableDropdown('specialDrop',false)
+                }
 
               }
               $('#stepSixSave').text(crString + ":" + array + ":" + graft + ":" + classDrop + ":" + subtype);
@@ -4437,7 +4534,7 @@ $('.wizard-card').bootstrapWizard({
               generateMultiDropdown("languageDropdown","Languages (if any)","languageDrop","Select languages",0,languages,100);
 
               //generate user fillable sections
-              generateMultiDropdown("optionalSectionsDropdown","Extra stat block entries (user fillable)","OSDrop","Select entries",0,["Ecology","Gear","Tactics"],100);
+              generateMultiDropdown("optionalSectionsDropdown","Extra stat block entries (user fillable)","OSDrop","Select entries",0,["Ecology","Tactics"],100);
 
               //geneate alignments
 
