@@ -1593,7 +1593,19 @@ function buildStatBlock() {
     $StatBlock.append(textBlock);
 
     //log event in analytics
-    ga('send', 'event', 'Generation', 'monster', statBlock.Cr+":"+statBlock.Base+":"+statBlock.CreatureType);
+    var analyticsString = "";
+    if (statBlock.hasOwnProperty('SubType')){
+      analyticsString += ":"+statBlock.SubType;
+    }
+    if (statBlock.hasOwnProperty('Class')){
+      analyticsString += ":"+statBlock.Class;
+    }
+    if (statBlock.hasOwnProperty('Graft')){
+      analyticsString += ":"+statBlock.Graft;
+    }
+
+
+    ga('send', 'event', 'Generation', 'monster', statBlock.Cr+":"+statBlock.Base+":"+statBlock.CreatureType+analyticsString);
 
   } catch(err) {
     var status = getErrorStatus();

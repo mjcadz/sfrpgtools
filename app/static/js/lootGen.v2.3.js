@@ -300,7 +300,7 @@ function generateLoot() {
   //push table to html
   $outputArea.append(table);
 
-  ga('send', 'event', 'Generation', 'loot', aplmod.toString());
+  ga('send', 'event', 'Generation', 'loot', aplmod.toString() +':'+ crmod +':'+ moremod);
 }
 
 function addTableItem (item,trueTable){

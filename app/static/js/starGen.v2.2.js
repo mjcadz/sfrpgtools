@@ -762,7 +762,10 @@ function printSystem2() {
 
   $outputArea.append(accordion);
 
-  ga('send', 'event', 'Generation', 'starSystem');
+  var sizeDrop = $('#sizeDrop').text().toString();
+  var lifeDrop = $('#lifeDrop').text().toString();
+
+  ga('send', 'event', 'Generation', 'starSystem', sizeDrop+':'+lifeDrop);
 
   //set icon changes on collapse trigger
   $(".collapse").on('shown.bs.collapse', function(e){
