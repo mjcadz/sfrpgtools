@@ -12,7 +12,7 @@ var starModifiers = ["Binary System","Nebula","Dust Rings","Energy Harvesting De
 //PLANETS
 var terrestrialLife = ["Garden World","Rocky World","City World","Ocean World","Desert World","Forest World","Ice World","Lava World","Marsh World"];
 var terrestrialNonLife = ["Rocky World","Ice World","Iron World","Coreless World","Carbon World","Debris Field","Destroyed World","Protoplanet"];
-var artificialWorlds =["Ring World","Cube World","Ark Ship","Disk World","Shield World","Refuelling Station","Offworld Trading Post","Ship Scrapyard"];
+var artificialWorlds =["Ring World","Cube World","Ark Ship","Flat World","Shield World","Refuelling Station","Offworld Trading Post","Ship Scrapyard"];
 var gasGiants = ["Small Gas World","Gas Giant","Hot Gas Giant","Cold Gas Giant"];
 
 var worldModifiers = ["Rings","Super Rings","Terraformed","Terraform in Progress","Force Field","Surrounded by Synthetic Debris","Large Axial Tilt","Perpendicular Rotation"];
@@ -51,7 +51,7 @@ var planetBiomes = {
   "Protoplanet": ["-"],
   "Ring World": ["Forest Terrain","Hill Terrain","Urban Terrain"],
   "Cube World": ["Aquatic Terrain","Forest Terrain","Desert Terrain","Urban Terrain"],
-  "Disk World": ["Aquatic Terrain","Forest Terrain","Desert Terrain","Urban Terrain"],
+  "Flat World": ["Aquatic Terrain","Forest Terrain","Desert Terrain","Urban Terrain"],
   "Shield World": ["Forest Terrain","Hill Terrain","Urban Terrain"],
   "Ice Moon": ["Aquatic Terrain","Desert Terrain","Mountain Terrain"],
   "Forest Moon": ["Forest Terrain"],
