@@ -628,23 +628,22 @@ function buildStatBlock() {
       statBlock.FreeAbilities = subArray
     }
 
-    //Step 7 - gear
+    //step 8 - skills and Modifiers
+
+    //overwrite master+ good skills with selected + graft skills
+    statBlock.MainAbilityScores = $(".stepSevenAbilityDescription").first().text().replace('Main ability scores: (','').replace(')','').split(',')
+    statBlock.MasterSkills = $(".stepSevenMasterDescription").first().text().replace('Master skills: ','').replace(/\*/g,'').split(',');
+    statBlock.GoodSkills = $(".stepSevenGoodDescription").first().text().replace('Good skills: ','').replace(/\*/g,'').split(',');
+
+    //Step 8 - gear
 
     var gearTabDescription = $(".stepEightGearDescription").first().text().replace('Gear: ','');
     if (gearTabDescription != '') {
       statBlock.gear = gearTabDescription;
     }
 
-
-    //step 8 - attacks
+    //step 9 - attacks
     statBlock.attackFocus = $("#attackDrop").val().trim();
-
-    //step 9 - skills and Modifiers
-
-    //overwrite master+ good skills with selected + graft skills
-    statBlock.MainAbilityScores = $(".stepSevenAbilityDescription").first().text().replace('Main ability scores: (','').replace(')','').split(',')
-    statBlock.MasterSkills = $(".stepSevenMasterDescription").first().text().replace('Master skills: ','').replace(/\*/g,'').split(',');
-    statBlock.GoodSkills = $(".stepSevenGoodDescription").first().text().replace('Good skills: ','').replace(/\*/g,'').split(',');
 
     //step 10 - spells
 
@@ -989,6 +988,7 @@ function buildStatBlock() {
 
     //build skills string
     listOfSkills = Object.keys(skillNames);
+    listOfSkills = listOfSkills.concat(professionSkills);
     var skillString = '';
     for (i = 0; i < listOfSkills.length; i++) {
       if (statBlock.MasterSkills.includes(listOfSkills[i])){
