@@ -12,7 +12,7 @@ var starModifiers = ["Binary System","Nebula","Dust Rings","Energy Harvesting De
 //PLANETS
 var terrestrialLife = ["Garden World","Rocky World","City World","Ocean World","Desert World","Forest World","Ice World","Lava World","Marsh World"];
 var terrestrialNonLife = ["Rocky World","Ice World","Iron World","Coreless World","Carbon World","Debris Field","Destroyed World","Protoplanet"];
-var artificialWorlds =["Ring World","Cube World","Ark Ship","Flat World","Shield World","Refuelling Station","Offworld Trading Post","Ship Scrapyard"];
+var artificialWorlds =["Ring World","Cube World","Ark Ship","Flat World","Shield World","Refuelling Station","Offworld Trading Post","Ship Scrapyard","Comet"];
 var gasGiants = ["Small Gas World","Gas Giant","Hot Gas Giant","Cold Gas Giant"];
 
 var worldModifiers = ["Rings","Super Rings","Terraformed","Terraform in Progress","Force Field","Surrounded by Synthetic Debris","Large Axial Tilt","Perpendicular Rotation"];
@@ -47,8 +47,8 @@ var planetBiomes = {
   "Coreless World": ["Desert Terrain","Hill Terrain","Mountain Terrain","Aerial Terrain"],
   "Carbon World": ["Desert Terrain","Hill Terrain","Mountain Terrain","Aerial Terrain"],
   "Debris Field": ["-"],
-  "Destroyed World": ["Forest Terrain","Desert Terrain","Hill Terrain"],
-  "Protoplanet": ["-"],
+  "Destroyed World": ["-"],
+  "Protoplanet": ["Desert Terrain","Hill Terrain","Mountain Terrain"],
   "Ring World": ["Forest Terrain","Hill Terrain","Urban Terrain"],
   "Cube World": ["Aquatic Terrain","Forest Terrain","Desert Terrain","Urban Terrain"],
   "Flat World": ["Aquatic Terrain","Forest Terrain","Desert Terrain","Urban Terrain"],
@@ -61,9 +61,10 @@ var planetBiomes = {
   "Rocky Moon": ["Desert Terrain","Aerial Terrain","Hill Terrain","Mountain Terrain"],
   "Volcanic Moon": ["Desert Terrain","Hill Terrain"],
   "Iron Moon": ["Desert Terrain","Hill Terrain","Mountain Terrain"],
-  "Captured Asteroid": ["-"],
+  "Captured Asteroid": ["Hill Terrain","Mountain Terrain"],
   "Destroyed Moon": ["-"],
-  "Starless Planet": ["Aquatic Terrain","Desert Terrain","Hill Terrain","Forest Terrain","Mountain Terrain","Marsh Terrain","Urban Terrain"]
+  "Starless Planet": ["Aquatic Terrain","Desert Terrain","Hill Terrain","Forest Terrain","Mountain Terrain","Marsh Terrain","Urban Terrain"],
+  "Comet": ["Aquatic Terrain","Hill Terrain","Mountain Terrain","Urban Terrain"],
 }
 
 var numberWords = ["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen"];
@@ -76,7 +77,7 @@ var flavourText = ["This world features a prominent ring system composed mainly 
 "This world has undergone terraforming to make it habitable.",
 "An ancient terraforming platform lies inactive on the worlds surface.",
 "This world is surrounded by an impenetrable force field.",
-"Tons upon tons of synthetic debris floats in LEO.",
+"Tons upon tons of synthetic debris floats in low orbit.",
 "The large axial tilt of this world produces violent seasons.",
 "This world rotates perpendicular to the solar plane.",
 "This world is tidally locked.",
@@ -99,19 +100,29 @@ var flavourText = ["This world features a prominent ring system composed mainly 
 "The surface of this world is purple.",
 "The surface of this world is mint green.",
 "This world shows signs of being engineered to its current state.",
-"Cosmic rays bombard the surface of this world",
-"Electrical storms surround the equator of this world",
-"Solar wind is slowly stripping this worlds atmosphere",
-"This world is a severe radiation hazard",
-"The surface of this world is constantly bombarded by asteroids",
-"Beautiful aurorae are frequently seen at the poles of this world",
-"This world has a very strong magnetic field",
-"This world has a weak magnetic field",
-"Geomagnetic storms run wild through this worlds magnetosphere",
-"Volcanic activity constantly reshapes this worlds surface",
-"This world has geysers that spew large amounts of ice and rock into space",
-"Constant meteor showers light up this worlds sky",
-"This world has large polar ice caps"];
+"Cosmic rays bombard the surface of this world.",
+"Electrical storms surround the equator of this world.",
+"Solar wind is slowly stripping this worlds atmosphere.",
+"This world is a severe radiation hazard.",
+"The surface of this world is constantly bombarded by asteroids.",
+"Beautiful aurorae are frequently seen at the poles of this world.",
+"This world has a very strong magnetic field.",
+"This world has a weak magnetic field.",
+"Geomagnetic storms run wild through this worlds magnetosphere.",
+"Volcanic activity constantly reshapes this worlds surface.",
+"This world has geysers that spew large amounts of ice and rock into space.",
+"Constant meteor showers light up this worlds sky.",
+"This world has large polar ice caps.",
+"Frequenct earthquakes rock this world.",
+"Erratic storms disperse and form very quickly on this world.",
+"A robust magnetosphere protects this planet from all external radiation.",
+"This planet was recently impacted by a huge asteroid.",
+"A recent mass extinction has left this planet quiet and calm.",
+"A great storm ravaged the surface of this planet changing the state of its climate.",
+"Global warming destroyed this planets atmosphere.",
+"This planets biome used to be must more habitable than it is now.",
+"The crust of this planet has split open revealing vast sources of minerals.",
+"This world has long been abandoned."];
 
 var flavourDict = {
   "Satellite Array":
@@ -240,13 +251,14 @@ var flavourDict = {
   "Orbital Mirrors":
   ["This mirror is placed to provide extra sunlight to agricultural colonies.",
   "This array extends the daylight hours on this world to grow more food.",
-  "This set of mirrors redirects sunlight to the dark side of this world."]
+  "This set of mirrors redirects sunlight to the dark side of this world."],
+  "Comet":
+  ["The frozen surface of this comet is mined for precious ice.",
+  "A city has been built into the ice chasms of  this comet.",
+  "This comet is on a collision course with another body in this system.",
+  "A massive ball of ice and rock with a tail many times larger than its length.",
+  "The sunny side of this comet spews ice and debris into space creating a long tail."]
 }
-
-Number.prototype.between = function (min, max) {
-    return this > min && this < max;
-};
-
 
 function getStar(includeSystemless) {
   var deck = [];
@@ -418,6 +430,16 @@ function getBodyStats (bodies,position,moon) {
     stats.push("-");//biome
     stats.push(randomChoice(flavourDict[currentBody]));//flavour text
   }
+  else if (currentBody == "Comet"){
+    stats.push(randomChoice(["2","3","4","5","6","10"]) + " miles");//diameter
+    stats.push("less than x1/100");//mass
+    stats.push(randomChoice(["x1/2","x1"]));//gravity
+    stats.push("No Atmosphere");//atmosphere
+    stats.push(randomChoice(["1 day","20 hours","5 hours","8 hours","43 hours","1 day","4 days","15 days","12 days"]));//day
+    stats.push(getBodyYear(bodies.length,position));//year
+    stats.push(randomChoice(planetBiomes[currentBody]));//biome
+    stats.push(randomChoice(flavourDict[currentBody]));//flavour text
+  }
   else if (["Ark Ship","Generation Ship","Deep Space Research Station"].includes(currentBody)){
     stats.push(randomChoice(["2","3","4","5","6"]) + " miles");//diameter
     stats.push("less than x1/100");//mass
@@ -485,7 +507,7 @@ function getBodyStats (bodies,position,moon) {
       var diameter = ["1/80","1/50","1/25","1/20","1/10","1/8","1/6","1/5","1/4","1/4","1/3","1/2"];
       var mass = ["1/100","1/80","1/50","1/32","1/25","1/24","1/20","1/16","1/10","1/5","1/4","1/3"];
       var gravity = ["1/10","1/5","1/4","1/3","1/2","1/2","2/3","3/4","1","1","1 1/2","2"];
-      var maxIndex = 13;
+      var maxIndex = 11;
       weight = [1,1,2,2,3,3,3,4,6,8,3,1];
       var flavour = (randomChoice(flavourText)).replace(/world/g,"moon");
     } else { //planet stats
@@ -509,11 +531,11 @@ function getBodyStats (bodies,position,moon) {
     var diam,mas,grav;
     diam = randomWeightedChoice(diameter, weight);
     index = diameter.indexOf(diam);
-    if (index.between(0,maxIndex)){
+    if (index > 0 && index < maxIndex){
       index = index + randomChoice([-1,0,+1]);
     }
     mas = mass[index];
-    if (index.between(0,maxIndex-1)){
+    if (index > 0 && index < maxIndex){
       index = index + randomChoice([-1,0,+1]);
     }
     grav = gravity[index];
@@ -568,9 +590,9 @@ function getBodyStats (bodies,position,moon) {
     //Day
     var dayHours = [6,10,12,15,18,25,26,27,28,40,47];
     var dayDays = [1,1,1,2,5,6,7,12,21,26,30];
-    var weight = [1,8,8];
+    var weight = [1,6,6];
     var artificalDay = ["Refuelling Station","Offworld Trading Post","Ark Ship","Space Station","Huge Space Station","Research Outpost"];
-    var days = randomWeightedChoice(["-",randomChoice(dayHours)+" hours",randomChoice(dayDays)+" days"],weight);
+    var days = randomWeightedChoice(["tidally locked",randomChoice(dayHours)+" hours",randomChoice(dayDays)+" days"],weight);
 
     if (artificalDay.includes(currentBody)){
       days = randomChoice([days,"1 day (artificial)"])
