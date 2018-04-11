@@ -615,9 +615,9 @@ function printNeat(level,gunName,type,damage,range,critical,capacity,usage,speci
                         "<br><b>Capacity: </b>" + capacity +
                         "<br><b>Usage: </b>" + usage +
                         "<br><b>Bulk: </b>" + bulk +
-                        "<br><b>Special: </b>" + special +
-                        "<br>" +
-                        "<br><i>" + flavourText.selectRandom() + ".</i></p>";
+                        "<br><b>Special: </b>" + special + "</p>"
+                        //"<br>" +
+                        //"<br><i>" + flavourText.selectRandom() + ".</i></p>";
 
   }
   $outputArea.append("<div class=\"panel " + indexString + "\">");
