@@ -196,11 +196,24 @@ function removeEntry(index) {
 function generateSettlement() {
 
   var randAlign = alignment.selectRandom();
-  var randType = cityBySize.small.selectRandom();
-  var randGov = government.selectRandom();
-  var randQual = [Object.keys(qualities).selectRandom()];
+  var sizeKeys = Object.keys(cityBySize);
+  var randSize = sizeKeys.selectRandom()
 
-  printPanel(randAlign,randType,randGov,randQual)
+  var randType = cityBySize[randSize].selectRandom();
+  var randGov = government.selectRandom();
+
+  var qualNum = [1,2,3].selectRandom();
+  var randQuals = [];
+  var qualKeys = Object.keys(qualities);
+
+  for(var i = 0; i < qualNum; i++) {
+      var newQual = qualKeys.selectRandom();
+      if (!randQuals.includes(newQual)){
+        randQuals.push(newQual);
+      }
+  }
+
+  printPanel(randAlign,randType,randGov,randQuals)
 
 }
 
