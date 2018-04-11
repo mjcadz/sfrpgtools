@@ -63,3 +63,9 @@ def encounterGenerator():
     resp = make_response(render_template('encounter-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
+
+@app.route('/settlement-generator')
+def settlementGenerator():
+    resp = make_response(render_template('settlement-generator.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp
