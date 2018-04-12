@@ -47,16 +47,15 @@ var cityBySize = {
       "fishing village",
       "cave dwelling",
       "asteroid base",
+      "prison",
     ],
     "small":[
       "farming community",
-      "village",
       "town",
       "trading post",
       "terraforming platform",
       "barracks",
       "colony",
-      "mining colony",
       "community",
       "biodome",
       "township",
@@ -74,9 +73,11 @@ var cityBySize = {
       "space station",
       "bubble-city",
       "flotilla",
+      "mining town",
+      "prison",
+      "labour camp"
     ],
     "medium":[
-      "farming community",
       "spaceport",
       "trading post",
       "terraforming platform",
@@ -152,8 +153,41 @@ var cityBySize = {
     ],
 };
 
+var namesEnd = ["dale", "moor", "ton","more","haunt","rast", " Gate","rise", "town","bound","spire","winter","burg","bourne","water","fire","set", "shore", "ville", "ton", "sley"," End","dawn", "waters", "ridge", "sley", "age", "mere", "shire", "feld", "field", "wall", " Falls", "bury", "ford", "arm", " City", " Fork", "fall", "caster", "moor", "cliff", "sby", "chapel", "blight", " Falls", "bend", "hope", " Point"," Rise", "lone", "side", " Gate", "ham", "melt"];
+var namesStart = ["Aeon","Aban","Ale","Ash","End","Bane","Nova","Atmos","Data","Mem","Dream","Ender","Radiation","Fable","Glory","Luna","Mag", "Chrono","Aura","Apollo","Nether","Ark","Alpha","Beta","Gamma","Lore","Enigma","Quiet","Neo","Snow","Awe","Wolf","Bear","Rain","Drought","Voyage","Glimmer","Glitter","Wind","Miracle","Moon","Birds","Necro","Ill","Lost","Crash","Light","Fools","Back","Kill","Cat","Dark","Dread","Ever","Hope","Ember","Happy","Dead","Dog","Dawn","Dire","Ditch","Dirt","Void","Demon","Angel","Cruel","Crumble","Somer","Cloud","Border","Break","Bliss","Doom","Water","Fire","Earth","Boom","Air","Metal","Space","Zero","Black","White","Blue","Red","Yellow","Purple","Green","Gray","Orbit","Outland","Elf","Dwarf","Beast","Pinoeer","Prism","Relic","Scout","Tech","Computer","Settler","Scout","Terra","Cosmo","Shere"]
+var names = ["Aegis", "Olympus","Aeon","Miracle","Paradox","Anomaly","Alliance","Helios","Guardian","Memento","Hyperion","Inception","Infinity","Beacon","Genesis","Exposure","Curiosity","Fortuna","Eternity","Atlas","Atrophy","Beggar's End","Havoc", "Promise","Terminus","Seclusion","Serenity","Solitude","Remorse","Jericho","Hub","Nirvana","Pleasure","Paradise","Nemesis","Hope","Harmony","Misery","Karma","Carnage","Cavity","City of Dawn","Closure","Hazard","Deadline","Eden","Elysium","Eternity","Final","Forsaken","Valhalla","Titan","Tranquility","Vestige"]
+
 var indexCounter = 0;
 
+function getPopulation(size) {
+  var pop = 0;
+  switch (size) {
+    case "empty":
+        pop = 0;
+        break;
+    case "tiny":
+        pop = getRandomInt(2, 200);//two to two hundred
+        break;
+    case "small":
+        pop = getRandomInt(200, 20000);//two hundred to twenty thousand
+        pop = Math.round(pop/10)*10;
+        break;
+    case "medium":
+        pop = getRandomInt(20000, 2000000);//twenty thousand to two million
+        pop = Math.round(pop/100)*100;
+        break;
+    case "large":
+        pop = getRandomInt(2000000, 200000000);//two million to two hundred million
+        pop = Math.round(pop/1000)*1000;
+        break;
+    case "huge":
+        pop = getRandomInt(200000000, 20000000000);//two hundred million to twenty billion
+        pop = Math.round(pop/1000000)*1000000;
+        break;
+  }
+  return pop.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");//add commas as necessary
+;
+}
 
 function clearOutput() {
   var $outputArea = $(".output.area").first();
@@ -161,7 +195,7 @@ function clearOutput() {
   indexCounter = 0;
 }
 
-function printPanel(alignment,type,government,qualities) {
+function printPanel(alignment,population,type,government,qualities) {
   var $outputArea = $(".output.area").first();
   var storeOutput = $( "div.output.area" ).html();
   $outputArea.empty();
@@ -169,11 +203,16 @@ function printPanel(alignment,type,government,qualities) {
   indexCounter += 1;
   indexString = "index" + indexCounter.toString();
 
-  var panelTitle =  "settlement";
+  var settlement = [];
+  settlement.push(names.selectRandom());
+  settlement.push(namesStart.selectRandom() + namesEnd.selectRandom());
+  settlement.push(namesStart.selectRandom() + namesEnd.selectRandom());
+
+  var panelTitle =  settlement.selectRandom();
   var panelBody =   "<p>" + alignment + " " + type +
-                    "<br><b>Population </b>" + "0" +
-                    "<br><b>Government </b>" + government +
-                    "<br><b>Qualities </b>" + qualities.join(', ') +
+                    "<br><b>Population </b>" + population +
+                    "<br><b>Government </b>" + government.toLowerCase() +
+                    "<br><b>Qualities </b>" + qualities.join(', ').toLowerCase() +
                     "<br><b>Maximum Item Level </b>" + "16th" + "</p>";
 
   $outputArea.append("<div class=\"panel " + indexString + "\">");
@@ -195,25 +234,50 @@ function removeEntry(index) {
 
 function generateSettlement() {
 
-  var randAlign = alignment.selectRandom();
-  var sizeKeys = Object.keys(cityBySize);
-  var randSize = sizeKeys.selectRandom()
+  //size & type
+  var sizeDrop = $('#sizePicker').val().trim();
+  if (sizeDrop.includes("Any")) {
+    var sizeKeys = Object.keys(cityBySize);
+    var sizePick = sizeKeys.selectRandom();
+  } else {
+    var sizePick = sizeDrop.toLowerCase();
+  }
+  var randType = cityBySize[sizePick].selectRandom();
 
-  var randType = cityBySize[randSize].selectRandom();
+  //alignment
+  var randAlign = alignment.selectRandom();
+
+  //government
   var randGov = government.selectRandom();
 
+  //qualities
   var qualNum = [1,2,3].selectRandom();
   var randQuals = [];
   var qualKeys = Object.keys(qualities);
 
   for(var i = 0; i < qualNum; i++) {
       var newQual = qualKeys.selectRandom();
+      if (newQual == "Tech") {
+        newQual = Object.keys(qualities.Tech).selectRandom()
+      }
       if (!randQuals.includes(newQual)){
         randQuals.push(newQual);
       }
   }
 
-  printPanel(randAlign,randType,randGov,randQuals)
+  //population
+  var randPop = 0;
+  if (["lone tavern","camp site","farm"].includes(randType)) {
+    randPop = getRandomInt(2, 20);
+  } else if (["planetwide city"].includes(randType)) {
+    randPop = getRandomInt(20000000000, 2000000000000);
+    randPop = Math.round(randPop/1000000000)*1000000000;
+  } else {
+    var randPop = getPopulation(sizePick)
+  }
+
+  //display
+  printPanel(randAlign,randPop,randType,randGov,randQuals)
 
 }
 
