@@ -1,0 +1,16 @@
+<!-- index.html-->
+
+{% extends "base.html" %}
+{% block title %}Starfinder Ship Builder{% endblock %}
+{% block description %}Starship creator for starfinder roleplaying game{% endblock %}
+{% block body %}
+<h1>Ship Builder</h1>
+{% endblock %}
+{% block includes %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-wizard.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote-ext-print.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/shipData.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/shipBuilder.js') }}"></script>
+{% endblock %}
