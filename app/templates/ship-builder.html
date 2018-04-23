@@ -4,13 +4,71 @@
 {% block title %}Starfinder Ship Builder{% endblock %}
 {% block description %}Starship creator for starfinder roleplaying game{% endblock %}
 {% block body %}
-<h1>Ship Builder</h1>
+<div class="jumbotron">
+    <h1>Ship Generator</h1>
+    <p class="lead">Generates random starships for the Starfinder RPG.</p>
+    <p></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+              <select class="selectpicker show-tick" id="tierPicker" data-style="btn-default" data-width="100%" data-size="10">
+                <option selected>Any tier</option>
+                <option data-divider="true"></option>
+                <option>Tier 1</option>
+                <option>Tier 2</option>
+                <option>Tier 3</option>
+                <option>Tier 4</option>
+                <option>Tier 5</option>
+                <option>Tier 6</option>
+                <option>Tier 7</option>
+                <option>Tier 8</option>
+                <option>Tier 9</option>
+                <option>Tier 10</option>
+                <option>Tier 11</option>
+                <option>Tier 12</option>
+                <option>Tier 13</option>
+                <option>Tier 14</option>
+                <option>Tier 15</option>
+                <option>Tier 16</option>
+                <option>Tier 17</option>
+                <option>Tier 18</option>
+                <option>Tier 19</option>
+                <option>Tier 20</option>
+              </select>
+              <select class="selectpicker show-tick" id="framePicker" data-style="btn-default" data-width="100%" data-size="10">
+                <option selected>Any frame</option>
+                <option data-divider="true"></option>
+                <option>Racer</option>
+                <option>Interceptor</option>
+                <option>Fighter</option>
+                <option>Shuttle</option>
+                <option>Light Freighter</option>
+                <option>Explorer</option>
+                <option>Transport</option>
+                <option>Destroyer</option>
+                <option>Heavy Freighter</option>
+                <option>Bulk Freighter</option>
+                <option>Cruiser</option>
+                <option>Carrier</option>
+                <option>Battleship</option>
+                <option>Dreadnought</option>
+              </select>
+              <P></P>
+              <button type="button" onclick="generateShip()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
+              <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
+              <P></P>
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+
+    <div class="output area">
+
+    </div>
+</div>
 {% endblock %}
 {% block includes %}
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-wizard.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote-ext-print.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/shipData.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/shipBuilder.js') }}"></script>
 {% endblock %}

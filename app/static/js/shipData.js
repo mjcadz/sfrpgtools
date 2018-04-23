@@ -1506,7 +1506,7 @@ var shipPowerCores = {
 var shipQuarters = {
   Good: {
     "cost": {
-    "BP": 2
+    	"BP": 2
     },
     "description": "Good crew quarters are a bit more upscale than common crew quarters. They consist of dormitory-style rooms that can hold one or two small beds (larger starships usually require lower-ranking crew members to share these quarters) and sometimes a personal closet or drawer space for each occupant. Good crew quarters also include one or two shared bathrooms with multiple sinks and shower stalls, and a dining space with an attached galley. Crews of larger starships eat in this dining space in shifts."
   },
@@ -1521,6 +1521,7 @@ var shipQuarters = {
       "BP": 5
     },
     "description": "Luxurious crew quarters are the pinnacle of comfort. They consist of private rooms for each crew member, with personal bathrooms (including showers with high water pressure) and furnishings that match the resident's tastes. Some luxurious crew quarters also feature a kitchenette, gaming areas, or intimate meeting spaces."
+	}
 }
 
 var shipSecurity = {
