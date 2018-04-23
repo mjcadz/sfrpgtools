@@ -315,8 +315,10 @@ function buildStatBlock() {
 
       statBlock.ClassOtherAbilities = resolveClassAbilities('Connections',mysticCr,statBlock.abilityDCBase,connectionList,connection);
 
-      var featureList = mysticFeatures["features"];
-      statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(resolveClassAbilities('MysticFeatures',mysticCr,statBlock.abilityDCBase,featureList,''));
+      if (mysticFeatures.hasOwnProperty("features")) {
+        var featureList = mysticFeatures["features"];
+        statBlock.ClassOtherAbilities = statBlock.ClassOtherAbilities.concat(resolveClassAbilities('MysticFeatures',mysticCr,statBlock.abilityDCBase,featureList,''));
+      }
 
       statBlock.ClassOtherAbilities.sort();
     }
