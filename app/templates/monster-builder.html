@@ -2,7 +2,7 @@
 {% block title %}Starfinder Monster Builder{% endblock %}
 {% block description %}NPC and monster creator for starfinder roleplaying game{% endblock %}
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/monsterPrint.v2.1.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/monsterPrint.v2.2.css') }}">
 {% endblock %}
 {% block body %}
 <div class="jumbotron">
@@ -45,7 +45,7 @@
                                     <h4 class="info-text">Base array</h4>
                                 </div>
                                 <div class="col-sm-6">
-                                    <hr>
+                                    <hr class="dontPrint">
                                     <div id="CRDropdown"></div>
                                     <div id="arrayDropdown"></div>
                                 </div>
@@ -62,7 +62,7 @@
                                     <h4 class="info-text">Creature type graft</h4>
                                 </div>
                                 <div class="col-sm-6">
-                                  <hr>
+                                  <hr class="dontPrint">
                                   <div id="creatureTypeDropdown"></div>
                                   <div id="stepTwoOptionalDropdown"></div>
                                 </div>

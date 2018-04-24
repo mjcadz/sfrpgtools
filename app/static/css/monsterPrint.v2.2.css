@@ -1,6 +1,6 @@
 /* css for print buttons*/
 @media print {
-  .btn, .btn-finish, .alert-this, h1, p, .footer, h4, .dontPrint, hr, .progress, .top-spacer {
+  .btn, .btn-finish, .alert-this, h1, p, .footer, h4, .dontPrint, .progress, .top-spacer {
     display:none!important;
   }
   #capture {
