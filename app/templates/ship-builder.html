@@ -3,6 +3,9 @@
 {% extends "base.html" %}
 {% block title %}Starfinder Ship Builder{% endblock %}
 {% block description %}Starship creator for starfinder roleplaying game{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/monsterPrint.v2.0.css') }}">
+{% endblock %}
 {% block body %}
 <div class="jumbotron">
     <h1>Ship Generator</h1>
@@ -57,6 +60,7 @@
               <button type="button" onclick="generateShip()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
               <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
               <P></P>
+
             </div>
             <div class="col-md-8"></div>
         </div>
@@ -65,10 +69,25 @@
     <div class="output area">
 
     </div>
+    <hr class="dontPrint">
+    <button type="button" style="margin-left: 20px;" class="btn btn-edit btn-grn" onclick="editBlock()" type="button">Edit shipblock</button>
+    <button type="button" style="margin-left: 20px;" class="btn btn-save btn-grn" onclick="saveBlock()" type="button">Save shipblock</button>
+    <button type="button" style="margin-left: 20px;" class="btn btn-image btn-grn" onclick="blockToImage()" type="button">Save shipblock as image</button>
+    <button type="button" style="margin-left: 20px;" class="btn btn-print btn-grn" onclick="printBlock()" type="button">Print shipblock</button>
+    <p></p>
+    <div id="capture" style="max-width: 600px;">
+        <div id="overEdit" style="margin-left: 4.5em; margin-right: 1em;">
+            <div class="summernoteEdit edit-block" style="padding-top: 15px; padding-bottom: 15px; padding-right: 15px;">
+
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 {% block includes %}
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/html2canvas.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/shipData.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/shipBuilder.js') }}"></script>
 {% endblock %}
