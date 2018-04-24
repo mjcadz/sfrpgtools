@@ -4,7 +4,7 @@
 {% block title %}Starfinder Ship Builder{% endblock %}
 {% block description %}Starship creator for starfinder roleplaying game{% endblock %}
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/monsterPrint.v2.0.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/monsterPrint.v2.2.css') }}">
 {% endblock %}
 {% block body %}
 <div class="jumbotron">
@@ -13,7 +13,7 @@
     <p></p>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 dontPrint">
               <select class="selectpicker show-tick" id="tierPicker" data-style="btn-default" data-width="100%" data-size="10">
                 <option selected>Any tier</option>
                 <option data-divider="true"></option>
@@ -87,7 +87,8 @@
 {% block includes %}
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote.js') }}"></script>
+<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/html2canvas.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/shipData.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/shipBuilder.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/shipGen.v2.0.js') }}"></script>
 {% endblock %}
