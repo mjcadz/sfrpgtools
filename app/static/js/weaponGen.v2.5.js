@@ -773,6 +773,12 @@ function advancedMelee(level) {
   var type;
   var critical;
   var special = [];
+  if (level > 3) {
+    var battery = randomChoice(["20","40"]);
+  } else {
+    var battery = "20";
+  }
+
 
   var advancedMeleeType = ["FX Sword","FX Gauntlet","FX Hammer","FX-edged Handaxe","FX Truncheon","FX Doshko","FX-edged Greatsword","FX Pike","FX Longhammer"];
   var weaponType = randomChoice(advancedMeleeType);
@@ -790,7 +796,7 @@ function advancedMelee(level) {
       critical = (randomChoice(["-","Bleed"]));
       special.push("Analog");
     } else {
-      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+      special.push("Powered (capacity "+ battery +", usage "+randomChoice(["1","2","4"])+")");
     }
     handed = "one";
     bulk = "1";
@@ -801,7 +807,7 @@ function advancedMelee(level) {
       critical = (randomChoice(["-","Knockdown"]));
       special.push("Analog");
     } else {
-      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+      special.push("Powered (capacity "+ battery +", usage "+randomChoice(["1","2","4"])+")");
     }
     handed = "one";
     bulk = "1";
@@ -812,7 +818,7 @@ function advancedMelee(level) {
       critical = (randomChoice(["-","Staggered"]));
       special.push("Analog");
     } else {
-      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+      special.push("Powered (capacity "+ battery +", usage "+randomChoice(["1","2","4"])+")");
     }
     handed = "one";
     bulk = "1";
@@ -823,7 +829,7 @@ function advancedMelee(level) {
       critical = (randomChoice(["-","-","Bleed","Wound"]));
       special.push("Analog");
     } else {
-      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+      special.push("Powered (capacity "+ battery +", usage "+randomChoice(["1","2","4"])+")");
     }
 
     handed = "one";
@@ -835,7 +841,7 @@ function advancedMelee(level) {
       critical = (randomChoice(["-","Staggered","Wound"]));
       special.push("Analog");
     } else {
-      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+      special.push("Powered (capacity "+ battery +", usage "+randomChoice(["1","2","4"])+")");
     }
 
     handed = "one";
@@ -848,7 +854,7 @@ function advancedMelee(level) {
       special.push("Analog");
       special.push("Unwieldy");
     } else {
-      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+      special.push("Powered (capacity "+ battery +", usage "+randomChoice(["1","2","4"])+")");
     }
     handed = "two";
     bulk = "1";
@@ -858,10 +864,10 @@ function advancedMelee(level) {
       damageShorthand = damageTypeAbbrv["Slashing"];
       critical = (randomChoice(["-","Wound","Bleed"]));
       special.push("Analog");
+      special.push("Unwieldy");
     } else {
-      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+      special.push("Powered (capacity "+ battery +", usage "+randomChoice(["1","2","4"])+")");
     }
-    special.push("Unwieldy");
     handed = "two";
     bulk = "2";
 
@@ -872,7 +878,7 @@ function advancedMelee(level) {
       critical = (randomChoice(["-","Bleed"]));
       special.push("Analog");
     } else {
-      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+      special.push("Powered (capacity "+ battery +", usage "+randomChoice(["1","2","4"])+")");
     }
     handed = "two";
     bulk = "2";
@@ -884,7 +890,7 @@ function advancedMelee(level) {
       critical = (randomChoice(["-","Knockdown"]));
       special.push("Analog");
     } else {
-      special.push("Powered (capacity "+randomChoice(["20","40"])+", usage "+randomChoice(["1","2","4"])+")");
+      special.push("Powered (capacity "+ battery +", usage "+randomChoice(["1","2","4"])+")");
     }
     handed = "two";
     bulk = "2";
