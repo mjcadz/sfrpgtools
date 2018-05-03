@@ -39,15 +39,75 @@ function generateDropdown(parentID,label,dropID,title,array) {
   $('#'+dropID).on('changed.bs.select', dropClickHandler);
 }
 
+function clearOutput() {
+  var $outputArea = $(".output.area").first();
+  $outputArea.empty();
+  $('.btn-edit').hide();
+  $('.btn-image').hide();
+  $('.btn-print').hide();
+}
+
 function generateShip() {
+
   $('.btn-edit').show();
   $('.btn-image').show();
   $('.btn-print').show();
-  displayShipBlock()
+
+  var shipBlock = {};
+
+  var tier = $('#tierPicker').val().trim().replace('Tier ','').replace('Any tier',Object.keys(shipTiers).selectRandom());
+  var frame = $('#framePicker').val().trim().replace('Any frame',Object.keys(shipFrames).selectRandom())
+
+  shipBlock.tier = tier
+  shipBlock.frame = frame
+
+  var buildPoints = shipTiers[tier].SBP;
+
+  //FRAME
+
+  frameObj = shipFrames[frame]
+
+  buildPoints -= frameObj.cost.BP
+  shipBlock.size = shipSizes[frameObj.size]
+  shipBlock.maneuverability = frameObj.maneuverability
+  //values
+  for (value in frameObj.value) {
+    shipBlock[value] = frameObj.value[value];
+  }
+
+  //CORE
+
+  shipBlock.core = getCores(frameObj.size).selectRandom()
+  buildPoints -= shipPowerCores[shipBlock.core].cost.BP
+  shipBlock.PCU = shipPowerCores[shipBlock.core].value.PCU
+  //console.log(shipBlock.core)
+  //console.log(shipBlock.PCU)
+
+  //SPEED
+
+  shipBlock.speed = 8;
+
+  //HP increase
+  for (var i = 0; i < shipTiers[tier].hpIncrease; i++) {
+    shipBlock.HP += shipBlock.HPIncrement
+  }
+
+  displayShipBlock(shipBlock)
 
 }
 
-function displayShipBlock() {
+//return the cores for a particular ship size. integer
+function getCores(size) {
+  var cores = []
+  for (core in shipPowerCores) {
+    if (size <= shipPowerCores[core].maxSize && size >= shipPowerCores[core].minSize) {
+      cores.push(core)
+    }
+  }
+  return cores
+}
+
+function displayShipBlock(shipBlock) {
     //
     //Ship Block
     //
@@ -55,11 +115,12 @@ function displayShipBlock() {
     textBlock = "";
     //description
     textBlock += '<hr>';
-    textBlock += leftAndRight('<b>' + "Name" + '</b>','<b>TIER '+ "5" +'</b>');
+    textBlock += leftAndRight('<b>' + "Name" + '</b>','<b>TIER '+ shipBlock.tier +'</b>');
     textBlock += '<hr>';
-    textBlock += "<div>" + "Medium transport" + "</div>";
-    textBlock += "<div>" + "<b>Speed</b> 8; " + "<b>Maneuverability</b> average (2 turn); " + "<b>Drift</b> 2" + "</div>";
+    textBlock += "<div>" + shipBlock.size + " " + shipBlock.frame.toLowerCase() + "</div>";
+    textBlock += "<div>" + "<b>Speed</b> " + shipBlock.speed + "; " + "<b>Maneuverability</b> average (2 turn); " + "<b>Drift</b> 2" + "</div>";
     textBlock += "<div>" + "<b>AC</b> 22; " + "<b>TL</b> 22" + "</div>";
+    textBlock += "<div>" + "<b>HP </b>" + shipBlock.HP + "; " + "<b>DT</b> " + shipBlock.DT + "; <b>CT</b> " + shipBlock.CT + "</div>";
     textBlock += "<div>" + "<b>Shields</b> X; " + "</div>";
     textBlock += "<div>" + "<b>Attack (Forward)</b> X; " + "</div>";
     textBlock += "<div>" + "<b>Systems</b> X; " + "</div>";

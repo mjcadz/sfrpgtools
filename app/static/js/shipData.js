@@ -1,15 +1,19 @@
 var shipTiers = {
 	"1": {
-		"SBP": 40
+		"SBP": 40,
+		"hpIncrease": 0
 	},
 	"1/2": {
-		"SBP": 40
+		"SBP": 40,
+		"hpIncrease": 0
 	},
 	"1/3": {
-		"SBP": 30
+		"SBP": 30,
+		"hpIncrease": 0
 	},
 	"1/4": {
-		"SBP": 25
+		"SBP": 25,
+		"hpIncrease": 0
 	},
 	"10": {
 		"SBP": 270,
@@ -52,14 +56,16 @@ var shipTiers = {
 		"hpIncrease": 4
 	},
 	"2": {
-		"SBP": 75
+		"SBP": 75,
+		"hpIncrease": 0
 	},
 	"20": {
 		"SBP": 1000,
 		"hpIncrease": 5
 	},
 	"3": {
-		"SBP": 95
+		"SBP": 95,
+		"hpIncrease": 0
 	},
 	"4": {
 		"SBP": 115,
