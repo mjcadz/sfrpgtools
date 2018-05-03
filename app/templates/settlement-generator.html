@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Starfinder Settlement Generator{% endblock %}
+{% block description %}Random settlement generator to help fill your Starfinder worlds{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <h1>Settlement Generator</h1>
+    <p class="lead">Generates settlements for the Starfinder RPG to help fill your worlds.</p>
+    <p></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <select class="selectpicker show-tick" id="sizePicker" data-style="btn-default" data-width="100%" data-size="10">
+                  <option selected>Any size</option>
+                  <option data-divider="true"></option>
+                  <option>Empty</option>
+                  <option>Tiny</option>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                  <option>Huge</option>
+                </select>
+                <P></P>
+                <button type="button" onclick="generateSettlement()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
+                <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
+                <P></P>
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+
+    <div class="output area">
+
+    </div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/common.v2.4.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/settlementGen.v2.0.js') }}"></script>
+{% endblock %}

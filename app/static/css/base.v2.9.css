@@ -19,9 +19,10 @@ body {
     height: 65px;
   }
   .nav-height-calc {
-    height: calc(100vh - 460px);
+    height: calc(100vh - 490px);
   }
 }
+/*mobile view*/
 @media (max-width: 767px) {
   .content {
     min-height: calc(100vh - 200px);
@@ -30,7 +31,7 @@ body {
     height: 65px;
   }
   .nav-height-calc {
-    height: calc(100vh - 500px);
+    height: calc(100vh - 550px);
   }
 }
 
