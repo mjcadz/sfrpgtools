@@ -57,54 +57,95 @@ function generateShip() {
 
   var tier = $('#tierPicker').val().trim().replace('Tier ','').replace('Any tier',Object.keys(shipTiers).selectRandom());
   var frame = $('#framePicker').val().trim().replace('Any frame',Object.keys(shipFrames).selectRandom())
+  var weapons = $('#weaponPicker').val().trim().replace(" armed","").replace('Any armament',["Not","Lightly","Heavily"].selectRandom())
+
+  console.log(weapons)
 
   shipBlock.tier = tier
   shipBlock.frame = frame
 
-  var buildPoints = shipTiers[tier].SBP;
+  var buildPoints;
+  var powerCoreUnits;
+
+  buildPoints = shipTiers[tier].SBP;
 
   //FRAME
 
   frameObj = shipFrames[frame]
 
-  buildPoints -= frameObj.cost.BP
   shipBlock.size = shipSizes[frameObj.size]
   shipBlock.maneuverability = frameObj.maneuverability
-  //values
+  //frame values
   for (value in frameObj.value) {
     shipBlock[value] = frameObj.value[value];
   }
+  buildPoints -= frameObj.cost.BP
 
-  //CORE
-
-  shipBlock.core = getCores(frameObj.size).selectRandom()
-  buildPoints -= shipPowerCores[shipBlock.core].cost.BP
-  shipBlock.PCU = shipPowerCores[shipBlock.core].value.PCU
-  //console.log(shipBlock.core)
-  //console.log(shipBlock.PCU)
-
-  //SPEED
-
-  shipBlock.speed = 8;
-
-  //HP increase
+  //HP INCREASE
   for (var i = 0; i < shipTiers[tier].hpIncrease; i++) {
     shipBlock.HP += shipBlock.HPIncrement
   }
 
-  displayShipBlock(shipBlock)
+  //POWER CORE
 
-}
+  shipBlock.core = getCores(frameObj.size).selectRandom()
+  shipBlock.PCU = shipPowerCores[shipBlock.core].value.PCU
 
-//return the cores for a particular ship size. integer
-function getCores(size) {
-  var cores = []
-  for (core in shipPowerCores) {
-    if (size <= shipPowerCores[core].maxSize && size >= shipPowerCores[core].minSize) {
-      cores.push(core)
+  buildPoints -= shipPowerCores[shipBlock.core].cost.BP
+  powerCoreUnits = shipBlock.PCU
+
+  //THRUSTERS
+  shipBlock.thrusters = getThrusters(frameObj.size).selectRandom();
+  var thrusterObj = shipThrusters[shipBlock.thrusters]
+
+  shipBlock.speed = thrusterObj.value.hexSpeed;
+  shipBlock.piloting += thrusterObj.value.piloting;
+
+  buildPoints -= thrusterObj.cost.BP
+  powerCoreUnits -= thrusterObj.cost.PCU
+
+  console.log(buildPoints)
+  console.log(powerCoreUnits)
+
+  //WEAPONS
+  mounts = frameObj.mounts
+  mountKeys = Object.keys(mounts)
+
+  if (weapons.includes("Lightly")) {
+    mountList = shuffle(["ForwardArc","Turret"]);
+  } else if (weapons.includes("Heavily")) {
+    mountList = shuffle(["ForwardArc","Turret","SideArcs","AftArc"]);
+  } else if (weapons.includes("Not")) {
+    mountList = [];
+  } else {
+    console.log("error")
+  }
+
+  console.log(mountList)
+
+  for (var i = 0; i < mountList.length; i++) {
+    if (mountKeys.includes(mountList[i])) {
+      console.log(mountList[i])
+      for (weaponClass in mounts[mountList[i]]) {
+
+        console.log(weaponClass + ":" + mounts[mountList[i]][weaponClass])
+      }
+
     }
   }
-  return cores
+
+
+
+  //ESSENTIAL SYSTEMS
+  var essentialSystems = ["shipArmor","shipComputers","shipDefenses","shipShields","Weapons"]
+
+  //OTHER SYSTEMS
+  var otherSystems = ["shipQuarters","shipDriftEngines","shipExpansionBays","shipSecurity","shipSensors"]
+
+
+  //PRINT
+  displayShipBlock(shipBlock)
+
 }
 
 function displayShipBlock(shipBlock) {
@@ -123,13 +164,13 @@ function displayShipBlock(shipBlock) {
     textBlock += "<div>" + "<b>HP </b>" + shipBlock.HP + "; " + "<b>DT</b> " + shipBlock.DT + "; <b>CT</b> " + shipBlock.CT + "</div>";
     textBlock += "<div>" + "<b>Shields</b> X; " + "</div>";
     textBlock += "<div>" + "<b>Attack (Forward)</b> X; " + "</div>";
+    textBlock += "<div>" + "<b>Power Core</b> " + shipBlock.core + " (" + shipBlock.PCU + " PCU); <b>Drift Engine</b> </div>";
     textBlock += "<div>" + "<b>Systems</b> X; " + "</div>";
     textBlock += "<div>" + "<b>Modifiers</b> X; " + "</div>";
     textBlock += "<div><b>CREW</b></div>";
     textBlock += '<hr>';
     textBlock += "<div>" + "<b>Captain</b> X; " + "</div>";
 
-    //statBlock.CreatureType
     var $StatBlock = $(".summernoteEdit").first();
     $StatBlock.empty();
     $StatBlock.append(textBlock);
@@ -138,6 +179,38 @@ function displayShipBlock(shipBlock) {
 //returns a string div with right aligned and left alignedtext on the same line
 function leftAndRight(left,right){
   return '<div class="row"><div class="col-xs-8"><div>' + left + '</div></div><div class="col-xs-4"><div class="text-right">' + right + '</div></div></div>'
+}
+
+//return the cores for a particular ship size. integer
+function getCores(size) {
+  var cores = []
+  for (core in shipPowerCores) {
+    if (size <= shipPowerCores[core].maxSize && size >= shipPowerCores[core].minSize) {
+      cores.push(core)
+    }
+  }
+  return cores
+}
+
+//return available thrusters
+function getThrusters(size) {
+  var thrusters = []
+  for (thruster in shipThrusters) {
+    if (size == shipThrusters[thruster].size) {
+      thrusters.push(thruster)
+    }
+  }
+  return thrusters
+}
+
+function getWeapons(weaponClass) {
+  var weapons = []
+  for (weapon in shipWeapons) {
+    if (weaponClass == shipWeapons[weapon].class) {
+      thrusters.push(thruster)
+    }
+  }
+  return weapons
 }
 
 //show the summernote edit box wrapped around the statblock text
@@ -187,6 +260,26 @@ function blockToImage() {
 function printBlock() {
     window.print();
 };
+
+//returns a shuffled array
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 //runs when page is loaded
 $( document ).ready(function() {
