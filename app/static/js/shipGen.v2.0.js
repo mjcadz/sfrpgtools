@@ -1,43 +1,3 @@
-//Handle the clicks from dropdowns - function is divided by dropdown id. each dropdown will only execute the code for its own id
-function dropClickHandler(e, clickedIndex, newValue, oldValue) {
-    //get the item that wa selected on the dropdown click + the dropdowns id
-    var selected = $(e.currentTarget).val();
-    var id = $(e.currentTarget).attr('id');
-
-    if (id=='frameDrop') {
-
-    }
-}
-
-//creates bootstrap-select dropdowns from arrays
-function generateDropdown(parentID,label,dropID,title,array) {
-  //add select options
-  var dropHtml = "";
-  if (label != "") {
-    dropHtml += '<label>' + label + '</label>'
-  }
-  dropHtml += '<select class="selectpicker show-tick" id="'+ dropID +'" title="'+title+'" data-style="btn-default" data-width="100%" data-size="10">'
-  //build list, apply BREAKS or LABELS if words present in array
-  for (i = 0; i < array.length; i++) {
-    if (array[i] == 'BREAK'){
-      dropHtml += '<option data-divider="true"></option>';
-    } else if (array[i].includes('LABEL=')) {
-      dropHtml += '<optgroup label="' + array[i].replace('LABEL=','') + '">';
-    } else if (array[i].includes('ENDLABEL')) {
-      dropHtml += '</optgroup>';
-    }
-    else {
-      dropHtml += '<option>' + array[i] + '</option>';
-    }
-  }
-  dropHtml += '</select>';
-  //add to parent div
-  document.getElementById(parentID).innerHTML = dropHtml;
-  //initialise dropdown
-  $('#'+dropID).selectpicker();
-  //bind dropdown click  handler
-  $('#'+dropID).on('changed.bs.select', dropClickHandler);
-}
 
 function clearOutput() {
   var $outputArea = $(".output.area").first();
@@ -114,27 +74,39 @@ function generateShip() {
   if (weapons.includes("Lightly")) {
     mountList = shuffle(["ForwardArc","Turret"]);
   } else if (weapons.includes("Heavily")) {
-    mountList = shuffle(["ForwardArc","Turret","SideArcs","AftArc"]);
+    mountList = shuffle(["ForwardArc","Turret","PortArc","StarboardArc","AftArc"]);
   } else if (weapons.includes("Not")) {
     mountList = [];
   } else {
     console.log("error")
   }
 
-  console.log(mountList)
+  shipBlock.mounts = {};
+  shipBlock.mounts.Turret = [];
+  shipBlock.mounts.ForwardArc = [];
+  shipBlock.mounts.AftArc = [];
+  shipBlock.mounts.PortArc = [];
+  shipBlock.mounts.StarboardArc = [];
 
   for (var i = 0; i < mountList.length; i++) {
     if (mountKeys.includes(mountList[i])) {
-      console.log(mountList[i])
+
       for (weaponClass in mounts[mountList[i]]) {
+        //check if theres enough BP
+        if (buildPoints > 0) {
 
-        console.log(weaponClass + ":" + mounts[mountList[i]][weaponClass])
+          var weaponNum = mounts[mountList[i]][weaponClass];
+          var randWeapons = getRandomInt(1, weaponNum);
+
+          for (var j = 0; j < randWeapons; j++) {
+            var weapon = getWeapons(weaponClass.capitalise(),buildPoints).selectRandom()
+            shipBlock.mounts[mountList[i]].push(weapon + " (" + shipWeapons[weapon].damage + ")" )
+            buildPoints -= shipWeapons[weapon].cost.BP
+          }
+        }
       }
-
     }
   }
-
-
 
   //ESSENTIAL SYSTEMS
   var essentialSystems = ["shipArmor","shipComputers","shipDefenses","shipShields","Weapons"]
@@ -163,7 +135,23 @@ function displayShipBlock(shipBlock) {
     textBlock += "<div>" + "<b>AC</b> 22; " + "<b>TL</b> 22" + "</div>";
     textBlock += "<div>" + "<b>HP </b>" + shipBlock.HP + "; " + "<b>DT</b> " + shipBlock.DT + "; <b>CT</b> " + shipBlock.CT + "</div>";
     textBlock += "<div>" + "<b>Shields</b> X; " + "</div>";
-    textBlock += "<div>" + "<b>Attack (Forward)</b> X; " + "</div>";
+
+    if (shipBlock.mounts.ForwardArc.length > 0) {
+      textBlock += "<div>" + "<b>Attack (Forward)</b> " + shipBlock.mounts.ForwardArc.join(', ') + "</div>";
+    }
+    if (shipBlock.mounts.PortArc.length > 0) {
+      textBlock += "<div>" + "<b>Attack (Port)</b> " + shipBlock.mounts.PortArc.join(', ') + "</div>";
+    }
+    if (shipBlock.mounts.StarboardArc.length > 0) {
+      textBlock += "<div>" + "<b>Attack (Starboard)</b> " + shipBlock.mounts.StarboardArc.join(', ') + "</div>";
+    }
+    if (shipBlock.mounts.AftArc.length > 0) {
+      textBlock += "<div>" + "<b>Attack (Aft)</b> " + shipBlock.mounts.AftArc.join(', ') + "</div>";
+    }
+    if (shipBlock.mounts.Turret.length > 0) {
+      textBlock += "<div>" + "<b>Attack (Turret)</b> " + shipBlock.mounts.Turret.join(', ') + "</div>";
+    }
+
     textBlock += "<div>" + "<b>Power Core</b> " + shipBlock.core + " (" + shipBlock.PCU + " PCU); <b>Drift Engine</b> </div>";
     textBlock += "<div>" + "<b>Systems</b> X; " + "</div>";
     textBlock += "<div>" + "<b>Modifiers</b> X; " + "</div>";
@@ -203,11 +191,11 @@ function getThrusters(size) {
   return thrusters
 }
 
-function getWeapons(weaponClass) {
+function getWeapons(weaponClass,buildPoints) {
   var weapons = []
   for (weapon in shipWeapons) {
-    if (weaponClass == shipWeapons[weapon].class) {
-      thrusters.push(thruster)
+    if (weaponClass == shipWeapons[weapon].class && shipWeapons[weapon].cost.BP <= buildPoints) {
+      weapons.push(weapon)
     }
   }
   return weapons

@@ -1042,7 +1042,8 @@ var shipFrames = {
 				"heavy": 2
 			},
 			"PortArc": {
-				"capital,3": 1
+				"capital": 1,
+				"heavy": 3
 			},
 			"StarboardArc": {
 				"capital": 1,
@@ -2189,7 +2190,7 @@ var shipWeapons = {
 			"BP": 25,
 			"PCU": 15
 		},
-		"damage": "4d10 + 10",
+		"damage": "4d10 x 10",
 		"hexSpeed": 6,
 		"range": "Long",
 		"special": "Limited fire 5",
@@ -2245,7 +2246,7 @@ var shipWeapons = {
 			"BP": 50,
 			"PCU": 40
 		},
-		"damage": "2d6 + 10",
+		"damage": "2d6 x 10",
 		"range": "Long",
 		"special": "Tractor beam",
 		"type": "Direct"
@@ -2370,7 +2371,7 @@ var shipWeapons = {
 			"BP": 25,
 			"PCU": 10
 		},
-		"damage": "2d10 + 10",
+		"damage": "2d10 x 10",
 		"hexSpeed": 8,
 		"range": "Long",
 		"special": "Limited fire 5",
@@ -2484,7 +2485,7 @@ var shipWeapons = {
 			"BP": 25,
 			"PCU": 25
 		},
-		"damage": "2d6 + 10",
+		"damage": "2d6 x 10",
 		"range": "Long",
 		"special": "-",
 		"type": "Direct"
@@ -2507,7 +2508,7 @@ var shipWeapons = {
 			"BP": 20,
 			"PCU": 15
 		},
-		"damage": "4d8 + 10",
+		"damage": "4d8 x 10",
 		"hexSpeed": 8,
 		"range": "Long",
 		"special": "Limited fire 5",
@@ -2530,7 +2531,7 @@ var shipWeapons = {
 			"BP": 30,
 			"PCU": 30
 		},
-		"damage": "3d4 + 10",
+		"damage": "3d4 x 10",
 		"range": "Long",
 		"special": "-",
 		"type": "Direct"
@@ -2552,7 +2553,7 @@ var shipWeapons = {
 			"BP": 40,
 			"PCU": 50
 		},
-		"damage": "2d10 + 10",
+		"damage": "2d10 x 10",
 		"range": "Long",
 		"special": "-",
 		"type": "Direct"
@@ -2574,7 +2575,7 @@ var shipWeapons = {
 			"BP": 20,
 			"PCU": 15
 		},
-		"damage": "2d8 + 10",
+		"damage": "2d8 x 10",
 		"hexSpeed": 12,
 		"range": "Long",
 		"special": "Limited fire 5, quantum",
@@ -2597,7 +2598,7 @@ var shipWeapons = {
 			"BP": 20,
 			"PCU": 10
 		},
-		"damage": "2d6 + 10",
+		"damage": "2d6 x 10",
 		"hexSpeed": 10,
 		"range": "Long",
 		"special": "Limited fire 5",
@@ -2620,7 +2621,7 @@ var shipWeapons = {
 			"BP": 60,
 			"PCU": 50
 		},
-		"damage": "3d4 + 10",
+		"damage": "3d4 x 10",
 		"range": "Long",
 		"special": "Line",
 		"type": "Direct"
@@ -2631,7 +2632,7 @@ var shipWeapons = {
 			"BP": 35,
 			"PCU": 45
 		},
-		"damage": "3d6 + 10",
+		"damage": "3d6 x 10",
 		"range": "Medium",
 		"special": "-",
 		"type": "Direct"
@@ -2642,7 +2643,7 @@ var shipWeapons = {
 			"BP": 60,
 			"PCU": 50
 		},
-		"damage": "2d8 + 10",
+		"damage": "2d8 x 10",
 		"range": "Medium",
 		"special": "Irradiate (high)",
 		"type": "Direct"
@@ -2653,7 +2654,7 @@ var shipWeapons = {
 			"BP": 20,
 			"PCU": 20
 		},
-		"damage": "2d4 + 10",
+		"damage": "2d4 x 10",
 		"range": "Long",
 		"special": "-",
 		"type": "Direct"
@@ -2664,7 +2665,7 @@ var shipWeapons = {
 			"BP": 35,
 			"PCU": 40
 		},
-		"damage": "2d8 + 10",
+		"damage": "2d8 x 10",
 		"range": "Long",
 		"special": "-",
 		"type": "Direct"
@@ -2698,7 +2699,7 @@ var shipWeapons = {
 			"BP": 75,
 			"PCU": 55
 		},
-		"damage": "2d12 + 10",
+		"damage": "2d12 x 10",
 		"range": "Medium",
 		"special": "Vortex",
 		"type": "Direct"
