@@ -1,40 +1,39 @@
 
 function changePriceButton(price) {
-  var product,pricelink;
-  var $buttonArea = $(".buybutton").first();
-  $buttonArea.empty();
-  price = price.trim();
+    $('.buybutton1').hide();
+    $('.buybutton2').hide();
+    $('.buybutton3').hide();
+    $('.buybutton4').hide();
+    $('.buybutton5').hide();
+    $('.buybutton6').hide();
+    $('.buybutton7').hide();
+    $('.buybutton8').hide();
+    $('.buybutton9').hide();
+    $('.buybutton10').hide();
 
   if (price =='$1'){
-    product = '77722079/4CB2E941';
+    $('.buybutton1').show();
   } else if (price =='$2'){
-    product = '77722080/E3B766ED';
+    $('.buybutton2').show();
   } else if (price =='$3'){
-    product = '77722081/EB72008B';
+    $('.buybutton3').show();
   } else if (price =='$4'){
-    product = '77722083/31C6A589';
+    $('.buybutton4').show();
   } else if (price =='$5'){
-    product = '77722085/EE993B62';
+    $('.buybutton5').show();
   } else if (price =='$6'){
-    product = '77722090/1ABB5E75';
+    $('.buybutton6').show();
   } else if (price =='$7'){
-    product = '77722086/8A82EB24';
+    $('.buybutton7').show();
   } else if (price =='$8'){
-    product = '77722095/47F6FAAF';
+    $('.buybutton8').show();
   } else if (price =='$9'){
-    product = '77722089/483E980A';
+    $('.buybutton9').show();
   } else if (price =='$10'){
-    product = '77722091/2CC07F41';
+    $('.buybutton10').show();
   }else {
-    product = NaN;
+    console.log("broken")
   }
-
-  pricelink = '<a href="https://transactions.sendowl.com/products/' + product + '/purchase" rel="nofollow" class="btn btn-grn">BUY NOW</a><script type="text/javascript" src="https://transactions.sendowl.com/assets/sendowl.js"></script>'
-
-  $buttonArea.append(pricelink);
-  //update sendowl
-  sendOwl.captureLinks();
-
 }
 
 function dropClickHandler(e, clickedIndex, newValue, oldValue) {
@@ -54,6 +53,5 @@ $( document ).ready(function() {
   $('.selectpicker').on('changed.bs.select', dropClickHandler);
   $('.selectpicker').selectpicker('val', '$3');
   $('.selectpicker').selectpicker('refresh');
-  //grab sendowl purchase forms
-  sendOwl.captureLinks();
+
 });
