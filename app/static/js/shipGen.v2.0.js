@@ -108,11 +108,27 @@ function generateShip() {
     }
   }
 
+  shipBlock.AC = 0;
+  shipBlock.TL = 0;
+
   //ESSENTIAL SYSTEMS
-  var essentialSystems = ["shipArmor","shipComputers","shipDefenses","shipShields","Weapons"]
+  var essentialSystems = shuffle(["shipArmor"]); //,"shipComputers","shipDefenses","shipShields"
+
+  for (var i = 0; i < essentialSystems.length; i++) {
+    if (essentialSystems[i] == "shipArmor") {
+      var armor = getArmor(frameObj.size,buildPoints).selectRandom()
+      shipBlock.armor = armor;
+      shipBlock.AC = shipBlock.AC + shipArmor[armor].value.AC;
+      shipBlock.TL = shipBlock.TL + shipArmor[armor].value.TL;
+      shipBlock.turn = shipBlock.turn + shipArmor[armor].value.turn;
+      buildPoints -= shipArmor[armor].BPCostMultiplier * frameObj.size;
+    }
+  };
+
+  console.log(shipBlock)
 
   //OTHER SYSTEMS
-  var otherSystems = ["shipQuarters","shipDriftEngines","shipExpansionBays","shipSecurity","shipSensors"]
+  var otherSystems = shuffle(["shipQuarters","shipDriftEngines","shipExpansionBays","shipSecurity","shipSensors"]);
 
 
   //PRINT
@@ -195,10 +211,21 @@ function getWeapons(weaponClass,buildPoints) {
   var weapons = []
   for (weapon in shipWeapons) {
     if (weaponClass == shipWeapons[weapon].class && shipWeapons[weapon].cost.BP <= buildPoints) {
-      weapons.push(weapon)
+      weapons.push(weapon);
     }
   }
   return weapons
+}
+
+function getArmor(size,buildPoints) {
+  var armors = []
+  for (armor in shipArmor) {
+    if ( (shipArmor[armor].BPCostMultiplier * size ) <= buildPoints) {
+      console.log(shipArmor[armor].BPCostMultiplier * size)
+      armors.push(armor);
+    }
+  }
+  return armors
 }
 
 //show the summernote edit box wrapped around the statblock text

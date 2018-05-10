@@ -109,7 +109,7 @@ var shipArmor = {
 		"BPCostMultiplier": 1,
 		"value": {
 			"AC": 1,
-			"TL": "none",
+			"TL": 0,
 			"turn": 0
 		}
 	},
@@ -165,7 +165,7 @@ var shipArmor = {
 		"BPCostMultiplier": 2,
 		"value": {
 			"AC": 2,
-			"TL": "none",
+			"TL": 0,
 			"turn": 0
 		}
 	},
@@ -173,7 +173,7 @@ var shipArmor = {
 		"BPCostMultiplier": 3,
 		"value": {
 			"AC": 3,
-			"TL": "none",
+			"TL": 0,
 			"turn": 0
 		}
 	},
@@ -181,7 +181,7 @@ var shipArmor = {
 		"BPCostMultiplier": 5,
 		"value": {
 			"AC": 4,
-			"TL": "none",
+			"TL": 0,
 			"turn": 0
 		}
 	},
