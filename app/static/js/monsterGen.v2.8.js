@@ -1278,7 +1278,15 @@ function buildStatBlock() {
     //check if there is any senses
     var sensesString = '';
     if (statBlock.hasOwnProperty('Senses')){
-      sensesString = '; <b>Senses</b> '+statBlock.Senses.join(', ').toLowerCase()
+
+      //remove duplicates
+      var uniqueSenses = statBlock.Senses.filter(function(elem, index, self) {
+        return index === self.indexOf(elem);
+      })
+
+      uniqueSenses = uniqueSenses.sort();
+
+      sensesString = '; <b>Senses</b> '+uniqueSenses.join(', ').toLowerCase()
     }
 
     //build attack strings
