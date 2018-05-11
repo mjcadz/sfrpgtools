@@ -1511,7 +1511,7 @@ var shipPowerCores = {
 };
 
 var shipQuarters = {
-  Good: {
+  "Good": {
     "cost": {
     	"BP": 2
     },

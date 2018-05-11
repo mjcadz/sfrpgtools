@@ -206,8 +206,48 @@ function generateShip() {
   console.log(shipBlock)
 
   //OTHER SYSTEMS
-  var otherSystems = shuffle(["shipQuarters","shipDriftEngines","shipExpansionBays","shipSecurity","shipSensors"]);
+  var otherSystems = shuffle(["shipDriftEngines","shipSensors","shipQuarters","shipExpansionBays"]);//,"shipExpansionBays","shipSecurity"
 
+  for (var i = 0; i < otherSystems.length; i++) {
+    if (otherSystems[i] == "shipDriftEngines") {
+      var driftArray = getDriftEngine(frameObj.size,buildPoints,shipBlock.PCU);
+
+      if (driftArray.length > 0){
+        var engine = driftArray.selectRandom()
+        shipBlock.driftEngine = engine;
+        shipBlock.driftRating = shipDriftEngines[engine].value.driftEngineRating;
+
+        buildPoints -= shipDriftEngines[engine].BPCostMultiplier * frameObj.size;
+      }
+
+    } else if (otherSystems[i] == "shipSensors") {
+      var sensorArray = getSensors(buildPoints);
+
+      if (sensorArray.length > 0){
+        var sensor = sensorArray.selectRandom()
+        shipBlock.systems.push(sensor + " sensors");
+
+        buildPoints -= shipSensors[sensor].cost.BP;
+
+      }
+
+    } else if (otherSystems[i] == "shipQuarters") {
+
+      var quarters = ["Common"]
+      if (buildPoints >= 2){quarters.push("Good")}
+      if (buildPoints >= 5){quarters.push("Luxurious")}
+
+      var quarter = quarters.selectRandom()
+      shipBlock.systems.push("crew quarters (" + quarter.toLowerCase() + ")");
+      buildPoints -= shipQuarters[quarter].cost.BP;
+    } else if (otherSystems[i] == "shipExpansionBays") {
+
+      var cargoHolds = getRandomInt(0, shipBlock.ExpansionBays);
+      var remainingBays = shipBlock.ExpansionBays - cargoHolds
+
+      for (var j = 0; j < remainingBays; j++) {}
+    }
+  };
 
   //PRINT
   displayShipBlock(shipBlock)
@@ -225,7 +265,11 @@ function displayShipBlock(shipBlock) {
     textBlock += leftAndRight('<b>' + "Name" + '</b>','<b>TIER '+ shipBlock.tier +'</b>');
     textBlock += '<hr>';
     textBlock += "<div>" + shipBlock.size + " " + shipBlock.frame.toLowerCase() + "</div>";
-    textBlock += "<div>" + "<b>Speed</b> " + shipBlock.speed + "; " + "<b>Maneuverability</b> " + shipBlock.maneuverability + " (" + shipBlock.turn + " turn); " + "<b>Drift</b> 2" + "</div>";
+    textBlock += "<div>" + "<b>Speed</b> " + shipBlock.speed + "; " + "<b>Maneuverability</b> " + shipBlock.maneuverability + " (" + shipBlock.turn + " turn)";
+    if (shipBlock.hasOwnProperty('driftRating')) {
+      textBlock += "; <b>Drift</b> " + shipBlock.driftRating;
+    }
+    textBlock += "</div>"
     textBlock += "<div>" + "<b>AC</b> 22; " + "<b>TL</b> 22" + "</div>";
     textBlock += "<div>" + "<b>HP </b>" + shipBlock.HP + "; " + "<b>DT</b> " + shipBlock.DT + "; <b>CT</b> " + shipBlock.CT + "</div>";
     if (shipBlock.hasOwnProperty('shield')) {
@@ -251,11 +295,14 @@ function displayShipBlock(shipBlock) {
       textBlock += "<div>" + "<b>Attack (Turret)</b> " + shipBlock.mounts.Turret.join(', ') + "</div>";
     }
 
-    textBlock += "<div>" + "<b>Power Core</b> " + shipBlock.core + " (" + shipBlock.PCU + " PCU);"
-    //TODO drift engine
+    textBlock += "<div>" + "<b>Power Core</b> " + shipBlock.core + " (" + shipBlock.PCU + " PCU)"
+    if (shipBlock.hasOwnProperty('driftEngine')) {
+      textBlock += "; <b>Drift Engine</b> " + shipBlock.driftEngine;
+    }
     if (shipBlock.systems.length != 0) {
       shipBlock.systems = shipBlock.systems.sort();
-      textBlock += " <b>Systems</b> " + shipBlock.systems.join(', ') + ";"
+      textBlock += "; <b>Systems</b> " + shipBlock.systems.join(', ').toLowerCase()
+
     }
     textBlock += "</div>"
 
@@ -348,6 +395,26 @@ function getDefenses(buildPoints,powerCoreUnits) {
     }
   }
   return defenses
+}
+
+function getDriftEngine(size,buildPoints,power) {
+  var engines = []
+  for (engine in shipDriftEngines) {
+    if ( (shipDriftEngines[engine].BPCostMultiplier * size ) <= buildPoints && size <= shipDriftEngines[engine].maxSize && power >= shipDriftEngines[engine].minPCU) {
+      engines.push(engine);
+    }
+  }
+  return engines
+}
+
+function getSensors(buildPoints) {
+  var sensors = []
+  for (sensor in shipSensors) {
+    if (shipSensors[sensor].cost.BP <= buildPoints) {
+      sensors.push(sensor);
+    }
+  }
+  return sensors
 }
 
 //show the summernote edit box wrapped around the statblock text

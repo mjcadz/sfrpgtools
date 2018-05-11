@@ -19,7 +19,7 @@ body {
     height: 65px;
   }
   .nav-height-calc {
-    height: calc(100vh - 490px);
+    height: calc(100vh - 530px);
   }
 }
 /*mobile view*/
@@ -31,7 +31,7 @@ body {
     height: 65px;
   }
   .nav-height-calc {
-    height: calc(100vh - 550px);
+    height: calc(100vh - 580px);
   }
 }
 
