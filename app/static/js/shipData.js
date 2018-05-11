@@ -228,7 +228,7 @@ var shipArmor = {
 };
 
 var shipComputers = {
-	"Basic computer": {
+	"Basic": {
 		"cost": {
 			"BP": 0,
 			"PCU": 0

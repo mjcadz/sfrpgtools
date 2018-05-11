@@ -66,6 +66,10 @@
                 <option>Lightly armed</option>
                 <option>Heavily armed</option>
               </select>
+              <select class="selectpicker show-tick" id="crewPicker" data-style="btn-default" data-width="100%" data-size="10">
+                <option selected>NPC crew</option>
+                <option>Player crew</option>
+              </select>
               <P></P>
               <button type="button" onclick="generateShip()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
               <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
@@ -80,10 +84,10 @@
 
     </div>
     <hr class="dontPrint">
-    <button type="button" style="margin-left: 20px;" class="btn btn-edit btn-grn" onclick="editBlock()" type="button">Edit shipblock</button>
-    <button type="button" style="margin-left: 20px;" class="btn btn-save btn-grn" onclick="saveBlock()" type="button">Save shipblock</button>
-    <button type="button" style="margin-left: 20px;" class="btn btn-image btn-grn" onclick="blockToImage()" type="button">Save shipblock as image</button>
-    <button type="button" style="margin-left: 20px;" class="btn btn-print btn-grn" onclick="printBlock()" type="button">Print shipblock</button>
+    <button type="button" style="margin-left: 20px;display: none;" class="btn btn-edit btn-grn" onclick="editBlock()" type="button">Edit shipblock</button>
+    <button type="button" style="margin-left: 20px;display: none;" class="btn btn-save btn-grn" onclick="saveBlock()" type="button">Save shipblock</button>
+    <button type="button" style="margin-left: 20px;display: none;" class="btn btn-image btn-grn" onclick="blockToImage()" type="button">Save shipblock as image</button>
+    <button type="button" style="margin-left: 20px;display: none;" class="btn btn-print btn-grn" onclick="printBlock()" type="button">Print shipblock</button>
     <p></p>
     <div id="capture" style="max-width: 600px;">
         <div id="overEdit" style="margin-left: 4.5em; margin-right: 1em;">
