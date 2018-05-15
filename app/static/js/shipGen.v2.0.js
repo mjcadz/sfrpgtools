@@ -189,7 +189,7 @@ function generateShip() {
       }
 
     } else if (essentialSystems[i] == "shipDefenses") {
-      console.log("HERE")
+
       var defenseArray = getDefenses(buildPoints,powerCoreUnits);
       if (defenseArray.length > 0){
         var defense = defenseArray.selectRandom()
@@ -203,7 +203,7 @@ function generateShip() {
     }
   };
 
-  console.log(shipBlock)
+  //console.log(shipBlock)
 
   //OTHER SYSTEMS
   var otherSystems = shuffle(["shipDriftEngines","shipSensors","shipQuarters","shipExpansionBays"]);//,"shipExpansionBays","shipSecurity"
@@ -244,8 +244,42 @@ function generateShip() {
 
       var cargoHolds = getRandomInt(0, shipBlock.ExpansionBays);
       var remainingBays = shipBlock.ExpansionBays - cargoHolds
+      var baySelections = [];
+      var bayNumbers = [];
 
-      for (var j = 0; j < remainingBays; j++) {}
+      if (cargoHolds > 0) {
+        baySelections.push("cargo hold");
+        bayNumbers.push(cargoHolds)
+      }
+
+      for (var j = 0; j < remainingBays; j++) {
+        var bayArray = getExpansionBays(frameObj.size,buildPoints,powerCoreUnits);
+        if (bayArray.length > 0) {
+          var bay = bayArray.selectRandom()
+          if (baySelections.includes(bay)){
+            bayNumbers[baySelections.indexOf(bay)] = bayNumbers[baySelections.indexOf(bay)] += 1;
+          } else {
+            baySelections.push(bay);
+            bayNumbers.push(1)
+          }
+          buildPoints -= shipExpansionBays[bay].cost.BP;
+          powerCoreUnits -= shipExpansionBays[bay].cost.PCU
+        }
+      }
+
+      //TODO recover unused cargo slots. hanger bay multiple slots. "s" on the end doesnt fit all cases
+
+      shipBlock.expansionBayArray = [];
+
+      if (baySelections.length > 0) {
+        for (var k = 0; k < baySelections.length; k++) {
+          var bayString = baySelections[k];
+          if (bayNumbers[k] > 1) {
+            bayString += "s (" + bayNumbers[k] + ")";
+          }
+          shipBlock.expansionBayArray.push(bayString.toLowerCase());
+        }
+      }
     }
   };
 
@@ -304,6 +338,11 @@ function displayShipBlock(shipBlock) {
       textBlock += "; <b>Systems</b> " + shipBlock.systems.join(', ').toLowerCase()
 
     }
+    if (shipBlock.expansionBayArray.length != 0) {
+      shipBlock.expansionBayArray = shipBlock.expansionBayArray.sort();
+      textBlock += "; <b>Expansion Bays</b> " + shipBlock.expansionBayArray.join(', ').toLowerCase()
+    }
+
     textBlock += "</div>"
 
     if (shipBlock.modifiers.length != 0) {
@@ -405,6 +444,16 @@ function getDriftEngine(size,buildPoints,power) {
     }
   }
   return engines
+}
+
+function getExpansionBays(size,buildPoints,powerCoreUnits) {
+  var bays = []
+  for (bay in shipExpansionBays) {
+    if ( size >= shipExpansionBays[bay].minSize && shipExpansionBays[bay].cost.BP <= buildPoints && shipExpansionBays[bay].cost.PCU <= powerCoreUnits && bay != "Cargo hold" && bay != "Power core housing") {
+      bays.push(bay);
+    }
+  }
+  return bays
 }
 
 function getSensors(buildPoints) {

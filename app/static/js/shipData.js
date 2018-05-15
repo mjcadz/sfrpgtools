@@ -894,7 +894,7 @@ var shipFrames = {
 		"value": {
 			"CT": 56,
 			"DT": 10,
-			"ExansionBays": 8,
+			"ExpansionBays": 8,
 			"HP": 280,
 			"HPIncrement": 40,
 			"maxCrew": 300,
@@ -923,7 +923,7 @@ var shipFrames = {
 		"value": {
 			"CT": 32,
 			"DT": 5,
-			"ExansionBays": 10,
+			"ExpansionBays": 10,
 			"HP": 160,
 			"HPIncrement": 20,
 			"maxCrew": 50,
@@ -955,7 +955,7 @@ var shipFrames = {
 		"value": {
 			"CT": 48,
 			"DT": 10,
-			"ExansionBays": 10,
+			"ExpansionBays": 10,
 			"HP": 240,
 			"HPIncrement": 30,
 			"maxCrew": 200,
@@ -987,7 +987,7 @@ var shipFrames = {
 		"value": {
 			"CT": 36,
 			"DT": 5,
-			"ExansionBays": 6,
+			"ExpansionBays": 6,
 			"HP": 180,
 			"HPIncrement": 25,
 			"maxCrew": 100,
@@ -1022,7 +1022,7 @@ var shipFrames = {
 		"value": {
 			"CT": 30,
 			"DT": 0,
-			"ExansionBays": 4,
+			"ExpansionBays": 4,
 			"HP": 150,
 			"HPIncrement": 20,
 			"maxCrew": 20,
@@ -1057,7 +1057,7 @@ var shipFrames = {
 		"value": {
 			"CT": 80,
 			"DT": 15,
-			"ExansionBays": 20,
+			"ExpansionBays": 20,
 			"HP": 400,
 			"HPIncrement": 50,
 			"maxCrew": 500,
@@ -1089,7 +1089,7 @@ var shipFrames = {
 		"value": {
 			"CT": 11,
 			"DT": 0,
-			"ExansionBays": 4,
+			"ExpansionBays": 4,
 			"HP": 55,
 			"HPIncrement": 10,
 			"maxCrew": 6,
@@ -1115,7 +1115,7 @@ var shipFrames = {
 		"value": {
 			"CT": 7,
 			"DT": 0,
-			"ExansionBays": 0,
+			"ExpansionBays": 0,
 			"HP": 35,
 			"HPIncrement": 5,
 			"maxCrew": 2,
@@ -1145,7 +1145,7 @@ var shipFrames = {
 		"value": {
 			"CT": 24,
 			"DT": 0,
-			"ExansionBays": 8,
+			"ExpansionBays": 8,
 			"HP": 120,
 			"HPIncrement": 20,
 			"maxCrew": 20,
@@ -1168,7 +1168,7 @@ var shipFrames = {
 		"value": {
 			"CT": 6,
 			"DT": 0,
-			"ExansionBays": 0,
+			"ExpansionBays": 0,
 			"HP": 30,
 			"HPIncrement": 5,
 			"maxCrew": 1,
@@ -1197,7 +1197,7 @@ var shipFrames = {
 		"value": {
 			"CT": 8,
 			"DT": 0,
-			"ExansionBays": 3,
+			"ExpansionBays": 3,
 			"HP": 40,
 			"HPIncrement": 10,
 			"maxCrew": 6,
@@ -1223,7 +1223,7 @@ var shipFrames = {
 		"value": {
 			"CT": 4,
 			"DT": 0,
-			"ExansionBays": 0,
+			"ExpansionBays": 0,
 			"HP": 20,
 			"HPIncrement": 5,
 			"maxCrew": 1,
@@ -1246,7 +1246,7 @@ var shipFrames = {
 		"value": {
 			"CT": 7,
 			"DT": 0,
-			"ExansionBays": 3,
+			"ExpansionBays": 3,
 			"HP": 35,
 			"HPIncrement": 5,
 			"maxCrew": 4,
@@ -1276,7 +1276,7 @@ var shipFrames = {
 		"value": {
 			"CT": 14,
 			"DT": 0,
-			"ExansionBays": 5,
+			"ExpansionBays": 5,
 			"HP": 70,
 			"HPIncrement": 15,
 			"maxCrew": 6,
