@@ -130,8 +130,8 @@ function generateShip() {
     }
   }
 
-  shipBlock.AC = 0;
-  shipBlock.TL = 0;
+  shipBlock.AC = 10;
+  shipBlock.TL = 10;
   shipBlock.systems = [];
   shipBlock.modifiers = [];
 
@@ -140,6 +140,9 @@ function generateShip() {
   }
 
   shipBlock.complement = getRandomInt(shipBlock.minCrew, shipBlock.maxCrew);
+  if (Math.abs(shipBlock.complement % 2) == 1 && shipBlock.complement > 1) {
+    shipBlock.complement = shipBlock.complement - 1;
+  }
 
   //ESSENTIAL SYSTEMS
   var essentialSystems = shuffle(["shipArmor","shipComputers","shipShields","shipDefenses"]);
@@ -304,6 +307,19 @@ function generateShip() {
 
 
   };
+  //CREW
+  captainSkills = ["Bluff","Diplomacy","Computers","Engineering","Gunnery","Intimidate","Piloting"]
+  rank = " (" + shipBlock.tier.replace('1/2','1').replace('1/3','1').replace('1/4','1') + " rank)"
+  masterSkill = captainSkills.selectRandom()
+  shipBlock.captain = []
+  for (var i = 0; i < captainSkills.length; i++) {
+    if (captainSkills[i] == masterSkill) {
+      shipBlock.captain.push(captainSkills[i] + " +" + crewBaseStats[shipBlock.tier][0] + rank)
+    } else {
+      shipBlock.captain.push(captainSkills[i] + " +" + crewBaseStats[shipBlock.tier][1] + rank)
+    }
+  }
+
   //PRINT
   displayShipBlock(shipBlock)
 
@@ -359,9 +375,11 @@ function displayShipBlock(shipBlock) {
       textBlock += "; <b>Systems</b> " + shipBlock.systems.join(', ').toLowerCase()
 
     }
-    if (shipBlock.expansionBayArray.length != 0) {
+    if (shipBlock.expansionBayArray.length > 0) {
       shipBlock.expansionBayArray = shipBlock.expansionBayArray.sort();
       textBlock += "; <b>Expansion Bays</b> " + shipBlock.expansionBayArray.join(', ').toLowerCase()
+    } else {
+      textBlock += "; <b>Expansion Bays</b> none";
     }
 
     textBlock += "</div>"
@@ -375,7 +393,7 @@ function displayShipBlock(shipBlock) {
 
     textBlock += "<div><b>CREW</b></div>";
     textBlock += '<hr>';
-    textBlock += "<div>" + "<b>Captain</b> X; " + "</div>";
+    textBlock += "<div>" + "<b>Captain</b> " + shipBlock.captain.join(', ') + "</div>";
 
     var $StatBlock = $(".summernoteEdit").first();
     $StatBlock.empty();
