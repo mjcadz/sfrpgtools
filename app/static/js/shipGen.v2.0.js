@@ -18,10 +18,8 @@ function generateShip() {
     var shipBlock = {};
 
     var tier = $('#tierPicker').val().trim().replace('Tier ','').replace('Any tier',Object.keys(shipTiers).selectRandom());
-    var frame = $('#framePicker').val().trim().replace('Any frame',Object.keys(shipFrames).selectRandom())
-    var weapons = $('#weaponPicker').val().trim().replace(" armed","").replace('Any armament',["Not","Lightly","Heavily"].selectRandom())
-
-    console.log(weapons)
+    var frame = $('#framePicker').val().trim().replace('Any frame',Object.keys(shipFrames).selectRandom());
+    var weapons = $('#weaponPicker').val().trim().replace(" armed","").replace('Any armament',["Not","Lightly","Heavily"].selectRandom());
 
     shipBlock.tier = tier
     shipBlock.frame = frame
@@ -87,10 +85,6 @@ function generateShip() {
   buildPoints -= thrusterObj.cost.BP
   powerCoreUnits -= thrusterObj.cost.PCU
 
-  console.log(buildPoints)
-  console.log(powerCoreUnits)
-  console.log('-------')
-
   //WEAPONS
   mounts = frameObj.mounts
   mountKeys = Object.keys(mounts)
@@ -140,6 +134,12 @@ function generateShip() {
   shipBlock.TL = 0;
   shipBlock.systems = [];
   shipBlock.modifiers = [];
+
+  if (shipBlock.piloting != 0) {
+    shipBlock.modifiers.push(("+" + shipBlock.piloting.toString() + " Piloting").replace('+-','-'))
+  }
+
+  shipBlock.complement = getRandomInt(shipBlock.minCrew, shipBlock.maxCrew);
 
   //ESSENTIAL SYSTEMS
   var essentialSystems = shuffle(["shipArmor","shipComputers","shipShields","shipDefenses"]);
@@ -203,11 +203,8 @@ function generateShip() {
     }
   };
 
-  //console.log(shipBlock)
-
   //OTHER SYSTEMS
   var otherSystems = shuffle(["shipDriftEngines","shipSensors","shipQuarters","shipExpansionBays"]);//,"shipExpansionBays","shipSecurity"
-
   for (var i = 0; i < otherSystems.length; i++) {
     if (otherSystems[i] == "shipDriftEngines") {
       var driftArray = getDriftEngine(frameObj.size,buildPoints,shipBlock.PCU);
@@ -216,30 +213,32 @@ function generateShip() {
         var engine = driftArray.selectRandom()
         shipBlock.driftEngine = engine;
         shipBlock.driftRating = shipDriftEngines[engine].value.driftEngineRating;
-
         buildPoints -= shipDriftEngines[engine].BPCostMultiplier * frameObj.size;
       }
 
     } else if (otherSystems[i] == "shipSensors") {
+      shipBlock.sensorMod = ""
       var sensorArray = getSensors(buildPoints);
 
       if (sensorArray.length > 0){
         var sensor = sensorArray.selectRandom()
         shipBlock.systems.push(sensor + " sensors");
-
         buildPoints -= shipSensors[sensor].cost.BP;
-
+        if (shipSensors[sensor].sensorMod != "+0")
+        shipBlock.modifiers.push(shipSensors[sensor].sensorMod + " Computers");
       }
 
     } else if (otherSystems[i] == "shipQuarters") {
+      if (frameObj.size > 1) {
+        var quarters = ["Common"]
+        if (buildPoints >= 2){quarters.push("Good")}
+        if (buildPoints >= 5){quarters.push("Luxurious")}
 
-      var quarters = ["Common"]
-      if (buildPoints >= 2){quarters.push("Good")}
-      if (buildPoints >= 5){quarters.push("Luxurious")}
+        var quarter = quarters.selectRandom()
+        shipBlock.systems.push("crew quarters (" + quarter.toLowerCase() + ")");
+        buildPoints -= shipQuarters[quarter].cost.BP;
+      }
 
-      var quarter = quarters.selectRandom()
-      shipBlock.systems.push("crew quarters (" + quarter.toLowerCase() + ")");
-      buildPoints -= shipQuarters[quarter].cost.BP;
     } else if (otherSystems[i] == "shipExpansionBays") {
 
       var cargoHolds = getRandomInt(0, shipBlock.ExpansionBays);
@@ -247,15 +246,13 @@ function generateShip() {
       var baySelections = [];
       var bayNumbers = [];
 
-      if (cargoHolds > 0) {
-        baySelections.push("cargo hold");
-        bayNumbers.push(cargoHolds)
-      }
-
       for (var j = 0; j < remainingBays; j++) {
-        var bayArray = getExpansionBays(frameObj.size,buildPoints,powerCoreUnits);
+        var bayArray = getExpansionBays(frameObj.size,buildPoints,powerCoreUnits,remainingBays-j);
         if (bayArray.length > 0) {
           var bay = bayArray.selectRandom()
+          if (bay == "Hangar bay") {
+            j += 3
+          }
           if (baySelections.includes(bay)){
             bayNumbers[baySelections.indexOf(bay)] = bayNumbers[baySelections.indexOf(bay)] += 1;
           } else {
@@ -267,22 +264,46 @@ function generateShip() {
         }
       }
 
-      //TODO recover unused cargo slots. hanger bay multiple slots. "s" on the end doesnt fit all cases
+      //recover cargo bays
+      if (bayNumbers.length > 0) {
+        var baySum = bayNumbers.reduce(function(acc, val) { return acc + val; });
+      } else {
+        var baySum = 0;
+      }
+      cargoHolds += (remainingBays - baySum);
+      if (baySelections.includes("Hangar bay")) {
+        cargoHolds -= bayNumbers[baySelections.indexOf("Hangar bay")] * 3;
+      }
+
+      if (cargoHolds > 0) {
+        baySelections.push("cargo hold");
+        bayNumbers.push(cargoHolds)
+      }
 
       shipBlock.expansionBayArray = [];
 
       if (baySelections.length > 0) {
         for (var k = 0; k < baySelections.length; k++) {
           var bayString = baySelections[k];
+          if (bayString == "Guest quarters") {
+            bayString += [" (common)"," (good)"," (luxurious)"].selectRandom();
+          }
           if (bayNumbers[k] > 1) {
-            bayString += "s (" + bayNumbers[k] + ")";
+            if (bayString.includes(" (")) {
+              bayString = bayString.replace(' (','s (');
+              bayString += " (" + bayNumbers[k] + ")";
+            } else {
+              bayString += "s (" + bayNumbers[k] + ")";
+            }
+            bayString = bayString.replace('boatss','boats').replace('seatings','seating');
           }
           shipBlock.expansionBayArray.push(bayString.toLowerCase());
         }
       }
     }
-  };
 
+
+  };
   //PRINT
   displayShipBlock(shipBlock)
 
@@ -347,8 +368,10 @@ function displayShipBlock(shipBlock) {
 
     if (shipBlock.modifiers.length != 0) {
       shipBlock.modifiers = shipBlock.modifiers.sort();
-      textBlock += "<div>" + "<b>Modifiers</b> " + shipBlock.modifiers.join(', ') + ";" + "</div>";
+      textBlock += "<div>" + "<b>Modifiers</b> " + shipBlock.modifiers.join(', ');
     }
+    textBlock += "; <b>Complement</b> " + shipBlock.complement;
+    textBlock += "</div>"
 
     textBlock += "<div><b>CREW</b></div>";
     textBlock += '<hr>';
@@ -446,10 +469,10 @@ function getDriftEngine(size,buildPoints,power) {
   return engines
 }
 
-function getExpansionBays(size,buildPoints,powerCoreUnits) {
+function getExpansionBays(size,buildPoints,powerCoreUnits,slots) {
   var bays = []
   for (bay in shipExpansionBays) {
-    if ( size >= shipExpansionBays[bay].minSize && shipExpansionBays[bay].cost.BP <= buildPoints && shipExpansionBays[bay].cost.PCU <= powerCoreUnits && bay != "Cargo hold" && bay != "Power core housing") {
+    if ( size >= shipExpansionBays[bay].minSize && shipExpansionBays[bay].cost.BP <= buildPoints && shipExpansionBays[bay].cost.PCU <= powerCoreUnits && shipExpansionBays[bay].slots <= slots && bay != "Cargo hold" && bay != "Power core housing") {
       bays.push(bay);
     }
   }

@@ -708,7 +708,8 @@ var shipExpansionBays = {
 			"PCU": 1
 		},
 		"description": "An arcane laboratory contains all the tools and space necessary to craft magic items (see page 235), though the crafter must still provide the necessary raw materials. Such a laboratory reduces the crafting time by half.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Cargo hold": {
 		"cost": {
@@ -716,7 +717,8 @@ var shipExpansionBays = {
 			"PCU": 0
 		},
 		"description": "Unconverted expansion bays count as cargo holds. A cargo hold can contain approximately 25 tons of goods, with no item being larger than Large. A starship with multiple cargo holds can hold larger objects; usually 4 contiguous cargo holds are required to hold Huge objects and 8 for Gargantuan objects. These size restrictions can be overridden at the GM's discretion.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Escape pods": {
 		"cost": {
@@ -724,7 +726,8 @@ var shipExpansionBays = {
 			"PCU": 2
 		},
 		"description": "Escape pods give the crew of a severely damaged or destroyed starship a way to avoid imminent death. An escape pod fits one Medium or smaller creature and has enough supplies and life-support capacity for that creature to survive for 7 days. It is also fitted with a distress beacon that is easily identified by long-range scanners. An escape pod has heat shields that allow it to crash-land on a planet with an atmosphere, but no means of propulsion. A single expansion bay can be converted into six escape pods.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Guest quarters": {
 		"cost": {
@@ -732,7 +735,8 @@ var shipExpansionBays = {
 			"PCU": 1
 		},
 		"description": "Starships that function as passenger vessels require spaces apart from their crew quarters for their guests to sleep. A single expansion bay can be converted into common quarters (usually simple bunks or hammocks) for six passengers, good quarters (usually a comfortable bed, a desk with a chair, and a small set of drawers) for four passengers, or luxurious quarters (usually a large bed, a wardrobe, a couch, a desk with a nice chair, and a private washroom) for two passengers.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Hangar bay": {
 		"cost": {
@@ -740,7 +744,8 @@ var shipExpansionBays = {
 			"PCU": 30
 		},
 		"description": "A hangar bay can be installed only in a Gargantuan or larger starship and takes up 4 expansion bays. A hangar bay provides a place for up to 8 Tiny starships to dock.",
-		"minSize": 6
+		"minSize": 6,
+		"slots":4
 	},
 	"Life Science lab": {
 		"cost": {
@@ -748,7 +753,8 @@ var shipExpansionBays = {
 			"PCU": 2
 		},
 		"description": "A science lab contains scientific apparatuses and other laboratory equipment to aid in the research of certain topics. A general science lab provides a +1 circumstance bonus to Life Science and Physical Science checks (and is called a general science lab), a life science lab provides a +2 circumstance bonus to Life Science checks, and a physical science lab provides a +2 circumstance bonus to Physical Science checks. The lab type is chosen when the expansion bay is converted.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Life boats": {
 		"cost": {
@@ -756,7 +762,8 @@ var shipExpansionBays = {
 			"PCU": 5
 		},
 		"description": "A life boat is a more sophisticated version of an escape pod. It has room for one Large creature, or two Medium or smaller creatures, and enough supplies to last those passengers 15 days (or 30 days of supplies for one Medium or smaller creature). While it has the same kind of distress beacon as an escape pod, a life boat also has an on-board computer that automatically detects the nearest hospitable celestial body and minimal thrusters to get the craft there (though a life boat can't participate in starship combat). A single expansion bay can be converted into two life boats.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Medical bay": {
 		"cost": {
@@ -764,7 +771,8 @@ var shipExpansionBays = {
 			"PCU": 4
 		},
 		"description": "A medical bay functions as a medical lab (see page 220).",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Passenger seating": {
 		"cost": {
@@ -772,7 +780,8 @@ var shipExpansionBays = {
 			"PCU": 0
 		},
 		"description": "An expansion bay can be converted into rows of seating for passengers at no cost. A single expansion bay can hold seating for 16 Medium passengers (though seats can be built for larger creatures). This upgrade is appropriate only for taking many passengers on short trips; starships on journeys lasting multiple days should instead have guest quarters installed.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Physical Science lab": {
 		"cost": {
@@ -780,7 +789,8 @@ var shipExpansionBays = {
 			"PCU": 2
 		},
 		"description": "A science lab contains scientific apparatuses and other laboratory equipment to aid in the research of certain topics. A general science lab provides a +1 circumstance bonus to Life Science and Physical Science checks (and is called a general science lab), a life science lab provides a +2 circumstance bonus to Life Science checks, and a physical science lab provides a +2 circumstance bonus to Physical Science checks. The lab type is chosen when the expansion bay is converted.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Power core housing": {
 		"cost": {
@@ -788,7 +798,8 @@ var shipExpansionBays = {
 			"PCU": 0
 		},
 		"description": "An expansion bay can be set aside for an additional power core (which must be purchased separately) and the associated wiring and safety apparatuses. A power core housing can be installed on only a Medium or larger starship.",
-		"minSize": 3
+		"minSize": 3,
+		"slots":1
 	},
 	"Recreation suite (HAC)": {
 		"cost": {
@@ -796,7 +807,8 @@ var shipExpansionBays = {
 			"PCU": 3
 		},
 		"description": "A recreation suite includes entertainments that help the crew (or passengers) relax and blow off steam. These diversions can be wide-ranging, with some consuming more PCU than others (see the table on page 300). Example recreation suites include a gym, sparring arena, or other exercise area; a trivid den or other comfortable space in which to consume passive entertainment; or a holographic amusement chamber (or HAC), vidgame arcade, or other high-tech interactive entertainment center.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Recreation suite (gym)": {
 		"cost": {
@@ -804,7 +816,8 @@ var shipExpansionBays = {
 			"PCU": 0
 		},
 		"description": "A recreation suite includes entertainments that help the crew (or passengers) relax and blow off steam. These diversions can be wide-ranging, with some consuming more PCU than others (see the table on page 300). Example recreation suites include a gym, sparring arena, or other exercise area; a trivid den or other comfortable space in which to consume passive entertainment; or a holographic amusement chamber (or HAC), vidgame arcade, or other high-tech interactive entertainment center.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Recreation suite (trivid den)": {
 		"cost": {
@@ -812,7 +825,8 @@ var shipExpansionBays = {
 			"PCU": 1
 		},
 		"description": "A recreation suite includes entertainments that help the crew (or passengers) relax and blow off steam. These diversions can be wide-ranging, with some consuming more PCU than others (see the table on page 300). Example recreation suites include a gym, sparring arena, or other exercise area; a trivid den or other comfortable space in which to consume passive entertainment; or a holographic amusement chamber (or HAC), vidgame arcade, or other high-tech interactive entertainment center.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Science lab": {
 		"cost": {
@@ -820,7 +834,8 @@ var shipExpansionBays = {
 			"PCU": 2
 		},
 		"description": "A science lab contains scientific apparatuses and other laboratory equipment to aid in the research of certain topics. A general science lab provides a +1 circumstance bonus to Life Science and Physical Science checks (and is called a general science lab), a life science lab provides a +2 circumstance bonus to Life Science checks, and a physical science lab provides a +2 circumstance bonus to Physical Science checks. The lab type is chosen when the expansion bay is converted.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Sealed environment chamber": {
 		"cost": {
@@ -828,7 +843,8 @@ var shipExpansionBays = {
 			"PCU": 2
 		},
 		"description": "Occasionally, a starship will need to host an alien or other creature whose biology is radically different from that of the crew. The passenger might be able to breathe only methane gas or can survive in only below-freezing temperatures. In such a case, a sealed environment chamber is required for the passenger to remain comfortable (and alive).",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Shuttle bay": {
 		"cost": {
@@ -836,7 +852,8 @@ var shipExpansionBays = {
 			"PCU": 10
 		},
 		"description": "A shuttle bay can be installed only in a Huge or larger starship and takes up two expansion bays. A shuttle bay provides a place for a Small or smaller starship to dock.",
-		"minSize": 5
+		"minSize": 5,
+		"slots":1
 	},
 	"Smuggler compartment": {
 		"cost": {
@@ -844,7 +861,8 @@ var shipExpansionBays = {
 			"PCU": 4
 		},
 		"description": "Smuggler compartments are cargo holds hidden behind false bulkheads and are shielded from most scanning, allowing a starship equipped with them to haul illegal goods without detection. A smuggler compartment can contain 10 tons of goods, with no item being larger than Medium. A creature on the starship must succeed at a DC 20 Perception check to detect a basic smuggler compartment on the starship. A creature scanning the starship must succeed at a DC 20 Computers check to detect one (this additional check is part of the science officer's scan action in starship combat; see page 325). For each Build Point spent over the base cost, these DCs increase by 5 (maximum DC 50), though the amount of power the compartment uses also increases by 1.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Synthesis bay": {
 		"cost": {
@@ -852,7 +870,8 @@ var shipExpansionBays = {
 			"PCU": 2
 		},
 		"description": "A synthesis bay contains all the space and tools required to craft drugs, medicine, or poison (see page 235), though the crafter must still provide the necessary raw materials. A synthesis bay reduces the crafting time by half.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	},
 	"Tech workshop": {
 		"cost": {
@@ -860,7 +879,8 @@ var shipExpansionBays = {
 			"PCU": 3
 		},
 		"description": "A tech workshop contains all the space and tools necessary to craft technological items (see page 235), though the crafter must still provide the necessary raw materials. Such a workshop reduces the crafting time by half.",
-		"minSize": 1
+		"minSize": 1,
+		"slots":1
 	}
 };
 
@@ -1582,70 +1602,70 @@ var shipSensors = {
 			"BP": 14
 		},
 		"range": "Long",
-		"sensorMod": 4
+		"sensorMod": "+4"
 	},
 	"Advanced medium-range": {
 		"cost": {
 			"BP": 8
 		},
 		"range": "Medium",
-		"sensorMod": 4
+		"sensorMod": "+4"
 	},
 	"Advanced short-range": {
 		"cost": {
 			"BP": 4
 		},
 		"range": "Short",
-		"sensorMod": 4
+		"sensorMod": "+4"
 	},
 	"Basic long-range": {
 		"cost": {
 			"BP": 10
 		},
 		"range": "Long",
-		"sensorMod": 2
+		"sensorMod": "+2"
 	},
 	"Basic medium-range": {
 		"cost": {
 			"BP": 5
 		},
 		"range": "Medium",
-		"sensorMod": 2
+		"sensorMod": "+2"
 	},
 	"Basic short-range": {
 		"cost": {
 			"BP": 3
 		},
 		"range": "Short",
-		"sensorMod": 2
+		"sensorMod": "+2"
 	},
 	"Budget long-range": {
 		"cost": {
 			"BP": 6
 		},
 		"range": "Long",
-		"sensorMod": 0
+		"sensorMod": "+0"
 	},
 	"Budget medium-range": {
 		"cost": {
 			"BP": 3
 		},
 		"range": "Medium",
-		"sensorMod": 0
+		"sensorMod": "+0"
 	},
 	"Budget short-range": {
 		"cost": {
 			"BP": 2
 		},
 		"range": "Short",
-		"sensorMod": 0
+		"sensorMod": "+0"
 	},
 	"Cut-rate": {
 		"cost": {
 			"BP": 1
 		},
 		"range": "Short",
-		"sensorMod": -2
+		"sensorMod": "-2"
 	}
 };
 

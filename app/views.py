@@ -70,8 +70,8 @@ def settlementGenerator():
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/ship-generator')
-def shipGenerator():
-    resp = make_response(render_template('ship-generator.html'))
+@app.route('/starship-generator')
+def starshipGenerator():
+    resp = make_response(render_template('starship-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
