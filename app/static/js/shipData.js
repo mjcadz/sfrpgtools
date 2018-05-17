@@ -2797,3 +2797,14 @@ var ACTLSizeMod = {
 	"6": -4,
 	"7": -8,
 };
+
+var maneuverability = {
+	"0": "Perfect",
+	"1": "Good",
+	"2": "Average",
+	"3": "Poor",
+	"4": "Clumsy",
+	"5": "Clumsy",
+	"6": "Clumsy",
+	"7": "Clumsy",
+}

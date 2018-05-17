@@ -34,7 +34,7 @@ function generateShip() {
     frameObj = shipFrames[frame]
 
     shipBlock.size = shipSizes[frameObj.size]
-    shipBlock.maneuverability = frameObj.maneuverability
+
     //frame values
     for (value in frameObj.value) {
       shipBlock[value] = frameObj.value[value];
@@ -204,6 +204,7 @@ function generateShip() {
       }
     }
   };
+  shipBlock.maneuverability = maneuverability[shipBlock.turn.toString()]
 
   //OTHER SYSTEMS
   var otherSystems = shuffle(["shipDriftEngines","shipSensors","shipQuarters","shipExpansionBays"]);//,"shipExpansionBays","shipSecurity"
@@ -362,23 +363,45 @@ function generateShip() {
     shipBlock.pilot.bonus.push(crewSkillStrings.Piloting)
   } else {
 
-    //captain
+    remainingCrew = shipBlock.complement - 2  // for captain and pilot
+
+
+    if (remainingCrew > 40) {
+      var officers = [0,0,1,2,3].selectRandom()
+      if (officers != 0) {
+        shipBlock.captain.label += " (plus " + officers + " officer" + (officers == 1 ? "" : "s") + ")"
+        remainingCrew -= officers
+      }
+    }
+    if (remainingCrew > 40) {
+      var officers = [0,1,1].selectRandom()
+      var crewMembers = getRandomInt(2, 10);
+      if (officers != 0) {
+        shipBlock.pilot.label += " (1 officer, " + crewMembers + " crew)"
+        remainingCrew -= (crewMembers + 1)
+      }
+    }
+    var crewChunks = getThreeSplit(remainingCrew)
+    if (crewChunks[0] > 1) {
+      shipBlock.engineer.label += getCrewString(crewChunks[0],"Engineer")
+    }
+    if (crewChunks[1] > 1) {
+      shipBlock.gunner.label += getCrewString(crewChunks[1],"Gunner")
+    }
+    if (crewChunks[2] > 1) {
+      shipBlock.scienceOfficer.label += getCrewString(crewChunks[2],"Science Officer")
+    }
+
+
     for (string in crewSkillStrings) {
       shipBlock.captain.bonus.push(crewSkillStrings[string])
     }
-    //engineer
     shipBlock.engineer.bonus.push(crewSkillStrings.Engineering)
-    //gunner
-    shipBlock.gunner.bonus.push(crewSkillStrings.Gunnery)
-    //pilot
     shipBlock.pilot.bonus.push(crewSkillStrings.Piloting)
-    //science Officer
+    shipBlock.gunner.bonus.push(crewSkillStrings.Gunnery)
     shipBlock.scienceOfficer.bonus.push(crewSkillStrings.Computers)
 
   }
-
-  console.log(Math.round(shipBlock.complement/4))
-  console.log(getCrewString(Math.round(shipBlock.complement/4),"Engineer"))
 
   //PRINT
   displayShipBlock(shipBlock)
@@ -393,10 +416,10 @@ function displayShipBlock(shipBlock) {
     textBlock = "";
     //description
     textBlock += '<hr>';
-    textBlock += leftAndRight('<b>' + "Name" + '</b>','<b>TIER '+ shipBlock.tier +'</b>');
+    textBlock += leftAndRight('<b>' + generateName() + '</b>','<b>TIER '+ shipBlock.tier +'</b>');
     textBlock += '<hr>';
     textBlock += "<div>" + shipBlock.size + " " + shipBlock.frame.toLowerCase() + "</div>";
-    textBlock += "<div>" + "<b>Speed</b> " + shipBlock.speed + "; " + "<b>Maneuverability</b> " + shipBlock.maneuverability + " (" + shipBlock.turn + " turn)";
+    textBlock += "<div>" + "<b>Speed</b> " + shipBlock.speed + "; " + "<b>Maneuverability</b> " + shipBlock.maneuverability.toLowerCase() + " (turn " + shipBlock.turn + ")";
     if (shipBlock.hasOwnProperty('driftRating')) {
       textBlock += "; <b>Drift</b> " + shipBlock.driftRating;
     }
@@ -448,7 +471,10 @@ function displayShipBlock(shipBlock) {
       shipBlock.modifiers = shipBlock.modifiers.sort();
       textBlock += "<b>Modifiers</b> " + shipBlock.modifiers.join(', ');
     }
-    textBlock += "; <b>Complement</b> " + shipBlock.complement;
+    if (textBlock.includes("Modifiers")){
+      textBlock += "; "
+    }
+    textBlock += "<b>Complement</b> " + shipBlock.complement;
     textBlock += "</div>"
 
     textBlock += "<div><b>CREW</b></div>";
@@ -585,7 +611,7 @@ function getCrewString(crewTotal,crewPosition) {
   var officerNum = [1,2,3,4,5,6,7,8,9,10]
   var crewArray = []
   if (crewTotal < 5) {
-    var crewString = crewPosition
+    var crewString = ""
     if (["Engineer","Science Officer","Gunner"].includes(crewPosition)) {
       crewString += "s"
     }
@@ -594,7 +620,7 @@ function getCrewString(crewTotal,crewPosition) {
   } else {
     for (var i = 0; i < officerNum.length; i++) {
       crew = crewTotal - officerNum[i]
-      if (crew % officerNum[i] == 0 && crew > 0) {
+      if (crew % officerNum[i] == 0 && crew > 0 && crew/officerNum[i] > 3) {
         crewArray.push([officerNum[i],crew/officerNum[i]])
       }
     }
@@ -602,7 +628,7 @@ function getCrewString(crewTotal,crewPosition) {
       crewArray.shift();
     }
     var selected = crewArray.selectRandom()
-    var crewString = crewPosition
+    var crewString = ""
     if (["Engineer","Science Officer","Gunner"].includes(crewPosition)) {
       crewString += "s"
     }
@@ -612,6 +638,25 @@ function getCrewString(crewTotal,crewPosition) {
     crewString += " (" + selected[0] + " officer" + (selected[0] == 1 ? ", " : "s, ") + selected[1] + " crew" + (selected[0] == 1 ? ")" : " each)")
   }
   return crewString
+}
+
+function getThreeSplit (input) {
+
+  var first = Math.round(input / 3)
+  var second = input - first - first
+  var third = input - first - second
+  var split = [first,second,third]
+  if (split[0] > 4) {
+    mover = getRandomInt(1, Math.round(split[0]/2));
+    split[0] = split[0] - mover;
+    split[2] = split[2] + mover;
+  }
+  split = shuffle(split)
+  return split
+}
+
+function generateName() {
+  return "NAME"
 }
 
 
