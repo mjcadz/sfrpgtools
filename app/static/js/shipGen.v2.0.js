@@ -405,7 +405,6 @@ function generateShip() {
 
   //PRINT
   displayShipBlock(shipBlock)
-
 }
 
 function displayShipBlock(shipBlock) {
@@ -416,7 +415,7 @@ function displayShipBlock(shipBlock) {
     textBlock = "";
     //description
     textBlock += '<hr>';
-    textBlock += leftAndRight('<b>' + generateName() + '</b>','<b>TIER '+ shipBlock.tier +'</b>');
+    textBlock += leftAndRight('<b>' + generateName(shipBlock.frame).toUpperCase() + '</b>','<b>TIER '+ shipBlock.tier +'</b>');
     textBlock += '<hr>';
     textBlock += "<div>" + shipBlock.size + " " + shipBlock.frame.toLowerCase() + "</div>";
     textBlock += "<div>" + "<b>Speed</b> " + shipBlock.speed + "; " + "<b>Maneuverability</b> " + shipBlock.maneuverability.toLowerCase() + " (turn " + shipBlock.turn + ")";
@@ -655,8 +654,24 @@ function getThreeSplit (input) {
   return split
 }
 
-function generateName() {
-  return "NAME"
+function generateName(type) {
+
+  var classShip = shipNames.Ships[type].Type.selectRandom()
+  var name = shipNames.Word.selectRandom() + " " + shipNames.Words.selectRandom()
+  if (classShip != type) {
+    name += " " + classShip
+  } else {
+    name = "The " + name
+  }
+  return name
+}
+
+function generateClass(type) {
+   var classShip = shipNames.Ships[type].Type.selectRandom()
+   if (classShip != type) {
+     classShip += " (" + type + ")"
+   }
+   return classShip.toLowerCase()
 }
 
 

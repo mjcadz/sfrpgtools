@@ -5,6 +5,7 @@
   }
   #capture {
     max-width: 100%!important;
+    padding-top: 0px!important;
   }
   .jumbotron {
     padding-top: 0px!important;
