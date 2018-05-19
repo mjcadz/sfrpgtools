@@ -708,13 +708,16 @@ function saveBlock() {
   $('.summernoteEdit').summernote('destroy');
 };
 
+
 //generate image from statblock so user can save
 function blockToImage() {
+
   html2canvas(document.querySelector("#capture")).then(canvas => {
 
     canvas.toBlob(function(blob) {
     	saveAs(blob, "statblock.png");
     });
+
   });
 };
 

@@ -2812,48 +2812,48 @@ var maneuverability = {
 var shipNames = {
 	Ships: {
 		"Battleship": {
-			"Type": ["Battleship","Siegeship","Capital Ship","Heavy Gunship","Strike Craft","Defender","Interdictor","Stealth Ship"]
+			"Type": ["Battleship","Siegeship","Capital Ship","Heavy Gunship","Strike Craft","Defender","Interdictor","Stealth Ship","Frigate","Troopship","Banner Ship"]
 		},
 		"Bulk Freighter": {
-			"Type": ["Bulk Freighter","Bulk Hauler","Bulk Freight","Construction Ship","Cruiseship","Mining Vessel","Trade Ship","Fuel Hauler","Ore Hauler"]
+			"Type": ["Bulk Freighter","Bulk Hauler","Bulk Freight","Construction Ship","Cruiseship","Mining Vessel","Trade Ship","Fuel Hauler","Tanker"]
 		},
 		"Carrier": {
-			"Type": ["Carrier","Fleet Carrier","Repair Barge","Heavy Salvage","Hospital Ship","Sleeper Ship","Supply Ship"]
+			"Type": ["Carrier","Fleet Carrier","Repair Barge","Heavy Salvage","Hospital Ship","Sleeper Ship","Supply Ship","Assault Carrier","Prison Ship"]
 		},
 		"Cruiser": {
-			"Type": ["Cruiser","Corvette","Tourer","Medium Gunship","Long-range Transport","Defense Platform","Missile Cruiser","Warship"]
+			"Type": ["Cruiser","Corvette","Tourer","Medium Gunship","Long-range Transport","Defense Platform","Missile Cruiser","Warship","Command Ship","Space Artillery"]
 		},
 		"Destroyer": {
-			"Type": ["Destroyer","Expedition","Gunship","Personnel Carrier","Heavy Recon","Military Transport","Frigate","Patrol Craft","Enforcer"]
+			"Type": ["Destroyer","Expedition","Gunship","Personnel Carrier","Heavy Recon","Military Transport","Patrol Craft","Enforcer","Fast Attack Craft","Planetary Defense Boat"]
 		},
 		"Dreadnought": {
-			"Type": ["Dreadnought","Mothership","Base Ship","Planet Cracker","Command Ship","Mobile Command Center","World Gouger","Battle Platform","Starcutter","Superdreadnought"]
+			"Type": ["Dreadnought","Mothership","Base Ship","Planet Cracker","Mobile Command Center","World Gouger","Battle Platform","Starcutter","Superdreadnought"]
 		},
 		"Explorer": {
 			"Type": ["Explorer","Diplomatic Barge","Science vessel","Pathfinder","Pleasure Craft","Planet Hopper","Consulor Ship","Light Starship","Surveyor"]
 		},
 		"Fighter": {
-			"Type": ["Fighter","Snub Fighter","Escort Fighter","Medium Fighter","Assault Ship","Starfighter","Attack Fighter"]
+			"Type": ["Fighter","Snub Fighter","Escort Fighter","Medium Fighter","Assault Ship","Starfighter","Attack Fighter","Mobile Suit"]
 		},
 		"Heavy Freighter": {
-			"Type": ["Heavy Freighter","Heavy Freight","Heavy Hauler","Trash Hauler","Freighter","Refueller","Heavy Salvage","Treasury Ship","Ice Hauler"]
+			"Type": ["Heavy Freighter","Heavy Freight","Heavy Hauler","Trash Hauler","Freighter","Refueller","Heavy Salvage","Treasury Ship","Ice Hauler","Ore Hauler","Merchant Ship"]
 		},
 		"Interceptor": {
 			"Type": ["Interceptor","Superiority Fighter","Rapid Assault Craft","Stealh Bomber","Scout Ship","Guard Ship","Approach Craft"]
 		},
 		"Light Freighter": {
-			"Type": ["Light Freighter","Freighter","Cargo Hauler","Spacetug","Salvage","Cargo Lift","Delivery Ship","Maintenance Hauler","Mining Scow","Trader"]
+			"Type": ["Light Freighter","Freighter","Cargo Hauler","Spacetug","Salvage","Cargo Lift","Delivery Ship","Maintenance Hauler","Mining Scow","Trader","Blockade Runner"]
 		},
 		"Racer": {
 			"Type": ["Racer","Sport Model","Recon","Data Hauler","News Chaser","Personal Transport","Courier","Space Pod","Starskiff"]
 		},
 		"Shuttle": {
-			"Type": ["Shuttle", "Dropship","Snubship","Bomber","Heavy Fighter","Med Evac","Cloud Jumper","Landing Craft","Rescue Runner"]
+			"Type": ["Shuttle", "Dropship","Snubship","Bomber","Heavy Fighter","Med Evac","Cloud Jumper","Landing Craft","Rescue Runner","Boarding Craft","Repair Tug"]
 		},
 		"Transport": {
-			"Type": ["Transport","Passenger Shuttle","Constant G Transport","Luxury Yacht","Orbit Hopper","Passenger Liner","Slave Ship"]
+			"Type": ["Transport","Passenger Shuttle","Constant G Transport","Luxury Yacht","Orbit Hopper","Passenger Liner","Slave Ship","Holiday Cruiser"]
 		}
 	},
-	"Word": ["Space","Blessed","Carbon","Compact","Basic","Cosmic","Efficient","Friendly","Furious","Galactic","Hardened","Heavenly","Hectic","Infinite","Intergalactic","Interstellar","Magnificent","Meaty","Mechanised","Mithril","Perfect","Precision","Radiant","Spicy","Superior","Synthetic","Ultra","Vorpal","Wrought","Silver","Steel","Swift","Titanium","Galorians","Interplanetary","Celestial","Dark","Bleeding","Wrathful","Vengeful","Lofty","Sunrise","Black","White","Amazing","Golden","Happy","Jolly","Valiant","Imperial","Astro","Blazing","Grinning","Lunar","Silent","Mighty","Royal","Blazing","Junk","Solar","Ebon","Flying","Millenium","Hammerhead","Night","Champion","Destiny","Night","Interstellar","Knight","Epsilon","Pursuit","Elysium","Lambda","Orbital","Starhive","Ringworks","Atech","Weyland","Idaran","Universal"],
-	"Words":["Oblivion","Bard","Boy","Odyssey","Asteroid","Compulsion","Constellation","D20","Defender","Delivery","Elite","Ghost","Hornet","Infinity","Jewel","Massacre","Matter","Nutrition","Paragon","Platypus","Protector","Seeker","Ranger","Shadow","Starburst","Vacation","Wizard","Star","Retailator","Hopper","Subjugator","Harbinger","Tenacity","Destiny","Jumper","Arrow","Andromeda","Centurai","Gemini","Jupiter","Orion","Vega","Fury","Nemesis","Plague","Scourge","Scorpion","Threat","Shadow","Wrath","Dagger","Dragon","Fox","Laser","Nova","Eye","Blossom","Flower","Bounty","Typhoon","Explorer","Unicorn","Claw","Demon","Doom","Fortune","Kiss","Maiden","Passion","Swan","Fist","Hulk","Sailer","Hawk","Clairvoyance","Tyrant","Titan","Falcon","Comet","Spirit","Wings","Bear","Terror","Dove","Expedition","Doshko","Hammer","Dawn","Avenger"]
+	"Word": ["Space","Blessed","Carbon","Compact","Brutal","Burning","Crimson","Cryptic","Crystal","Defiant","Devil's","Dying","Empty","Enduring","Fallen","Final","First","Forgotten","Frozen","Glass","Hot","Lazy","Lost","Patient","Purple","Red","Rotting","Silent","Soaring","Stone","Twisted","Basic","Cosmic","Rowdy","Efficient","Friendly","Furious","Galactic","Hardened","Heavenly","Hectic","Infinite","Intergalactic","Interstellar","Magnificent","Meaty","Mechanised","Mithril","Perfect","Precision","Radiant","Spicy","Superior","Synthetic","Ultra","Vorpal","Wrought","Silver","Steel","Swift","Titanium","Galorians","Interplanetary","Celestial","Dark","Bleeding","Wrathful","Vengeful","Lofty","Sunrise","Black","White","Amazing","Golden","Happy","Jolly","Valiant","Imperial","Astro","Blazing","Grinning","Lunar","Silent","Mighty","Royal","Blazing","Junk","Solar","Ebon","Flying","Millenium","Hammerhead","Night","Champion","Destiny","Night","Interstellar","Knight","Epsilon","Pursuit","Elysium","Lambda","Orbital","Starhive","Ringworks","Atech","Weyland","Idaran","Universal"],
+	"Words":["Oblivion","Bard","Boy","Odyssey","Asteroid","Compulsion","Constellation","D20","Defender","Delivery","Elite","Ghost","Hornet","Infinity","Jewel","Massacre","Matter","Nutrition","Paragon","Platypus","Protector","Breath","Crown","Daze","Dream","Engine","Fall","Fear","Fog","Grave","Hydra","Hymn","Jester","Justice","King","Line","Law","Moon","Priest","Prophet","Pyre","Rain","Serpent","Shroud","Smoke","Stroke","Summer","Sword","Thorn","Vanguard","Seeker","Ranger","Shadow","Starburst","Vacation","Wizard","Star","Retailator","Hopper","Subjugator","Harbinger","Tenacity","Destiny","Jumper","Arrow","Andromeda","Centurai","Gemini","Jupiter","Orion","Vega","Fury","Nemesis","Plague","Scourge","Scorpion","Threat","Shadow","Wrath","Dagger","Dragon","Fox","Laser","Nova","Eye","Blossom","Flower","Bounty","Typhoon","Explorer","Unicorn","Claw","Demon","Doom","Fortune","Kiss","Maiden","Passion","Swan","Fist","Hulk","Sailer","Hawk","Clairvoyance","Tyrant","Titan","Falcon","Comet","Spirit","Wings","Bear","Terror","Dove","Expedition","Doshko","Hammer","Dawn","Avenger"]
 };
