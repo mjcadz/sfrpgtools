@@ -2,6 +2,8 @@ var government = ["Anarchy","Autocracy","Council","Magocracy","Military","Oligar
 
 var alignment = ["CG","NG","LG","CN","N","LN","CE","NE","LE"];
 
+var races = ["android","human","kasatha","lashunta","shirren","vesk","ysoki","dwarf","elf","gnome","half-elf","half-elf","halfling"];
+
 var qualities = {
   "Academic" : "It is often easier to do research in this settlement, which is home to a large school, research facility, or great repository of knowledge.",
   "Bureaucratic" : "The settlement is a nightmarish, confusing, and frustrating maze of red tape and official paperwork.",
@@ -232,6 +234,57 @@ function removeEntry(index) {
   $(".panel."+index).remove();
 }
 
+function sortNumber(a,b) {
+    return b - a;
+}
+
+//removes the selected element from selected array
+function removeElement(array,element) {
+
+  var index = array.indexOf(element);
+  if (index > -1) {
+    array.splice(index, 1);
+  }
+  return array;
+
+}
+
+function popPercentages() {
+  //split 100 into random parts
+  var m = 1
+  var maxm = [2,3,4,5,6].selectRandom()
+  console.log(maxm)
+  var n = 100
+  var a = [];
+  while (n > 0) {
+    m += 1
+    var s = Math.round(Math.random() * (n - 1)) + 1;
+    a.push(s);
+    n -= s;
+    if (m == maxm && n > 0){
+      a.push(n);
+      n = 0;
+    }
+  }
+  //sort array
+  a.sort(sortNumber);
+  var x = a.selectRandom()
+  a = removeElement(a,x)
+  a.push(x)
+
+  //add string parts
+  var possibleRaces = []
+  possibleRaces = possibleRaces.concat(races)
+  var popString = " ("
+  for (var j = 0; j < a.length - 1 ; j++) {
+    var selectrace = possibleRaces.selectRandom()
+    possibleRaces = removeElement(possibleRaces,selectrace)
+    popString += a[j].toString() + '% ' +selectrace +', '
+  }
+  popString += a[a.length - 1].toString() + '% other)'
+  return popString
+}
+
 function generateSettlement() {
 
   //size & type
@@ -272,9 +325,11 @@ function generateSettlement() {
   } else if (["planetwide city"].includes(randType)) {
     randPop = getRandomInt(20000000000, 2000000000000);
     randPop = Math.round(randPop/1000000000)*1000000000;
+    randPop = randPop.toString() + popPercentages()
   } else {
-    var randPop = getPopulation(sizePick)
+    randPop = getPopulation(sizePick) + popPercentages()
   }
+
 
   //display
   printPanel(randAlign,randPop,randType,randGov,randQuals)
