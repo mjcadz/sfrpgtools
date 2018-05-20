@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Starfinder Loot Generator{% endblock %}
 {% block description %}Randomly generated loot for starfinder encounters{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css') }}">
+{% endblock %}
 {% block body %}
 <div class="jumbotron">
     <h1>Loot Generator</h1>

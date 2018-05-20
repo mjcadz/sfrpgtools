@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Starfinder Character Concept Generator{% endblock %}
 {% block description %}Random character concept generator to inpire your starfinder characters and NPCs{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css') }}">
+{% endblock %}
 {% block body %}
 <div class="jumbotron">
     <h1>Character Concept Generator</h1>

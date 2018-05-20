@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Alternate Starfinder Character Sheet{% endblock %}
 {% block description %}Alternate character sheets for the starfinder roleplaying game{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
+{% endblock %}
 {% block body %}
 <div class="jumbotron">
    <h1>Alternate Character Sheet</h1>

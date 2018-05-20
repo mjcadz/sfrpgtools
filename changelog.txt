@@ -6,6 +6,7 @@ Changes:
   - change payments from sendowl to chec
   - html2canvas to alpha12
   - migrate to new server
+  - only load required css files instead of all
 
 V2.4
 New Features:

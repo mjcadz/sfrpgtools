@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Starfinder Encounter Generator{% endblock %}
 {% block description %}Random encounter generator for your combat needs{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css') }}">
+{% endblock %}
 {% block body %}
 <div class="jumbotron">
     <h1>Encounter Generator</h1>
