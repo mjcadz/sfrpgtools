@@ -2830,7 +2830,7 @@ var shipNames = {
 			"Type": ["Dreadnought","Mothership","Base Ship","Planet Cracker","Mobile Command Center","World Gouger","Battle Platform","Starcutter","Superdreadnought"]
 		},
 		"Explorer": {
-			"Type": ["Explorer","Diplomatic Barge","Science vessel","Pathfinder","Pleasure Craft","Planet Hopper","Consulor Ship","Light Starship","Surveyor"]
+			"Type": ["Explorer","Diplomatic Barge","Science vessel","Pathfinder","Pleasure Craft","Planet Hopper","Consulor Ship","Light Starship","Surveyor","Pathfinder"]
 		},
 		"Fighter": {
 			"Type": ["Fighter","Snub Fighter","Escort Fighter","Medium Fighter","Assault Ship","Starfighter","Attack Fighter","Mobile Suit"]

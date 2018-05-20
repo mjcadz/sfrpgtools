@@ -4,6 +4,7 @@ New Features:
   - starship generator
 Changes:
   - change payments from sendowl to chec
+  - html2canvas to alpha12
   - migrate to new server
 
 V2.4
