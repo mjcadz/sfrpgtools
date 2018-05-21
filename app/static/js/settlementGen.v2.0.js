@@ -164,10 +164,10 @@ var namesStart = ["Aeon","Aban","Ale","Ash","End","Bane","Nova","Atmos","Data","
 var names = ["Aegis", "Olympus","Aeon","Miracle","Paradox","Anomaly","Alliance","Helios","Guardian","Memento","Hyperion","Inception","Infinity","Beacon","Genesis","Exposure","Curiosity","Fortuna","Eternity","Atlas","Atrophy","Beggar's End","Havoc", "Promise","Terminus","Seclusion","Serenity","Solitude","Remorse","Jericho","Hub","Nirvana","Pleasure","Paradise","Nemesis","Hope","Harmony","Misery","Karma","Carnage","Cavity","City of Dawn","Closure","Hazard","Deadline","Eden","Elysium","Eternity","Final","Forsaken","Valhalla","Titan","Tranquility","Vestige"]
 
 var tavernPrefixes = [
-'Angry','Arcane','Babbling','Blackened','Blind','Bloody','Nanotech','Blushing','Broken','Antigrav','Carved','Celestial','Chaotic','Charming','Concussive','Sentient','Crimson','Dancing','Dark','Deaf','Demonic','Dire','Dirty','Draconic','Dragon\'s','Drunken','Superluminal','Dull','Electric','Fighting','Filthy','Flaming','Flying','Forceful','Forged','Forgotten','Fractured','Frightened','Gnarled','Golden','Happy','Hidden','Holy','Hungry','Icy','Invisible','Iron','Jade','Jagged','Joyful','Jumping','Keen','Knotted','Laughing','Lawful','Lawless','Quantum','Autonomous','Sonic','Thermal','Lonely','Lost','Lucky','Metal',"Sapient",'Miniature','Terraformed','Monstrous','Mossy','Musty','Necrotic','Nervous','Old','Pious','Platinum','Poisoned','Polished','Priceless','Prone','Purple','Radiant','Raging','Rusty','Sad','Shining','Sleeping','Steel','Sultry','Sweet','Tiny','Toothless','Tranquil','Twisted','Unholy','Electrostatic','Unlucky','Unsoiled','Violent','Violet','White','Wicked','Winged','Wise','Wounded','Yawning',"Fusion"
+'Angry','Arcane','Sidereal','Blackened','Blind','Bloody','Nanotech','Blushing','Augmented','Antigrav','Carved','Celestial','Chaotic','Charming','Concussive','Sentient','Crimson','Dancing','Dark','Deaf','Demonic','Dire','Dirty','Draconic','Dragon\'s','Drunken','Superluminal','Dull','Electric','Fighting','Filthy','Flaming','Flying','Forceful','Forged','Forgotten','Fractured','Frightened','Galactic','Golden','Happy','Hidden','Holy','Hungry','Interstellar','Invisible','Iron','Solar','Stellar','Joyful','Jumping','Keen','Robo','Cybernetic','Lawful','Lawless','Quantum','Autonomous','Sonic','Thermal','Lonely','Lost','Lucky','Metal',"Sapient",'Miniature','Terraformed','Monstrous','Mossy','Musty','Necrotic','Nervous','Old','Pious','Platinum','Cosmic','Polished','Celestial','Prone','Divine','Radiant','Raging','Rusty','Sad','Shining','Sleeping','Steel','Sultry','Sweet','Tiny','Toothless','Tranquil','Twisted','Unholy','Electrostatic','Unlucky','Unsoiled','Violent','Heavenly','White','Wicked','Winged','Wise','Wounded','Yawning',"Fusion"
 ]
 var tavernSuffixes = [
-'Aboleth','Angel','Anvil','Bullet','Doshko','Drifter','Beacon','Bear','Droid','Blade','Starship','Star','Station','Chain','Chest','Circle','Cloak','Clover','Credit','Crowbar','Crown','Comet','Asteroid','Planet','Dagger','Devil','Door','Dove','Dragon','Drow','Dwarf','Edge','Elemental','Soldier','Technomancer','Mystic','Operative','Mechanic','Databank','Solarian','Envoy','Drone','Robot','Longhammer','Lashunta','Kasathan','Ysoki','Vesk','Shirren','Android','Gnome','Goat','Goblin','Hag','Halfling','Hammer','Hoard','Jelly','King','Ladder','Lamp','Lantern','Lemon','Lich','Blaster','Loot','Mage','Map','Laser','Melon','Nuar','Nail','Nightmare','Plasma','Ooze','Orb','Battery','Pitcher','Plate','Polyhedral','Datapad','Computer','Datacore','Queen','Quiver','Rat','Respite','Rest','Ring','Robe','Rope','Sack','Spacer','Sanctum','Shadow','Ship','Slumber','Sphere','Generator','Force Field','Square','Stone','Sword','Armor','Jewel','Vortex','Blackhole','Railgun','Thruster','Tackle','Jump Jet','Tail','Titan','Shield','Grenade','Crew','Power Core','Circuit','Sensor','Jetpack','Singularity','Cargo','Trap','Tree','Triangle','Portal','Unicorn','Whistle','Wizard']
+'Logic','Angel','Anvil','Bullet','Doshko','Drifter','Beacon','Satellite','Droid','Blade','Starship','Star','Station','Chain','Moon','Circle','Cloak','Clover','Credit','Crowbar','Crown','Comet','Asteroid','Planet','Galaxy','Devil','Door','Dove','Dragon','Drow','Dwarf','Antimatter','Elemental','Soldier','Technomancer','Mystic','Operative','Mechanic','Databank','Solarian','Envoy','Drone','Robot','Longhammer','Lashunta','Kasathan','Ysoki','Vesk','Shirren','Android','Gnome','Goat','Goblin','Hag','Halfling','Hammer','Hoard','Jelly','King','Quasar','Pulsar','Lantern','Lemon','Lich','Blaster','Loot','Nova','Nebula','Laser','Melon','Nuar','Nail','Nightmare','Plasma','Ooze','Orb','Battery','Pitcher','Plate','Polyhedral','Datapad','Computer','Datacore','Queen','Constellation','Helmet','Respite','Rest','Ring','Robe','Rope','Sack','Spacer','Sanctum','Shadow','Ship','Slumber','Sphere','Generator','Force Field','Rocket','Stone','Sword','Armor','Jewel','Vortex','Blackhole','Railgun','Thruster','Tackle','Jump Jet','Tail','Titan','Shield','Grenade','Crew','Power Core','Circuit','Sensor','Jetpack','Singularity','Cargo','Trap','Tree','Triangle','Portal','Unicorn','Whistle','Wizard']
 
 var indexCounter = 0;
 
@@ -207,7 +207,7 @@ function clearOutput() {
   indexCounter = 0;
 }
 
-function printPanel(alignment,population,type,government,qualities) {
+function printPanel(alignment,population,type,government,qualities,item) {
   var $outputArea = $(".output.area").first();
   var storeOutput = $( "div.output.area" ).html();
   $outputArea.empty();
@@ -225,7 +225,7 @@ function printPanel(alignment,population,type,government,qualities) {
                     "<br><b>Population </b>" + population +
                     "<br><b>Government </b>" + government.toLowerCase() +
                     "<br><b>Qualities </b>" + qualities.join(', ').toLowerCase() +
-                    "<br><b>Maximum Item Level </b>" + "16th" + "</p>";
+                    "<br><b>Maximum Item Level </b>" + item + "</p>";
   panelBody += "<p>The " + tavernPrefixes.selectRandom() + " " + tavernSuffixes.selectRandom() + "</p>"
   panelBody += "<p>The " + tavernSuffixes.selectRandom() + " & " + tavernSuffixes.selectRandom() + "</p>"
 
@@ -300,6 +300,8 @@ function generateSettlement() {
 
   //size & type
   var sizeDrop = $('#sizePicker').val().trim();
+  var itemDrop = $('#itemPicker').val().trim().replace('Any max item level',["1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th","13th","14th","15th","16th","17th","18th","19th","20th"].selectRandom());
+
   if (sizeDrop.includes("Any")) {
     var sizeKeys = Object.keys(cityBySize);
     var sizePick = sizeKeys.selectRandom();
@@ -349,7 +351,7 @@ function generateSettlement() {
 
 
   //display
-  printPanel(randAlign,randPop,randType,randGov,randQuals)
+  printPanel(randAlign,randPop,randType,randGov,randQuals,itemDrop)
 
 }
 
