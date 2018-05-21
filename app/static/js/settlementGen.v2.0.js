@@ -155,9 +155,19 @@ var cityBySize = {
     ],
 };
 
+var tavernGen = ["Tavern","Bar","Club","Dance Hall","Seedy Bar"]
+var shopGen = ["Market","Armory","General Store","Data Storage","Computer Repair"]
+var otherPlaceGen = ["Church","School of","Guard Post"]
+
 var namesEnd = ["dale", "moor", "ton","more","haunt","rast", " Gate","rise", "town","bound","spire","winter","burg","bourne","water","fire","set", "shore", "ville", "ton", "sley"," End","dawn", "waters", "ridge", "sley", "age", "mere", "shire", "feld", "field", "wall", " Falls", "bury", "ford", "arm", " City", " Fork", "fall", "caster", "moor", "cliff", "sby", "chapel", "blight", " Falls", "bend", "hope", " Point"," Rise", "lone", "side", " Gate", "ham", "melt"];
 var namesStart = ["Aeon","Aban","Ale","Ash","End","Bane","Nova","Atmos","Data","Mem","Dream","Ender","Radiation","Fable","Glory","Luna","Mag", "Chrono","Aura","Apollo","Nether","Ark","Alpha","Beta","Gamma","Lore","Enigma","Quiet","Neo","Snow","Awe","Wolf","Bear","Rain","Drought","Voyage","Glimmer","Glitter","Wind","Miracle","Moon","Birds","Necro","Ill","Lost","Crash","Light","Fools","Back","Kill","Cat","Dark","Dread","Ever","Hope","Ember","Happy","Dead","Dog","Dawn","Dire","Ditch","Dirt","Void","Demon","Angel","Cruel","Crumble","Somer","Cloud","Border","Break","Bliss","Doom","Water","Fire","Earth","Boom","Air","Metal","Space","Zero","Black","White","Blue","Red","Yellow","Purple","Green","Gray","Orbit","Outland","Elf","Dwarf","Beast","Pinoeer","Prism","Relic","Scout","Tech","Computer","Settler","Scout","Terra","Cosmo","Shere"]
 var names = ["Aegis", "Olympus","Aeon","Miracle","Paradox","Anomaly","Alliance","Helios","Guardian","Memento","Hyperion","Inception","Infinity","Beacon","Genesis","Exposure","Curiosity","Fortuna","Eternity","Atlas","Atrophy","Beggar's End","Havoc", "Promise","Terminus","Seclusion","Serenity","Solitude","Remorse","Jericho","Hub","Nirvana","Pleasure","Paradise","Nemesis","Hope","Harmony","Misery","Karma","Carnage","Cavity","City of Dawn","Closure","Hazard","Deadline","Eden","Elysium","Eternity","Final","Forsaken","Valhalla","Titan","Tranquility","Vestige"]
+
+var tavernPrefixes = [
+'Angry','Arcane','Babbling','Blackened','Blind','Bloody','Nanotech','Blushing','Broken','Antigrav','Carved','Celestial','Chaotic','Charming','Concussive','Sentient','Crimson','Dancing','Dark','Deaf','Demonic','Dire','Dirty','Draconic','Dragon\'s','Drunken','Superluminal','Dull','Electric','Fighting','Filthy','Flaming','Flying','Forceful','Forged','Forgotten','Fractured','Frightened','Gnarled','Golden','Happy','Hidden','Holy','Hungry','Icy','Invisible','Iron','Jade','Jagged','Joyful','Jumping','Keen','Knotted','Laughing','Lawful','Lawless','Quantum','Autonomous','Sonic','Thermal','Lonely','Lost','Lucky','Metal',"Sapient",'Miniature','Terraformed','Monstrous','Mossy','Musty','Necrotic','Nervous','Old','Pious','Platinum','Poisoned','Polished','Priceless','Prone','Purple','Radiant','Raging','Rusty','Sad','Shining','Sleeping','Steel','Sultry','Sweet','Tiny','Toothless','Tranquil','Twisted','Unholy','Electrostatic','Unlucky','Unsoiled','Violent','Violet','White','Wicked','Winged','Wise','Wounded','Yawning',"Fusion"
+]
+var tavernSuffixes = [
+'Aboleth','Angel','Anvil','Bullet','Doshko','Drifter','Beacon','Bear','Droid','Blade','Starship','Star','Station','Chain','Chest','Circle','Cloak','Clover','Credit','Crowbar','Crown','Comet','Asteroid','Planet','Dagger','Devil','Door','Dove','Dragon','Drow','Dwarf','Edge','Elemental','Soldier','Technomancer','Mystic','Operative','Mechanic','Databank','Solarian','Envoy','Drone','Robot','Longhammer','Lashunta','Kasathan','Ysoki','Vesk','Shirren','Android','Gnome','Goat','Goblin','Hag','Halfling','Hammer','Hoard','Jelly','King','Ladder','Lamp','Lantern','Lemon','Lich','Blaster','Loot','Mage','Map','Laser','Melon','Nuar','Nail','Nightmare','Plasma','Ooze','Orb','Battery','Pitcher','Plate','Polyhedral','Datapad','Computer','Datacore','Queen','Quiver','Rat','Respite','Rest','Ring','Robe','Rope','Sack','Spacer','Sanctum','Shadow','Ship','Slumber','Sphere','Generator','Force Field','Square','Stone','Sword','Armor','Jewel','Vortex','Blackhole','Railgun','Thruster','Tackle','Jump Jet','Tail','Titan','Shield','Grenade','Crew','Power Core','Circuit','Sensor','Jetpack','Singularity','Cargo','Trap','Tree','Triangle','Portal','Unicorn','Whistle','Wizard']
 
 var indexCounter = 0;
 
@@ -216,6 +226,8 @@ function printPanel(alignment,population,type,government,qualities) {
                     "<br><b>Government </b>" + government.toLowerCase() +
                     "<br><b>Qualities </b>" + qualities.join(', ').toLowerCase() +
                     "<br><b>Maximum Item Level </b>" + "16th" + "</p>";
+  panelBody += "<p>The " + tavernPrefixes.selectRandom() + " " + tavernSuffixes.selectRandom() + "</p>"
+  panelBody += "<p>The " + tavernSuffixes.selectRandom() + " & " + tavernSuffixes.selectRandom() + "</p>"
 
   $outputArea.append("<div class=\"panel " + indexString + "\">");
   var $panel = $(".panel."+indexString).first();
@@ -250,38 +262,37 @@ function removeElement(array,element) {
 }
 
 function popPercentages() {
-  //split 100 into random parts
-  var m = 1
-  var maxm = [2,3,4,5,6].selectRandom()
-  console.log(maxm)
-  var n = 100
-  var a = [];
+  //split 100 into random sum parts
+  var parts = 1;
+  var maxparts = [2,3,4,5,6].selectRandom();
+  var n = 100;
+  var randomSumParts = [];
   while (n > 0) {
-    m += 1
+    parts += 1
     var s = Math.round(Math.random() * (n - 1)) + 1;
-    a.push(s);
+    randomSumParts.push(s);
     n -= s;
-    if (m == maxm && n > 0){
-      a.push(n);
+    if (parts == maxparts && n > 0){
+      randomSumParts.push(n);
       n = 0;
     }
   }
   //sort array
-  a.sort(sortNumber);
-  var x = a.selectRandom()
-  a = removeElement(a,x)
-  a.push(x)
+  randomSumParts.sort(sortNumber);
+  var otherPart = randomSumParts.selectRandom()
+  randomSumParts = removeElement(randomSumParts,otherPart)
+  randomSumParts.push(otherPart)
 
   //add string parts
   var possibleRaces = []
   possibleRaces = possibleRaces.concat(races)
   var popString = " ("
-  for (var j = 0; j < a.length - 1 ; j++) {
+  for (var j = 0; j < randomSumParts.length - 1 ; j++) {
     var selectrace = possibleRaces.selectRandom()
     possibleRaces = removeElement(possibleRaces,selectrace)
-    popString += a[j].toString() + '% ' +selectrace +', '
+    popString += randomSumParts[j].toString() + '% ' +selectrace +', '
   }
-  popString += a[a.length - 1].toString() + '% other)'
+  popString += randomSumParts[randomSumParts.length - 1].toString() + '% other)'
   return popString
 }
 
@@ -321,13 +332,19 @@ function generateSettlement() {
   //population
   var randPop = 0;
   if (["lone tavern","camp site","farm"].includes(randType)) {
-    randPop = getRandomInt(2, 20);
+    randPop = getRandomInt(2, 20).toString();
+    randPop += " (100% " + races.selectRandom() + ")"
   } else if (["planetwide city"].includes(randType)) {
     randPop = getRandomInt(20000000000, 2000000000000);
     randPop = Math.round(randPop/1000000000)*1000000000;
     randPop = randPop.toString() + popPercentages()
   } else {
-    randPop = getPopulation(sizePick) + popPercentages()
+    randPop = getPopulation(sizePick)
+    if (Number(randPop.replace(/,/g , "")) > 20){
+      randPop += popPercentages()
+    } if (Number(randPop.replace(/,/g , "")) > 0) {
+      randPop += " (100% " + races.selectRandom() + ")"
+    }
   }
 
 
