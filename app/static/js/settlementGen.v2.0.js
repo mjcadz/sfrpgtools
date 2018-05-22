@@ -2,6 +2,128 @@ var government = ["Anarchy","Autocracy","Council","Magocracy","Military","Oligar
 
 var alignment = ["CG","NG","LG","CN","N","LN","CE","NE","LE"];
 
+var dieties =
+  "Abadar":	{
+    "Description": "God of civilization, commerce, law, wealth",
+    "Title": "the Master of the First Vault",
+    "Symbol": "a golden key",
+    "Align": "LN"
+  }
+  "Besmara":	{
+    "Description": "Goddess of piracy, space monsters, strife",
+    "Title": "the Pirate Queen",
+    "Symbol": "a skull and crossbones",
+    "Align": "CN"
+  },
+  "Damoritosh": {
+    "Description": "God of conquest, duty, war",
+    "Title": "the Conqueror",
+    "Symbol": "a red doshko energy blades on a black field",
+    "Align": "LE"
+  },
+  "Desna": {
+    "Description": "Goddess of dreams, luck, stars, travelers",
+    "Title": "the Song of the Spheres",
+    "Symbol": "A butterfly with stars, suns, and moons on its wings",
+    "Align": "CG"
+  },
+  "The Devourer": {
+    "Description": "God of black holes, destruction, supernovas",
+    "Title": "the Star-Eater",
+    "Symbol": "a black hole, tinged with red",
+    "Align": "CE"
+  },
+  "Eloritu": {
+    "Description": "God of history, magic, secrets",
+    "Title": "the Hidden Truth",
+    "Symbol": "a glowing ring of magic runes",
+    "Align": "TN	SOURCEPAGE:p.485"
+  },
+  "Hylax": {
+    "Description": "Goddess of diplomacy, first contact, friendship, peace",
+    "Title": "the Forever Queen",
+    "Symbol": "a shirren head crowned with stars",
+    "Align": "LG"
+  },
+  "Ibra": {
+    "Description": "God of celestial bodies, the cosmos, mysteries of the universe",
+    "Title": "the Inscrutable",
+    "Symbol": "a circle and arrow containing a constellation",
+    "Align": "N"
+  },
+  "Iomedae": {
+    "Description": "Goddess of honorable battle, humanity, justice, valor",
+    "Title": "the Spirit of Golarion",
+    "Symbol": "a longsword surrounded by a sunburst",
+    "Align": "LG"
+  },
+  "Lao Shu Po": {
+    "Description": "Goddess of assassins, rats, spies, thieves",
+    "Title": "Grandmother Rat",
+    "Symbol": "a curled and emaciated rat",
+    "Align": "NE"
+  },
+  "Nyarlathotep": {
+    "Description": "Outer God of conspiracies, dangerous secrets, forbidden magic",
+    "Title": "the Crawling Chaos",
+    "Symbol": "an inverted black ankh",
+    "Align": "CE"
+  },
+  "Oras": {
+    "Description": "God of adaptation, evolution, natural selection",
+    "Title": "the Agent of Change",
+    "Symbol": "a double helix",
+    "Align": "CN"
+  },
+  "Pharasma": {
+    "Description": "Goddess of birth, death, fate, prophecy",
+    "Title": "the Lady of Graves",
+    "Symbol": "a cometlike spiral of energy",
+    "Align": "N"
+  },
+  "Sarenrae": {
+    "Description": "Goddess of healing, redemption, the sun",
+    "Title": "the Dawnflower",
+    "Symbol": "an angel with flaming wings",
+    "Align": "NG"
+  },
+  "Talavet": {
+    "Description": "Goddess of community, self-reliance, tradition",
+    "Title": "the Storyteller",
+    "Symbol": "an ancient kasathan sigil of community",
+    "Align": "LN"
+  },
+  "Triune": {
+    "Description": "God of artificial intelligence, computers, the Drift",
+    "Title": "the All-Code",
+    "Symbol": "three interlocking circles of computer code",
+    "Align": "N"
+  },
+  "Urgathoa": {
+    "Description": "Goddess of disease, gluttony, undeath",
+    "Title": "the Pallid Princess",
+    "Symbol": "a skull-backed fly or deaths head moth",
+    "Align": "NE"
+  },
+  "Weydan": {
+    "Description": "God of discovery, equality, exploration, freedom",
+    "Title": "the Endless Horizon",
+    "Symbol": "a starship heading into the unknown",
+    "Align": "CG"
+  },
+  "Yaraesa": {
+    "Description": "Goddess of knowledge, mental perfection, scholarship, science",
+    "Title": "the Lady of Wisdom",
+    "Symbol": "an atom with a brain as its nucleus",
+    "Align": "NG"
+  },
+  "Zon-Kuthon": {
+    "Description": "God of darkness, envy, loss, pain",
+    "Title": "the Midnight Lord",
+    "Symbol": "a skull with spiked chains through its eye sockets",
+    "Align": "LE"
+  }
+
 var races = ["android","human","kasatha","lashunta","shirren","vesk","ysoki","dwarf","elf","gnome","half-elf","half-elf","halfling"];
 
 var qualities = {
@@ -157,10 +279,417 @@ var cityBySize = {
 
 var tavernGen = ["Tavern","Bar","Club","Dance Hall","Seedy Bar"]
 var shopGen = ["Market","Armory","General Store","Data Storage","Computer Repair"]
-var otherPlaceGen = ["Church","School of","Guard Post"]
+var otherPlaceGen = ["Church","School of","Guard Post","Space Port","Data Center"]
 
-var namesEnd = ["dale", "moor", "ton","more","haunt","rast", " Gate","rise", "town","bound","spire","winter","burg","bourne","water","fire","set", "shore", "ville", "ton", "sley"," End","dawn", "waters", "ridge", "sley", "age", "mere", "shire", "feld", "field", "wall", " Falls", "bury", "ford", "arm", " City", " Fork", "fall", "caster", "moor", "cliff", "sby", "chapel", "blight", " Falls", "bend", "hope", " Point"," Rise", "lone", "side", " Gate", "ham", "melt"];
-var namesStart = ["Aeon","Aban","Ale","Ash","End","Bane","Nova","Atmos","Data","Mem","Dream","Ender","Radiation","Fable","Glory","Luna","Mag", "Chrono","Aura","Apollo","Nether","Ark","Alpha","Beta","Gamma","Lore","Enigma","Quiet","Neo","Snow","Awe","Wolf","Bear","Rain","Drought","Voyage","Glimmer","Glitter","Wind","Miracle","Moon","Birds","Necro","Ill","Lost","Crash","Light","Fools","Back","Kill","Cat","Dark","Dread","Ever","Hope","Ember","Happy","Dead","Dog","Dawn","Dire","Ditch","Dirt","Void","Demon","Angel","Cruel","Crumble","Somer","Cloud","Border","Break","Bliss","Doom","Water","Fire","Earth","Boom","Air","Metal","Space","Zero","Black","White","Blue","Red","Yellow","Purple","Green","Gray","Orbit","Outland","Elf","Dwarf","Beast","Pinoeer","Prism","Relic","Scout","Tech","Computer","Settler","Scout","Terra","Cosmo","Shere"]
+var placesOfInterest = {
+  "Pharmacy": {
+    "flavour": [
+      "has enough stock to replenish your medical supplies",
+      "has a large range of prescription only medications",
+      "is owned by a pharmacist that will hand out any medication for a price",
+      "has shelves upon shelves of hair products for every race",
+      "is very popular among the aging population"
+    ]
+    }
+  },
+  "Robo Repair": {
+    "flavour": [
+      "specialises is drone repair",
+      "is filled with many junk bots that serve no real purpose",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Electronics Workshop": {
+    "flavour": [
+      "has an owner that can fix just about anything given enough time",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Warehouse": {
+    "flavour": [
+      "is a huge facility, yet empty",
+      "has countless shelves spanning many kilometers",
+      "is a small facility that many locals use",
+      "",
+      ""
+    ]
+    }
+  },
+  "Legal Firm": {
+    "flavour": [
+      "is run by the shadiest legal team this side of the gap",
+      "has a owner who only takes cases they know they can win",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Religous Building": {
+    "flavour": [
+      "is seldom used anymore, the population has moved away from this deity",
+      "is always full, people pay their respects at all times of the day",
+      "is frequented by travellerers, some coming from different worlds to pay their respects here",
+      "is bustling, the annual pilgrimage has begun",
+      "seems empty, no one has been here in a log time",
+      "has a huge statue as its centrepiece",
+      "has its walls adorned by SX",
+      "is met by a large set of doors decorated with SX",
+      "has been destryed by a long forgotten crusade",
+      "provides divine services if you have the credits",
+      "displays a rich tapestry of SX",
+      "has a hologram of SX in the middle of the building",
+      "is hidden in an underground bunker accessible only with the right codes"
+    ],
+    "name":[
+      "The church of DX",
+      "The divine abbey of DX",
+      "A small temple devoted to DX",
+      "A large temple devoted to DX",
+      "A secret following of DX",
+      "A sanctuary for the followers of DX",
+      "A shrine for the worship of DX",
+      "A huge cathedral dedicated to DX"]
+    }
+  },
+  "Capsule Hotel": {
+    "flavour": [
+      "has rooms to cater to every race and religion",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Data Storage": {
+    "flavour": [
+      "will keep your data secure in any event possible",
+      "has data safety and retention plans for every person",
+      "will take illegal data if you know the pass phrase",
+      "can take an near infinite amount of data over its vast distrubution networks",
+      "enforces triple terrabyte security phrases with 13 factor biometric authentification "
+    ]
+    }
+  },
+  "Low Rent Housing Project": {
+    "flavour": [
+      "has every room packed with multiple families",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Hypermarket": {
+    "flavour": [
+      "is having a promotion on 10,000 types of fruit",
+      "only sells genectically modified protein paste",
+      "has the galaxys largest range of foods",
+      "has shelves upon shelves of types of cereal",
+      ""
+    ]
+    }
+  },
+  "Designated Starship Parking": {
+    "flavour": [
+      "is a large flat area of land with many waiting starships",
+      "is a huge automated facility that parks and retrieves ship from underground",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Fast Food Franchise": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Police Department": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "College": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Government Building": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Hospital": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Augmentation Clinic": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Luxury Apartments": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Media Company": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Starship Dealership": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Vehicle Rental": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "VRcade": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Habitation Stack": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Nightclub bar etc": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Fabrication Hub": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Bulk Transport Company": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Military Base": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Coffe shop, cafe, Restaurant": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Weapons Supply, Arms Dealer, Underground Arms Dealer": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Bank": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Magical Item Store": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  },
+  "Private Security": {
+    "flavour": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    }
+  }
+}
+
+var buildingFlavour = [
+  "has extreme security protocols",
+  "is decrepit and rundown",
+  "is covered in graffiti",
+  "looks newly renovated",
+  "seems unusally busy",
+  "seems very quiet",
+  "has very little security",
+  "is a front for criminal activity",
+  "obscured by large holo ads",
+  "was constructed by nanites",
+  "looks like it has been fire damaged",
+  "is covered in bright glyphs and graphics",
+  "is constructed from plastic",
+  "has an active anti-drone system",
+  "requires weapons to be left at the door",
+  "has a metal detector",
+  "is members only",
+  "has an AI system that greets people upon entry",
+  "seems to be well guarded",
+  "is on a street taken over by junkees",
+  "has very unpleasent climate control",
+  "appears to be self aware",
+  "has an unusual smell",
+  "is completely automated",
+  "is family owned",
+  "is soon to be demolished",
+  "is very dim and dark inside",
+  "is brightly lit",
+  "has the music turned up too loud",
+  "has an agressively enforced no parking zone out front",
+  "the main entrance it closed, you need to go around the back",
+  "has tinted windows",
+  "is closed during the day",
+  "has pristine white halls",
+  "is dark and dirty",
+  "can not be found on the infosphere",
+  "you must scan your biometrics on entry",
+  "the owner looks like they are armed",
+  "is in an area plagued by violence"
+]
+
+var settlementFlavour = [
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+]
+
+
+
+var namesEnd = ["dale", "moor", "ton","more","haunt","bed","s Landing","s End","rast", " Gate","rise", "town","bound","spire","winter","burg","bourne","water","fire","set", "shore", "ville", "ton", "sley"," End","dawn", "waters", "ridge", "sley", "age", "mere", "shire", "feld", "field", "wall", " Falls", "bury", "ford", "arm", " City", " Fork", "fall", "caster", "moor", "cliff", "sby", "chapel", "blight", " Falls", "bend", "hope", " Point"," Rise", "lone", "side", " Gate", "ham", "melt"];
+var namesStart = ["Aeon","Aban","Ale","Ash","End","Bane","Nova","Atmos","Data","Mem","Dream","Ender","Radiation","Fable","Glory","Luna","Mag", "Chrono","Aura","Apollo","Nether","Ark","Alpha","Beta","Gamma","Lore","Enigma","Quiet","Neo","Snow","Awe","Wolf","Bear","Rain","Drought","Voyage","Glimmer","Glitter","Wind","Miracle","Moon","Birds","Necro","Ill","Lost","Crash","Light","Fools","Back","Kill","Cat","Dark","Dread","Ever","Hope","Ember","Happy","Dead","Dog","Dawn","Dire","Ditch","Dirt","Void","Demon","Angel","Cruel","Crumble","Somer","Cloud","Border","Break","Bliss","Doom","Water","Fire","Earth","Boom","Air","Metal","Space","Zero","Black","White","Blue","Red","Yellow","Purple","Green","Gray","Orbit","Rose","Outland","Elf","Dwarf","Beast","Pinoeer","Prism","Relic","Scout","Tech","Computer","Settler","Scout","Terra","Cosmo","Shere"]
 var names = ["Aegis", "Olympus","Aeon","Miracle","Paradox","Anomaly","Alliance","Helios","Guardian","Memento","Hyperion","Inception","Infinity","Beacon","Genesis","Exposure","Curiosity","Fortuna","Eternity","Atlas","Atrophy","Beggar's End","Havoc", "Promise","Terminus","Seclusion","Serenity","Solitude","Remorse","Jericho","Hub","Nirvana","Pleasure","Paradise","Nemesis","Hope","Harmony","Misery","Karma","Carnage","Cavity","City of Dawn","Closure","Hazard","Deadline","Eden","Elysium","Eternity","Final","Forsaken","Valhalla","Titan","Tranquility","Vestige"]
 
 var tavernPrefixes = [
@@ -353,6 +882,10 @@ function generateSettlement() {
   //display
   printPanel(randAlign,randPop,randType,randGov,randQuals,itemDrop)
 
+}
+
+function getPlaceOfWorship() {
+  var paragraph = '<p> </p>'
 }
 
 //runs when page is loaded
