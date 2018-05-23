@@ -348,7 +348,7 @@ function buildFilter() {
 
   //sources are used in both modes
   var source = $('#SourcePicker').val().toString().trim();
-  source = source.replace('Alien Archive','AA,CRB').replace('Dead Suns 1-4','DS1,DS2,DS3,DS4').replace('Pact Worlds','PW')
+  source = source.replace('Alien Archive','AA,CRB').replace('Dead Suns 1-5','DS1,DS2,DS3,DS4,DS5').replace('Pact Worlds','PW')
 
   if (source != '') {
     if (source.includes(',')) {
@@ -492,6 +492,7 @@ function displayTable() {
   //clear output
   var $outputArea = $(".output.area").first();
   $outputArea.empty();
+  var stripe = false
 
   //if empty
   if (jQuery.isEmptyObject(tableObject)) {
@@ -526,8 +527,16 @@ function displayTable() {
       lockToggle = '<i style="padding-left: 5px; cursor: pointer" id="LOCK' + creature + index + '" onclick = "toggleLockIcon(this.id)" class="fas fa-lg fa-unlock"></i>';
     }
 
+    //stripe table
+    if (stripe) {
+      var stripeClass = ' class="success"';
+    } else {
+      var stripeClass = '';
+    }
+    stripe = !stripe
+
     //creature info
-    tableHTML += '<tr id="ROW' + index + '"><td>' + lockToggle + '</td><td id="NUM' + index + '">' + tableObject[creature].number + '</td><td id="MON' + creature + index + '">' + creaturePrint + '</td><td id="CR' + index + '">' + tableObject[creature].cr + '</td><td>' + tableObject[creature].alignment + '</td><td>' + tableObject[creature].size + '</td><td>' + tableObject[creature].type + '</td><td>' + tableObject[creature].source + ' p.' + tableObject[creature].page + '</td><td>' + plusMinus + '</td></tr>';
+    tableHTML += '<tr id="ROW' + index + '"' + stripeClass + '><td>' + lockToggle + '</td><td id="NUM' + index + '">' + tableObject[creature].number + '</td><td id="MON' + creature + index + '">' + creaturePrint + '</td><td id="CR' + index + '">' + tableObject[creature].cr + '</td><td>' + tableObject[creature].alignment + '</td><td>' + tableObject[creature].size + '</td><td>' + tableObject[creature].type + '</td><td>' + tableObject[creature].source + ' p.' + tableObject[creature].page + '</td><td>' + plusMinus + '</td></tr>';
     tableIndexCounter += 1;
   }
   //cap table container
@@ -539,6 +548,7 @@ function displayTable() {
 //shows filtered/searched monsters on another table where they can be added to the display table
 function displayMonsterPicker() {
   var filter = buildFilter();
+  var stripe = false
 
   var $outputArea = $("#pickerZone").first();
   $outputArea.empty();
@@ -574,8 +584,15 @@ function displayMonsterPicker() {
     for (i = 0; i < monsterKeys.length; i++) {
 
       monster = monsterKeys [i];
+      //stripe table
+      if (stripe) {
+        var stripeClass = ' class="success"';
+      } else {
+        var stripeClass = '';
+      }
+      stripe = !stripe
       addition = '<i style="padding-left: 5px; cursor: pointer;" id="' + monster + '" onclick = "plusMonster(this.id)" class="fas fa-lg fa-plus"></i>';
-      tableHTML += '<tr><td>' + addition + '</td><td>' + monster + '</td><td>' + filteredMonsters[monster].cr + '</td><td>' + filteredMonsters[monster].type + '</td><td>' + filteredMonsters[monster].source + ' p.' + filteredMonsters[monster].page + '</td></tr>';
+      tableHTML += '<tr' + stripeClass + '><td>' + addition + '</td><td>' + monster + '</td><td>' + filteredMonsters[monster].cr + '</td><td>' + filteredMonsters[monster].type + '</td><td>' + filteredMonsters[monster].source + ' p.' + filteredMonsters[monster].page + '</td></tr>';
 
     }
     tableHTML += '</tbody></table></div>';

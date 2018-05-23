@@ -2,6 +2,7 @@ V2.5
 New Features:
   - settlement generator
   - starship generator
+  - dead suns 5 added to encounter gen
 Changes:
   - change payments from sendowl to chec
   - html2canvas to alpha12
