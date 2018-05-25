@@ -968,9 +968,78 @@ var equipmentData = {
             "sourcepage": "p.168",
             "special": "analog, disarm, nonlethal, reach, trip",
             "wield": "onehanded"
+        },
+            "Xenolash - blooming": {
+            "bulk": "1",
+            "category": "Uncategorized",
+            "cost": "70,000",
+            "critical": "corrode 4d4",
+            "damage": "9d4",
+            "damage type": "A & S",
+            "level": "14",
+            "range": "-",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, disarm, entangle, reach, trip",
+            "type": "Advanced Melee",
+            "wield": "twohanded"
+        },
+        "Xenolash - immature": {
+            "bulk": "1",
+            "category": "Uncategorized",
+            "cost": "2,430",
+            "critical": "corrode 1d4",
+            "damage": "2d4",
+            "damage type": "A & S",
+            "level": "4",
+            "range": "-",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, disarm, entangle, reach, trip",
+            "type": "Advanced Melee",
+            "wield": "twohanded"
+        },
+        "Xenolash - mature": {
+            "bulk": "1",
+            "category": "Uncategorized",
+            "cost": "17,000",
+            "critical": "corrode 2d4",
+            "damage": "5d4",
+            "damage type": "A & S",
+            "level": "10",
+            "range": "-",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, disarm, entangle, reach, trip",
+            "type": "Advanced Melee",
+            "wield": "twohanded"
+        },
+        "Xenolash - seeded": {
+            "bulk": "1",
+            "category": "Uncategorized",
+            "cost": "409,000",
+            "critical": "corrode 6d4",
+            "damage": "9d8",
+            "damage type": "A & S",
+            "level": "18",
+            "range": "-",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, disarm, entangle, reach, trip",
+            "type": "Advanced Melee",
+            "wield": "twohanded"
         }
     },
     "Ammunition": {
+        "Flechettes": {
+            "bulk": "L",
+            "chargescartridges": "25",
+            "cost": "75",
+            "sourcebook": "pw",
+            "level": "1",
+            "sourcepage": "p.193",
+            "special": "-"
+        },
         "Arrows": {
             "bulk": "L",
             "chargescartridges": "20",
@@ -1117,6 +1186,83 @@ var equipmentData = {
         }
     },
     "Armor Upgrades": {
+        "Descent thrusters": {
+            "bulk": "L",
+            "cost": "800",
+            "level": "1",
+            "sourcebook": "pw",
+            "sourcepage": "p.196"
+        },
+        "Flashblinders - mk 1": {
+            "bulk": "1",
+            "cost": "2,000",
+            "level": "4",
+            "sourcebook": "pw",
+            "sourcepage": "p.196"
+        },
+        "Flashblinders - mk 2": {
+            "bulk": "1",
+            "cost": "10,000",
+            "level": "8",
+            "sourcebook": "pw",
+            "sourcepage": "p.196"
+        },
+        "Flashblinders - mk 3": {
+            "bulk": "1",
+            "cost": "38,000",
+            "level": "12",
+            "sourcebook": "pw",
+            "sourcepage": "p.196"
+        },
+        "Flashblinders - mk 4": {
+            "bulk": "1",
+            "cost": "180,000",
+            "level": "16",
+            "sourcebook": "pw",
+            "sourcepage": "p.196"
+        },
+        "Ghostmarch unit": {
+            "bulk": "1",
+            "cost": "590,000",
+            "level": "19",
+            "sourcebook": "pw",
+            "sourcepage": "p.196"
+        },
+        "Grandchild's cloak": {
+            "bulk": "L",
+            "cost": "10,000",
+            "level": "8",
+            "sourcebook": "pw",
+            "sourcepage": "p.196"
+        },
+        "Grandchild's cloak - greater": {
+            "bulk": "L",
+            "cost": "120,000",
+            "level": "15",
+            "sourcebook": "pw",
+            "sourcepage": "p.196"
+        },
+        "Haze field": {
+            "bulk": "-",
+            "cost": "13,000",
+            "level": "9",
+            "sourcebook": "pw",
+            "sourcepage": "p.196"
+        },
+        "Microspur spray": {
+            "bulk": "1",
+            "cost": "6,700",
+            "level": "7",
+            "sourcebook": "pw",
+            "sourcepage": "p.196"
+        },
+        "Snarl barbs": {
+            "bulk": "L",
+            "cost": "1,500",
+            "level": "1",
+            "sourcebook": "pw",
+            "sourcepage": "p.196"
+        },
         "Automated Loader": {
             "bulk": "1",
             "cost": "750",
@@ -1371,6 +1517,96 @@ var equipmentData = {
         }
     },
     "Basic Melee Weapons": {
+        "Sword cane - advanced": {
+            "bulk": "L",
+            "category": "Uncategorized",
+            "cost": "2,100",
+            "critical": "bleed 1d4",
+            "damage": "1d4",
+            "damage type": "P",
+            "level": "4",
+            "range": "-",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, operative",
+            "type": "Basic Melee",
+            "wield": "onehanded"
+        },
+        "Sword cane - dimensional slice": {
+            "bulk": "L",
+            "category": "Uncategorized",
+            "cost": "160,000",
+            "critical": "bleed 2d6",
+            "damage": "5d8",
+            "damage type": "P",
+            "level": "16",
+            "range": "-",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, operative",
+            "type": "Basic Melee",
+            "wield": "onehanded"
+        },
+        "Sword cane - molecular rift": {
+            "bulk": "L",
+            "category": "Uncategorized",
+            "cost": "50,900",
+            "critical": "bleed 1d8",
+            "damage": "3d8",
+            "damage type": "P",
+            "level": "13",
+            "range": "-",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, operative",
+            "type": "Basic Melee",
+            "wield": "onehanded"
+        },
+        "Sword cane - tactical": {
+            "bulk": "L",
+            "category": "Uncategorized",
+            "cost": "250",
+            "critical": "bleed 1d3",
+            "damage": "1d4",
+            "damage type": "P",
+            "level": "1",
+            "range": "-",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, operative",
+            "type": "Basic Melee",
+            "wield": "onehanded"
+        },
+        "Sword cane - ultrathin": {
+            "bulk": "L",
+            "category": "Uncategorized",
+            "cost": "7,000",
+            "critical": "bleed 1d4",
+            "damage": "2d4",
+            "damage type": "P",
+            "level": "7",
+            "range": "-",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, operative",
+            "type": "Basic Melee",
+            "wield": "onehanded"
+        },
+        "Sword cane - zero-edge": {
+            "bulk": "L",
+            "category": "Uncategorized",
+            "cost": "18,000",
+            "critical": "bleed 1d6",
+            "damage": "2d6",
+            "damage type": "P",
+            "level": "10",
+            "range": "-",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, operative",
+            "type": "Basic Melee",
+            "wield": "onehanded"
+        },
         "Bone cestus - austere": {
             "bulk": "L",
             "capacity": "-",
@@ -2148,6 +2384,66 @@ var equipmentData = {
         }
     },
     "Fusion Seals": {
+        "Fusion Seal - Apprehending": {
+            "bulk": "-",
+            "sourcebook": "pw",
+            "level": "5",
+            "sourcepage": "p.194"
+        },
+        "Fusion Seal - Astute": {
+            "bulk": "-",
+            "sourcebook": "pw",
+            "level": "3",
+            "sourcepage": "p.194"
+        },
+        "Fusion Seal - Bonding": {
+            "bulk": "-",
+            "sourcebook": "pw",
+            "level": "4",
+            "sourcepage": "p.194"
+        },
+        "Fusion Seal - Interposing": {
+            "bulk": "-",
+            "sourcebook": "pw",
+            "level": "5",
+            "sourcepage": "p.195"
+        },
+        "Fusion Seal - Manufacturing": {
+            "bulk": "-",
+            "sourcebook": "pw",
+            "level": "4",
+            "sourcepage": "p.195"
+        },
+        "Fusion Seal - Ratjaw": {
+            "bulk": "-",
+            "sourcebook": "pw",
+            "level": "9",
+            "sourcepage": "p.195"
+        },
+        "Fusion Seal - Sentinel": {
+            "bulk": "-",
+            "sourcebook": "pw",
+            "level": "3",
+            "sourcepage": "p.195"
+        },
+        "Fusion Seal - Tactical": {
+            "bulk": "-",
+            "sourcebook": "pw",
+            "level": "4",
+            "sourcepage": "p.195"
+        },
+        "Fusion Seal - Tattoo": {
+            "bulk": "-",
+            "sourcebook": "pw",
+            "level": "7",
+            "sourcepage": "p.195"
+        },
+        "Fusion Seal - Ulrikka duster": {
+            "bulk": "-",
+            "sourcebook": "pw",
+            "level": "2",
+            "sourcepage": "p.195"
+        },
         "Fusion Seal - Nanite": {
             "bulk": "-",
             "description": "The nanite fusion gives a weapon the nanite burst critical effect. When this critical effect is triggered, a cloud of nanites detaches from the blade and begins devouring the target, swarming over it and dismantling it at the molecular level. In this situation, the weapon deals double damage as normal, but all of the damage is treated as acid damage, and the target must succeed at a Fortitude saving throw (see page 181 of the Starfinder Core Rulebook for how to calculate the DC) or be nauseated for 1 round. When you score a critical hit with a weapon that has multiple critical hit effects, you can apply only one of those critical hit effects of your choice. Only melee weapons can have this fusion.",
@@ -2849,6 +3145,111 @@ var equipmentData = {
         }
     },
     "Heavy Armor": {
+        "Formian hide - advanced": {
+            "armorcheck": "-3",
+            "bulk": "2",
+            "cost": "6,100",
+            "eac": "10",
+            "kac": "12",
+            "level": "7",
+            "maxdex": "3",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "-5",
+            "type": "Heavy",
+            "upgradeslots": "3"
+        },
+        "Formian hide - basic": {
+            "armorcheck": "-3",
+            "bulk": "2",
+            "cost": "2,400",
+            "eac": "7",
+            "kac": "8",
+            "level": "4",
+            "maxdex": "2",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "-5",
+            "type": "Heavy",
+            "upgradeslots": "2"
+        },
+        "Formian hide - superior": {
+            "armorcheck": "-4",
+            "bulk": "2",
+            "cost": "16,500",
+            "eac": "15",
+            "kac": "17",
+            "level": "10",
+            "maxdex": "3",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "-5",
+            "type": "Heavy",
+            "upgradeslots": "3"
+        },
+        "Hellknight plate - armiger": {
+            "armorcheck": "-2",
+            "bulk": "3",
+            "cost": "980",
+            "eac": "4",
+            "kac": "5",
+            "level": "2",
+            "maxdex": "2",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "-10",
+            "type": "Heavy",
+            "upgradeslots": "2"
+        },
+        "Hellknight plate - lictor": {
+            "armorcheck": "-2",
+            "bulk": "3",
+            "cost": "3,300",
+            "eac": "9",
+            "kac": "10",
+            "level": "5",
+            "maxdex": "2",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "-10",
+            "type": "Heavy",
+            "upgradeslots": "2"
+        },
+        "Hellknight plate - maralictor": {
+            "armorcheck": "-2",
+            "bulk": "3",
+            "cost": "14,500",
+            "eac": "16",
+            "kac": "17",
+            "level": "9",
+            "maxdex": "2",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "-10",
+            "type": "Heavy",
+            "upgradeslots": "4"
+        },
+        "Hellknight plate - paralictor": {
+            "armorcheck": "-2",
+            "bulk": "3",
+            "cost": "80,000",
+            "eac": "21",
+            "kac": "22",
+            "level": "14",
+            "maxdex": "3",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "-10",
+            "type": "Heavy",
+            "upgradeslots": "6"
+        },
         "Battle dress - AG command": {
             "armorcheck": "-3",
             "kac": "17",
@@ -3436,6 +3837,142 @@ var equipmentData = {
         }
     },
     "Heavy Weapons": {
+        "Anacite ion cannon - aurora": {
+            "bulk": "2",
+            "capacity": "40 charges",
+            "category": "Shock",
+            "cost": "10,900",
+            "critical": "staggered",
+            "damage": "2d10",
+            "damage type": "E",
+            "level": "8",
+            "range": "45",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Line, lockdown, unwieldy",
+            "type": "Heavy",
+            "usage": "4",
+            "wield": "twohanded"
+        },
+        "Anacite ion cannon - static": {
+            "bulk": "2",
+            "capacity": "20 charges",
+            "category": "Shock",
+            "cost": "1,550",
+            "critical": "staggered",
+            "damage": "1d10",
+            "damage type": "E",
+            "level": "3",
+            "range": "20",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Line, lockdown, unwieldy",
+            "type": "Heavy",
+            "usage": "2",
+            "wield": "twohanded"
+        },
+        "Anacite ion cannon - storm": {
+            "bulk": "2",
+            "capacity": "80 charges",
+            "category": "Shock",
+            "cost": "52,900",
+            "critical": "staggered",
+            "damage": "4d10",
+            "damage type": "E",
+            "level": "13",
+            "range": "75",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Line, lockdown, unwieldy",
+            "type": "Heavy",
+            "usage": "5",
+            "wield": "twohanded"
+        },
+        "Anacite ion cannon - tempest": {
+            "bulk": "2",
+            "capacity": "100 charges",
+            "category": "Shock",
+            "cost": "441,000",
+            "critical": "staggered",
+            "damage": "6d10",
+            "damage type": "E",
+            "level": "18",
+            "range": "100",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Line, lockdown, unwieldy",
+            "type": "Heavy",
+            "usage": "10",
+            "wield": "twohanded"
+        },
+        "Starheart cannon - blue star": {
+            "bulk": "2",
+            "capacity": "100 charges",
+            "category": "Plasma",
+            "cost": "360,000",
+            "critical": "blind",
+            "damage": "9d6",
+            "damage type": "E & F",
+            "level": "18",
+            "range": "100",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Bright, explode (15), unwieldy",
+            "type": "Heavy",
+            "usage": "10",
+            "wield": "twohanded"
+        },
+        "Starheart cannon - red star": {
+            "bulk": "2",
+            "capacity": "40 charges",
+            "category": "Plasma",
+            "cost": "1,300",
+            "critical": "blind",
+            "damage": "1d6",
+            "damage type": "E & F",
+            "level": "3",
+            "range": "100",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Bright, explode (5), unwieldy",
+            "type": "Heavy",
+            "usage": "5",
+            "wield": "twohanded"
+        },
+        "Starheart cannon - white star": {
+            "bulk": "2",
+            "capacity": "100 charges",
+            "category": "Plasma",
+            "cost": "48,100",
+            "critical": "blind",
+            "damage": "5d6",
+            "damage type": "E & F",
+            "level": "13",
+            "range": "100",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Bright, explode (10), unwieldy",
+            "type": "Heavy",
+            "usage": "5",
+            "wield": "twohanded"
+        },
+        "Starheart cannon - yellow star": {
+            "bulk": "2",
+            "capacity": "100 charges",
+            "category": "Plasma",
+            "cost": "9,050",
+            "critical": "blind",
+            "damage": "3d6",
+            "damage type": "E & F",
+            "level": "8",
+            "range": "100",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Bright, explode (10), unwieldy",
+            "type": "Heavy",
+            "usage": "5",
+            "wield": "twohanded"
+        },
         "Acid lancer - corroder-class": {
             "bulk": "2",
             "capacity": "20 Caustrol",
@@ -4252,6 +4789,76 @@ var equipmentData = {
         }
     },
     "Hybrid Items": {
+        "Ablative insulation - mk 1": {
+            "bulk": "L",
+            "cost": "350",
+            "level": "4",
+            "sourcebook": "pw",
+            "sourcepage": "p.202"
+        },
+        "Ablative insulation - mk 2": {
+            "bulk": "L",
+            "cost": "1,500",
+            "level": "8",
+            "sourcebook": "pw",
+            "sourcepage": "p.202"
+        },
+        "Ablative insulation - mk 3": {
+            "bulk": "L",
+            "cost": "5,500",
+            "level": "12",
+            "sourcebook": "pw",
+            "sourcepage": "p.202"
+        },
+        "Mind guardian": {
+            "bulk": "-",
+            "cost": "36,000",
+            "level": "12",
+            "sourcebook": "pw",
+            "sourcepage": "p.202"
+        },
+        "Motospheres (4-pack)": {
+            "bulk": "L",
+            "cost": "5,600",
+            "level": "7",
+            "sourcebook": "pw",
+            "sourcepage": "p.202"
+        },
+        "Necrotic mantle": {
+            "bulk": "L",
+            "cost": "17,000",
+            "level": "10",
+            "sourcebook": "pw",
+            "sourcepage": "p.203"
+        },
+        "Prescient lenses - mk 1": {
+            "bulk": "-",
+            "cost": "2,150",
+            "level": "4",
+            "sourcebook": "pw",
+            "sourcepage": "p.203"
+        },
+        "Prescient lenses - mk 2": {
+            "bulk": "-",
+            "cost": "13,900",
+            "level": "9",
+            "sourcebook": "pw",
+            "sourcepage": "p.203"
+        },
+        "Prescient lenses - mk 3": {
+            "bulk": "-",
+            "cost": "77,000",
+            "level": "14",
+            "sourcebook": "pw",
+            "sourcepage": "p.203"
+        },
+        "Tactokinesis gloves": {
+            "bulk": "L",
+            "cost": "4,450",
+            "level": "6",
+            "sourcebook": "pw",
+            "sourcepage": "p.203"
+        },
         "Eoxian wrackstaff": {
             "bulk": "1",
             "cost": "48,500",
@@ -4380,18 +4987,108 @@ var equipmentData = {
         }
     },
     "Light Armor": {
+        "Hardened resin": {
+            "armorcheck": "-1",
+            "bulk": "1",
+            "cost": "1,200",
+            "eac": "2",
+            "kac": "3",
+            "level": "3",
+            "maxdex": "5",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "0",
+            "type": "Light",
+            "upgradeslots": "1"
+        },
+        "Zeizerer diffractor I": {
+            "armorcheck": "0",
+            "bulk": "L",
+            "cost": "650",
+            "eac": "2",
+            "kac": "2",
+            "level": "2",
+            "maxdex": "4",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "0",
+            "type": "Light",
+            "upgradeslots": "0"
+        },
+        "Zeizerer diffractor II": {
+            "armorcheck": "0",
+            "bulk": "L",
+            "cost": "4,150",
+            "eac": "6",
+            "kac": "6",
+            "level": "6",
+            "maxdex": "6",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "0",
+            "type": "Light",
+            "upgradeslots": "1"
+        },
+        "Zeizerer diffractor III": {
+            "armorcheck": "0",
+            "bulk": "L",
+            "cost": "12,500",
+            "eac": "11",
+            "kac": "11",
+            "level": "9",
+            "maxdex": "7",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "0",
+            "type": "Light",
+            "upgradeslots": "2"
+        },
+        "Zeizerer diffractor IV": {
+            "armorcheck": "0",
+            "bulk": "L",
+            "cost": "48,500",
+            "eac": "15",
+            "kac": "15",
+            "level": "13",
+            "maxdex": "8",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "0",
+            "type": "Light",
+            "upgradeslots": "3"
+        },
+        "Zeizerer diffractor V": {
+            "armorcheck": "0",
+            "bulk": "L",
+            "cost": "340,000",
+            "eac": "20",
+            "kac": "20",
+            "level": "18",
+            "maxdex": "9",
+            "sourcebook": "pw",
+            "sourcepage": "p.196",
+            "special": "-",
+            "speedadj": "0",
+            "type": "Light",
+            "upgradeslots": "4"
+        },
         "SpecOps armor - AG": {
-          "armorcheck": "-1",
-          "kac": "8",
-          "upgradeslots": "3 + 2*",
-          "level": "7",
-          "eac": "7",
-          "cost": "7,500",
-          "bulk": "1",
-          "sourcebook": "aa",
-          "sourcepage": "p.7",
-          "speedadj": "0",
-          "maxdex": "5",
+            "armorcheck": "-1",
+            "kac": "8",
+            "upgradeslots": "3 + 2*",
+            "level": "7",
+            "eac": "7",
+            "cost": "7,500",
+            "bulk": "1",
+            "sourcebook": "aa",
+            "sourcepage": "p.7",
+            "speedadj": "0",
+            "maxdex": "5",
         },
         "Abadarcorp Travel Suit - Gold": {
             "armorcheck": "-",
@@ -4941,6 +5638,91 @@ var equipmentData = {
         }
     },
     "Longarms": {
+        "Kalo shredder - cascade-class": {
+            "bulk": "1",
+            "capacity": "18 Flechettes",
+            "category": "Projectile",
+            "cost": "6,630",
+            "critical": "bleed 1d6",
+            "damage": "2d6",
+            "damage type": "S",
+            "level": "7",
+            "range": "40",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Analog, automatic, underwater",
+            "type": "Longarms",
+            "usage": "1",
+            "wield": "twohanded"
+        },
+        "Kalo shredder - deluge-class": {
+            "bulk": "1",
+            "capacity": "36 Flechettes",
+            "category": "Projectile",
+            "cost": "74,300",
+            "critical": "bleed 4d4",
+            "damage": "6d6",
+            "damage type": "S",
+            "level": "14",
+            "range": "60",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Analog, automatic, underwater",
+            "type": "Longarms",
+            "usage": "1",
+            "wield": "twohanded"
+        },
+        "Kalo shredder - monsoon-class": {
+            "bulk": "1",
+            "capacity": "48 Flechettes",
+            "category": "Projectile",
+            "cost": "784,000",
+            "critical": "bleed 4d6",
+            "damage": "12d6",
+            "damage type": "S",
+            "level": "17",
+            "range": "60",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Analog, automatic, underwater",
+            "type": "Longarms",
+            "usage": "1",
+            "wield": "twohanded"
+        },
+        "Kalo shredder - slipstream-class": {
+            "bulk": "1",
+            "capacity": "8 Flechettes",
+            "category": "Projectile",
+            "cost": "1,610",
+            "critical": "bleed 1d4",
+            "damage": "1d6",
+            "damage type": "S",
+            "level": "3",
+            "range": "30",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Analog, automatic, underwater",
+            "type": "Longarms",
+            "usage": "1",
+            "wield": "twohanded"
+        },
+        "Kalo shredder - torrent-class": {
+            "bulk": "1",
+            "capacity": "24 Flechettes",
+            "category": "Projectile",
+            "cost": "26,700",
+            "critical": "bleed 3d4",
+            "damage": "4d6",
+            "damage type": "S",
+            "level": "11",
+            "range": "40",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Analog, automatic, underwater",
+            "type": "Longarms",
+            "usage": "1",
+            "wield": "twohanded"
+        },
         "RPPR - AG": {
             "bulk": "2",
             "capacity": "12 mini-rockets",
@@ -5887,6 +6669,86 @@ var equipmentData = {
         }
     },
     "Magic Items": {
+        "Aballonian drone box": {
+            "bulk": "1",
+            "cost": "24,500",
+            "level": "11",
+            "sourcebook": "pw",
+            "sourcepage": "p.200",
+            "usage": "Held"
+        },
+        "Boardroom attire": {
+            "bulk": "L",
+            "cost": "62,500",
+            "level": "14",
+            "sourcebook": "pw",
+            "sourcepage": "p.200",
+            "usage": "Worn (cloak)"
+        },
+        "Brigh's bolt": {
+            "bulk": "-",
+            "cost": "1,300",
+            "level": "3",
+            "sourcebook": "pw",
+            "sourcepage": "p.200",
+            "usage": "Passive"
+        },
+        "Encryption tattoo - agent": {
+            "bulk": "-",
+            "cost": "50",
+            "level": "1",
+            "sourcebook": "pw",
+            "sourcepage": "p.200",
+            "usage": "Passive"
+        },
+        "Encryption tattoo - master": {
+            "bulk": "-",
+            "cost": "360,000",
+            "level": "18",
+            "sourcebook": "pw",
+            "sourcepage": "p.200",
+            "usage": "Passive"
+        },
+        "Encryption tattoo - operative": {
+            "bulk": "-",
+            "cost": "8,900",
+            "level": "8",
+            "sourcebook": "pw",
+            "sourcepage": "p.200",
+            "usage": "Passive"
+        },
+        "Encryption tattoo - provocateur": {
+            "bulk": "-",
+            "cost": "48,000",
+            "level": "13",
+            "sourcebook": "pw",
+            "sourcepage": "p.200",
+            "usage": "Passive"
+        },
+        "Lawfinder": {
+            "bulk": "L",
+            "cost": "1,200",
+            "level": "3",
+            "sourcebook": "pw",
+            "sourcepage": "p.200",
+            "usage": "Held"
+        },
+        "Ratfolk belt": {
+            "bulk": "-",
+            "cost": "12,250",
+            "level": "9",
+            "sourcebook": "pw",
+            "sourcepage": "p.201",
+            "usage": "Worn (belt)"
+        },
+        "Serum - Pact Worlds": {
+            "bulk": "L",
+            "cost": "475",
+            "level": "5",
+            "sourcebook": "pw",
+            "sourcepage": "p.201",
+            "usage": "Consumable"
+        },
         "Barachius helm": {
             "usage": "Worn (helmet)",
             "bulk": "L",
@@ -6331,6 +7193,74 @@ var equipmentData = {
         }
     },
     "Small Arms": {
+        "Nightarch needler - advanced": {
+            "bulk": "L",
+            "capacity": "5 Darts",
+            "category": "Uncategorized",
+            "cost": "6,270",
+            "critical": "injection dc +2",
+            "damage": "2d6",
+            "damage type": "P",
+            "level": "8",
+            "range": "30",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, injection",
+            "type": "Small Arms",
+            "usage": "1",
+            "wield": "onehanded"
+        },
+        "Nightarch needler - elite": {
+            "bulk": "L",
+            "capacity": "5 Darts",
+            "category": "Uncategorized",
+            "cost": "44,980",
+            "critical": "injection dc +2",
+            "damage": "4d6",
+            "damage type": "P",
+            "level": "13",
+            "range": "30",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, injection",
+            "type": "Small Arms",
+            "usage": "1",
+            "wield": "onehanded"
+        },
+        "Nightarch needler - paragon": {
+            "bulk": "L",
+            "capacity": "5 Darts",
+            "category": "Uncategorized",
+            "cost": "369,000",
+            "critical": "injection dc +2",
+            "damage": "8d6",
+            "damage type": "P",
+            "level": "18",
+            "range": "30",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, injection",
+            "type": "Small Arms",
+            "usage": "1",
+            "wield": "onehanded"
+        },
+        "Nightarch needler - tactical": {
+            "bulk": "L",
+            "capacity": "5 Darts",
+            "category": "Uncategorized",
+            "cost": "1,650",
+            "critical": "injection dc +2",
+            "damage": "1d6",
+            "damage type": "P",
+            "level": "3",
+            "range": "30",
+            "sourcebook": "pw",
+            "sourcepage": "p.192",
+            "special": "Analog, injection",
+            "type": "Small Arms",
+            "usage": "1",
+            "wield": "onehanded"
+        },
         "Arc Pistol - Aurora": {
             "bulk": "L",
             "capacity": "40 charges",
@@ -6798,6 +7728,74 @@ var equipmentData = {
         }
     },
     "Sniper Weapons": {
+        "Shobhad horizon striker - advanced": {
+            "bulk": "2",
+            "capacity": "2 Rounds",
+            "category": "Projectile",
+            "cost": "4,750",
+            "critical": "-",
+            "damage": "3d4",
+            "damage type": "P",
+            "level": "6",
+            "range": "120",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Analog, sniper (1000), unwieldy",
+            "type": "Sniper",
+            "usage": "1",
+            "wield": "twohanded"
+        },
+        "Shobhad horizon striker - elite": {
+            "bulk": "2",
+            "capacity": "2 Rounds",
+            "category": "Projectile",
+            "cost": "27,300",
+            "critical": "-",
+            "damage": "6d4",
+            "damage type": "P",
+            "level": "11",
+            "range": "140",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Analog, sniper (1250), unwieldy",
+            "type": "Sniper",
+            "usage": "1",
+            "wield": "twohanded"
+        },
+        "Shobhad horizon striker - paragon": {
+            "bulk": "2",
+            "capacity": "2 Rounds",
+            "category": "Projectile",
+            "cost": "185,000",
+            "critical": "-",
+            "damage": "8d8",
+            "damage type": "P",
+            "level": "16",
+            "range": "160",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Analog, sniper (1500), unwieldy",
+            "type": "Sniper",
+            "usage": "1",
+            "wield": "twohanded"
+        },
+        "Shobhad horizon striker - tactical": {
+            "bulk": "2",
+            "capacity": "2 Rounds",
+            "category": "Projectile",
+            "cost": "440",
+            "critical": "-",
+            "damage": "2d4",
+            "damage type": "P",
+            "level": "1",
+            "range": "100",
+            "sourcebook": "pw",
+            "sourcepage": "p.193",
+            "special": "Analog, sniper (500), unwieldy",
+            "type": "Sniper",
+            "usage": "1",
+            "wield": "twohanded"
+        },
         "Diasporan rifle - advanced": {
             "bulk": "2",
             "capacity": "20 charges",
@@ -6955,6 +7953,48 @@ var equipmentData = {
         }
     },
     "Solarion Weapon Crystals": {
+      "Tauon Crystal (Greater)": {
+          "bulk": "-",
+          "cost": "48,400",
+          "sourcebook": "pw",
+          "level": "13",
+          "sourcepage": "p.193"
+      },
+      "Tauon Crystal (Least)": {
+          "bulk": "-",
+          "cost": "235",
+          "sourcebook": "pw",
+          "level": "1",
+          "sourcepage": "p.193"
+      },
+      "Tauon Crystal (Lesser)": {
+          "bulk": "-",
+          "cost": "6000",
+          "sourcebook": "pw",
+          "level": "7",
+          "sourcepage": "p.193"
+      },
+      "Tauon Crystal (Minor)": {
+          "bulk": "-",
+          "cost": "1850",
+          "sourcebook": "pw",
+          "level": "4",
+          "sourcepage": "p.193"
+      },
+      "Tauon Crystal (Standard)": {
+          "bulk": "-",
+          "cost": "17,500",
+          "sourcebook": "pw",
+          "level": "10",
+          "sourcepage": "p.193"
+      },
+      "Tauon Crystal (True)": {
+          "bulk": "-",
+          "cost": "161,000",
+          "sourcebook": "pw",
+          "level": "16",
+          "sourcepage": "p.193"
+      },
         "Gluon Crystal (Greater)": {
             "bulk": "-",
             "cost": "330300",
@@ -7303,6 +8343,121 @@ var equipmentData = {
         }
     },
     "Technological Items": {
+        "Antigravity belt": {
+            "bulk": "L",
+            "charge capacity": "20",
+            "level": "7",
+            "cost": "6,500",
+            "sourcebook": "pw",
+            "sourcepage": "p.198",
+            "special": "-",
+            "usage": "1 / round"
+        },
+        "Autoclaw": {
+            "bulk": "1",
+            "charge capacity": "40",
+            "level": "8",
+            "cost": "9,000",
+            "sourcebook": "pw",
+            "sourcepage": "p.198",
+            "special": "-",
+            "usage": "1 / round"
+        },
+        "Binoculars": {
+            "bulk": "L",
+            "charge capacity": "-",
+            "level": "1",
+            "cost": "50",
+            "sourcebook": "pw",
+            "sourcepage": "p.198",
+            "special": "-"
+        },
+        "Frictionless gel": {
+            "bulk": "L",
+            "charge capacity": "-",
+            "level": "5",
+            "cost": "450",
+            "sourcebook": "pw",
+            "sourcepage": "p.198",
+            "special": "-"
+        },
+        "Library chip": {
+            "bulk": "-",
+            "charge capacity": "-",
+            "level": "3",
+            "cost": "250",
+            "sourcebook": "pw",
+            "sourcepage": "p.198",
+            "special": "-"
+        },
+        "Magboots": {
+            "bulk": "1",
+            "charge capacity": "20",
+            "level": "2",
+            "cost": "750",
+            "sourcebook": "pw",
+            "sourcepage": "p.198",
+            "special": "-",
+            "usage": "1 / hour"
+        },
+        "Magniscope": {
+            "bulk": "L",
+            "charge capacity": "20",
+            "level": "4",
+            "cost": "2,000",
+            "sourcebook": "pw",
+            "sourcepage": "p.198",
+            "special": "-",
+            "usage": "1 / hour"
+        },
+        "Oxygen candle": {
+            "bulk": "L",
+            "charge capacity": "-",
+            "level": "1",
+            "cost": "20",
+            "sourcebook": "pw",
+            "sourcepage": "p.198",
+            "special": "-"
+        },
+        "Purifying puck": {
+            "bulk": "L",
+            "charge capacity": "40",
+            "level": "4",
+            "cost": "2,000",
+            "sourcebook": "pw",
+            "sourcepage": "p.198",
+            "special": "-",
+            "usage": "1 / round"
+        },
+        "Radiation badge": {
+            "bulk": "L",
+            "charge capacity": "-",
+            "level": "1",
+            "cost": "100",
+            "sourcebook": "pw",
+            "sourcepage": "p.198",
+            "special": "-",
+            "usage": "See text"
+        },
+        "Tool kit - specialty": {
+            "bulk": "L",
+            "charge capacity": "-",
+            "level": "1",
+            "cost": "200",
+            "sourcebook": "pw",
+            "sourcepage": "p.198",
+            "special": "-"
+        },
+        "Tracking bug": {
+            "bulk": "L",
+            "charge capacity": "20",
+            "level": "6",
+            "cost": "4,250",
+            "sourcebook": "pw",
+            "sourcepage": "p.199",
+            "special": "-",
+            "usage": "1 / hour"
+        },
         "Memory Expunger": {
             "bulk": "L",
             "charge capacity": "20",

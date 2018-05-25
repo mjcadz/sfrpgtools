@@ -97,6 +97,7 @@ function generateLoot() {
   //replace book names with shortened name
   sourcebooks = sourcebooks.map(function(x){ return x.replace("Core Rulebook","crb") });
   sourcebooks = sourcebooks.map(function(x){ return x.replace("Alien Archive","aa") });
+  sourcebooks = sourcebooks.map(function(x){ return x.replace("Pact Worlds","pw") });
   //
   //BUILD LIST
   //
@@ -276,6 +277,9 @@ function generateLoot() {
         thisItem[0] = thisItem[0].replace("Spell Gem (Level 0)",randomChoice(spellGems0)).replace("Spell Gem (Level 1)",randomChoice(spellGems1)).replace("Spell Gem (Level 2)",randomChoice(spellGems2)).replace("Spell Gem (Level 3)",randomChoice(spellGems3)).replace("Spell Gem (Level 4)",randomChoice(spellGems4)).replace("Spell Gem (Level 5)",randomChoice(spellGems5)).replace("Spell Gem (Level 6)",randomChoice(spellGems6));
       }
 
+      //capitalise all words
+      thisItem[0] = thisItem[0].toTitleCase()
+
       addTableItem(thisItem,false);
 
       wealthCount -= Number(thisItem[2]);
@@ -378,6 +382,16 @@ function getDataArray(groups,json,sourcebooks){
     }
   }
   return dataArray;
+}
+
+String.prototype.capitalise = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+String.prototype.toTitleCase = function() {
+  return this.replace(/\w\S*/g, function(txt){
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
 }
 
 //runs when page is loaded
