@@ -277,9 +277,6 @@ function generateLoot() {
         thisItem[0] = thisItem[0].replace("Spell Gem (Level 0)",randomChoice(spellGems0)).replace("Spell Gem (Level 1)",randomChoice(spellGems1)).replace("Spell Gem (Level 2)",randomChoice(spellGems2)).replace("Spell Gem (Level 3)",randomChoice(spellGems3)).replace("Spell Gem (Level 4)",randomChoice(spellGems4)).replace("Spell Gem (Level 5)",randomChoice(spellGems5)).replace("Spell Gem (Level 6)",randomChoice(spellGems6));
       }
 
-      //capitalise all words
-      thisItem[0] = thisItem[0].toTitleCase()
-
       addTableItem(thisItem,false);
 
       wealthCount -= Number(thisItem[2]);
@@ -352,7 +349,7 @@ function getDataArray(groups,json,sourcebooks){
           minLevel = limitedGroups.includes(itemGroup) ? aplmod - 2 : 0;
 
           if ( itemLevel <= aplmod+1 && itemLevel >= minLevel ){
-            item[0] = itemName.replace("Iii","III").replace("Ii","II").replace("Iv","IV").replace("Viii","VIII").replace("Vii","VII").replace("Vi","VI").replace("Fxprofession",randomChoice(professions));//name
+            item[0] = itemName.toTitleCase().replace("Iii","III").replace("Ii","II").replace("Iv","IV").replace("Viii","VIII").replace("Vii","VII").replace("Vi","VI").replace("Fxprofession",randomChoice(professions));//name
             item[1] = json[itemGroup][itemName]['level'];//level
 
             if (itemName.includes("Fusion Seal")){
@@ -382,10 +379,6 @@ function getDataArray(groups,json,sourcebooks){
     }
   }
   return dataArray;
-}
-
-String.prototype.capitalise = function() {
-    return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
 String.prototype.toTitleCase = function() {

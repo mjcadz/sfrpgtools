@@ -289,7 +289,19 @@ var FromList = [
     "a nearspace planet close to a drift beacon",
     "beyond the rim",
     "a space station in a backwater system",
-    "an exploration vessel"
+    "an exploration vessel",
+    "the frozen waste of Triaxus ",
+    "a refugee convoy, fleeing from the Veskarium",
+    "a multigenerational starship that patrols the endless void.",
+    "a depleted mining world.",
+    "the far reaches of the Veskrium.",
+    "deep within the Diaspora.",
+    "the jungles of Castrovel.",
+    "a backwater village",
+    "a cryogenic freezing facility",
+    "space, found alone on an abandoned starship as a child",
+    "the lower levels of Absalom’s spike",
+    "beyond the Pact Worlds"
 ];
 
 var WhoList = [
@@ -457,7 +469,36 @@ var WhoList = [
     "is a total tech head",
     "believes in life after love",
     "loves to dance",
-    "has a farmers union iced coffee and a sausage roll for smoko every day, no exceptions"]
+    "has a farmers union iced coffee and a sausage roll for smoko every day, no exceptions",
+    "has a drinking problem",
+    "is afraid of heights",
+    "only sleeps with the lights on",
+    "has to urinate frequently ",
+    "is obsessed with their hair ",
+    "dresses provocatively",
+    "smells like old cheese",
+    "dances with wolves",
+    "talks with a 1920s mafia accent",
+    "talks about stabbing people strangely too much",
+    "constantly has a broken arm, looking for help",
+    "is obsessed with the local sports team",
+    "is obsessed with cars",
+    "smokes too much herb, like all the time",
+    "gives people small amounts of credits, in strange amounts, for doing the simplest errands for him",
+    "speaks to people as though hes being hunted",
+    "speaks to people as though hes hunting them",
+    "gets startled at the slightest raise in someones tone",
+    "wears rings, which isn’t cool, but its cool that he doesn’t care if he’s cool",
+    "is slightly overweight",
+    "has a limp",
+    "has a well kept mustache",
+    "believes they are destined for a higher calling",
+    "looks down on anyone who poorer than they are",
+    "believes in ghosts",
+    "is superstitious",
+    "flirts relentlessly",
+    "seems aloof and distant",
+    "is so laid back they often come across as rude and uncaring"]
 
 function clearOutput() {
   var $outputArea = $(".output.area").first();

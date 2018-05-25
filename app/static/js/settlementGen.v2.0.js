@@ -290,47 +290,30 @@ var placesOfInterest = {
       "has shelves upon shelves of hair products for every race",
       "is very popular among the aging population"
     ]
-    }
   },
   "Robo Repair": {
     "flavour": [
       "specialises is drone repair",
       "is filled with many junk bots that serve no real purpose",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Electronics Workshop": {
     "flavour": [
       "has an owner that can fix just about anything given enough time",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Warehouse": {
     "flavour": [
       "is a huge facility, yet empty",
       "has countless shelves spanning many kilometers",
       "is a small facility that many locals use",
-      "",
-      ""
     ]
-    }
   },
   "Legal Firm": {
     "flavour": [
       "is run by the shadiest legal team this side of the gap",
-      "has a owner who only takes cases they know they can win",
-      "",
-      "",
-      ""
+      "has an owner who only takes cases they know they can win",
     ]
-    }
   },
   "Religous Building": {
     "flavour": [
@@ -357,17 +340,11 @@ var placesOfInterest = {
       "A sanctuary for the followers of DX",
       "A shrine for the worship of DX",
       "A huge cathedral dedicated to DX"]
-    }
   },
   "Capsule Hotel": {
     "flavour": [
       "has rooms to cater to every race and religion",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Data Storage": {
     "flavour": [
@@ -377,17 +354,11 @@ var placesOfInterest = {
       "can take an near infinite amount of data over its vast distrubution networks",
       "enforces triple terrabyte security phrases with 13 factor biometric authentification "
     ]
-    }
   },
   "Low Rent Housing Project": {
     "flavour": [
       "has every room packed with multiple families",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Hypermarket": {
     "flavour": [
@@ -395,229 +366,114 @@ var placesOfInterest = {
       "only sells genectically modified protein paste",
       "has the galaxys largest range of foods",
       "has shelves upon shelves of types of cereal",
-      ""
     ]
-    }
   },
   "Designated Starship Parking": {
     "flavour": [
       "is a large flat area of land with many waiting starships",
       "is a huge automated facility that parks and retrieves ship from underground",
-      "",
-      "",
-      ""
     ]
     }
   },
   "Fast Food Franchise": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Police Department": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "College": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Government Building": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Hospital": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Augmentation Clinic": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Luxury Apartments": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Media Company": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Starship Dealership": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Vehicle Rental": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "VRcade": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Habitation Stack": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Nightclub bar etc": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Fabrication Hub": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Bulk Transport Company": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
-  },
-  "Military Base": {
-    "flavour": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ]
-    }
   },
   "Coffe shop, cafe, Restaurant": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Weapons Supply, Arms Dealer, Underground Arms Dealer": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Bank": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Magical Item Store": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   },
   "Private Security": {
     "flavour": [
       "",
-      "",
-      "",
-      "",
-      ""
     ]
-    }
   }
 }
 
@@ -664,26 +520,25 @@ var buildingFlavour = [
 ]
 
 var settlementFlavour = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
+  "Is inhabited solely by refugees",
+  "Has a gang problem",
+  "Wouldn’t win any awards for cleanliness",
+  "is overrun with rampant corruption ",
+  "is packed with overly helpful Skittermander ",
+  "Smells like oranges.",
+  "Is home to an abstract religion.",
+  "Is a front for a drug manufacturer.",
+  "Is densely inhabited with Lashunta.",
+  "Is run by a magical council .",
+  "Is ruled by a maniacal arms dealer.",
+  "Is infested by flying pests",
+  "Is blanketed with dense haze",
+  "Was thought lost to the ages",
+  "Is corporate owned and funded",
+  "Doesn’t show up in any maps or records",
+  "Is festooned with “Danger” signs ",
+  "Boasts they have the best ice cream parlor",
+  "Is harder to find each time you visit"
 ]
 
 

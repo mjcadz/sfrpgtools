@@ -417,7 +417,8 @@ function displayShipBlock(shipBlock) {
     textBlock += '<hr>';
     textBlock += leftAndRight('<b>' + generateName(shipBlock.frame).toUpperCase() + '</b>','<b>TIER '+ shipBlock.tier +'</b>');
     textBlock += '<hr>';
-    textBlock += "<div>" + shipBlock.size + " " + shipBlock.frame.toLowerCase() + "</div>";
+    //textBlock += "<div>" + shipBlock.size + " " + shipBlock.frame.toLowerCase() + "</div>";
+    textBlock += "<div style=\"padding: 10px 0px 10px 0px;\"><i>This</i> " + shipBlock.size.toLowerCase() + " " + shipBlock.frame.toLowerCase() + " <i>" + flavorText.selectRandom().toLowerCase() + "</i></div>";
     textBlock += "<div>" + "<b>Speed</b> " + shipBlock.speed + "; " + "<b>Maneuverability</b> " + shipBlock.maneuverability.toLowerCase() + " (turn " + shipBlock.turn + ")";
     if (shipBlock.hasOwnProperty('driftRating')) {
       textBlock += "; <b>Drift</b> " + shipBlock.driftRating;

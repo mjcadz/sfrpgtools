@@ -2857,3 +2857,38 @@ var shipNames = {
 	"Word": ["Space","Blessed","Carbon","Compact","Brutal","Burning","Crimson","Cryptic","Crystal","Defiant","Devil's","Dying","Empty","Enduring","Fallen","Final","First","Forgotten","Frozen","Glass","Hot","Lazy","Lost","Patient","Purple","Red","Rotting","Silent","Soaring","Stone","Twisted","Basic","Cosmic","Rowdy","Efficient","Friendly","Furious","Galactic","Hardened","Heavenly","Hectic","Infinite","Intergalactic","Interstellar","Magnificent","Meaty","Mechanised","Mithril","Perfect","Precision","Radiant","Spicy","Superior","Synthetic","Ultra","Vorpal","Wrought","Silver","Steel","Swift","Titanium","Golarions","Interplanetary","Celestial","Dark","Bleeding","Wrathful","Vengeful","Lofty","Sunrise","Black","White","Amazing","Golden","Happy","Jolly","Valiant","Imperial","Astro","Blazing","Grinning","Lunar","Silent","Mighty","Royal","Blazing","Junk","Solar","Ebon","Flying","Millenium","Hammerhead","Night","Champion","Destiny","Night","Interstellar","Knight","Epsilon","Pursuit","Elysium","Lambda","Orbital","Starhive","Ringworks","Atech","Weyland","Idaran","Universal"],
 	"Words":["Oblivion","Bard","Boy","Odyssey","Asteroid","Compulsion","Constellation","D20","Defender","Delivery","Elite","Ghost","Hornet","Infinity","Jewel","Massacre","Matter","Nutrition","Paragon","Platypus","Protector","Breath","Crown","Daze","Dream","Engine","Fall","Fear","Fog","Grave","Hydra","Hymn","Jester","Justice","King","Line","Law","Moon","Priest","Prophet","Pyre","Rain","Serpent","Shroud","Smoke","Stroke","Summer","Sword","Thorn","Vanguard","Seeker","Ranger","Shadow","Starburst","Vacation","Wizard","Star","Retailator","Hopper","Subjugator","Rapture","Harbinger","Tenacity","Destiny","Jumper","Arrow","Andromeda","Centurai","Gemini","Jupiter","Orion","Vega","Fury","Nemesis","Plague","Scourge","Scorpion","Threat","Shadow","Wrath","Dagger","Dragon","Fox","Laser","Nova","Eye","Blossom","Flower","Bounty","Typhoon","Explorer","Unicorn","Claw","Demon","Doom","Fortune","Kiss","Maiden","Passion","Swan","Fist","Hulk","Sailer","Hawk","Clairvoyance","Tyrant","Titan","Falcon","Comet","Spirit","Wings","Bear","Terror","Dove","Expedition","Doshko","Hammer","Dawn","Avenger","Trader"]
 };
+
+var flavorText = [
+	"Is covered in minor damage from dogfights",
+	"Was mass produced in a vast shipyard",
+	"Has shields that are iridescent ",
+	"Bristles with advanced weaponry",
+	"more closely resembles a briar patch than a technological marvel. ",
+	"Is layered with repair plates welded one over another",
+	"Has a wicked, hi contrast paint job that sets it apart from otherwise identical vessels",
+	"Is painted a solid red color",
+	"Was built for comfort rather than speed",
+	"Has a large Skittermander infestation",
+	"Has a bridge that resembles a skull, the viewing ports acting as the eye sockets",
+	"Has a tally chart scratched into the paintwork, marking kills by its previous owners",
+	"Is decorated in spikes and rivets",
+	"Has been polished to a high sheen, you can almost see your reflection in its surface.",
+	"Looks as though two starships have been welded together in an ugly metal mass",
+	"Has a reinforced glass ceiling - giving its crew a view to the stars",
+	"Has been painted to resemble a shark, complete with teeth",
+	"Looks as though it’ll never get off the ground",
+	"Completed the kessel run in 12 parsecs",
+	"Was once part of a large military fleet and holds many war stories in its repair jobs",
+	"Can only be entered via a hatch on its roof",
+	"Has it’s bridge in the rear, it navigates via a series of viewing cameras",
+	"Has a vast wing-span",
+	"Has a mirrored chrome finish",
+	"Was once used as a party ship and still retains a super charged sound system",
+	"Is infested with goblins.",
+	"Is carefully decorated inside and out.",
+	"Is covered from bow to stern in sparkling paint.",
+	"Is missing a sizeable part of its hull",
+	"has never left the drydock",
+	"has been to countless solar systems",
+	"has bathed in the light of countless suns"
+]
