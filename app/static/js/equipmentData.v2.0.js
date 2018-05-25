@@ -1,4 +1,638 @@
 var equipmentData = {
+    "Augmentations": {
+        "Antitoxin membrane": {
+            "cost": "3,000",
+            "level": "5",
+            "sourcebook": "AA",
+            "sourcepage": "p.11",
+            "system": "Skin",
+            "type": "Cybernetic"
+        },
+        "Black heart - mk 1": {
+            "cost": "200",
+            "level": "1",
+            "sourcebook": "DS3",
+            "sourcepage": "p.42",
+            "system": "Heart or Lungs",
+            "type": "Necrograft"
+        },
+        "Black heart - mk 2": {
+            "cost": "4,000",
+            "level": "6",
+            "sourcebook": "DS3",
+            "sourcepage": "p.42",
+            "system": "Heart or Lungs",
+            "type": "Necrograft"
+        },
+        "Black heart - mk 3": {
+            "cost": "30,000",
+            "level": "12",
+            "sourcebook": "DS3",
+            "sourcepage": "p.42",
+            "system": "Heart or Lungs",
+            "type": "Necrograft"
+        },
+        "Black heart - mk 4": {
+            "cost": "350,000",
+            "level": "18",
+            "sourcebook": "DS3",
+            "sourcepage": "p.42",
+            "system": "Heart or Lungs",
+            "type": "Necrograft"
+        },
+        "Black heart - mk 5": {
+            "cost": "775,000",
+            "level": "20",
+            "sourcebook": "DS3",
+            "sourcepage": "p.42",
+            "system": "Heart or Lungs",
+            "type": "Necrograft"
+        },
+        "Bone blade - mk 1": {
+            "cost": "200",
+            "level": "1",
+            "sourcebook": "DS3",
+            "sourcepage": "p.42",
+            "system": "Arm",
+            "type": "Necrograft"
+        },
+        "Bone blade - mk 2": {
+            "cost": "4,000",
+            "level": "6",
+            "sourcebook": "DS3",
+            "sourcepage": "p.42",
+            "system": "Arm",
+            "type": "Necrograft"
+        },
+        "Bone blade - mk 3": {
+            "cost": "30,000",
+            "level": "12",
+            "sourcebook": "DS3",
+            "sourcepage": "p.42",
+            "system": "Arm",
+            "type": "Necrograft"
+        },
+        "Bone blade - mk 4": {
+            "cost": "350,000",
+            "level": "18",
+            "sourcebook": "DS3",
+            "sourcepage": "p.42",
+            "system": "Arm",
+            "type": "Necrograft"
+        },
+        "Bone blade - mk 5": {
+            "cost": "775,000",
+            "level": "20",
+            "sourcebook": "DS3",
+            "sourcepage": "p.42",
+            "system": "Arm",
+            "type": "Necrograft"
+        },
+        "Cardiac accelerator": {
+            "cost": "3,850",
+            "level": "6",
+            "sourcebook": "CRB",
+            "sourcepage": "p.208",
+            "system": "Heart",
+            "type": "Cybernetic"
+        },
+        "Climbing suckers": {
+            "cost": "1,200",
+            "level": "3",
+            "sourcebook": "CRB",
+            "sourcepage": "p.211",
+            "system": "All feet",
+            "type": "Biotech"
+        },
+        "Cybernetic arm - dual": {
+            "cost": "70,150",
+            "level": "14",
+            "sourcebook": "CRB",
+            "sourcepage": "p.208",
+            "system": "Spinal column",
+            "type": "Cybernetic"
+        },
+        "Cybernetic arm - single": {
+            "cost": "24,750",
+            "level": "11",
+            "sourcebook": "CRB",
+            "sourcepage": "p.208",
+            "system": "Spinal column",
+            "type": "Cybernetic"
+        },
+        "Darkvision capacitors - advanced": {
+            "cost": "9,000",
+            "level": "8",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Eyes",
+            "type": "Cybernetic"
+        },
+        "Darkvision capacitors - long-range": {
+            "cost": "48,950",
+            "level": "13",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Eyes",
+            "type": "Cybernetic"
+        },
+        "Darkvision capacitors - standard": {
+            "cost": "1,750",
+            "level": "3",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Eyes",
+            "type": "Cybernetic"
+        },
+        "Datajack - accelerated": {
+            "cost": "8,525",
+            "level": "8",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Brain",
+            "type": "Cybernetic"
+        },
+        "Datajack - high-density": {
+            "cost": "2,600",
+            "level": "5",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Brain",
+            "type": "Cybernetic"
+        },
+        "Datajack - standard": {
+            "cost": "625",
+            "level": "2",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Brain",
+            "type": "Cybernetic"
+        },
+        "Dermal plating - mk 1": {
+            "cost": "3,025",
+            "level": "5",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Skin",
+            "type": "Cybernetic"
+        },
+        "Dermal plating - mk 2": {
+            "cost": "6,950",
+            "level": "7",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Skin",
+            "type": "Cybernetic"
+        },
+        "Dermal plating - mk 3": {
+            "cost": "17,975",
+            "level": "9",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Skin",
+            "type": "Cybernetic"
+        },
+        "Dermal plating - mk 4": {
+            "cost": "48,850",
+            "level": "12",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Skin",
+            "type": "Cybernetic"
+        },
+        "Dermal plating - mk 5": {
+            "cost": "105,000",
+            "level": "14",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Skin",
+            "type": "Cybernetic"
+        },
+        "Dermal plating - mk 6": {
+            "cost": "163,500",
+            "level": "16",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Skin",
+            "type": "Cybernetic"
+        },
+        "Dermal plating - mk 7": {
+            "cost": "542,000",
+            "level": "19",
+            "sourcebook": "CRB",
+            "sourcepage": "p.209",
+            "system": "Skin",
+            "type": "Cybernetic"
+        },
+        "Dragon gland - standard": {
+            "cost": "19,125",
+            "level": "10",
+            "sourcebook": "CRB",
+            "sourcepage": "p.211",
+            "system": "Throat",
+            "type": "Biotech"
+        },
+        "Dragon gland - wyrm": {
+            "cost": "181,500",
+            "level": "16",
+            "sourcebook": "CRB",
+            "sourcepage": "p.211",
+            "system": "Throat",
+            "type": "Biotech"
+        },
+        "Dragon gland - wyrmling": {
+            "cost": "755",
+            "level": "2",
+            "sourcebook": "CRB",
+            "sourcepage": "p.211",
+            "system": "Throat",
+            "type": "Biotech"
+        },
+        "Ghoul glands - mk 1": {
+            "cost": "200",
+            "level": "1",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Skin",
+            "type": "Necrograft"
+        },
+        "Ghoul glands - mk 2": {
+            "cost": "4,000",
+            "level": "6",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Skin",
+            "type": "Necrograft"
+        },
+        "Ghoul glands - mk 3": {
+            "cost": "30,000",
+            "level": "12",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Skin",
+            "type": "Necrograft"
+        },
+        "Ghoul glands - mk 4": {
+            "cost": "350,000",
+            "level": "18",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Skin",
+            "type": "Necrograft"
+        },
+        "Ghoul glands - mk 5": {
+            "cost": "775,000",
+            "level": "20",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Skin",
+            "type": "Necrograft"
+        },
+        "Gill sheath": {
+            "cost": "95",
+            "level": "1",
+            "sourcebook": "CRB",
+            "sourcepage": "p.211",
+            "system": "Lungs",
+            "type": "Biotech"
+        },
+        "Grave wind - mk 1": {
+            "cost": "200",
+            "level": "1",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Lungs",
+            "type": "Necrograft"
+        },
+        "Grave wind - mk 2": {
+            "cost": "4,000",
+            "level": "6",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Lungs",
+            "type": "Necrograft"
+        },
+        "Grave wind - mk 3": {
+            "cost": "30,000",
+            "level": "12",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Lungs",
+            "type": "Necrograft"
+        },
+        "Grave wind - mk 4": {
+            "cost": "350,000",
+            "level": "18",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Lungs",
+            "type": "Necrograft"
+        },
+        "Grave wind - mk 5": {
+            "cost": "775,000",
+            "level": "20",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Lungs",
+            "type": "Necrograft"
+        },
+        "Hideaway limb - quickdraw": {
+            "cost": "3,050",
+            "level": "5",
+            "sourcebook": "CRB",
+            "sourcepage": "p.210",
+            "system": "Arm or Leg",
+            "type": "Cybernetic"
+        },
+        "Hideaway limb - standard": {
+            "cost": "150",
+            "level": "1",
+            "sourcebook": "CRB",
+            "sourcepage": "p.210",
+            "system": "Arm or Leg",
+            "type": "Cybernetic"
+        },
+        "Ocucloak processor": {
+            "cost": "2,200",
+            "level": "4",
+            "sourcebook": "AA",
+            "sourcepage": "p.103",
+            "system": "Brain",
+            "type": "Biotech"
+        },
+        "Personal upgrade - mk 1": {
+            "cost": "1,400",
+            "level": "3",
+            "sourcebook": "CRB",
+            "sourcepage": "p.212",
+            "system": "-",
+            "type": "-"
+        },
+        "Personal upgrade - mk 2": {
+            "cost": "6,500",
+            "level": "7",
+            "sourcebook": "CRB",
+            "sourcepage": "p.212",
+            "system": "-",
+            "type": "-"
+        },
+        "Personal upgrade - mk 3": {
+            "cost": "75,000",
+            "level": "14",
+            "sourcebook": "CRB",
+            "sourcepage": "p.212",
+            "system": "-",
+            "type": "-"
+        },
+        "Polyhand": {
+            "cost": "71,000",
+            "level": "14",
+            "sourcebook": "CRB",
+            "sourcepage": "p.210",
+            "system": "Hand",
+            "type": "Cybernetic"
+        },
+        "Prosthetic limb - standard": {
+            "cost": "100",
+            "level": "1",
+            "sourcebook": "CRB",
+            "sourcepage": "p.210",
+            "system": "Arm and Hand or Leg and Foot",
+            "type": "Cybernetic"
+        },
+        "Prosthetic limb - storage": {
+            "cost": "1,450",
+            "level": "3",
+            "sourcebook": "CRB",
+            "sourcepage": "p.210",
+            "system": "Arm and Hand or Leg and Foot",
+            "type": "Cybernetic"
+        },
+        "Respiration compounder": {
+            "cost": "250",
+            "level": "1",
+            "sourcebook": "CRB",
+            "sourcepage": "p.210",
+            "system": "Lungs",
+            "type": "Cybernetic"
+        },
+        "Retinal reflectors": {
+            "cost": "1,350",
+            "level": "3",
+            "sourcebook": "CRB",
+            "sourcepage": "p.210",
+            "system": "Eyes",
+            "type": "Cybernetic"
+        },
+        "Shadow nerves - mk 1": {
+            "cost": "200",
+            "level": "1",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Spinal column",
+            "type": "Necrograft"
+        },
+        "Shadow nerves - mk 2": {
+            "cost": "4,000",
+            "level": "6",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Spinal column",
+            "type": "Necrograft"
+        },
+        "Shadow nerves - mk 3": {
+            "cost": "30,000",
+            "level": "12",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Spinal column",
+            "type": "Necrograft"
+        },
+        "Shadow nerves - mk 4": {
+            "cost": "350,000",
+            "level": "18",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Spinal column",
+            "type": "Necrograft"
+        },
+        "Shadow nerves - mk 5": {
+            "cost": "775,000",
+            "level": "20",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Spinal column",
+            "type": "Necrograft"
+        },
+        "Shortwave receiver-transmitter": {
+            "cost": "6,500",
+            "level": "7",
+            "sourcebook": "AA",
+            "sourcepage": "p.11",
+            "system": "Brain",
+            "type": "Cybernetic"
+        },
+        "Skin of the chameleon": {
+            "cost": "4,050",
+            "level": "6",
+            "sourcebook": "CRB",
+            "sourcepage": "p.211",
+            "system": "Skin",
+            "type": "Biotech"
+        },
+        "Speed suspension - complete": {
+            "cost": "32,900",
+            "level": "12",
+            "sourcebook": "CRB",
+            "sourcepage": "p.211",
+            "system": "All legs",
+            "type": "Cybernetic"
+        },
+        "Speed suspension - minimal": {
+            "cost": "1,900",
+            "level": "4",
+            "sourcebook": "CRB",
+            "sourcepage": "p.211",
+            "system": "All legs",
+            "type": "Cybernetic"
+        },
+        "Speed suspension - standard": {
+            "cost": "8,800",
+            "level": "8",
+            "sourcebook": "CRB",
+            "sourcepage": "p.211",
+            "system": "All legs",
+            "type": "Cybernetic"
+        },
+        "Tympanal cluster": {
+            "cost": "2,150",
+            "level": "4",
+            "sourcebook": "CRB",
+            "sourcepage": "p.212",
+            "system": "Ears",
+            "type": "Biotech"
+        },
+        "Vampire voice - mk 1": {
+            "cost": "200",
+            "level": "1",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Throat",
+            "type": "Necrograft"
+        },
+        "Vampire voice - mk 2": {
+            "cost": "4,000",
+            "level": "6",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Throat",
+            "type": "Necrograft"
+        },
+        "Vampire voice - mk 3": {
+            "cost": "30,000",
+            "level": "12",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Throat",
+            "type": "Necrograft"
+        },
+        "Vampire voice - mk 4": {
+            "cost": "350,000",
+            "level": "18",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Throat",
+            "type": "Necrograft"
+        },
+        "Vampire voice - mk 5": {
+            "cost": "775,000",
+            "level": "20",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Throat",
+            "type": "Necrograft"
+        },
+        "Venom spur": {
+            "cost": "625",
+            "level": "2",
+            "sourcebook": "CRB",
+            "sourcepage": "p.212",
+            "system": "Hand",
+            "type": "Biotech"
+        },
+        "Vocal modulator": {
+            "cost": "125",
+            "level": "1",
+            "sourcebook": "CRB",
+            "sourcepage": "p.211",
+            "system": "Throat",
+            "type": "Cybernetic"
+        },
+        "Voice amplifier": {
+            "cost": "125",
+            "level": "1",
+            "sourcebook": "AA",
+            "sourcepage": "p.11",
+            "system": "Throat",
+            "type": "Cybernetic"
+        },
+        "Wide-spectrum ocular implant": {
+            "cost": "2,825",
+            "level": "5",
+            "sourcebook": "CRB",
+            "sourcepage": "p.211",
+            "system": "Eyes",
+            "type": "Cybernetic"
+        },
+        "Wildwise": {
+            "cost": "500",
+            "level": "2",
+            "sourcebook": "CRB",
+            "sourcepage": "p.212",
+            "system": "Throat",
+            "type": "Biotech"
+        },
+        "Wraith motes - mk 1": {
+            "cost": "200",
+            "level": "1",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Eyes",
+            "type": "Necrograft"
+        },
+        "Wraith motes - mk 2": {
+            "cost": "4,000",
+            "level": "6",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Eyes",
+            "type": "Necrograft"
+        },
+        "Wraith motes - mk 3": {
+            "cost": "30,000",
+            "level": "12",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Eyes",
+            "type": "Necrograft"
+        },
+        "Wraith motes - mk 4": {
+            "cost": "350,000",
+            "level": "18",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Eyes",
+            "type": "Necrograft"
+        },
+        "Wraith motes - mk 5": {
+            "cost": "775,000",
+            "level": "20",
+            "sourcebook": "DS3",
+            "sourcepage": "p.43",
+            "system": "Eyes",
+            "type": "Necrograft"
+        }
+    },
     "Advanced Melee Weapons": {
         "Dragonglaive - basic": {
             "bulk": "2",

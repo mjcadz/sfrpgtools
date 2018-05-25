@@ -338,7 +338,7 @@ function getDataArray(groups,json,sourcebooks){
   aplmod = Number($('#APLDrop').val().replace("APL ","").trim());
 
   for (itemGroup in json) {
-    if (groups.includes(itemGroup) || groups.includes("All")) {
+    if ((groups.includes(itemGroup) || groups.includes("All")) && itemGroup != "Augmentations") {
       for (itemName in json[itemGroup]) {
         source = json[itemGroup][itemName]['sourcebook']
         if (sourcebooks.includes(source)){

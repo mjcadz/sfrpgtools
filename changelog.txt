@@ -3,7 +3,8 @@ New Features:
   - settlement generator
   - starship generator
   - dead suns 5 creatures added to encounter gen
-  - pact worlds equipment added to loot gen
+  - pact worlds options added to loot gen and character gen
+  - armor + weapon flavor text
 Changes:
   - html2canvas to alpha12
   - migrate to new server

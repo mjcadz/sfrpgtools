@@ -2,13 +2,13 @@ var government = ["Anarchy","Autocracy","Council","Magocracy","Military","Oligar
 
 var alignment = ["CG","NG","LG","CN","N","LN","CE","NE","LE"];
 
-var dieties =
+var dieties = {
   "Abadar":	{
     "Description": "God of civilization, commerce, law, wealth",
     "Title": "the Master of the First Vault",
     "Symbol": "a golden key",
     "Align": "LN"
-  }
+  },
   "Besmara":	{
     "Description": "Goddess of piracy, space monsters, strife",
     "Title": "the Pirate Queen",
@@ -123,6 +123,7 @@ var dieties =
     "Symbol": "a skull with spiked chains through its eye sockets",
     "Align": "LE"
   }
+}
 
 var races = ["android","human","kasatha","lashunta","shirren","vesk","ysoki","dwarf","elf","gnome","half-elf","half-elf","halfling"];
 
@@ -373,7 +374,6 @@ var placesOfInterest = {
       "is a large flat area of land with many waiting starships",
       "is a huge automated facility that parks and retrieves ship from underground",
     ]
-    }
   },
   "Fast Food Franchise": {
     "flavour": [

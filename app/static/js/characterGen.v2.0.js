@@ -1,10 +1,12 @@
 var RaceList = ["Android","Human","Kasatha","Lashunta","Shirren","Vesk","Ysoki"];
 var RaceListLegacy = ["Dwarf","Elf","Gnome","Half-Elf","Half-Orc","Halfling"];
 var RaceListAA = ["Barathu","Contemplative","Draelik","Dragonkin","Drow","Formian","Space Goblin","Gray","Haan","Ikeshti","Kalo","Maraquoi","Nuar","Reptoid","Rhyporian","Sarcesian","Shobhad","Skittermander","Urog","Verthani","Witchwyrd","Wrikreechee"];
+var RaceListPW = ["Astrazoan","Bantrid","Borai","Khizar","SRO","Strix"];
 var AgeList =['Child', 'Young', 'Adult', 'Mature', 'Old'];
 var ClassList = ["Envoy","Mechanic","Mystic","Operative","Solarian","Soldier","Technomancer"];
 var AlignList = ["Lawful Good","Neutral Good","Chaotic Good","Lawful Neutral","Neutral","Chaotic Neutral","Lawful Evil","Neutral Evil","Chaotic Evil"];
 var ThemeList = ["Ace Pilot","Bounty Hunter","Icon","Mercenary","Outlaw","Priest","Scholar","Spacefarer","Xenoseeker"];
+var ThemeListPW = ["Solar Disciple","Roboticist","Wild Warden","Corporate Agent","Gladiator","Cyberborn","Tempered Pilgrim","Space Pirate","Death-Touched","Dragonblood","Dream Prophet","Biotechnician","Xenoarchaeologist","Cultist"];
 
 var ProfessionList = ["Accountant","Actor","Archaeologist","Architect","Artist","Builder","Bounty Hunter","Comedian","Con Artist",
     "Cook","Cop","Corporate Professional","Courtesan","Counselor","Dancer","Dockworker","Electrician","Engineer","Factory Worker",
@@ -308,7 +310,7 @@ var WhoList = [
     "doesn't believe in magic",
     "hates wearing armor face masks",
     "is scared of Shirren",
-    "want to open their own spacer bar",
+    "wants to open their own spacer bar",
     "has a huge credit debt to pay back",
     "is running from their debt",
     "owes a debt collector a starship",
@@ -556,6 +558,8 @@ function generateCharacter() {
   }
 
   var Races = [];
+  var Themes = [];
+  Themes = Themes.concat(ThemeList)
 
   if (sourcebooks.includes("Core Rulebook")){
     Races = Races.concat(RaceList)
@@ -566,13 +570,17 @@ function generateCharacter() {
   if (sourcebooks.includes("Alien Archive")){
     Races = Races.concat(RaceListAA)
   }
+  if (sourcebooks.includes("Pact Worlds")){
+    Races = Races.concat(RaceListPW)
+    Themes = Themes.concat(ThemeListPW)
+  }
 
   //select random combination
   var Age = AgeList.selectRandom();
   var Align = AlignList.selectRandom();
   var Race = Races.selectRandom();
   var Class = ClassList.selectRandom();
-  var Theme = ThemeList.selectRandom();
+  var Theme = Themes.selectRandom();
   var Profession = ProfessionList.selectRandom();
   var Who = WhoList.selectRandom();
   var Personality = PersonalityList.selectRandom() + ' and ' + PersonalityList.selectRandom();
