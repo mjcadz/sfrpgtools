@@ -1,5 +1,13 @@
 var equipmentData = {
     "Augmentations": {
+        "Adaptive Biochains": {
+            "cost": "Varies",
+            "level": "3",
+            "sourcebook": "CRB",
+            "sourcepage": "p.211",
+            "system": "Varies",
+            "type": "Biotech"
+        },
         "Antitoxin membrane": {
             "cost": "3,000",
             "level": "5",

@@ -282,8 +282,9 @@ var tavernGen = ["Tavern","Bar","Club","Dance Hall","Seedy Bar"]
 var shopGen = ["Market","Armory","General Store","Data Storage","Computer Repair"]
 var otherPlaceGen = ["Church","School of","Guard Post","Space Port","Data Center"]
 
-var placesOfInterest = {
+var stores = {
   "Pharmacy": {
+    "equipment":[]
     "flavour": [
       "has enough stock to replenish your medical supplies",
       "has a large range of prescription only medications",
@@ -292,17 +293,50 @@ var placesOfInterest = {
       "is very popular among the aging population"
     ]
   },
+  "Electronics Workshop": {
+    "flavour": [
+      "has an owner that can fix just about anything given enough time",
+    ]
+  },
+  "Hypermarket": {
+    "flavour": [
+      "is having a promotion on 10,000 types of fruit",
+      "only sells genectically modified protein paste",
+      "has the galaxys largest range of foods",
+      "has shelves upon shelves of types of cereal",
+    ]
+  },
+  "Magical Item Store": {
+    "flavour": [
+      "",
+    ]
+  },
+  "Augmentation Clinic": {
+    "flavour": [
+      "",
+    ]
+  },
+  "Fabrication Hub": {
+    "flavour": [
+      "",
+    ]
+  },
+  "Weapons Supply, Arms Dealer, Underground Arms Dealer": {
+    "flavour": [
+      "",
+    ]
+  },
+}
+
+var placesOfInterest = {
+
   "Robo Repair": {
     "flavour": [
       "specialises is drone repair",
       "is filled with many junk bots that serve no real purpose",
     ]
   },
-  "Electronics Workshop": {
-    "flavour": [
-      "has an owner that can fix just about anything given enough time",
-    ]
-  },
+
   "Warehouse": {
     "flavour": [
       "is a huge facility, yet empty",
@@ -361,14 +395,7 @@ var placesOfInterest = {
       "has every room packed with multiple families",
     ]
   },
-  "Hypermarket": {
-    "flavour": [
-      "is having a promotion on 10,000 types of fruit",
-      "only sells genectically modified protein paste",
-      "has the galaxys largest range of foods",
-      "has shelves upon shelves of types of cereal",
-    ]
-  },
+
   "Designated Starship Parking": {
     "flavour": [
       "is a large flat area of land with many waiting starships",
@@ -400,11 +427,7 @@ var placesOfInterest = {
       "",
     ]
   },
-  "Augmentation Clinic": {
-    "flavour": [
-      "",
-    ]
-  },
+
   "Luxury Apartments": {
     "flavour": [
       "",
@@ -440,11 +463,7 @@ var placesOfInterest = {
       "",
     ]
   },
-  "Fabrication Hub": {
-    "flavour": [
-      "",
-    ]
-  },
+
   "Bulk Transport Company": {
     "flavour": [
       "",
@@ -455,17 +474,7 @@ var placesOfInterest = {
       "",
     ]
   },
-  "Weapons Supply, Arms Dealer, Underground Arms Dealer": {
-    "flavour": [
-      "",
-    ]
-  },
   "Bank": {
-    "flavour": [
-      "",
-    ]
-  },
-  "Magical Item Store": {
     "flavour": [
       "",
     ]
@@ -610,8 +619,8 @@ function printPanel(alignment,population,type,government,qualities,item) {
                     "<br><b>Government </b>" + government.toLowerCase() +
                     "<br><b>Qualities </b>" + qualities.join(', ').toLowerCase() +
                     "<br><b>Maximum Item Level </b>" + item + "</p>";
-  panelBody += "<p>The " + tavernPrefixes.selectRandom() + " " + tavernSuffixes.selectRandom() + "</p>"
-  panelBody += "<p>The " + tavernSuffixes.selectRandom() + " & " + tavernSuffixes.selectRandom() + "</p>"
+
+  panelBody += getPlaceOfInterest()
 
   $outputArea.append("<div class=\"panel " + indexString + "\">");
   var $panel = $(".panel."+indexString).first();
@@ -739,8 +748,11 @@ function generateSettlement() {
 
 }
 
-function getPlaceOfWorship() {
-  var paragraph = '<p> </p>'
+function getPlaceOfInterest() {
+  var place = Object.keys(placesOfInterest).selectRandom()
+  var body = "<p><b>Places of Interest</b></p>"
+  body += "<p>" + getPlaceOfInterest() + "</p>"
+  body += "<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-grn btn-sm\" onclick = \"inventory(this.id)\">Roll Inventory</button>"
 }
 
 //runs when page is loaded
