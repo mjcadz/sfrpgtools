@@ -4658,6 +4658,7 @@ var equipmentData = {
             "level": "14",
             "cost": "75,000",
             "range": "50",
+            "sourcebook": "aa",
             "special": "Analog, boost 1d8, line, unwieldy",
             "type": "Heavy",
             "sourcepage": "p.109",
