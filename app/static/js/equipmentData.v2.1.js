@@ -2991,37 +2991,51 @@ var equipmentData = {
         "Field Ration (Per Week)": {
             "bulk": "1",
             "cost": "1",
+            "level": "1",
+            "sourcebook": "crb",
             "sourcepage": "p.233"
         },
         "Intoxicant (Minor)": {
             "bulk": "L",
             "cost": "1",
+            "level": "1",
+            "sourcebook": "crb",
             "sourcepage": "p.233"
         },
         "Intoxicant (Superior)": {
             "bulk": "L",
             "cost": "10",
+            "level": "1",
             "info": "actual cost varies",
+            "sourcebook": "crb",
             "sourcepage": "p.233"
         },
         "Meal (Common)": {
             "bulk": "L",
             "cost": "3",
+            "level": "1",
+            "sourcebook": "crb",
             "sourcepage": "p.233"
         },
         "Meal (Good)": {
             "bulk": "L",
             "cost": "5",
+            "level": "1",
+            "sourcebook": "crb",
             "sourcepage": "p.233"
         },
         "Meal (Poor)": {
             "bulk": "L",
             "cost": "1",
+            "level": "1",
+            "sourcebook": "crb",
             "sourcepage": "p.233"
         },
         "R2E": {
             "bulk": "L",
             "cost": "1",
+            "level": "1",
+            "sourcebook": "crb",
             "sourcepage": "p.233"
         }
     },

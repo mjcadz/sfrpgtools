@@ -1,7 +1,7 @@
 var government = ["Anarchy","Autocracy","Council","Magocracy","Military","Oligarchy","Secret Syndicate","Plutocracy","Utopia","True Democracy"];
 
 var alignment = ["CG","NG","LG","CN","N","LN","CE","NE","LE"];
-
+var limitedGroups = ["Solarion Weapon Crystals", "Heavy Weapons", "Advanced Melee Weapons", "Light Armor", "Longarms", "Basic Melee Weapons", "Heavy Armor", "Sniper Weapons", "Small Arms", "Special Weapons", "Grenades"];
 var spellGems0 = ["Spell Gem (Dancing Lights)","Spell Gem (Daze)","Spell Gem (Detect Affliction)","Spell Gem (Detect Magic)","Spell Gem (Energy Ray)","Spell Gem (Fatigue)","Spell Gem (Ghost Sound)","Spell Gem (Grave Words)","Spell Gem (Mending)","Spell Gem (Psychokinetic Hand)","Spell Gem (Stabilize)","Spell Gem (Telekinetic Projectile)","Spell Gem (Telepathic Message)","Spell Gem (Token Spell)","Spell Gem (Transfer Charge)"];
 var spellGems1 = ["Spell Gem (Charm Person)","Spell Gem (Command)","Spell Gem (Comprehend Languages)","Spell Gem (Confusion (Lesser))","Spell Gem (Detect Radiation)","Spell Gem (Detect Tech)","Spell Gem (Detect Thoughts)","Spell Gem (Disguise Self)","Spell Gem (Erase)","Spell Gem (Fear (Level 1))","Spell Gem (Flight (Level 1))","Spell Gem (Grease)","Spell Gem (Hold Portal)","Spell Gem (Holographic Image (Level 1))","Spell Gem (Identify)","Spell Gem (Jolting Surge)","Spell Gem (Keen Senses)","Spell Gem (Life Bubble)","Spell Gem (Magic Missile)","Spell Gem (Mind Link)","Spell Gem (Mind Thrust (Level 1))","Spell Gem (Mystic Cure (Level 1))","Spell Gem (Overheat)","Spell Gem (Reflecting Armor)","Spell Gem (Remove Condition (Lesser))","Spell Gem (Share Language)","Spell Gem (Supercharge Weapon)","Spell Gem (Unseen Servant)","Spell Gem (Wisp Ally)"];
 var spellGems2 = ["Spell Gem (Augury)","Spell Gem (Caustic Conversion)","Spell Gem (Command Undead)","Spell Gem (Darkvision)","Spell Gem (Daze Monster)","Spell Gem (Fear (Level 2))","Spell Gem (Flight (Level 2))","Spell Gem (Fog Cloud)","Spell Gem (Force Blast)","Spell Gem (Hold Person)","Spell Gem (Holographic Image (Level 2))","Spell Gem (Hurl Forcedisk)","Spell Gem (Implant Data)","Spell Gem (Inflict Pain)","Spell Gem (Inject Nanobots)","Spell Gem (Invisibility)","Spell Gem (Knock)","Spell Gem (Logic Bomb)","Spell Gem (Make Whole)","Spell Gem (Microbot Assault)","Spell Gem (Mind Thrust (Level 2))","Spell Gem (Mirror Image)","Spell Gem (Mystic Cure (Level 2))","Spell Gem (Recharge)","Spell Gem (Remove Condition)","Spell Gem (Restoration (Lesser))","Spell Gem (Security Seal)","Spell Gem (See Invisibility)","Spell Gem (Shield Other)","Spell Gem (Spider Climb)","Spell Gem (Status)","Spell Gem (Zone of Truth)"];
@@ -292,9 +292,49 @@ var cityBySize = {
     ],
 };
 
-var tavernGen = ["Tavern","Bar","Club","Dance Hall","Seedy Bar"]
-var shopGen = ["Market","Armory","General Store","Data Storage","Computer Repair"]
-var otherPlaceGen = ["Church","School of","Guard Post","Space Port","Data Center"]
+var wateringHole = {
+  "prefixes": [
+    'Angry','Arcane','Sidereal','Blackened','Blind','Bloody','Nanotech','Blushing','Augmented','Antigrav','Carved','Celestial','Chaotic','Charming','Concussive','Sentient','Crimson','Dancing','Dark','Deaf','Demonic','Dire','Dirty','Draconic','Dragon\'s','Drunken','Superluminal','Dull','Electric','Fighting','Filthy','Flaming','Flying','Forceful','Forged','Forgotten','Fractured','Frightened','Galactic','Golden','Happy','Hidden','Holy','Hungry','Interstellar','Invisible','Iron','Solar','Stellar','Joyful','Jumping','Keen','Robo','Cybernetic','Lawful','Lawless','Quantum','Autonomous','Sonic','Thermal','Lonely','Lost','Lucky','Metal',"Sapient",'Miniature','Terraformed','Monstrous','Mossy','Musty','Necrotic','Nervous','Old','Pious','Platinum','Cosmic','Polished','Celestial','Prone','Divine','Radiant','Raging','Rusty','Sad','Shining','Sleeping','Steel','Sultry','Sweet','Tiny','Toothless','Tranquil','Twisted','Unholy','Electrostatic','Unlucky','Unsoiled','Violent','Heavenly','White','Wicked','Winged','Wise','Wounded','Yawning',"Fusion"
+  ],
+  "suffixes": [
+    'Logic','Angel','Anvil','Bullet','Doshko','Drifter','Beacon','Satellite','Droid','Blade','Starship','Star','Station','Chain','Moon','Circle','Cloak','Clover','Credit','Crowbar','Crown','Comet','Asteroid','Planet','Galaxy','Devil','Door','Dove','Dragon','Drow','Dwarf','Antimatter','Elemental','Soldier','Technomancer','Mystic','Operative','Mechanic','Databank','Solarian','Envoy','Drone','Robot','Longhammer','Lashunta','Kasathan','Ysoki','Vesk','Shirren','Android','Gnome','Goat','Goblin','Hag','Halfling','Hammer','Hoard','Jelly','King','Quasar','Pulsar','Lantern','Lemon','Lich','Blaster','Loot','Nova','Nebula','Laser','Melon','Nuar','Nail','Nightmare','Plasma','Ooze','Orb','Battery','Pitcher','Plate','Polyhedral','Datapad','Computer','Datacore','Queen','Constellation','Helmet','Respite','Rest','Ring','Robe','Rope','Sack','Spacer','Sanctum','Shadow','Ship','Slumber','Sphere','Generator','Force Field','Rocket','Stone','Sword','Armor','Jewel','Vortex','Blackhole','Railgun','Thruster','Tackle','Jump Jet','Tail','Titan','Shield','Grenade','Crew','Power Core','Circuit','Sensor','Jetpack','Singularity','Cargo','Trap','Tree','Triangle','Portal','Unicorn','Whistle','Wizard'
+  ],
+  "establishment": [
+    "bar","spacer bar","nightclub","cantina","tavern","commissary","pub","atmo bar","intoxicant hall","speakeasy","live music venue"
+  ],
+  "flavour": [
+    "is the seediest place in this quadrant",
+    "has the best live shows in town"
+  ]
+};
+
+var placeofWorship = {
+  "flavour": [
+    "is seldom used anymore, the population has moved away from this deity",
+    "is always full, people pay their respects at all times of the day",
+    "is frequented by travellerers, some coming from different worlds to pay their respects here",
+    "is bustling, the annual pilgrimage has begun",
+    "seems empty, no one has been here in a log time",
+    "has a huge statue of SX as its centrepiece",
+    "has its walls adorned by SX",
+    "is met by a large set of doors decorated with SX",
+    "has been destryed by a long forgotten crusade",
+    "provides divine services if you have the credits",
+    "displays a rich tapestry of SX",
+    "has a hologram of SX in the middle of the building",
+    "is hidden in an underground bunker accessible only with the right codes"
+  ],
+  "names": [
+    "The church of DX",
+    "The divine abbey of DX",
+    "A small temple devoted to DX",
+    "A large temple devoted to DX",
+    "A secret following of DX",
+    "A sanctuary for the followers of DX",
+    "A shrine for the worship of DX",
+    "A huge cathedral dedicated to DX"
+  ]
+};
 
 var stores = {
   "Pharmacy": {
@@ -305,57 +345,121 @@ var stores = {
       "is owned by a pharmacist that will hand out any medication for a price",
       "has shelves upon shelves of hair products for every race",
       "is very popular among the aging population"
+    ],
+    "names": [
+      "Dans Pharmaceuticals"
     ]
   },
   "Electronics Workshop": {
     "equipment":["Technological Items","Computers"],
     "flavour": [
       "has an owner that can fix just about anything given enough time",
+    ],
+    "names": [
+      "Circuit Breakers"
     ]
   },
   "Computer Specialist": {
     "equipment":["Computers","Computer Countermeasures","Computer Modules","Upgrades"],
     "flavour": [
       "has an owner that can fix just about anything given enough time",
+    ],
+    "names": [
+      "Ultra New Egg"
     ]
   },
   "Hypermarket": {
-    "equipment":["Any"],
+    "equipment":["Augmentations", "Advanced Melee Weapons", "Ammunition", "Armor Upgrades", "Basic Melee Weapons", "Computer Countermeasures", "Computer Modules", "Computer Upgrades", "Computers", "Drugs Medicinals And Poisons", "Food And Drink", "Fusion Seals", "Grenades", "Heavy Armor", "Heavy Weapons", "Hybrid Items", "Light Armor", "Longarms", "Magic Items", "Personal Items", "Small Arms", "Sniper Weapons", "Solarion Weapon Crystals", "Special Ammunition", "Special Weapons", "Spell Ampoules", "Spell Gems", "Technological Items", "Healing Serum", "Medical Gear", "Trade Goods"],
     "flavour": [
       "is having a promotion on 10,000 types of fruit",
       "only sells genectically modified protein paste",
       "has the galaxys largest range of foods",
       "has shelves upon shelves of types of cereal",
+    ],
+    "names": [
+      "The Central Market",
+      "Space Bazaar"
     ]
   },
-  "Magical Item Store": {
+  "Magical Items Store": {
     "equipment":["Magic Items","Hybrid Items","Spell Ampoules","Spell Gems"],
     "flavour": [
-      "",
+      "has arcane trinkets and circuits for sale",
+    ],
+    "names": [
+      "Wizards of the Coast"
     ]
   },
-  "Augmentation Clinic": {
+  "Augmentations Clinic": {
     "equipment":["Augmentations"],
     "flavour": [
-      "",
+      "has 10 different types of knee joints",
+    ],
+    "names": [
+      "Body Recyclers"
     ]
   },
-  "Fabrication Hub": {
-    "equipment":["Drugs Medicinals And Poisons"],
+  "Personal Items Store": {
+    "equipment":["Personal Items","Food And Drink","Trade Goods"],
     "flavour": [
       "",
+    ],
+    "names": [
+      "Harrys Haberdashery"
     ]
   },
-  "Weapons Supply": {
-    "equipment":["Small Arms","Longarms","Heavy Weapons","Sniper Weapons","Special Weapons","Grenades","Fusion Seals"],
+  "Gun Store": {
+    "equipment":["Small Arms","Longarms","Heavy Weapons","Sniper Weapons","Special Weapons","Grenades"],
     "flavour": [
-      "",
+      "will only sell to patrons with proper licensing",
+    ],
+    "names": [
+      "Barrels of Barrels"
     ]
   },
-  "Armor Supply": {
-    "equipment":["Light Armor","Heavy Armor","Armor Upgrades"],
+  "Melee Weapon Store": {
+    "equipment":["Basic Melee Weapons","Advanced Melee Weapons"],
     "flavour": [
       "",
+    ],
+    "names": [
+      "Bloodbath & Beyond"
+    ]
+  },
+  "Ammunition Store": {
+    "equipment":["Ammunition","Special Ammunition"],
+    "flavour": [
+      "",
+    ],
+    "names": [
+      "Batteries & Bullets"
+    ]
+  },
+  "Upgrade Store": {
+    "equipment":["Armor Upgrades","Fusion Seals","Solarion Weapon Crystals"],
+    "flavour": [
+      "sells upgardes that will make your equiment perform at its best",
+    ],
+    "names": [
+      "Upgrade Hub"
+    ]
+  },
+  "Armor Store": {
+    "equipment":["Light Armor","Heavy Armor"],
+    "flavour": [
+      "has every kind of body plating",
+    ],
+    "names": [
+      "The Armorer"
+    ]
+  },
+  "Armory": {
+    "equipment":["Light Armor","Heavy Armor","Armor Upgrades","Fusion Seals","Solarion Weapon Crystals","Ammunition","Special Ammunition","Small Arms","Longarms","Heavy Weapons","Sniper Weapons","Special Weapons","Grenades","Basic Melee Weapons","Advanced Melee Weapons"],
+    "flavour": [
+      "carries all manner of items needed for combat",
+    ],
+    "names": [
+      "Artys Armory"
     ]
   },
 }
@@ -381,32 +485,6 @@ var placesOfInterest = {
       "is run by the shadiest legal team this side of the gap",
       "has an owner who only takes cases they know they can win",
     ]
-  },
-  "Religous Building": {
-    "flavour": [
-      "is seldom used anymore, the population has moved away from this deity",
-      "is always full, people pay their respects at all times of the day",
-      "is frequented by travellerers, some coming from different worlds to pay their respects here",
-      "is bustling, the annual pilgrimage has begun",
-      "seems empty, no one has been here in a log time",
-      "has a huge statue as its centrepiece",
-      "has its walls adorned by SX",
-      "is met by a large set of doors decorated with SX",
-      "has been destryed by a long forgotten crusade",
-      "provides divine services if you have the credits",
-      "displays a rich tapestry of SX",
-      "has a hologram of SX in the middle of the building",
-      "is hidden in an underground bunker accessible only with the right codes"
-    ],
-    "name":[
-      "The church of DX",
-      "The divine abbey of DX",
-      "A small temple devoted to DX",
-      "A large temple devoted to DX",
-      "A secret following of DX",
-      "A sanctuary for the followers of DX",
-      "A shrine for the worship of DX",
-      "A huge cathedral dedicated to DX"]
   },
   "Capsule Hotel": {
     "flavour": [
@@ -490,12 +568,6 @@ var placesOfInterest = {
       "",
     ]
   },
-  "Nightclub bar etc": {
-    "flavour": [
-      "",
-    ]
-  },
-
   "Bulk Transport Company": {
     "flavour": [
       "",
@@ -584,16 +656,9 @@ var settlementFlavour = [
 
 var professions = ["Accountant","Actor","Archaeologist","Architect","Artist","Bounty Hunter","Comedian","Con Artist","Cook","Corporate Professional","Courtesan","Counselor","Dancer","Dockworker","Electrician","Farmer","Gambler","General Contractor","Herbalist","Lab Technician","Lawyer","Maintenance Worker","Manager","Mathematician","Mercenary","Merchant","Miner","Musician","Orator","Philosopher","Poet","Politician","Professor","Psychologist","Smuggler","Video Personality","Vidgamer","Writer"]
 
-
 var namesEnd = ["dale", "moor", "ton","more","haunt","bed","s Landing","s End","rast", " Gate","rise", "town","bound","spire","winter","burg","bourne","water","fire","set", "shore", "ville", "ton", "sley"," End","dawn", "waters", "ridge", "sley", "age", "mere", "shire", "feld", "field", "wall", " Falls", "bury", "ford", "arm", " City", " Fork", "fall", "caster", "moor", "cliff", "sby", "chapel", "blight", " Falls", "bend", "hope", " Point"," Rise", "lone", "side", " Gate", "ham", "melt"];
 var namesStart = ["Aeon","Aban","Ale","Ash","End","Bane","Nova","Atmos","Data","Mem","Dream","Ender","Radiation","Fable","Glory","Luna","Mag", "Chrono","Aura","Apollo","Nether","Ark","Alpha","Beta","Gamma","Lore","Enigma","Quiet","Neo","Snow","Awe","Wolf","Bear","Rain","Drought","Voyage","Glimmer","Glitter","Wind","Miracle","Moon","Birds","Necro","Ill","Lost","Crash","Light","Fools","Back","Kill","Cat","Dark","Dread","Ever","Hope","Ember","Happy","Dead","Dog","Dawn","Dire","Ditch","Dirt","Void","Demon","Angel","Cruel","Crumble","Somer","Cloud","Border","Break","Bliss","Doom","Water","Fire","Earth","Boom","Air","Metal","Space","Zero","Black","White","Blue","Red","Yellow","Purple","Green","Gray","Orbit","Rose","Outland","Elf","Dwarf","Beast","Pinoeer","Prism","Relic","Scout","Tech","Computer","Settler","Scout","Terra","Cosmo","Shere"]
 var names = ["Aegis", "Olympus","Aeon","Miracle","Paradox","Anomaly","Alliance","Helios","Guardian","Memento","Hyperion","Inception","Infinity","Beacon","Genesis","Exposure","Curiosity","Fortuna","Eternity","Atlas","Atrophy","Beggar's End","Havoc", "Promise","Terminus","Seclusion","Serenity","Solitude","Remorse","Jericho","Hub","Nirvana","Pleasure","Paradise","Nemesis","Hope","Harmony","Misery","Karma","Carnage","Cavity","City of Dawn","Closure","Hazard","Deadline","Eden","Elysium","Eternity","Final","Forsaken","Valhalla","Titan","Tranquility","Vestige"]
-
-var tavernPrefixes = [
-'Angry','Arcane','Sidereal','Blackened','Blind','Bloody','Nanotech','Blushing','Augmented','Antigrav','Carved','Celestial','Chaotic','Charming','Concussive','Sentient','Crimson','Dancing','Dark','Deaf','Demonic','Dire','Dirty','Draconic','Dragon\'s','Drunken','Superluminal','Dull','Electric','Fighting','Filthy','Flaming','Flying','Forceful','Forged','Forgotten','Fractured','Frightened','Galactic','Golden','Happy','Hidden','Holy','Hungry','Interstellar','Invisible','Iron','Solar','Stellar','Joyful','Jumping','Keen','Robo','Cybernetic','Lawful','Lawless','Quantum','Autonomous','Sonic','Thermal','Lonely','Lost','Lucky','Metal',"Sapient",'Miniature','Terraformed','Monstrous','Mossy','Musty','Necrotic','Nervous','Old','Pious','Platinum','Cosmic','Polished','Celestial','Prone','Divine','Radiant','Raging','Rusty','Sad','Shining','Sleeping','Steel','Sultry','Sweet','Tiny','Toothless','Tranquil','Twisted','Unholy','Electrostatic','Unlucky','Unsoiled','Violent','Heavenly','White','Wicked','Winged','Wise','Wounded','Yawning',"Fusion"
-]
-var tavernSuffixes = [
-'Logic','Angel','Anvil','Bullet','Doshko','Drifter','Beacon','Satellite','Droid','Blade','Starship','Star','Station','Chain','Moon','Circle','Cloak','Clover','Credit','Crowbar','Crown','Comet','Asteroid','Planet','Galaxy','Devil','Door','Dove','Dragon','Drow','Dwarf','Antimatter','Elemental','Soldier','Technomancer','Mystic','Operative','Mechanic','Databank','Solarian','Envoy','Drone','Robot','Longhammer','Lashunta','Kasathan','Ysoki','Vesk','Shirren','Android','Gnome','Goat','Goblin','Hag','Halfling','Hammer','Hoard','Jelly','King','Quasar','Pulsar','Lantern','Lemon','Lich','Blaster','Loot','Nova','Nebula','Laser','Melon','Nuar','Nail','Nightmare','Plasma','Ooze','Orb','Battery','Pitcher','Plate','Polyhedral','Datapad','Computer','Datacore','Queen','Constellation','Helmet','Respite','Rest','Ring','Robe','Rope','Sack','Spacer','Sanctum','Shadow','Ship','Slumber','Sphere','Generator','Force Field','Rocket','Stone','Sword','Armor','Jewel','Vortex','Blackhole','Railgun','Thruster','Tackle','Jump Jet','Tail','Titan','Shield','Grenade','Crew','Power Core','Circuit','Sensor','Jetpack','Singularity','Cargo','Trap','Tree','Triangle','Portal','Unicorn','Whistle','Wizard']
 
 var fusionSeal = {
   "1": 120,
@@ -616,6 +681,15 @@ var fusionSeal = {
   "18": 60300,
   "19": 90000,
   "20": 135000
+};
+
+var numOfShops = {
+  "empty": 0,
+  "tiny": 1,
+  "small": 2,
+  "medium": 3,
+  "large": 4,
+  "huge": 5
 };
 
 var indexCounter = 0;
@@ -662,7 +736,7 @@ function clearOutput() {
   indexCounter = 0;
 }
 
-function printPanel(alignment,population,type,government,qualities,item) {
+function printPanel(alignment,population,type,government,qualities,item,size) {
   var $outputArea = $(".output.area").first();
   var storeOutput = $( "div.output.area" ).html();
   $outputArea.empty();
@@ -676,13 +750,31 @@ function printPanel(alignment,population,type,government,qualities,item) {
   settlement.push(namesStart.selectRandom() + namesEnd.selectRandom());
 
   var panelTitle =  settlement.selectRandom();
+  panelTitle = panelTitle.replace('tt','t').replace('ss','s')
   var panelBody =   "<p>" + alignment + " " + type +
                     "<br><b>Population </b>" + population +
                     "<br><b>Government </b>" + government.toLowerCase() +
                     "<br><b>Qualities </b>" + qualities.join(', ').toLowerCase() +
                     "<br><b>Maximum Item Level </b>" + item + "</p>";
 
-  panelBody += getPlaceOfInterest(indexString + 'index' + item.slice(0, -2))
+  if (size != "empty"){
+      panelBody += "<hr>";
+  }
+
+  for (var i = 0; i < numOfShops[size]; i++){
+    var oneTwoThree = ["bar","worship","shop"].selectRandom()
+    switch(oneTwoThree) {
+      case "bar":
+        panelBody += genWateringHole()
+        break;
+      case "worship":
+        panelBody += genPlaceOfWorship(alignment);
+        break;
+      case "shop":
+        panelBody += genStore(indexString + 'index' + item.slice(0, -2));
+        break;
+    }
+  }
 
   $outputArea.append("<div class=\"panel " + indexString + "\">");
   var $panel = $(".panel."+indexString).first();
@@ -697,28 +789,54 @@ function printPanel(alignment,population,type,government,qualities,item) {
   }
 }
 
-function getPlaceOfInterest(index) {
+function genWateringHole() {
+
+  var body = "<p><b>The " + wateringHole.prefixes.selectRandom() + " " + wateringHole.suffixes.selectRandom() + "</b><br>"
+  body += "This " + wateringHole.establishment.selectRandom() + " " + wateringHole.flavour.selectRandom() + "</p>"
+  body += '<p></p>'
+  return body
+}
+
+function genPlaceOfWorship(alignment) {
+  var alignedDeities = []
+  for (deity in dieties) {
+    if (dieties[deity].Align == alignment) {
+      alignedDeities.push(deity)
+    }
+  }
+  var chosenDeity = alignedDeities.selectRandom()
+  var name = [dieties[chosenDeity].Title+" (" + chosenDeity + ")",chosenDeity].selectRandom()
+  var body = "<p><b>" + placeofWorship.names.selectRandom().replace('DX',name) + "</b><br>"
+  body += "This place of worship " + placeofWorship.flavour.selectRandom().replace('SX',dieties[chosenDeity].Symbol) + "</p>"
+  body += '<p></p>'
+  return body
+}
+
+function genStore(index) {
   var place = Object.keys(stores).selectRandom()
-  var indexString = place.replace(' ','-') + index
+  var indexString = place.replace(/\s/g,'-') + index
   console.log(indexString)
-  var body = "<p><b>Places of Interest</b></p>"
-  body += "<p>" + place + "</p>"
-  body += "<button type=\"button\" id=\""+indexString+"\"class=\"btn btn-grn btn-sm\" onclick = \"rollInventory(this.id)\">Roll Inventory</button>"
-  body += "<button style=\"margin-left: 10px\" type=\"button\" id=\""+indexString+"\"class=\"btn btn-default btn-notblack btn-sm\" onclick = \"clearInventory(this.id)\">Clear</button>"
+  var body = "<p><b>" + stores[place].names.selectRandom() + "</b><br>"
+  body += "This " + place.toLowerCase() + " " + stores[place].flavour.selectRandom() + "</p>"
+  body += "<button style=\"background-color: #cbf6f2;\" type=\"button\" id=\""+indexString+"\"class=\"btn btn-notblack btn-sm\" onclick = \"rollInventory(this.id)\">Roll Inventory</button>"
+  body += "<button style=\"margin-left: 10px;display: none;\" type=\"button\" id=\""+indexString+"\"class=\"btn-" + indexString + " btn btn-default btn-notblack btn-sm\" onclick = \"clearInventory(this.id)\">Clear</button>"
   body += '<div class="' + indexString + '"></div>'
+  body += '<p></p>'
   return body
 }
 
 function clearInventory(index) {
+  $('.btn-'+index).hide();
   var $inventoryArea = $("."+index).first();
   $inventoryArea.empty();
 }
 
 function rollInventory(index) {
+  $('.btn-'+index).show();
   indexparts = index.split("index")
   var $inventoryArea = $("."+index).first();
   $inventoryArea.empty();
-  var store = indexparts[0].replace('-',' ') //0 is shop type
+  var store = indexparts[0].replace(/-/g,' ') //0 is shop type
 
   //get equipment from categories
   var equipment = []
@@ -727,14 +845,13 @@ function rollInventory(index) {
     for (item in equipmentData[types[i]]) {
       var currentItem = []
       currentItem[0] = item.toTitleCase().replace("Iii","III").replace("Ii","II").replace("Iv","IV").replace("Viii","VIII").replace("Vii","VII").replace("Vi","VI").replace("Fxprofession",randomChoice(professions));//name
-
+      currentItem[5] = types[i] //group
       if (["Computer Countermeasures","Computer Modules","Computer Upgrades"].includes(types[i])){
         currentItem[3] = " ";//bulk
         currentItem[1] = "1"//level
         currentItem[4] = 'CRB ' + equipmentData[types[i]][item]['sourcepage'];//sourcepage
       } else {
         currentItem[1] = equipmentData[types[i]][item]['level']//level
-        console.log(item)
         currentItem[4] = equipmentData[types[i]][item]['sourcebook'].toUpperCase() + ' ' + equipmentData[types[i]][item]['sourcepage'];//sourcepage
         if (["Augmentations","Computers"].includes(types[i])){
           currentItem[3] = " ";//bulk
@@ -743,7 +860,9 @@ function rollInventory(index) {
         }
       }
       if (types[i].includes("Fusion Seal")){
+        currentItem[0] = currentItem[0].replace('Fusion Seal - ','')
         currentItem[2] = fusionSeal[currentItem[1]].toString();//fusion seal cost
+        currentItem[5] = "Fusions"
       } else {
         currentItem[2] = equipmentData[types[i]][item]['cost'];//cost
       }
@@ -766,40 +885,95 @@ function rollInventory(index) {
         equipment.push(copy1);
         equipment.push(copy2);
       }
+
       equipment.push(currentItem);
     }
   }
   //keep only appropriate level items
   var equipmentLeveled = []
   var level = Number(indexparts[2])
+
   for (var i = 0; i < equipment.length; i++){
-    if (Number(equipment[i][1]) <= level) {
+    if (limitedGroups.includes(equipment[i][5])){
+      //limit weapons and armor to current levels
+      var minLevel = level - 2;
+      if (minLevel < 0 ) { minLevel = 0 }
+    } else {
+      var minLevel = 0;
+    }
+
+    if (Number(equipment[i][1]) <= level && Number(equipment[i][1]) >= minLevel) {
       equipmentLeveled.push(equipment[i])
     }
   }
-  console.log(equipmentLeveled)
-  //get randomised inventory
-  var inventory = []
-  if (equipmentLeveled.length > 10) {
-    while (inventory.length < 10) {
-      inventory.push(equipmentLeveled.selectRandom())
-    }
-  } else {
-    inventory = inventory.concat(equipmentLeveled);
-  }
-  var stripe = false;
 
-  var table = "<div class=\"container table-responsive\"><table class=\"table table-striped\"><thead><tr><th>Inventory</th><th>Level</th><th>Cost</th><th>Bulk</th><th>Sourcepage</th></tr></thead><tbody>";
-  for (var i = 0; i < inventory.length; i++){
-    //stripe table
-    if (stripe) {
-      var stripeClass = ' class="success"';
-    } else {
-      var stripeClass = '';
-    }
-    stripe = !stripe
-    table += "<tr" + stripeClass + "><td>"+inventory[i][0]+"</td><td>"+inventory[i][1]+"</td><td>"+inventory[i][2]+"</td><td>"+inventory[i][3]+"</td><td>"+inventory[i][4]+"</td></tr>";
+  //get randomised inventory
+  var inventory = {};
+  var total = 0;
+  var itemsPresent = [];
+  var maxItems = 10;
+  var fusions = 0;
+
+  if (equipmentLeveled.length < 10) {
+    maxItems = equipmentLeveled.length;
   }
+
+  while (total < maxItems) {
+
+    var selected = equipmentLeveled.selectRandom();
+    if (selected[5] == 'Fusions') {
+      fusions += 1
+    }
+    if (fusions < 5 || selected[5] != 'Fusions') {
+      //check if item group exists if not create group
+      if (inventory.hasOwnProperty(selected[5])){
+        if (itemsPresent.includes(selected[0])) {
+          total -= 1;
+        } else {
+          inventory[selected[5]].push(selected);
+          itemsPresent.push(selected[0])
+        }
+      } else {
+        inventory[selected[5]] = [];
+        inventory[selected[5]].push(selected);
+        itemsPresent.push(selected[0])
+      }
+    } else {
+      total -= 1;
+    }
+    total += 1;
+
+  }
+
+  var stripe = false;
+  //PRESENT INVENTORY AS table
+  firstTitle = Object.keys(inventory)[0];
+  var table = "<div class=\"container table-responsive\"><table class=\"table\"><thead><tr><th>" + firstTitle + "</th><th>Level</th><th>Cost</th><th>Bulk</th><th>Sourcepage</th></tr></thead><tbody>";
+
+  for (itemGroup in inventory) {
+    if (itemGroup != firstTitle){
+      //stripe table
+      if (stripe) {
+        var stripeClass = ' class="success"';
+      } else {
+        var stripeClass = '';
+      }
+      stripe = !stripe
+      table += '<th colspan="5" scope="colgroup"' + stripeClass + '>' + itemGroup + '</th>'
+    }
+
+    for (var i = 0; i < inventory[itemGroup].length; i++){
+      //stripe table
+      if (stripe) {
+        var stripeClass = ' class="success"';
+      } else {
+        var stripeClass = '';
+      }
+      stripe = !stripe
+      table += "<tr" + stripeClass + "><td>"+inventory[itemGroup][i][0]+"</td><td>"+inventory[itemGroup][i][1]+"</td><td>"+inventory[itemGroup][i][2]+"</td><td>"+inventory[itemGroup][i][3]+"</td><td>"+inventory[itemGroup][i][4]+"</td></tr>";
+    }
+  }
+
   table += "</tbody></table></div>";
 
   $inventoryArea.append(table)
@@ -914,7 +1088,7 @@ function generateSettlement() {
 
 
   //display
-  printPanel(randAlign,randPop,randType,randGov,randQuals,itemDrop)
+  printPanel(randAlign,randPop,randType,randGov,randQuals,itemDrop,sizePick)
 
 }
 
