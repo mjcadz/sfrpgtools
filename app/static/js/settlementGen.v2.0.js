@@ -314,7 +314,7 @@ var placeofWorship = {
     "is always full, people pay their respects at all times of the day",
     "is frequented by travellerers, some coming from different worlds to pay their respects here",
     "is bustling, the annual pilgrimage has begun",
-    "seems empty, no one has been here in a log time",
+    "seems empty, no one has been here in a long time",
     "has a huge statue of SX as its centrepiece",
     "has its walls adorned by SX",
     "is met by a large set of doors decorated with SX",
@@ -322,7 +322,8 @@ var placeofWorship = {
     "provides divine services if you have the credits",
     "displays a rich tapestry of SX",
     "has a hologram of SX in the middle of the building",
-    "is hidden in an underground bunker accessible only with the right codes"
+    "is hidden in an underground bunker accessible only with the right codes",
+    "many screens in the entry show SX"
   ],
   "names": [
     "The church of DX",
@@ -347,7 +348,11 @@ var stores = {
       "is very popular among the aging population"
     ],
     "names": [
-      "Dans Pharmaceuticals"
+      "Dans Pharmaceuticals",
+      "Holistic Genomics",
+      "Corner Cancer Cures",
+      "Tricorder Emporium",
+      "Patient Zero"
     ]
   },
   "Electronics Workshop": {
@@ -356,7 +361,11 @@ var stores = {
       "has an owner that can fix just about anything given enough time",
     ],
     "names": [
-      "Circuit Breakers"
+      "Circuit Breakers",
+      "Robotic Instruments",
+      "The Rusty CPU",
+      "Solid States",
+      "System Analytics"
     ]
   },
   "Computer Specialist": {
@@ -365,7 +374,11 @@ var stores = {
       "has an owner that can fix just about anything given enough time",
     ],
     "names": [
-      "Ultra New Egg"
+      "Ultra New Egg",
+      "Datamancers R Us",
+      "Hackable Assets",
+      "The Teraflop Shop",
+      "The rogue AI"
     ]
   },
   "Hypermarket": {
@@ -378,7 +391,10 @@ var stores = {
     ],
     "names": [
       "The Central Market",
-      "Space Bazaar"
+      "Space Bazaar",
+      "Underground Market",
+      "Black Market",
+      "Exchange Hall"
     ]
   },
   "Magical Items Store": {
@@ -387,7 +403,10 @@ var stores = {
       "has arcane trinkets and circuits for sale",
     ],
     "names": [
-      "Wizards of the Coast"
+      "Wizards of the Coast",
+      "The Mysticism Check",
+      "Spell Slots Galore",
+      "Level 7 Magic"
     ]
   },
   "Augmentations Clinic": {
@@ -396,7 +415,9 @@ var stores = {
       "has 10 different types of knee joints",
     ],
     "names": [
-      "Body Recyclers"
+      "Body Recyclers",
+      "The Second Hand Store",
+      "Metal, Carbon, and Plastics Surgery"
     ]
   },
   "Personal Items Store": {
@@ -405,7 +426,8 @@ var stores = {
       "",
     ],
     "names": [
-      "Harrys Haberdashery"
+      "Harrys Haberdashery",
+      "Fabrication Hub"
     ]
   },
   "Gun Store": {
@@ -414,7 +436,9 @@ var stores = {
       "will only sell to patrons with proper licensing",
     ],
     "names": [
-      "Barrels of Barrels"
+      "Barrels of Barrels",
+      "The Hunters Mark",
+      ""
     ]
   },
   "Melee Weapon Store": {
@@ -423,7 +447,8 @@ var stores = {
       "",
     ],
     "names": [
-      "Bloodbath & Beyond"
+      "Bloodbath & Beyond",
+      "The Pointy End"
     ]
   },
   "Ammunition Store": {
@@ -432,7 +457,8 @@ var stores = {
       "",
     ],
     "names": [
-      "Batteries & Bullets"
+      "Batteries & Bullets",
+      "Battery Barn"
     ]
   },
   "Upgrade Store": {
@@ -450,7 +476,10 @@ var stores = {
       "has every kind of body plating",
     ],
     "names": [
-      "The Armorer"
+      "The Armorer",
+      "Pauls Plating",
+      "Aegis Protections",
+      "The Shield & Safeguard"
     ]
   },
   "Armory": {
@@ -459,7 +488,8 @@ var stores = {
       "carries all manner of items needed for combat",
     ],
     "names": [
-      "Artys Armory"
+      "Artys Armory",
+      "Navy Surplus"
     ]
   },
 }
@@ -599,7 +629,7 @@ var buildingFlavour = [
   "seems very quiet",
   "has very little security",
   "is a front for criminal activity",
-  "obscured by large holo ads",
+  "is obscured by large holo ads",
   "was constructed by nanites",
   "looks like it has been fire damaged",
   "is covered in bright glyphs and graphics",
@@ -688,8 +718,8 @@ var numOfShops = {
   "tiny": 1,
   "small": 2,
   "medium": 3,
-  "large": 4,
-  "huge": 5
+  "large": 5,
+  "huge": 7
 };
 
 var indexCounter = 0;
@@ -761,14 +791,18 @@ function printPanel(alignment,population,type,government,qualities,item,size) {
       panelBody += "<hr>";
   }
 
+  var worshipDone = false;
+
   for (var i = 0; i < numOfShops[size]; i++){
-    var oneTwoThree = ["bar","worship","shop"].selectRandom()
+    //only one place of worship
+    var oneTwoThree = ["bar","shop"].concat(worshipDone ? [] : ["worship"]).selectRandom()
     switch(oneTwoThree) {
       case "bar":
         panelBody += genWateringHole()
         break;
       case "worship":
         panelBody += genPlaceOfWorship(alignment);
+        worshipDone = true
         break;
       case "shop":
         panelBody += genStore(indexString + 'index' + item.slice(0, -2));
@@ -792,7 +826,7 @@ function printPanel(alignment,population,type,government,qualities,item,size) {
 function genWateringHole() {
 
   var body = "<p><b>The " + wateringHole.prefixes.selectRandom() + " " + wateringHole.suffixes.selectRandom() + "</b><br>"
-  body += "This " + wateringHole.establishment.selectRandom() + " " + wateringHole.flavour.selectRandom() + "</p>"
+  body += "This " + wateringHole.establishment.selectRandom() + " " + wateringHole.flavour.selectRandom() + " and " + buildingFlavour.selectRandom() + "</p>"
   body += '<p></p>'
   return body
 }
@@ -817,7 +851,7 @@ function genStore(index) {
   var indexString = place.replace(/\s/g,'-') + index
   console.log(indexString)
   var body = "<p><b>" + stores[place].names.selectRandom() + "</b><br>"
-  body += "This " + place.toLowerCase() + " " + stores[place].flavour.selectRandom() + "</p>"
+  body += "This " + place.toLowerCase() + " " + stores[place].flavour.selectRandom() + " and " + buildingFlavour.selectRandom() + "</p>"
   body += "<button style=\"background-color: #cbf6f2;\" type=\"button\" id=\""+indexString+"\"class=\"btn btn-notblack btn-sm\" onclick = \"rollInventory(this.id)\">Roll Inventory</button>"
   body += "<button style=\"margin-left: 10px;display: none;\" type=\"button\" id=\""+indexString+"\"class=\"btn-" + indexString + " btn btn-default btn-notblack btn-sm\" onclick = \"clearInventory(this.id)\">Clear</button>"
   body += '<div class="' + indexString + '"></div>'
