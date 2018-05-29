@@ -68,7 +68,7 @@ function randomWeightedChoice(list, weight) {
         return prev + cur;
     });
 
-    var random_num = rand(0, total_weight);
+    var random_num = getRandomInt(0, total_weight);
     var weight_sum = 0;
     //console.log(random_num)
 
@@ -82,10 +82,6 @@ function randomWeightedChoice(list, weight) {
     }
 
     // end of function
-};
-
-function rand(min, max) {
-    return Math.random() * (max - min) + min;
 };
 
 //returns random property from an object

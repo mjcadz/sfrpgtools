@@ -1,3 +1,17 @@
+V2.5
+New Features:
+  - settlement generator
+  - starship generator
+  - inventory generator
+  - dead suns 5 creatures added to encounter gen
+  - pact worlds options added to loot gen and character gen
+  - armor + weapon flavor text
+Changes:
+  - html2canvas to alpha12
+  - migrate to new server
+  - only load required css files instead of all
+  - cleaner printing
+
 V2.4
 New Features:
   - encounter generator

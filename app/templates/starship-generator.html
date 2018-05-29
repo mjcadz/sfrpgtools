@@ -1,0 +1,106 @@
+<!-- index.html-->
+
+{% extends "base.html" %}
+{% block title %}Starfinder Starship Generator{% endblock %}
+{% block description %}Starship generator for starfinder roleplaying game{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/monsterPrint.v2.2.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/summernote.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css') }}">
+{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <h1>Starship Generator</h1>
+    <p class="lead">Generates fully randomised starships for the Starfinder RPG.</p>
+    <p></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 dontPrint">
+              <select class="selectpicker show-tick" id="tierPicker" data-style="btn-default" data-width="100%" data-size="10">
+                <option selected>Any tier</option>
+                <option data-divider="true"></option>
+                <option>Tier 1/4</option>
+                <option>Tier 1/3</option>
+                <option>Tier 1/2</option>
+                <option>Tier 1</option>
+                <option>Tier 2</option>
+                <option>Tier 3</option>
+                <option>Tier 4</option>
+                <option>Tier 5</option>
+                <option>Tier 6</option>
+                <option>Tier 7</option>
+                <option>Tier 8</option>
+                <option>Tier 9</option>
+                <option>Tier 10</option>
+                <option>Tier 11</option>
+                <option>Tier 12</option>
+                <option>Tier 13</option>
+                <option>Tier 14</option>
+                <option>Tier 15</option>
+                <option>Tier 16</option>
+                <option>Tier 17</option>
+                <option>Tier 18</option>
+                <option>Tier 19</option>
+                <option>Tier 20</option>
+              </select>
+              <select class="selectpicker show-tick" id="framePicker" data-style="btn-default" data-width="100%" data-size="10">
+                <option selected>Any frame</option>
+                <option data-divider="true"></option>
+                <option>Racer</option>
+                <option>Interceptor</option>
+                <option>Fighter</option>
+                <option>Shuttle</option>
+                <option>Light Freighter</option>
+                <option>Explorer</option>
+                <option>Transport</option>
+                <option>Destroyer</option>
+                <option>Heavy Freighter</option>
+                <option>Bulk Freighter</option>
+                <option>Cruiser</option>
+                <option>Carrier</option>
+                <option>Battleship</option>
+                <option>Dreadnought</option>
+              </select>
+              <select class="selectpicker show-tick" id="weaponPicker" data-style="btn-default" data-width="100%" data-size="10">
+                <option selected>Any armament</option>
+                <option data-divider="true"></option>
+                <option>Not armed</option>
+                <option>Lightly armed</option>
+                <option>Heavily armed</option>
+              </select>
+              <P></P>
+              <button type="button" onclick="generateShip()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
+              <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
+              <P></P>
+
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+
+    <div class="output area">
+
+    </div>
+    <hr class="dontPrint">
+    <button type="button" style="margin-left: 20px;display: none;" class="btn btn-edit btn-grn" onclick="editBlock()" type="button">Edit shipblock</button>
+    <button type="button" style="margin-left: 20px;display: none;" class="btn btn-save btn-grn" onclick="saveBlock()" type="button">Save shipblock</button>
+    <button type="button" style="margin-left: 20px;display: none;" class="btn btn-image btn-grn" onclick="blockToImage()" type="button">Save shipblock as image</button>
+    <button type="button" style="margin-left: 20px;display: none;" class="btn btn-print btn-grn" onclick="printBlock()" type="button">Print shipblock</button>
+    <p></p>
+    <div id="capture" style="max-width: 600px;">
+        <div id="overEdit" style="margin-left: 4.5em; margin-right: 1em;">
+            <div class="summernoteEdit edit-block" style="padding-top: 15px; padding-bottom: 15px; padding-right: 15px;">
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/summernote.js') }}"></script>
+<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/html2canvas.alpha12.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/shipData.v2.0.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/shipGen.v2.0.js') }}"></script>
+{% endblock %}

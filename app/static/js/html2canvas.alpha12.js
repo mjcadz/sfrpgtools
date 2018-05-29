@@ -1,5 +1,5 @@
 /*!
- * html2canvas 1.0.0-alpha.9 <https://html2canvas.hertzen.com>
+ * html2canvas 1.0.0-alpha.11 <https://html2canvas.hertzen.com>
  * Copyright (c) 2018 Niklas von Hertzen <https://hertzen.com>
  * Released under MIT License
  */
@@ -341,6 +341,91 @@ var TRANSPARENT = exports.TRANSPARENT = new Color([0, 0, 0, 0]);
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.calculateLengthFromValueWithUnit = exports.LENGTH_TYPE = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _NodeContainer = __webpack_require__(3);
+
+var _NodeContainer2 = _interopRequireDefault(_NodeContainer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var LENGTH_WITH_UNIT = /([\d.]+)(px|r?em|%)/i;
+
+var LENGTH_TYPE = exports.LENGTH_TYPE = {
+    PX: 0,
+    PERCENTAGE: 1
+};
+
+var Length = function () {
+    function Length(value) {
+        _classCallCheck(this, Length);
+
+        this.type = value.substr(value.length - 1) === '%' ? LENGTH_TYPE.PERCENTAGE : LENGTH_TYPE.PX;
+        var parsedValue = parseFloat(value);
+        if (true && isNaN(parsedValue)) {
+            console.error('Invalid value given for Length: "' + value + '"');
+        }
+        this.value = isNaN(parsedValue) ? 0 : parsedValue;
+    }
+
+    _createClass(Length, [{
+        key: 'isPercentage',
+        value: function isPercentage() {
+            return this.type === LENGTH_TYPE.PERCENTAGE;
+        }
+    }, {
+        key: 'getAbsoluteValue',
+        value: function getAbsoluteValue(parentLength) {
+            return this.isPercentage() ? parentLength * (this.value / 100) : this.value;
+        }
+    }], [{
+        key: 'create',
+        value: function create(v) {
+            return new Length(v);
+        }
+    }]);
+
+    return Length;
+}();
+
+exports.default = Length;
+
+
+var getRootFontSize = function getRootFontSize(container) {
+    var parent = container.parent;
+    return parent ? getRootFontSize(parent) : parseFloat(container.style.font.fontSize);
+};
+
+var calculateLengthFromValueWithUnit = exports.calculateLengthFromValueWithUnit = function calculateLengthFromValueWithUnit(container, value, unit) {
+    switch (unit) {
+        case 'px':
+        case '%':
+            return new Length(value + unit);
+        case 'em':
+        case 'rem':
+            var length = new Length(value);
+            length.value *= unit === 'em' ? parseFloat(container.style.font.fontSize) : getRootFontSize(container);
+            return length;
+        default:
+            // TODO: handle correctly if unknown unit is used
+            return new Length('0');
+    }
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 exports.parseBoundCurves = exports.calculatePaddingBoxPath = exports.calculateBorderBoxPath = exports.parsePathForBorder = exports.parseDocumentSize = exports.calculateContentBox = exports.calculatePaddingBox = exports.parseBounds = exports.Bounds = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -541,91 +626,6 @@ var getCurvePoints = function getCurvePoints(x, y, r1, r2, position) {
 };
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.calculateLengthFromValueWithUnit = exports.LENGTH_TYPE = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _NodeContainer = __webpack_require__(3);
-
-var _NodeContainer2 = _interopRequireDefault(_NodeContainer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var LENGTH_WITH_UNIT = /([\d.]+)(px|r?em|%)/i;
-
-var LENGTH_TYPE = exports.LENGTH_TYPE = {
-    PX: 0,
-    PERCENTAGE: 1
-};
-
-var Length = function () {
-    function Length(value) {
-        _classCallCheck(this, Length);
-
-        this.type = value.substr(value.length - 1) === '%' ? LENGTH_TYPE.PERCENTAGE : LENGTH_TYPE.PX;
-        var parsedValue = parseFloat(value);
-        if (true && isNaN(parsedValue)) {
-            console.error('Invalid value given for Length: "' + value + '"');
-        }
-        this.value = isNaN(parsedValue) ? 0 : parsedValue;
-    }
-
-    _createClass(Length, [{
-        key: 'isPercentage',
-        value: function isPercentage() {
-            return this.type === LENGTH_TYPE.PERCENTAGE;
-        }
-    }, {
-        key: 'getAbsoluteValue',
-        value: function getAbsoluteValue(parentLength) {
-            return this.isPercentage() ? parentLength * (this.value / 100) : this.value;
-        }
-    }], [{
-        key: 'create',
-        value: function create(v) {
-            return new Length(v);
-        }
-    }]);
-
-    return Length;
-}();
-
-exports.default = Length;
-
-
-var getRootFontSize = function getRootFontSize(container) {
-    var parent = container.parent;
-    return parent ? getRootFontSize(parent) : parseFloat(container.style.font.fontSize);
-};
-
-var calculateLengthFromValueWithUnit = exports.calculateLengthFromValueWithUnit = function calculateLengthFromValueWithUnit(container, value, unit) {
-    switch (unit) {
-        case 'px':
-        case '%':
-            return new Length(value + unit);
-        case 'em':
-        case 'rem':
-            var length = new Length(value);
-            length.value *= unit === 'em' ? parseFloat(container.style.font.fontSize) : getRootFontSize(container);
-            return length;
-        default:
-            // TODO: handle correctly if unknown unit is used
-            return new Length('0');
-    }
-};
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -686,7 +686,7 @@ var _wordBreak = __webpack_require__(44);
 
 var _zIndex = __webpack_require__(45);
 
-var _Bounds = __webpack_require__(1);
+var _Bounds = __webpack_require__(2);
 
 var _Input = __webpack_require__(21);
 
@@ -919,7 +919,7 @@ var _Color = __webpack_require__(0);
 
 var _Color2 = _interopRequireDefault(_Color);
 
-var _Length = __webpack_require__(2);
+var _Length = __webpack_require__(1);
 
 var _Length2 = _interopRequireDefault(_Length);
 
@@ -931,7 +931,7 @@ var _Vector = __webpack_require__(7);
 
 var _Vector2 = _interopRequireDefault(_Vector);
 
-var _Bounds = __webpack_require__(1);
+var _Bounds = __webpack_require__(2);
 
 var _padding = __webpack_require__(17);
 
@@ -2461,6 +2461,7 @@ var CanvasRenderer = function () {
     }, {
         key: 'getTarget',
         value: function getTarget() {
+            this.canvas.getContext('2d').setTransform(1, 0, 0, 1, 0, 0);
             return Promise.resolve(this.canvas);
         }
     }, {
@@ -2575,7 +2576,7 @@ var CanvasRenderer = function () {
                                 var _options$fontMetrics$ = _this4.options.fontMetrics.getMetrics(font),
                                     baseline = _options$fontMetrics$.baseline;
 
-                                _this4.rectangle(text.bounds.left, Math.round(text.bounds.top + text.bounds.height - baseline), text.bounds.width, 1, textDecorationColor);
+                                _this4.rectangle(text.bounds.left, Math.round(text.bounds.top + baseline), text.bounds.width, 1, textDecorationColor);
                                 break;
                             case _textDecoration.TEXT_DECORATION_LINE.OVERLINE:
                                 _this4.rectangle(text.bounds.left, Math.round(text.bounds.top), text.bounds.width, 1, textDecorationColor);
@@ -2649,7 +2650,7 @@ var Logger = function () {
     function Logger(enabled, id, start) {
         _classCallCheck(this, Logger);
 
-        this.enabled = enabled;
+        this.enabled = typeof window !== 'undefined' && enabled;
         this.start = start ? start : Date.now();
         this.id = id;
     }
@@ -2706,7 +2707,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.parsePadding = exports.PADDING_SIDES = undefined;
 
-var _Length = __webpack_require__(2);
+var _Length = __webpack_require__(1);
 
 var _Length2 = _interopRequireDefault(_Length);
 
@@ -2847,11 +2848,11 @@ var _Color = __webpack_require__(0);
 
 var _Color2 = _interopRequireDefault(_Color);
 
-var _Length = __webpack_require__(2);
+var _Length = __webpack_require__(1);
 
 var _Length2 = _interopRequireDefault(_Length);
 
-var _Bounds = __webpack_require__(1);
+var _Bounds = __webpack_require__(2);
 
 var _TextBounds = __webpack_require__(22);
 
@@ -2955,7 +2956,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.parseTextBounds = exports.TextBounds = undefined;
 
-var _Bounds = __webpack_require__(1);
+var _Bounds = __webpack_require__(2);
 
 var _textDecoration = __webpack_require__(11);
 
@@ -3336,8 +3337,6 @@ var Proxy = exports.Proxy = function Proxy(src, options) {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _CanvasRenderer = __webpack_require__(15);
 
 var _CanvasRenderer2 = _interopRequireDefault(_CanvasRenderer);
@@ -3348,19 +3347,12 @@ var _Logger2 = _interopRequireDefault(_Logger);
 
 var _Window = __webpack_require__(28);
 
-var _Bounds = __webpack_require__(1);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var html2canvas = function html2canvas(element, conf) {
-    // eslint-disable-next-line no-console
-    if ((typeof console === 'undefined' ? 'undefined' : _typeof(console)) === 'object' && typeof console.log === 'function') {
-        // eslint-disable-next-line no-console
-        console.log('html2canvas ' + "1.0.0-alpha.9");
-    }
-
     var config = conf || {};
     var logger = new _Logger2.default(typeof config.logging === 'boolean' ? config.logging : true);
+    logger.log('html2canvas ' + "1.0.0-alpha.11");
 
     if (true && typeof config.onrendered === 'function') {
         logger.error('onrendered option is deprecated, html2canvas returns a Promise with the canvas as the value');
@@ -3371,17 +3363,6 @@ var html2canvas = function html2canvas(element, conf) {
         return Promise.reject('Provided element is not within a Document');
     }
     var defaultView = ownerDocument.defaultView;
-
-    var scrollX = defaultView.pageXOffset;
-    var scrollY = defaultView.pageYOffset;
-
-    var isDocument = element.tagName === 'HTML' || element.tagName === 'BODY';
-
-    var _ref = isDocument ? (0, _Bounds.parseDocumentSize)(ownerDocument) : (0, _Bounds.parseBounds)(element, scrollX, scrollY),
-        width = _ref.width,
-        height = _ref.height,
-        left = _ref.left,
-        top = _ref.top;
 
     var defaultOptions = {
         async: true,
@@ -3395,10 +3376,6 @@ var html2canvas = function html2canvas(element, conf) {
         scale: defaultView.devicePixelRatio || 1,
         target: new _CanvasRenderer2.default(config.canvas),
         useCORS: false,
-        x: left,
-        y: top,
-        width: Math.ceil(width),
-        height: Math.ceil(height),
         windowWidth: defaultView.innerWidth,
         windowHeight: defaultView.innerHeight,
         scrollX: defaultView.pageXOffset,
@@ -3452,7 +3429,7 @@ var _Feature = __webpack_require__(10);
 
 var _Feature2 = _interopRequireDefault(_Feature);
 
-var _Bounds = __webpack_require__(1);
+var _Bounds = __webpack_require__(2);
 
 var _Clone = __webpack_require__(54);
 
@@ -3486,25 +3463,38 @@ var renderElement = exports.renderElement = function renderElement(element, opti
                 return cloner.resourceLoader.ready();
             }).then(function () {
                 var renderer = new _ForeignObjectRenderer2.default(cloner.documentElement);
+
+                var defaultView = ownerDocument.defaultView;
+                var scrollX = defaultView.pageXOffset;
+                var scrollY = defaultView.pageYOffset;
+
+                var isDocument = element.tagName === 'HTML' || element.tagName === 'BODY';
+
+                var _ref = isDocument ? (0, _Bounds.parseDocumentSize)(ownerDocument) : (0, _Bounds.parseBounds)(element, scrollX, scrollY),
+                    width = _ref.width,
+                    height = _ref.height,
+                    left = _ref.left,
+                    top = _ref.top;
+
                 return renderer.render({
                     backgroundColor: backgroundColor,
                     logger: logger,
                     scale: options.scale,
-                    x: options.x,
-                    y: options.y,
-                    width: options.width,
-                    height: options.height,
+                    x: typeof options.x === 'number' ? options.x : left,
+                    y: typeof options.y === 'number' ? options.y : top,
+                    width: typeof options.width === 'number' ? options.width : Math.ceil(width),
+                    height: typeof options.height === 'number' ? options.height : Math.ceil(height),
                     windowWidth: options.windowWidth,
                     windowHeight: options.windowHeight,
                     scrollX: options.scrollX,
                     scrollY: options.scrollY
                 });
             });
-        }(new _Clone.DocumentCloner(element, options, logger, true, renderElement)) : (0, _Clone.cloneWindow)(ownerDocument, windowBounds, element, options, logger, renderElement).then(function (_ref) {
-            var _ref2 = _slicedToArray(_ref, 3),
-                container = _ref2[0],
-                clonedElement = _ref2[1],
-                resourceLoader = _ref2[2];
+        }(new _Clone.DocumentCloner(element, options, logger, true, renderElement)) : (0, _Clone.cloneWindow)(ownerDocument, windowBounds, element, options, logger, renderElement).then(function (_ref2) {
+            var _ref3 = _slicedToArray(_ref2, 3),
+                container = _ref3[0],
+                clonedElement = _ref3[1],
+                resourceLoader = _ref3[2];
 
             if (true) {
                 logger.log('Document cloned, using computed rendering');
@@ -3523,16 +3513,28 @@ var renderElement = exports.renderElement = function renderElement(element, opti
                     logger.log('Starting renderer');
                 }
 
+                var defaultView = clonedDocument.defaultView;
+                var scrollX = defaultView.pageXOffset;
+                var scrollY = defaultView.pageYOffset;
+
+                var isDocument = clonedElement.tagName === 'HTML' || clonedElement.tagName === 'BODY';
+
+                var _ref4 = isDocument ? (0, _Bounds.parseDocumentSize)(ownerDocument) : (0, _Bounds.parseBounds)(clonedElement, scrollX, scrollY),
+                    width = _ref4.width,
+                    height = _ref4.height,
+                    left = _ref4.left,
+                    top = _ref4.top;
+
                 var renderOptions = {
                     backgroundColor: backgroundColor,
                     fontMetrics: fontMetrics,
                     imageStore: imageStore,
                     logger: logger,
                     scale: options.scale,
-                    x: options.x,
-                    y: options.y,
-                    width: options.width,
-                    height: options.height
+                    x: typeof options.x === 'number' ? options.x : left,
+                    y: typeof options.y === 'number' ? options.y : top,
+                    width: typeof options.width === 'number' ? options.width : Math.ceil(width),
+                    height: typeof options.height === 'number' ? options.height : Math.ceil(height)
                 };
 
                 if (Array.isArray(options.target)) {
@@ -3835,7 +3837,7 @@ exports.parseBorderRadius = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-var _Length = __webpack_require__(2);
+var _Length = __webpack_require__(1);
 
 var _Length2 = _interopRequireDefault(_Length);
 
@@ -4099,7 +4101,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.parseMargin = undefined;
 
-var _Length = __webpack_require__(2);
+var _Length = __webpack_require__(1);
 
 var _Length2 = _interopRequireDefault(_Length);
 
@@ -4257,7 +4259,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.parseTransform = undefined;
 
-var _Length = __webpack_require__(2);
+var _Length = __webpack_require__(1);
 
 var _Length2 = _interopRequireDefault(_Length);
 
@@ -5268,7 +5270,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Bounds = __webpack_require__(1);
+var _Bounds = __webpack_require__(2);
 
 var _Font = __webpack_require__(25);
 
@@ -5611,7 +5613,7 @@ var _Color = __webpack_require__(0);
 
 var _Color2 = _interopRequireDefault(_Color);
 
-var _Length = __webpack_require__(2);
+var _Length = __webpack_require__(1);
 
 var _Length2 = _interopRequireDefault(_Length);
 
@@ -6088,7 +6090,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Bounds = __webpack_require__(1);
+var _Bounds = __webpack_require__(2);
 
 var _Proxy = __webpack_require__(26);
 
@@ -6289,7 +6291,15 @@ var DocumentCloner = exports.DocumentCloner = function () {
 
             if (node instanceof HTMLStyleElement && node.sheet && node.sheet.cssRules) {
                 var css = [].slice.call(node.sheet.cssRules, 0).reduce(function (css, rule) {
-                    return css + rule.cssText;
+                    try {
+                        if (rule && rule.cssText) {
+                            return css + rule.cssText;
+                        }
+                        return css;
+                    } catch (err) {
+                        _this3.logger.log('Unable to access cssText property', rule.name);
+                        return css;
+                    }
                 }, '');
                 var style = node.cloneNode(false);
                 style.textContent = css;
@@ -6320,9 +6330,11 @@ var DocumentCloner = exports.DocumentCloner = function () {
             var contentBefore = (0, _PseudoNodeContent.resolvePseudoContent)(node, styleBefore, this.pseudoContentData);
 
             for (var child = node.firstChild; child; child = child.nextSibling) {
-                if (child.nodeType !== Node.ELEMENT_NODE ||
+                if (child.nodeType !== Node.ELEMENT_NODE || child.nodeName !== 'SCRIPT' &&
                 // $FlowFixMe
-                child.nodeName !== 'SCRIPT' && !child.hasAttribute(IGNORE_ATTRIBUTE)) {
+                !child.hasAttribute(IGNORE_ATTRIBUTE) && (typeof this.options.ignoreElements !== 'function' ||
+                // $FlowFixMe
+                !this.options.ignoreElements(child))) {
                     if (!this.copyStyles || child.nodeName !== 'STYLE') {
                         clone.appendChild(this.cloneNode(child));
                     }
@@ -6601,7 +6613,16 @@ var cloneWindow = exports.cloneWindow = function cloneWindow(ownerDocument, boun
                 documentClone.documentElement.style.left = -bounds.left + 'px';
                 documentClone.documentElement.style.position = 'absolute';
             }
-            return cloner.clonedReferenceElement instanceof cloneWindow.HTMLElement || cloner.clonedReferenceElement instanceof ownerDocument.defaultView.HTMLElement || cloner.clonedReferenceElement instanceof HTMLElement ? Promise.resolve([cloneIframeContainer, cloner.clonedReferenceElement, cloner.resourceLoader]) : Promise.reject( true ? 'Error finding the ' + referenceElement.nodeName + ' in the cloned document' : '');
+
+            var result = Promise.resolve([cloneIframeContainer, cloner.clonedReferenceElement, cloner.resourceLoader]);
+
+            var onclone = options.onclone;
+
+            return cloner.clonedReferenceElement instanceof cloneWindow.HTMLElement || cloner.clonedReferenceElement instanceof ownerDocument.defaultView.HTMLElement || cloner.clonedReferenceElement instanceof HTMLElement ? typeof onclone === 'function' ? Promise.resolve().then(function () {
+                return onclone(documentClone);
+            }).then(function () {
+                return result;
+            }) : result : Promise.reject( true ? 'Error finding the ' + referenceElement.nodeName + ' in the cloned document' : '');
         });
 
         documentClone.open();
@@ -6683,6 +6704,10 @@ var ResourceLoader = function () {
             var _this = this;
 
             if (this.hasResourceInCache(src)) {
+                return src;
+            }
+            if (isBlobImage(src)) {
+                this.cache[src] = _loadImage(src, this.options.imageTimeout || 0);
                 return src;
             }
 
@@ -6883,6 +6908,9 @@ var isInlineImage = function isInlineImage(src) {
 };
 var isInlineBase64Image = function isInlineBase64Image(src) {
     return INLINE_BASE64.test(src);
+};
+var isBlobImage = function isBlobImage(src) {
+    return src.substr(0, 4) === 'blob';
 };
 
 var isSVG = function isSVG(src) {

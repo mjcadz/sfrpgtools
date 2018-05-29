@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Starfinder Character Concept Generator{% endblock %}
 {% block description %}Random character concept generator to inpire your starfinder characters and NPCs{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css') }}">
+{% endblock %}
 {% block body %}
 <div class="jumbotron">
     <h1>Character Concept Generator</h1>
@@ -13,6 +16,7 @@
                 <option selected title="Sources">Core Rulebook</option>
                 <option selected title="Sources">Core Rulebook Legacy</option>
                 <option selected title="Sources">Alien Archive</option>
+                <option selected title="Sources">Pact Worlds</option>
               </select>
                 <button type="button" onclick="generateCharacter()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
                 <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
@@ -29,5 +33,5 @@
 {% endblock %}
 {% block includes %}
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/characterGen.v2.0.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/characterGen.v2.1.js') }}"></script>
 {% endblock %}

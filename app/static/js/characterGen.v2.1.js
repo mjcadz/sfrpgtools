@@ -1,10 +1,12 @@
 var RaceList = ["Android","Human","Kasatha","Lashunta","Shirren","Vesk","Ysoki"];
 var RaceListLegacy = ["Dwarf","Elf","Gnome","Half-Elf","Half-Orc","Halfling"];
 var RaceListAA = ["Barathu","Contemplative","Draelik","Dragonkin","Drow","Formian","Space Goblin","Gray","Haan","Ikeshti","Kalo","Maraquoi","Nuar","Reptoid","Rhyporian","Sarcesian","Shobhad","Skittermander","Urog","Verthani","Witchwyrd","Wrikreechee"];
+var RaceListPW = ["Astrazoan","Bantrid","Borai","Khizar","SRO","Strix"];
 var AgeList =['Child', 'Young', 'Adult', 'Mature', 'Old'];
 var ClassList = ["Envoy","Mechanic","Mystic","Operative","Solarian","Soldier","Technomancer"];
 var AlignList = ["Lawful Good","Neutral Good","Chaotic Good","Lawful Neutral","Neutral","Chaotic Neutral","Lawful Evil","Neutral Evil","Chaotic Evil"];
 var ThemeList = ["Ace Pilot","Bounty Hunter","Icon","Mercenary","Outlaw","Priest","Scholar","Spacefarer","Xenoseeker"];
+var ThemeListPW = ["Solar Disciple","Roboticist","Wild Warden","Corporate Agent","Gladiator","Cyberborn","Tempered Pilgrim","Space Pirate","Death-Touched","Dragonblood","Dream Prophet","Biotechnician","Xenoarchaeologist","Cultist"];
 
 var ProfessionList = ["Accountant","Actor","Archaeologist","Architect","Artist","Builder","Bounty Hunter","Comedian","Con Artist",
     "Cook","Cop","Corporate Professional","Courtesan","Counselor","Dancer","Dockworker","Electrician","Engineer","Factory Worker",
@@ -289,14 +291,26 @@ var FromList = [
     "a nearspace planet close to a drift beacon",
     "beyond the rim",
     "a space station in a backwater system",
-    "an exploration vessel"
+    "an exploration vessel",
+    "the frozen waste of Triaxus ",
+    "a refugee convoy, fleeing from the Veskarium",
+    "a multigenerational starship that patrols the endless void.",
+    "a depleted mining world.",
+    "the far reaches of the Veskrium.",
+    "deep within the Diaspora.",
+    "the jungles of Castrovel.",
+    "a backwater village",
+    "a cryogenic freezing facility",
+    "space, found alone on an abandoned starship as a child",
+    "the lower levels of Absalom’s spike",
+    "beyond the Pact Worlds"
 ];
 
 var WhoList = [
     "doesn't believe in magic",
     "hates wearing armor face masks",
     "is scared of Shirren",
-    "want to open their own spacer bar",
+    "wants to open their own spacer bar",
     "has a huge credit debt to pay back",
     "is running from their debt",
     "owes a debt collector a starship",
@@ -457,7 +471,36 @@ var WhoList = [
     "is a total tech head",
     "believes in life after love",
     "loves to dance",
-    "has a farmers union iced coffee and a sausage roll for smoko every day, no exceptions"]
+    "has a farmers union iced coffee and a sausage roll for smoko every day, no exceptions",
+    "has a drinking problem",
+    "is afraid of heights",
+    "only sleeps with the lights on",
+    "has to urinate frequently ",
+    "is obsessed with their hair ",
+    "dresses provocatively",
+    "smells like old cheese",
+    "dances with wolves",
+    "talks with a 1920s mafia accent",
+    "talks about stabbing people strangely too much",
+    "constantly has a broken arm, looking for help",
+    "is obsessed with the local sports team",
+    "is obsessed with cars",
+    "smokes too much herb, like all the time",
+    "gives people small amounts of credits, in strange amounts, for doing the simplest errands for him",
+    "speaks to people as though hes being hunted",
+    "speaks to people as though hes hunting them",
+    "gets startled at the slightest raise in someones tone",
+    "wears rings, which isn’t cool, but its cool that he doesn’t care if he’s cool",
+    "is slightly overweight",
+    "has a limp",
+    "has a well kept mustache",
+    "believes they are destined for a higher calling",
+    "looks down on anyone who poorer than they are",
+    "believes in ghosts",
+    "is superstitious",
+    "flirts relentlessly",
+    "seems aloof and distant",
+    "is so laid back they often come across as rude and uncaring"]
 
 function clearOutput() {
   var $outputArea = $(".output.area").first();
@@ -515,6 +558,8 @@ function generateCharacter() {
   }
 
   var Races = [];
+  var Themes = [];
+  Themes = Themes.concat(ThemeList)
 
   if (sourcebooks.includes("Core Rulebook")){
     Races = Races.concat(RaceList)
@@ -525,13 +570,17 @@ function generateCharacter() {
   if (sourcebooks.includes("Alien Archive")){
     Races = Races.concat(RaceListAA)
   }
+  if (sourcebooks.includes("Pact Worlds")){
+    Races = Races.concat(RaceListPW)
+    Themes = Themes.concat(ThemeListPW)
+  }
 
   //select random combination
   var Age = AgeList.selectRandom();
   var Align = AlignList.selectRandom();
   var Race = Races.selectRandom();
   var Class = ClassList.selectRandom();
-  var Theme = ThemeList.selectRandom();
+  var Theme = Themes.selectRandom();
   var Profession = ProfessionList.selectRandom();
   var Who = WhoList.selectRandom();
   var Personality = PersonalityList.selectRandom() + ' and ' + PersonalityList.selectRandom();

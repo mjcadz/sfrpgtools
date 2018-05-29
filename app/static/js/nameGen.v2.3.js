@@ -39,7 +39,7 @@ function getrandomName(weaponName){
 
   //Remove unnecessary words
   stripName = weaponName.split(' ').filter(function(word) {
-    console.log(word, removedWords.indexOf(word));
+    //console.log(word, removedWords.indexOf(word));
     return removedWords.indexOf(word) === -1;
   }).join(' ');
 

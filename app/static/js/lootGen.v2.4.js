@@ -97,6 +97,7 @@ function generateLoot() {
   //replace book names with shortened name
   sourcebooks = sourcebooks.map(function(x){ return x.replace("Core Rulebook","crb") });
   sourcebooks = sourcebooks.map(function(x){ return x.replace("Alien Archive","aa") });
+  sourcebooks = sourcebooks.map(function(x){ return x.replace("Pact Worlds","pw") });
   //
   //BUILD LIST
   //
@@ -337,7 +338,7 @@ function getDataArray(groups,json,sourcebooks){
   aplmod = Number($('#APLDrop').val().replace("APL ","").trim());
 
   for (itemGroup in json) {
-    if (groups.includes(itemGroup) || groups.includes("All")) {
+    if ((groups.includes(itemGroup) || groups.includes("All")) && itemGroup != "Augmentations") {
       for (itemName in json[itemGroup]) {
         source = json[itemGroup][itemName]['sourcebook']
         if (sourcebooks.includes(source)){
@@ -348,7 +349,7 @@ function getDataArray(groups,json,sourcebooks){
           minLevel = limitedGroups.includes(itemGroup) ? aplmod - 2 : 0;
 
           if ( itemLevel <= aplmod+1 && itemLevel >= minLevel ){
-            item[0] = itemName.replace("Iii","III").replace("Ii","II").replace("Iv","IV").replace("Viii","VIII").replace("Vii","VII").replace("Vi","VI").replace("Fxprofession",randomChoice(professions));//name
+            item[0] = itemName.toTitleCase().replace("Iii","III").replace("Ii","II").replace("Iv","IV").replace("Viii","VIII").replace("Vii","VII").replace("Vi","VI").replace("Fxprofession",randomChoice(professions));//name
             item[1] = json[itemGroup][itemName]['level'];//level
 
             if (itemName.includes("Fusion Seal")){
@@ -378,6 +379,12 @@ function getDataArray(groups,json,sourcebooks){
     }
   }
   return dataArray;
+}
+
+String.prototype.toTitleCase = function() {
+  return this.replace(/\w\S*/g, function(txt){
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
 }
 
 //runs when page is loaded

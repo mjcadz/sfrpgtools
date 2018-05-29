@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Starfinder Settlement Generator{% endblock %}
+{% block description %}Random settlement generator to help fill your Starfinder worlds{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/contentPrint.v2.0.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css') }}">
+{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <h1>Settlement Generator</h1>
+    <p class="lead">Generates settlements for the Starfinder RPG to help fill your worlds.</p>
+    <p></p>
+    <div class="container">
+        <div class="dontPrint row">
+            <div class="col-md-4">
+                <select class="selectpicker show-tick" id="sizePicker" data-style="btn-default" data-width="100%" data-size="10">
+                  <option selected>Any size</option>
+                  <option data-divider="true"></option>
+                  <option>Empty</option>
+                  <option>Tiny</option>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                  <option>Huge</option>
+                </select>
+                <select class="selectpicker show-tick" id="itemPicker" data-style="btn-default" data-width="100%" data-size="10">
+                  <option selected>Any max item level</option>
+                  <option data-divider="true"></option>
+                  <option>1st</option>
+                  <option>2nd</option>
+                  <option>3rd</option>
+                  <option>4th</option>
+                  <option>5th</option>
+                  <option>6th</option>
+                  <option>7th</option>
+                  <option>8th</option>
+                  <option>9th</option>
+                  <option>10th</option>
+                  <option>11th</option>
+                  <option>12th</option>
+                  <option>13th</option>
+                  <option>14th</option>
+                  <option>15th</option>
+                  <option>16th</option>
+                  <option>17th</option>
+                  <option>18th</option>
+                  <option>19th</option>
+                  <option>20th</option>
+                </select>
+                <P></P>
+                <button type="button" onclick="generateSettlement()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
+                <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
+                <P></P>
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+
+    <div class="output area">
+
+    </div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/equipmentData.v2.1.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/settlementGen.v2.0.js') }}"></script>
+{% endblock %}

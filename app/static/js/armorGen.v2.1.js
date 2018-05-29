@@ -126,6 +126,93 @@ var armorNameHeavy2 = [
   "Thinplate"
 ]
 
+var flavorTextLight = [
+  "Is made from a high tech material that looks and feels like a t-shirt",
+  "Has light plating hidden underneath the environmental suit",
+  "Feels like wearing nothing at all. Nothing at all",
+  "Is magically enchanted to appear to be mere clothing",
+  "Shimmers, but only in pale light",
+  "Has holes in the sleeves where your elbows would be",
+  "Is tearaway armor",
+  "Is extremely breathable",
+  "Has an arm sleeve you can place your datapad into for working out",
+  "Comes with a hood",
+  "Has oversized sleeves",
+  "Has a long train, similar to a wedding dress",
+  "Is made of the finest silks",
+  "Never gets dirty",
+  "Is so not the sort of thing your mother would approve of you wearing out of the house",
+  "Is pearlescent and changes colour as it moves",
+  "Comes with a matching cape",
+  "Is skin-tight",
+  "Has no sleeves"
+
+]
+var flavorTextAll = [
+  "Was hand crafted with great care ",
+  "Is mostly grey and metallic with a utilitarian look.",
+  "Reeks with the stench of unfamiliar alien sweat",
+  "Has been fitted for an uncommon body type, and will need to be refitted",
+  "Is painted and dyed with nonreflective colors",
+  "Retains far too much heat",
+  "Speaks a random noun every few minutes",
+  "Look like old Steward surplus",
+  "Is covered in pockets",
+  "Can heal itself of small tears and rips",
+  "Has the name ‘Bucky’ written on it’s tag",
+  "Has a self-fastening zip which works by tapping a small touch-sensitive button",
+  "Is waterproof and never gets wet",
+  "Has a pocket which glows with the Starfinder Society emblem",
+  "Has a long belt which can be used as a rope",
+  "Comes with a matching beret",
+  "Smells like new",
+  "Has a large playing card of a joker stitched on its back",
+  "Is adorned with small metallic skulls",
+  "Belongs in a Revelaz music dance club",
+  "Is as black as space itself",
+  "Has various religious symbols on it",
+  "Has cracks all over it that were repaired",
+  "Comes with a fanny pack",
+  "Has been charred by fire ",
+  "Is covered in blaster holes",
+  "Is just a little bit too small ",
+  "Is blue with silver accents",
+  "Is red with yellow accents",
+  "Is green with gold accents",
+  "Is covered in nicks and scratches",
+  "Is as pristine as the day it left the factory",
+  "Has the name “Mungus” scrawled on the collar"
+]
+
+var flavorTextHeavy = [
+  "Absorbs the bulk of kinetic damage through energy dampeners",
+  "Feels strangely light weight when worn",
+  "Looks battle worn, adorning scars and tears deep into its plating",
+  "Resembles the scales of the Triaxian Dragonlord Dretchnyliax",
+  "Was obviously owned by a vesk, who decorated it with trophies of his kills",
+  "Has a built in air conditioner",
+  "Was painted a desert camo paint job",
+  "Has a large smiling face on the front torso, and a frowning face on the back",
+  "Is dented on the right shoulder pad",
+  "Seems to be fitted to hold a jetpack with ease",
+  "Has many magazine slots",
+  "Has the phrase “Please Stop Me” etched on the chest piece",
+  "Is covered in some sort of dried liquid, probably blood, yeah, thats blood",
+  "Really brings out the wearers eyes, or more specifically the killing intent in them",
+  "Has a huge dent in it’s chest that’s been hammered out",
+  "Is made from the hull of a starship",
+  "Protects well but looks like trash cans glued together",
+  "Is gold in colour save for a red arm guard and silver leg piece",
+  "Fits too tightly around the middle",
+  "Is crafted to resemble a highly muscled torso, complete with nipples",
+  "Has the words ‘Vesk Killer’ painted on it’s shoulder with a tally count beneath",
+  "Has a large glowing crystal in it’s chest which seems purely decorative",
+  "Has an broken data pad incorporated into the left arm",
+  "Is slightly sticky on the inside",
+  "Is corrupted by rust",
+  "Has “Property of Absalom Station Security” stamped on the collar"
+]
+
 var indexCounter = 0;
 
 var basePrice = [260,625,1415,2195,3230,4425,6350,9175,13300,17950,24400,35300,49600,72400,109750,170350,243850,370000,557450,832900];
@@ -218,8 +305,8 @@ function printPanel(level,name,type,eac,kac,dex,acheck,speed,slots,bulk) {
                     "<br><b>Armor Check Penalty: </b>" + acheck +
                     "<br><b>Speed Adjustment: </b>" + speed +
                     "<br><b>Upgrade Slots: </b>" + slots +
-                    "<br><b>Bulk: </b>" + bulk + "</p>";
-
+                    "<br><b>Bulk: </b>" + bulk + "</p>" +
+                    "<h5 class=\"text-muted text-muted-one\"><i>This " + type.toLowerCase() + " " + flavorTextAll.concat(type == "Light armor" ? flavorTextLight : flavorTextHeavy).selectRandom().toLowerCase() + "</i></h5>"
 
   $outputArea.append("<div class=\"panel " + indexString + "\">");
   var $panel = $(".panel."+indexString).first();

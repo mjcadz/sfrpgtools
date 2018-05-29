@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 {% block title %}Starfinder Loot Generator{% endblock %}
 {% block description %}Randomly generated loot for starfinder encounters{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/contentPrint.v2.0.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css') }}">
+{% endblock %}
 {% block body %}
 <div class="jumbotron">
     <h1>Loot Generator</h1>
     <p class="lead">Randomly generates loot from equipment in the various rulebooks. APL determines what item levels are available to the party and CR determines the wealth of the encounter.</p>
     <p></p>
     <div class="container">
-        <div class="row">
+        <div class="dontPrint row">
             <div class="col-md-4">
                 <select class="selectpicker show-tick" id="sourceDrop" multiple data-style="btn-default" data-width="100%" data-size="10" data-title="Sources" data-selected-text-format="static">
                   <option selected title="Sources">Core Rulebook</option>
                   <option selected title="Sources">Alien Archive</option>
+                  <option selected title="Sources">Pact Worlds</option>
                 </select>
                 <select class="selectpicker show-tick" id="APLDrop" data-style="btn-default" data-width="100%" data-size="10">
                     <option selected title="Average Party Level - 1">APL 1</option>
@@ -87,7 +92,7 @@
 </div>
 {% endblock %}
 {% block includes %}
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/equipmentData.v2.0.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/equipmentData.v2.1.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/lootGen.v2.3.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/lootGen.v2.4.js') }}"></script>
 {% endblock %}

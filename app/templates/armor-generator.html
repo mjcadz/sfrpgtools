@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Starfinder Armor Generator{% endblock %}
 {% block description %}Random armor generator to add balanced armor to your starfinder game{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css') }}">
+{% endblock %}
 {% block body %}
 <div class="jumbotron">
     <h1>Armor Generator</h1>
@@ -61,5 +64,5 @@
 {% endblock %}
 {% block includes %}
 <script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/armorGen.v2.0.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/armorGen.v2.1.js') }}"></script>
 {% endblock %}
