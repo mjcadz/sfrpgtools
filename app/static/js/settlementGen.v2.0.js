@@ -357,7 +357,6 @@ var stores = {
       "crafts housebrand knock-offs at a discounted rate",
       "is very popular among the aging population",
       "has half completed projects lying all over the workshop"
-
     ],
     "names": [
       "Circuit Breakers",
@@ -371,10 +370,13 @@ var stores = {
     "equipment":["Computers","Computer Countermeasures","Computer Modules","Upgrades"],
     "flavour": [
       "has an owner that can fix just about anything given enough time",
-      "obviously needs a new maintenance drone; lights flicker dimly overhead, & the aisles are filthy"
+      "obviously needs a new maintenance drone; lights flicker dimly overhead, & the aisles are filthy",
+      "is filled with scattered AI cortexes",
+      "specializes in portable datapad computers",
+      "specializes in gaming computers"
     ],
     "names": [
-      "Ultra New Egg",
+      "Ultra Newegg",
       "Datamancers R Us",
       "Hackable Assets",
       "The Teraflop Shop",
@@ -385,8 +387,8 @@ var stores = {
     "equipment":["Augmentations", "Advanced Melee Weapons", "Ammunition", "Armor Upgrades", "Basic Melee Weapons", "Computer Countermeasures", "Computer Modules", "Computer Upgrades", "Computers", "Drugs Medicinals And Poisons", "Food And Drink", "Fusion Seals", "Grenades", "Heavy Armor", "Heavy Weapons", "Hybrid Items", "Light Armor", "Longarms", "Magic Items", "Personal Items", "Small Arms", "Sniper Weapons", "Solarion Weapon Crystals", "Special Ammunition", "Special Weapons", "Spell Ampoules", "Spell Gems", "Technological Items", "Healing Serum", "Medical Gear", "Trade Goods"],
     "flavour": [
       "is having a promotion on 10,000 types of fruit",
-      "only sells genectically modified protein paste",
-      "has the galaxys largest range of foods",
+      "only sells genetically modified protein paste",
+      "has the galaxy's largest range of foods",
       "has shelves upon shelves of many types of cereal",
       "is packed with the most annoying, pushy, salespeople"
     ],
@@ -402,43 +404,51 @@ var stores = {
     "equipment":["Magic Items","Hybrid Items","Spell Ampoules","Spell Gems"],
     "flavour": [
       "has arcane trinkets and circuits for sale",
+      "is filled with curios that look very old",
+      "has very tall dusty shelves filled with strange items",
+      "has the latest and greatest magic infused items",
+      "is open about their magic use policies"
     ],
     "names": [
       "Wizards of the Coast",
       "The Mysticism Check",
       "Spell Slots Galore",
-      "Level 7 Magic"
+      "Level 7 Magic",
+      "Reliable Arcane Goods"
     ]
   },
   "Augmentations Clinic": {
     "equipment":["Augmentations"],
     "flavour": [
       "has 10 different types of knee joints",
+      "specializes in biotech",
+      "specializes in cybernetics",
+      "has a large range of cybernetics and biotech"
     ],
     "names": [
       "Body Recyclers",
       "The Second Hand Store",
-      "Metal, Carbon, and Plastics Surgery"
-    ]
-  },
-  "Personal Items Store": {
-    "equipment":["Personal Items","Food And Drink","Trade Goods"],
-    "flavour": [
-      "",
-    ],
-    "names": [
-      "Harrys Haberdashery",
-      "Fabrication Hub"
+      "Metal, Carbon, and Plastics Surgery",
+      "Neils Bulk Surgery",
+      "Executive Spares"
     ]
   },
   "Gun Store": {
     "equipment":["Small Arms","Longarms","Heavy Weapons","Sniper Weapons","Special Weapons","Grenades"],
     "flavour": [
       "will only sell to patrons with proper licensing",
+      "holds regular open days to try out new weapons",
+      "has a shooting range out back",
+      "will let you hire weapons on a temporary basis",
+      "specializes in grenades",
+      "specializes in sniper weapons"
     ],
     "names": [
       "Barrels of Barrels",
-      "The Hunters Mark"
+      "The Hunters Mark",
+      "Automatics Boutique",
+      "The Chain Gun Store",
+      "Reds Munitions"
     ]
   },
   "Melee Weapon Store": {
@@ -446,72 +456,102 @@ var stores = {
     "flavour": [
       "has just the basics, all you need for smashing slimes",
       "has restricted and military-grade equipment, but only sells to licensed individuals",
-      "has restricted and military-grade equipment, and will sell to anyone for the right price"
+      "has restricted and military-grade equipment, and will sell to anyone for the right price",
+      "holds regular open days to try out new weapons"
     ],
     "names": [
       "Bloodbath & Beyond",
-      "The Pointy End"
+      "The Pointy End",
+      "Close Combat Pawnshop",
+      "Blade & Bust",
+      "Melee and More"
     ]
   },
   "Ammunition Store": {
     "equipment":["Ammunition","Special Ammunition"],
     "flavour": [
-      "",
+      "has the equipment to keep your weapons powered and armed",
+      "has batteries guaranteed to keep charge for 200 years",
+      "has ammo with shelf lives upwards of 50 years",
+      "is guaranteed to have stock to fit your weapon",
+      "has every type of battery available to the public and some that are not"
     ],
     "names": [
       "Batteries & Bullets",
-      "Battery Barn"
+      "Battery Barn",
+      "Ballistic Supplies",
+      "Jack Flaks"
     ]
   },
   "Upgrade Store": {
     "equipment":["Armor Upgrades","Fusion Seals","Solarion Weapon Crystals"],
     "flavour": [
-      "sells upgardes that will make your equiment perform at its best",
+      "sells upgrades that will make your equipment perform at its best",
+      "has upgrades for any combat system",
+      "will get your combat items ready for combat",
+      "has the armor upgrades you seek",
+      "specializes in weapon fusions"
     ],
     "names": [
-      "Upgrade Hub"
+      "Upgrade Hub",
+      "Everyman Enhancements",
+      "Boost Shack",
+      "Ugly Upgrades",
+      "The Fusion King"
     ]
   },
   "Armor Store": {
     "equipment":["Light Armor","Heavy Armor"],
     "flavour": [
       "has every kind of body plating",
+      "specializes in heavy armor",
+      "specializes in light armor",
+      "will fit you out in a full environmental armored suit",
+      "has the tough kind of synthesised plating"
     ],
     "names": [
       "The Armorer",
       "Pauls Plating",
       "Aegis Protections",
-      "The Shield & Safeguard"
+      "The Shield & Safeguard",
+      "Kineticproof Vest"
     ]
   },
   "Armory": {
     "equipment":["Light Armor","Heavy Armor","Armor Upgrades","Fusion Seals","Solarion Weapon Crystals","Ammunition","Special Ammunition","Small Arms","Longarms","Heavy Weapons","Sniper Weapons","Special Weapons","Grenades","Basic Melee Weapons","Advanced Melee Weapons"],
     "flavour": [
       "carries all manner of items needed for combat",
+      "stocks all manner of combat items, from armor to ammunition",
+      "is a huge store with shelves full of stock",
+      "is a store that specialises in all forms of combat items"
     ],
     "names": [
       "Artys Armory",
-      "Navy Surplus"
+      "Navy Surplus",
+      "Munitions Mega Store",
+      "Gnome Depot"
     ]
   },
 }
 
 var placesOfInterest = {
-
   "Robo Repair": {
     "flavour": [
       "specialises is drone repair",
       "is filled with many junk bots that serve no real purpose",
+      "has pallets of robot parts ready to be installed",
+      "has large broken down security robots",
+      "is a flying drone specialist repairer",
+      "is a pact worlds certified repairer"
     ]
   },
-
   "Warehouse": {
     "flavour": [
       "is a huge facility, yet empty",
       "has countless shelves spanning many kilometers",
       "is a small facility that many locals use",
       "is a front for an Azlanti forward recon party",
-      "reguarly hosts rave parties",
+      "regularly hosts rave parties",
       "was converted into art lofts. Most art students will live here and play on their synths until the early hours of the morning",
       "Is fully stocked with merchandise from a cancelled holo show"
     ]
@@ -538,16 +578,16 @@ var placesOfInterest = {
     "flavour": [
       "will keep your data secure in any event possible",
       "has data safety and retention plans for every person",
-      "will take illegal data if you know the pass phrase",
-      "can take an near infinite amount of data over its vast distrubution networks",
-      "enforces triple terrabyte security phrases with 13 factor biometric authentification "
+      "will take illegal data if you know the passphrase",
+      "can take an near infinite amount of data over its vast distribution networks",
+      "enforces triple terabyte security phrases with 13 factor biometric authentication "
     ]
   },
   "Low Rent Housing Project": {
     "flavour": [
       "has every room packed with multiple families",
       "is home to a lot of random races. Most notable is the surprisingly abundant amount of Gripli’s residing",
-      "has street ball court next door",
+      "has streetball court next door",
       "has small rooms and smaller kitchens",
       "is only lived in by those who can't get out"
     ]
@@ -601,7 +641,7 @@ var placesOfInterest = {
     "flavour": [
       "is full of patients from a recent bio terror attack",
       "is run fully by robots. It’s never hard to get in",
-      "sends birthing robots out to peoples homes so they don't need to come in",
+      "sends birthing robots out to people's homes so they don't need to come in",
       "is a psychiatric hospital",
       "has a ER waiting list, it could takes days to get care"
     ]
@@ -610,10 +650,10 @@ var placesOfInterest = {
   "Luxury Apartments": {
     "flavour": [
       "is open to the public, if you have the credits",
-      "has may famous personalities as tennants",
+      "has may famous personalities as tenants",
       "rents rooms weekly",
       "is about to be knocked down as no one can afford to live here",
-      "will not even let non tennats on the street it is on"
+      "will not even let non tenants on the street it is on"
     ]
   },
   "Media Company": {
@@ -667,7 +707,7 @@ var placesOfInterest = {
       "is always looking for more drivers",
       "is a front for an illegal android trafficking business",
       "is a front for an illegal smuggling business",
-      "will transport almost anything for the right amount of creds",
+      "will transport almost anything for the right amount of credits",
       "is completely clean and above board, they just ship things"
 
     ]
@@ -676,7 +716,7 @@ var placesOfInterest = {
     "flavour": [
       "serves the strongest coffee fusion in the galaxy, it will keep you awake for years",
       "has the most inattentive and aloof staff, mainly young adults from the nearby college",
-      "the tea cakes here are absolutely scrumptous",
+      "the tea cakes here are absolutely scrumptious",
       "over 10,000 types of tea can be synthesised here",
       "overlooks a nice park"
     ]
@@ -695,7 +735,7 @@ var placesOfInterest = {
       "scraps old ships for credits",
       "is where derelict ships go to rot; a veritable graveyard of vessels sit out back",
       "secretly serves the Corpse Fleet",
-      "could probably cobble together a spaceworthy ship from spare parts alone",
+      "could probably cobble together a space worthy ship from spare parts alone",
       "will clean and detail a ship until it looks brand new",
       "has ship parts and upgrades for sale"
     ]
@@ -703,7 +743,7 @@ var placesOfInterest = {
   "Private Security": {
     "flavour": [
       "scraps old ships for credits",
-      "gets most of it’s business from the lenders and bankers in the area. Giving them mostly high dollar bodyguard jobs",
+      "gets most of its business from the lenders and bankers in the area. Giving them mostly high dollar bodyguard jobs",
       "hires mainly exmilitary, from any military including the enemies military",
       "gets most of its business from surrounding stores",
       "only hires people taller than 7 feet",
