@@ -75,3 +75,9 @@ def starshipGenerator():
     resp = make_response(render_template('starship-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
+
+@app.route('/inventory-generator')
+def inventoryGenerator():
+    resp = make_response(render_template('inventory-generator.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp

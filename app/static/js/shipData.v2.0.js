@@ -2890,5 +2890,6 @@ var flavorText = [
 	"Is missing a sizeable part of its hull",
 	"has never left the drydock",
 	"has been to countless solar systems",
-	"has bathed in the light of countless suns"
+	"has bathed in the light of countless suns",
+	"Sports large solar sails"
 ]

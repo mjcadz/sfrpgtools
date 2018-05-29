@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Starfinder Inventory Generator{% endblock %}
+{% block description %}Random inventory generator to help fill your Starfinder stores{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/contentPrint.v2.0.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css') }}">
+{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <h1>Inventory Generator</h1>
+    <p class="lead">Generates store inventories for your Starfinder games. Perfect for printing and handing out to players.</p>
+    <p></p>
+    <div class="container">
+        <div class="dontPrint row">
+            <div class="col-md-4">
+                <select class="selectpicker show-tick" id="sourceDrop" multiple data-style="btn-default" data-width="100%" data-size="10" data-title="Sources" data-selected-text-format="static">
+                  <option selected title="Sources">Core Rulebook</option>
+                  <option selected title="Sources">Alien Archive</option>
+                  <option selected title="Sources">Pact Worlds</option>
+                </select>
+                <div class="form-group">
+                    <label for="inputName">Store Name</label>
+                    <input type="text" class="form-control" id="inputName" placeholder="enter name">
+                </div>
+                <hr style="margin-top: 8px;">
+                <div class="groupDisplay">
+                  <div class="group1">
+                    <label><b>Item Group 1</b></label>
+                    <div class="ItemGroupDropdown1"></div>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <label>Min Level</label>
+                        <select class="selectpicker show-tick" id="MinPicker1" data-style="btn-default" data-width="100%" data-size="5">
+                          <option selected>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                          <option>7</option>
+                          <option>8</option>
+                          <option>9</option>
+                          <option>10</option>
+                          <option>11</option>
+                          <option>12</option>
+                          <option>13</option>
+                          <option>14</option>
+                          <option>15</option>
+                          <option>16</option>
+                          <option>17</option>
+                          <option>18</option>
+                          <option>19</option>
+                          <option>20</option>
+                        </select>
+                      </div>
+                      <div class="col-xs-6">
+                        <label>Max Level</label>
+                        <select class="selectpicker show-tick" id="MaxPicker1" data-style="btn-default" data-width="100%" data-size="5">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                          <option>7</option>
+                          <option>8</option>
+                          <option>9</option>
+                          <option>10</option>
+                          <option>11</option>
+                          <option>12</option>
+                          <option>13</option>
+                          <option>14</option>
+                          <option>15</option>
+                          <option>16</option>
+                          <option>17</option>
+                          <option>18</option>
+                          <option>19</option>
+                          <option selected>20</option>
+                        </select>
+                      </div>
+                    </div>
+                    <label>Max Items From Group</label>
+                    <select class="selectpicker show-tick" id="MaxNumPicker1" data-style="btn-default" data-width="100%" data-size="6">
+                      <option>5</option>
+                      <option selected>10</option>
+                      <option>15</option>
+                      <option>20</option>
+                      <option>25</option>
+                      <option>30</option>
+                      <option>20</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <div class="btn-group addRemove pull-right">
+                    <button type="button" id="addButton" class="btn btn-default btn-sm" onclick="addGroup()"><i class="fas fa-plus"></i></button>
+                    <button type="button" id="removeButton" class="btn btn-default btn-sm" onclick="removeGroup()"><i class="fas fa-minus"></i></button>
+                  </div>
+
+                </div>
+                <P></P>
+                <P></P>
+                <div style="margin-top: 50px;">
+                  <button type="button" onclick="generateInventory()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
+                  <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
+                </div>
+                <P></P>
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+
+    <div class="inventory area">
+
+    </div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/equipmentData.v2.1.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/inventoryGen.v2.0.js') }}"></script>
+{% endblock %}

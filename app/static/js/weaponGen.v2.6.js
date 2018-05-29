@@ -37,7 +37,9 @@ var flavourTextMelee = ["Looks like a ranged weapon",
   "Has clumps of multi colored hair hung from the hilt",
   "Has a gold locket with a picture of a Lashunta hanging from the pommel",
   "Is unnaturally cold to the touch",
-  "Hums a tune while used in battle"
+  "Hums a tune while used in battle",
+
+
 ]
 
 var flavourTextAll = ["looks quite old",
@@ -74,6 +76,11 @@ var flavourTextAll = ["looks quite old",
   "is left handed",
   "needs to be greased reguarly",
   "is covered in dirt and grime",
+  "Looks cheap but functional",
+  "Is much lighter than you expected",
+  "Is much heavier than you expected",
+  "Was painted a garish color",
+  "Is made of an unfamiliar material",
 ]
 
 var flavourTextRanged = ["features an oversized scope",
@@ -141,7 +148,10 @@ var flavourTextRanged = ["features an oversized scope",
   "Has a habit of ejecting spent ammunition at high velocity",
   "Refuses to fit in any conventional holster",
   "Is adorned with charms and runes",
-  "Is stained heavily with blood and oil"
+  "Is stained heavily with blood and oil",
+  "Looks like a children’s toy",
+  "Is deafening when fired"
+
 
 ]
 

@@ -3,7 +3,7 @@ var equipmentData = {
         "Adaptive Biochains": {
             "cost": "Varies",
             "level": "3",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.211",
             "system": "Varies",
             "type": "Biotech"
@@ -11,7 +11,7 @@ var equipmentData = {
         "Antitoxin membrane": {
             "cost": "3,000",
             "level": "5",
-            "sourcebook": "AA",
+            "sourcebook": "aa",
             "sourcepage": "p.11",
             "system": "Skin",
             "type": "Cybernetic"
@@ -99,7 +99,7 @@ var equipmentData = {
         "Cardiac accelerator": {
             "cost": "3,850",
             "level": "6",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.208",
             "system": "Heart",
             "type": "Cybernetic"
@@ -107,7 +107,7 @@ var equipmentData = {
         "Climbing suckers": {
             "cost": "1,200",
             "level": "3",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.211",
             "system": "All feet",
             "type": "Biotech"
@@ -115,7 +115,7 @@ var equipmentData = {
         "Cybernetic arm - dual": {
             "cost": "70,150",
             "level": "14",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.208",
             "system": "Spinal column",
             "type": "Cybernetic"
@@ -123,7 +123,7 @@ var equipmentData = {
         "Cybernetic arm - single": {
             "cost": "24,750",
             "level": "11",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.208",
             "system": "Spinal column",
             "type": "Cybernetic"
@@ -131,7 +131,7 @@ var equipmentData = {
         "Darkvision capacitors - advanced": {
             "cost": "9,000",
             "level": "8",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Eyes",
             "type": "Cybernetic"
@@ -139,7 +139,7 @@ var equipmentData = {
         "Darkvision capacitors - long-range": {
             "cost": "48,950",
             "level": "13",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Eyes",
             "type": "Cybernetic"
@@ -147,7 +147,7 @@ var equipmentData = {
         "Darkvision capacitors - standard": {
             "cost": "1,750",
             "level": "3",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Eyes",
             "type": "Cybernetic"
@@ -155,7 +155,7 @@ var equipmentData = {
         "Datajack - accelerated": {
             "cost": "8,525",
             "level": "8",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Brain",
             "type": "Cybernetic"
@@ -163,7 +163,7 @@ var equipmentData = {
         "Datajack - high-density": {
             "cost": "2,600",
             "level": "5",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Brain",
             "type": "Cybernetic"
@@ -171,7 +171,7 @@ var equipmentData = {
         "Datajack - standard": {
             "cost": "625",
             "level": "2",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Brain",
             "type": "Cybernetic"
@@ -179,7 +179,7 @@ var equipmentData = {
         "Dermal plating - mk 1": {
             "cost": "3,025",
             "level": "5",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Skin",
             "type": "Cybernetic"
@@ -187,7 +187,7 @@ var equipmentData = {
         "Dermal plating - mk 2": {
             "cost": "6,950",
             "level": "7",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Skin",
             "type": "Cybernetic"
@@ -195,7 +195,7 @@ var equipmentData = {
         "Dermal plating - mk 3": {
             "cost": "17,975",
             "level": "9",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Skin",
             "type": "Cybernetic"
@@ -203,7 +203,7 @@ var equipmentData = {
         "Dermal plating - mk 4": {
             "cost": "48,850",
             "level": "12",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Skin",
             "type": "Cybernetic"
@@ -211,7 +211,7 @@ var equipmentData = {
         "Dermal plating - mk 5": {
             "cost": "105,000",
             "level": "14",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Skin",
             "type": "Cybernetic"
@@ -219,7 +219,7 @@ var equipmentData = {
         "Dermal plating - mk 6": {
             "cost": "163,500",
             "level": "16",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Skin",
             "type": "Cybernetic"
@@ -227,7 +227,7 @@ var equipmentData = {
         "Dermal plating - mk 7": {
             "cost": "542,000",
             "level": "19",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.209",
             "system": "Skin",
             "type": "Cybernetic"
@@ -235,7 +235,7 @@ var equipmentData = {
         "Dragon gland - standard": {
             "cost": "19,125",
             "level": "10",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.211",
             "system": "Throat",
             "type": "Biotech"
@@ -243,7 +243,7 @@ var equipmentData = {
         "Dragon gland - wyrm": {
             "cost": "181,500",
             "level": "16",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.211",
             "system": "Throat",
             "type": "Biotech"
@@ -251,7 +251,7 @@ var equipmentData = {
         "Dragon gland - wyrmling": {
             "cost": "755",
             "level": "2",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.211",
             "system": "Throat",
             "type": "Biotech"
@@ -299,7 +299,7 @@ var equipmentData = {
         "Gill sheath": {
             "cost": "95",
             "level": "1",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.211",
             "system": "Lungs",
             "type": "Biotech"
@@ -347,7 +347,7 @@ var equipmentData = {
         "Hideaway limb - quickdraw": {
             "cost": "3,050",
             "level": "5",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.210",
             "system": "Arm or Leg",
             "type": "Cybernetic"
@@ -355,7 +355,7 @@ var equipmentData = {
         "Hideaway limb - standard": {
             "cost": "150",
             "level": "1",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.210",
             "system": "Arm or Leg",
             "type": "Cybernetic"
@@ -363,7 +363,7 @@ var equipmentData = {
         "Ocucloak processor": {
             "cost": "2,200",
             "level": "4",
-            "sourcebook": "AA",
+            "sourcebook": "aa",
             "sourcepage": "p.103",
             "system": "Brain",
             "type": "Biotech"
@@ -371,7 +371,7 @@ var equipmentData = {
         "Personal upgrade - mk 1": {
             "cost": "1,400",
             "level": "3",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.212",
             "system": "-",
             "type": "-"
@@ -379,7 +379,7 @@ var equipmentData = {
         "Personal upgrade - mk 2": {
             "cost": "6,500",
             "level": "7",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.212",
             "system": "-",
             "type": "-"
@@ -387,7 +387,7 @@ var equipmentData = {
         "Personal upgrade - mk 3": {
             "cost": "75,000",
             "level": "14",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.212",
             "system": "-",
             "type": "-"
@@ -395,7 +395,7 @@ var equipmentData = {
         "Polyhand": {
             "cost": "71,000",
             "level": "14",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.210",
             "system": "Hand",
             "type": "Cybernetic"
@@ -403,7 +403,7 @@ var equipmentData = {
         "Prosthetic limb - standard": {
             "cost": "100",
             "level": "1",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.210",
             "system": "Arm and Hand or Leg and Foot",
             "type": "Cybernetic"
@@ -411,7 +411,7 @@ var equipmentData = {
         "Prosthetic limb - storage": {
             "cost": "1,450",
             "level": "3",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.210",
             "system": "Arm and Hand or Leg and Foot",
             "type": "Cybernetic"
@@ -419,7 +419,7 @@ var equipmentData = {
         "Respiration compounder": {
             "cost": "250",
             "level": "1",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.210",
             "system": "Lungs",
             "type": "Cybernetic"
@@ -427,7 +427,7 @@ var equipmentData = {
         "Retinal reflectors": {
             "cost": "1,350",
             "level": "3",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.210",
             "system": "Eyes",
             "type": "Cybernetic"
@@ -475,7 +475,7 @@ var equipmentData = {
         "Shortwave receiver-transmitter": {
             "cost": "6,500",
             "level": "7",
-            "sourcebook": "AA",
+            "sourcebook": "aa",
             "sourcepage": "p.11",
             "system": "Brain",
             "type": "Cybernetic"
@@ -483,7 +483,7 @@ var equipmentData = {
         "Skin of the chameleon": {
             "cost": "4,050",
             "level": "6",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.211",
             "system": "Skin",
             "type": "Biotech"
@@ -491,7 +491,7 @@ var equipmentData = {
         "Speed suspension - complete": {
             "cost": "32,900",
             "level": "12",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.211",
             "system": "All legs",
             "type": "Cybernetic"
@@ -499,7 +499,7 @@ var equipmentData = {
         "Speed suspension - minimal": {
             "cost": "1,900",
             "level": "4",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.211",
             "system": "All legs",
             "type": "Cybernetic"
@@ -507,7 +507,7 @@ var equipmentData = {
         "Speed suspension - standard": {
             "cost": "8,800",
             "level": "8",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.211",
             "system": "All legs",
             "type": "Cybernetic"
@@ -515,7 +515,7 @@ var equipmentData = {
         "Tympanal cluster": {
             "cost": "2,150",
             "level": "4",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.212",
             "system": "Ears",
             "type": "Biotech"
@@ -563,7 +563,7 @@ var equipmentData = {
         "Venom spur": {
             "cost": "625",
             "level": "2",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.212",
             "system": "Hand",
             "type": "Biotech"
@@ -571,7 +571,7 @@ var equipmentData = {
         "Vocal modulator": {
             "cost": "125",
             "level": "1",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.211",
             "system": "Throat",
             "type": "Cybernetic"
@@ -579,7 +579,7 @@ var equipmentData = {
         "Voice amplifier": {
             "cost": "125",
             "level": "1",
-            "sourcebook": "AA",
+            "sourcebook": "aa",
             "sourcepage": "p.11",
             "system": "Throat",
             "type": "Cybernetic"
@@ -587,7 +587,7 @@ var equipmentData = {
         "Wide-spectrum ocular implant": {
             "cost": "2,825",
             "level": "5",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.211",
             "system": "Eyes",
             "type": "Cybernetic"
@@ -595,7 +595,7 @@ var equipmentData = {
         "Wildwise": {
             "cost": "500",
             "level": "2",
-            "sourcebook": "CRB",
+            "sourcebook": "crb",
             "sourcepage": "p.212",
             "system": "Throat",
             "type": "Biotech"
@@ -2641,114 +2641,141 @@ var equipmentData = {
     "Computer Countermeasures": {
         "Computer Countermeasure - Alarm": {
             "cost": "10",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Countermeasure - Fake Shell": {
             "cost": "25% of computers base price + 10% of price of control and data modules",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Countermeasure - Feedback": {
             "cost": "500",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Countermeasure - Firewall": {
             "cost": "20% of computers base price",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Countermeasure - Lockout": {
             "cost": "100",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Countermeasure - Shock Grid 1": {
             "cost": "500",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Countermeasure - Shock Grid 2": {
             "cost": "2000",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Countermeasure - Shock Grid 3": {
             "cost": "5000",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Countermeasure - Shock Grid 4": {
             "cost": "20000",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Countermeasure - Shock Grid 5": {
             "cost": "50000",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Countermeasure - Wipe": {
             "cost": "10",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         }
     },
     "Computer Modules": {
         "Computer Module - Control (Complex)": {
             "cost": "10% of controlled device",
+            "sourcebook": "crb",
             "sourcepage": "p.215"
         },
         "Computer Module - Secure Data (Average)": {
             "cost": "10",
+            "sourcebook": "crb",
             "sourcepage": "p.215"
         },
         "Computer Module - Secure Data (Large)": {
             "cost": "varies",
+            "sourcebook": "crb",
             "sourcepage": "p.215"
         },
         "Computer Module - Secure Data (Specific)": {
             "cost": "1",
+            "sourcebook": "crb",
             "sourcepage": "p.215"
         },
         "Computer Module - Spell Chip": {
             "cost": "110% of  component spell gem",
+            "sourcebook": "crb",
             "sourcepage": "p.215"
         }
     },
     "Computer Upgrades": {
         "Computer Upgrade - Artificial Personality": {
             "cost": "10% of computers base price",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Upgrade - Hardened": {
             "cost": "50% of computers base price",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Upgrade - Miniaturization": {
             "cost": "10% of computers base price",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Upgrade - Range I (100 Feet)": {
             "cost": "5",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Upgrade - Range Ii (1 Mile)": {
             "cost": "50",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Upgrade - Range Iii (Planetwide)": {
             "cost": "100",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Upgrade - Security 1": {
             "cost": "25% of computers base price",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Upgrade - Security 2": {
             "cost": "50% of computers base price",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Upgrade - Security 3": {
             "cost": "70% of computers base price",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Upgrade - Security 4": {
             "cost": "100% of computers base price",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         },
         "Computer Upgrade - Self-Charging": {
             "cost": "10% of computers base price",
+            "sourcebook": "crb",
             "sourcepage": "p.216"
         }
     },

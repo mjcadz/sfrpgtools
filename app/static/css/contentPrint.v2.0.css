@@ -1,0 +1,20 @@
+/* css for print buttons*/
+@media print {
+  .btn, .btn-finish, .alert-this, .footer, .dontPrint, .progress, .top-spacer {
+    display:none!important;
+  }
+  .jumbotron > h1, .jumbotron > p {
+    display:none!important;
+  }
+  #capture {
+    max-width: 100%!important;
+    padding-top: 0px!important;
+  }
+  .jumbotron {
+    padding-top: 0px!important;
+  }
+  .edit-block, .wizard-card, h3, h4 {
+    padding-top: 0px!important;
+    margin-top: 0px!important;
+  }
+}
