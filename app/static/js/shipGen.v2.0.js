@@ -405,6 +405,8 @@ function generateShip() {
 
   //PRINT
   displayShipBlock(shipBlock)
+
+  ga('send', 'event', 'Generation', 'starship', tier + ":" + frame);
 }
 
 function displayShipBlock(shipBlock) {

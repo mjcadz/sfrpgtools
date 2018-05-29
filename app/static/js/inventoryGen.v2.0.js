@@ -114,6 +114,8 @@ function generateInventory() {
 
   inventoryTable(inventory)
 
+  ga('send', 'event', 'Generation', 'inventory', Object.keys(inventory).join(':'));
+
 }
 
 function rollInventory(inventory,categories,minLevel,maxLevel,maxItems,sourcebooks) {

@@ -514,7 +514,6 @@ var placesOfInterest = {
       "reguarly hosts rave parties",
       "was converted into art lofts. Most art students will live here and play on their synths until the early hours of the morning",
       "Is fully stocked with merchandise from a cancelled holo show"
-
     ]
   },
   "Legal Firm": {
@@ -522,14 +521,17 @@ var placesOfInterest = {
       "is run by the shadiest legal team this side of the gap",
       "has an owner who only takes cases they know they can win",
       "specializes in Xenowarden overreach cases",
-      "is completely messy with papers, books and binders scattered all around the office"
+      "is completely messy with papers, books and binders scattered all around the office",
+      "specializes in starship crash cases"
     ]
   },
   "Capsule Hotel": {
     "flavour": [
       "has rooms to cater to every race and religion",
-      "is the owner of the largest heart shaped bed in the galaxy. Many people come from far far away to stay at the honeymoon suite, suitable for 40+ guests"
-
+      "is the owner of the largest heart shaped bed in the galaxy. Many people come from far far away to stay at the honeymoon suite, suitable for 40+ guests",
+      "has the cheapest rooms available",
+      "will upgrade you to a double capsule if you book on your birthday",
+      "only charges you if you touch the bed"
     ]
   },
   "Data Storage": {
@@ -544,14 +546,19 @@ var placesOfInterest = {
   "Low Rent Housing Project": {
     "flavour": [
       "has every room packed with multiple families",
-      "is home to a lot of random races. Most notable is the surprisingly abundant amount of Gripli’s residing"
+      "is home to a lot of random races. Most notable is the surprisingly abundant amount of Gripli’s residing",
+      "has street ball court next door",
+      "has small rooms and smaller kitchens",
+      "is only lived in by those who can't get out"
     ]
   },
-
   "Designated Starship Parking": {
     "flavour": [
       "is a large flat area of land with many waiting starships",
       "is a huge automated facility that parks and retrieves ship from underground",
+      "it just a flat space of land, you'll have to walk the rest of the way",
+      "has designated parking times, you will need to shift spaces soon",
+      "is a multi floored facility mostly for long term parking"
     ]
   },
   "Fast Food Franchise": {
@@ -559,63 +566,99 @@ var placesOfInterest = {
       "has genetically modified 'chicken wings' from some backwater blue planet",
       "specializes in cannibalistic delicacies",
       "named Crumb’s Crunchy Delights, takes care of the homeless population in the area",
-      "has been mainly using bugs for it’s protein since the mass cow extinction of 2347 AD. The Shirren population boycotts such establishments"
+      "has been mainly using bugs for it’s protein since the mass cow extinction of 2347 AD. The Shirren population boycotts such establishments",
+      "has golden arches adorning every entryway"
     ]
   },
   "Police Department": {
     "flavour": [
       "protects the rich and serves the richer",
+      "will take any case no matter how petty",
+      "upholds the changing daily laws of the pact worlds",
+      "doesn't have enough resources",
+      "tackles future crime"
     ]
   },
   "College": {
     "flavour": [
       "has a bunch of holo courses popular among the middle aged",
-      "is for the liberal art minds. The biggest courses are in music theory, taught by one of the last known bards in existence, Sir Elton John"
+      "is for the liberal art minds. The biggest courses are in music theory, taught by one of the last known bards in existence, Sir Elton John",
+      "is one of the last remaining schools where people physically attend",
+      "is completely hosted on the infosphere",
+      "will only take applications from those who pass a secret test"
     ]
   },
   "Government Building": {
     "flavour": [
       "where the laws are made",
+      "is constantly flooded with protestors",
+      "is constantly under threat from local militia",
+      "is open every hour of every day",
+      "has robots patrolling every entrance"
     ]
   },
   "Hospital": {
     "flavour": [
       "is full of patients from a recent bio terror attack",
-      "is run fully by robots. It’s never hard to get in"
+      "is run fully by robots. It’s never hard to get in",
+      "sends birthing robots out to peoples homes so they don't need to come in",
+      "is a psychiatric hospital",
+      "has a ER waiting list, it could takes days to get care"
     ]
   },
 
   "Luxury Apartments": {
     "flavour": [
       "is open to the public, if you have the credits",
+      "has may famous personalities as tennants",
+      "rents rooms weekly",
+      "is about to be knocked down as no one can afford to live here",
+      "will not even let non tennats on the street it is on"
     ]
   },
   "Media Company": {
     "flavour": [
       "is the local source of news and entertainment",
+      "has a huge globe atop their massive building",
+      "is rumored to have a super hero working as a reporter",
+      "is the only place in the quadrant that still prints news",
+      "sends a story to the infosphere every 60 milliseconds"
     ]
   },
   "Starship Dealership": {
     "flavour": [
       "can order you a new ship from their extensive catalog",
-      "specializes in bulk haulers"
+      "specializes in bulk haulers",
+      "has a range of ships docked in orbit",
+      "only sells luxury yachts",
+      "does not sell ships with drift drives as per local regulations"
     ]
   },
   "Vehicle Rental": {
     "flavour": [
       "hires out hover bikes and hover cars",
+      "only hires cars to vesk, they are the most careful",
+      "has vehicle available with weapons attached",
+      "has insurance that costs 5 times as much as the rental",
+      "will not hire to halflings, last time was the final time."
     ]
   },
   "VRcade": {
     "flavour": [
       "has a catalog of millions of games and movies",
+      "gamers can make credits here if they are good enough",
+      "has a lounge that shows 3D romantic comedies every hour of every day",
+      "is where most teens go to get adventuring out of their system",
+      "is the most popular form of entertainment in the area"
     ]
   },
   "Habitation Stack": {
     "flavour": [
       "contains self sustaining habitation pods",
       "is full of some of the more smaller races",
-      "goes higher than most can see"
+      "goes higher than most can see",
+      "has habitation pods that have been further subdivided by smaller species",
+      "is perfect for sleeping but no room for any activities"
     ]
   },
   "Bulk Transport Company": {
@@ -623,35 +666,48 @@ var placesOfInterest = {
       "can get your items from A to Galaxy 45-B7K",
       "is always looking for more drivers",
       "is a front for an illegal android trafficking business",
-      "is a front for an illegal smuggling business"
+      "is a front for an illegal smuggling business",
+      "will transport almost anything for the right amount of creds",
+      "is completely clean and above board, they just ship things"
 
     ]
   },
   "Cafe": {
     "flavour": [
       "serves the strongest coffee fusion in the galaxy, it will keep you awake for years",
-      "has the most inattentive and aloof staff, mainly young adults from the nearby college"
+      "has the most inattentive and aloof staff, mainly young adults from the nearby college",
+      "the tea cakes here are absolutely scrumptous",
+      "over 10,000 types of tea can be synthesised here",
+      "overlooks a nice park"
     ]
   },
   "Bank": {
     "flavour": [
       "is connected to a vast banking network offering near infinite credit",
       "offers quantum safe deposits; deposit it here, remove it from any of their 80 locations",
-      "was once robbed weekly, now has 4 large security guards asking you to remove your glasses and hat before entering"
+      "was once robbed weekly, now has 4 large security guards asking you to remove your glasses and hat before entering",
+      "was the first bank to offer fleet loans to up and coming militaristic planets",
+      "charges the rich extra fees and spreads the earnings among the poor"
     ]
   },
   "Shipyard": {
     "flavour": [
-      "craps old ships for credits",
+      "scraps old ships for credits",
       "is where derelict ships go to rot; a veritable graveyard of vessels sit out back",
-      "secretly serves the Corpse Fleet"
+      "secretly serves the Corpse Fleet",
+      "could probably cobble together a spaceworthy ship from spare parts alone",
+      "will clean and detail a ship until it looks brand new",
+      "has ship parts and upgrades for sale"
     ]
   },
   "Private Security": {
     "flavour": [
       "scraps old ships for credits",
       "gets most of it’s business from the lenders and bankers in the area. Giving them mostly high dollar bodyguard jobs",
-      "hires mainly exmilitary, from any military including the enemies military"
+      "hires mainly exmilitary, from any military including the enemies military",
+      "gets most of its business from surrounding stores",
+      "only hires people taller than 7 feet",
+      "has a reputation for 'beating' the competition"
     ]
   }
 }
@@ -713,6 +769,7 @@ var buildingFlavour = [
   "Smells like cookies on the inside",
   "Is well known in the community as a dangerous place",
   "Is rumored to be haunted",
+  "is owned by a mega corp"
 
 ]
 
@@ -1000,6 +1057,8 @@ function generateSettlement() {
 
   //display
   printPanel(randAlign,randPop,randType,randGov,randQuals,itemDrop,sizePick)
+
+  ga('send', 'event', 'Generation', 'settlement', sizePick);
 
 }
 
