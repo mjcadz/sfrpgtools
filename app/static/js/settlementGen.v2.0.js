@@ -1084,7 +1084,7 @@ function generateSettlement() {
   } else if (["planetwide city"].includes(randType)) {
     randPop = getRandomInt(20000000000, 2000000000000);
     randPop = Math.round(randPop/1000000000)*1000000000;
-    randPop = randPop.toString() + popPercentages()
+    randPop = randPop.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + popPercentages()
   } else {
     randPop = getPopulation(sizePick)
     if (Number(randPop.replace(/,/g , "")) > 20){
