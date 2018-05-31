@@ -5,11 +5,9 @@ function changePriceButton(price) {
     $('.buybutton3').hide();
     $('.buybutton4').hide();
     $('.buybutton5').hide();
-    $('.buybutton6').hide();
-    $('.buybutton7').hide();
-    $('.buybutton8').hide();
-    $('.buybutton9').hide();
     $('.buybutton10').hide();
+    $('.buybutton15').hide();
+    $('.buybutton20').hide();
 
   if (price =='$1'){
     $('.buybutton1').show();
@@ -21,14 +19,10 @@ function changePriceButton(price) {
     $('.buybutton4').show();
   } else if (price =='$5'){
     $('.buybutton5').show();
-  } else if (price =='$6'){
-    $('.buybutton6').show();
-  } else if (price =='$7'){
-    $('.buybutton7').show();
-  } else if (price =='$8'){
-    $('.buybutton8').show();
-  } else if (price =='$9'){
-    $('.buybutton9').show();
+  } else if (price =='$15'){
+    $('.buybutton15').show();
+  } else if (price =='$20'){
+    $('.buybutton20').show();
   } else if (price =='$10'){
     $('.buybutton10').show();
   }else {
