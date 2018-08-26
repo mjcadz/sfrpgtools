@@ -84,7 +84,7 @@ function generateLoot() {
   var aplmod = Number($('#APLDrop').val().replace("APL ","").trim());
   var crmod = ($('#CRDrop').val().replace("CR ","")).trim();
   var moremod = ($('#moreDrop').val().replace("More ","")).trim();
-  var sourcebooks = $('#sourceDrop').val();
+  var sourcebooks = $('#sourceDrop').val().join(',');
   var wealth = crWealth[crmod];
 
   if (sourcebooks.length == 0){
@@ -95,9 +95,11 @@ function generateLoot() {
   }
 
   //replace book names with shortened name
-  sourcebooks = sourcebooks.map(function(x){ return x.replace("Core Rulebook","crb") });
-  sourcebooks = sourcebooks.map(function(x){ return x.replace("Alien Archive","aa") });
-  sourcebooks = sourcebooks.map(function(x){ return x.replace("Pact Worlds","pw") });
+  sourcebooks = sourcebooks.replace("Core Rulebook","crb");
+  sourcebooks = sourcebooks.replace("Alien Archive","aa");
+  sourcebooks = sourcebooks.replace("Pact Worlds","pw");
+  sourcebooks = sourcebooks.replace("Armory","arm");
+  sourcebooks = sourcebooks.replace("Dead Suns (1-6)","DS1,DS2,DS3,DS4,DS5,DS6");
   //
   //BUILD LIST
   //

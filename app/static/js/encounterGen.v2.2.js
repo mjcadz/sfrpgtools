@@ -348,7 +348,7 @@ function buildFilter() {
 
   //sources are used in both modes
   var source = $('#SourcePicker').val().toString().trim();
-  source = source.replace('Alien Archive','AA,CRB').replace('Dead Suns 1-5','DS1,DS2,DS3,DS4,DS5').replace('Pact Worlds','PW')
+  source = source.replace('Alien Archive','AA,CRB').replace('Dead Suns 1-6','DS1,DS2,DS3,DS4,DS5,DS6').replace('Pact Worlds','PW')
 
   if (source != '') {
     if (source.includes(',')) {

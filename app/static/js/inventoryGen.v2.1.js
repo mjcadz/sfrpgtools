@@ -75,7 +75,7 @@ function clearOutput() {
 
 function generateInventory() {
 
-  var sourcebooks = $('#sourceDrop').val();
+  var sourcebooks = $('#sourceDrop').val().join(',');
 
   if (sourcebooks.length == 0){
     var $outputArea = $(".inventory.area").first();
@@ -85,9 +85,11 @@ function generateInventory() {
   }
 
   //replace book names with shortened name
-  sourcebooks = sourcebooks.map(function(x){ return x.replace("Core Rulebook","crb") });
-  sourcebooks = sourcebooks.map(function(x){ return x.replace("Alien Archive","aa") });
-  sourcebooks = sourcebooks.map(function(x){ return x.replace("Pact Worlds","pw") });
+  sourcebooks = sourcebooks.replace("Core Rulebook","crb");
+  sourcebooks = sourcebooks.replace("Alien Archive","aa");
+  sourcebooks = sourcebooks.replace("Pact Worlds","pw");
+  sourcebooks = sourcebooks.replace("Armory","arm");
+  sourcebooks = sourcebooks.replace("Dead Suns (1-6)","DS1,DS2,DS3,DS4,DS5,DS6");
 
   inventory = {}
 
