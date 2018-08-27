@@ -101,7 +101,8 @@ var shipSizes = [
   "Large",
   "Huge",
   "Gargantuan",
-  "Colossal"
+  "Colossal",
+  "Supercolossal"
 ];
 
 var shipArmor = {
@@ -661,7 +662,7 @@ var shipDefenses = {
 var shipDriftEngines = {
 	"Signal Basic": {
 		"BPCostMultiplier": 2,
-		"maxSize": 7,
+		"maxSize": 8,
 		"minPCU": 2,
 		"value": {
 			"driftEngineRating": 1
@@ -881,6 +882,116 @@ var shipExpansionBays = {
 		"description": "A tech workshop contains all the space and tools necessary to craft technological items (see page 235), though the crafter must still provide the necessary raw materials. Such a workshop reduces the crafting time by half.",
 		"minSize": 1,
 		"slots":1
+	},
+	"Brig": {
+		"cost": {
+			"BP": 1,
+			"PCU": 1
+		},
+		"description": "A brig contains all the necessary restraints and security systems to incarcerate up to eight Medium creatures.",
+		"minSize": 1,
+		"slots": 1,
+		"source": "pw"
+	},
+	"Drift shadow projector": {
+		"cost": {
+			"BP": 15,
+			"PCU": 5
+		},
+		"description": "Created by the Hellknights to aid them in capturing enemy vessels, this device creates an area of “Drift shadow” when activated. The Drift shadow extends out to a range of 10 hexes from the activating ship, and each vessel in this area treats the Drift rating of its engine as if it were 2 lower. If this reduces the engine’s rating to less than 1, that vessel cannot enter the Drift while in the shadow. Ships attempting enter normal space from the Drift into an area of Drift shadow are affected in the same way. Shadows created by multiple vessels stack, making it impossible for any ship to enter or exit the Drift",
+		"minSize": 1,
+		"slots": 1,
+		"source": "pw"
+	},
+	"Hive bay": {
+		"cost": {
+			"BP": 10,
+			"PCU": 5
+		},
+		"description": "Xenowarden capital ships have the ability to launch pod ships (see pw page 162) to use as shuttles or other short-range vessels. A hive bay can launch up to two pod ships. For each pod launched in this way, the arkship loses 15 Hull Points and takes a –2 penalty to its AC and TL, and all crew actions take a –2 penalty. As long as the capital ship has an unoccupied slot in a hive bay, it can reabsorb a pod ship to regain these Hull Points and negate the penalties. If the pod returns damaged, the capital vessel regains 1 fewer Hull Point for every 2 points of Hull Point damage taken by the pod ship. The penalties are negated regardless of the pod ship’s condition.",
+		"minSize": 1,
+		"slots": 1,
+		"source": "pw"
+	},
+	"Hydroponic garden": {
+		"cost": {
+			"BP": 5,
+			"PCU": 0
+		},
+		"description": "This space holds an entirely self-sustaining garden, complete with oxygen recycling, food production, and lighting that fosters advanced growth. A hydroponic garden takes up two expansion bays and can provide food for up to 10 Medium-sized creatures indefinitely, even if the rest of the vessel is without full power or propulsion. Multiple hydroponic gardens can be linked together to form one massive garden space.",
+		"minSize": 1,
+		"slots": 1,
+		"source": "pw"
+	},
+	"Launch tubes": {
+		"cost": {
+			"BP": 5,
+			"PCU": 10
+		},
+		"description": "Designed to fit on Medium and Large vessels, these tubes allow a ship to carry a single smaller vessel that can be launched at the start of any helm phase. A launch tube takes up two expansion bays and can hold one Tiny starship. If a vessel needs to dock in a launch tube during combat, it occurs at the end of the helm phase and requires a successful DC 10 Piloting skill check; this check takes a –1 penalty for each hex the smaller ship has moved this round. A failed check means that the ship doesn’t dock with the larger vesse.",
+		"minSize": 5,
+		"slots": 1,
+		"source": "pw"
+	},
+	"Launch tubes": {
+		"cost": {
+			"BP": 5,
+			"PCU": 10
+		},
+		"description": "Designed to fit on Medium and Large vessels, these tubes allow a ship to carry a single smaller vessel that can be launched at the start of any helm phase. A launch tube takes up two expansion bays and can hold one Tiny starship. If a vessel needs to dock in a launch tube during combat, it occurs at the end of the helm phase and requires a successful DC 10 Piloting skill check; this check takes a –1 penalty for each hex the smaller ship has moved this round. A failed check means that the ship doesn’t dock with the larger vesse.",
+		"minSize": 5,
+		"slots": 1,
+		"source": "pw"
+	},
+	"Launch tubes": {
+		"cost": {
+			"BP": 5,
+			"PCU": 10
+		},
+		"description": "Designed to fit on Medium and Large vessels, these tubes allow a ship to carry a single smaller vessel that can be launched at the start of any helm phase. A launch tube takes up two expansion bays and can hold one Tiny starship. If a vessel needs to dock in a launch tube during combat, it occurs at the end of the helm phase and requires a successful DC 10 Piloting skill check; this check takes a –1 penalty for each hex the smaller ship has moved this round. A failed check means that the ship doesn’t dock with the larger vesse.",
+		"minSize": 5,
+		"slots": 1,
+		"source": "pw"
+	},
+	"Launch tubes": {
+		"cost": {
+			"BP": 5,
+			"PCU": 10
+		},
+		"description": "Designed to fit on Medium and Large vessels, these tubes allow a ship to carry a single smaller vessel that can be launched at the start of any helm phase. A launch tube takes up two expansion bays and can hold one Tiny starship. If a vessel needs to dock in a launch tube during combat, it occurs at the end of the helm phase and requires a successful DC 10 Piloting skill check; this check takes a –1 penalty for each hex the smaller ship has moved this round. A failed check means that the ship doesn’t dock with the larger vesse.",
+		"minSize": 5,
+		"slots": 1,
+		"source": "pw"
+	},
+	"Arcane mortuary": {
+		"cost": {
+			"BP": 2,
+			"PCU": 1
+		},
+		"description": "An arcane mortuary contains equipment that aids spellcasters in creating undead. A spellcaster using this mortuary must still provide any special materials that undead creation requires. The benefit of using the arcane mortuary is that undead created there have 10% more Hit Points than a typical undead creature of the same CR. An arcane mortuary can also store up to five Medium or smaller corpses without them deteriorating due to time. One Large corpse can be stored in place of two Medium ones.",
+		"minSize": 1,
+		"slots": 1,
+		"source": "ds"
+	},
+	"Corpse recycler": {
+		"cost": {
+			"BP": 2,
+			"PCU": 2
+		},
+		"description": "A corpse recycler allows a starship crew to render bodies into parts for necrografts (Starfinder Adventure Path #3: Splintered Worlds 42). In a process that takes 1 hour, a carcass fed into the recycler produces a number of necrograft UPBs equal to 10 × the CR of the creature from which the corpse originated. These UPBs can be used only to create necrografts.",
+		"minSize": 1,
+		"slots": 1,
+		"source": "ds"
+	},
+	"Ghost drive": {
+		"cost": {
+			"BP": 5,
+			"PCU": 10
+		},
+		"description": "A ghost drive can be installed only on a Large or smaller starship. During the helm phase, as a science officer action, you can attempt a Computers check (DC = 10 + 1-1/2 × the starship’s tier) to activate the ghost drive. If the check is successful, the ghost drive becomes active and the vessel in which it is equipped becomes insubstantial. An active ghost drive has several effects in starship combat. The drive pulls power from the thrusters, so the insubstantial starship’s speed is 2 lower, and its distance between turns is 1 higher. An insubstantial starship can move through hexes containing enemy starships without allowing those foes to make free attacks. Additionally, if other starships move	through the hex containing the insubstantial starship, that	does not allow it to make free attacks.",
+		"minSize": 1,
+		"slots": 1,
+		"source": "ds"
 	}
 };
 
@@ -1304,6 +1415,75 @@ var shipFrames = {
 			"piloting": 0,
 			"turn": 2
 		}
+	},
+	"Base Ship": {
+		"cost": {
+			"BP": 250
+		},
+		"maneuverability": "clumsy",
+		"mounts": {
+			"ForwardArc": {
+				"heavy": 4
+			},
+			"PortArc": {
+				"heavy": 4
+			},
+			"StarboardArc": {
+				"heavy": 4
+			},
+			"Turret": {
+				"capital": 2
+			}
+		},
+		"size": 8,
+		"value": {
+			"CT": 90,
+			"DT": 15,
+			"ExpansionBays": 30,
+			"HP": 450,
+			"HPIncrement": 75,
+			"maxCrew": 600,
+			"minCrew": 150,
+			"piloting": -2,
+			"turn": 4
+		}
+	},
+	"Ultranought": {
+		"cost": {
+			"BP": 350
+		},
+		"maneuverability": "clumsy",
+		"mounts": {
+			"ForwardArc": {
+				"capital": 2,
+				"heavy": 4,
+				"spinal": 1
+			},
+			"PortArc": {
+				"capital": 2,
+				"heavy": 3
+			},
+			"StarboardArc": {
+				"capital": 2,
+				"heavy": 3
+			},
+			"Turret": {
+				"capital": 1,
+				"heavy": 2
+			}
+		},
+		"size": 8,
+		"value": {
+			"CT": 110,
+			"DT": 20,
+			"ExpansionBays": 30,
+			"HP": 550,
+			"HPIncrement": 100,
+			"maxCrew": 700,
+			"minCrew": 250,
+			"piloting": -2,
+			"turn": 4
+		}
 	}
 };
 
@@ -1526,6 +1706,36 @@ var shipPowerCores = {
 		"minSize": 1,
 		"value": {
 			"PCU": 140
+		}
+	},
+	"Titan Light": {
+		"cost": {
+			"BP": 50
+		},
+		"maxSize": 8,
+		"minSize": 8,
+		"value": {
+			"PCU": 700
+		}
+	},
+	"Titan Heavy": {
+		"cost": {
+			"BP": 60
+		},
+		"maxSize": 8,
+		"minSize": 8,
+		"value": {
+			"PCU": 950
+		}
+	},
+	"Titan Ultra": {
+		"cost": {
+			"BP": 70
+		},
+		"maxSize": 8,
+		"minSize": 8,
+		"value": {
+			"PCU": 1200
 		}
 	}
 };
@@ -2200,6 +2410,39 @@ var shipThrusters = {
 			"hexSpeed": 8,
 			"piloting": 0
 		}
+	},
+	"SC4 Thrusters": {
+		"cost": {
+			"BP": 16,
+			"PCU": 300
+		},
+		"size": 8,
+		"value": {
+			"hexSpeed": 4,
+			"piloting": 1
+		}
+	},
+	"SC6 Thrusters": {
+		"cost": {
+			"BP": 20,
+			"PCU": 400
+		},
+		"size": 8,
+		"value": {
+			"hexSpeed": 6,
+			"piloting": 0
+		}
+	},
+	"SC8 Thrusters": {
+		"cost": {
+			"BP": 24,
+			"PCU": 500
+		},
+		"size": 8,
+		"value": {
+			"hexSpeed": 8,
+			"piloting": -1
+		}
 	}
 };
 
@@ -2734,7 +2977,166 @@ var shipWeapons = {
 		"range": "Long",
 		"special": "Line",
 		"type": "Direct"
-	}
+	},
+	"Mining Laser": {
+		"class": "Light",
+		"cost": {
+			"BP": 5,
+			"PCU": 10
+		},
+		"damage": "2d6",
+		"range": "Short",
+		"special": "Burrowing",
+		"type": "Direct",
+		"source": "pw"
+	},
+	"Light spore torpedo launcher": {
+		"class": "Light",
+		"cost": {
+			"BP": 5,
+			"PCU": 5
+		},
+		"damage": "3d6",
+		"hexSpeed": 14,
+		"range": "Medium",
+		"special": "Limited fire 5, spore",
+		"type": "Tracking",
+		"source": "pw"
+	},
+	"Heavy spore torpedo launcher": {
+		"class": "Heavy",
+		"cost": {
+			"BP": 10,
+			"PCU": 10
+		},
+		"damage": "5d8",
+		"hexSpeed": 12,
+		"range": "Medium",
+		"special": "Limited fire 5, spore",
+		"type": "Tracking",
+		"source": "pw"
+	},
+	"Gravity annihilator": {
+		"class": "Spinal",
+		"cost": {
+			"BP": 60,
+			"PCU": 50
+		},
+		"damage": "8d6 x 10",
+		"range": "Long",
+		"special": "Tractor beam",
+		"type": "Direct",
+		"source": "ds"
+	},
+	"Hypermass cannon": {
+		"class": "Spinal",
+		"cost": {
+			"BP": 30,
+			"PCU": 40
+		},
+		"damage": "6d6 x 10",
+		"range": "Long",
+		"special": "Line",
+		"type": "Direct",
+		"source": "ds"
+	},
+	"Particle acceleration gun": {
+		"class": "Spinal",
+		"cost": {
+			"BP": 30,
+			"PCU": 50
+		},
+		"damage": "9d4 x 10",
+		"range": "Long",
+		"special": "Line",
+		"type": "Direct",
+		"source": "ds"
+	},
+	"Nova ram": {
+		"class": "Spinal",
+		"cost": {
+			"BP": 45,
+			"PCU": 75
+		},
+		"damage": "6d10 x 10",
+		"range": "Long",
+		"special": "Line",
+		"type": "Direct",
+		"source": "ds"
+	},
+	"Ultra plasma cannon": {
+		"class": "Spinal",
+		"cost": {
+			"BP": 35,
+			"PCU": 80
+		},
+		"damage": "9d6 x 10",
+		"range": "Medium",
+		"special": "Line",
+		"type": "Direct",
+		"source": "ds"
+	},
+	"Ultra x-laser cannon": {
+		"class": "Spinal",
+		"cost": {
+			"BP": 60,
+			"PCU": 90
+		},
+		"damage": "6d8 x 10",
+		"range": "Long",
+		"special": "Line",
+		"type": "Direct",
+		"source": "ds"
+	},
+	"Ultragraser": {
+		"class": "Spinal",
+		"cost": {
+			"BP": 70,
+			"PCU": 75
+		},
+		"damage": "6d8 x 10",
+		"range": "Medium",
+		"special": "Irradiate (high), line",
+		"type": "Direct",
+		"source": "ds"
+	},
+	"Ultralaser": {
+		"class": "Spinal",
+		"cost": {
+			"BP": 25,
+			"PCU": 30
+		},
+		"damage": "6d4 x 10",
+		"range": "Long",
+		"special": "Line",
+		"type": "Direct",
+		"source": "ds"
+	},
+	"Ultramaser": {
+		"class": "Spinal",
+		"cost": {
+			"BP": 40,
+			"PCU": 60
+		},
+		"damage": "6d8 x 10",
+		"range": "Long",
+		"special": "Line",
+		"type": "Direct",
+		"source": "ds"
+	},
+	"Vortex devourer": {
+		"class": "Spinal",
+		"cost": {
+			"BP": 80,
+			"PCU": 80
+		},
+		"damage": "6d12 x 10",
+		"range": "Medium",
+		"special": "Vortex",
+		"type": "Direct",
+		"source": "ds"
+	},
+	
 };
 
 var crewSkillBonus = {
@@ -2796,6 +3198,7 @@ var ACTLSizeMod = {
 	"5": -2,
 	"6": -4,
 	"7": -8,
+	"8": -8
 };
 
 var maneuverability = {
@@ -2827,7 +3230,7 @@ var shipNames = {
 			"Type": ["Destroyer","Expedition","Gunship","Personnel Carrier","Heavy Recon","Military Transport","Patrol Craft","Enforcer","Fast Attack Craft","Planetary Defense Boat","Scout Frigate"]
 		},
 		"Dreadnought": {
-			"Type": ["Dreadnought","Mothership","Command Ship","Capital Ship","Planet Cracker","World Gouger","Battle Platform","Starcutter","Superdreadnought"]
+			"Type": ["Dreadnought","Capital Ship","Battle Platform","Superdreadnought"]
 		},
 		"Explorer": {
 			"Type": ["Explorer","Diplomatic Barge","Science vessel","Pathfinder","Pleasure Craft","Planet Hopper","Consulor Ship","Light Starship","Surveyor","Pathfinder"]
@@ -2852,6 +3255,12 @@ var shipNames = {
 		},
 		"Transport": {
 			"Type": ["Transport","Passenger Shuttle","Constant G Transport","Luxury Yacht","Orbit Hopper","Passenger Liner","Slave Ship","Holiday Cruiser","Prison Transport"]
+		},
+		"Base Ship": {
+			"Type": ["Base Ship","Mothership","Command Ship","Battle Platform"]
+		},
+		"Ultranought": {
+			"Type": ["Ultranought","Planet Cracker","World Gouger","Starcutter"]
 		}
 	},
 	"Word": ["Space","Blessed","Carbon","Compact","Brutal","Burning","Crimson","Cryptic","Crystal","Defiant","Devil's","Dying","Empty","Enduring","Fallen","Final","First","Forgotten","Frozen","Glass","Hot","Lazy","Lost","Patient","Purple","Red","Rotting","Silent","Soaring","Stone","Twisted","Basic","Cosmic","Rowdy","Efficient","Friendly","Furious","Galactic","Hardened","Heavenly","Hectic","Infinite","Intergalactic","Interstellar","Magnificent","Meaty","Mechanised","Mithril","Perfect","Precision","Radiant","Spicy","Superior","Synthetic","Ultra","Vorpal","Wrought","Silver","Steel","Swift","Titanium","Golarions","Interplanetary","Celestial","Dark","Bleeding","Wrathful","Vengeful","Lofty","Sunrise","Black","White","Amazing","Golden","Happy","Jolly","Valiant","Imperial","Astro","Blazing","Grinning","Lunar","Silent","Mighty","Royal","Blazing","Junk","Solar","Ebon","Flying","Millenium","Hammerhead","Night","Champion","Destiny","Night","Interstellar","Knight","Epsilon","Pursuit","Elysium","Lambda","Orbital","Starhive","Ringworks","Atech","Weyland","Idaran","Universal"],
