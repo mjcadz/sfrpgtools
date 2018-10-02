@@ -156,7 +156,11 @@ var flavourTextRanged = ["features an oversized scope",
 ]
 
 var damageType = ["Acid", "Cryo", "Flame", "Laser", "Plasma", "Projectile", "Shock", "Sonic"];
+var damageTypeEnergy = ["Acid", "Cryo", "Flame", "Laser", "Plasma", "Shock", "Sonic"];
+var damageTypeKinetic = ["Projectile"];
 var meleeDamageType = ["Acid", "Cryo", "Flame", "Plasma", "Shock", "Sonic", "Uncat","Uncat"];
+var meleeDamageTypeEnergy = ["Acid", "Cryo", "Flame", "Plasma", "Shock", "Sonic"];
+var meleeDamageTypeKinetic = ["Uncat","Uncat"];
 var damageTypeAbbrv = {
   "Acid":" A",
   "Bludgeoning": " B",
@@ -885,7 +889,14 @@ function advancedMelee(level) {
   var advancedMeleeType = ["FX Sword","FX Gauntlet","FX Hammer","FX-edged Handaxe","FX Truncheon","FX Doshko","FX-edged Greatsword","FX Pike","FX Longhammer"];
   var weaponType = randomChoice(advancedMeleeType);
 
-  var damageType = randomChoice(meleeDamageType);
+  var damageDrop = $('#damageDrop').text();
+  if (damageDrop.includes("Any")) {
+    var damageType = randomChoice(meleeDamageType);
+  } else if (damageDrop.includes("Energy")) {
+    var damageType = randomChoice(meleeDamageTypeEnergy);
+  } else if (damageDrop.includes("Kinetic")) {
+    var damageType = randomChoice(meleeDamageTypeKinetic);
+  }
 
   var weaponName = weaponType.replace("FX", damageType).replace("Uncat ", "").replace("Uncat-edged ", "");
 
@@ -1046,10 +1057,18 @@ function advancedMelee(level) {
 function smallArm(level) {
 
   var tier = getTier(level);
-  var randomDamageType = randomChoice(damageType);
   var gunType = randomChoice(smallSubType);
   var printLevel = level;
   var battery = getBattery(level)
+
+  var damageDrop = $('#damageDrop').text();
+  if (damageDrop.includes("Any")) {
+    var randomDamageType = randomChoice(damageType);
+  } else if (damageDrop.includes("Energy")) {
+    var randomDamageType = randomChoice(damageTypeEnergy);
+  } else if (damageDrop.includes("Kinetic")) {
+    var randomDamageType = randomChoice(damageTypeKinetic);
+  }
 
   // Hand-Cannon has higher damage compared to other typed
   if (gunType === "FX Hand-Cannon" && level !== 20) {
@@ -1186,10 +1205,18 @@ function smallArm(level) {
 function longarm(level) {
 
   var tier = getTier(level);
-  var randomDamageType = randomChoice(damageType);
   var gunType = randomChoice(longSubType);
   var printLevel = level;
   var battery = getBattery(level);
+
+  var damageDrop = $('#damageDrop').text();
+  if (damageDrop.includes("Any")) {
+    var randomDamageType = randomChoice(damageType);
+  } else if (damageDrop.includes("Energy")) {
+    var randomDamageType = randomChoice(damageTypeEnergy);
+  } else if (damageDrop.includes("Kinetic")) {
+    var randomDamageType = randomChoice(damageTypeKinetic);
+  }
 
   // Rifle has higher damage compared to other types
   if (gunType === "FX Assault Rifle" && level != 20) {
@@ -1328,11 +1355,19 @@ function longarm(level) {
 function heavyWeapon(level) {
 
   var tier = getTier(level);
-  var randomDamageType = randomChoice(damageType);
   var gunType = randomChoice(heavySubType);
   var printLevel = level;
   var damage;
   var battery = getBattery(level);
+
+  var damageDrop = $('#damageDrop').text();
+  if (damageDrop.includes("Any")) {
+    var randomDamageType = randomChoice(damageType);
+  } else if (damageDrop.includes("Energy")) {
+    var randomDamageType = randomChoice(damageTypeEnergy);
+  } else if (damageDrop.includes("Kinetic")) {
+    var randomDamageType = randomChoice(damageTypeKinetic);
+  }
 
   // Railgun increase damage compared to other types
   if (gunType === "FX Railgun" && level != 20) {
@@ -1477,9 +1512,17 @@ function heavyWeapon(level) {
 function sniperWeapon(level) {
 
   var tier = getTier(level);
-  var randomDamageType = randomChoice(damageType);
   var gunType = randomChoice(sniperSubType);
   var printLevel = level;
+
+  var damageDrop = $('#damageDrop').text();
+  if (damageDrop.includes("Any")) {
+    var randomDamageType = randomChoice(damageType);
+  } else if (damageDrop.includes("Energy")) {
+    var randomDamageType = randomChoice(damageTypeEnergy);
+  } else if (damageDrop.includes("Kinetic")) {
+    var randomDamageType = randomChoice(damageTypeKinetic);
+  }
 
   // Shirren-eye Rifle increase damage compared to other types
   if (gunType === "Shirren-eye FX Rifle" && level != 20) {
