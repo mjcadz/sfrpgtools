@@ -84,6 +84,9 @@ celerybeat-schedule
 env/
 venv/
 ENV/
+bin
+share
+pyvenv.cfg
 
 # Spyder project settings
 .spyderproject
