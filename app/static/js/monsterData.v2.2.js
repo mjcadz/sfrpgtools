@@ -3760,7 +3760,7 @@ var monsterData = {
     "environment": ["forests","marshes"],
     "climate": "any",
     "planet": "Castrovel",
-    "organization": "pack(3-8)",
+    "organization": ["solitary","pair","pack(3-8)"],
     "source": "AA2",
     "page": "124"
   },
@@ -3775,7 +3775,7 @@ var monsterData = {
     "environment": ["forests","marshes"],
     "climate": "any",
     "planet": "Castrovel",
-    "organization": "pack(1-2)",
+    "organization": ["solitary","pair","pack(3-8)"],
     "source": "AA2",
     "page": "124"
   },
