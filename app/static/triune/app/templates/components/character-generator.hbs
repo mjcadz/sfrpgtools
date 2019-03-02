@@ -1,0 +1,38 @@
+<div local-class="generator">
+  <h1>Character Concept Generator</h1>
+  <p local-class="subtitle">Generates random character concepts for the Starfinder RPG to inspire your characters and NPCs.</p>
+
+  {{#power-select-multiple
+    options=sources
+    selected=selectedSource
+    onchange=(action (mut selectedSource))
+    as |source|
+  }}
+    {{source}}
+  {{/power-select-multiple}}
+
+  <button
+    title="magic, baby"
+    local-class="generate-button"
+    onclick={{action generate}}
+  >
+    Generate
+  </button>
+
+  {{#if generatedContent}}
+    <div local-class="content">
+      <div local-class="panel-header">
+        <em>{{generatedContent.summary}}</em>
+      </div>
+      <div local-class="panel-body">
+        <div><strong>Age</strong>: {{generatedContent.age}}</div>
+        <div><strong>Alignment</strong>: {{generatedContent.alignment}}</div>
+        <div><strong>Race</strong>: {{generatedContent.race}}</div>
+        <div><strong>Class</strong>: {{generatedContent.class}}</div>
+        <div><strong>Themes</strong>: {{generatedContent.themes}}</div>
+        <div><strong>Profession</strong>: {{generatedContent.profession}}</div>
+        <div><strong>Personality</strong>: {{generatedContent.personality}}</div>
+      </div>
+    </div>
+  {{/if}}
+</div>

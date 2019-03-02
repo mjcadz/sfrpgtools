@@ -1,0 +1,12 @@
+{{#power-select
+  onchange=(action (mut selectedGenerator))
+  options=generators
+  selected=selectedGenerator
+  as |generator|
+}}
+  {{generator}}
+{{/power-select}}
+
+{{#if (eq selectedGenerator CHARACTER_GENERATOR)}}
+  {{character-generator}}
+{{/if}}
