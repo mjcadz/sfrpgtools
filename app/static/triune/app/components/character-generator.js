@@ -1,6 +1,11 @@
 import Component from '@ember/component';
-import { set } from '@ember/object';
+import { set, computed } from '@ember/object';
 import {
+  CORE_RULEBOOK,
+  CORE_RULEBOOK_LEGACY,
+  ALIEN_ARCHIVE,
+  PACT_WORLDS,
+
   races,
   legacyRaces,
   aaRaces,
@@ -18,22 +23,12 @@ import {
 
 import { randomElement, articlize } from '../utils';
 
-const CORE_RULEBOOK = 'Core Rulebook';
-const CORE_RULEBOOK_LEGACY = 'Core Rulebook Legacy';
-const ALIEN_ARCHIVE = 'Alien Archive';
-const PACT_WORLDS = 'Pact Worlds';
-
-const sources = [
-  CORE_RULEBOOK,
-  CORE_RULEBOOK_LEGACY,
-  ALIEN_ARCHIVE,
-  PACT_WORLDS,
-];
-
 export default Component.extend({
-  sources,
-  selectedSource: sources,
   generatedContent: null,
+
+  noSourcesSelected: computed('selectedSource', function() {
+    return !(this.selectedSource && this.selectedSource.length);
+  }),
 
   generate() {
     const coreSelected = this.selectedSource.includes(CORE_RULEBOOK);
@@ -71,4 +66,4 @@ export default Component.extend({
 
     set(this, 'generatedContent', content);
   },
-})
+});

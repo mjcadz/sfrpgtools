@@ -1,12 +1,40 @@
-{{#power-select
-  onchange=(action (mut selectedGenerator))
-  options=generators
-  selected=selectedGenerator
-  as |generator|
-}}
-  {{generator}}
-{{/power-select}}
+<div local-class="header-menu">
+  <div local-class="selector">
+    <div local-class="label">Generator:</div>
+    {{#power-select
+      onchange=(action (mut selectedGenerator))
+      options=generators
+      selected=selectedGenerator
+      as |generator|
+    }}
+      {{generator}}
+    {{/power-select}}
+  </div>
 
-{{#if (eq selectedGenerator CHARACTER_GENERATOR)}}
-  {{character-generator}}
-{{/if}}
+  <div local-class="selector">
+    <div local-class="label">Sources:</div>
+    {{#power-select-multiple
+      class=(local-class 'sources')
+      options=sources
+      selected=selectedSource
+      onchange=(action (mut selectedSource))
+      as |source|
+    }}
+      {{source}}
+    {{/power-select-multiple}}
+  </div>
+</div>
+
+<div local-class="generator">
+  {{#if (eq selectedGenerator CHARACTER_GENERATOR)}}
+    {{character-generator
+      selectedSource=selectedSource
+    }}
+  {{/if}}
+
+  {{#if (eq selectedGenerator SETTLEMENT_GENERATOR)}}
+    {{settlement-generator
+      selectedSource=selectedSource
+    }}
+  {{/if}}
+</div>

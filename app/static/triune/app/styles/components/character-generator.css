@@ -1,7 +1,3 @@
-.generator {
-  composes: jumbotron from global;
-}
-
 .subtitle {
   composes: lead from global;
 }
