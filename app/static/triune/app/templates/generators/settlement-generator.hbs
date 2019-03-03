@@ -1,2 +1,53 @@
 <h1>Settlement Generator</h1>
-<p local-class="subtitle">Generates random character concepts for the Starfinder RPG to inspire your characters and NPCs.</p>
+<p local-class="subtitle">Generates settlements for the Starfinder RPG to help fill your worlds.</p>
+
+{{#power-select
+  onchange=(action (mut selectedSize))
+  options=sizes
+  selected=selectedSize
+  as |size|
+}}
+  {{size}}
+{{/power-select}}
+
+{{#power-select
+  onchange=(action (mut selectedMaxItemLevel))
+  options=maxItemLevels
+  selected=selectedMaxItemLevel
+  as |level|
+}}
+  {{level}}
+{{/power-select}}
+
+<button
+  title="magic, baby"
+  local-class="generate-button"
+  onclick={{action generate}}
+  disabled={{noSourcesSelected}}
+>
+  Generate
+</button>
+
+<button
+  title="magic, baby"
+  local-class="clear-button"
+  onclick={{action clear}}
+  disabled={{noSettlementsGenerated}}
+>
+  Clear
+</button>
+
+{{#each settlementContent as |settlement|}}
+  <div local-class="content">
+    <div local-class="panel-header">
+      <h4>{{settlement.name}}</h4>
+      <p>{{alignment}} {{type}}</p>
+    </div>
+    <div local-class="panel-body">
+      <div><strong>Name</strong>: {{settlement.name}}</div>
+      <div><strong>Qualities</strong>: {{settlement.qualities}}</div>
+      <div><strong>Max Item Level</strong>: {{settlement.maxItemLevel}}</div>
+      <div><strong>Name</strong>: {{settlement.name}}</div>
+    </div>
+  </div>
+{{/each}}

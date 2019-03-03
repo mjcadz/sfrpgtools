@@ -807,7 +807,7 @@ export const wateringHoles = {
   "establishment": [
     "bar","spacer bar","nightclub","cantina","tavern","commissary","pub","atmo bar","intoxicant hall","speakeasy","live music venue"
   ],
-  "flavour": [
+  "flavor": [
     "is the seediest place in this quadrant",
     "has the best live shows in town",
     "has over 9000 types of intoxicants",
@@ -819,7 +819,7 @@ export const wateringHoles = {
 };
 
 export const placesofWorship = {
-  "flavour": [
+  "flavor": [
     "is seldom used anymore, the population has moved away from this deity",
     "is always full, people pay their respects at all times of the day",
     "is frequented by travellerers, some coming from different worlds to pay their respects here",
@@ -850,7 +850,7 @@ export const placesofWorship = {
 export const stores = {
   "Pharmacy": {
     "equipment":["Drugs Medicinals And Poisons","Healing Serum","Medical Gear"],
-    "flavour": [
+    "flavor": [
       "has enough stock to replenish your medical supplies",
       "has a large range of prescription only medications",
       "is owned by a pharmacist that will hand out any medication for a price",
@@ -868,7 +868,7 @@ export const stores = {
   },
   "Electronics Workshop": {
     "equipment":["Technological Items","Computers"],
-    "flavour": [
+    "flavor": [
       "has an owner that can fix just about anything given enough time",
       "is full of rare parts, in archive type part boxes, most of which the owner doesn’t know about",
       "crafts housebrand knock-offs at a discounted rate",
@@ -885,7 +885,7 @@ export const stores = {
   },
   "Computer Specialist": {
     "equipment":["Computers","Computer Countermeasures","Computer Modules","Upgrades"],
-    "flavour": [
+    "flavor": [
       "has an owner that can fix just about anything given enough time",
       "obviously needs a new maintenance drone; lights flicker dimly overhead, & the aisles are filthy",
       "is filled with scattered AI cortexes",
@@ -902,7 +902,7 @@ export const stores = {
   },
   "Hypermarket": {
     "equipment":["Augmentations", "Advanced Melee Weapons", "Ammunition", "Armor Upgrades", "Basic Melee Weapons", "Computer Countermeasures", "Computer Modules", "Computer Upgrades", "Computers", "Drugs Medicinals And Poisons", "Food And Drink", "Fusion Seals", "Grenades", "Heavy Armor", "Heavy Weapons", "Hybrid Items", "Light Armor", "Longarms", "Magic Items", "Personal Items", "Small Arms", "Sniper Weapons", "Solarion Weapon Crystals", "Special Ammunition", "Special Weapons", "Spell Ampoules", "Spell Gems", "Technological Items", "Healing Serum", "Medical Gear", "Trade Goods"],
-    "flavour": [
+    "flavor": [
       "is having a promotion on 10,000 types of fruit",
       "only sells genetically modified protein paste",
       "has the galaxy's largest range of foods",
@@ -919,7 +919,7 @@ export const stores = {
   },
   "Magical Items Store": {
     "equipment":["Magic Items","Hybrid Items","Spell Ampoules","Spell Gems"],
-    "flavour": [
+    "flavor": [
       "has arcane trinkets and circuits for sale",
       "is filled with curios that look very old",
       "has very tall dusty shelves filled with strange items",
@@ -936,7 +936,7 @@ export const stores = {
   },
   "Augmentations Clinic": {
     "equipment":["Augmentations"],
-    "flavour": [
+    "flavor": [
       "has 10 different types of knee joints",
       "specializes in biotech",
       "specializes in cybernetics",
@@ -952,7 +952,7 @@ export const stores = {
   },
   "Gun Store": {
     "equipment":["Small Arms","Longarms","Heavy Weapons","Sniper Weapons","Special Weapons","Grenades"],
-    "flavour": [
+    "flavor": [
       "will only sell to patrons with proper licensing",
       "holds regular open days to try out new weapons",
       "has a shooting range out back",
@@ -970,7 +970,7 @@ export const stores = {
   },
   "Melee Weapon Store": {
     "equipment":["Basic Melee Weapons","Advanced Melee Weapons"],
-    "flavour": [
+    "flavor": [
       "has just the basics, all you need for smashing slimes",
       "has restricted and military-grade equipment, but only sells to licensed individuals",
       "has restricted and military-grade equipment, and will sell to anyone for the right price",
@@ -986,7 +986,7 @@ export const stores = {
   },
   "Ammunition Store": {
     "equipment":["Ammunition","Special Ammunition"],
-    "flavour": [
+    "flavor": [
       "has the equipment to keep your weapons powered and armed",
       "has batteries guaranteed to keep charge for 200 years",
       "has ammo with shelf lives upwards of 50 years",
@@ -1002,7 +1002,7 @@ export const stores = {
   },
   "Upgrade Store": {
     "equipment":["Armor Upgrades","Fusion Seals","Solarion Weapon Crystals"],
-    "flavour": [
+    "flavor": [
       "sells upgrades that will make your equipment perform at its best",
       "has upgrades for any combat system",
       "will get your combat items ready for combat",
@@ -1019,7 +1019,7 @@ export const stores = {
   },
   "Armor Store": {
     "equipment":["Light Armor","Heavy Armor"],
-    "flavour": [
+    "flavor": [
       "has every kind of body plating",
       "specializes in heavy armor",
       "specializes in light armor",
@@ -1036,7 +1036,7 @@ export const stores = {
   },
   "Armory": {
     "equipment":["Light Armor","Heavy Armor","Armor Upgrades","Fusion Seals","Solarion Weapon Crystals","Ammunition","Special Ammunition","Small Arms","Longarms","Heavy Weapons","Sniper Weapons","Special Weapons","Grenades","Basic Melee Weapons","Advanced Melee Weapons"],
-    "flavour": [
+    "flavor": [
       "carries all manner of items needed for combat",
       "stocks all manner of combat items, from armor to ammunition",
       "is a huge store with shelves full of stock",
@@ -1053,7 +1053,7 @@ export const stores = {
 
 export const placesOfInterest = {
   "Robo Repair": {
-    "flavour": [
+    "flavor": [
       "specialises is drone repair",
       "is filled with many junk bots that serve no real purpose",
       "has pallets of robot parts ready to be installed",
@@ -1063,7 +1063,7 @@ export const placesOfInterest = {
     ]
   },
   "Warehouse": {
-    "flavour": [
+    "flavor": [
       "is a huge facility, yet empty",
       "has countless shelves spanning many kilometers",
       "is a small facility that many locals use",
@@ -1074,7 +1074,7 @@ export const placesOfInterest = {
     ]
   },
   "Legal Firm": {
-    "flavour": [
+    "flavor": [
       "is run by the shadiest legal team this side of the gap",
       "has an owner who only takes cases they know they can win",
       "specializes in Xenowarden overreach cases",
@@ -1083,7 +1083,7 @@ export const placesOfInterest = {
     ]
   },
   "Capsule Hotel": {
-    "flavour": [
+    "flavor": [
       "has rooms to cater to every race and religion",
       "is the owner of the largest heart shaped bed in the galaxy. Many people come from far far away to stay at the honeymoon suite, suitable for 40+ guests",
       "has the cheapest rooms available",
@@ -1092,7 +1092,7 @@ export const placesOfInterest = {
     ]
   },
   "Data Storage": {
-    "flavour": [
+    "flavor": [
       "will keep your data secure in any event possible",
       "has data safety and retention plans for every person",
       "will take illegal data if you know the passphrase",
@@ -1101,7 +1101,7 @@ export const placesOfInterest = {
     ]
   },
   "Low Rent Housing Project": {
-    "flavour": [
+    "flavor": [
       "has every room packed with multiple families",
       "is home to a lot of random races. Most notable is the surprisingly abundant amount of Gripli’s residing",
       "has streetball court next door",
@@ -1110,7 +1110,7 @@ export const placesOfInterest = {
     ]
   },
   "Designated Starship Parking": {
-    "flavour": [
+    "flavor": [
       "is a large flat area of land with many waiting starships",
       "is a huge automated facility that parks and retrieves ship from underground",
       "it just a flat space of land, you'll have to walk the rest of the way",
@@ -1119,7 +1119,7 @@ export const placesOfInterest = {
     ]
   },
   "Fast Food Franchise": {
-    "flavour": [
+    "flavor": [
       "has genetically modified 'chicken wings' from some backwater blue planet",
       "specializes in cannibalistic delicacies",
       "named Crumb’s Crunchy Delights, takes care of the homeless population in the area",
@@ -1128,7 +1128,7 @@ export const placesOfInterest = {
     ]
   },
   "Police Department": {
-    "flavour": [
+    "flavor": [
       "protects the rich and serves the richer",
       "will take any case no matter how petty",
       "upholds the changing daily laws of the pact worlds",
@@ -1137,7 +1137,7 @@ export const placesOfInterest = {
     ]
   },
   "College": {
-    "flavour": [
+    "flavor": [
       "has a bunch of holo courses popular among the middle aged",
       "is for the liberal art minds. The biggest courses are in music theory, taught by one of the last known bards in existence, Sir Elton John",
       "is one of the last remaining schools where people physically attend",
@@ -1146,7 +1146,7 @@ export const placesOfInterest = {
     ]
   },
   "Government Building": {
-    "flavour": [
+    "flavor": [
       "where the laws are made",
       "is constantly flooded with protestors",
       "is constantly under threat from local militia",
@@ -1155,7 +1155,7 @@ export const placesOfInterest = {
     ]
   },
   "Hospital": {
-    "flavour": [
+    "flavor": [
       "is full of patients from a recent bio terror attack",
       "is run fully by robots. It’s never hard to get in",
       "sends birthing robots out to people's homes so they don't need to come in",
@@ -1165,7 +1165,7 @@ export const placesOfInterest = {
   },
 
   "Luxury Apartments": {
-    "flavour": [
+    "flavor": [
       "is open to the public, if you have the credits",
       "has may famous personalities as tenants",
       "rents rooms weekly",
@@ -1174,7 +1174,7 @@ export const placesOfInterest = {
     ]
   },
   "Media Company": {
-    "flavour": [
+    "flavor": [
       "is the local source of news and entertainment",
       "has a huge globe atop their massive building",
       "is rumored to have a super hero working as a reporter",
@@ -1183,7 +1183,7 @@ export const placesOfInterest = {
     ]
   },
   "Starship Dealership": {
-    "flavour": [
+    "flavor": [
       "can order you a new ship from their extensive catalog",
       "specializes in bulk haulers",
       "has a range of ships docked in orbit",
@@ -1192,7 +1192,7 @@ export const placesOfInterest = {
     ]
   },
   "Vehicle Rental": {
-    "flavour": [
+    "flavor": [
       "hires out hover bikes and hover cars",
       "only hires cars to vesk, they are the most careful",
       "has vehicle available with weapons attached",
@@ -1201,7 +1201,7 @@ export const placesOfInterest = {
     ]
   },
   "VRcade": {
-    "flavour": [
+    "flavor": [
       "has a catalog of millions of games and movies",
       "gamers can make credits here if they are good enough",
       "has a lounge that shows 3D romantic comedies every hour of every day",
@@ -1210,7 +1210,7 @@ export const placesOfInterest = {
     ]
   },
   "Habitation Stack": {
-    "flavour": [
+    "flavor": [
       "contains self sustaining habitation pods",
       "is full of some of the more smaller races",
       "goes higher than most can see",
@@ -1219,7 +1219,7 @@ export const placesOfInterest = {
     ]
   },
   "Bulk Transport Company": {
-    "flavour": [
+    "flavor": [
       "can get your items from A to Galaxy 45-B7K",
       "is always looking for more drivers",
       "is a front for an illegal android trafficking business",
@@ -1230,7 +1230,7 @@ export const placesOfInterest = {
     ]
   },
   "Cafe": {
-    "flavour": [
+    "flavor": [
       "serves the strongest coffee fusion in the galaxy, it will keep you awake for years",
       "has the most inattentive and aloof staff, mainly young adults from the nearby college",
       "the tea cakes here are absolutely scrumptious",
@@ -1239,7 +1239,7 @@ export const placesOfInterest = {
     ]
   },
   "Bank": {
-    "flavour": [
+    "flavor": [
       "is connected to a vast banking network offering near infinite credit",
       "offers quantum safe deposits; deposit it here, remove it from any of their 80 locations",
       "was once robbed weekly, now has 4 large security guards asking you to remove your glasses and hat before entering",
@@ -1248,7 +1248,7 @@ export const placesOfInterest = {
     ]
   },
   "Shipyard": {
-    "flavour": [
+    "flavor": [
       "scraps old ships for credits",
       "is where derelict ships go to rot; a veritable graveyard of vessels sit out back",
       "secretly serves the Corpse Fleet",
@@ -1258,7 +1258,7 @@ export const placesOfInterest = {
     ]
   },
   "Private Security": {
-    "flavour": [
+    "flavor": [
       "scraps old ships for credits",
       "gets most of its business from the lenders and bankers in the area. Giving them mostly high dollar bodyguard jobs",
       "hires mainly exmilitary, from any military including the enemies military",

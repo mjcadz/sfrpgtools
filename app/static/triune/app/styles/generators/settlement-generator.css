@@ -1,0 +1,22 @@
+.subtitle {
+  composes: subtitle from '../shared';
+}
+
+.generate-button {
+  composes: btn btn-primary from global;
+  margin-top: 20px;
+}
+
+.content {
+  composes: card from global;
+  margin-top: 20px;
+}
+
+.panel-header {
+  composes: card-header from global;
+  font-size: 1.2em;
+}
+
+.panel-body {
+  composes: card-body from global;
+}
