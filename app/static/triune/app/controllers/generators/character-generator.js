@@ -1,5 +1,7 @@
-import Component from '@ember/component';
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 import { set, computed } from '@ember/object';
+import { alias } from '@ember/object/computed';
 import {
   CORE_RULEBOOK,
   CORE_RULEBOOK_LEGACY,
@@ -19,11 +21,15 @@ import {
   personalities,
   origins,
   characterTraits,
-} from '../data';
+} from '../../data';
 
-import { randomElement, articlize } from '../utils';
+import { randomElement, articlize } from '../../utils';
 
-export default Component.extend({
+export default Controller.extend({
+  sources: service(),
+
+  selectedSource: alias('sources.selected'),
+
   generatedContent: null,
 
   noSourcesSelected: computed('selectedSource', function() {
@@ -31,10 +37,10 @@ export default Component.extend({
   }),
 
   generate() {
-    const coreSelected = this.selectedSource.includes(CORE_RULEBOOK);
-    const coreLegacySelected = this.selectedSource.includes(CORE_RULEBOOK_LEGACY);
-    const alienArchiveSelected = this.selectedSource.includes(ALIEN_ARCHIVE);
-    const pactWorldsSelected = this.selectedSource.includes(PACT_WORLDS);
+    const coreSelected = this.sources.includes(CORE_RULEBOOK);
+    const coreLegacySelected = this.sources.includes(CORE_RULEBOOK_LEGACY);
+    const alienArchiveSelected = this.sources.includes(ALIEN_ARCHIVE);
+    const pactWorldsSelected = this.sources.includes(PACT_WORLDS);
 
     const candidateRaces = [].concat(
       coreSelected && races,

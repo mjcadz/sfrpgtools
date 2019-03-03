@@ -7,7 +7,10 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function () {
-  this.route('generators', { path: '/' });
+  this.route('generators', { path: '/' }, function() {
+    this.route('character-generator');
+    this.route('settlement-generator');
+  });
 });
 
 export default Router;

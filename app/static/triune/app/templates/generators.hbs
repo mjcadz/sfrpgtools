@@ -2,7 +2,7 @@
   <div local-class="selector">
     <div local-class="label">Generator:</div>
     {{#power-select
-      onchange=(action (mut selectedGenerator))
+      onchange=(action selectGenerator)
       options=generators
       selected=selectedGenerator
       as |generator|
@@ -26,7 +26,9 @@
 </div>
 
 <div local-class="generator">
-  {{#if (eq selectedGenerator CHARACTER_GENERATOR)}}
+  {{outlet}}
+
+  {{!-- {{#if (eq selectedGenerator CHARACTER_GENERATOR)}}
     {{character-generator
       selectedSource=selectedSource
     }}
@@ -36,5 +38,5 @@
     {{settlement-generator
       selectedSource=selectedSource
     }}
-  {{/if}}
+  {{/if}} --}}
 </div>

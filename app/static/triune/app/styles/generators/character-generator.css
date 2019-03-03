@@ -1,5 +1,5 @@
 .subtitle {
-  composes: lead from global;
+  composes: subtitle from '../shared';
 }
 
 .generate-button {
