@@ -55,6 +55,7 @@
   "dependencies": {
     "ember-bootstrap": "^2.5.0",
     "ember-css-modules": "^1.1.1",
+    "ember-local-storage": "^1.6.0",
     "ember-power-select": "^2.2.2"
   }
 }

@@ -1,7 +1,8 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { set, computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
+import { storageFor } from 'ember-local-storage';
 import {
   CORE_RULEBOOK,
   CORE_RULEBOOK_LEGACY,
@@ -21,25 +22,23 @@ import {
   personalities,
   origins,
   characterTraits,
-} from '../../data';
+} from 'triune/data';
 
-import { randomElement, articlize } from '../../utils';
+import { randomElement, articlize } from 'triune/utils';
 
 export default Controller.extend({
   sources: service(),
 
   selectedSource: alias('sources.selected'),
 
-  characters: computed(function() {
-    return [];
-  }),
+  characters: storageFor('characters'),
 
   noSourcesSelected: computed('selectedSource', function() {
     return !(this.selectedSource && this.selectedSource.length);
   }),
 
   clear() {
-    set(this, 'characters', []);
+    this.characters.reset();
   },
 
   generate() {

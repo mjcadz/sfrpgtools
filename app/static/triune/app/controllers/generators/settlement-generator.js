@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { set, computed } from '@ember/object';
 import { not } from '@ember/object/computed';
+import { storageFor } from 'ember-local-storage';
 import {
   citiesBySize,
   settlementNames,
@@ -34,9 +35,7 @@ const maxItemLevels = [
 ];
 
 export default Controller.extend({
-  settlementContent: computed(function() {
-    return [];
-  }),
+  settlementContent: storageFor('settlements'),
 
   settlementsGenerated: not('noSettlementsGenerated'),
   noSettlementsGenerated: not('settlementContent.length'),
@@ -52,7 +51,7 @@ export default Controller.extend({
   selectedMaxItemLevel: maxItemLevels[0],
 
   clear() {
-    set(this, 'settlementContent', []);
+    this.settlementContent.reset();
   },
 
   generateQualities(possibleQualityCounts) {

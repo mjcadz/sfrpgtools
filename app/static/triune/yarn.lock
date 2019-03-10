@@ -1761,6 +1761,11 @@ blank-object@^1.0.1:
   resolved "https://registry.yarnpkg.com/blank-object/-/blank-object-1.0.2.tgz#f990793fbe9a8c8dd013fb3219420bec81d5f4b9"
   integrity sha1-+ZB5P76ajI3QE/syGUIL7IHV9Lk=
 
+blob-polyfill@^2.0.20171115:
+  version "2.0.20171115"
+  resolved "https://registry.yarnpkg.com/blob-polyfill/-/blob-polyfill-2.0.20171115.tgz#8e5c2659dda443365fafd6dd421517653f1d5ffd"
+  integrity sha512-qHpuIpWlDLdOzSI9n1+423JL8c60Tbyyu/w4+zQIPCazvKBjf0sqQWiUS2QtyHph3S1C8m17T/jKyhv/DnnQFA==
+
 blob@0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/blob/-/blob-0.0.5.tgz#d680eeef25f8cd91ad533f5b01eed48e64caf683"
@@ -3545,6 +3550,13 @@ ember-concurrency@^0.8.26:
     ember-cli-babel "^6.8.2"
     ember-maybe-import-regenerator "^0.1.5"
 
+ember-copy@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-copy/-/ember-copy-1.0.0.tgz#426554ba6cf65920f31d24d0a3ca2cb1be16e4aa"
+  integrity sha512-aiZNAvOmdemHdvZNn0b5b/0d9g3JFpcOsrDgfhYEbfd7SzE0b69YiaVK2y3wjqfjuuiA54vOllGN4pjSzECNSw==
+  dependencies:
+    ember-cli-babel "^6.6.0"
+
 ember-css-modules@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ember-css-modules/-/ember-css-modules-1.1.1.tgz#acb6f58e576d0d6fd8cb9d90a8de71ad90d6b6ff"
@@ -3630,6 +3642,21 @@ ember-load-initializers@^1.1.0:
   integrity sha512-WiciFi8IXOqjyJ65M4iBNIthqcy4uXXQq5n3WxeMMhvJVk5JNSd9hynNECNz3nqfEYuZQ9c04UWkmFIQXRfl4Q==
   dependencies:
     ember-cli-babel "^6.6.0"
+
+ember-local-storage@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/ember-local-storage/-/ember-local-storage-1.6.0.tgz#fc4d98f3461b06e6bf8351ef1a68d1cccfa76eaa"
+  integrity sha512-PSern58nhiWYZwmeV2HxgQkHok0U+Pm+i48znepufF3518uOtuWfpr404VQx4q9UCBFIFPTBZzH4ToRZncpEpw==
+  dependencies:
+    blob-polyfill "^2.0.20171115"
+    broccoli-funnel "^2.0.1"
+    broccoli-merge-trees "^2.0.0"
+    broccoli-stew "^1.5.0"
+    chalk "^2.3.0"
+    ember-cli-babel "^6.6.0"
+    ember-cli-string-utils "^1.1.0"
+    ember-cli-version-checker "^2.1.0"
+    ember-copy "^1.0.0"
 
 ember-maybe-import-regenerator@^0.1.5, ember-maybe-import-regenerator@^0.1.6:
   version "0.1.6"
