@@ -15,9 +15,9 @@
     <div local-class="label">Sources:</div>
     {{#power-select-multiple
       class=(local-class 'sources')
-      options=sources
-      selected=selectedSource
-      onchange=(action (mut selectedSource))
+      options=sources.all
+      selected=sources.selected
+      onchange=(action selectSources)
       as |source|
     }}
       {{source}}
@@ -27,16 +27,4 @@
 
 <div local-class="generator">
   {{outlet}}
-
-  {{!-- {{#if (eq selectedGenerator CHARACTER_GENERATOR)}}
-    {{character-generator
-      selectedSource=selectedSource
-    }}
-  {{/if}}
-
-  {{#if (eq selectedGenerator SETTLEMENT_GENERATOR)}}
-    {{settlement-generator
-      selectedSource=selectedSource
-    }}
-  {{/if}} --}}
 </div>

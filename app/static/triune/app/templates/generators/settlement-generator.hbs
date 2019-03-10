@@ -44,10 +44,10 @@
       <p>{{settlement.alignment}} {{settlement.type}}</p>
     </div>
     <div local-class="panel-body">
-      <div><strong>Name</strong>: {{settlement.name}}</div>
+      <div><strong>Population</strong>: {{settlement.population}}</div>
+      <div><strong>Government</strong>: {{settlement.government}}</div>
       <div><strong>Qualities</strong>: {{settlement.qualities}}</div>
       <div><strong>Max Item Level</strong>: {{settlement.maxItemLevel}}</div>
-      <div><strong>Government</strong>: {{settlement.government}}</div>
       <hr>
       {{#each settlement.placesOfInterest as |place|}}
         <div><strong>{{place.name}}</strong></div>

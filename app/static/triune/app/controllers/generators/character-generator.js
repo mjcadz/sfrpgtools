@@ -4,15 +4,7 @@ import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { storageFor } from 'ember-local-storage';
 import {
-  CORE_RULEBOOK,
-  CORE_RULEBOOK_LEGACY,
-  ALIEN_ARCHIVE,
   PACT_WORLDS,
-
-  races,
-  legacyRaces,
-  aaRaces,
-  pwRaces,
   ages,
   alignments,
   classes,
@@ -42,17 +34,9 @@ export default Controller.extend({
   },
 
   generate() {
-    const coreSelected = this.sources.includes(CORE_RULEBOOK);
-    const coreLegacySelected = this.sources.includes(CORE_RULEBOOK_LEGACY);
-    const alienArchiveSelected = this.sources.includes(ALIEN_ARCHIVE);
     const pactWorldsSelected = this.sources.includes(PACT_WORLDS);
 
-    const candidateRaces = [].concat(
-      coreSelected && races,
-      coreLegacySelected && legacyRaces,
-      alienArchiveSelected && aaRaces,
-      pactWorldsSelected && pwRaces
-    ).filter(Boolean);
+    const candidateRaces = this.sources.availableRaces;
 
     const candidateThemes = themes.concat(
       pactWorldsSelected && pwThemes

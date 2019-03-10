@@ -1,9 +1,17 @@
 import Controller from '@ember/controller';
-import { set, computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { not } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
 import { storageFor } from 'ember-local-storage';
 import {
   citiesBySize,
+  CITY_SIZE_EMPTY,
+  CITY_SIZE_TINY,
+  CITY_SIZE_SMALL,
+  CITY_SIZE_MEDIUM,
+  CITY_SIZE_LARGE,
+  CITY_SIZE_HUGE,
+
   settlementNames,
   settlementNameSuffixes,
   settlementNamePrefixes,
@@ -18,7 +26,8 @@ import {
   stores,
   placesOfInterest,
 } from 'triune/data';
-import { randomElement } from 'triune/utils';
+import { randomElement, randomInt } from 'triune/utils';
+import { numberWithCommas } from '../../utils';
 
 const ANY_SIZE = 'Any size';
 const ANY_MAX_ITEM_LEVEL = 'Any max item level';
@@ -35,6 +44,8 @@ const maxItemLevels = [
 ];
 
 export default Controller.extend({
+  sources: service(),
+
   settlementContent: storageFor('settlements'),
 
   settlementsGenerated: not('noSettlementsGenerated'),
@@ -162,8 +173,86 @@ export default Controller.extend({
     return places;
   },
 
+  sumArray(arr) {
+    return arr.reduce((x, y) => x + y, 0);
+  },
+
+  randomPercentages(maxLength = 5) {
+    const percentages = [randomInt(1, 100)];
+    if (maxLength < 2) return [100];
+    let sum = this.sumArray(percentages);
+    while (
+      sum < 100,
+      percentages[percentages.length - 1] > 1 &&
+      percentages.length + 1 < maxLength
+    ) {
+      percentages.push(randomInt(1, 100 - sum));
+      sum = this.sumArray(percentages);
+    }
+    sum = this.sumArray(percentages);
+    if (sum < 100) percentages.push(100 - sum);
+    return percentages.sort((a, b) => b - a);
+  },
+
+  randomPercentagesWithRaces(pop) {
+    const percentages = this.randomPercentages(
+      pop < 21
+      ? 1
+      : randomElement([2, 3, 4, 5, 6])
+    );
+    let candidateRaces = [...this.sources.availableRaces];
+    const demoParts = [];
+    for (const percentage of percentages) {
+      const race = randomElement(candidateRaces);
+      candidateRaces = candidateRaces.reject(r => r === race);
+      demoParts.push(`${percentage}% ${race}`);
+    }
+    return `(${demoParts.join(', ')})`;
+  },
+
+  calculatePopulationAndDemographics(type, size) {
+
+
+
+    let pop = 0;
+    switch (size) {
+      case CITY_SIZE_EMPTY:
+          pop = 0;
+          break;
+      case CITY_SIZE_TINY:
+          pop = randomInt(2, 200);//two to two hundred
+          break;
+      case CITY_SIZE_SMALL:
+          pop = randomInt(200, 20000);//two hundred to twenty thousand
+          pop = Math.round(pop/10)*10;
+          break;
+      case CITY_SIZE_MEDIUM:
+          pop = randomInt(20000, 2000000);//twenty thousand to two million
+          pop = Math.round(pop/100)*100;
+          break;
+      case CITY_SIZE_LARGE:
+          pop = randomInt(2000000, 200000000);//two million to two hundred million
+          pop = Math.round(pop/1000)*1000;
+          break;
+      case CITY_SIZE_HUGE:
+          pop = randomInt(200000000, 20000000000);//two hundred million to twenty billion
+          pop = Math.round(pop/1000000)*1000000;
+          break;
+    }
+
+    if (["lone tavern","camp site","farm"].includes(type)) {
+      pop = randomInt(2, 20);
+    } else if (["planetwide city"].includes(type)) {
+      pop = Math.round(randomInt(20000000000, 2000000000000)/1000000000)*1000000000;
+    }
+
+    const demographics = this.randomPercentagesWithRaces(pop);
+
+    return `${numberWithCommas(pop)} ${demographics}`;
+  },
+
   generate() {
-    const size = this.selectedSize === ANY_SIZE ? randomElement(this.sizes.slice(1)) : this.selectedSize;
+    const size = (this.selectedSize === ANY_SIZE ? randomElement(this.sizes.slice(1)) : this.selectedSize).toLowerCase();
     const alignment = randomElement(alignments);
     const maxItemLevel = this.selectedMaxItemLevel === ANY_MAX_ITEM_LEVEL ? randomElement(this.maxItemLevels) : this.selectedMaxItemLevel;
 
@@ -176,13 +265,14 @@ export default Controller.extend({
 
     const placesOfInterest = this.generatePlacesOfInterest(size, alignment);
 
-    // const population = populationForLocation
+    const type = randomElement(citiesBySize[size.toLowerCase()]);
 
     this.settlementContent.insertAt(0, {
       size,
+      type,
       alignment,
+      population: this.calculatePopulationAndDemographics(type, size),
       qualities: qualities.join(', '),
-      type: randomElement(citiesBySize[size.toLowerCase()]),
       name: randomElement(candidateNames),
       maxItemLevel,
       government: randomElement(governments),
