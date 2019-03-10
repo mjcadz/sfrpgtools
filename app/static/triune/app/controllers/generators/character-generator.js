@@ -30,11 +30,17 @@ export default Controller.extend({
 
   selectedSource: alias('sources.selected'),
 
-  generatedContent: null,
+  characters: computed(function() {
+    return [];
+  }),
 
   noSourcesSelected: computed('selectedSource', function() {
     return !(this.selectedSource && this.selectedSource.length);
   }),
+
+  clear() {
+    set(this, 'characters', []);
+  },
 
   generate() {
     const coreSelected = this.sources.includes(CORE_RULEBOOK);
@@ -70,6 +76,6 @@ export default Controller.extend({
 
     content.summary = `${articlize(content.age.toLowerCase(), true)} ${content.race.toLowerCase()} ${content.class.toLowerCase()} who ${content.characterTrait.toLowerCase()} and comes from ${content.origin.toLowerCase()}. They are ${content.personality.toLowerCase()}, and have found work as ${content.profession.toLowerCase()}.`
 
-    set(this, 'generatedContent', content);
+    this.characters.insertAt(0, content);
   },
 });

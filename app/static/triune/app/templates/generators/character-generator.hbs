@@ -10,7 +10,16 @@
   Generate
 </button>
 
-{{#if generatedContent}}
+<button
+  title="magic, baby"
+  local-class="clear-button"
+  onclick={{action clear}}
+  disabled={{not characters.length}}
+>
+  Clear
+</button>
+
+{{#each characters as |generatedContent|}}
   <div local-class="content">
     <div local-class="panel-header">
       <em>{{generatedContent.summary}}</em>
@@ -25,4 +34,4 @@
       <div><strong>Personality</strong>: {{generatedContent.personality}}</div>
     </div>
   </div>
-{{/if}}
+{{/each}}

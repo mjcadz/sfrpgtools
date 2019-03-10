@@ -32,7 +32,7 @@
   title="magic, baby"
   local-class="clear-button"
   onclick={{action clear}}
-  disabled={{noSettlementsGenerated}}
+  disabled={{not settlementContent.length}}
 >
   Clear
 </button>
@@ -41,13 +41,18 @@
   <div local-class="content">
     <div local-class="panel-header">
       <h4>{{settlement.name}}</h4>
-      <p>{{alignment}} {{type}}</p>
+      <p>{{settlement.alignment}} {{settlement.type}}</p>
     </div>
     <div local-class="panel-body">
       <div><strong>Name</strong>: {{settlement.name}}</div>
       <div><strong>Qualities</strong>: {{settlement.qualities}}</div>
       <div><strong>Max Item Level</strong>: {{settlement.maxItemLevel}}</div>
-      <div><strong>Name</strong>: {{settlement.name}}</div>
+      <div><strong>Government</strong>: {{settlement.government}}</div>
+      <hr>
+      {{#each settlement.placesOfInterest as |place|}}
+        <div><strong>{{place.name}}</strong></div>
+        <p>{{place.description}}</p>
+      {{/each}}
     </div>
   </div>
 {{/each}}

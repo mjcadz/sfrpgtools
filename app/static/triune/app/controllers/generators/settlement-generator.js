@@ -8,10 +8,18 @@ import {
   settlementNamePrefixes,
   alignments,
   settlementQualities,
-} from '../../data';
-import { randomElement } from '../../utils';
+  governments,
+  numberOfShops,
+  deities,
+  placesofWorship,
+  wateringHoles,
+  buildingFlavors,
+  stores,
+  placesOfInterest,
+} from 'triune/data';
+import { randomElement } from 'triune/utils';
 
-const ANY_SIZE = 'Any Size';
+const ANY_SIZE = 'Any size';
 const ANY_MAX_ITEM_LEVEL = 'Any max item level';
 
 const maxItemLevels = [
@@ -47,16 +55,8 @@ export default Controller.extend({
     set(this, 'settlementContent', []);
   },
 
-  generate() {
-    const size = this.selectedSize === ANY_SIZE ? randomElement(this.sizes) : this.selectedSize;
-    const maxItemLevel = this.selectedMaxItemLevel === ANY_MAX_ITEM_LEVEL ? randomElement(this.maxItemLevels) : this.selectedMaxItemLevel;
-
-    const candidateNames = [];
-    candidateNames.push(randomElement(settlementNames));
-    candidateNames.push(randomElement(settlementNamePrefixes) + randomElement(settlementNameSuffixes));
-    candidateNames.push(randomElement(settlementNamePrefixes) + randomElement(settlementNameSuffixes));
-
-    const numQualities = randomElement([1, 2, 3]);
+  generateQualities(possibleQualityCounts) {
+    const numQualities = randomElement(possibleQualityCounts);
     const techName = 'Tech';
     const qualities = [];
     for (let i = 0; i < numQualities; i++) {
@@ -68,14 +68,126 @@ export default Controller.extend({
         qualities.push(newQual);
       }
     }
+    return qualities;
+  },
 
-    this.settlementContent.pushObject({
+  generateWateringHole() {
+    const name = `The ${randomElement(wateringHoles.prefixes)} ${randomElement(wateringHoles.suffixes)}`;
+    const description = `This ${randomElement(wateringHoles.establishment)} ${randomElement(wateringHoles.flavor).toLowerCase()} and ${randomElement(buildingFlavors).toLowerCase()}`;
+
+    return {
+      name,
+      description,
+    };
+  },
+
+  generateStore() {
+    const name = randomElement(Object.keys(stores));
+    const description = `This ${name.toLowerCase()} ${randomElement(stores[name].flavor).toLowerCase()} and ${randomElement(buildingFlavors).toLowerCase()}`;
+
+    return {
+      name,
+      description,
+    };
+  },
+
+  generatePlaceOfInterest() {
+    const name = randomElement(Object.keys(placesOfInterest));
+    const description = `This ${name.toLowerCase()} ${randomElement(placesOfInterest[name].flavor).toLowerCase()} and ${randomElement(buildingFlavors).toLowerCase()}`;
+
+    return {
+      name,
+      description,
+    };
+  },
+
+  generatePlaceOfWorship(alignment) {
+    const alignmentAbbr = alignment.match(/\b(\w)/g).join('');
+    const alignedDeities = []
+
+    for (const deity of Object.keys(deities)) {
+      if (deities[deity].Align === alignmentAbbr) {
+        alignedDeities.push(deity);
+      }
+    }
+
+    const chosenDeity = randomElement(alignedDeities);
+    const displayDeityName = randomElement([
+      `${deities[chosenDeity].Title} (${chosenDeity})`,
+      chosenDeity,
+    ]);
+
+    const name = randomElement(placesofWorship.names).replace('DX', displayDeityName);
+    const flavor = randomElement(placesofWorship.flavor).replace('SX', deities[chosenDeity].Symbol).toLowerCase();
+
+    return {
+      name,
+      description: `This place of worship ${flavor}`,
+    };
+  },
+
+  generatePlacesOfInterest(size, alignment) {
+    const places = [];
+    let selectedPlaceOfWorship = false;
+
+    for (let i = 0; i < numberOfShops[size.toLowerCase()]; i++){
+      //only one place of worship
+      const validTypes = [
+        'bar',
+        'shop',
+        'place'
+      ].concat(selectedPlaceOfWorship ? [] : ['worship']);
+
+      var type = randomElement(validTypes);
+      let place;
+      switch(type) {
+        case 'bar':
+          place = this.generateWateringHole();
+          break;
+        case 'worship':
+          place = this.generatePlaceOfWorship(alignment);
+          selectedPlaceOfWorship = true
+          break;
+        case 'shop':
+          place = this.generateStore();
+          break;
+        case 'place':
+          place = this.generatePlaceOfInterest();
+          break;
+
+      }
+
+      places.push(place);
+    }
+
+    return places;
+  },
+
+  generate() {
+    const size = this.selectedSize === ANY_SIZE ? randomElement(this.sizes.slice(1)) : this.selectedSize;
+    const alignment = randomElement(alignments);
+    const maxItemLevel = this.selectedMaxItemLevel === ANY_MAX_ITEM_LEVEL ? randomElement(this.maxItemLevels) : this.selectedMaxItemLevel;
+
+    const candidateNames = [];
+    candidateNames.push(randomElement(settlementNames));
+    candidateNames.push(randomElement(settlementNamePrefixes) + randomElement(settlementNameSuffixes));
+    candidateNames.push(randomElement(settlementNamePrefixes) + randomElement(settlementNameSuffixes));
+
+    const qualities = this.generateQualities([1, 2, 3]);
+
+    const placesOfInterest = this.generatePlacesOfInterest(size, alignment);
+
+    // const population = populationForLocation
+
+    this.settlementContent.insertAt(0, {
       size,
-      alignment: randomElement(alignments),
+      alignment,
       qualities: qualities.join(', '),
       type: randomElement(citiesBySize[size.toLowerCase()]),
       name: randomElement(candidateNames),
       maxItemLevel,
+      government: randomElement(governments),
+      placesOfInterest,
     });
   },
 });

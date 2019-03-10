@@ -515,7 +515,7 @@ export const characterTraits = [
 
 export const governments = ["Anarchy","Autocracy","Council","Magocracy","Military","Oligarchy","Secret Syndicate","Plutocracy","Utopia","True Democracy"];
 
-export const dieties = {
+export const deities = {
   "Abadar":	{
     "Description": "God of civilization, commerce, law, wealth",
     "Title": "the Master of the First Vault",
