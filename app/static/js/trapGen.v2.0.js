@@ -128,6 +128,7 @@ var trapTypes = {
     "disable": ["Engineering", "disable one cannon"],
     "trigger": "location",
     "reset": "1 minute",
+    "bypass": "wireless key card reader (Computers DC FXDISABLE to hack)",
     "init": true,
     "duration": "3 rounds",
     "effect": "chain cannon +FXATTACK ranged (FXDAMAGE P); multiple targets (all targets in room)",
@@ -156,7 +157,7 @@ var trapTypes = {
     "trigger": "location (doorway)",
     "reset": "manual",
     "effect": "swinging paint can (FXDAMAGE B); Reflex DC FXSAVE avoids",
-    "explanation": "A paint can is tied to a long piece of string which is tied to the roof. Triggering this trap causes the paint can to swing like a pedulum into the creature that triggered it. Paint can is filled with depleted uranium for extra mass."
+    "explanation": "A paint can is tied to a long piece of string which is tied to a door frame. Triggering this trap causes the paint can to swing like a pedulum into the creature that triggered it. Paint can is filled with depleted uranium for extra mass."
   },
   "Save Or Die Trap": {
     "type": "hybrid",
@@ -165,6 +166,22 @@ var trapTypes = {
     "reset": "manual",
     "effect": "death; Fortitude DC FXSAVE saves",
     "explanation": "Chaotic GMs only. The forces of the universe attempt to nullify the existence of the creature that triggers this trap."
+  },
+  "Atmosphere Evacuation Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "seal vents"],
+    "trigger": "location",
+    "reset": "none",
+    "effect": "vacuum; all atmosphere vented is from the room; onset delay (1 minute)",
+    "explanation": "After 1 minute of entering the trapped room the doors seal and all atmosphere is vented from the room creating a vacuum"
+  },
+  "Faulty Medical Station Trap": {
+    "type": "technological",
+    "disable": ["Computers", "rewrite bad code"],
+    "trigger": "activation",
+    "reset": "none",
+    "effect": "non vital organ removal (FXDAMAGE S); Reflex DC FXSAVE avoids",
+    "explanation": "Looks like a functional medical station, using it will cause the station to attempt to remove the patients non vital organs"
   },
 };
 
