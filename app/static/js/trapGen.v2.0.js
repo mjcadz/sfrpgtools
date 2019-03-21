@@ -25,11 +25,88 @@ var trapStats = {
 
 var trapTypes = {
   "Pit Trap": {
-    "Type": "analog",
-    "Disable": "engineering: open trap door",
-    "Trigger": "location",
-    "Reset": "manual"
-  }
+    "type": "analog",
+    "disable": ["Engineering", "open trap door"],
+    "trigger": "location",
+    "reset": "manual",
+    "effect": "20-ft. deep pit (FXDAMAGE falling damage); Reflex DC FXSAVE avoids; multiple targets (all targets in a 10-ft. square area)",
+    "explanation": "A trap door with a deep pit underneath."
+  },
+  "Laser Blast Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "disable motion sensors"],
+    "trigger": "location",
+    "reset": "1 minute",
+    "effect": "laser +FXATTACK ranged (FXDAMAGE F)",
+    "explanation": "When sensors detect movement in the trapped room, a wall panel opens and a mounted laser rifle opens fire on the triggering creature."
+  },
+  "Jolting Console Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "disable shock plates"],
+    "trigger": "touch",
+    "reset": "immediate",
+    "bypass": "wireless key card reader (Computers DC FXDISABLE to hack)",
+    "effect": "arc of electricity (FXDAMAGE E); Reflex DC FXSAVE half",
+    "explanation": "When an unsuspecting creature touches the trapped console, the console sparks with electricity, shocking the triggering creature."
+  },
+  "Mind Spores Trap": {
+    "type": "hybrid",
+    "disable": ["Engineering", "jam vent closed"],
+    "trigger": "location",
+    "reset": "1 hour",
+    "effect": "spores (-4 penalty to Intelligence, Wisdom, and Charisma based ability checks, skill checks, and saving throws for 1d4 hours; this is a mind-affecting effect); Will DC FXSAVE negates; multiple targets (all targets in 30-ft. cone)",
+    "explanation": "When sensors detect movement, a vent releases a spray of spores that affect the triggering creature's mental processes."
+  },
+  "Hacker's Curse Trap": {
+    "type": "hybrid",
+    "disable": ["Computers", "rewrite virus code"],
+    "trigger": "touch",
+    "reset": "1 minute",
+    "effect": "curse (technological items become cursehacked; this is a curse effect); Will DC FXSAVE negates (items of 8th level or above only; lower-level items receive no save); multiple targets (tech items carried by all creatures within 60 ft. of console",
+    "explanation": "When an unauthorized user attempts to hack the trapped computer console, a magical curse script downloads into nearby technological items, which become cursehacked. A creature using a cursehacked item takes a -4 penalty to attack rolls (if it's a weapon), AC (if it's a suit of armor), skill checks (if it's involved in attempting the skill check), and so on. The virus replicates in other technological items if they touch either a cursehacked item or a creature carrying or wearing one. This curse remains until removed by remove affliction or similar magic or by a successful Computers DC 35 check that takes 10 minutes for a single item."
+  },
+  "Explosive Detonation Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "defuse explosive"],
+    "trigger": "proximity (thermal, 5 feet)",
+    "reset": "none",
+    "effect": "explosion (FXDAMAGE F); Reflex DC FXSAVE half; multiple targets (all targets within 20-ft. radius)",
+    "explanation": "When the trap detects a living creature within 5 feet, it explodes."
+  },
+  "Nanoflechette Launcher Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "close one aperture"],
+    "trigger": "location",
+    "reset": "1 minute",
+    "init": true,
+    "duration": "10 rounds",
+    "effect": "nanoflechettes +FXATTACK ranged (FXDAMAGE P); multiple targets (all targets in room)",
+    "explanation": "When sensors detect movement in the trapped room, the doors seal and five wall apertures open on its initiative count to launch nanoflechettes at everyone in the room. The trap fires nanoflechettes for 10 rounds, unless all the apertures have been closed or destroyed. An aperture has EAC FXEAC, KAC FXKAC, Fort + FXGOOD. Ref + FXPOOR, hardness 10, and FXHPDIV5 Hit Points."
+  },
+  "Obedience Implant Trap": {
+    "type": "hybrid",
+    "disable": ["Engineering", "disable lancet", "Mysticism", "render implant ineffective"],
+    "trigger": "proximity (visual, 10 feet)",
+    "reset": "manual",
+    "effect": "lancet +FXATTACK melee (FXDAMAGE P plus dominate person); Will DC FXSAVE negates dominate person effect",
+    "explanation": "When the trap sees a creature within 10 feet, a lancet implants a magic microchip in the triggering creature, which falls under the telepathic control of the trap's creator, as per dominate person (but affecting any creature). Removing the chip safely requires a 1-minute surgical procedure and a successful Medicine DC 28 check. Failure deals 3d6 slashing damage and leaves the implant in place. An implanted chip prevents magical means of ending the spell effect. Any later successful save (such as to resist a command) renders the spell effect dormant for 1 round rather than ending it."
+  },
+  "Disintegration Chamber Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "disable beam"],
+    "trigger": "location",
+    "reset": "1 minute",
+    "effect": "disintegration beam (FXDAMAGE); Fortitude DC FXSAVE half damage; onset delay (1 round); multiple targets (all targets in room)",
+    "explanation": "When organic matter enters the trapped room, a disintegration beam permeates it 1 round later, atomizing everything within."
+  },
+  "Soul Upload Trap": {
+    "type": "hybrid",
+    "disable": ["Computers", "disrupt system's upload capacity", "Mysticism", "scramble magic"],
+    "trigger": "location",
+    "reset": "immediate",
+    "effect": "death, soul uploaded into data module, Will DC FXSAVE negates; onset delay (1 minute); multiple targets (all targets in room)",
+    "explanation": "One minute after living creatures enter the trapped room, they are bombarded with energy that digitizes and removes their souls, leaving their bodies lifeless husks. The digitized souls are uploaded into data modules linked to the room's computer system. Hacking the system via a successful Computers check can release trapped souls, but it usually has a wipe module. A failed attempt might purge the souls. Casting raise dead on an affected body requires a successful DC 32 caster level check or the spell fails."
+  },
 };
 
 xp = {
@@ -64,7 +141,7 @@ function clearOutput() {
   indexCounter = 0;
 }
 
-function printPanel(trap,level) {
+function printPanel(trap,cr) {
   var $outputArea = $(".output.area").first();
   var storeOutput = $( "div.output.area" ).html();
   $outputArea.empty();
@@ -72,16 +149,17 @@ function printPanel(trap,level) {
   indexCounter += 1;
   indexString = "index" + indexCounter.toString();
 
-  var panelTitle =  "CR " + level + " " + trap;
-  var panelBody =   "<h5 class=\"text-muted text-muted-one\">butts</h5>" +
-                    "<p><b>Price: </b>" +
-                    "<br><b>EAC: </b>" +
-                    "<br><b>KAC: </b>" +
-                    "<br><b>Max Dex Bonus: </b>" +
-                    "<br><b>Armor Check Penalty: </b>" +
-                    "<br><b>Speed Adjustment: </b>" +
-                    "<br><b>Upgrade Slots: </b>" +
-                    "<br><b>Bulk: </b>" + "</p>" +
+  var panelTitle =  "CR " + cr + " " + trap;
+  var panelBody =   "<h5 class=\"text-muted\"><i>" + trapTypes[trap].explanation + "</i></h5>" +
+                    "<p><b>XP " + xp[cr] + "</b>" +
+                    "<br><b>Type </b>" + trapTypes[trap].type + "; <b>Perception </b> DC " + trapStats[cr][0] +
+                    getDisable(trap) +
+                    "<br><b>Trigger </b>" + trapTypes[trap].trigger + getInit(trap) + getDuration(trap) + "; <b>Reset </b>" + trapTypes[trap].reset +
+                    getBypass(trap) +
+                    "<br><b>Effect </b>" + trapTypes[trap].effect + "</p>"
+
+panelBody = panelBody.replace('FXDAMAGE',trapStats[cr][9]).replace('FXSAVE',trapStats[cr][10]).replace('FXATTACK',trapStats[cr][8]).replace('FXDISABLE',trapStats[cr][1]).replace('FXEAC',trapStats[cr][3]).replace('FXKAC',trapStats[cr][4]).replace('FXGOOD',trapStats[cr][5]).replace('FXPOOR',trapStats[cr][6])
+panelBody = panelBody.replace('FXHPDIV5',calcHP(cr,5));
 
   $outputArea.append("<div class=\"panel " + indexString + "\">");
   var $panel = $(".panel."+indexString).first();
@@ -96,27 +174,60 @@ function printPanel(trap,level) {
   }
 }
 
+function getBypass(trap) {
+  if (trapTypes[trap].hasOwnProperty('bypass')) {
+    return "; <b>Bypass </b>" + trapTypes[trap].bypass
+  }
+  return "";
+}
+
+function getInit(trap) {
+  if (trapTypes[trap].hasOwnProperty('init')) {
+    return "; <b>Init </b>+" + trapStats[cr][2]
+  }
+  return "";
+}
+
+function getDuration(trap) {
+  if (trapTypes[trap].hasOwnProperty('duration')) {
+    return "; <b>Duration </b>" + trapTypes[trap].duration
+  }
+  return "";
+}
+
+function getDisable(trap) {
+  var disable = "; <b>Disable </b> " + trapTypes[trap].disable[0] + " DC " + trapStats[cr][1] + " (" + trapTypes[trap].disable[1] + ")"
+  if (trapTypes[trap].disable.length > 2) {
+    disable = disable + " or " + trapTypes[trap].disable[2] + " DC " + trapStats[cr][1] + " (" + trapTypes[trap].disable[3] + ")"
+  }
+  return disable
+}
+
+function calcHP(cr,dividedby) {
+  return Math.round((Number(trapStats[cr][7])/dividedby))
+}
+
 function removeEntry(index) {
   $(".panel."+index).remove();
 }
 
 function generateTrap() {
 
-  var trap = "Laser";
+  var trap = Object.getOwnPropertyNames(trapTypes).selectRandom();
 
-  var trapDrop = $('#trapPicker').val().trim();
+  var crDrop = $('#trapPicker').val().trim();
 
   //level
-  if (trapDrop.includes("Any")) {
-    level = getRandomInt(1, 20);
-  } else if (trapDrop.includes("CR")){
-    level = parseInt(trapDrop.replace("CR ", ""));
+  if (crDrop.includes("Any")) {
+    cr = Object.getOwnPropertyNames(trapStats).selectRandom();
+  } else if (crDrop.includes("CR")){
+    cr = crDrop.replace("CR ", "");
   } else {
     level = NaN;
     console.log('error getting level');
   }
 
-  printPanel(trap,level);
+  printPanel(trap,cr);
 
   //log event in analytics
   //ga('send', 'event', 'Generation', 'trap');
