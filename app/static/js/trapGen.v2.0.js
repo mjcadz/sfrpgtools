@@ -107,6 +107,65 @@ var trapTypes = {
     "effect": "death, soul uploaded into data module, Will DC FXSAVE negates; onset delay (1 minute); multiple targets (all targets in room)",
     "explanation": "One minute after living creatures enter the trapped room, they are bombarded with energy that digitizes and removes their souls, leaving their bodies lifeless husks. The digitized souls are uploaded into data modules linked to the room's computer system. Hacking the system via a successful Computers check can release trapped souls, but it usually has a wipe module. A failed attempt might purge the souls. Casting raise dead on an affected body requires a successful DC 32 caster level check or the spell fails."
   },
+  "Reverse Gravity Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "disable gravity pump"],
+    "trigger": "proximity (thermal, 5 feet)",
+    "reset": "1 minute",
+    "effect": "slammed on roof (FXDAMAGE falling damage); Reflex DC FXSAVE half damage; multiple targets (all targets in room)",
+    "explanation": "Stepping near the sensor of this trap will reverse gravity in the room, slamming everyone onto the roof."
+  },
+  "Pulled Back Branch Trap": {
+    "type": "analog",
+    "disable": ["Engineering", "release branch"],
+    "trigger": "location",
+    "reset": "manual",
+    "effect": "slapped in face (FXDAMAGE B); Reflex DC FXSAVE avoids",
+    "explanation": "Its a pulled back branch"
+  },
+  "Point Defense Cannon Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "disable one cannon"],
+    "trigger": "location",
+    "reset": "1 minute",
+    "init": true,
+    "duration": "3 rounds",
+    "effect": "chain cannon +FXATTACK ranged (FXDAMAGE P); multiple targets (all targets in room)",
+    "explanation": "When sensors detect movement in the trapped room, the doors seal and 2 cannons mounted on opposite walls start firing at everyone in the room. The trap fires for 3 rounds, unless both cannons have been disabled or destroyed. Each cannon has EAC FXEAC, KAC FXKAC, Fort + FXGOOD. Ref + FXPOOR, and FXHPDIV2 Hit Points."
+  },
+  "Heated Door Knob Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "disable heating mechanism"],
+    "trigger": "touch",
+    "reset": "immediately",
+    "effect": "burn flesh (FXDAMAGE F, Burn 1d8)",
+    "explanation": "When the door knob is touched it causes some nasty fire damage, enough to damage through suits and armor."
+  },
+  "Janitor Robot Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "disable robot"],
+    "trigger": "location",
+    "init": true,
+    "reset": "1 minute",
+    "effect": "garbage crusher +FXATTACK melee (FXDAMAGE B)",
+    "explanation": "Entering the trapped room causes an old janitor robot to activate, after which it relentlessly chases down anyone in the room at 10ft per round, if it comes within 5 feet of a creature it will attack with its garbage crusher"
+  },
+  "Paint Can Pendulum Trap": {
+    "type": "analog",
+    "disable": ["Engineering", "untie paint can"],
+    "trigger": "location (doorway)",
+    "reset": "manual",
+    "effect": "swinging paint can (FXDAMAGE B); Reflex DC FXSAVE avoids",
+    "explanation": "A paint can is tied to a long piece of string which is tied to the roof. Triggering this trap causes the paint can to swing like a pedulum into the creature that triggered it. Paint can is filled with depleted uranium for extra mass."
+  },
+  "Save Or Die Trap": {
+    "type": "hybrid",
+    "disable": ["Mysticism", "skirt death"],
+    "trigger": "proximity (5 feet)",
+    "reset": "manual",
+    "effect": "death; Fortitude DC FXSAVE saves",
+    "explanation": "Chaotic GMs only. The forces of the universe attempt to nullify the existence of the creature that triggers this trap."
+  },
 };
 
 xp = {
@@ -159,7 +218,7 @@ function printPanel(trap,cr) {
                     "<br><b>Effect </b>" + trapTypes[trap].effect + "</p>"
 
 panelBody = panelBody.replace('FXDAMAGE',trapStats[cr][9]).replace('FXSAVE',trapStats[cr][10]).replace('FXATTACK',trapStats[cr][8]).replace('FXDISABLE',trapStats[cr][1]).replace('FXEAC',trapStats[cr][3]).replace('FXKAC',trapStats[cr][4]).replace('FXGOOD',trapStats[cr][5]).replace('FXPOOR',trapStats[cr][6])
-panelBody = panelBody.replace('FXHPDIV5',calcHP(cr,5));
+panelBody = panelBody.replace('FXHPDIV5',calcHP(cr,5)).replace('FXHPDIV2',calcHP(cr,2));
 
   $outputArea.append("<div class=\"panel " + indexString + "\">");
   var $panel = $(".panel."+indexString).first();
