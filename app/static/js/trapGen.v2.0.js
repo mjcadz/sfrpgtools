@@ -160,7 +160,7 @@ var trapTypes = {
     "explanation": "A paint can is tied to a long piece of string which is tied to a door frame. Triggering this trap causes the paint can to swing like a pedulum into the creature that triggered it. Paint can is filled with depleted uranium for extra mass."
   },
   "Save Or Die Trap": {
-    "type": "hybrid",
+    "type": "magical",
     "disable": ["Mysticism", "skirt death"],
     "trigger": "proximity (5 feet)",
     "reset": "manual",
@@ -173,15 +173,104 @@ var trapTypes = {
     "trigger": "location",
     "reset": "none",
     "effect": "vacuum; all atmosphere vented is from the room; onset delay (1 minute)",
-    "explanation": "After 1 minute of entering the trapped room the doors seal and all atmosphere is vented from the room creating a vacuum"
+    "explanation": "1 minute after entering the trapped room the doors seal and all atmosphere is vented from the room creating a vacuum"
   },
   "Faulty Medical Station Trap": {
     "type": "technological",
     "disable": ["Computers", "rewrite bad code"],
-    "trigger": "activation",
+    "trigger": "touch (with patient in bay)",
     "reset": "none",
     "effect": "non vital organ removal (FXDAMAGE S); Reflex DC FXSAVE avoids",
-    "explanation": "Looks like a functional medical station, using it will cause the station to attempt to remove the patients non vital organs"
+    "explanation": "Looks like a fully functional medical station, using it will cause the station to attempt to remove the patients non vital organs. If it disabled it functions as a medical lab (with room for only 1 patient)"
+  },
+  "Rampant AI Trap": {
+    "type": "technological",
+    "disable": ["Computers", "lock ports"],
+    "trigger": "touch",
+    "reset": "none",
+    "effect": "rampant AI (technological items become disabled); Will DC FXSAVE negates; multiple targets (tech items carried by all creatures within 60 ft. of console/data module",
+    "explanation": "When a craeture attempts to hack the trapped computer console or reads a trapped data module, a rampant AI downloads into nearby technological items, which become disabled. These items will no longer work and will act as if they were never equiped. The AI spreads other technological items if they touch. The AI remains until removed by a successful Computers DC 35 check that takes 10 minutes for a single item."
+  },
+  "Spell Gem Trap": {
+    "type": "magical",
+    "disable": ["Mysticism", "remove gem"],
+    "trigger": "proximity (5 feet)",
+    "reset": "none",
+    "effect": "spell gem effect",
+    "explanation": "A spell gem is placed on this trap. A living creature coming within 5 feet of this trap will activate the spell gem and the stored spell is cast, targetting the closet creature. Successfully disabling this trap grants the disabler access to the spell gem."
+  },
+  "Radiation Soak Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "disable control panel"],
+    "trigger": "location",
+    "reset": "1 minute",
+    "effect": "radiation burns (FXDAMAGE); radiation sickness (FXDAMAGE, Nauseated) damage taken after 1 hour and then every hour until creature is treated in a medical lab; Fortitude DC FXSAVE negates; multiple targets (all targets in 30-ft. cone)",
+    "explanation": "This trap will soak the trapped area in radiation. Creatures take immediate burn damage and then radiation sickness damage every hour until treated in a medical lab. creatures become nauseated every time raditation sickness damage is taken."
+  },
+  "Psychological Horror Trap": {
+    "type": "hybrid",
+    "disable": ["Engineering","disable hologram projector","Mysticism", "block mind reader"],
+    "trigger": "location",
+    "reset": "1 hour",
+    "effect": "primal fear (FXDAMAGE) target becomes Panicked; Fortitude DC FXSAVE negates",
+    "explanation": "This trap will attempt to find the targets greatest fear and then projects it as a hologram while simultaneously weakening the affected creatures ability to handle fear."
+  },
+  "Countdown Trap": {
+    "type": "technological",
+    "disable": ["Engineering","disable hologram projector"],
+    "trigger": "location",
+    "reset": "1 hour",
+    "effect": "after button is pushed 5 times, plasma launcher +FXATTACK ranged (FXDAMAGE E&F); multiple targets (all targets in room)",
+    "explanation": "This is a room with a single button on a pedestal in the middle and a large display panel on the wall. Entering the room causes the doors to seal and a countdown to start flashing on the screen. If the countdown reaches zero the doors simply open. Pressing the button resets the countdown. If the button is pushed 5 times the trap is sprung."
+  },
+  "Portal Trap": {
+    "type": "magical",
+    "disable": ["Mysticism", "close portal"],
+    "trigger": "touch",
+    "reset": "1 hour",
+    "effect": "teleportation, target is teleported 100-ft. (rounded down to avoid walls etc) in a random direction (roll 1d8); Reflex DC FXSAVE avoids",
+    "explanation": "A teleportation portal is hidden under a false floor panel, steeping on the panel will cause it to fall away and any creature on the space will fall into a teleportation portal"
+  },
+  "Rolling Boulder Trap": {
+    "type": "analog",
+    "disable": ["Engineering", "secure boulder"],
+    "trigger": "location",
+    "init": true,
+    "reset": "none",
+    "effect": "roll over (FXDAMAGE B, knocked prone); Reflex DC FXSAVE avoids",
+    "explanation": "Triggering this trap causes a huge boulder to start rolling down a hallway at 40-ft. per round. Catching a creature requires the creature to make a reflex save, taking damage on a fail."
+  },
+  "Sonic Blast Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "disable motion sensors"],
+    "trigger": "location",
+    "reset": "1 minute",
+    "effect": "sonic blast +FXATTACK ranged (FXDAMAGE So, deafened)",
+    "explanation": "When sensors detect movement in the trapped room, a wall panel opens and a mounted sonic weapon fires on the triggering creature."
+  },
+  "Debilitation Beam Trap": {
+    "type": "hybrid",
+    "disable": ["Engineering", "disable sensor array"],
+    "trigger": "location",
+    "reset": "1 minute",
+    "effect": "debilitation beam +FXATTACK ranged (roll 1d10[ blinded, confused, dazed, deafened, exhausted, frightened, nauseated, panicked, sickened, stunned ] )",
+    "explanation": "Triggering this trap causes the creature to be blasted with a mix of sounds, lights, heat, and magic which inflicts a random condition on a successful hit."
+  },
+  "Exploding Console Trap": {
+    "type": "technological",
+    "disable": ["Engineering", "defuse explosives"],
+    "trigger": "touch",
+    "reset": "none",
+    "effect": "explosion (FXDAMAGE F); Reflex DC FXSAVE half; multiple targets (all targets in a 20-ft. square area)",
+    "explanation": "When an unsuspecting creature touches the trapped console, the console explodes."
+  },
+  "Undying Love Trap": {
+    "type": "magic",
+    "disable": ["Mysticism", "deny love"],
+    "trigger": "touch",
+    "reset": "1 hour",
+    "effect": "The target falls in love with the very next thing that they see, and will do anything to be close to their desire",
+    "explanation": "I feel it in my fingers, I feel it in my toes. Well, love is all around me and so the feeling grows."
   },
 };
 
@@ -290,6 +379,7 @@ function removeEntry(index) {
 function generateTrap() {
 
   var trap = Object.getOwnPropertyNames(trapTypes).selectRandom();
+  console.log(Object.getOwnPropertyNames(trapTypes))
 
   var crDrop = $('#trapPicker').val().trim();
 
