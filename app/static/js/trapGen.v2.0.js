@@ -323,7 +323,7 @@ function printPanel(trap,cr) {
                     getBypass(trap) +
                     "<br><b>Effect </b>" + trapTypes[trap].effect + "</p>"
 
-panelBody = panelBody.replace('FXDAMAGE',trapStats[cr][9]).replace('FXSAVE',trapStats[cr][10]).replace('FXATTACK',trapStats[cr][8]).replace('FXDISABLE',trapStats[cr][1]).replace('FXEAC',trapStats[cr][3]).replace('FXKAC',trapStats[cr][4]).replace('FXGOOD',trapStats[cr][5]).replace('FXPOOR',trapStats[cr][6])
+panelBody = panelBody.replace('FXDAMAGE',trapStats[cr][9]).replace('FXDAMAGE',trapStats[cr][9]).replace('FXSAVE',trapStats[cr][10]).replace('FXATTACK',trapStats[cr][8]).replace('FXDISABLE',trapStats[cr][1]).replace('FXEAC',trapStats[cr][3]).replace('FXKAC',trapStats[cr][4]).replace('FXGOOD',trapStats[cr][5]).replace('FXPOOR',trapStats[cr][6])
 panelBody = panelBody.replace('FXHPDIV5',calcHP(cr,5)).replace('FXHPDIV2',calcHP(cr,2));
 
   $outputArea.append("<div class=\"panel " + indexString + "\">");
