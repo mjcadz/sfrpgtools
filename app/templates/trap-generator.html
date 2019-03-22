@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Starfinder Trap Generator{% endblock %}
+{% block description %}Random trap generator to add sneaky and deadly traps to your Starfinder game{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css') }}">
+{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <h1>Trap Generator</h1>
+    <p class="lead">Generates sneaky and deadly traps for the Starfinder RPG.</p>
+    <p></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <select class="selectpicker show-tick" id="trapPicker" data-style="btn-default" data-width="100%" data-size="10">
+                  <option selected>Any CR</option>
+                  <option data-divider="true"></option>
+                  <option>CR 1/2</option>
+                  <option>CR 1</option>
+                  <option>CR 2</option>
+                  <option>CR 3</option>
+                  <option>CR 4</option>
+                  <option>CR 5</option>
+                  <option>CR 6</option>
+                  <option>CR 7</option>
+                  <option>CR 8</option>
+                  <option>CR 9</option>
+                  <option>CR 10</option>
+                  <option>CR 11</option>
+                  <option>CR 12</option>
+                  <option>CR 13</option>
+                  <option>CR 14</option>
+                  <option>CR 15</option>
+                  <option>CR 16</option>
+                  <option>CR 17</option>
+                  <option>CR 18</option>
+                  <option>CR 19</option>
+                  <option>CR 20</option>
+                </select>
+                <P></P>
+                <button type="button" onclick="generateTrap()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
+                <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
+                <P></P>
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+
+    <div class="output area">
+
+    </div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/trapGen.v2.0.js') }}"></script>
+{% endblock %}

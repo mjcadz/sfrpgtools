@@ -81,3 +81,9 @@ def inventoryGenerator():
     resp = make_response(render_template('inventory-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
+
+@app.route('/trap-generator')
+def trapGenerator():
+    resp = make_response(render_template('trap-generator.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp
