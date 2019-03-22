@@ -396,7 +396,7 @@ function generateTrap() {
   printPanel(trap,cr);
 
   //log event in analytics
-  //ga('send', 'event', 'Generation', 'trap');
+  ga('send', 'event', 'Generation', 'trap', cr);
 }
 
 //runs when page is loaded
