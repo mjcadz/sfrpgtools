@@ -81,3 +81,9 @@ def trapGenerator():
     resp = make_response(render_template('trap-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
+
+@app.route('/quest-generator.html')
+def questGenerator():
+    resp = make_response(render_template('quest-generator.html'))
+    resp.headers.set('Cache-Control', "public, max-age=604800")
+    return resp

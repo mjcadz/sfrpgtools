@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Starfinder Quest Generator{% endblock %}
+{% block description %}Random quest generator for inspiration in your Starfinder game{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css') }}">
+{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <h1>Quest Generator</h1>
+    <p class="lead">Generates quests for the Starfinder RPG.</p>
+    <p></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <select class="selectpicker show-tick" id="questPicker" data-style="btn-default" data-width="100%" data-size="10">
+                  <option selected>Any quest type</option>
+                  <option data-divider="true"></option>
+                  <option>Onboard Starship</option>
+                  <option>City</option>
+                  <option>Space</option>
+                  <option>Planetside</option>
+                </select>
+                <P></P>
+                <button type="button" onclick="generateQuest()" title="magic, baby" class="btn btn-grn">Generate <i class="fa fa-magic fa-lg"></i></button>
+                <button type="button" onclick="clearOutput()" class="btn btn-default btn-notblack">Clear</button>
+                <P></P>
+            </div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+
+    <div class="output area">
+
+    </div>
+</div>
+{% endblock %}
+{% block includes %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/questGen.v2.0.js') }}"></script>
+{% endblock %}
