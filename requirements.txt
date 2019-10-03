@@ -5,4 +5,4 @@ itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
 pkg-resources==0.0.0
-Werkzeug==0.12.2
+Werkzeug==0.15.3
