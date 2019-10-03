@@ -126,6 +126,7 @@ var armorNameHeavy2 = [
   "Thinplate"
 ]
 
+// flavourtext
 var flavorTextLight = [
   "Is made from a high tech material that looks and feels like a t-shirt",
   "Has light plating hidden underneath the environmental suit",
