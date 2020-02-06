@@ -746,6 +746,14 @@ creatureSubType = {
         "Senses": [
           "darkvision 60 ft."
         ]
+        "Space Goblin": {
+        "OtherAbilities": [
+          "armor savant",
+          "kanobo magic"
+        ],
+        "Senses": [
+          "darkvision 60 ft."
+        ]
       }
     }
   },
@@ -2699,6 +2707,7 @@ uncommonLanguages = [
   "Arkanen",
   "Auran",
   "Celestial",
+  "Damai",
   "Draconic",
   "Drow",
   "Dwarven",
@@ -2711,9 +2720,12 @@ uncommonLanguages = [
   "Kalo",
   "Nchaki",
   "Orc",
+  "Pahtra",
+  "Phentomite",
   "Sarcesian",
   "Shobhad",
-  "Terran"
+  "Terran",
+  "Vlaka"
 ];
 
 alignments = {
