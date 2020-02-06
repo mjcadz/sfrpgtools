@@ -739,20 +739,21 @@ creatureSubType = {
         "MasterSkills": [
           "intimidate",
           "stealth"
-        ],
-        "OtherAbilities": [
-          "battle hardened"
-        ],
-        "Senses": [
-          "darkvision 60 ft."
-        ]
-        "Space Goblin": {
-        "OtherAbilities": [
-          "armor savant",
-          "kanobo magic"
-        ],
-        "Senses": [
-          "darkvision 60 ft."
+      ],
+      "OtherAbilities": [
+        "battle hardened"
+      ],
+      "Senses": [
+        "darkvision 60 ft."
+      ]
+      },
+       "Kanabo": {
+       "OtherAbilities": [
+         "armor savant",
+         "kanabo magic"
+       ],
+       "Senses": [
+         "darkvision 60 ft."
         ]
       }
     }
