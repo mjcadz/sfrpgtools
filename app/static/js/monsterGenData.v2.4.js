@@ -338,7 +338,7 @@ creatureType = {
 //subtype lists
 subTypeAll = ["Air","Magical","Chaotic","Evil", "Extraplanar","Good","Lawful","Native","Technological","Aquatic","Cold","Earth","Elemental","Giant","Incorporeal","Fire","Plantlike","Shapechanger","Water"];
 subTypeOutsider = ["Aeon","Agathion","Angel","Archon","Azata","Daemon","Demon","Devil","Inevitable","Protean"];
-subTypeHumanoid = ["Android","Dwarf","Elf","Gnome","Goblinoid","Gray","Halfling","Human","Ikeshti","Kasatha","Lashunta","Maraquoi","Orc","Reptoid","Ryphorian","Sarcesian","Shirren","Skittermander","Verthani","Vesk","Ysoki"];
+subTypeHumanoid = ["Android","Damai","Dwarf","Elf","Gnome","Goblinoid","Gray","Halfling","Human","Ikeshti","Kasatha","Lashunta","Maraquoi","Orc","Pahtra","Phentomite","Reptoid","Ryphorian","Sarcesian","Shirren","Skittermander","Verthani","Vesk","Vlaka","Ysoki"];
 subTypeConstruct = ["Magical","Technological"];
 subTypeVermin = ["Swarm"];
 subTypeDragon = ["Black Dragon","Blue Dragon","Green Dragon","Red Dragon","White Dragon"];
@@ -537,6 +537,19 @@ creatureSubType = {
       "cold 10"
     ]
   },
+  "Damai": {
+    "Description": "This subtype is applied to damais and creatures related to damais",
+    "MasterSkills": [
+      "stealth"
+      "survival"
+    ], 
+    "OtherAbilities": [
+      "scrappy"
+    ],
+    "Senses": [
+      "low-light vision"
+    ]
+  },	
   "Demon": {
     "SpecialAbilities": [
       "Summon Allies (Sp)"
@@ -705,20 +718,36 @@ creatureSubType = {
   },
   "Goblinoid": {
     "Description": "This subtype is applied to humanoids of various goblinoid subspecies, such as space goblins.",
-    "GoodSkills": [
-      "survival"
-    ],
-    "MasterSkills": [
-      "engineering",
-      "stealth"
-    ],
-    "OtherAbilities": [
-      "fast",
-      "tinker"
-    ],
-    "Senses": [
-      "darkvision 60 ft."
-    ]
+    "SubRaces": {
+      "Space Goblin": {
+        "GoodSkills": [
+          "survival"
+      ],
+      "MasterSkills": [
+        "engineering",
+        "stealth"
+      ],
+      "OtherAbilities": [
+        "fast",
+        "tinker"
+      ],
+      "Senses": [
+        "darkvision 60 ft."
+      ]
+      },
+      "Hobgoblin": {
+        "MasterSkills": [
+          "intimidate",
+          "stealth"
+        ],
+        "OtherAbilities": [
+          "battle hardened"
+        ],
+        "Senses": [
+          "darkvision 60 ft."
+        ]
+      }
+    }
   },
   "Good": {
     "Description": "This subtype is applied to good aligned creatures",
@@ -869,6 +898,35 @@ creatureSubType = {
       }
     }
   },
+  "Pahtra": {
+    "Description": "This subtype is applied to pahtras and creatures related to pahtras"
+    "OtherAbilities": [
+      "nimble",
+      "wary"
+    ],
+    "MasterSkills": [
+      "acrobatics",
+      "stealth"
+    ],
+    "Senses": [
+      "darkvision 60 ft.",
+      "low-light vision"
+    ]
+  },
+  "Phentomite": {
+    "Description": "This subtype is applied to phentomites and creatures related to phentomites."
+    "OtherAbilities": [
+      "acclimated",
+      "heat tracking"
+    ],
+    "MasterSkills": [
+      "acrobatics",
+      "athletics"
+    ],
+    "Senses": [
+      "darkvision 60 ft.",
+    ]
+  },
   "Plantlike": {
     "OtherAbilities": [
       "plantlike"
@@ -1007,6 +1065,21 @@ creatureSubType = {
     ],
     "Senses": [
       "low-light vision"
+    ]
+  },
+  "Vlaka": {
+    "Description": "This subtype is applied to vlakas and other creatures related to vlakas",
+    "Resistance": [
+      "cold 5"
+    ],
+    "OtherAbilities": [
+      "buoy",
+      "cooperative",
+      "versed",
+      "vlaken senses"
+    ],
+    "MasterSkills": [
+      "sense motive"
     ]
   },
   "Water": {
