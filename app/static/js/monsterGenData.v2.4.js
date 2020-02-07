@@ -2081,6 +2081,7 @@ graftTemplates = {
       ],
       "RequiredCreatureType": "Dragon",
       "RequiredSubType": "Water",
+      "RequiredCR": 3
       "SRtable": {
         "CR" : [10],
         "SR" : ["11+CR"]
@@ -2093,7 +2094,11 @@ graftTemplates = {
         "Swamp Stride (Ex)"
       ],
       "Speed": [
-        "swim 60 ft."
+        "swim 60 ft.",
+        "FlyTable": {
+          "CR" : [3,7,11,17}
+          "FlySpeed" : ["150 ft. [Ex, average]","200 ft. [Ex, average]","200 ft. [Ex, clumsy]","250 ft. [Ex, clumsy]")
+	 }
       ]
     },
     "Blue Dragon": {
@@ -2137,6 +2142,10 @@ graftTemplates = {
       ],
       "Speed": [
         "burrow 60 ft."
+        "FlyTable": {
+          "CR" : [3,7,11,17}
+          "FlySpeed" : ["150 ft. [Ex, average]","200 ft. [Ex, average]","200 ft. [Ex, clumsy]","250 ft. [Ex, clumsy]")
+	 }
       ]
     },
     "Green Dragon": {
@@ -2183,6 +2192,10 @@ graftTemplates = {
       ],
       "Speed": [
         "swim 40 ft."
+        "FlyTable": {
+          "CR" : [3,7,11,17}
+          "FlySpeed" : ["150 ft. [Ex, average]","200 ft. [Ex, average]","200 ft. [Ex, clumsy]","250 ft. [Ex, clumsy]")
+	 }
       ]
     },
     "Red Dragon": {
@@ -2224,6 +2237,12 @@ graftTemplates = {
       ],
       "Vulnerable": [
         "cold"
+      ]
+      "Speed": [
+        "FlyTable": {
+          "CR" : [3,7,11,17}
+          "FlySpeed" : ["150 ft. [Ex, average]","200 ft. [Ex, average]","200 ft. [Ex, clumsy]","250 ft. [Ex, clumsy]")
+	 }
       ]
     },
     "White Dragon": {
@@ -2269,6 +2288,10 @@ graftTemplates = {
       "Speed": [
         "burrow 30 ft.",
         "swim 60 ft."
+        "FlyTable": {
+          "CR" : [3,7,11,17}
+          "FlySpeed" : ["150 ft. [Ex, average]","200 ft. [Ex, average]","200 ft. [Ex, clumsy]","250 ft. [Ex, clumsy]")
+	 }
       ],
       "Vulnerable": [
         "fire"
