@@ -2311,7 +2311,7 @@ graftTemplates = {
       },
       "ResistanceTable": {
         "type" : "cold",
-        "CR" : [3,7,11,15}
+        "CR" : [3,7,11,15]
         "Resistance" : [5,10,20,30]
       },
       "RequiredCreatureType": "Humanoid",
