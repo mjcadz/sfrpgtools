@@ -2273,6 +2273,40 @@ graftTemplates = {
       "Vulnerable": [
         "fire"
       ]
+    },
+  }
+},
+  "giantGrafts": {
+    "Cloud Giant": 
+      "Spell-likeAbilities": {
+        "CR": 11
+      },
+      "Alignment": "Neutral Good", "Neutral Evil",
+      "Description": "Cloud giants live on floating citadels in the swirling atmospheres of gas planets.",
+      "ResistanceTable": {
+        "type" : "cold",
+        "CR" : [3,7,11,15}
+        "Resistance" : [5,10,20,30]
+      },
+      "RequiredCreatureType": "Humanoid",
+      "RequiredSubType": "Giant",
+      "Senses": [
+        "blindsense (scent) 60 ft.",
+        "sense through (vision [clouds only])"
+      ],
+      "OffensiveAbilities": [
+        "crush (replace with standard melee damage)"
+      ],
+      "OtherAbilities": [
+        "hurl debris"
+      ],
+      "SpecialAbilities": [
+        "Knockback (Ex)"
+      ],
+      "Speed": {
+        "type" : "fly speed 40 ft. Su, average; normal, thick, and toxic atmospheres only",
+        "CR" : 5
+      }
     }
   }
 };
@@ -2687,7 +2721,8 @@ graftSpecialAbilities = {
   "Icewalking (Ex)": "A white dragon can move across icy surfaces without penalty and doesn't need to attempt Acrobatics checks to run or charge on ice. In addition, a white dragon can climb icy surfaces as if under the effect of spider climb.",
   "Woodland Stride (Ex)": "A green dragon can move through natural foliage at full speed without taking damage or suffering impairment. Areas of foliage that have been magically altered affect it normally.",
   "Summon Allies (Sp)": "The creature can attempt to summon creatures of the same creature type as itself as a full action. The summoned ally returns to the place from which it came after 1 hour.",
-
+  "Knockback (Ex)": "Whenever a cloud giant successfully deals damage to a creature with a melee attack or thrown projectile, the giant can immediately initiate a bull rush combat maneuver against that target (this takes no action and does not provoke attacks of opportunity).",
+  
 };
 
 commonLanguages = [
