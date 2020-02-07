@@ -2401,6 +2401,10 @@ specialAbilities = {
       "Description": "The creature can mentally communicate with any creatures within the listed range with which it shares a language.",
       "Format": "Languages limited telepathy 30 ft."
     },
+    "Limited Plant Benefits (Ex)": {
+      "Description": "Despite being a plant creature, the creature doesn’t gain the standard immunities associated with creatures of the plant type. Instead, a creature with this ability gains a +2 racial bonus on saving throws against mind-affecting effects, paralysis, poison, polymorph, sleep, and stunning effects, unless the effect specifies that it is effective against plants.",
+      "Format": "Defensive Abilities limited plant benefits."
+    },
     "Low-Light Vision (Ex)": {
       "Description": "The creature can see in dim light as if it were normal light.\nLow-light vision is color vision, unlike darkvision. A creature with low-light vision can read as long as even the tiniest source of light is next to it. Creatures with low-light vision can see outdoors on a moonlit night as well as they can during the day, since the moon casts dim light.",
       "Format": "Senses low-light vision."
@@ -2434,6 +2438,10 @@ specialAbilities = {
     }
   },
   "Abilities": {
+    "Alien Presence (Ex or Su)": {
+      "Description": "The creature’s mere presence can have deleterious effects for those nearby. It can activate this ability as part of the action of making an attack or as a move action, but it can activate it only once per round. It usually has a range of 30 feet. This aura functions as frightful presence, but instead of imposing the shaken condition on creatures that fail their Will saves, it imposes the listed condition. The duration is 5d6 rounds unless the ability says otherwise. Once an opponent has been exposed to a creature’s alien presence (whether or not the opponent succeeds at its saving throw), it cannot be affected by the same creature’s alien presence for 24 hours. This is an emotion, fear, mind-affecting, and sensedependent effect.",
+      "Format": "Aura alien presence (240 ft., DC 25, sickened 2d4 rounds)."
+    },
     "Amorphous (Ex)": {
       "Description": "The creature's body is malleable and shapeless. It does not take double damage from critical hits, but it is affected by critical hit effects normally.",
       "Format": "Defensive Abilities amorphous."
@@ -2494,9 +2502,18 @@ specialAbilities = {
       "Description": "A successful energy drain attack inflicts one or more negative levels (as described in the ability). If an attack that includes an energy drain scores a critical hit, it inflicts twice the listed number of negative levels. Unless otherwise specified in the draining creature's description, it gains 5 temporary Hit Points for each negative level it inflicts on an opponent. These temporary Hit Points last for a maximum of 1 hour. Negative levels from energy drain remain until 24 hours have passed or until they are removed with magic or technology. If a negative level isn't removed before 24 hours have passed, the affected target must attempt a Fortitude saving throw (the exact DC is given in the creature's stat block). On a success, the negative level goes away. On a failure, the negative level becomes permanent. A separate saving throw is required for each negative level.",
       "Format": "Melee slam +24 (6d12+22 B plus energy drain); Offensive Abilities energy drain (2 levels, DC 22)."
     },
+    "Engulf (Ex)": {
+      "Description": "As a standard action, the creature can move up to its speed, moving into or through the space of any creatures that are at least one size smaller than itself without penalty. Every creature in the engulfing creature’s path is automatically engulfed, with no attack roll needed. A targeted creature can attempt a Reflex saving throw to avoid being engulfed; if it attempts this save, it can’t make an attack of opportunity against the engulfing creature due to that creature’s movement. On a successful save, the target is pushed back or aside (target’s choice) as the engulfing creature continues to move. An engulfed creature gains the pinned condition, takes the listed damage at the beginning of each turn it is engulfed, is in danger of suffocating if it doesn’t have environmental protections, and is trapped within the engulfing creature’s body until it is no longer pinned. An engulfed creature moves with the engulfing creature; this movement does not provoke attacks of opportunity against the engulfed creature. A creature can engulf one creature that is one size smaller than itself, up to two creatures that are two sizes smaller, or up to four creatures that are three sizes smaller.",
+      "Format": "Offensive Abilities engulf (1d6+8 F, DC 13)."
+      "Guidelines": "Use the same damage amount as for the creature’s standard melee attack."
+    },
     "Fast Healing (Ex)": {
       "Description": "The creature regains the listed number of Hit Points at the start of its turn. Unless otherwise noted, the creature can never exceed its maximum Hit Points.\nFast healing does not restore Hit Points lost from starvation, thirst, or suffocation, nor does it allow a creature to regrow or reattach lost body parts, unless otherwise stated. Fast healing continues to function until a creature dies, at which point the effects of fast healing end immediately.",
       "Format": "Defensive Abilities fast healing 5."
+    },
+    "Ferocious Charge (Ex)": {
+      "Description": "When the creature charges, it can attempt a trip combat maneuver in place of the normal melee attack. In addition, the creature can charge without taking the normal charge penalties to its attack roll or AC. If the creature has another ability that allows it to charge without taking these penalties (such as the charge attack ability from the soldier’s blitz fighting style), it also gains the ability to charge through difficult terrain.",
+      "Format": "Offensive Abilities ferocious charge."
     },
     "Ferocity (Ex)": {
       "Description": "When the creature is brought to 0 Hit Points, it can fight on for 1 more round. It can act normally until the end of its next turn; if it has 0 HP at that point, it dies. If it would lose further Hit Points before this, it ceases to be able to act and dies.",
@@ -2519,6 +2536,15 @@ specialAbilities = {
       "Format": "Immunities acid, paralysis.",
       "Guidelines": "A creature usually has one immunity, plus one for every 5 CR. Broad immunities like immunity to mind-affecting effects or all magic should be chosen with caution and might count as multiple abilities."
     },
+    "Integrated Weapons (Ex)": {
+      "Description": "The creature’s weapons are manufactured weapons, not natural weapons, and they are integrated into its frame. A creature can’t be disarmed of these weapons, though they can be removed and used if the creature is dead.",
+      "Format": "Defensive Abilities integrated weapons."
+      "Guidelines": "A manufactured weapon is a weapon with an item level that can be purchased by characters."
+    },
+    "Multiarmed (Ex)": {
+      "Description": "The creature has the number of arms listed. This allows it to wield and hold up to that many hands’ worth of weapons and equipment. While this increases the number of items it can have at the ready, it doesn’t increase the number of attacks it can make during combat.",
+      "Format": "Other Abilities multiarmed (4)."
+    },
     "Multiattack (Ex)": {
       "Description": "When making a full attack, the creature can make all the listed attacks, instead of two attacks, at the attack bonuses indicated. It can make the attacks in any order.",
       "Format": "Multiattack bite +10 (3d6+5), 2 claws +10 (2d8+5).",
@@ -2535,6 +2561,10 @@ specialAbilities = {
     "Plantlike (Ex)": {
       "Description": "For effects targeting creatures by type, plantlike creatures count as both their type and plants, whichever is most detrimental to them. They also receive a +2 racial bonus to saving throws against mind-affecting effects, paralysis, poison, polymorph, sleep, and stunning, unless the effect specifies that it works against plants.",
       "Format": "Other Abilities plantlike."
+    },
+    "Radioactive (Ex, Su)": {
+      "Description": "The creature emanates radiation at the listed radiation level to the listed radius. If the radiation level is medium or stronger, the effect suffuses a larger area at a lower level as normal.",
+      "Format": "Aura radioactive (medium, 20 ft., DC 17)."
     },
     "Regeneration (Ex)": {
       "Description": "The creature regains Hit Points at the start of its turn, as with fast healing, but it can't die as long as its regeneration is still functioning (although creatures with regeneration still fall unconscious when their Hit Points reach 0). Certain attacks, typically those that deal acid or fire damage, cause a creature's regeneration to stop functioning for 1 round. During this round, the creature doesn't regain Hit Points and can die normally. The creature's stat block describes the types of damage that suppress the regeneration.\nRegeneration doesn't restore Hit Points lost from starvation, thirst, or suffocation. Creatures with regeneration can regrow lost portions of their bodies and can reattach severed body parts if they are recovered within 1 hour of severing. Severed parts that aren't reattached wither and decompose normally.\nA creature usually must have a Constitution score or modifier to have this ability.",
@@ -2556,9 +2586,23 @@ specialAbilities = {
       "Description": "The creature does not use any visual senses and is thus never subject to any effect that requires the creature to see a target or effect. Sightless creatures normally have some form of blindsight to compensate for their sightlessness, but if not, they are assumed to be able to operate as well as a creature with normal vision unless the creature's description says otherwise.",
       "Format": "Senses sightless."
     },
+    "Solar Adaptation (Ex or Su)": {
+      "Description": "The creature can survive within a star despite the luminance, pressure, radiation, and convection currents. In addition, while within a star, the creature can move as if it had a supernatural fly speed equal to its fastest speed.",
+      "Format": "Other Abilities solar adaptation."
+      "Guidelines": "A creature with solar adaptation should also have the fire subtype or immunity to fire."
+    },
+    "Spaceflight (Su)": {
+      "Description": "The creature can fly through space at standard navigation and astrogation speeds using Piloting to navigate. If it uses a skill other than Piloting for skill checks to astrogate, that skill is listed in parentheses.",
+      "Format": "Other Abilities spaceflight (Mysticism)."
+      "Guidelines": "Most creatures with spaceflight also have void adaptation."
+    },
     "Spell Resistance (Ex)": {
       "Description": "The creature can avoid the effects of some spells and spell-like abilities that would directly affect it. To determine whether a spell or spell-like ability works against a creature with spell resistance, the caster must attempt a caster level check (1d20 + caster level). If the result equals or exceeds the creature's spell resistance, the spell works normally, though the creature can still attempt any saving throws normally allowed.",
       "Format": "SR 18."
+    },
+    "Spider Climb (Ex)": {
+      "Description": "The creature can climb as though affected by the spell spider climb.",
+      "Format": "Speed spider climb."
     },
     "Stellar Alignment (Su)": {
       "Description": "The creature is aligned to the cycles of solar systems. Creatures with stellar alignment usually have stellar revelations and zenith revelations, either ones from the solarian class or ones unique to the creature. When using stellar revelations, the creature is always considered attuned. However, it's not always considered fully attuned, so it normally can't always use zenith powers. When you roll initiative for the creature, roll 1d3. Once that many rounds have elapsed, the creature is considered fully attuned and gains access to its zenith powers. After it uses a zenith power, it's no longer fully attuned and you roll 1d3 again to see how many rounds it will take to recharge.\nIf a creature has stellar alignment (graviton) or stellar alignment (photon), it's considered to be attuned only in the indicated mode and can become fully attuned only in the indicated mode, as described above.",
@@ -2591,6 +2635,15 @@ specialAbilities = {
       "Format": "Offensive Abilities trample (3d4+14 B, DC 16).",
       "Guidelines": "The amount of damage the trample deals should be the same as the creature's standard melee damage."
     },
+    "Troop Attack (Ex)": {
+      "Description": "The creature doesn’t make standard melee attacks. Instead, it deals automatic damage to any creature within its reach or whose space it occupies at the end of its turn, with no attack roll needed. A troop threatens all creatures within its reach or within its area and resolves attacks of opportunity by dealing automatic troop damage to any foe in reach that provokes an attack of opportunity. A troop is still limited to making one such attack per round unless stated otherwise. A troop can perform grapple and sunder combat maneuvers, but no other combat maneuvers, unless the troop’s description states otherwise.",
+      "Format": "Melee troop attack (1d4+10 P)."
+      "Guidelines": "To determine the amount of damage a troop of CR 6 or lower deals with its troop attack, use the dice value listed for CR 6 in the Melee Damage, Three Attacks column on its appropriate array table (see pages 129–132 of Alien Archive), lowering the additional damage added to the dice value to match the additional damage of its actual CR and adding its Strength modifier as normal. For creatures of all other CRs, use the damage listed in the Melee Damage, Four Attacks entry for its CR in the corresponding array table."
+    },
+    "Troop Defenses (Ex)": {
+      "Description": "Troops take damage from attacks differently depending on how the attack targets them. A troop takes half damage from attacks that effect a single target (such as shot from a semi-auto pistol). A troop is immune to effects that target a specific number of creatures (including single-target spells and multiple-target spells such as haste). A troop takes half again as much damage (+50%) from effects that affect all targets in an area, such as grenades, blast and explode weapons, and many evocation spells. A troop takes normal damage from an attack or effect that affects multiple targets (including lines and fully automatic mode attacks). For the purposes of the automatic weapon special property, a troop counts as five targets. For example, if an automatic attack is made using 12 rounds of ammunition, the attack affects a maximum of six targets, so it can damage a troop normally. However, if two other targets are closer to the attacker than the troop, they must be attacked first, leaving only four attacks to target the troop, so the troop takes no damage.",
+      "Format": "Defensive Abilities troop defenses."
+    },
     "Truespeech (Su)": {
       "Description": "The creature can speak with any other creature that has a language. This ability is always active.",
       "Format": "Languages truespeech."
@@ -2602,6 +2655,10 @@ specialAbilities = {
     "Unliving (Ex)": {
       "Description": "The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn't heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing still benefits from that ability. Unliving creatures don't breathe, eat, or sleep. They can't be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.",
       "Format": "Other Abilities unliving."
+    },
+    "Void Adaptation (Ex or Su)": {
+      "Description": "Numerous creatures are inured to the void of outer space. A creature with void adaptation has the following abilities. Immunity to cosmic rays. Immunity to the environmental effects of vacuum. No breath.",
+      "Format": "Defensive Abilities void adaptation."
     },
     "Vortex (Ex Or Su)": {
       "Description": "A vortex ability works identically to the whirlwind ability (see below), except the creature gains a swim speed instead of a fly speed, it can form only in a liquid (such as in water), it cannot leave a liquid medium, and it always blocks all vision within it and line of sight past it. In addition, carried creatures must have a swim speed in order to attempt a Reflex save to escape.",
@@ -2633,6 +2690,10 @@ specialAbilities = {
     "Swarm Immunities (Ex)": {
       "Description": "Swarms are immune to the following effects unless the effect specifies it works against swarms:\nBleeding, critical hits, flat-footed, off-target, pinned, prone, staggered, and stunned.\nCombat maneuvers-swarms can't be affected by and can't perform combat maneuvers unless the swarm's description says otherwise.\nFlanking-swarms are unflankable.\nDying-a swarm reduced to 0 Hit Points breaks up and ceases to exist as a swarm, though individual members of it might survive.",
       "Format": "Immunities swarm immunities."
+    },
+    "Troop Immunities (Ex)": {
+      "Description": "Troops are immune to the following effects, unless the effect specifies it works against swarms or troops:\nPinned, prone, staggered, and stunned.\nCombat maneuvers—a troop can’t be subject to combat maneuvers, unless it’s affected by area effects that include such effects or the troop’s description says otherwise.\nFlanking—troops are unflankable.\nDying—a troop reduced to 0 Hit Points breaks up and is effectively destroyed, though individual members of it might survive.",
+      "Format": "Languages truespeech."
     },
     "Undead Immunities (Ex)": {
       "Description": "Undead are immune to the following effects unless the effect specifies it works against undead creatures:\nBleed, death effects, disease, mind-affecting effects, paralysis, poison, sleep, and stunning.\nAbility damage, ability drain, energy drain, exhaustion, fatigue, negative levels, and nonlethal damage.\nAny effect that requires a Fortitude save (unless the effect works on objects or is harmless).",
