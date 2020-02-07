@@ -2306,6 +2306,9 @@ graftTemplates = {
       },
       "Alignment": "Neutral Good", "Neutral Evil",
       "Description": "Cloud giants live on floating citadels in the swirling atmospheres of gas planets.",
+      "Adjustments": {
+       "attackDamageCR":1
+      },
       "ResistanceTable": {
         "type" : "cold",
         "CR" : [3,7,11,15}
