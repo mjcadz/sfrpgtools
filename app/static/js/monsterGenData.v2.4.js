@@ -2064,9 +2064,23 @@ graftTemplates = {
       "SensesTable": {
 				"darkvision 60 ft.": "always",
 				"blindsense (vibration) 5 ft.": 7
-			},
-		}
-	},
+      },
+   }
+},
+  "otherGrafts": {
+    "Oni": 
+      "Description": "Oni are evil spirits that take humanoid form to become native outsiders.",
+      "Text": "Grafts: Oni gain the humanoid subtype graft of the race associated with their physical form. For example, a ja noi oni takes the form of a hobgoblin and therefore gains the goblinoid subtype graft, even though it is not a humanoid or a member of the hobgoblin race. Oni also gain the shapechanger subtype graft, with their change shape ability generally limited to humanoids of similar size.\nReplace Humanoid with Outsider",
+      "RequiredCreatureType": "Humanoid",
+      "Senses": [
+        "Darkvision 60 ft.",
+        "low-light vision"
+      ],
+      "DefensiveAbilities": [
+        "regeneration (#) (acid, fire)."
+      ],
+   }
+},
   "dragonGrafts": {
     "Black Dragon": {
       "CalculatedAbilities": {
