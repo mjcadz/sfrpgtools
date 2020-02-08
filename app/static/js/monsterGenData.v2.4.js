@@ -338,7 +338,7 @@ creatureType = {
 //subtype lists
 subTypeAll = ["Air","Magical","Chaotic","Evil", "Extraplanar","Good","Lawful","Native","Technological","Aquatic","Cold","Earth","Elemental","Giant","Incorporeal","Fire","Plantlike","Shapechanger","Water"];
 subTypeOutsider = ["Aeon","Agathion","Angel","Archon","Azata","Daemon","Demon","Devil","Inevitable","Protean"];
-subTypeHumanoid = ["Android","Damai","Dwarf","Elf","Gnome","Goblinoid","Gray","Halfling","Human","Ikeshti","Kasatha","Lashunta","Maraquoi","Orc","Pahtra","Phentomite","Reptoid","Ryphorian","Sarcesian","Shirren","Skittermander","Verthani","Vesk","Vlaka","Ysoki"];
+subTypeHumanoid = ["Android","Damai","Dwarf","Elf","Gnome","Goblinoid","Gray","Halfling","Human","Ikeshti","Kasatha","Khizar","Lashunta","Maraquoi","Orc","Pahtra","Phentomite","Reptoid","Ryphorian","Sarcesian","Shirren","Skittermander","Verthani","Vesk","Vlaka","Ysoki"];
 subTypeConstruct = ["Magical","Technological"];
 subTypeVermin = ["Swarm"];
 subTypeDragon = ["Black Dragon","Blue Dragon","Green Dragon","Red Dragon","White Dragon"];
@@ -840,6 +840,21 @@ creatureSubType = {
       "desert stride",
       "four-armed"
     ]
+  },
+  "Khizar": {
+    "Description": "This subtype is applied to khizars and creatures related to khizars.",
+    "GoodSkills": [
+      "life science",
+      "survival
+    ],
+    "OtherAbilities": [
+      " carbonic respiration",
+      "evergreen",
+      "limited telepathy (including communication with non-mindless creatures of the plant type)"
+    ],
+    "Senses": [
+      "Blindsense (vibration) 30 ft.",
+      " blindsight (life) 30 ft"
   },
   "Lashunta": {
     "Description": "This subtype is applied to lashuntas and creatures related to lashuntas.",
