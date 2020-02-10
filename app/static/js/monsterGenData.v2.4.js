@@ -337,7 +337,7 @@ creatureType = {
 
 //subtype lists
 subTypeAll = ["Air","Magical","Chaotic","Evil", "Extraplanar","Good","Lawful","Native","Swarm","Technological","Aquatic","Cold","Earth","Elemental","Giant","Incorporeal","Fire","Plantlike","Shapechanger","Water"];
-subTypeOutsider = ["Aeon","Agathion","Angel","Archon","Azata","Daemon","Demon","Devil","Inevitable","Protean"];
+subTypeOutsider = ["Aeon","Agathion","Angel","Archon","Azata","Daemon","Demon","Devil","Inevitable","Protean","Velstrac"];
 subTypeHumanoid = ["Android","Damai","Dwarf","Elf","Gnome","Goblinoid","Gray","Halfling","Human","Ikeshti","Kasatha","Khizar","Lashunta","Maraquoi","Orc","Pahtra","Phentomite","Reptoid","Ryphorian","Sarcesian","Shirren","Skittermander","Strix","Verthani","Vesk","Vlaka","Ysoki"];
 subTypeConstruct = ["Magical","Technological"];
 subTypeVermin = [];
@@ -1084,6 +1084,21 @@ creatureSubType = {
   "Technological": {
     "Description": "This subtype is applies to creatures of technological origins"
   },
+  "Velstrac": {
+    "Description": "Velstracs are lawful evil outsiders native to the Shadow Plane who feed on fear and pain",
+      "Immunities": [
+        "cold"
+      ],  
+      "DefensiveAbilities": [
+        "regeneration 5 (good, silver)."
+      ],
+    "OtherAbilities": [
+      "Unnerving Gaze (Su): This gaze ability manipulates the perceptions of those who look upon a velstrac. Unnerving gaze has a range of 30 feet and can be negated by a Will save; the exact effects vary by velstrac. All velstracs are immune to this ability. This is a mind-affecting fear effect"
+    ],
+    "Senses": [
+      "Darkvision 60 ft."
+    ]
+  },
   "Verthani": {
     "AdditionalAbilities": {
       "GoodSkills": 1
@@ -1129,7 +1144,7 @@ creatureSubType = {
       "athletics"
     ],
     "Speed": [
-      "swim 30 ft."
+      "swim __ ft."
     ]
   },
   "Ysoki": {
@@ -2094,9 +2109,39 @@ graftTemplates = {
         "low-light vision"
       ],
       "DefensiveAbilities": [
-        "regeneration (#) (acid, fire)."
+        "regeneration _ (acid, fire)."
       ],
    }
+},
+  "environmentalGrafts": {
+    "Airborne": 
+      "Description": "These environmental grafts can be applied to any creature, though additional adjudication may be needed when applying them to humanoids, monstrous humanoids, and outsiders.\n\nAirborne creatures spend a good part of their life aloft",
+      "Senses": [
+        "Keen eyesight is common among airborne creatures. You can choose to give them blindsense or darkvision with a longer-than-usual range"
+      ],
+      "Speed": [
+        "Flying: Airborne creatures gain a fly speed at least as fast as their land speed, and often twice as fast"
+      ],
+      "GoodSkills" [
+        "acrobatics, perception"
+      ],
+   },
+   "Aquatic":
+      "Description": "These environmental grafts can be applied to any creature, though additional adjudication may be needed when applying them to humanoids, monstrous humanoids, and outsiders.\n\nAn aquatic creature lives much, if not all, of its life in the water",
+      "Text": "Aquatic Subtype: Most aquatic creatures have the aquatic subtype, meaning they breathe water. A creature that can breathe air and water has the aquatic subtype and the amphibious special ability. If an aquatic creature lacks the aquatic subtype, it has the hold breath special ability."
+      "Senses": [
+        "You can add one sense for free if you wish. Among aquatic creatures, blindsense (scent, sound, or vibration) is common. Some such creatures have sonar, granting them blindsight (sound) out to 120 feet. A few aquatic predators have tracking (scent), normally representing the ability to sense blood in the water"
+      ],
+      "Immunities": [
+        "Depth Inured: You can make aquatic creatures immune to the dangers of extreme depths (Starfinder Core Rulebook 396) without counting it against their special abilities"
+      ],
+      "Speed": [
+        "Swimming: Aquatic creatures normally have a swim speed based on their CR. This swim speed is typically 20 feet for creatures with a CR of 2 or less, 30 feet for CR 3–6, 40 feet for CR 7–9, 50 feet for CR 10–12, and 60 feet for CR 13 or higher (though you can make creatures faster or slower, based on the creature’s concept and other abilities). Many aquatic creatures have no other form of movement, though you can make flying, walking, or burrowing aquatic creatures if you wish"
+      ],
+      "GoodSkills" [
+        "Athletics, The creature might have penalties to such checks on land"
+      ],
+   },
 },
   "dragonGrafts": {
     "Black Dragon": {
