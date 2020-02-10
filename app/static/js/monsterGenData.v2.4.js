@@ -336,11 +336,11 @@ creatureType = {
 };
 
 //subtype lists
-subTypeAll = ["Air","Magical","Chaotic","Evil", "Extraplanar","Good","Lawful","Native","Technological","Aquatic","Cold","Earth","Elemental","Giant","Incorporeal","Fire","Plantlike","Shapechanger","Water"];
+subTypeAll = ["Air","Magical","Chaotic","Evil", "Extraplanar","Good","Lawful","Native","Swarm","Technological","Aquatic","Cold","Earth","Elemental","Giant","Incorporeal","Fire","Plantlike","Shapechanger","Water"];
 subTypeOutsider = ["Aeon","Agathion","Angel","Archon","Azata","Daemon","Demon","Devil","Inevitable","Protean"];
 subTypeHumanoid = ["Android","Damai","Dwarf","Elf","Gnome","Goblinoid","Gray","Halfling","Human","Ikeshti","Kasatha","Khizar","Lashunta","Maraquoi","Orc","Pahtra","Phentomite","Reptoid","Ryphorian","Sarcesian","Shirren","Skittermander","Strix","Verthani","Vesk","Vlaka","Ysoki"];
 subTypeConstruct = ["Magical","Technological"];
-subTypeVermin = ["Swarm"];
+subTypeVermin = [];
 subTypeDragon = ["Black Dragon","Blue Dragon","Green Dragon","Red Dragon","White Dragon"];
 
 creatureSubType = {
