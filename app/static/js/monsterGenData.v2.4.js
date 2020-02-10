@@ -2124,7 +2124,7 @@ graftTemplates = {
       "Speed": [
         "Fly __ ft."
       ],
-      "GoodSkills" [
+      "GoodSkills": [
         "acrobatics, perception"
       ],
    },
@@ -2142,7 +2142,7 @@ graftTemplates = {
         "CR" : [1,3,7,10,13]
         "speed" : [20,30,40,50,60]
       },
-      "GoodSkills" [
+      "GoodSkills": [
         "Athletics"
       ],
    },
@@ -2159,6 +2159,47 @@ graftTemplates = {
       "GoodSkills" [
         "Acrobatics",
         "Athletics"
+      ],
+   },
+   "Arctic":
+      "Description": "These environmental grafts can be applied to any creature, though additional adjudication may be needed when applying them to humanoids, monstrous humanoids, and outsiders.\n\nConstant cold forces an arctic creature to adapt to frigid conditions. Many constantly frozen regions are also deserts.",
+      "Text": "Some arctic creatures can dig quickly through ice or snow, and they gain a typical burrow speed. Some such creatures can also burrow in soil."
+      ],
+      "Speed": [
+        "Burrow __ ft."
+      ],
+      "OtherAbilities": [
+        "An arctic creature treats severe cold as cold and extreme cold as severe cold. Such a creature might also have resistance 5 to cold or the cold subtype."
+      ],
+      "GoodSkills": [
+        "Survival"
+      ],
+   },
+   "Desert":
+      "Description": "These environmental grafts can be applied to any creature, though additional adjudication may be needed when applying them to humanoids, monstrous humanoids, and outsiders.\n\nThe arid conditions of a desert breed tough creatures. Many desert creatures also have the arctic or thermic environmental graft, representing particularly cold or hot deserts.",
+      "Text": "A few desert creatures can burrow through sand, dust, and parched soil, gaining a typical burrow speed."
+      ],
+      "Speed": [
+        "Burrow __ ft."
+      ],
+      "OtherAbilities": [
+        "Thirst Inured: You can allow desert creatures to go without water for as long as most creatures can go without food without it counting against their number of special abilities."
+      ],
+      "MasterSkills": [
+        "Survival"
+      ],
+   },
+   "Forest":
+      "Description": "These environmental grafts can be applied to any creature, though additional adjudication may be needed when applying them to humanoids, monstrous humanoids, and outsiders.\n\nFrom sweltering jungles to frosty taigas, forests shelter abundant creature life.",
+      "Text": "Arboreal:/nIf a creature lives up in the trees, it also has the arboreal subtype./nClimbing:/nMany forest species are adroit climbers. They should have a climb speed, Athletics as a master skill, or both./nSkills/n:Choose two: Acrobatics, Athletics, Stealth./nForest creatures can have coloration that grants them a +4 to +8 bonus to Stealth checks in their native environment (and similar conditions) without it counting against their number of special abilities."
+      ],
+      "Speed": [
+        "Climb __ ft."
+      ],
+      "GoodSkills": [
+        "Acrobatics", 
+	"Athletics",
+	"Stealth"
       ],
    },
 },
