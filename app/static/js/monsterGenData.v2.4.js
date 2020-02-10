@@ -2116,11 +2116,13 @@ graftTemplates = {
   "environmentalGrafts": {
     "Airborne": 
       "Description": "These environmental grafts can be applied to any creature, though additional adjudication may be needed when applying them to humanoids, monstrous humanoids, and outsiders.\n\nAirborne creatures spend a good part of their life aloft",
+      "Text": "Keen eyesight is common among airborne creatures. You can choose to give them blindsense or darkvision with a longer-than-usual range/nAirborne creatures also gain a fly speed at least as fast as their land speed, and often twice as fast"
       "Senses": [
-        "Keen eyesight is common among airborne creatures. You can choose to give them blindsense or darkvision with a longer-than-usual range"
+        "blindsense",
+         "darkvision"
       ],
       "Speed": [
-        "Flying: Airborne creatures gain a fly speed at least as fast as their land speed, and often twice as fast"
+        "Fly __ ft."
       ],
       "GoodSkills" [
         "acrobatics, perception"
@@ -2128,18 +2130,35 @@ graftTemplates = {
    },
    "Aquatic":
       "Description": "These environmental grafts can be applied to any creature, though additional adjudication may be needed when applying them to humanoids, monstrous humanoids, and outsiders.\n\nAn aquatic creature lives much, if not all, of its life in the water",
-      "Text": "Aquatic Subtype: Most aquatic creatures have the aquatic subtype, meaning they breathe water. A creature that can breathe air and water has the aquatic subtype and the amphibious special ability. If an aquatic creature lacks the aquatic subtype, it has the hold breath special ability."
+      "Text": "Aquatic Subtype: Most aquatic creatures have the aquatic subtype, meaning they breathe water. A creature that can breathe air and water has the aquatic subtype and the amphibious special ability. If an aquatic creature lacks the aquatic subtype, it has the hold breath special ability./nSenses:/nYou can add one sense for free if you wish. Among aquatic creatures, blindsense (scent, sound, or vibration) is common. Some such creatures have sonar, granting them blindsight (sound) out to 120 feet. A few aquatic predators have tracking (scent), normally representing the ability to sense blood in the water/nThe creature might have penalties to Athletic checks on land"
       "Senses": [
-        "You can add one sense for free if you wish. Among aquatic creatures, blindsense (scent, sound, or vibration) is common. Some such creatures have sonar, granting them blindsight (sound) out to 120 feet. A few aquatic predators have tracking (scent), normally representing the ability to sense blood in the water"
+        "Blindsense __ ft. (__)"
       ],
-      "Immunities": [
+      "OtherAbilities": [
         "Depth Inured: You can make aquatic creatures immune to the dangers of extreme depths (Starfinder Core Rulebook 396) without counting it against their special abilities"
       ],
+      "Speed": {
+        "Type" : "Swim",
+        "CR" : [1,3,7,10,13]
+        "speed" : [20,30,40,50,60]
+      },
+      "GoodSkills" [
+        "Athletics"
+      ],
+   },
+   "Arboreal":
+      "Description": "These environmental grafts can be applied to any creature, though additional adjudication may be needed when applying them to humanoids, monstrous humanoids, and outsiders.\n\nA creature is arboreal if it not only lives in forests but also lives primarily in the trees",
+      "Text": "Arboreal creatures are great climbers and gain a climb speed equal to at least half their land speed./nFlying:/nSome arboreal creatures fly. You can give arboreal creatures a typical fly speed, as flying creatures find shelter high and plentiful in forests./nSenses:/nYou can optionally add senses to an arboreal creature. Keen hearing is common among arboreal creatures, which can’t rely on sight in dense vegetation. You can grant them blindsense (scent) or blindsight (sound), generally with a 30-foot range"
+      "Senses": [
+        "Blindsense 30 ft. (Scent/Sound)"
+      ],
       "Speed": [
-        "Swimming: Aquatic creatures normally have a swim speed based on their CR. This swim speed is typically 20 feet for creatures with a CR of 2 or less, 30 feet for CR 3–6, 40 feet for CR 7–9, 50 feet for CR 10–12, and 60 feet for CR 13 or higher (though you can make creatures faster or slower, based on the creature’s concept and other abilities). Many aquatic creatures have no other form of movement, though you can make flying, walking, or burrowing aquatic creatures if you wish"
+        "Climb __ ft",
+        "Fly __ ft.
       ],
       "GoodSkills" [
-        "Athletics, The creature might have penalties to such checks on land"
+        "Acrobatics",
+        "Athletics"
       ],
    },
 },
