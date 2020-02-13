@@ -10,73 +10,73 @@ def index():
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/weapon-generator.html')
+@app.route('/weapon-generator')
 def weaponGenerator():
     resp = make_response(render_template('weapon-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/system-generator.html')
+@app.route('/system-generator')
 def systemGenerator():
     resp = make_response(render_template('system-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/loot-generator.html')
+@app.route('/loot-generator')
 def lootGenerator():
     resp = make_response(render_template('loot-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/monster-builder.html')
+@app.route('/monster-builder')
 def monsterBuilder():
     resp = make_response(render_template('monster-builder.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/armor-generator.html')
+@app.route('/armor-generator')
 def armorGenerator():
     resp = make_response(render_template('armor-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/character-sheet.html')
+@app.route('/character-sheet')
 def characterSheet():
     resp = make_response(render_template('character-sheet.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/character-concept-generator.html')
+@app.route('/character-concept-generator')
 def characterGenerator():
     resp = make_response(render_template('character-concept-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/encounter-generator.html')
+@app.route('/encounter-generator')
 def encounterGenerator():
     resp = make_response(render_template('encounter-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/settlement-generator.html')
+@app.route('/settlement-generator')
 def settlementGenerator():
     resp = make_response(render_template('settlement-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/starship-generator.html')
+@app.route('/starship-generator')
 def starshipGenerator():
     resp = make_response(render_template('starship-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/inventory-generator.html')
+@app.route('/inventory-generator')
 def inventoryGenerator():
     resp = make_response(render_template('inventory-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
     return resp
 
-@app.route('/trap-generator.html')
+@app.route('/trap-generator')
 def trapGenerator():
     resp = make_response(render_template('trap-generator.html'))
     resp.headers.set('Cache-Control', "public, max-age=604800")
