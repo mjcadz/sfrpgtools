@@ -1,5 +1,5 @@
 # Starfinder Tools App
-Code for [sfrpgtools](sfrpgtools.com). Written in javascript. Hosted with
+Code for [sfrpgtools](https://sfrpgtools.com). Written in javascript. Hosted with
 [Flask](http://flask.pocoo.org/).
 
 ## Development
