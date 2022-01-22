@@ -1,99 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- base2.html -->
-<head>
+  <!-- base2.html -->
+  <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <title>{% block title %}{% endblock %}</title>
     <meta name="description" content="{% block description %}{% endblock %}" />
 
-    <meta name="keywords" content="Starfinder, Roleplaying Game, Generator, Weapons, Tools" />
-    <link rel="icon" href="{{ url_for('static', filename = 'tri.png') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/navbar-fixed-left.v2.2.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/base.v2.12.css') }}">
+    <meta
+      name="keywords"
+      content="Starfinder, Roleplaying Game, Generator, Weapons, Tools"
+    />
+    <link rel="icon" href="{{ url_for('static', filename = 'tri.png') }}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
+      integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename = 'css/navbar-fixed-left.v2.2.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename = 'css/base.v2.12.css') }}"
+    />
     {% block css %} {% endblock %}
     <!-- header colours -->
     <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#2EC4B6">
+    <meta name="theme-color" content="#2EC4B6" />
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#2EC4B6">
+    <meta name="msapplication-navbutton-color" content="#2EC4B6" />
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#2EC4B6">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#2EC4B6" />
     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(
+        window,
+        document,
+        "script",
+        "https://www.google-analytics.com/analytics.js",
+        "ga"
+      );
 
-        ga('create', 'UA-106988621-1', 'auto');
-        ga('send', 'pageview');
+      ga("create", "UA-106988621-1", "auto");
+      ga("send", "pageview");
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <nav class="navbar navbar-default navbar-fixed-left">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" style="padding: 0px" href="/"><img src="/static/sfrpgtoolslogo.svg" alt="sfrpgtools" height="64px" width="232px"/></a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                  <li><div style="margin:0 auto;">
-                    <button style="margin:2rem; color: #2A0DA4 !important; background-color: #fe79c7; border-color: #fe79c7;" type="button" class="btn btn-default btn-round btn-block" onclick="location.href = 'https://www.starfindertools.com';">Starfinder Tools 2.0</button>
-                  </div></li>
-                    <li><a style="font-size:15px; color: #ffffff;" href="/">&nbsp;&nbsp;&nbsp;&nbsp;Home</a></li>
-                    <li><hr style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc;"><a style="font-size:15px; color: #ffffff;" href="/armor-generator">&nbsp;&nbsp;&nbsp;&nbsp;Armor Generator</a></li>
-                    <li><hr style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc;"><a style="font-size:15px; color: #ffffff;" href="/weapon-generator">&nbsp;&nbsp;&nbsp;&nbsp;Weapon Generator</a></li>
-                    <li><hr style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc;"><a style="font-size:15px; color: #ffffff;" href="/system-generator">&nbsp;&nbsp;&nbsp;&nbsp;System Generator</a></li>
-                    <li><hr style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc;"><a style="font-size:15px; color: #ffffff;" href="/settlement-generator">&nbsp;&nbsp;&nbsp;&nbsp;Settlement Generator</a></li>
-                    <li><hr style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc;"><a style="font-size:15px; color: #ffffff;" href="/inventory-generator">&nbsp;&nbsp;&nbsp;&nbsp;Inventory Generator</a></li>
-                    <li><hr style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc;"><a style="font-size:15px; color: #ffffff;" href="/starship-generator">&nbsp;&nbsp;&nbsp;&nbsp;Starship Generator</a></li>
-                    <li><hr style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc;"><a style="font-size:15px; color: #ffffff;" href="/loot-generator">&nbsp;&nbsp;&nbsp;&nbsp;Loot Generator</a></li>
-                    <li><hr style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc;"><a style="font-size:15px; color: #ffffff;" href="/encounter-generator">&nbsp;&nbsp;&nbsp;&nbsp;Encounter Generator</a></li>
-                    <li><hr style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc;"><a style="font-size:15px; color: #ffffff;" href="/trap-generator">&nbsp;&nbsp;&nbsp;&nbsp;Trap Generator</a></li>
-                    <li><hr style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc;"><a style="font-size:15px; color: #ffffff;" href="/character-concept-generator">&nbsp;&nbsp;&nbsp;&nbsp;Character Concept<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generator</a></li>
-                    <li><hr style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc;"><a style="font-size:15px; color: #ffffff;" href="/monster-builder">&nbsp;&nbsp;&nbsp;&nbsp;Monster Builder</a></li>
-                    <li><hr style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc;"><a style="font-size:15px; color: #ffffff;" href="/character-sheet">&nbsp;&nbsp;&nbsp;&nbsp;Character Sheet</a></li>
-                    <li><div class="nav-height-calc" style="position: relative; width:190px; margin:0 auto; margin-top: 30px;">
-                      <button type="button" style="position: absolute; bottom: 20px;" class="btn btn-default btn-round btn-grn btn-block" onclick="location.href = 'https://www.paypal.me/mjcadz';">Buy creator a space beer</button>
-                    </div></li>
-
-                </ul>
-            </div>
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" style="padding: 0px" href="/"
+            ><img
+              src="/static/sfrpgtoolslogo.svg"
+              alt="sfrpgtools"
+              height="64px"
+              width="232px"
+          /></a>
         </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              <a style="font-size: 15px; color: #ffffff" href="/"
+                >&nbsp;&nbsp;&nbsp;&nbsp;Home</a
+              >
+            </li>
+            <li>
+              <hr
+                style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc"
+              />
+              <a style="font-size: 15px; color: #ffffff" href="/armor-generator"
+                >&nbsp;&nbsp;&nbsp;&nbsp;Armor Generator</a
+              >
+            </li>
+            <li>
+              <hr
+                style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc"
+              />
+              <a
+                style="font-size: 15px; color: #ffffff"
+                href="/weapon-generator"
+                >&nbsp;&nbsp;&nbsp;&nbsp;Weapon Generator</a
+              >
+            </li>
+            <li>
+              <hr
+                style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc"
+              />
+              <a
+                style="font-size: 15px; color: #ffffff"
+                href="/system-generator"
+                >&nbsp;&nbsp;&nbsp;&nbsp;System Generator</a
+              >
+            </li>
+            <li>
+              <hr
+                style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc"
+              />
+              <a
+                style="font-size: 15px; color: #ffffff"
+                href="/settlement-generator"
+                >&nbsp;&nbsp;&nbsp;&nbsp;Settlement Generator</a
+              >
+            </li>
+            <li>
+              <hr
+                style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc"
+              />
+              <a
+                style="font-size: 15px; color: #ffffff"
+                href="/inventory-generator"
+                >&nbsp;&nbsp;&nbsp;&nbsp;Inventory Generator</a
+              >
+            </li>
+            <li>
+              <hr
+                style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc"
+              />
+              <a
+                style="font-size: 15px; color: #ffffff"
+                href="/starship-generator"
+                >&nbsp;&nbsp;&nbsp;&nbsp;Starship Generator</a
+              >
+            </li>
+            <li>
+              <hr
+                style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc"
+              />
+              <a style="font-size: 15px; color: #ffffff" href="/loot-generator"
+                >&nbsp;&nbsp;&nbsp;&nbsp;Loot Generator</a
+              >
+            </li>
+            <li>
+              <hr
+                style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc"
+              />
+              <a
+                style="font-size: 15px; color: #ffffff"
+                href="/encounter-generator"
+                >&nbsp;&nbsp;&nbsp;&nbsp;Encounter Generator</a
+              >
+            </li>
+            <li>
+              <hr
+                style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc"
+              />
+              <a style="font-size: 15px; color: #ffffff" href="/trap-generator"
+                >&nbsp;&nbsp;&nbsp;&nbsp;Trap Generator</a
+              >
+            </li>
+            <li>
+              <hr
+                style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc"
+              />
+              <a
+                style="font-size: 15px; color: #ffffff"
+                href="/character-concept-generator"
+                >&nbsp;&nbsp;&nbsp;&nbsp;Character Concept<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generator</a
+              >
+            </li>
+            <li>
+              <hr
+                style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc"
+              />
+              <a style="font-size: 15px; color: #ffffff" href="/monster-builder"
+                >&nbsp;&nbsp;&nbsp;&nbsp;Monster Builder</a
+              >
+            </li>
+            <li>
+              <hr
+                style="margin: 0 25px 0 25px; border-top: 1px solid #5ad8cc"
+              />
+              <a style="font-size: 15px; color: #ffffff" href="/character-sheet"
+                >&nbsp;&nbsp;&nbsp;&nbsp;Character Sheet</a
+              >
+            </li>
+            <li>
+              <div
+                class="nav-height-calc"
+                style="
+                  position: relative;
+                  width: 190px;
+                  margin: 0 auto;
+                  margin-top: 30px;
+                "
+              >
+                <button
+                  type="button"
+                  style="position: absolute; bottom: 20px"
+                  class="btn btn-default btn-round btn-grn btn-block"
+                  onclick="location.href = 'https://www.paypal.me/mjcadz';"
+                >
+                  Buy creator a space beer
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
     <div class="container">
-        <div class="content">
-            <div class="top-spacer" style="height: 20px;"></div>
-            {% block body %} {% endblock %}
-        </div>
-        <footer class="footer">
-            <ul class="share-buttons">
-                <li><a href="https://github.com/mjcadz/sfrpgtools" target="_blank" title="View on Github" id="github" onclick="return share(this.id)"><i class="fab fa-github-alt fa-2x" aria-hidden="true"></i><span class="sr-only">View Github code</span></a></li>
-                <li><a href="http://www.reddit.com/submit?url=http%3A%2F%2Fwww.sfrpgtools.com&title=" target="_blank" title="Submit to Reddit" id="reddit" onclick="return share(this.id)"><i class="fab fa-reddit-alien fa-2x" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a></li>
-                <li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.sfrpgtools.com&text=:%20http%3A%2F%2Fwww.sfrpgtools.com" target="_blank" title="Tweet" id="twitter" onclick="return share(this.id)"><i class="fab fa-twitter fa-2x" aria-hidden="true"></i><span class="sr-only">Tweet</span></a></li>
-                <li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.sfrpgtools.com&t=" target="_blank" title="Share on Facebook" id="facebook" onclick="return share(this.id)"><i class="fab fa-facebook fa-2x" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a></li>
-            </ul>
-            <p style="text-align: center;">mjcadz 2018 <i class="fa fa-bolt" aria-hidden="true"></i> v2.6</p>
-        </footer>
+      <div class="content">
+        <div class="top-spacer" style="height: 20px"></div>
+        {% block body %} {% endblock %}
+      </div>
+      <footer class="footer">
+        <ul class="share-buttons">
+          <li>
+            <a
+              href="https://github.com/mjcadz/sfrpgtools"
+              target="_blank"
+              title="View on Github"
+              id="github"
+              onclick="return share(this.id)"
+              ><i class="fab fa-github-alt fa-2x" aria-hidden="true"></i
+              ><span class="sr-only">View Github code</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="http://www.reddit.com/submit?url=http%3A%2F%2Fwww.sfrpgtools.com&title="
+              target="_blank"
+              title="Submit to Reddit"
+              id="reddit"
+              onclick="return share(this.id)"
+              ><i class="fab fa-reddit-alien fa-2x" aria-hidden="true"></i
+              ><span class="sr-only">Submit to Reddit</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fwww.sfrpgtools.com&text=:%20http%3A%2F%2Fwww.sfrpgtools.com"
+              target="_blank"
+              title="Tweet"
+              id="twitter"
+              onclick="return share(this.id)"
+              ><i class="fab fa-twitter fa-2x" aria-hidden="true"></i
+              ><span class="sr-only">Tweet</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.sfrpgtools.com&t="
+              target="_blank"
+              title="Share on Facebook"
+              id="facebook"
+              onclick="return share(this.id)"
+              ><i class="fab fa-facebook fa-2x" aria-hidden="true"></i
+              ><span class="sr-only">Share on Facebook</span></a
+            >
+          </li>
+        </ul>
+        <p style="text-align: center">
+          mjcadz 2018 <i class="fa fa-bolt" aria-hidden="true"></i> v2.6
+        </p>
+      </footer>
     </div>
     <!-- /container -->
     <!-- JavaScript -->
     <!-- jQuery first, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename = 'js/common.v2.6.js') }}"></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename = 'js/common.v2.6.js') }}"
+    ></script>
     {% block includes %} {% endblock %}
-</body>
-
+  </body>
 </html>
